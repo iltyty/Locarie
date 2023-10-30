@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */; };
+		50AAB17F2AEFA2E9003FEDF1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17E2AEFA2E9003FEDF1 /* ContentView.swift */; };
+		50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */; };
+		50AAB1842AEFA2EC003FEDF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAB1832AEFA2EC003FEDF1 /* Preview Assets.xcassets */; };
+		50AAB18E2AEFA2ED003FEDF1 /* locarieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB18D2AEFA2ED003FEDF1 /* locarieTests.swift */; };
+		50AAB1982AEFA2ED003FEDF1 /* locarieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB1972AEFA2ED003FEDF1 /* locarieUITests.swift */; };
+		50AAB19A2AEFA2ED003FEDF1 /* locarieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB1992AEFA2ED003FEDF1 /* locarieUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		50AAB18A2AEFA2ED003FEDF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 50AAB1712AEFA2E9003FEDF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50AAB1782AEFA2E9003FEDF1;
+			remoteInfo = locarie;
+		};
+		50AAB1942AEFA2ED003FEDF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 50AAB1712AEFA2E9003FEDF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50AAB1782AEFA2E9003FEDF1;
+			remoteInfo = locarie;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		50AAB1792AEFA2E9003FEDF1 /* locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieApp.swift; sourceTree = "<group>"; };
+		50AAB17E2AEFA2E9003FEDF1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50AAB1832AEFA2EC003FEDF1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		50AAB1892AEFA2ED003FEDF1 /* locarieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locarieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50AAB18D2AEFA2ED003FEDF1 /* locarieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieTests.swift; sourceTree = "<group>"; };
+		50AAB1932AEFA2ED003FEDF1 /* locarieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locarieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50AAB1972AEFA2ED003FEDF1 /* locarieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieUITests.swift; sourceTree = "<group>"; };
+		50AAB1992AEFA2ED003FEDF1 /* locarieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50AAB1762AEFA2E9003FEDF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50AAB1862AEFA2ED003FEDF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50AAB1902AEFA2ED003FEDF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		50AAB1702AEFA2E9003FEDF1 = {
+			isa = PBXGroup;
+			children = (
+				50AAB17B2AEFA2E9003FEDF1 /* locarie */,
+				50AAB18C2AEFA2ED003FEDF1 /* locarieTests */,
+				50AAB1962AEFA2ED003FEDF1 /* locarieUITests */,
+				50AAB17A2AEFA2E9003FEDF1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		50AAB17A2AEFA2E9003FEDF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50AAB1792AEFA2E9003FEDF1 /* locarie.app */,
+				50AAB1892AEFA2ED003FEDF1 /* locarieTests.xctest */,
+				50AAB1932AEFA2ED003FEDF1 /* locarieUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50AAB17B2AEFA2E9003FEDF1 /* locarie */ = {
+			isa = PBXGroup;
+			children = (
+				50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */,
+				50AAB17E2AEFA2E9003FEDF1 /* ContentView.swift */,
+				50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */,
+				50AAB1822AEFA2EC003FEDF1 /* Preview Content */,
+			);
+			path = locarie;
+			sourceTree = "<group>";
+		};
+		50AAB1822AEFA2EC003FEDF1 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				50AAB1832AEFA2EC003FEDF1 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		50AAB18C2AEFA2ED003FEDF1 /* locarieTests */ = {
+			isa = PBXGroup;
+			children = (
+				50AAB18D2AEFA2ED003FEDF1 /* locarieTests.swift */,
+			);
+			path = locarieTests;
+			sourceTree = "<group>";
+		};
+		50AAB1962AEFA2ED003FEDF1 /* locarieUITests */ = {
+			isa = PBXGroup;
+			children = (
+				50AAB1972AEFA2ED003FEDF1 /* locarieUITests.swift */,
+				50AAB1992AEFA2ED003FEDF1 /* locarieUITestsLaunchTests.swift */,
+			);
+			path = locarieUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		50AAB1782AEFA2E9003FEDF1 /* locarie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50AAB19D2AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarie" */;
+			buildPhases = (
+				50AAB1752AEFA2E9003FEDF1 /* Sources */,
+				50AAB1762AEFA2E9003FEDF1 /* Frameworks */,
+				50AAB1772AEFA2E9003FEDF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = locarie;
+			productName = locarie;
+			productReference = 50AAB1792AEFA2E9003FEDF1 /* locarie.app */;
+			productType = "com.apple.product-type.application";
+		};
+		50AAB1882AEFA2ED003FEDF1 /* locarieTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50AAB1A02AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarieTests" */;
+			buildPhases = (
+				50AAB1852AEFA2ED003FEDF1 /* Sources */,
+				50AAB1862AEFA2ED003FEDF1 /* Frameworks */,
+				50AAB1872AEFA2ED003FEDF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50AAB18B2AEFA2ED003FEDF1 /* PBXTargetDependency */,
+			);
+			name = locarieTests;
+			productName = locarieTests;
+			productReference = 50AAB1892AEFA2ED003FEDF1 /* locarieTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		50AAB1922AEFA2ED003FEDF1 /* locarieUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50AAB1A32AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarieUITests" */;
+			buildPhases = (
+				50AAB18F2AEFA2ED003FEDF1 /* Sources */,
+				50AAB1902AEFA2ED003FEDF1 /* Frameworks */,
+				50AAB1912AEFA2ED003FEDF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50AAB1952AEFA2ED003FEDF1 /* PBXTargetDependency */,
+			);
+			name = locarieUITests;
+			productName = locarieUITests;
+			productReference = 50AAB1932AEFA2ED003FEDF1 /* locarieUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50AAB1712AEFA2E9003FEDF1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					50AAB1782AEFA2E9003FEDF1 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					50AAB1882AEFA2ED003FEDF1 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 50AAB1782AEFA2E9003FEDF1;
+					};
+					50AAB1922AEFA2ED003FEDF1 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 50AAB1782AEFA2E9003FEDF1;
+					};
+				};
+			};
+			buildConfigurationList = 50AAB1742AEFA2E9003FEDF1 /* Build configuration list for PBXProject "locarie" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 50AAB1702AEFA2E9003FEDF1;
+			productRefGroup = 50AAB17A2AEFA2E9003FEDF1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				50AAB1782AEFA2E9003FEDF1 /* locarie */,
+				50AAB1882AEFA2ED003FEDF1 /* locarieTests */,
+				50AAB1922AEFA2ED003FEDF1 /* locarieUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		50AAB1772AEFA2E9003FEDF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50AAB1842AEFA2EC003FEDF1 /* Preview Assets.xcassets in Resources */,
+				50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50AAB1872AEFA2ED003FEDF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50AAB1912AEFA2ED003FEDF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50AAB1752AEFA2E9003FEDF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50AAB17F2AEFA2E9003FEDF1 /* ContentView.swift in Sources */,
+				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50AAB1852AEFA2ED003FEDF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50AAB18E2AEFA2ED003FEDF1 /* locarieTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50AAB18F2AEFA2ED003FEDF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50AAB19A2AEFA2ED003FEDF1 /* locarieUITestsLaunchTests.swift in Sources */,
+				50AAB1982AEFA2ED003FEDF1 /* locarieUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		50AAB18B2AEFA2ED003FEDF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50AAB1782AEFA2E9003FEDF1 /* locarie */;
+			targetProxy = 50AAB18A2AEFA2ED003FEDF1 /* PBXContainerItemProxy */;
+		};
+		50AAB1952AEFA2ED003FEDF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50AAB1782AEFA2E9003FEDF1 /* locarie */;
+			targetProxy = 50AAB1942AEFA2ED003FEDF1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		50AAB19B2AEFA2ED003FEDF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		50AAB19C2AEFA2ED003FEDF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		50AAB19E2AEFA2ED003FEDF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"locarie/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiu.locarie;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		50AAB19F2AEFA2ED003FEDF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"locarie/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiu.locarie;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		50AAB1A12AEFA2ED003FEDF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiu.locarieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/locarie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/locarie";
+			};
+			name = Debug;
+		};
+		50AAB1A22AEFA2ED003FEDF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiu.locarieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/locarie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/locarie";
+			};
+			name = Release;
+		};
+		50AAB1A42AEFA2ED003FEDF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiu.locarieUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = locarie;
+			};
+			name = Debug;
+		};
+		50AAB1A52AEFA2ED003FEDF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiu.locarieUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = locarie;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50AAB1742AEFA2E9003FEDF1 /* Build configuration list for PBXProject "locarie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50AAB19B2AEFA2ED003FEDF1 /* Debug */,
+				50AAB19C2AEFA2ED003FEDF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50AAB19D2AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50AAB19E2AEFA2ED003FEDF1 /* Debug */,
+				50AAB19F2AEFA2ED003FEDF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50AAB1A02AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarieTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50AAB1A12AEFA2ED003FEDF1 /* Debug */,
+				50AAB1A22AEFA2ED003FEDF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50AAB1A32AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarieUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50AAB1A42AEFA2ED003FEDF1 /* Debug */,
+				50AAB1A52AEFA2ED003FEDF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 50AAB1712AEFA2E9003FEDF1 /* Project object */;
+}
