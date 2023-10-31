@@ -1,0 +1,43 @@
+//
+//  SearchBar.swift
+//  locarie
+//
+//  Created by qiuty on 2023/10/31.
+//
+
+import SwiftUI
+
+struct SearchBar: View {
+    @State var text: String
+    var title = "Explore"
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "magnifyingglass")
+                .padding([.leading])
+                .padding([.trailing], Constants.iconPadding)
+            
+            TextField(title, text: $text)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
+        }
+        .background(
+            RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                .fill(.white)
+                .frame(height: Constants.height)
+        )
+        .padding(Constants.padding)
+    }
+    
+    private struct Constants {
+        static let height: CGFloat = 50.0
+        static let padding: CGFloat = 20.0
+        static let iconPadding: CGFloat = 10.0
+        static let cornerRadius: CGFloat = 25.0
+    }
+}
+
+#Preview {
+    var text = ""
+    return SearchBar(text: text)
+}

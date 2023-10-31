@@ -11,7 +11,7 @@ import SwiftUI
 struct locarieApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LocarieView()
         }
     }
 }
