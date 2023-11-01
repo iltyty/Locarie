@@ -72,7 +72,8 @@ struct FavoriteView: View {
                     )
                 }
             }
-            .navigationTitle(Constants.navigationTitle).navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(Constants.navigationTitle)
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     

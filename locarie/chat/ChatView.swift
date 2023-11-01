@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct ChatView: View {
+    @State var searchText = "Search"
     var body: some View {
-        Text("This is the chat view")
+        NavigationView {
+            VStack(alignment: .leading) {
+                SearchBar(text: searchText)
+                    .navigationTitle(Constants.navigationTitle)
+                    .navigationBarTitleDisplayMode(.inline)
+                
+                List(0..<20) { _ in
+                    MessageRow()
+                }
+                .listStyle(.plain)
+            }
+        }
+    }
+    
+    struct Constants {
+        static let navigationTitle = "Message"
     }
 }
 

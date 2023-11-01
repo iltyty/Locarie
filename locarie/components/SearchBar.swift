@@ -25,6 +25,7 @@ struct SearchBar: View {
             RoundedRectangle(cornerRadius: Constants.cornerRadius)
                 .fill(.white)
                 .frame(height: Constants.height)
+                .shadow(color: .gray, radius: 2)
         )
         .padding(Constants.padding)
     }
