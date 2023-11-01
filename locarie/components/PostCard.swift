@@ -39,11 +39,15 @@ struct PostCard: View {
 
                 
                 HStack {
-                    Image(systemName: "person")
-                    
+                    Image("avatar")
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: Constants.avatarSize, height: Constants.avatarSize)
                     Text("Shreeji")
+                    Spacer()
+                    Image(systemName: "map")
                 }
-                .padding([.bottom], Constants.bottomPadding)
+                .padding([.bottom, .trailing], Constants.bottomPadding)
             }
             .padding([.leading])
         }
@@ -53,6 +57,7 @@ struct PostCard: View {
     
     struct Constants {
         static let height: CGFloat = 175
+        static let avatarSize: CGFloat = 32
         static let borderRadius: CGFloat = 10.0
         static let bottomPadding: CGFloat = 15.0
     }
