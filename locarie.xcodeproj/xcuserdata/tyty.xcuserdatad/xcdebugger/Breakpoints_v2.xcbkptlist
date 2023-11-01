@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "5F45386E-6536-4056-A4CA-E8AF1A1702E9"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "locarie/favorite/FavoriteView.swift"
@@ -18,6 +18,38 @@
             endingLineNumber = "22"
             landmarkName = "body"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "5F45386E-6536-4056-A4CA-E8AF1A1702E9 - cda5a51da3b32a9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "locarie.FavoriteView.body.getter : some"
+                  moduleName = "locarie"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tyty/Projects/locarie/locarie/favorite/FavoriteView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "400">
+               </Location>
+               <Location
+                  uuid = "5F45386E-6536-4056-A4CA-E8AF1A1702E9 - b330f857d00f7ebe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationBarTitleDisplayMode(SwiftUI.NavigationBarItem.TitleDisplayMode) -&gt; some&gt;&gt;.0 in locarie.FavoriteView.body.getter : some"
+                  moduleName = "locarie"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tyty/Projects/locarie/locarie/favorite/FavoriteView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "540">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
