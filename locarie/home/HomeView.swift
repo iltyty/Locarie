@@ -29,7 +29,6 @@ struct HomeView: View {
                 Marker("Marker4", coordinate: CLLocationCoordinate2D(latitude: 51.5206, longitude: -0.12641))
                     .tint(Color.mapMarkerOrange)
             }
-            .searchable(text: $hello)
             
             VStack {
                 SearchBar(text: hello)
