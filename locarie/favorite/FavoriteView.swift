@@ -34,42 +34,13 @@ struct FavoriteView: View {
                         .tint(Color.mapMarkerOrange)
                 }
                 
-                GeometryReader { proxy in
-                    VStack {
-                        Capsule()
-                            .fill(.gray)
-                            .frame(width: 50, height: 5)
-                            .padding(.top)
-                        PostCard()
-                        PostCard()
-                        PostCard()
+                BottomDrawerView(offsetY: 400) {
+                    ScrollView {
+                        ForEach(0..<10) { _ in
+                            PostCard()
+                        }
                     }
-                    .background(.white).clipShape(UnevenRoundedRectangle(
-                        topLeadingRadius: 10, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 10
-                    ))
-                    .offset(y: proxy.size.height-100)
-                    .offset(y: currentOffset)
-                    .offset(y: endOffset)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { value in
-                                withAnimation(.spring()) {
-                                    currentOffset = value.translation.height
-                                }
-                            }
-                            .onEnded { value in
-                                withAnimation(.spring()) {
-                                    if currentOffset < -150{
-                                        endOffset = -(proxy.size.height - 100)
-                                        atTheTop = true
-                                    } else if endOffset != 0 && currentOffset > 150 {
-                                        endOffset = .zero
-                                        atTheTop = false
-                                    }
-                                    currentOffset = 0
-                                }
-                            }
-                    )
+                    .scrollIndicators(.hidden)
                 }
             }
             .navigationTitle(Constants.navigationTitle)
