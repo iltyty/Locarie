@@ -9,33 +9,39 @@ import SwiftUI
 import MapKit
 
 struct HomeView: View {
-    @State var hello = "Explore"
     @State private var mapRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D.LSE,
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
 
     var body: some View {
-        ZStack(alignment: .top) {
-            Map(position: .constant(.region(mapRegion))) {
-                Marker("LSE", coordinate: CLLocationCoordinate2D.LSE)
-                    .tint(Color.mapMarkerOrange)
-                Marker("Marker1", coordinate: CLLocationCoordinate2D(latitude: 51.5346, longitude: -0.12641))
-                    .tint(Color.mapMarkerOrange)
-                Marker("Marker2", coordinate: CLLocationCoordinate2D(latitude: 51.5246, longitude: -0.09841))
-                    .tint(Color.mapMarkerOrange)
-                Marker("Marker3", coordinate: CLLocationCoordinate2D(latitude: 51.5196, longitude: -0.096641))
-                    .tint(Color.mapMarkerOrange)
-                Marker("Marker4", coordinate: CLLocationCoordinate2D(latitude: 51.5206, longitude: -0.12641))
-                    .tint(Color.mapMarkerOrange)
-            }
-            
-            VStack {
-                SearchBar(text: hello)
+        NavigationStack {
+            ZStack(alignment: .top) {
+                Map(position: .constant(.region(mapRegion))) {
+                    Marker("LSE", coordinate: CLLocationCoordinate2D.LSE)
+                        .tint(Color.mapMarkerOrange)
+                    Marker("Marker1", coordinate: CLLocationCoordinate2D(latitude: 51.5346, longitude: -0.12641))
+                        .tint(Color.mapMarkerOrange)
+                    Marker("Marker2", coordinate: CLLocationCoordinate2D(latitude: 51.5246, longitude: -0.09841))
+                        .tint(Color.mapMarkerOrange)
+                    Marker("Marker3", coordinate: CLLocationCoordinate2D(latitude: 51.5196, longitude: -0.096641))
+                        .tint(Color.mapMarkerOrange)
+                    Marker("Marker4", coordinate: CLLocationCoordinate2D(latitude: 51.5206, longitude: -0.12641))
+                        .tint(Color.mapMarkerOrange)
+                }
                 
-                Spacer()
-                
-                PostCard()
+                VStack {
+                    NavigationLink {
+                        SearchView()
+                    } label: {
+                        SearchBar(title: "Explore", isDisabled: true)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    Spacer()
+                    
+                    PostCard()
+                }
             }
         }
     }

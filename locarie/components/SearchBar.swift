@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct SearchBar: View {
-    @State var text: String
+    @State var text = ""
     var title = "Explore"
+    var isDisabled = false
     
     var body: some View {
         HStack {
@@ -20,6 +21,7 @@ struct SearchBar: View {
             TextField(title, text: $text)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
+                .disabled(isDisabled)
         }
         .background(
             RoundedRectangle(cornerRadius: Constants.cornerRadius)

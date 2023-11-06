@@ -71,9 +71,6 @@ struct BottomDrawerView<Content: View>: View {
             .offset(y: translation.height + offsetY)
             .gesture(dragGesture(proxy: proxy))
             .ignoresSafeArea(edges: .bottom)
-            .onAppear() {
-                print(proxy.size)
-            }
         }
     }
 }
