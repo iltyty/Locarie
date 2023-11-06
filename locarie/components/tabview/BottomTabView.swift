@@ -24,7 +24,7 @@ struct BottomTabView: View {
             BottomTabViewItem(page: .favorite, iconName: "bookmark", viewRouter: viewRouter)
                 .imageScale(.large)
             Spacer()
-            BottomTabViewItem(page: .chat, iconName: "message", viewRouter: viewRouter)   .imageScale(.large)
+            BottomTabViewItem(page: .message, iconName: "message", viewRouter: viewRouter)   .imageScale(.large)
             Spacer()
             BottomTabViewItem(page: .profile, iconName: "person", viewRouter: viewRouter)
                 .imageScale(.large)

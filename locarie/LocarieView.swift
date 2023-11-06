@@ -12,7 +12,7 @@ struct LocarieView: View {
     
     private let homeView = HomeView()
     private let favoriteView = FavoriteView()
-    private let chatView = ChatView()
+    private let chatView = MessageHomeView()
     private let profileView = ProfileView()
     
     var body: some View {
@@ -24,7 +24,7 @@ struct LocarieView: View {
                 favoriteView
             case .new:
                 HomeView()
-            case .chat:
+            case .message:
                 chatView
             case .profile:
                 profileView

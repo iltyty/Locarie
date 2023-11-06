@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChatView: View {
+struct MessageHomeView: View {
     @State var searchText = "Search"
     var body: some View {
         NavigationView {
@@ -30,5 +30,5 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView()
+    MessageHomeView()
 }

@@ -11,7 +11,7 @@ enum Page {
     case home
     case favorite
     case new
-    case chat
+    case message
     case profile
 }
 
