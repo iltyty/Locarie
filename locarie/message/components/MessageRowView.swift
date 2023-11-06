@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MessageRow: View {
+struct MessageRowView: View {
     var body: some View {
         HStack(alignment: .top) {
             Image("avatar")
@@ -36,5 +36,5 @@ struct MessageRow: View {
 }
 
 #Preview {
-    MessageRow()
+    MessageRowView()
 }

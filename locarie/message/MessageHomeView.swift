@@ -17,7 +17,7 @@ struct MessageHomeView: View {
                     .navigationBarTitleDisplayMode(.inline)
                 
                 List(0..<20) { _ in
-                    MessageRow()
+                    MessageRowView()
                 }
                 .listStyle(.plain)
             }
