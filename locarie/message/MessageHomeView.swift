@@ -10,14 +10,18 @@ import SwiftUI
 struct MessageHomeView: View {
     @State var searchText = "Search"
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .leading) {
                 SearchBar(text: searchText)
                     .navigationTitle(Constants.navigationTitle)
                     .navigationBarTitleDisplayMode(.inline)
                 
                 List(0..<20) { _ in
-                    MessageRowView()
+                    NavigationLink {
+                        MessageDetailView()
+                    } label: {
+                        MessageRowView()
+                    }
                 }
                 .listStyle(.plain)
             }
