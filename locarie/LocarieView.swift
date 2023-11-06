@@ -8,35 +8,25 @@
 import SwiftUI
 
 struct LocarieView: View {
-    @StateObject var viewRouter = BottomTabViewRouter()
-    
-    private let homeView = HomeView()
-    private let favoriteView = FavoriteView()
-    private let chatView = MessageHomeView()
-    private let profileView = ProfileView()
+    @EnvironmentObject var viewRouter: BottomTabViewRouter
     
     var body: some View {
-        VStack(spacing: 0) {
-            switch viewRouter.currentPage {
-            case .home:
-                homeView
-            case .favorite:
-                favoriteView
-            case .new:
-                HomeView()
-            case .message:
-                chatView
-            case .profile:
-                profileView
-            }
-            ZStack {
-                BottomTabView(viewRouter: viewRouter)
-            }
-            .zIndex(1.0)
+        switch viewRouter.currentPage {
+        case .home:
+            HomeView()
+        case .favorite:
+            FavoriteView()
+        case .new:
+            HomeView()
+        case .message:
+            MessageHomeView()
+        case .profile:
+            ProfileView()
         }
     }
 }
 
 #Preview {
     LocarieView()
+        .environmentObject(BottomTabViewRouter())
 }

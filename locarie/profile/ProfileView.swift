@@ -9,17 +9,12 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        NavigationView {
-            VStack {
-                UnderView()
-                
-                ZStack(alignment: .leading) {
-                    UnevenRoundedRectangle(
-                        topLeadingRadius: 10, topTrailingRadius: 10
-                    )
-                        .fill(.white)
-                        .shadow(radius: 4)
-    
+        NavigationStack {
+            VStack(spacing: 0) {
+                ScrollView {
+                    UnderView()
+                        .padding(.bottom)
+                       
                     VStack {
                         HStack {
                             Spacer()
@@ -37,17 +32,21 @@ struct ProfileView: View {
                         PostCard()
                     }
                     .padding(.top)
+                    .background(
+                        UnevenRoundedRectangle(
+                            topLeadingRadius: 10, topTrailingRadius: 10
+                        )
+                            .fill(.white)
+                            .shadow(radius: 4)
+                    )
                 }
-                .offset(y: 100)
+                .background(Color(hex: 0xf9f9f9))
+                
+                BottomTabView()
             }
-            .background(Color(hex: 0xf9f9f9))
         }
     }
    
-}
-
-#Preview {
-    ProfileView()
 }
 
 struct UnderView: View {
@@ -89,4 +88,9 @@ struct UnderView: View {
         static let btnEditHeight: CGFloat = 40
         static let btnSettingsSize: CGFloat = 25
     }
+}
+
+#Preview {
+    ProfileView()
+        .environmentObject(BottomTabViewRouter())
 }

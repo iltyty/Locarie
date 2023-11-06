@@ -11,7 +11,7 @@ struct MessageHomeView: View {
     @State var searchText = "Search"
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 SearchBar(text: searchText)
                     .navigationTitle(Constants.navigationTitle)
                     .navigationBarTitleDisplayMode(.inline)
@@ -24,6 +24,8 @@ struct MessageHomeView: View {
                     }
                 }
                 .listStyle(.plain)
+                
+                BottomTabView()
             }
         }
     }
@@ -35,4 +37,5 @@ struct MessageHomeView: View {
 
 #Preview {
     MessageHomeView()
+        .environmentObject(BottomTabViewRouter())
 }

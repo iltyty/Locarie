@@ -20,28 +20,32 @@ struct FavoriteView: View {
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .bottom) {
-                Map(position: .constant(.region(mapRegion))) {
-                    Marker("LSE", coordinate: CLLocationCoordinate2D.LSE)
-                        .tint(Color.mapMarkerOrange)
-                    Marker("Marker1", coordinate: CLLocationCoordinate2D(latitude: 51.5346, longitude: -0.12641))
-                        .tint(Color.mapMarkerOrange)
-                    Marker("Marker2", coordinate: CLLocationCoordinate2D(latitude: 51.5246, longitude: -0.09841))
-                        .tint(Color.mapMarkerOrange)
-                    Marker("Marker3", coordinate: CLLocationCoordinate2D(latitude: 51.5196, longitude: -0.096641))
-                        .tint(Color.mapMarkerOrange)
-                    Marker("Marker4", coordinate: CLLocationCoordinate2D(latitude: 51.5206, longitude: -0.12641))
-                        .tint(Color.mapMarkerOrange)
+            VStack(spacing: 0) {
+                ZStack(alignment: .bottom) {
+                    Map(position: .constant(.region(mapRegion))) {
+                        Marker("LSE", coordinate: CLLocationCoordinate2D.LSE)
+                            .tint(Color.mapMarkerOrange)
+                        Marker("Marker1", coordinate: CLLocationCoordinate2D(latitude: 51.5346, longitude: -0.12641))
+                            .tint(Color.mapMarkerOrange)
+                        Marker("Marker2", coordinate: CLLocationCoordinate2D(latitude: 51.5246, longitude: -0.09841))
+                            .tint(Color.mapMarkerOrange)
+                        Marker("Marker3", coordinate: CLLocationCoordinate2D(latitude: 51.5196, longitude: -0.096641))
+                            .tint(Color.mapMarkerOrange)
+                        Marker("Marker4", coordinate: CLLocationCoordinate2D(latitude: 51.5206, longitude: -0.12641))
+                            .tint(Color.mapMarkerOrange)
+                    }
+                    
+                    BottomDrawerView(offsetY: 400) {
+                        ScrollView {
+                            ForEach(0..<10) { _ in
+                                PostCard()
+                            }
+                        }
+                        .scrollIndicators(.hidden)
+                    }
                 }
                 
-                BottomDrawerView(offsetY: 400) {
-                    ScrollView {
-                        ForEach(0..<10) { _ in
-                            PostCard()
-                        }
-                    }
-                    .scrollIndicators(.hidden)
-                }
+                BottomTabView()
             }
             .navigationTitle(Constants.navigationTitle)
             .navigationBarTitleDisplayMode(.inline)
@@ -55,4 +59,5 @@ struct FavoriteView: View {
 
 #Preview {
     FavoriteView()
+        .environmentObject(BottomTabViewRouter())
 }

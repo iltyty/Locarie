@@ -14,7 +14,7 @@ fileprivate struct Constants {
 }
 
 struct BottomTabView: View {
-    @StateObject var viewRouter: BottomTabViewRouter
+    @EnvironmentObject var viewRouter: BottomTabViewRouter
     
     var body: some View {
         HStack {
@@ -36,8 +36,9 @@ struct BottomTabView: View {
 }
 
 #Preview {
-    ZStack {
+    let viewRouter = BottomTabViewRouter()
+    return ZStack {
         Color.blue
-        BottomTabView(viewRouter: BottomTabViewRouter())
-    }
+        BottomTabView()
+    }.environmentObject(viewRouter)
 }

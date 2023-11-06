@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct locarieApp: App {
+    @StateObject var viewRouter = BottomTabViewRouter()
+    
     var body: some Scene {
         WindowGroup {
             LocarieView()
+                .environmentObject(viewRouter)
         }
     }
 }
