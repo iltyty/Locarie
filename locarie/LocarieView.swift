@@ -17,7 +17,7 @@ struct LocarieView: View {
         case .favorite:
             FavoriteView()
         case .new:
-            HomeView()
+            NewPostView()
         case .message:
             MessageHomeView()
         case .profile:

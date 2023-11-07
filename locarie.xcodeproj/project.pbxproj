@@ -28,6 +28,9 @@
 		50AAB18E2AEFA2ED003FEDF1 /* locarieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB18D2AEFA2ED003FEDF1 /* locarieTests.swift */; };
 		50AAB1982AEFA2ED003FEDF1 /* locarieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB1972AEFA2ED003FEDF1 /* locarieUITests.swift */; };
 		50AAB19A2AEFA2ED003FEDF1 /* locarieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB1992AEFA2ED003FEDF1 /* locarieUITestsLaunchTests.swift */; };
+		50B11ACF2AF9DE77002A7B91 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11ACE2AF9DE77002A7B91 /* NewPostView.swift */; };
+		50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AD22AFA063B002A7B91 /* PhotoViewModel.swift */; };
+		50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +75,9 @@
 		50AAB1932AEFA2ED003FEDF1 /* locarieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locarieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AAB1972AEFA2ED003FEDF1 /* locarieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieUITests.swift; sourceTree = "<group>"; };
 		50AAB1992AEFA2ED003FEDF1 /* locarieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		50B11ACE2AF9DE77002A7B91 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
+		50B11AD22AFA063B002A7B91 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachmentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,12 +231,23 @@
 		50B11ACC2AF9DDD9002A7B91 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				50B11ACD2AF9DE68002A7B91 /* new */,
 				50277F752AF117840045AB12 /* favorite */,
 				50277F722AF117640045AB12 /* home */,
 				50277F782AF117A70045AB12 /* message */,
 				50277F7B2AF117C30045AB12 /* profile */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		50B11ACD2AF9DE68002A7B91 /* new */ = {
+			isa = PBXGroup;
+			children = (
+				50B11ACE2AF9DE77002A7B91 /* NewPostView.swift */,
+				50B11AD22AFA063B002A7B91 /* PhotoViewModel.swift */,
+				50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */,
+			);
+			path = new;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,6 +383,7 @@
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
 				50277F802AF12A700045AB12 /* SearchBar.swift in Sources */,
+				50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */,
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailView.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCard.swift in Sources */,
@@ -376,6 +394,8 @@
 				50277F7A2AF117B20045AB12 /* MessageHomeView.swift in Sources */,
 				5000C6C92AF8C3440057EF2D /* SearchView.swift in Sources */,
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,
+				50B11ACF2AF9DE77002A7B91 /* NewPostView.swift in Sources */,
+				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
 				50277F7D2AF117CE0045AB12 /* ProfileView.swift in Sources */,
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
 				5000C6CE2AF8D9A20057EF2D /* MessageContentView.swift in Sources */,
