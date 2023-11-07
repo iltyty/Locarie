@@ -187,11 +187,8 @@
 		50AAB17B2AEFA2E9003FEDF1 /* locarie */ = {
 			isa = PBXGroup;
 			children = (
+				50B11ACC2AF9DDD9002A7B91 /* views */,
 				50277F7E2AF12A640045AB12 /* components */,
-				50277F7B2AF117C30045AB12 /* profile */,
-				50277F782AF117A70045AB12 /* message */,
-				50277F752AF117840045AB12 /* favorite */,
-				50277F722AF117640045AB12 /* home */,
 				50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */,
 				50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */,
 				50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */,
@@ -223,6 +220,17 @@
 				50AAB1992AEFA2ED003FEDF1 /* locarieUITestsLaunchTests.swift */,
 			);
 			path = locarieUITests;
+			sourceTree = "<group>";
+		};
+		50B11ACC2AF9DDD9002A7B91 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				50277F752AF117840045AB12 /* favorite */,
+				50277F722AF117640045AB12 /* home */,
+				50277F782AF117A70045AB12 /* message */,
+				50277F7B2AF117C30045AB12 /* profile */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
