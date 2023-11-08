@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BusinessHomeView: View {
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
@@ -31,6 +32,9 @@ struct BusinessHomeView: View {
                         HStack {
                             Image(systemName: "chevron.backward")
                                 .font(.system(size: 32))
+                                .onTapGesture {
+                                    dismiss()
+                                }
                             Spacer()
                             Image(systemName: "ellipsis")
                                 .font(.system(size: 32))
@@ -58,6 +62,7 @@ struct BusinessHomeView: View {
                     }
                 }
             }
+            .navigationBarBackButtonHidden()
         }
     }
 }
