@@ -42,7 +42,7 @@ extension PostDetailView {
 
 extension PostDetailView {
     var contentView: some View {
-        VStack(alignment: .leading, spacing: Constants.contentVerticalSpacing) {
+        VStack(alignment: .leading, spacing: Constants.contentVSpacing) {
             HStack {
                 Text("30 mins ago")
                     .foregroundStyle(.green)
@@ -91,7 +91,7 @@ extension PostDetailView {
 fileprivate struct Constants {
     static let avatarSize: CGFloat = 36
     static let backButtonSize: CGFloat = 32
-    static let contentVerticalSpacing: CGFloat = 20
+    static let contentVSpacing: CGFloat = 20
     static let contentTopPaddingProportion: CGFloat = 2 / 3
 }
 

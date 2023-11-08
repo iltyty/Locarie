@@ -21,7 +21,7 @@ struct LocarieView: View {
         case .message:
             MessageHomeView()
         case .profile:
-            ProfileView()
+            UserProfileView()
         }
     }
 }

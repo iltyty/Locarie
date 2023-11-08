@@ -96,14 +96,14 @@ extension NewPostView {
         Button {
             print("tapped")
         } label: {
-            Text(Constants.shareButtonText)
+            Text(Constants.btnShareText)
                 .font(.title2)
                 .foregroundStyle(.white)
                 .fontWeight(.bold)
                 .background(
                     Capsule()
                         .fill(.orange)
-                        .frame(width: Constants.shareButtonWidth, height: Constants.shareButtonHeight)
+                        .frame(width: Constants.btnShareWidth, height: Constants.btnShareHeight)
                 )
                 .padding(.vertical)
         }
@@ -114,9 +114,9 @@ fileprivate struct Constants {
     static let pageTitle = "Share"
     static let imageSizeProportion: CGFloat = 1 / 3.5
     static let contentEditorHeightProportion: CGFloat = 1 / 3
-    static let shareButtonText = "share"
-    static let shareButtonWidth: CGFloat = 180
-    static let shareButtonHeight: CGFloat = 50
+    static let btnShareText = "share"
+    static let btnShareWidth: CGFloat = 180
+    static let btnShareHeight: CGFloat = 50
 }
 
 #Preview {

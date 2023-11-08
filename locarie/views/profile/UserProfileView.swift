@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct UserProfileView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -23,7 +23,7 @@ struct ProfileView: View {
    
 }
 
-extension ProfileView {
+extension UserProfileView {
     var topView: some View {
         VStack {
             HStack {
@@ -52,7 +52,7 @@ extension ProfileView {
     }
 }
 
-extension ProfileView {
+extension UserProfileView {
     var bottomView: some View {
         VStack(spacing: Constants.bottomViewVSpacing) {
             HStack {
@@ -93,6 +93,6 @@ fileprivate struct Constants {
 }
 
 #Preview {
-    ProfileView()
+    UserProfileView()
         .environmentObject(BottomTabViewRouter())
 }
