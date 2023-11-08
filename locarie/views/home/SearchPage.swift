@@ -1,5 +1,5 @@
 //
-//  SearchView.swift
+//  SearchPage.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/6.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct SearchView: View {
+struct SearchPage: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack(spacing: 0) {
-            SearchBar(title: "Search")
+            SearchBarView(title: "Search")
             Color.clear
                 .contentShape(Rectangle())
                 .onTapGesture {
@@ -25,5 +25,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchPage()
 }

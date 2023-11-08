@@ -1,5 +1,5 @@
 //
-//  PostDetailView.swift
+//  PostDetailPage.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/8.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PostDetailView: View {
+struct PostDetailPage: View {
     @Environment(\.dismiss) var dismiss
     var body: some View {
         GeometryReader { proxy in
@@ -30,7 +30,7 @@ struct PostDetailView: View {
     }
 }
 
-extension PostDetailView {
+extension PostDetailPage {
     func underneathImageView(image: Image, width: CGFloat, height: CGFloat) -> some View {
         image
             .resizable()
@@ -40,7 +40,7 @@ extension PostDetailView {
     }
 }
 
-extension PostDetailView {
+extension PostDetailPage {
     func contentView(screenWidth: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: Constants.contentVSpacing) {
             HStack {
@@ -67,7 +67,7 @@ extension PostDetailView {
     }
 }
 
-extension PostDetailView {
+extension PostDetailPage {
     var scrollViewOverlay: some View {
         HStack {
             Image(systemName: "chevron.backward")
@@ -76,7 +76,7 @@ extension PostDetailView {
                     dismiss()
                 }
             NavigationLink {
-                BusinessHomeView()
+                BusinessHomePage()
             } label: {
                 AvatarView(name: "avatar", size: Constants.avatarSize)
             }
@@ -98,5 +98,5 @@ fileprivate struct Constants {
 }
 
 #Preview {
-    PostDetailView()
+    PostDetailPage()
 }

@@ -1,5 +1,5 @@
 //
-//  BusinessHomeView.swift
+//  BusinessHomePage.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/7.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BusinessHomeView: View {
+struct BusinessHomePage: View {
     @Environment(\.dismiss) var dismiss
     var body: some View {
         GeometryReader { proxy in
@@ -67,7 +67,7 @@ struct BusinessHomeView: View {
     }
 }
 
-extension BusinessHomeView {
+extension BusinessHomePage {
     var infoView: some View {
         VStack(alignment: .leading, spacing: 20) {
             infoHeaderView
@@ -91,7 +91,7 @@ extension BusinessHomeView {
     }
 }
 
-extension BusinessHomeView {
+extension BusinessHomePage {
     var buttonView: some View {
         HStack {
             buttonBuilder(text: "55 mins ago", systemImage: "heart")
@@ -115,7 +115,7 @@ extension BusinessHomeView {
     }
 }
 
-extension BusinessHomeView {
+extension BusinessHomePage {
     var infoHeaderView: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -144,5 +144,5 @@ extension BusinessHomeView {
 
 
 #Preview {
-    BusinessHomeView()
+    BusinessHomePage()
 }

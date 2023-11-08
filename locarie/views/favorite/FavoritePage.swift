@@ -1,5 +1,5 @@
 //
-//  FavoriteView.swift
+//  FavoritePage.swift
 //  locarie
 //
 //  Created by qiuty on 2023/10/31.
@@ -8,7 +8,7 @@
 import MapKit
 import SwiftUI
 
-struct FavoriteView: View {
+struct FavoritePage: View {
     @State private var mapRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D.LSE,
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -73,6 +73,6 @@ fileprivate struct Constants {
     static let postCoverWidthProportion = 0.8
 }
 #Preview {
-    FavoriteView()
+    FavoritePage()
         .environmentObject(BottomTabViewRouter())
 }

@@ -12,7 +12,7 @@ struct PostCardView: View {
     
     var body: some View {
         NavigationLink {
-            PostDetailView()
+            PostDetailPage()
         } label: {
             VStack(alignment: .leading, spacing: 8) {
                 cover(width: coverWidth).padding([.horizontal, .top])

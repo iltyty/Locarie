@@ -1,5 +1,5 @@
 //
-//  SearchBar.swift
+//  SearchBarView.swift
 //  locarie
 //
 //  Created by qiuty on 2023/10/31.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchBar: View {
+struct SearchBarView: View {
     @State var text = ""
     var title = "Explore"
     var isDisabled = false
@@ -42,5 +42,5 @@ struct SearchBar: View {
 
 #Preview {
     let text = ""
-    return SearchBar(text: text)
+    return SearchBarView(text: text)
 }

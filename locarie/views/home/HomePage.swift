@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  HomePage.swift
 //  locarie
 //
 //  Created by qiuty on 2023/10/31.
@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct HomeView: View {
+struct HomePage: View {
     @State private var mapRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D.LSE,
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -34,9 +34,9 @@ struct HomeView: View {
                         
                         VStack {
                             NavigationLink {
-                                SearchView()
+                                SearchPage()
                             } label: {
-                                SearchBar(title: "Explore", isDisabled: true)
+                                SearchBarView(title: "Explore", isDisabled: true)
                             }
                             .buttonStyle(PlainButtonStyle())
                             
@@ -79,6 +79,6 @@ fileprivate struct Constants {
 
 #Preview {
     let viewRouter = BottomTabViewRouter()
-    return HomeView()
+    return HomePage()
         .environmentObject(viewRouter)
 }

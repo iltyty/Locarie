@@ -1,5 +1,5 @@
 //
-//  ProfileView.swift
+//  UserProfilePage.swift
 //  locarie
 //
 //  Created by qiuty on 2023/10/31.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UserProfileView: View {
+struct UserProfilePage: View {
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
@@ -25,7 +25,7 @@ struct UserProfileView: View {
    
 }
 
-extension UserProfileView {
+extension UserProfilePage {
     var topView: some View {
         VStack {
             HStack {
@@ -54,7 +54,7 @@ extension UserProfileView {
     }
 }
 
-extension UserProfileView {
+extension UserProfilePage {
     func bottomView(screenWidth: CGFloat) -> some View {
         VStack(spacing: Constants.bottomViewVSpacing) {
             HStack {
@@ -95,6 +95,6 @@ fileprivate struct Constants {
 }
 
 #Preview {
-    UserProfileView()
+    UserProfilePage()
         .environmentObject(BottomTabViewRouter())
 }

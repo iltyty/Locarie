@@ -13,15 +13,15 @@ struct LocarieView: View {
     var body: some View {
         switch viewRouter.currentPage {
         case .home:
-            HomeView()
+            HomePage()
         case .favorite:
-            FavoriteView()
+            FavoritePage()
         case .new:
-            NewPostView()
+            NewPostPage()
         case .message:
-            MessageHomeView()
+            MessagePage()
         case .profile:
-            UserProfileView()
+            UserProfilePage()
         }
     }
 }

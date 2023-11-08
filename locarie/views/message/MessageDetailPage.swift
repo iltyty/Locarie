@@ -1,5 +1,5 @@
 //
-//  MessageDetailView.swift
+//  MessageDetailPage.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/6.
@@ -29,7 +29,7 @@ import SwiftUI
 //    }
 //}
 
-struct MessageDetailView: View {
+struct MessageDetailPage: View {
     @State var message = "Message"
     
     var body: some View {
@@ -76,7 +76,7 @@ struct MessageDetailView: View {
 }
 
 #Preview {
-    MessageDetailView()
+    MessageDetailPage()
 }
 
 fileprivate struct NavigationBarView: View {

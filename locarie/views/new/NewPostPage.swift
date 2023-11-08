@@ -1,5 +1,5 @@
 //
-//  NewPostView.swift
+//  NewPostPage.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/7.
@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-struct NewPostView: View {
+struct NewPostPage: View {
     @State var title = ""
     @State var content = ""
     @StateObject private var viewModel = PhotoViewModel()
@@ -34,7 +34,7 @@ struct NewPostView: View {
     }
 }
 
-extension NewPostView {
+extension NewPostPage {
     var navigationBar: some View {
         Text(Constants.pageTitle)
             .fontWeight(.bold)
@@ -42,7 +42,7 @@ extension NewPostView {
     }
 }
 
-extension NewPostView {
+extension NewPostPage {
     func photosPicker(imageSize: CGFloat) -> some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
@@ -72,7 +72,7 @@ extension NewPostView {
     }
 }
 
-extension NewPostView {
+extension NewPostPage {
     func editor(
         contentEditorHeight: CGFloat, title: Binding<String>, content: Binding<String>
     ) -> some View {
@@ -91,7 +91,7 @@ extension NewPostView {
     }
 }
 
-extension NewPostView {
+extension NewPostPage {
     var shareButton: some View {
         Button {
             print("tapped")
@@ -120,6 +120,6 @@ fileprivate struct Constants {
 }
 
 #Preview {
-    NewPostView()
+    NewPostPage()
         .environmentObject(BottomTabViewRouter())
 }
