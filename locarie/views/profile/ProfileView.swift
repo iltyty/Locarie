@@ -64,10 +64,7 @@ struct UnderView: View {
             }
             .padding(.bottom, 80)
             
-            Image("avatar")
-                .resizable()
-                .clipShape(Circle())
-                .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+            AvatarView(name: "avatar", size: Constants.avatarSize)
             Text("Steve Rogers")
             Text("@CaptainAmerica")
                 .foregroundStyle(.secondary)

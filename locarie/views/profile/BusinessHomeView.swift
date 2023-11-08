@@ -119,10 +119,7 @@ extension BusinessHomeView {
     var infoHeaderView: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image("avatar")
-                    .resizable()
-                    .frame(width: 64, height: 64)
-                    .clipShape(Circle())
+                AvatarView(name: "avatar", size: 64)
                 Spacer()
                 Image(systemName: "message")
                     .font(.system(size: 20))

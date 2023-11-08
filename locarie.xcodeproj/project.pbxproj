@@ -33,6 +33,7 @@
 		50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */; };
 		50B11AD72AFA28E9002A7B91 /* BusinessHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AD62AFA28E8002A7B91 /* BusinessHomeView.swift */; };
 		50B11ADA2AFB3661002A7B91 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AD92AFB3660002A7B91 /* PostDetailView.swift */; };
+		50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachmentView.swift; sourceTree = "<group>"; };
 		50B11AD62AFA28E8002A7B91 /* BusinessHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHomeView.swift; sourceTree = "<group>"; };
 		50B11AD92AFB3660002A7B91 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				50277F7F2AF12A700045AB12 /* SearchBar.swift */,
 				50277F812AF1512E0045AB12 /* PostCard.swift */,
 				503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */,
+				50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				5000C6C92AF8C3440057EF2D /* SearchView.swift in Sources */,
 				50B11AD72AFA28E9002A7B91 /* BusinessHomeView.swift in Sources */,
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,
+				50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostView.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
 				50277F7D2AF117CE0045AB12 /* ProfileView.swift in Sources */,

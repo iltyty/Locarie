@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-fileprivate struct Constants {
-    static let avatarSize: CGFloat = 42
-    static let messageCornerRadius: CGFloat = 20
-    static let messageMinHeight: CGFloat = 64
-    static let messageMaxWidthProportion = 0.7
-}
-
 struct MessageContentView: View {
     var isSentBySelf = true
     var content: String
@@ -24,10 +17,7 @@ struct MessageContentView: View {
             if isSentBySelf {
                 Spacer()
             } else {
-                avatar
-                    .resizable()
-                    .frame(width: Constants.avatarSize, height: Constants.avatarSize)
-                    .clipShape(Circle())
+                AvatarView(image: avatar, size: Constants.avatarSize)
             }
             Text(content)
                 .padding()
@@ -37,10 +27,7 @@ struct MessageContentView: View {
                 )
                 .fixedSize(horizontal: false, vertical: true)
             if isSentBySelf {
-                avatar
-                    .resizable()
-                    .clipShape(Circle())
-                    .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+                AvatarView(image: avatar, size: Constants.avatarSize)
             } else {
                 Spacer()
             }
@@ -49,6 +36,13 @@ struct MessageContentView: View {
         .frame(alignment: .center)
 
     }
+}
+
+fileprivate struct Constants {
+    static let avatarSize: CGFloat = 42
+    static let messageCornerRadius: CGFloat = 20
+    static let messageMinHeight: CGFloat = 64
+    static let messageMaxWidthProportion = 0.7
 }
 
 #Preview {

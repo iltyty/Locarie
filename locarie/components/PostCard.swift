@@ -42,10 +42,7 @@ struct PostCard: View {
                     
                     
                     HStack {
-                        Image("avatar")
-                            .resizable()
-                            .clipShape(Circle())
-                            .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+                        AvatarView(name: "avatar", size: Constants.avatarSize)
                         Text("Shreeji")
                         Spacer()
                         Image(systemName: "map")

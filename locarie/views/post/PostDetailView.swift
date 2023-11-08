@@ -36,10 +36,7 @@ struct PostDetailView: View {
                         NavigationLink {
                             BusinessHomeView()
                         } label: {
-                            Image("avatar")
-                                .resizable()
-                                .frame(width: 36, height: 36)
-                                .clipShape(Circle())
+                            AvatarView(name: "avatar", size: Constants.avatarSize)
                         }
                         Text("Jolene Hornsey")
                             .fixedSize(horizontal: true, vertical: false)
@@ -78,6 +75,10 @@ extension PostDetailView {
             PostCard()
         }
     }
+}
+
+fileprivate struct Constants {
+    static let avatarSize: CGFloat = 36
 }
 
 #Preview {

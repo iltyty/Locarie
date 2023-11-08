@@ -10,18 +10,12 @@ import SwiftUI
 struct MessageRowView: View {
     var body: some View {
         HStack(alignment: .top) {
-            Image("avatar")
-                .resizable()
-                .clipShape(Circle())
-                .frame(width: Constants.avatarSize, height: Constants.avatarSize)
-            
+            AvatarView(name: "avatar", size: Constants.avatarSize)
             VStack(alignment: .leading) {
                 Text("Tony Stark")
                 Text("Hello, I'm Iron Man!")
             }
-            
             Spacer()
-            
             VStack {
                 Text("Status")
                     .foregroundStyle(.secondary)
@@ -29,10 +23,10 @@ struct MessageRowView: View {
             }
         }
     }
-    
-    struct Constants {
-        static let avatarSize: CGFloat = 50
-    }
+}
+
+fileprivate struct Constants {
+    static let avatarSize: CGFloat = 50
 }
 
 #Preview {

@@ -91,11 +91,8 @@ fileprivate struct NavigationBarView: View {
                 .foregroundStyle(.primary)
                 .padding(.leading)
                 .imageScale(.large)
-            Image("avatar")
-                .resizable()
-                .clipShape(Circle())
-                .frame(width: Constants.avatarSize, height: Constants.avatarSize)
-            Text("Business Name")
+            AvatarView(name: "avatar", size: Constants.avatarSize)
+            Text("Jolene Hornsey")
             Spacer()
         }
     }
