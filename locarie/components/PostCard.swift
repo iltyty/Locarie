@@ -9,50 +9,55 @@ import SwiftUI
 
 struct PostCard: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Image("cover")
-                .resizable()
-                .scaledToFill()
-                .frame(height: Constants.height)
-                .clipped()
-                .listRowInsets(EdgeInsets())
-                .clipShape(
-                    .rect(
-                        topLeadingRadius: Constants.borderRadius,
-                        topTrailingRadius: Constants.borderRadius
+        NavigationLink {
+            PostDetailView()
+        } label: {
+            VStack(alignment: .leading, spacing: 8) {
+                Image("cover")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: Constants.height)
+                    .clipped()
+                    .listRowInsets(EdgeInsets())
+                    .clipShape(
+                        .rect(
+                            topLeadingRadius: Constants.borderRadius,
+                            topTrailingRadius: Constants.borderRadius
+                        )
                     )
-                )
-            
-            Group {
-                HStack {
-                    Text("1 min ago")
-                        .foregroundStyle(.green)
-                    Text("·")
-                    Text("3 km")
-                        .foregroundStyle(.secondary)
+                
+                Group {
+                    HStack {
+                        Text("1 min ago")
+                            .foregroundStyle(.green)
+                        Text("·")
+                        Text("3 km")
+                            .foregroundStyle(.secondary)
+                    }
+                    
+                    
+                    Text("Today's new arrivals.")
+                        .font(.title2)
+                        .listRowSeparator(.hidden)
+                    
+                    
+                    HStack {
+                        Image("avatar")
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+                        Text("Shreeji")
+                        Spacer()
+                        Image(systemName: "map")
+                    }
+                    .padding([.bottom, .trailing], Constants.bottomPadding)
                 }
-                
-                
-                Text("Today's new arrivals.")
-                    .font(.title2)
-                    .listRowSeparator(.hidden)
-
-                
-                HStack {
-                    Image("avatar")
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: Constants.avatarSize, height: Constants.avatarSize)
-                    Text("Shreeji")
-                    Spacer()
-                    Image(systemName: "map")
-                }
-                .padding([.bottom, .trailing], Constants.bottomPadding)
+                .padding([.leading])
             }
-            .padding([.leading])
+            .background(RoundedRectangle(cornerRadius: Constants.borderRadius).fill(.white))
+            .padding()
+            .tint(.primary)
         }
-        .background(RoundedRectangle(cornerRadius: Constants.borderRadius).fill(.white))
-        .padding()
     }
     
     struct Constants {

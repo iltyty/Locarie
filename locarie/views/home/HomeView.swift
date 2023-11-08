@@ -41,12 +41,7 @@ struct HomeView: View {
                         
                         Spacer()
                         
-                        NavigationLink {
-                            PostDetailView()
-                        } label: {
-                            PostCard()
-                        }
-                        .tint(.primary)
+                        PostCard()
                     }
                 }
                 
