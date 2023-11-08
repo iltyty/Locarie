@@ -16,66 +16,17 @@ struct NewPostView: View {
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                Text(Constants.pageTitle)
-                    .fontWeight(.bold)
-                    .font(.title3)
+                navigationBar
                 
-                ScrollView {
-                    let imageSize = proxy.size.width / 3.5
-                    LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
-                        ForEach(viewModel.attachments) { imageAttachment in
-                            ImageAttachmentView(
-                                imageSize: imageSize, imageAttachment: imageAttachment
-                            )
-                        }
-                        PhotosPicker(
-                            selection: $viewModel.selection,
-                            matching: .images,
-                            photoLibrary: .shared()
-                        ) {
-                            Image(systemName: "camera")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: imageSize / 3)
-                                .foregroundStyle(.orange)
-                                .frame(width: imageSize, height: imageSize)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 5).fill(.thickMaterial)
-                                )
-                        }
-                    }
-                    .padding()
-                }
+                photosPicker(imageSize: proxy.size.width * Constants.imageSizeProportion)
                 
-                TextField("Title", text: $title)
-                    .padding(.horizontal)
+                editor(
+                    contentEditorHeight: proxy.size.height * Constants.contentEditorHeightProportion,
+                    title: $title,
+                    content: $content
+                )
                 
-                Divider()
-                    .padding(.horizontal)
-                
-                TextField("Paragraph", text: $content)
-                    .padding([.horizontal, .top])
-                    .frame(height: proxy.size.height / 3, alignment: .top)
-                
-                Divider()
-                    .padding(.horizontal)
-                
-                Spacer()
-                
-                Button {
-                    print("tapped")
-                } label: {
-                    Text("share")
-                        .font(.title2)
-                        .foregroundStyle(.white)
-                        .fontWeight(.bold)
-                        .background(
-                            Capsule()
-                                .fill(.orange)
-                                .frame(width: 180, height: 50)
-                        )
-                        .padding(.vertical)
-                }
+                shareButton
                 
                 BottomTabView()
             }
@@ -83,9 +34,89 @@ struct NewPostView: View {
     }
 }
 
+extension NewPostView {
+    var navigationBar: some View {
+        Text(Constants.pageTitle)
+            .fontWeight(.bold)
+            .font(.title3)
+    }
+}
+
+extension NewPostView {
+    func photosPicker(imageSize: CGFloat) -> some View {
+        ScrollView {
+            LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+                ForEach(viewModel.attachments) { imageAttachment in
+                    ImageAttachmentView(
+                        imageSize: imageSize, imageAttachment: imageAttachment
+                    )
+                }
+                PhotosPicker(
+                    selection: $viewModel.selection,
+                    matching: .images,
+                    photoLibrary: .shared()
+                ) {
+                    Image(systemName: "camera")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: imageSize / 3)
+                        .foregroundStyle(.orange)
+                        .frame(width: imageSize, height: imageSize)
+                        .background(
+                            RoundedRectangle(cornerRadius: 5).fill(.thickMaterial)
+                        )
+                }
+            }
+            .padding()
+        }
+    }
+}
+
+extension NewPostView {
+    func editor(
+        contentEditorHeight: CGFloat, title: Binding<String>, content: Binding<String>
+    ) -> some View {
+        VStack {
+            TextField("Title", text: title)
+                .padding(.horizontal)
+            Divider()
+                .padding(.horizontal)
+            TextField("Paragraph", text: content)
+                .padding([.horizontal, .top])
+                .frame(height: contentEditorHeight, alignment: .top)
+            Divider()
+                .padding(.horizontal)
+            Spacer()
+        }
+    }
+}
+
+extension NewPostView {
+    var shareButton: some View {
+        Button {
+            print("tapped")
+        } label: {
+            Text(Constants.shareButtonText)
+                .font(.title2)
+                .foregroundStyle(.white)
+                .fontWeight(.bold)
+                .background(
+                    Capsule()
+                        .fill(.orange)
+                        .frame(width: Constants.shareButtonWidth, height: Constants.shareButtonHeight)
+                )
+                .padding(.vertical)
+        }
+    }
+}
+
 fileprivate struct Constants {
     static let pageTitle = "Share"
-    static let imageSize: CGFloat = 64
+    static let imageSizeProportion: CGFloat = 1 / 3.5
+    static let contentEditorHeightProportion: CGFloat = 1 / 3
+    static let shareButtonText = "share"
+    static let shareButtonWidth: CGFloat = 180
+    static let shareButtonHeight: CGFloat = 50
 }
 
 #Preview {
