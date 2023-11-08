@@ -19,44 +19,59 @@ struct FavoriteView: View {
     @State private var currentOffset: CGFloat = 0
     
     var body: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                ZStack(alignment: .bottom) {
-                    Map(position: .constant(.region(mapRegion))) {
-                        Marker("LSE", coordinate: CLLocationCoordinate2D.LSE)
-                            .tint(Color.mapMarkerOrange)
-                        Marker("Marker1", coordinate: CLLocationCoordinate2D(latitude: 51.5346, longitude: -0.12641))
-                            .tint(Color.mapMarkerOrange)
-                        Marker("Marker2", coordinate: CLLocationCoordinate2D(latitude: 51.5246, longitude: -0.09841))
-                            .tint(Color.mapMarkerOrange)
-                        Marker("Marker3", coordinate: CLLocationCoordinate2D(latitude: 51.5196, longitude: -0.096641))
-                            .tint(Color.mapMarkerOrange)
-                        Marker("Marker4", coordinate: CLLocationCoordinate2D(latitude: 51.5206, longitude: -0.12641))
-                            .tint(Color.mapMarkerOrange)
-                    }
-                    
-                    BottomDrawerView(offsetY: 400) {
+        NavigationStack {
+            GeometryReader { proxy in
+                VStack(spacing: 0) {
+                    ZStack(alignment: .bottom) {
+                        Map(position: .constant(.region(mapRegion))) {
+                            Marker("LSE", coordinate: CLLocationCoordinate2D.LSE)
+                                .tint(Color.mapMarkerOrange)
+                            Marker("Marker1", coordinate: CLLocationCoordinate2D(latitude: 51.5346, longitude: -0.12641))
+                                .tint(Color.mapMarkerOrange)
+                            Marker("Marker2", coordinate: CLLocationCoordinate2D(latitude: 51.5246, longitude: -0.09841))
+                                .tint(Color.mapMarkerOrange)
+                            Marker("Marker3", coordinate: CLLocationCoordinate2D(latitude: 51.5196, longitude: -0.096641))
+                                .tint(Color.mapMarkerOrange)
+                            Marker("Marker4", coordinate: CLLocationCoordinate2D(latitude: 51.5206, longitude: -0.12641))
+                                .tint(Color.mapMarkerOrange)
+                        }
+                        
                         ScrollView {
-                            ForEach(0..<10) { _ in
-                                PostCard()
+                            Group {
+                                Spacer()
+                                Capsule(style: .circular)
+                                    .fill(.secondary)
+                                    .frame(width: Constants.handlerWidth, height: Constants.handlerHeight)
+                                    .padding(.top, 10)
+                                
+                                ForEach(0..<10) { _ in
+                                    PostCardView(coverWidth: proxy.size.width * Constants.postCoverWidthProportion)
+                                }
                             }
+                            .background(
+                                UnevenRoundedRectangle(topLeadingRadius: 10, topTrailingRadius: 10).fill(.white)
+                            )
+                            .padding(.top, proxy.size.height * 4 / 5)
                         }
                         .scrollIndicators(.hidden)
                     }
+                    
+                    BottomTabView()
                 }
-                
-                BottomTabView()
+                .navigationTitle(Constants.navigationTitle)
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationTitle(Constants.navigationTitle)
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
-    struct Constants {
-        static let navigationTitle = "Followed"
-    }
 }
 
+fileprivate struct Constants {
+    static let navigationTitle = "Followed"
+    static let handlerWidth: CGFloat = 80
+    static let handlerHeight: CGFloat = 5
+    static let postCoverWidthProportion = 0.8
+}
 #Preview {
     FavoriteView()
         .environmentObject(BottomTabViewRouter())

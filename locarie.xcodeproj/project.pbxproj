@@ -18,7 +18,7 @@
 		50277F7A2AF117B20045AB12 /* MessageHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F792AF117B20045AB12 /* MessageHomeView.swift */; };
 		50277F7D2AF117CE0045AB12 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7C2AF117CE0045AB12 /* UserProfileView.swift */; };
 		50277F802AF12A700045AB12 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7F2AF12A700045AB12 /* SearchBar.swift */; };
-		50277F822AF1512E0045AB12 /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F812AF1512E0045AB12 /* PostCard.swift */; };
+		50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F812AF1512E0045AB12 /* PostCardView.swift */; };
 		503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */; };
 		5037D2C92AF2337400108F0F /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037D2C82AF2337400108F0F /* MessageRowView.swift */; };
 		50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */; };
@@ -65,7 +65,7 @@
 		50277F792AF117B20045AB12 /* MessageHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHomeView.swift; sourceTree = "<group>"; };
 		50277F7C2AF117CE0045AB12 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		50277F7F2AF12A700045AB12 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		50277F812AF1512E0045AB12 /* PostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCard.swift; sourceTree = "<group>"; };
+		50277F812AF1512E0045AB12 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
 		503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDrawerView.swift; sourceTree = "<group>"; };
 		5037D2C82AF2337400108F0F /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
 		50AAB1792AEFA2E9003FEDF1 /* locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,7 +171,7 @@
 			children = (
 				5000C6C32AF7CD3D0057EF2D /* tabview */,
 				50277F7F2AF12A700045AB12 /* SearchBar.swift */,
-				50277F812AF1512E0045AB12 /* PostCard.swift */,
+				50277F812AF1512E0045AB12 /* PostCardView.swift */,
 				503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */,
 				50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */,
 			);
@@ -403,7 +403,7 @@
 				50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */,
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailView.swift in Sources */,
-				50277F822AF1512E0045AB12 /* PostCard.swift in Sources */,
+				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,
 				50277F772AF117970045AB12 /* FavoriteView.swift in Sources */,
 				5037D2C92AF2337400108F0F /* MessageRowView.swift in Sources */,

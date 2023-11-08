@@ -10,13 +10,15 @@ import SwiftUI
 struct UserProfileView: View {
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                ScrollView {
-                    topView.padding(.bottom)
-                    bottomView
+            GeometryReader { proxy in
+                VStack(spacing: 0) {
+                    ScrollView {
+                        topView.padding(.bottom)
+                        bottomView(screenWidth: proxy.size.width)
+                    }
+                    .background(Constants.pageBackground)
+                    BottomTabView()
                 }
-                .background(Constants.pageBackground)
-                BottomTabView()
             }
         }
     }
@@ -53,7 +55,7 @@ extension UserProfileView {
 }
 
 extension UserProfileView {
-    var bottomView: some View {
+    func bottomView(screenWidth: CGFloat) -> some View {
         VStack(spacing: Constants.bottomViewVSpacing) {
             HStack {
                 Spacer()
@@ -67,7 +69,7 @@ extension UserProfileView {
             Image(systemName: "map")
             Divider()
                 .padding(.horizontal)
-            PostCard()
+            PostCardView(coverWidth: screenWidth * 0.8)
         }
         .padding(.top)
         .background(

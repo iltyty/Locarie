@@ -41,6 +41,6 @@ struct SearchBar: View {
 }
 
 #Preview {
-    var text = ""
+    let text = ""
     return SearchBar(text: text)
 }

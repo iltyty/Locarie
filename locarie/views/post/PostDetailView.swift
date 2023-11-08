@@ -17,7 +17,7 @@ struct PostDetailView: View {
                 underneathImageView(image: Image("post"), width: size.width, height: size.height)
 
                 ScrollView {
-                    contentView
+                    contentView(screenWidth: proxy.size.width)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 20).fill(.white))
                         .padding(.top, proxy.size.height * Constants.contentTopPaddingProportion)
@@ -41,7 +41,7 @@ extension PostDetailView {
 }
 
 extension PostDetailView {
-    var contentView: some View {
+    func contentView(screenWidth: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: Constants.contentVSpacing) {
             HStack {
                 Text("30 mins ago")
@@ -60,7 +60,7 @@ extension PostDetailView {
             ForEach(0..<20) { i in
                 Text("This is a review from custosmer \(i)")
             }
-            PostCard()
+            PostCardView(coverWidth: screenWidth * 0.7)
         }
     }
 }
