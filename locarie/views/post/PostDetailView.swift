@@ -12,39 +12,17 @@ struct PostDetailView: View {
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
-                Image("post")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: proxy.size.width, height: proxy.size.height)
-                    .ignoresSafeArea(edges: .top)
+                let size = proxy.size
                 
+                underneathImageView(image: Image("post"), width: size.width, height: size.height)
+
                 ScrollView {
                     contentView
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.white)
-                        )
-                        .padding(.top, proxy.size.height * 2 / 3)
+                        .background(RoundedRectangle(cornerRadius: 20).fill(.white))
+                        .padding(.top, proxy.size.height * Constants.contentTopPaddingProportion)
                 }.overlay(alignment: .top) {
-                    HStack {
-                        Image(systemName: "chevron.backward")
-                            .font(.system(size: 32))
-                            .onTapGesture {
-                                dismiss()
-                            }
-                        NavigationLink {
-                            BusinessHomeView()
-                        } label: {
-                            AvatarView(name: "avatar", size: Constants.avatarSize)
-                        }
-                        Text("Jolene Hornsey")
-                            .fixedSize(horizontal: true, vertical: false)
-                        Spacer()
-                        Image(systemName: "ellipsis")
-                            .font(.system(size: 32))
-                    }
-                    .padding(.horizontal)
+                    scrollViewOverlay
                 }
             }
             .navigationBarBackButtonHidden()
@@ -53,8 +31,18 @@ struct PostDetailView: View {
 }
 
 extension PostDetailView {
+    func underneathImageView(image: Image, width: CGFloat, height: CGFloat) -> some View {
+        image
+            .resizable()
+            .scaledToFill()
+            .frame(width: width, height: height)
+            .ignoresSafeArea(edges: .top)
+    }
+}
+
+extension PostDetailView {
     var contentView: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: Constants.contentVerticalSpacing) {
             HStack {
                 Text("30 mins ago")
                     .foregroundStyle(.green)
@@ -77,8 +65,34 @@ extension PostDetailView {
     }
 }
 
+extension PostDetailView {
+    var scrollViewOverlay: some View {
+        HStack {
+            Image(systemName: "chevron.backward")
+                .font(.system(size: Constants.backButtonSize))
+                .onTapGesture {
+                    dismiss()
+                }
+            NavigationLink {
+                BusinessHomeView()
+            } label: {
+                AvatarView(name: "avatar", size: Constants.avatarSize)
+            }
+            Text("Jolene Hornsey")
+                .fixedSize(horizontal: true, vertical: false)
+            Spacer()
+            Image(systemName: "ellipsis")
+                .font(.system(size: Constants.backButtonSize))
+        }
+        .padding(.horizontal)
+    }
+}
+
 fileprivate struct Constants {
     static let avatarSize: CGFloat = 36
+    static let backButtonSize: CGFloat = 32
+    static let contentVerticalSpacing: CGFloat = 20
+    static let contentTopPaddingProportion: CGFloat = 2 / 3
 }
 
 #Preview {
