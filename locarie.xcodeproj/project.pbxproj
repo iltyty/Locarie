@@ -31,6 +31,7 @@
 		50B11ACF2AF9DE77002A7B91 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11ACE2AF9DE77002A7B91 /* NewPostView.swift */; };
 		50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AD22AFA063B002A7B91 /* PhotoViewModel.swift */; };
 		50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */; };
+		50B11AD72AFA28E9002A7B91 /* BusinessHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AD62AFA28E8002A7B91 /* BusinessHomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		50B11ACE2AF9DE77002A7B91 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
 		50B11AD22AFA063B002A7B91 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachmentView.swift; sourceTree = "<group>"; };
+		50B11AD62AFA28E8002A7B91 /* BusinessHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				50277F7C2AF117CE0045AB12 /* ProfileView.swift */,
+				50B11AD62AFA28E8002A7B91 /* BusinessHomeView.swift */,
 			);
 			path = profile;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				50277F742AF117700045AB12 /* HomeView.swift in Sources */,
 				50277F7A2AF117B20045AB12 /* MessageHomeView.swift in Sources */,
 				5000C6C92AF8C3440057EF2D /* SearchView.swift in Sources */,
+				50B11AD72AFA28E9002A7B91 /* BusinessHomeView.swift in Sources */,
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostView.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
