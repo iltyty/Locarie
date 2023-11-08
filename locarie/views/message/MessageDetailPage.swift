@@ -31,6 +31,11 @@ import SwiftUI
 
 struct MessageDetailPage: View {
     @State var message = "Message"
+    @State var messages: [Message]
+    
+    init(messages: [Message]) {
+        self.messages = messages
+    }
     
     var body: some View {
         VStack {
@@ -38,12 +43,15 @@ struct MessageDetailPage: View {
             
             ScrollView {
                 VStack(spacing: 20) {
-                    MessageContentView(isSentBySelf: true, content: "hello, I'm Tony Start from the Avengers", avatar: Image("avatar"))
-                    MessageContentView(isSentBySelf: true, content: "how's everything going these days?", avatar: Image("avatar"))
-                    MessageContentView(isSentBySelf: false, content: "hello, I'm Steve Rogers from the Avengers", avatar: Image("avatar"))
-                    MessageContentView(isSentBySelf: false, content: "hh not bad bro ", avatar: Image("avatar"))
-                    MessageContentView(isSentBySelf: true, content: "good, go get a shot tonight?", avatar: Image("avatar"))
-                    MessageContentView(isSentBySelf: false, content: "ok, what time?", avatar: Image("avatar"))
+                    ForEach(messages, id: \.self) { m in
+                        MessageView(message: m)
+                    }
+//                    MessageView(isSentBySelf: true, content: "hello, I'm Tony Start from the Avengers", avatar: Image("avatar"))
+//                    MessageView(isSentBySelf: true, content: "how's everything going these days?", avatar: Image("avatar"))
+//                    MessageView(isSentBySelf: false, content: "hello, I'm Steve Rogers from the Avengers", avatar: Image("avatar"))
+//                    MessageView(isSentBySelf: false, content: "hh not bad bro ", avatar: Image("avatar"))
+//                    MessageView(isSentBySelf: true, content: "good, go get a shot tonight?", avatar: Image("avatar"))
+//                    MessageView(isSentBySelf: false, content: "ok, what time?", avatar: Image("avatar"))
                 }
             }
             
@@ -74,11 +82,6 @@ struct MessageDetailPage: View {
         .navigationBarBackButtonHidden()
     }
 }
-
-#Preview {
-    MessageDetailPage()
-}
-
 fileprivate struct NavigationBarView: View {
     @Environment(\.dismiss) var dismiss
     
@@ -104,4 +107,10 @@ fileprivate struct Constants {
     static let iconPadding: CGFloat = 8.0
     static let cornerRadius: CGFloat = 25.0
     static let avatarSize: CGFloat = 42.0
+}
+
+
+#Preview {
+    let messageVM = MessageViewModel()
+    return MessageDetailPage(messages: messageVM.messages[User.business2]!)
 }

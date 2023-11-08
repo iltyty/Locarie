@@ -7,19 +7,21 @@
 
 import SwiftUI
 
-struct MessageContentView: View {
-    var isSentBySelf = true
-    var content: String
-    var avatar: Image
+struct MessageView: View {
+    let message: Message
+    
+    var isSentBySelf: Bool {
+        return message.sender.id == 3
+    }
     
     var body: some View {
         HStack {
             if isSentBySelf {
                 Spacer()
             } else {
-                AvatarView(image: avatar, size: Constants.avatarSize)
+                AvatarView(image: message.sender.avatar, size: Constants.avatarSize)
             }
-            Text(content)
+            Text(message.content)
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: Constants.messageCornerRadius)
@@ -27,7 +29,7 @@ struct MessageContentView: View {
                 )
                 .fixedSize(horizontal: false, vertical: true)
             if isSentBySelf {
-                AvatarView(image: avatar, size: Constants.avatarSize)
+                AvatarView(image: message.sender.avatar, size: Constants.avatarSize)
             } else {
                 Spacer()
             }
@@ -46,9 +48,7 @@ fileprivate struct Constants {
 }
 
 #Preview {
-    MessageContentView(
-        content: "Hello, I'm Tony Stark from the Avengers!",
-        avatar: Image("avatar")
-    )
-    .background(.blue)
+    let messageVM = MessageViewModel()
+    return MessageView(message: messageVM.messages[User.business1]![0])
+        .background(.blue)
 }

@@ -8,12 +8,26 @@
 import SwiftUI
 
 struct MessageRowView: View {
+    let message: Message
+    
+    init(_ message: Message) {
+        self.message = message
+    }
+    
+    var isSentBySelf: Bool {
+        message.sender.id == 3
+    }
+    
+    var user: User {
+        isSentBySelf ? message.receiver : message.sender
+    }
+    
     var body: some View {
         HStack(alignment: .top) {
-            AvatarView(name: "avatar", size: Constants.avatarSize)
+            AvatarView(image: user.avatar, size: Constants.avatarSize)
             VStack(alignment: .leading) {
-                Text("Tony Stark")
-                Text("Hello, I'm Iron Man!")
+                Text(user.username)
+                Text(message.content).lineLimit(1)
             }
             Spacer()
             VStack {
@@ -30,5 +44,7 @@ fileprivate struct Constants {
 }
 
 #Preview {
-    MessageRowView()
+    let messageVM = MessageViewModel()
+    let lastMessage = messageVM.messages[User.business1]![0]
+    return MessageRowView(lastMessage)
 }
