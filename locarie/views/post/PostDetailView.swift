@@ -56,9 +56,11 @@ extension PostDetailView {
                 .lineLimit(1)
             Label("8am - 11 pm", systemImage: "clock")
             Divider()
-            Label("Reviews", systemImage: "message")
-            ForEach(0..<20) { i in
-                Text("This is a review from custosmer \(i)")
+            NavigationLink {
+                ReviewPage()
+            } label: {
+                Label("Reviews", systemImage: "message")
+                    .tint(.primary)
             }
             PostCardView(coverWidth: screenWidth * 0.7)
         }
