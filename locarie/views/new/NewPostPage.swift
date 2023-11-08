@@ -15,30 +15,24 @@ struct NewPostPage: View {
     
     var body: some View {
         GeometryReader { proxy in
-            VStack {
-                navigationBar
-                
-                photosPicker(imageSize: proxy.size.width * Constants.imageSizeProportion)
-                
-                editor(
-                    contentEditorHeight: proxy.size.height * Constants.contentEditorHeightProportion,
-                    title: $title,
-                    content: $content
-                )
-                
-                shareButton
-                
-                BottomTabView()
+            NavigationStack {
+                VStack {
+                    photosPicker(imageSize: proxy.size.width * Constants.imageSizeProportion)
+                    
+                    editor(
+                        contentEditorHeight: proxy.size.height * Constants.contentEditorHeightProportion,
+                        title: $title,
+                        content: $content
+                    )
+                    
+                    shareButton
+                    
+                    BottomTabView()
+                }
+                .navigationTitle(Constants.pageTitle)
+            .navigationBarTitleDisplayMode(.inline)
             }
         }
-    }
-}
-
-extension NewPostPage {
-    var navigationBar: some View {
-        Text(Constants.pageTitle)
-            .fontWeight(.bold)
-            .font(.title3)
     }
 }
 
