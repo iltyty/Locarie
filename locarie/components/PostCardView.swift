@@ -21,6 +21,7 @@ struct PostCardView: View {
             .background(RoundedRectangle(cornerRadius: Constants.coverBorderRadius).fill(.white))
             .tint(.primary)
         }
+        .buttonStyle(FlatLinkStyle())
     }
 }
 
@@ -67,6 +68,11 @@ extension PostCardView {
     }
 }
 
+struct FlatLinkStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+    }
+}
 
 fileprivate struct Constants {
     static let avatarSize: CGFloat = 32
