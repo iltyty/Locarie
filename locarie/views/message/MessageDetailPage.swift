@@ -30,28 +30,26 @@ import SwiftUI
 //}
 
 struct MessageDetailPage: View {
-    @State var message = "Message"
+    var user: User
     @State var messages: [Message]
     
-    init(messages: [Message]) {
-        self.messages = messages
+    @State var message = "Message"
+    @Environment(\.dismiss) var dismiss
+    
+    init(user: User, messages: [Message]) {
+        self._messages = .init(initialValue: messages)
+        self.user = user
     }
     
     var body: some View {
         VStack {
-            NavigationBarView()
+            navigationBar(dismiss: dismiss, user: user)
             
             ScrollView {
                 VStack(spacing: 20) {
                     ForEach(messages, id: \.self) { m in
                         MessageView(message: m)
                     }
-//                    MessageView(isSentBySelf: true, content: "hello, I'm Tony Start from the Avengers", avatar: Image("avatar"))
-//                    MessageView(isSentBySelf: true, content: "how's everything going these days?", avatar: Image("avatar"))
-//                    MessageView(isSentBySelf: false, content: "hello, I'm Steve Rogers from the Avengers", avatar: Image("avatar"))
-//                    MessageView(isSentBySelf: false, content: "hh not bad bro ", avatar: Image("avatar"))
-//                    MessageView(isSentBySelf: true, content: "good, go get a shot tonight?", avatar: Image("avatar"))
-//                    MessageView(isSentBySelf: false, content: "ok, what time?", avatar: Image("avatar"))
                 }
             }
             
@@ -82,10 +80,9 @@ struct MessageDetailPage: View {
         .navigationBarBackButtonHidden()
     }
 }
-fileprivate struct NavigationBarView: View {
-    @Environment(\.dismiss) var dismiss
-    
-    var body: some View {
+
+extension MessageDetailPage {
+    func navigationBar(dismiss: DismissAction, user: User) -> some View {
         HStack(spacing: 15) {
             Image(systemName: "chevron.left")
                 .onTapGesture {
@@ -94,8 +91,8 @@ fileprivate struct NavigationBarView: View {
                 .foregroundStyle(.primary)
                 .padding(.leading)
                 .imageScale(.large)
-            AvatarView(name: "avatar", size: Constants.avatarSize)
-            Text("Jolene Hornsey")
+            AvatarView(image: user.avatar, size: Constants.avatarSize)
+            Text(user.username)
             Spacer()
         }
     }
@@ -112,5 +109,5 @@ fileprivate struct Constants {
 
 #Preview {
     let messageVM = MessageViewModel()
-    return MessageDetailPage(messages: messageVM.messages[User.business2]!)
+    return MessageDetailPage(user: User.business2, messages: messageVM.messages[User.business2]!)
 }

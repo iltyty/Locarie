@@ -25,7 +25,7 @@ struct MessagePage: View {
                 List {
                     ForEach(messages.keys.sorted { $0.id < $1.id }) { user in
                         NavigationLink {
-                            MessageDetailPage(messages: messages[user]!)
+                            MessageDetailPage(user: user, messages: messages[user]!)
                         } label: {
                             MessageRowView(messages[user]!.last!)
                         }
