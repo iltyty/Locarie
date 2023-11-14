@@ -10,6 +10,12 @@ import SwiftUI
 struct PostCardView: View {
     let post: Post
     let coverWidth: CGFloat
+    @ObservedObject var locationManager = LocationManager()
+    
+    var distance: Double {
+        guard let location = locationManager.location else { return 0 }
+        return location.distance(from: post.businessLocation)
+    }
     
     var body: some View {
         NavigationLink {
@@ -21,6 +27,9 @@ struct PostCardView: View {
             }
             .background(RoundedRectangle(cornerRadius: Constants.coverBorderRadius).fill(.white))
             .tint(.primary)
+            .onAppear {
+                print(locationManager.location)
+            }
         }
         .buttonStyle(FlatLinkStyle())
     }
@@ -54,7 +63,7 @@ extension PostCardView {
             HStack {
                 Text(getTimeDifferenceString(from: post.time)).foregroundStyle(.green)
                 Text("·")
-                Text("3 km").foregroundStyle(.secondary)
+                Text(formatDistance(distance: distance)).foregroundStyle(.secondary)
             }
             Text(post.title)
                 .font(.title2)
