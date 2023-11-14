@@ -17,6 +17,10 @@ struct User: Hashable, Equatable, Identifiable {
     
     // the following fields are only valid for business users
     var coverName = ""  // TODO: switch to url based cover
+    var introduction = ""
+    var category = ""
+    var homepageUrl = ""
+    var phone = ""
     var openTime = DateComponents()
     var closeTime = DateComponents()
     var location = CLLocation()
@@ -34,10 +38,15 @@ struct User: Hashable, Equatable, Identifiable {
         self.avatarName = avatarName
     }
     
-    init(id: Int, username: String, avatarName: String, coverName: String, openTime: DateComponents,
-         closeTime: DateComponents, location: CLLocation, locationName: String) {
+    init(id: Int, username: String, avatarName: String, coverName: String,
+         introduction: String, category: String, phone: String, homepageUrl: String,
+         openTime: DateComponents, closeTime: DateComponents, location: CLLocation, locationName: String) {
         self.init(id: id, username: username, avatarName: avatarName)
         self.coverName = coverName
+        self.introduction = introduction
+        self.category = category
+        self.phone = phone
+        self.homepageUrl = homepageUrl
         if let hour = openTime.hour, let minute = openTime.minute {
             self.openTime.hour = hour
             self.openTime.minute = minute
@@ -50,10 +59,11 @@ struct User: Hashable, Equatable, Identifiable {
         self.locationName = locationName
     }
     
-    init(id: Int, username: String, avatarName: String, coverName: String, openTime: DateComponents,
-         closeTime: DateComponents, latitude: CLLocationDegrees, longitude: CLLocationDegrees, locationName: String) {
-        self.init(id: id, username: username, avatarName: avatarName, coverName: coverName, openTime: openTime, closeTime: closeTime,
-                  location: CLLocation(latitude: latitude, longitude: longitude), locationName: locationName)
+    init(id: Int, username: String, avatarName: String, coverName: String,
+         introduction: String, category: String, phone: String, homepageUrl: String,
+         openTime: DateComponents, closeTime: DateComponents, latitude: CLLocationDegrees, longitude: CLLocationDegrees, locationName: String) {
+        self.init(id: id, username: username, avatarName: avatarName, coverName: coverName, introduction: introduction, category: category, phone: phone, homepageUrl: homepageUrl,
+                  openTime: openTime, closeTime: closeTime, location: CLLocation(latitude: latitude, longitude: longitude), locationName: locationName)
     }
     
     var avatar: Image {

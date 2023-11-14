@@ -88,7 +88,7 @@ extension PostDetailPage {
                     dismiss()
                 }
             NavigationLink {
-                BusinessHomePage()
+                BusinessHomePage(post.businessUser)
             } label: {
                 AvatarView(image: post.businessAvatar, size: Constants.avatarSize)
             }

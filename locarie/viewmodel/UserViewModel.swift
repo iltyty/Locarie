@@ -36,10 +36,14 @@ class UserViewModel: ObservableObject {
         closeComponents2.minute = 30
         users = [
             User(id: 1, username: "Tony Stark", avatarName: "avatar2"),
-            User(id: 2, username: "Jolene Hornsey", avatarName: "avatar", coverName: "BusinessCover1", openTime: openComponents1,
-                 closeTime: closeComponents1, latitude: 51.55445566, longitude: -0.11060179, locationName: "Jolene Hornsey Rd"),
-            User(id: 3, username: "Shreeji", avatarName: "avatar1", coverName: "BusinessCover2", openTime: openComponents2,
-                 closeTime: closeComponents2, latitude: 51.5186134201, longitude: -0.154531110, locationName: "6 Chiltern St"),
+            User(id: 2, username: "Jolene Hornsey", avatarName: "avatar", coverName: "BusinessCover1",
+                 introduction: "Farm-to-table dishes & baked goods are showcased at this down-to-earth, bohemian restaurant.", category: "Restaurant",
+                 phone: "02039156760", homepageUrl: "https://www.bigjobakery.com",
+                 openTime: openComponents1, closeTime: closeComponents1, latitude: 51.55445566, longitude: -0.11060179, locationName: "Jolene Hornsey Rd"),
+            User(id: 3, username: "Shreeji", avatarName: "avatar1", coverName: "BusinessCover2",
+                 introduction: "Newsagent & Tobacconist, with a coffee & pastry-bar, curated publications and renovated events spaces.", category: "Cafe",
+                 phone: "02039156761", homepageUrl: "http://www.shreejinewsagents.com",
+                 openTime: openComponents2, closeTime: closeComponents2, latitude: 51.5186134201, longitude: -0.154531110, locationName: "6 Chiltern St"),
         ]
     }
     

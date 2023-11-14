@@ -9,10 +9,17 @@ import SwiftUI
 
 struct BusinessHomePage: View {
     @Environment(\.dismiss) var dismiss
+    
+    let user: User
+    
+    init(_ user: User) {
+        self.user = user
+    }
+    
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
-                Image("BusinessHome")
+                Image(user.coverName)
                     .resizable()
                     .scaledToFill()
                     .frame(width: proxy.size.width, height: proxy.size.height / 2)
@@ -73,20 +80,17 @@ extension BusinessHomePage {
             infoHeaderView
             buttonView
             Divider()
-            Label("324 Hornsey Rd, Finsbury Park, London, British", systemImage: "location")
+            Label(user.locationName, systemImage: "location")
                 .lineLimit(1)
-            Label("8am - 11pm", systemImage: "clock")
+            Label(formatOpeningTime(from: user.openTime, to: user.closeTime), systemImage: "clock")
                 .lineLimit(1)
-            Label("https://www.bigjobakery.com", systemImage: "link")
+            Label(user.homepageUrl, systemImage: "link")
                 .lineLimit(1)
                 .tint(.primary)
-            Label("02039156760", systemImage: "phone")
+            Label(user.phone, systemImage: "phone")
                 .lineLimit(1)
             Divider()
             Label("Reviews", systemImage: "message")
-            ForEach(0..<10, id: \.self) { _ in
-                Text("This is a review")
-            }
         }
     }
 }
@@ -119,7 +123,7 @@ extension BusinessHomePage {
     var infoHeaderView: some View {
         VStack(alignment: .leading) {
             HStack {
-                AvatarView(name: "avatar", size: 64)
+                AvatarView(image: user.avatar, size: 64)
                 Spacer()
                 Image(systemName: "message")
                     .font(.system(size: 20))
@@ -130,13 +134,13 @@ extension BusinessHomePage {
             }
             
             HStack {
-                Text("Jolene Hornsey")
+                Text(user.username)
                 Spacer()
-                Text("Restaurant")
+                Text(user.category)
                     .foregroundStyle(.secondary)
             }
             
-            Text("Farm-to-table dishes & baked goods are showcased at this down-to-earth, bohemian restaurant.")
+            Text(user.introduction)
                 .lineLimit(5)
         }
     }
@@ -144,5 +148,5 @@ extension BusinessHomePage {
 
 
 #Preview {
-    BusinessHomePage()
+    BusinessHomePage(UserViewModel.getUserById(3))
 }

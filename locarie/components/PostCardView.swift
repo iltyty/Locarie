@@ -27,9 +27,6 @@ struct PostCardView: View {
             }
             .background(RoundedRectangle(cornerRadius: Constants.coverBorderRadius).fill(.white))
             .tint(.primary)
-            .onAppear {
-                print(locationManager.location)
-            }
         }
         .buttonStyle(FlatLinkStyle())
     }
