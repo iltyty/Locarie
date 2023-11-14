@@ -109,5 +109,5 @@ fileprivate struct Constants {
 
 #Preview {
     let messageVM = MessageViewModel()
-    return MessageDetailPage(user: User.business2, messages: messageVM.messages[User.business2]!)
+    return MessageDetailPage(user: UserViewModel.getUserById(1), messages: messageVM.messages[UserViewModel.getUserById(3)]!)
 }

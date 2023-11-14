@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct LocarieView: View {
     @EnvironmentObject var viewRouter: BottomTabViewRouter
-    @EnvironmentObject var messageViewMode: MessageViewModel
     
     var body: some View {
         switch viewRouter.currentPage {
@@ -30,5 +30,7 @@ struct LocarieView: View {
 #Preview {
     LocarieView()
         .environmentObject(BottomTabViewRouter())
+        .environmentObject(PostViewModel())
         .environmentObject(MessageViewModel())
 }
+

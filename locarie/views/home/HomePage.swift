@@ -9,9 +9,11 @@ import SwiftUI
 import MapKit
 
 struct HomePage: View {
+    @EnvironmentObject var postViewModel: PostViewModel
+    
     @State private var mapRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D.LSE,
-        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        center: CLLocationCoordinate2D.CP,
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.1)
     )
 
     var body: some View {
@@ -20,16 +22,10 @@ struct HomePage: View {
                 VStack(spacing: 0) {
                     ZStack(alignment: .top) {
                         Map(position: .constant(.region(mapRegion))) {
-                            Marker("LSE", coordinate: CLLocationCoordinate2D.LSE)
-                                .tint(Color.mapMarkerOrange)
-                            Marker("Marker1", coordinate: CLLocationCoordinate2D(latitude: 51.5346, longitude: -0.12641))
-                                .tint(Color.mapMarkerOrange)
-                            Marker("Marker2", coordinate: CLLocationCoordinate2D(latitude: 51.5246, longitude: -0.09841))
-                                .tint(Color.mapMarkerOrange)
-                            Marker("Marker3", coordinate: CLLocationCoordinate2D(latitude: 51.5196, longitude: -0.096641))
-                                .tint(Color.mapMarkerOrange)
-                            Marker("Marker4", coordinate: CLLocationCoordinate2D(latitude: 51.5206, longitude: -0.12641))
-                                .tint(Color.mapMarkerOrange)
+                            ForEach(postViewModel.posts) { post in
+                                Marker(post.businessName, coordinate: post.businessLocationCoordinate)
+                                    .tint(Constants.mapMarkerColor)
+                            }
                         }
                         
                         VStack {
@@ -39,10 +35,8 @@ struct HomePage: View {
                                 SearchBarView(title: "Explore", isDisabled: true)
                             }
                             .buttonStyle(PlainButtonStyle())
-                            
                             Spacer()
-                            
-                            PostCardView(coverWidth: proxy.size.width * Constants.postCoverWidthProportion)
+                            PostCardView(post: postViewModel.posts[0], coverWidth: proxy.size.width * Constants.postCoverWidthProportion)
                         }
                     }
                     
@@ -68,17 +62,18 @@ extension Color {
 }
 
 extension CLLocationCoordinate2D {
-    static let LSE = CLLocationCoordinate2D(
-        latitude: 51.51463, longitude: -0.11641
+    static let CP = CLLocationCoordinate2D(
+        latitude: 51.546781359379445, longitude: -0.12298996843934423
     )
 }
 
 fileprivate struct Constants {
     static let postCoverWidthProportion = 0.8
+    static let mapMarkerColor = Color.mapMarkerOrange
 }
 
 #Preview {
-    let viewRouter = BottomTabViewRouter()
     return HomePage()
-        .environmentObject(viewRouter)
+        .environmentObject(BottomTabViewRouter())
+        .environmentObject(PostViewModel())
 }

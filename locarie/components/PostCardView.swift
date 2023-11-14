@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct PostCardView: View {
+    let post: Post
     let coverWidth: CGFloat
     
     var body: some View {
         NavigationLink {
-            PostDetailPage()
+            PostDetailPage(post)
         } label: {
             VStack(alignment: .leading, spacing: 8) {
                 cover(width: coverWidth).padding([.horizontal, .top])
@@ -29,14 +30,15 @@ extension PostCardView {
     func cover(width: CGFloat) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                coverBuilder(cover: Image("cover"), width: width)
-                coverBuilder(cover: Image("BusinessCover"), width: width)
+                ForEach(post.imageNames, id: \.self) { imageName in
+                    coverBuilder(imageName: imageName, width: width)
+                }
             }
         }
     }
     
-    func coverBuilder(cover: Image, width: CGFloat) -> some View {
-        cover
+    func coverBuilder(imageName: String, width: CGFloat) -> some View {
+        Image(imageName)
             .resizable()
             .scaledToFill()
             .frame(width: width, height: width / Constants.coverAspectRatio)
@@ -50,16 +52,16 @@ extension PostCardView {
     var content: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("1 min ago").foregroundStyle(.green)
+                Text(getTimeDifferenceString(from: post.time)).foregroundStyle(.green)
                 Text("·")
                 Text("3 km").foregroundStyle(.secondary)
             }
-            Text("Today's new arrivals.")
+            Text(post.title)
                 .font(.title2)
                 .listRowSeparator(.hidden)
             HStack {
-                AvatarView(name: "avatar", size: Constants.avatarSize)
-                Text("Shreeji")
+                AvatarView(image: post.businessAvatar, size: Constants.avatarSize)
+                Text(post.businessName)
                 Spacer()
                 Image(systemName: "map")
             }
@@ -82,6 +84,6 @@ fileprivate struct Constants {
 }
 
 #Preview {
-    PostCardView(coverWidth: 300)
+    PostCardView(post: PostViewModel().posts[0], coverWidth: 300)
         .padding()
 }

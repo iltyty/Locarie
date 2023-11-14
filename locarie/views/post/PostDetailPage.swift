@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct PostDetailPage: View {
+    let post: Post
+    let locationManager = LocationManager()
+    
+    init(_ post: Post) {
+        self.post = post
+    }
+    
+    var distance: Double {
+        guard let location = locationManager.location else { return 0 }
+        return location.distance(from: post.businessLocation)
+    }
+    
     @Environment(\.dismiss) var dismiss
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
                 let size = proxy.size
                 
-                underneathImageView(image: Image("post"), width: size.width, height: size.height)
+                underneathImageView(image: Image(post.imageNames[0]), width: size.width, height: size.height)
 
                 ScrollView {
                     contentView(screenWidth: proxy.size.width)
@@ -44,17 +56,17 @@ extension PostDetailPage {
     func contentView(screenWidth: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: Constants.contentVSpacing) {
             HStack {
-                Text("30 mins ago")
+                Text(getTimeDifferenceString(from: post.time))
                     .foregroundStyle(.green)
-                Text(" · 800m")
+                Text(formatDistance(distance: distance))
                 Spacer()
             }
-            Text("Today’s special 🤤🤤🤤")
-            Text("potato rosti, mayo & chives 🤤 tap to see today’s lunch")
+            Text(post.title)
+            Text(post.content)
             Divider()
-            Label("324 Hornsey Rd, Finsbury Park, London, British", systemImage: "location")
+            Label(post.businessLocationName, systemImage: "location")
                 .lineLimit(1)
-            Label("8am - 11 pm", systemImage: "clock")
+            Label(formatOpeningTime(from: post.businessOpenTime, to: post.businessCloseTime), systemImage: "clock")
             Divider()
             NavigationLink {
                 ReviewPage()
@@ -62,7 +74,7 @@ extension PostDetailPage {
                 Label("Reviews", systemImage: "message")
                     .tint(.primary)
             }
-            PostCardView(coverWidth: screenWidth * 0.7)
+            PostCardView(post: post, coverWidth: screenWidth * 0.7)
         }
     }
 }
@@ -78,9 +90,9 @@ extension PostDetailPage {
             NavigationLink {
                 BusinessHomePage()
             } label: {
-                AvatarView(name: "avatar", size: Constants.avatarSize)
+                AvatarView(image: post.businessAvatar, size: Constants.avatarSize)
             }
-            Text("Jolene Hornsey")
+            Text(post.businessName)
                 .fixedSize(horizontal: true, vertical: false)
             Spacer()
             Image(systemName: "ellipsis")
@@ -98,5 +110,5 @@ fileprivate struct Constants {
 }
 
 #Preview {
-    PostDetailPage()
+    PostDetailPage(PostViewModel().posts[0])
 }

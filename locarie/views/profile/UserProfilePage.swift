@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct UserProfilePage: View {
+    @EnvironmentObject var postViewModel: PostViewModel
+    
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
@@ -69,7 +71,9 @@ extension UserProfilePage {
             Image(systemName: "map")
             Divider()
                 .padding(.horizontal)
-            PostCardView(coverWidth: screenWidth * 0.8)
+            ForEach(postViewModel.favoritePosts) { post in
+                PostCardView(post: post, coverWidth: screenWidth * 0.8)
+            }
         }
         .padding(.top)
         .background(
@@ -97,4 +101,5 @@ fileprivate struct Constants {
 #Preview {
     UserProfilePage()
         .environmentObject(BottomTabViewRouter())
+        .environmentObject(PostViewModel())
 }

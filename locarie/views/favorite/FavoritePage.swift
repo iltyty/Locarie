@@ -9,8 +9,9 @@ import MapKit
 import SwiftUI
 
 struct FavoritePage: View {
+    @EnvironmentObject var postViewModel: PostViewModel
     @State private var mapRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D.LSE,
+        center: CLLocationCoordinate2D.CP,
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
     @State private var atTheTop = false
@@ -24,16 +25,10 @@ struct FavoritePage: View {
                 VStack(spacing: 0) {
                     ZStack(alignment: .bottom) {
                         Map(position: .constant(.region(mapRegion))) {
-                            Marker("LSE", coordinate: CLLocationCoordinate2D.LSE)
-                                .tint(Color.mapMarkerOrange)
-                            Marker("Marker1", coordinate: CLLocationCoordinate2D(latitude: 51.5346, longitude: -0.12641))
-                                .tint(Color.mapMarkerOrange)
-                            Marker("Marker2", coordinate: CLLocationCoordinate2D(latitude: 51.5246, longitude: -0.09841))
-                                .tint(Color.mapMarkerOrange)
-                            Marker("Marker3", coordinate: CLLocationCoordinate2D(latitude: 51.5196, longitude: -0.096641))
-                                .tint(Color.mapMarkerOrange)
-                            Marker("Marker4", coordinate: CLLocationCoordinate2D(latitude: 51.5206, longitude: -0.12641))
-                                .tint(Color.mapMarkerOrange)
+                            ForEach(postViewModel.favoritePosts) { post in
+                                Marker(post.businessName, coordinate: post.businessLocationCoordinate)
+                                    .tint(Constants.mapMarkerColor)
+                            }
                         }
                         
                         ScrollView {
@@ -44,8 +39,8 @@ struct FavoritePage: View {
                                     .frame(width: Constants.handlerWidth, height: Constants.handlerHeight)
                                     .padding(.top, 10)
                                 
-                                ForEach(0..<10) { _ in
-                                    PostCardView(coverWidth: proxy.size.width * Constants.postCoverWidthProportion)
+                                ForEach(postViewModel.favoritePosts) { post in
+                                    PostCardView(post: post, coverWidth: proxy.size.width * Constants.postCoverWidthProportion)
                                 }
                             }
                             .background(
@@ -68,6 +63,7 @@ struct FavoritePage: View {
 
 fileprivate struct Constants {
     static let navigationTitle = "Followed"
+    static let mapMarkerColor: Color = .mapMarkerOrange
     static let handlerWidth: CGFloat = 80
     static let handlerHeight: CGFloat = 5
     static let postCoverWidthProportion = 0.8
@@ -75,4 +71,5 @@ fileprivate struct Constants {
 #Preview {
     FavoritePage()
         .environmentObject(BottomTabViewRouter())
+        .environmentObject(PostViewModel())
 }
