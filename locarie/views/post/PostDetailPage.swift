@@ -31,7 +31,7 @@ struct PostDetailPage: View {
                 ScrollView {
                     contentView(screenWidth: proxy.size.width)
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 20).fill(.white))
+                        .background(RoundedRectangle(cornerRadius: 20).fill(.background))
                         .padding(.top, proxy.size.height * Constants.contentTopPaddingProportion)
                 }.overlay(alignment: .top) {
                     scrollViewOverlay

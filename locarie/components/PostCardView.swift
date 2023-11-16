@@ -25,7 +25,10 @@ struct PostCardView: View {
                 cover(width: coverWidth).padding([.horizontal, .top])
                 content.padding(.horizontal)
             }
-            .background(RoundedRectangle(cornerRadius: Constants.coverBorderRadius).fill(.white))
+            .background(
+                RoundedRectangle(cornerRadius: Constants.coverBorderRadius)
+                    .fill(.background)
+            )
             .tint(.primary)
         }
         .buttonStyle(FlatLinkStyle())

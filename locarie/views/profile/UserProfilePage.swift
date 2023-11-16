@@ -10,6 +10,7 @@ import SwiftUI
 struct UserProfilePage: View {
     @AppStorage("uid") var uid: Int = 1
     @EnvironmentObject var postViewModel: PostViewModel
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     init() {}
     
@@ -25,7 +26,7 @@ struct UserProfilePage: View {
                         topView.padding(.bottom)
                         bottomView(screenWidth: proxy.size.width)
                     }
-                    .background(Constants.pageBackground)
+                    .background(Color(uiColor: UIColor.systemBackground))
                     BottomTabView()
                 }
             }
@@ -51,10 +52,11 @@ extension UserProfilePage {
 //            Text("@CaptainAmerica")
 //                .foregroundStyle(.secondary)
             Text("Edit Profile")
+                .foregroundStyle(.primary)
                 .padding()
                 .background(
                     Capsule()
-                        .fill(.white)
+                        .fill(colorScheme == .light ? .white : .gray)
                         .frame(height: Constants.btnEditHeight)
                         .shadow(radius: Constants.btnEditShadowRadius)
                 )
@@ -87,14 +89,13 @@ extension UserProfilePage {
                 topLeadingRadius: Constants.bottomViewBackgroundRadius,
                 topTrailingRadius: Constants.bottomViewBackgroundRadius
             )
-            .fill(.white)
+            .fill(.background)
             .shadow(radius: Constants.bottomViewShadowRadius)
         )
     }
 }
 
 fileprivate struct Constants {
-    static let pageBackground = Color(hex: 0xf9f9f9)
     static let avatarSize: CGFloat = 80
     static let btnSettingsSize: CGFloat = 25
     static let btnEditHeight: CGFloat = 40

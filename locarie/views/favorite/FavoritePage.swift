@@ -44,7 +44,7 @@ struct FavoritePage: View {
                                 }
                             }
                             .background(
-                                UnevenRoundedRectangle(topLeadingRadius: 10, topTrailingRadius: 10).fill(.white)
+                                UnevenRoundedRectangle(topLeadingRadius: 10, topTrailingRadius: 10).fill(.background)
                             )
                             .padding(.top, proxy.size.height * 4 / 5)
                         }

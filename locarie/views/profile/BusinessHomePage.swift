@@ -29,7 +29,7 @@ struct BusinessHomePage: View {
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: Constants.scrollViewCornerRadius)
-                                .fill(.white)
+                                .fill(.background)
                         )
                         .padding(.top, proxy.size.height / 5)
                 }
@@ -93,7 +93,7 @@ extension BusinessHomePage {
         .padding(.horizontal, Constants.infoViewButtonHPadding)
         .padding(.vertical, Constants.infoViewButtonVPadding)
         .background(
-            Capsule().fill(.white)
+            Capsule().fill(.background)
                 .shadow(radius: Constants.infoViewButtonShadowRadius)
         )
     }
@@ -109,7 +109,7 @@ extension BusinessHomePage {
                     .font(.system(size: Constants.infoViewBtnMessageSize))
                     .padding()
                     .background(
-                        Circle().fill(.white).shadow(radius: Constants.infoViewBtnMessageShadowRadius)
+                        Circle().fill(.background).shadow(radius: Constants.infoViewBtnMessageShadowRadius)
                     )
             }
             
