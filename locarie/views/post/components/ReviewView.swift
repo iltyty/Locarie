@@ -21,7 +21,8 @@ struct ReviewView: View {
 extension ReviewView {
     var user: some View {
         HStack {
-            AvatarView(name: "avatar", size: Constants.avatarSize)
+//            AvatarView(imageUrl: "https://picsum.photos/200", size: Constants.avatarSize)
+            AvatarView(imageUrl: "https://picsum.photos/200", size: Constants.avatarSize)
             Text("Tony Stark")
         }
     }

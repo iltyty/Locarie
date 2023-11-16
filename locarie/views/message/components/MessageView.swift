@@ -11,7 +11,7 @@ struct MessageView: View {
     let message: Message
     
     var isSentBySelf: Bool {
-        return message.sender.id == 3
+        return message.sender.id == 1
     }
     
     var body: some View {
@@ -19,7 +19,7 @@ struct MessageView: View {
             if isSentBySelf {
                 Spacer()
             } else {
-                AvatarView(image: message.sender.avatar, size: Constants.avatarSize)
+                AvatarView(imageUrl: message.sender.avatarUrl, size: Constants.avatarSize)
             }
             Text(message.content)
                 .padding()
@@ -29,7 +29,7 @@ struct MessageView: View {
                 )
                 .fixedSize(horizontal: false, vertical: true)
             if isSentBySelf {
-                AvatarView(image: message.sender.avatar, size: Constants.avatarSize)
+                AvatarView(imageUrl: message.sender.avatarUrl, size: Constants.avatarSize)
             } else {
                 Spacer()
             }

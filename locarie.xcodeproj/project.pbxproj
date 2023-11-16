@@ -13,6 +13,7 @@
 		5000C6C92AF8C3440057EF2D /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5000C6C82AF8C3440057EF2D /* SearchPage.swift */; };
 		5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5000C6CB2AF8CFB30057EF2D /* MessageDetailPage.swift */; };
 		5000C6CE2AF8D9A20057EF2D /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5000C6CD2AF8D9A20057EF2D /* MessageView.swift */; };
+		5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500477092B05DAAC0031AA94 /* AsyncImageView.swift */; };
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F772AF117970045AB12 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F762AF117970045AB12 /* FavoritePage.swift */; };
 		50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F792AF117B20045AB12 /* MessagePage.swift */; };
@@ -21,6 +22,8 @@
 		50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F812AF1512E0045AB12 /* PostCardView.swift */; };
 		503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */; };
 		5037D2C92AF2337400108F0F /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037D2C82AF2337400108F0F /* MessageRowView.swift */; };
+		5090C4372B04DDEA008931A6 /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4362B04DDEA008931A6 /* users.json */; };
+		5090C4392B04E5CF008931A6 /* posts.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4382B04E5CF008931A6 /* posts.json */; };
 		50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */; };
 		50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */; };
 		50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */; };
@@ -70,6 +73,7 @@
 		5000C6C82AF8C3440057EF2D /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
 		5000C6CB2AF8CFB30057EF2D /* MessageDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailPage.swift; sourceTree = "<group>"; };
 		5000C6CD2AF8D9A20057EF2D /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		500477092B05DAAC0031AA94 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		50277F732AF117700045AB12 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		50277F762AF117970045AB12 /* FavoritePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePage.swift; sourceTree = "<group>"; };
 		50277F792AF117B20045AB12 /* MessagePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePage.swift; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 		50277F812AF1512E0045AB12 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
 		503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDrawerView.swift; sourceTree = "<group>"; };
 		5037D2C82AF2337400108F0F /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
+		5090C4362B04DDEA008931A6 /* users.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
+		5090C4382B04E5CF008931A6 /* posts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = posts.json; sourceTree = "<group>"; };
 		50AAB1792AEFA2E9003FEDF1 /* locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieApp.swift; sourceTree = "<group>"; };
 		50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieView.swift; sourceTree = "<group>"; };
@@ -195,8 +201,18 @@
 				50277F812AF1512E0045AB12 /* PostCardView.swift */,
 				503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */,
 				50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */,
+				500477092B05DAAC0031AA94 /* AsyncImageView.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		5090C4352B04DDA3008931A6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5090C4362B04DDEA008931A6 /* users.json */,
+				5090C4382B04E5CF008931A6 /* posts.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		50AAB1702AEFA2E9003FEDF1 = {
@@ -222,6 +238,7 @@
 		50AAB17B2AEFA2E9003FEDF1 /* locarie */ = {
 			isa = PBXGroup;
 			children = (
+				5090C4352B04DDA3008931A6 /* Resources */,
 				50E60DED2B01F4F900CA088F /* Info.plist */,
 				50E60DE62AFF885200CA088F /* common */,
 				50B11AE92AFB878A002A7B91 /* viewmodel */,
@@ -436,7 +453,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				50AAB1842AEFA2EC003FEDF1 /* Preview Assets.xcassets in Resources */,
+				5090C4372B04DDEA008931A6 /* users.json in Resources */,
 				50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */,
+				5090C4392B04E5CF008931A6 /* posts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +506,7 @@
 				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
 				50E60DE82AFF885F00CA088F /* util.swift in Sources */,
 				50B11AE62AFB8368002A7B91 /* message.swift in Sources */,
+				5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
 				50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */,
 				50277F7D2AF117CE0045AB12 /* UserProfilePage.swift in Sources */,

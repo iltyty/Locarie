@@ -91,7 +91,7 @@ extension MessageDetailPage {
                 .foregroundStyle(.primary)
                 .padding(.leading)
                 .imageScale(.large)
-            AvatarView(image: user.avatar, size: Constants.avatarSize)
+            AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
             Text(user.username)
             Spacer()
         }
@@ -109,5 +109,5 @@ fileprivate struct Constants {
 
 #Preview {
     let messageVM = MessageViewModel()
-    return MessageDetailPage(user: UserViewModel.getUserById(1), messages: messageVM.messages[UserViewModel.getUserById(3)]!)
+    return MessageDetailPage(user: UserViewModel.getUserById(1)!, messages: messageVM.messages[UserViewModel.getUserById(3)!]!)
 }

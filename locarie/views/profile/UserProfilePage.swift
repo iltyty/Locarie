@@ -40,7 +40,7 @@ extension UserProfilePage {
                     )
                     .padding(.trailing)
             }
-            AvatarView(name: "avatar", size: Constants.avatarSize)
+            AvatarView(imageUrl: "https://picsum.photos/200", size: Constants.avatarSize)
             Text("Steve Rogers")
             Text("@CaptainAmerica")
                 .foregroundStyle(.secondary)

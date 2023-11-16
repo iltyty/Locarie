@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 import MapKit
 
-struct User: Hashable, Equatable, Identifiable {
+struct User: Hashable, Equatable, Identifiable, Decodable {
     
-    var id: Int
-    var username: String
-    var avatarName: String  // TODO: switch to url based avatar
+    var id = 0
+    var username = ""
+    var avatarUrl = ""
     
     // the following fields are only valid for business users
-    var coverName = ""  // TODO: switch to url based cover
+    var coverUrl = ""
     var introduction = ""
     var category = ""
     var homepageUrl = ""
@@ -26,48 +26,58 @@ struct User: Hashable, Equatable, Identifiable {
     var location = CLLocation()
     var locationName = ""
     
-    init() {
-        id = 1
-        username = "Jolene Hornsey"
-        avatarName = "avatar"
+    enum CodingKeys: String, CodingKey {
+        case id, username, avatarUrl, coverUrl, introduction,
+            category, phone, homepageUrl, openTimeHour, openTimeMinute,
+            closeTimeHour, closeTimeMinute, location, locationName
     }
     
-    init(id: Int, username: String, avatarName: String) {
-        self.id = id
-        self.username = username
-        self.avatarName = avatarName
+    enum LocationKeys: String, CodingKey {
+        case latitude, longitude
     }
     
-    init(id: Int, username: String, avatarName: String, coverName: String,
-         introduction: String, category: String, phone: String, homepageUrl: String,
-         openTime: DateComponents, closeTime: DateComponents, location: CLLocation, locationName: String) {
-        self.init(id: id, username: username, avatarName: avatarName)
-        self.coverName = coverName
-        self.introduction = introduction
-        self.category = category
-        self.phone = phone
-        self.homepageUrl = homepageUrl
-        if let hour = openTime.hour, let minute = openTime.minute {
-            self.openTime.hour = hour
-            self.openTime.minute = minute
-        }
-        if let hour = closeTime.hour, let minute = closeTime.minute {
-            self.closeTime.hour = hour
-            self.closeTime.minute = minute
-        }
-        self.location = location
-        self.locationName = locationName
-    }
+    init() {}
     
-    init(id: Int, username: String, avatarName: String, coverName: String,
-         introduction: String, category: String, phone: String, homepageUrl: String,
-         openTime: DateComponents, closeTime: DateComponents, latitude: CLLocationDegrees, longitude: CLLocationDegrees, locationName: String) {
-        self.init(id: id, username: username, avatarName: avatarName, coverName: coverName, introduction: introduction, category: category, phone: phone, homepageUrl: homepageUrl,
-                  openTime: openTime, closeTime: closeTime, location: CLLocation(latitude: latitude, longitude: longitude), locationName: locationName)
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(Int.self, forKey: .id)
+        username = try container.decode(String.self, forKey: .username)
+        avatarUrl = try container.decode(String.self, forKey: .avatarUrl)
+        coverUrl = try container.decode(String.self, forKey: .coverUrl)
+        introduction = try container.decode(String.self, forKey: .introduction)
+        category = try container.decode(String.self, forKey: .category)
+        phone = try container.decode(String.self, forKey: .phone)
+        
+        homepageUrl = try container.decode(String.self, forKey: .homepageUrl)
+        let openTimeHour = try container.decode(Int.self, forKey: .openTimeHour)
+        let openTimeMinute = try container.decode(Int.self, forKey: .openTimeMinute)
+        let closeTimeHour = try container.decode(Int.self, forKey: .closeTimeHour)
+        let closeTimeMinute = try container.decode(Int.self, forKey: .closeTimeMinute)
+        openTime = DateComponents()
+        openTime.hour = openTimeHour
+        openTime.minute = openTimeMinute
+        closeTime = DateComponents()
+        closeTime.hour = closeTimeHour
+        closeTime.minute = closeTimeMinute
+        
+        let locationContainer = try container.nestedContainer(keyedBy: LocationKeys.self, forKey: .location)
+        let latitude = try locationContainer.decode(Double.self, forKey: .latitude)
+        let longitude = try locationContainer.decode(Double.self, forKey: .longitude)
+        location = CLLocation(latitude: latitude, longitude: longitude)
+        
+        locationName = try container.decode(String.self, forKey: .locationName)
     }
     
     var avatar: Image {
-        Image(avatarName)
+        Image(avatarUrl)  // TODO: load image from url
+    }
+    
+    var avatarURL: URL? {
+        URL(string: avatarUrl)
+    }
+    
+    var coverURL: URL? {
+        URL(string: coverUrl)
     }
     
     static func == (lhs: User, rhs: User) -> Bool {
@@ -80,7 +90,7 @@ struct User: Hashable, Equatable, Identifiable {
 }
 
 extension User {
-    static let user1 = UserViewModel.getUserById(1)
-    static let business1 = UserViewModel.getUserById(2)
-    static let business2 = UserViewModel.getUserById(3)
+    static let user1 = UserViewModel.getUserById(1)!
+    static let business1 = UserViewModel.getUserById(2)!
+    static let business2 = UserViewModel.getUserById(3)!
 }

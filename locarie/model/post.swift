@@ -9,39 +9,35 @@ import Foundation
 import MapKit
 import SwiftUI
 
-struct Post: Identifiable {
+struct Post: Identifiable, Decodable {
     let id: String
     let uid: Int  // business user's id
     var title: String
     var content: String
     var time: Date
-    var imageNames: [String]  // TODO: switch to URL based images
+    var imageUrls: [String]
     
-    init(uid: Int, title: String, content: String, time: Date, imageNames: [String]) {
+    init(uid: Int, title: String, content: String, time: Date, imageUrls: [String]) {
         self.uid = uid
         self.id = UUID().uuidString
         self.time = time
         self.title = title
         self.content = content
-        self.imageNames = imageNames
+        self.imageUrls = imageUrls
     }
 }
 
 extension Post {
     var businessUser: User {
-        UserViewModel.getUserById(uid)
+        UserViewModel.getUserById(uid) ?? User()
     }
     
     var businessName: String {
         businessUser.username
     }
     
-    var businessAvatarName: String {
-        businessUser.avatarName
-    }
-    
-    var businessAvatar: Image {
-        Image(businessAvatarName)
+    var businessAvatarUrl: String {
+        businessUser.avatarUrl
     }
     
     var businessLocation: CLLocation {

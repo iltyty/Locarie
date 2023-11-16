@@ -77,3 +77,28 @@ func getLocationCoordinate(location: String, completion: @escaping (CLLocation?)
         completion(location)
     }
 }
+
+func load<T: Decodable>(_ filename: String) -> T? {
+    guard let url = Bundle.main.url(forResource: "\(filename)", withExtension: nil)
+    else {
+        print("Couldn't find \(filename) in main bundle")
+        return nil
+    }
+    
+    let data: Data
+    do {
+        data = try Data(contentsOf: url)
+    } catch {
+        print("Couldn't load \(filename) from main bundle\n \(error)")
+        return nil
+    }
+    
+    do {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        return try decoder.decode(T.self, from: data)
+    } catch {
+        print("Couldn't parse \(filename) as \(T.self): \n \(error)")
+    }
+    return nil
+}

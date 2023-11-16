@@ -71,54 +71,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A5FD23A1-491C-4B1A-B38F-89E1C5A5B9EC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "locarieTests/locarieTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "testExample()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A5FD23A1-491C-4B1A-B38F-89E1C5A5B9EC - c64af25fe55c74e7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "locarieTests.locarieTests.testExample() throws -&gt; ()"
-                  moduleName = "locarieTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tyty/Projects/locarie/locarieTests/locarieTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "180">
-               </Location>
-               <Location
-                  uuid = "A5FD23A1-491C-4B1A-B38F-89E1C5A5B9EC - c64af25fe55c74e7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "locarieTests.locarieTests.testExample() throws -&gt; ()"
-                  moduleName = "locarieTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tyty/Projects/locarie/locarieTests/locarieTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "244">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "37CCE855-26A5-42B2-90AD-64838772443E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -129,6 +81,102 @@
             startingLineNumber = "27"
             endingLineNumber = "27"
             landmarkName = "testExample()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B2D7C4CE-47A3-4058-8F02-14B1CF61957F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "locarie/viewmodel/PostViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "init()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6634870B-A262-44C9-B28F-ABFF0BA85981"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "locarie/viewmodel/UserViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "loadUsers()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "01A1C62B-9B8F-4FA9-A16A-04CF6F2BE660"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "locarie/common/util.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "load(_:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "01A1C62B-9B8F-4FA9-A16A-04CF6F2BE660 - 7d8b5bc73e4ef130"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "locarie.load&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(Swift.String) -&gt; Swift.Optional&lt;&#x3c4;_0_0&gt;"
+                  moduleName = "locarie"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tyty/Projects/locarie/locarie/common/util.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "476">
+               </Location>
+               <Location
+                  uuid = "01A1C62B-9B8F-4FA9-A16A-04CF6F2BE660 - 7d8b5bc73e4ef130"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "locarie.load&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(Swift.String) -&gt; Swift.Optional&lt;&#x3c4;_0_0&gt;"
+                  moduleName = "locarie"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tyty/Projects/locarie/locarie/common/util.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "440">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1C6F54ED-AF2E-4774-AA5F-6ED90A1DFB35"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "locarie/viewmodel/PostViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "getAllPosts()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

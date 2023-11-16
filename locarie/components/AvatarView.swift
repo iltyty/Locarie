@@ -10,29 +10,25 @@ import SwiftUI
 struct AvatarView: View {
     var name: String
     var size: CGFloat
-    var image: Image
+    var imageUrl: String
     
-    init(name: String, size: CGFloat) {
-        self.name = name
-        self.size = size
-        self.image = Image(name)
-    }
-    
-    init(image: Image, size: CGFloat) {
+    init(imageUrl: String, size: CGFloat) {
         self.name = ""
         self.size = size
-        self.image = image
+        self.imageUrl = imageUrl
     }
     
     var body: some View {
-        image
-            .resizable()
-            .scaledToFill()
-            .frame(width: size, height: size)
-            .clipShape(Circle())
+        AsyncImageView(url: imageUrl, width: size, height: size) { image in
+            image
+                .resizable()
+                .scaledToFill()
+                .frame(width: size, height: size)
+                .clipShape(Circle())
+        }
     }
 }
 
 #Preview {
-    AvatarView(name: "avatar", size: 128)
+    AvatarView(imageUrl: "https://picsum.photos/200", size: 128)
 }

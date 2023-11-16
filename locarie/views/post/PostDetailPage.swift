@@ -26,7 +26,7 @@ struct PostDetailPage: View {
             ZStack(alignment: .top) {
                 let size = proxy.size
                 
-                underneathImageView(image: Image(post.imageNames[0]), width: size.width, height: size.height)
+                underneathImageView(imageUrl: post.imageUrls.first, width: size.width, height: size.height)
 
                 ScrollView {
                     contentView(screenWidth: proxy.size.width)
@@ -43,12 +43,14 @@ struct PostDetailPage: View {
 }
 
 extension PostDetailPage {
-    func underneathImageView(image: Image, width: CGFloat, height: CGFloat) -> some View {
-        image
-            .resizable()
-            .scaledToFill()
-            .frame(width: width, height: height)
-            .ignoresSafeArea(edges: .top)
+    func underneathImageView(imageUrl: String?, width: CGFloat, height: CGFloat) -> some View {
+        AsyncImageView(url: imageUrl ?? "", width: width, height: height) { image in
+            image
+                .resizable()
+                .scaledToFill()
+                .frame(width: width, height: height)
+                .ignoresSafeArea(edges: .top)
+        }
     }
 }
 
@@ -90,7 +92,7 @@ extension PostDetailPage {
             NavigationLink {
                 BusinessHomePage(post.businessUser)
             } label: {
-                AvatarView(image: post.businessAvatar, size: Constants.avatarSize)
+                AvatarView(imageUrl: post.businessAvatarUrl, size: Constants.avatarSize)
             }
             Text(post.businessName)
                 .fixedSize(horizontal: true, vertical: false)

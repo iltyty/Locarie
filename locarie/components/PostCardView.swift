@@ -36,21 +36,24 @@ extension PostCardView {
     func cover(width: CGFloat) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(post.imageNames, id: \.self) { imageName in
-                    coverBuilder(imageName: imageName, width: width)
+                ForEach(post.imageUrls, id: \.self) { imageUrl in
+                    coverBuilder(imageUrl: imageUrl, width: width)
                 }
             }
         }
     }
     
-    func coverBuilder(imageName: String, width: CGFloat) -> some View {
-        Image(imageName)
-            .resizable()
-            .scaledToFill()
-            .frame(width: width, height: width / Constants.coverAspectRatio)
-            .clipped()
-            .listRowInsets(EdgeInsets())
-            .clipShape(RoundedRectangle(cornerRadius: Constants.coverBorderRadius))
+    func coverBuilder(imageUrl: String, width: CGFloat) -> some View {
+        let height = width / Constants.coverAspectRatio
+        return AsyncImageView(url: imageUrl, width: width, height: height) { image in
+            image
+                .resizable()
+                .scaledToFill()
+                .frame(width: width, height: height)
+                .clipped()
+                .listRowInsets(EdgeInsets())
+                .clipShape(RoundedRectangle(cornerRadius: Constants.coverBorderRadius))
+        }
     }
 }
 
@@ -66,7 +69,7 @@ extension PostCardView {
                 .font(.title2)
                 .listRowSeparator(.hidden)
             HStack {
-                AvatarView(image: post.businessAvatar, size: Constants.avatarSize)
+                AvatarView(imageUrl: post.businessAvatarUrl, size: Constants.avatarSize)
                 Text(post.businessName)
                 Spacer()
                 Image(systemName: "map")

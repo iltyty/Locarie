@@ -19,11 +19,15 @@ struct BusinessHomePage: View {
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
-                Image(user.coverName)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: proxy.size.width, height: proxy.size.height / 2)
-                    .ignoresSafeArea(edges: .top)
+                let width = proxy.size.width
+                let height = proxy.size.height / 2
+                AsyncImageView(url: user.coverUrl, width: width, height: height) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: width, height: height)
+                        .ignoresSafeArea(edges: .top)
+                }
                 
                 ScrollView {
                     infoView
@@ -123,7 +127,7 @@ extension BusinessHomePage {
     var infoHeaderView: some View {
         VStack(alignment: .leading) {
             HStack {
-                AvatarView(image: user.avatar, size: 64)
+                AvatarView(imageUrl: user.avatarUrl, size: 64)
                 Spacer()
                 Image(systemName: "message")
                     .font(.system(size: 20))
@@ -148,5 +152,5 @@ extension BusinessHomePage {
 
 
 #Preview {
-    BusinessHomePage(UserViewModel.getUserById(3))
+    BusinessHomePage(UserViewModel.getUserById(3)!)
 }

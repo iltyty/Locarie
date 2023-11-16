@@ -15,7 +15,7 @@ struct MessageRowView: View {
     }
     
     var isSentBySelf: Bool {
-        message.sender.id == 3
+        message.sender.id == 1
     }
     
     var user: User {
@@ -24,7 +24,7 @@ struct MessageRowView: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            AvatarView(image: user.avatar, size: Constants.avatarSize)
+            AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
             VStack(alignment: .leading) {
                 Text(user.username)
                 Text(message.content).lineLimit(1)
