@@ -20,57 +20,21 @@ struct BusinessHomePage: View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
                 let width = proxy.size.width
-                let height = proxy.size.height / 2
-                AsyncImageView(url: user.coverUrl, width: width, height: height) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: width, height: height)
-                        .ignoresSafeArea(edges: .top)
-                }
+                let height = proxy.size.height * Constants.underneathImageHeightProportion
+                
+                underneathImageView(width: width, height: height)
                 
                 ScrollView {
                     infoView
                         .padding()
                         .background(
-                            RoundedRectangle(cornerRadius: 20)
+                            RoundedRectangle(cornerRadius: Constants.scrollViewCornerRadius)
                                 .fill(.white)
                         )
                         .padding(.top, proxy.size.height / 5)
                 }
                 .overlay {
-                    VStack {
-                        HStack {
-                            Image(systemName: "chevron.backward")
-                                .font(.system(size: 32))
-                                .onTapGesture {
-                                    dismiss()
-                                }
-                            Spacer()
-                            Image(systemName: "ellipsis")
-                                .font(.system(size: 32))
-                        }
-                        .padding(.horizontal)
-                        
-                        Spacer()
-                        
-                        ZStack(alignment: .bottom) {
-                            Rectangle()
-                                .fill(.white)
-                                .frame(width: proxy.size.width, height: 93)
-                                .offset(y: 40)
-                                .shadow(radius: 2)
-                            Label("Map", systemImage: "map")
-                                .fontWeight(.bold)
-                                .foregroundStyle(.white)
-                                .padding(10)
-                                .background(
-                                    Capsule()
-                                        .fill(Color(red: 236 / 255, green: 100 / 255, blue: 43 / 255))
-                                        .frame(width: 120, height: 50)
-                                )
-                        }
-                    }
+                    overlayView(width: proxy.size.width)
                 }
             }
             .navigationBarBackButtonHidden()
@@ -79,8 +43,20 @@ struct BusinessHomePage: View {
 }
 
 extension BusinessHomePage {
+    func underneathImageView(width: Double, height: Double) -> some View {
+        AsyncImageView(url: user.coverUrl, width: width, height: height) { image in
+            image
+                .resizable()
+                .scaledToFill()
+                .frame(width: width, height: height)
+                .ignoresSafeArea(edges: .top)
+        }
+    }
+}
+
+extension BusinessHomePage {
     var infoView: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: Constants.infoViewVSpace) {
             infoHeaderView
             buttonView
             Divider()
@@ -114,11 +90,11 @@ extension BusinessHomePage {
             Text(text)
                 .lineLimit(1)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 12)
+        .padding(.horizontal, Constants.infoViewButtonHPadding)
+        .padding(.vertical, Constants.infoViewButtonVPadding)
         .background(
             Capsule().fill(.white)
-                .shadow(radius: 2)
+                .shadow(radius: Constants.infoViewButtonShadowRadius)
         )
     }
 }
@@ -127,13 +103,13 @@ extension BusinessHomePage {
     var infoHeaderView: some View {
         VStack(alignment: .leading) {
             HStack {
-                AvatarView(imageUrl: user.avatarUrl, size: 64)
+                AvatarView(imageUrl: user.avatarUrl, size: Constants.infoViewAvatarSize)
                 Spacer()
                 Image(systemName: "message")
-                    .font(.system(size: 20))
-                    .padding(10)
+                    .font(.system(size: Constants.infoViewBtnMessageSize))
+                    .padding()
                     .background(
-                        Circle().fill(.white).shadow(radius: 5)
+                        Circle().fill(.white).shadow(radius: Constants.infoViewBtnMessageShadowRadius)
                     )
             }
             
@@ -145,11 +121,65 @@ extension BusinessHomePage {
             }
             
             Text(user.introduction)
-                .lineLimit(5)
+                .lineLimit(Constants.infoViewIntroductionLineLimit)
         }
     }
 }
 
+extension BusinessHomePage {
+    func overlayView(width: Double) -> some View {
+        VStack {
+            HStack {
+                Image(systemName: "chevron.backward")
+                    .font(.system(size: Constants.overlayViewBtnSize))
+                    .onTapGesture {
+                        dismiss()
+                    }
+                Spacer()
+                Image(systemName: "ellipsis")
+                    .font(.system(size: Constants.overlayViewBtnSize))
+            }
+            .padding(.horizontal)
+            
+            Spacer()
+            
+            Divider()
+                .shadow(color: .black, radius: Constants.overlayViewDividerShadowRadius, y: Constants.overlayViewDividerShadowY)
+            
+            Capsule()
+                .fill(Constants.overlayViewBtnMapColor)
+                .frame(
+                    width: Constants.overlayViewBtnMapWidth,
+                    height: Constants.overlayViewBtnMapHeight
+                )
+                .overlay {
+                    Label("Map", systemImage: "map")
+                        .fontWeight(.bold)
+                        .foregroundStyle(.white)
+                }
+        }
+    }
+}
+
+fileprivate struct Constants {
+    static let underneathImageHeightProportion = 0.5
+    static let scrollViewCornerRadius: CGFloat = 20
+    static let infoViewVSpace: CGFloat = 20
+    static let infoViewButtonShadowRadius: CGFloat = 2
+    static let infoViewButtonHPadding: CGFloat = 8
+    static let infoViewButtonVPadding: CGFloat = 12
+    static let infoViewAvatarSize: CGFloat = 64
+    static let infoViewBtnMessageSize: CGFloat = 20
+    static let infoViewBtnMessageShadowRadius: CGFloat = 5
+    static let infoViewIntroductionLineLimit = 5
+    static let overlayViewBtnSize: CGFloat = 32
+    static let overlayViewBtnMapColor =
+    Color(red: 236 / 255, green: 100 / 255, blue: 43 / 255)
+    static let overlayViewBtnMapWidth: CGFloat = 120
+    static let overlayViewBtnMapHeight: CGFloat = 50
+    static let overlayViewDividerShadowRadius: CGFloat = 2
+    static let overlayViewDividerShadowY: CGFloat = 2
+}
 
 #Preview {
     BusinessHomePage(UserViewModel.getUserById(3)!)

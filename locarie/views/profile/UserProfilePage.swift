@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct UserProfilePage: View {
+    @AppStorage("uid") var uid: Int = 1
     @EnvironmentObject var postViewModel: PostViewModel
+    
+    init() {}
+    
+    var user: User {
+        UserViewModel.getUserById(uid) ?? User()
+    }
     
     var body: some View {
         NavigationStack {
@@ -24,7 +31,6 @@ struct UserProfilePage: View {
             }
         }
     }
-   
 }
 
 extension UserProfilePage {
@@ -40,10 +46,10 @@ extension UserProfilePage {
                     )
                     .padding(.trailing)
             }
-            AvatarView(imageUrl: "https://picsum.photos/200", size: Constants.avatarSize)
-            Text("Steve Rogers")
-            Text("@CaptainAmerica")
-                .foregroundStyle(.secondary)
+            AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
+            Text(user.username)
+//            Text("@CaptainAmerica")
+//                .foregroundStyle(.secondary)
             Text("Edit Profile")
                 .padding()
                 .background(
