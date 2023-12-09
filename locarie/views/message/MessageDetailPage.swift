@@ -5,6 +5,7 @@
 //  Created by qiuty on 2023/11/6.
 //
 
+import UIKit
 import SwiftUI
 
 //extension View {
@@ -77,9 +78,18 @@ struct MessageDetailPage: View {
             )
             .padding()
         }
-        .navigationBarBackButtonHidden()
+//        .navigationTitle(user.username)
+//        .toolbarTitleDisplayMode(.inline)
+//        .navigationBarBackButtonHidden()
     }
 }
+
+//extension UINavigationController {
+//    open override func viewDidLoad() {
+//        super.viewDidLoad()
+//        interactivePopGestureRecognizer?.delegate = nil
+//    }
+//}
 
 extension MessageDetailPage {
     func navigationBar(dismiss: DismissAction, user: User) -> some View {

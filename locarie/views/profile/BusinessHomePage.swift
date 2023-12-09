@@ -37,7 +37,7 @@ struct BusinessHomePage: View {
                     overlayView(width: proxy.size.width)
                 }
             }
-            .navigationBarBackButtonHidden()
+//            .navigationBarBackButtonHidden()
         }
     }
 }

@@ -5,6 +5,7 @@
 //  Created by qiuty on 2023/11/8.
 //
 
+import UIKit
 import SwiftUI
 
 struct PostDetailPage: View {
@@ -33,11 +34,12 @@ struct PostDetailPage: View {
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 20).fill(.background))
                         .padding(.top, proxy.size.height * Constants.contentTopPaddingProportion)
-                }.overlay(alignment: .top) {
+                }
+                .overlay(alignment: .top) {
                     scrollViewOverlay
                 }
             }
-            .navigationBarBackButtonHidden()
+//            .navigationBarBackButtonHidden()
         }
     }
 }
@@ -101,6 +103,17 @@ extension PostDetailPage {
                 .font(.system(size: Constants.backButtonSize))
         }
         .padding(.horizontal)
+    }
+}
+
+extension UINavigationController {
+    open override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        navigationBar.isHidden = true
+    }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
     }
 }
 

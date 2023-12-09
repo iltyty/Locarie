@@ -15,7 +15,7 @@ struct HomePage: View {
         center: CLLocationCoordinate2D.CP,
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.1)
     )
-
+    
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
@@ -30,7 +30,8 @@ struct HomePage: View {
                         
                         VStack {
                             NavigationLink {
-                                SearchPage()
+//                                SearchPage()
+                                CustomBackSwipeView()
                             } label: {
                                 SearchBarView(title: "Explore", isDisabled: true)
                             }
@@ -49,7 +50,7 @@ struct HomePage: View {
 
 extension Color {
     static let mapMarkerOrange = Color(hex: 0xff571b)
-
+    
     init(hex: UInt, alpha: Double = 1) {
         self.init(
             .sRGB,
