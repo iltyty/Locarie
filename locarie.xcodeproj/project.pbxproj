@@ -134,8 +134,8 @@
 		50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		50B11ADE2AFB7850002A7B91 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		50B11AE02AFB7A46002A7B91 /* ReviewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPage.swift; sourceTree = "<group>"; };
-		50B11AE52AFB8368002A7B91 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Message.swift; path = ../viewmodel/Message.swift; sourceTree = "<group>"; };
-		50B11AE72AFB8392002A7B91 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../viewmodel/User.swift; sourceTree = "<group>"; };
+		50B11AE52AFB8368002A7B91 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		50B11AE72AFB8392002A7B91 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		50E60DDC2AFF78D400CA088F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		50E60DDE2AFF79A400CA088F /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
@@ -401,8 +401,8 @@
 			isa = PBXGroup;
 			children = (
 				500F661F2B257C4C0074FE3C /* Dtos */,
-				50B11AE52AFB8368002A7B91 /* Message.swift */,
 				50B11AE72AFB8392002A7B91 /* User.swift */,
+				50B11AE52AFB8368002A7B91 /* Message.swift */,
 				50E60DDC2AFF78D400CA088F /* Post.swift */,
 				500F66252B2854A80074FE3C /* LocalCache.swift */,
 				5054CDF22B28954E00645F5C /* UserInfo.swift */,

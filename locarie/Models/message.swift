@@ -8,28 +8,15 @@
 import Foundation
 
 struct Message: Hashable {
-    let id: Int = 1
-    let senderId: Int
-    let receiverId: Int
-    let time: Date = .init()
+    let sender: User
+    let receiver: User
+    let time: Date
     let content: String
-    
-    init(senderId: Int, receiverId: Int, content: String) {
-        self.senderId = senderId
-        self.receiverId = receiverId
+
+    init(sender: User, receiver: User, content: String) {
+        self.sender = sender
+        self.receiver = receiver
+        time = Date.now
         self.content = content
-    }
-    
-    // uid: the current user's id
-    func getTheOtherUser(uid: Int) -> User {
-        UserViewModel.getUserById(uid == senderId ? receiverId : senderId)
-    }
-    
-    func getSender() -> User {
-        UserViewModel.getUserById(senderId)
-    }
-    
-    func getReceiver() -> User {
-        UserViewModel.getUserById(receiverId)
     }
 }
