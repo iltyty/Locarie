@@ -176,23 +176,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5000C6C32AF7CD3D0057EF2D /* tabview */ = {
+		5000C6C32AF7CD3D0057EF2D /* TabView */ = {
 			isa = PBXGroup;
 			children = (
 				5000C6C12AF7C7350057EF2D /* BottomTabView.swift */,
 				5000C6C42AF8B9EF0057EF2D /* BottomTabViewRouter.swift */,
 				5000C6C62AF8BA580057EF2D /* BottomTabViewItem.swift */,
 			);
-			path = tabview;
+			path = TabView;
 			sourceTree = "<group>";
 		};
-		5000C6CA2AF8CF190057EF2D /* components */ = {
+		5000C6CA2AF8CF190057EF2D /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				5037D2C82AF2337400108F0F /* MessageRowView.swift */,
 				5000C6CD2AF8D9A20057EF2D /* MessageView.swift */,
 			);
-			path = components;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		500F661F2B257C4C0074FE3C /* Dtos */ = {
@@ -203,53 +203,53 @@
 			path = Dtos;
 			sourceTree = "<group>";
 		};
-		50277F722AF117640045AB12 /* home */ = {
+		50277F722AF117640045AB12 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				50277F732AF117700045AB12 /* HomePage.swift */,
 				5000C6C82AF8C3440057EF2D /* SearchPage.swift */,
 			);
-			path = home;
+			path = Home;
 			sourceTree = "<group>";
 		};
-		50277F752AF117840045AB12 /* favorite */ = {
+		50277F752AF117840045AB12 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
 				50277F762AF117970045AB12 /* FavoritePage.swift */,
 			);
-			path = favorite;
+			path = Favorite;
 			sourceTree = "<group>";
 		};
-		50277F782AF117A70045AB12 /* message */ = {
+		50277F782AF117A70045AB12 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				5000C6CA2AF8CF190057EF2D /* components */,
+				5000C6CA2AF8CF190057EF2D /* Components */,
 				50277F792AF117B20045AB12 /* MessagePage.swift */,
 				5000C6CB2AF8CFB30057EF2D /* MessageDetailPage.swift */,
 			);
-			path = message;
+			path = Message;
 			sourceTree = "<group>";
 		};
-		50277F7B2AF117C30045AB12 /* profile */ = {
+		50277F7B2AF117C30045AB12 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				50277F7C2AF117CE0045AB12 /* UserProfilePage.swift */,
 				50B11AD62AFA28E8002A7B91 /* BusinessHomePage.swift */,
 			);
-			path = profile;
+			path = Profile;
 			sourceTree = "<group>";
 		};
-		50277F7E2AF12A640045AB12 /* components */ = {
+		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				5000C6C32AF7CD3D0057EF2D /* tabview */,
+				5000C6C32AF7CD3D0057EF2D /* TabView */,
 				50277F7F2AF12A700045AB12 /* SearchBarView.swift */,
 				50277F812AF1512E0045AB12 /* PostCardView.swift */,
 				503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */,
 				50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */,
 				500477092B05DAAC0031AA94 /* AsyncImageView.swift */,
 			);
-			path = components;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		5054CDED2B288D1500645F5C /* APIServices */ = {
@@ -271,7 +271,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		509CDA302B1F078E004A6D22 /* login */ = {
+		509CDA302B1F078E004A6D22 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				509CDA352B1F1AED004A6D22 /* Components */,
@@ -279,7 +279,7 @@
 				509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */,
 				509CDA382B1F2414004A6D22 /* LoginRegisterUtil.swift */,
 			);
-			path = login;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		509CDA352B1F1AED004A6D22 /* Components */ = {
@@ -317,10 +317,10 @@
 				50E60DED2B01F4F900CA088F /* Info.plist */,
 				5090C4352B04DDA3008931A6 /* Resources */,
 				50E60DE62AFF885200CA088F /* Common */,
-				50B11AE92AFB878A002A7B91 /* viewmodel */,
+				50B11AE92AFB878A002A7B91 /* ViewModels */,
 				50B11AE22AFB834A002A7B91 /* Models */,
-				50B11ACC2AF9DDD9002A7B91 /* views */,
-				50277F7E2AF12A640045AB12 /* components */,
+				50B11ACC2AF9DDD9002A7B91 /* Views */,
+				50277F7E2AF12A640045AB12 /* Components */,
 				50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */,
 				50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */,
 				50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */,
@@ -354,39 +354,39 @@
 			path = locarieUITests;
 			sourceTree = "<group>";
 		};
-		50B11ACC2AF9DDD9002A7B91 /* views */ = {
+		50B11ACC2AF9DDD9002A7B91 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				509CDA302B1F078E004A6D22 /* login */,
-				50B11AD82AFB3654002A7B91 /* post */,
-				50B11ACD2AF9DE68002A7B91 /* new */,
-				50277F752AF117840045AB12 /* favorite */,
-				50277F722AF117640045AB12 /* home */,
-				50277F782AF117A70045AB12 /* message */,
-				50277F7B2AF117C30045AB12 /* profile */,
+				509CDA302B1F078E004A6D22 /* Login */,
+				50B11AD82AFB3654002A7B91 /* Post */,
+				50B11ACD2AF9DE68002A7B91 /* New */,
+				50277F752AF117840045AB12 /* Favorite */,
+				50277F722AF117640045AB12 /* Home */,
+				50277F782AF117A70045AB12 /* Message */,
+				50277F7B2AF117C30045AB12 /* Profile */,
 				5004770B2B06072E0031AA94 /* CustomBackSwipeView.swift */,
 			);
-			path = views;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		50B11ACD2AF9DE68002A7B91 /* new */ = {
+		50B11ACD2AF9DE68002A7B91 /* New */ = {
 			isa = PBXGroup;
 			children = (
 				50B11ACE2AF9DE77002A7B91 /* NewPostPage.swift */,
 				50B11AD22AFA063B002A7B91 /* PhotoViewModel.swift */,
 				50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */,
 			);
-			path = new;
+			path = New;
 			sourceTree = "<group>";
 		};
-		50B11AD82AFB3654002A7B91 /* post */ = {
+		50B11AD82AFB3654002A7B91 /* Post */ = {
 			isa = PBXGroup;
 			children = (
 				50B11ADD2AFB781E002A7B91 /* components */,
 				50B11AD92AFB3660002A7B91 /* PostDetailPage.swift */,
 				50B11AE02AFB7A46002A7B91 /* ReviewPage.swift */,
 			);
-			path = post;
+			path = Post;
 			sourceTree = "<group>";
 		};
 		50B11ADD2AFB781E002A7B91 /* components */ = {
@@ -410,7 +410,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		50B11AE92AFB878A002A7B91 /* viewmodel */ = {
+		50B11AE92AFB878A002A7B91 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */,
@@ -419,7 +419,7 @@
 				5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */,
 				5054CDF42B289E7F00645F5C /* AuthViewModel.swift */,
 			);
-			path = viewmodel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		50E60DE62AFF885200CA088F /* Common */ = {
