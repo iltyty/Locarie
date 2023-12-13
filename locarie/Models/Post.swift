@@ -1,5 +1,5 @@
 //
-//  post.swift
+//  Post.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/11.
@@ -11,13 +11,13 @@ import SwiftUI
 
 struct Post: Identifiable, Decodable {
     let id: String
-    let uid: Int  // business user's id
+    let uid: Double  // business user's id
     var title: String
     var content: String
     var time: Date
     var imageUrls: [String]
     
-    init(uid: Int, title: String, content: String, time: Date, imageUrls: [String]) {
+    init(uid: Double, title: String, content: String, time: Date, imageUrls: [String]) {
         self.uid = uid
         self.id = UUID().uuidString
         self.time = time

@@ -20,14 +20,15 @@ struct CustomInputField: View {
                 TextField(hint, text: value)
             }
         }
-        .padding(.vertical, Constants.verticalPadding)
-        .padding(.horizontal, Constants.horizontalPadding)
-        .background(Color.white.opacity(Constants.bgOpacity))
-        .clipShape(.rect(cornerRadius: Constants.cornerRadius, style: .continuous))
+        .textInputAutocapitalization(.never)
+        .padding(.vertical, CustomInputFieldConstants.verticalPadding)
+        .padding(.horizontal, CustomInputFieldConstants.horizontalPadding)
+        .background(Color.white.opacity(CustomInputFieldConstants.bgOpacity))
+        .clipShape(.rect(cornerRadius: CustomInputFieldConstants.cornerRadius, style: .continuous))
     }
 }
 
-fileprivate struct Constants {
+struct CustomInputFieldConstants {
     static let verticalPadding = 10.0
     static let horizontalPadding = 15.0
     static let bgOpacity = 0.12

@@ -9,15 +9,13 @@ import SwiftUI
 import CoreLocation
 
 struct LocarieView: View {
-    @AppStorage("userId") var userId: Double = 0
+    @EnvironmentObject var cacheViewModel: LocalCacheViewModel
     @EnvironmentObject var viewRouter: BottomTabViewRouter
     
     var body: some View {
-        if userId == 0 {
-            // not logged in yet
+        if !cacheViewModel.isLoggedIn() {
             LoginPage()
         } else {
-            // logged in already
             switch viewRouter.currentPage {
             case .home:
                 HomePage()
@@ -36,6 +34,7 @@ struct LocarieView: View {
 
 #Preview {
     LocarieView()
+        .environmentObject(LocalCacheViewModel())
         .environmentObject(BottomTabViewRouter())
         .environmentObject(PostViewModel())
         .environmentObject(MessageViewModel())

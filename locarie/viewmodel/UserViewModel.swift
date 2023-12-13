@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 
 class UserViewModel: ObservableObject {
-    @AppStorage("userId") var uid: Int = 0  // current user's id
+    @AppStorage("userId") var uid: Double = 0  // current user's id
     
     static var users: [User] = []
     
-    init(uid: Int) {
+    init(uid: Double) {
         self.uid = uid
     }
     
@@ -28,7 +28,7 @@ class UserViewModel: ObservableObject {
     }
     
     // TODO: fetch the de-facto result from the backend
-    static func getUserById(_ id: Int) -> User? {
+    static func getUserById(_ id: Double) -> User? {
         loadUsers()
         return users.first(where: { $0.id == id })
     }

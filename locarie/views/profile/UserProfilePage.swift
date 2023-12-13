@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserProfilePage: View {
-    @AppStorage("uid") var uid: Int = 1
+    @AppStorage("uid") var uid: Double = 1
     @EnvironmentObject var postViewModel: PostViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     

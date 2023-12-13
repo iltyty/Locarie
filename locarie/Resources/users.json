@@ -1,7 +1,10 @@
 [
     {
         "id": 1,
+        "type": "PLAIN",
         "username": "Tony Stark",
+        "email": "tony-stark@avengers.com",
+        "password": "tonystark,therichest",
         "avatarUrl": "https://i.ibb.co/MG3q4G9/avatar-brat.png",
         "coverUrl": "",
         "introduction": "",
@@ -20,7 +23,10 @@
     },
     {
         "id": 2,
+        "type": "BUSINESS",
         "username": "Jolene Hornsey",
+        "email": "jolene-hornsey@bigjo.com",
+        "password": "88888888",
         "avatarUrl": "https://i.ibb.co/CK9B6vj/avatar-jolene.jpg",
         "coverUrl": "https://i.ibb.co/QMnRsgG/cover-jolene.jpg",
         "introduction": "Farm-to-table dishes & baked goods are showcased at this down-to-earth, bohemian restaurant.",
@@ -39,7 +45,10 @@
     },
     {
         "id": 3,
+        "type": "BUSINESS",
         "username": "Shreeji News",
+        "email": "shreeji-news@newsagent.com",
+        "password": "88888888",
         "avatarUrl": "https://i.ibb.co/myjmQYm/avatar-shreeji.png",
         "coverUrl": "https://i.ibb.co/hyjh0gJ/cover-shreeji.jpg",
         "introduction": "Newsagent & Tobacconist, with a coffee & pastry-bar, curated publications and renovated events spaces.",

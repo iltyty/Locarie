@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct HomePage: View {
+    @AppStorage(GlobalConstants.userIdKey) var userId: Double = 0
     @EnvironmentObject var postViewModel: PostViewModel
     
     @State private var mapRegion = MKCoordinateRegion(

@@ -31,7 +31,7 @@ func makeLoginPageBackground<T: View>(_ content: T) -> some View {
 
 func makeLoginPageTitle(_ title: String) -> some View {
     Text(title)
-        .font(.largeTitle)
+        .font(.title)
         .fontWeight(.semibold)
 }
 
@@ -45,7 +45,6 @@ func makeLoginPageFieldInput(text: String, hint: String, input: Binding<String>,
 
 func loginPageButtonLabel(_ title: String) -> some View {
     Text(title)
-        .font(.title3)
         .fontWeight(.semibold)
         .foregroundStyle(.black)
         .padding(.vertical, Constants.btnTitlePaddingVertical)
@@ -62,7 +61,7 @@ func loginPageButtonBuilder(_ title: String, action: @escaping () -> Void) -> so
     }
 }
 
-struct LoginPageConstants {
+struct LoginRegisterPageConstants {
     static let tableItemSpace = 10.0
     static let tableInputSpace = 8.0
     static let btnPaddingTop = 20.0
