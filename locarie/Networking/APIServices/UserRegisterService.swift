@@ -18,21 +18,21 @@ extension APIServices {
         }
         throw LError.cannotReach
     }
-    
+
     private static func prepareMultipartFormData(user: User) throws -> MultipartFormData {
         let result = MultipartFormData()
         let userData = try JSONEncoder().encode(user)
         result.append(userData, withName: "user", mimeType: "application/json")
         return result
     }
-    
+
     private static func sendRegisterRequest(multipartFormData data: MultipartFormData) async throws -> ResponseDto<User> {
         try await AF
             .upload(multipartFormData: data, to: APIEndpoints.userRegisterUrl)
             .serializingDecodable(ResponseDto<User>.self)
             .value
     }
-    
+
     private static func handleRegisterError(_ error: Error) throws {
         try handleError(error)
     }

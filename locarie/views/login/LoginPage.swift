@@ -9,16 +9,16 @@ import SwiftUI
 
 struct LoginPage: View {
     @EnvironmentObject var cacheViewModel: LocalCacheViewModel
-    
+
     @State private var email: String = ""
     @State private var password: String = ""
-    
+
     @State private var isLoading = false
     @State private var isAlertShowing = false
     @State private var alertTitle: AlertTitle?
-    
+
     private let authViewModel = AuthViewModel()
-    
+
     var body: some View {
         NavigationView {
             makeLoginPageBackground(formTable)
@@ -29,15 +29,15 @@ struct LoginPage: View {
                 }
         }
     }
-    
+
     var overlayView: some View {
         isLoading ? loadingView.background(Color.white.opacity(0.05)) : nil
     }
-    
+
     var loadingView: some View {
         ProgressView().progressViewStyle(.circular)
     }
-    
+
     var formTable: some View {
         VStack(spacing: LoginRegisterPageConstants.tableItemSpace) {
             makeLoginPageTitle("Login")
@@ -53,10 +53,10 @@ struct LoginPage: View {
             }
         }
     }
-    
+
     var btnLogin: some View {
         loginPageButtonBuilder("Login") { login() }
-        .padding(.top, LoginRegisterPageConstants.btnPaddingTop)
+            .padding(.top, LoginRegisterPageConstants.btnPaddingTop)
     }
 }
 
@@ -71,7 +71,7 @@ extension LoginPage {
             onError: handleLoginError
         )
     }
-    
+
     private func handleLoginSuccess(_ response: Response) {
         isLoading = false
         if let info = response.data {
@@ -80,7 +80,7 @@ extension LoginPage {
         alertTitle = .success
         isAlertShowing = true
     }
-    
+
     private func handleLoginFailure(_ response: Response) {
         isLoading = false
         if let code = ResultCode(rawValue: response.status) {
@@ -95,8 +95,8 @@ extension LoginPage {
         }
         isAlertShowing = true
     }
-    
-    private func handleLoginError(_ error: Error) {
+
+    private func handleLoginError(_: Error) {
         isLoading = false
         alertTitle = .unknownError
         isAlertShowing = true

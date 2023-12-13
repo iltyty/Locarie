@@ -17,14 +17,14 @@ extension APIServices {
         }
         throw LError.cannotReach
     }
-    
+
     private static func sendLoginRequest(parameters: Parameters?) async throws -> ResponseDto<UserLoginResponse> {
-        return try await AF
+        try await AF
             .request(APIEndpoints.userLoginUrl, method: .post, parameters: parameters)
             .serializingDecodable(ResponseDto<UserLoginResponse>.self)
             .value
     }
-    
+
     private static func handleLoginError(_ error: Error) throws {
         try handleError(error)
     }

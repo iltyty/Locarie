@@ -9,15 +9,15 @@ import SwiftUI
 
 struct RegisterPage: View {
     @EnvironmentObject var cacheViewModel: LocalCacheViewModel
-    
+
     @StateObject private var user = User()
-    
+
     @State private var isLoading = false
     @State private var isAlertShowing = false
     @State private var alertTitle: AlertTitle?
-    
+
     private let authViewModel = AuthViewModel()
-    
+
     var body: some View {
         makeLoginPageBackground(content)
             .disabled(isLoading)
@@ -29,15 +29,15 @@ struct RegisterPage: View {
                 Button("OK") {}
             }
     }
-    
+
     var overlayView: some View {
         isLoading ? loadingView : nil
     }
-    
+
     var loadingView: some View {
         ProgressView().progressViewStyle(.circular)
     }
-    
+
     private var content: some View {
         VStack(spacing: LoginRegisterPageConstants.tableItemSpace) {
             title
@@ -50,11 +50,11 @@ struct RegisterPage: View {
             btnRegister
         }
     }
-    
+
     private var title: some View {
         makeLoginPageTitle("Register")
     }
-    
+
     private var userTypeChooser: some View {
         Picker("UserType", selection: $user.type) {
             ForEach(User.UserType.allCases) { type in
@@ -63,7 +63,7 @@ struct RegisterPage: View {
         }
         .pickerStyle(.segmented)
     }
-    
+
     private var plainForm: some View {
         VStack(alignment: .leading, spacing: LoginRegisterPageConstants.tableInputSpace) {
             makeLoginPageFieldInput(text: "Username", hint: "username", input: $user.username, isPassword: false)
@@ -71,7 +71,7 @@ struct RegisterPage: View {
             makeLoginPageFieldInput(text: "Password", hint: "password", input: $user.password, isPassword: true)
         }
     }
-    
+
     private var businessForm: some View {
         VStack(spacing: LoginRegisterPageConstants.tableItemSpace) {
             plainForm
@@ -80,7 +80,7 @@ struct RegisterPage: View {
             introductionInput
         }
     }
-    
+
     private var introductionInput: some View {
         VStack(alignment: .leading) {
             Text("Introduction")
@@ -92,7 +92,7 @@ struct RegisterPage: View {
                 .clipShape(.rect(cornerRadius: CustomInputFieldConstants.cornerRadius))
         }
     }
-    
+
     private var btnRegister: some View {
         loginPageButtonBuilder("Register") {
             register()
@@ -112,23 +112,23 @@ extension RegisterPage {
             }
         }
     }
-    
+
     private func handleRegisterResponse(_ response: ResponseDto<User>) {
         response.status == 0
             ? handleRegisterSuccess(response)
             : handleRegisterFailure(response)
     }
-    
-    private func handleRegisterError(_ error: Error) {
+
+    private func handleRegisterError(_: Error) {
         isLoading = false
         alertTitle = .unknownError
         isAlertShowing = true
     }
-    
-    private func handleRegisterSuccess(_ response: ResponseDto<User>) {
+
+    private func handleRegisterSuccess(_: ResponseDto<User>) {
         login()
     }
-    
+
     private func handleRegisterFailure(_ response: ResponseDto<User>) {
         isLoading = false
         if let code = ResultCode(rawValue: response.status) {
@@ -155,13 +155,13 @@ extension RegisterPage {
             onError: handleLoginError
         )
     }
-    
-    private func handleLoginError(_ error: Error) {
+
+    private func handleLoginError(_: Error) {
         isLoading = false
         alertTitle = .unknownError
         isAlertShowing = true
     }
-    
+
     private func handleLoginSuccess(_ response: Response) {
         isLoading = false
         alertTitle = .success
@@ -170,7 +170,7 @@ extension RegisterPage {
         }
         isAlertShowing = true
     }
-    
+
     private func handleLoginFailure(_ response: Response) {
         isLoading = false
         if let code = ResultCode(rawValue: response.status) {

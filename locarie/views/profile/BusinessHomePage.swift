@@ -9,21 +9,21 @@ import SwiftUI
 
 struct BusinessHomePage: View {
     @Environment(\.dismiss) var dismiss
-    
+
     let user: User
-    
+
     init(_ user: User) {
         self.user = user
     }
-    
+
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
                 let width = proxy.size.width
                 let height = proxy.size.height * Constants.underneathImageHeightProportion
-                
+
                 underneathImageView(width: width, height: height)
-                
+
                 ScrollView {
                     infoView
                         .padding()
@@ -83,7 +83,7 @@ extension BusinessHomePage {
             buttonBuilder(text: "688", systemImage: "bookmark")
         }
     }
-    
+
     func buttonBuilder(text: String, systemImage: String) -> some View {
         HStack {
             Image(systemName: systemImage)
@@ -112,14 +112,14 @@ extension BusinessHomePage {
                         Circle().fill(.background).shadow(radius: Constants.infoViewBtnMessageShadowRadius)
                     )
             }
-            
+
             HStack {
                 Text(user.username)
                 Spacer()
                 Text(user.category)
                     .foregroundStyle(.secondary)
             }
-            
+
             Text(user.introduction)
                 .lineLimit(Constants.infoViewIntroductionLineLimit)
         }
@@ -127,7 +127,7 @@ extension BusinessHomePage {
 }
 
 extension BusinessHomePage {
-    func overlayView(width: Double) -> some View {
+    func overlayView(width _: Double) -> some View {
         VStack {
             HStack {
                 Image(systemName: "chevron.backward")
@@ -140,12 +140,12 @@ extension BusinessHomePage {
                     .font(.system(size: Constants.overlayViewBtnSize))
             }
             .padding(.horizontal)
-            
+
             Spacer()
-            
+
             Divider()
                 .shadow(color: .black, radius: Constants.overlayViewDividerShadowRadius, y: Constants.overlayViewDividerShadowY)
-            
+
             Capsule()
                 .fill(Constants.overlayViewBtnMapColor)
                 .frame(
@@ -161,7 +161,7 @@ extension BusinessHomePage {
     }
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let underneathImageHeightProportion = 0.5
     static let scrollViewCornerRadius: CGFloat = 20
     static let infoViewVSpace: CGFloat = 20
@@ -174,7 +174,7 @@ fileprivate struct Constants {
     static let infoViewIntroductionLineLimit = 5
     static let overlayViewBtnSize: CGFloat = 32
     static let overlayViewBtnMapColor =
-    Color(red: 236 / 255, green: 100 / 255, blue: 43 / 255)
+        Color(red: 236 / 255, green: 100 / 255, blue: 43 / 255)
     static let overlayViewBtnMapWidth: CGFloat = 120
     static let overlayViewBtnMapHeight: CGFloat = 50
     static let overlayViewDividerShadowRadius: CGFloat = 2

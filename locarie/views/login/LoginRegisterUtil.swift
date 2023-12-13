@@ -1,14 +1,14 @@
 //
-//  LoginPageUtil.swift
+//  LoginRegisterUtil.swift
 //  locarie
 //
 //  Created by qiuty on 05/12/2023.
 //
 
-import SwiftUI
 import Foundation
+import SwiftUI
 
-func makeLoginPageBackground<T: View>(_ content: T) -> some View {
+func makeLoginPageBackground(_ content: some View) -> some View {
     content
         .padding(.horizontal, Constants.tableHorizontalPadding)
         .padding(.vertical, Constants.tableVerticalPadding)
@@ -61,22 +61,22 @@ func loginPageButtonBuilder(_ title: String, action: @escaping () -> Void) -> so
     }
 }
 
-struct LoginRegisterPageConstants {
+enum LoginRegisterPageConstants {
     static let tableItemSpace = 10.0
     static let tableInputSpace = 8.0
     static let btnPaddingTop = 20.0
 }
 
-fileprivate struct Constants {
+private enum Constants {
     // background image constants
     static let bgBlurRadius = 8.0
-    
+
     // form table constants
     static let tableVerticalPadding = 30.0
     static let tableHorizontalPadding = 15.0
     static let tableBgCornerRadius = 20.0
     static let tableBgOpacity = 0.5
-    
+
     // button constants
     static let btnTitlePaddingVertical = 12.0
     static let btnCornerRadius = 10.0

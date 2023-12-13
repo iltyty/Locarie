@@ -11,7 +11,7 @@ struct CustomInputField: View {
     let hint: String
     let value: Binding<String>
     let isPassword: Bool
-        
+
     var body: some View {
         Group {
             if isPassword {
@@ -28,7 +28,7 @@ struct CustomInputField: View {
     }
 }
 
-struct CustomInputFieldConstants {
+enum CustomInputFieldConstants {
     static let verticalPadding = 10.0
     static let horizontalPadding = 15.0
     static let bgOpacity = 0.12

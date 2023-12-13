@@ -1,5 +1,5 @@
 //
-//  MessageContent.swift
+//  MessageView.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/6.
@@ -9,11 +9,11 @@ import SwiftUI
 
 struct MessageView: View {
     let message: Message
-    
+
     var isSentBySelf: Bool {
-        return message.sender.id == 1
+        message.sender.id == 1
     }
-    
+
     var body: some View {
         HStack {
             if isSentBySelf {
@@ -36,11 +36,10 @@ struct MessageView: View {
         }
         .padding(.horizontal)
         .frame(alignment: .center)
-
     }
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let avatarSize: CGFloat = 42
     static let messageCornerRadius: CGFloat = 20
     static let messageMinHeight: CGFloat = 64

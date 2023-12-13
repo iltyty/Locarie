@@ -11,13 +11,13 @@ struct SearchBarView: View {
     @State var text = ""
     var title = "Explore"
     var isDisabled = false
-    
+
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .padding([.leading])
                 .padding([.trailing], Constants.iconPadding)
-            
+
             TextField(title, text: $text)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
@@ -31,8 +31,8 @@ struct SearchBarView: View {
         )
         .padding(Constants.padding)
     }
-    
-    private struct Constants {
+
+    private enum Constants {
         static let height: CGFloat = 50.0
         static let padding: CGFloat = 20.0
         static let iconPadding: CGFloat = 10.0

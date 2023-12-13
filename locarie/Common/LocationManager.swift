@@ -1,12 +1,12 @@
 //
-//  LocationDataManager.swift
+//  LocationManager.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/12.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let geocoder = CLGeocoder()
@@ -14,7 +14,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationFeaturesEnabled = false
     @Published var location: CLLocation?
     @Published var placemark: CLPlacemark?
-    
+
     override init() {
         manager = CLLocationManager()
         super.init()
@@ -34,33 +34,33 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             fatalError()
         }
     }
-    
+
     func enableLocationFeatures() {
         locationFeaturesEnabled = true
     }
-    
+
     func disableLocationFeatures() {
         locationFeaturesEnabled = false
     }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+
+    func locationManager(_: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
         print("Unable to retrive the location")
     }
-    
+
     func requestLocation() {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+    func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
         self.location = location
 //        geocode()
     }
-    
+
     private func geocode() {
-        guard let location = self.location else { return }
+        guard let location else { return }
         geocoder.reverseGeocodeLocation(location) { places, error in
             self.placemark = error == nil ? places?[0] : nil
         }

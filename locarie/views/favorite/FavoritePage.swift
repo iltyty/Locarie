@@ -18,7 +18,7 @@ struct FavoritePage: View {
     @State private var initOffset: CGFloat = 0
     @State private var endOffset: CGFloat = 0
     @State private var currentOffset: CGFloat = 0
-    
+
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
@@ -30,7 +30,7 @@ struct FavoritePage: View {
                                     .tint(Constants.mapMarkerColor)
                             }
                         }
-                        
+
                         ScrollView {
                             Group {
                                 Spacer()
@@ -38,7 +38,7 @@ struct FavoritePage: View {
                                     .fill(.secondary)
                                     .frame(width: Constants.handlerWidth, height: Constants.handlerHeight)
                                     .padding(.top, 10)
-                                
+
                                 ForEach(postViewModel.favoritePosts) { post in
                                     PostCardView(post: post, coverWidth: proxy.size.width * Constants.postCoverWidthProportion)
                                 }
@@ -50,7 +50,7 @@ struct FavoritePage: View {
                         }
                         .scrollIndicators(.hidden)
                     }
-                    
+
                     BottomTabView()
                 }
                 .navigationTitle(Constants.navigationTitle)
@@ -58,16 +58,16 @@ struct FavoritePage: View {
             }
         }
     }
-    
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let navigationTitle = "Followed"
     static let mapMarkerColor: Color = .mapMarkerOrange
     static let handlerWidth: CGFloat = 80
     static let handlerHeight: CGFloat = 5
     static let postCoverWidthProportion = 0.8
 }
+
 #Preview {
     FavoritePage()
         .environmentObject(BottomTabViewRouter())

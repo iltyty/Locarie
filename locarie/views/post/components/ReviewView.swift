@@ -53,7 +53,7 @@ extension ReviewView {
     }
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let avatarSize: CGFloat = 48
     static let elementVSpacing: CGFloat = 15
 }

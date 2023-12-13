@@ -5,17 +5,17 @@
 //  Created by qiuty on 2023/11/7.
 //
 
-import SwiftUI
 import PhotosUI
+import SwiftUI
 
 struct ImageAttachmentView: View {
     let imageSize: CGFloat
     @ObservedObject var imageAttachment: PhotoViewModel.ImageAttachment
-    
+
     var body: some View {
         HStack {
             switch imageAttachment.status {
-            case .finished(let image):
+            case let .finished(image):
                 image.resizable()
                     .scaledToFill()
                     .frame(width: imageSize, height: imageSize)

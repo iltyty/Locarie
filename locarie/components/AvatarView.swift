@@ -11,13 +11,13 @@ struct AvatarView: View {
     var name: String
     var size: CGFloat
     var imageUrl: String
-    
+
     init(imageUrl: String, size: CGFloat) {
-        self.name = ""
+        name = ""
         self.size = size
         self.imageUrl = imageUrl
     }
-    
+
     var body: some View {
         AsyncImageView(url: imageUrl, width: size, height: size) { image in
             image

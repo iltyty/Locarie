@@ -1,5 +1,5 @@
 //
-//  PostCard.swift
+//  PostCardView.swift
 //  locarie
 //
 //  Created by qiuty on 2023/10/31.
@@ -11,12 +11,12 @@ struct PostCardView: View {
     let post: Post
     let coverWidth: CGFloat
     @ObservedObject var locationManager = LocationManager()
-    
+
     var distance: Double {
         guard let location = locationManager.location else { return 0 }
         return location.distance(from: post.businessLocation)
     }
-    
+
     var body: some View {
         NavigationLink {
             PostDetailPage(post)
@@ -45,7 +45,7 @@ extension PostCardView {
             }
         }
     }
-    
+
     func coverBuilder(imageUrl: String, width: CGFloat) -> some View {
         let height = width / Constants.coverAspectRatio
         return AsyncImageView(url: imageUrl, width: width, height: height) { image in
@@ -88,7 +88,7 @@ struct FlatLinkStyle: ButtonStyle {
     }
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let avatarSize: CGFloat = 32
     static let coverAspectRatio: CGFloat = 4 / 3
     static let coverBorderRadius: CGFloat = 10.0

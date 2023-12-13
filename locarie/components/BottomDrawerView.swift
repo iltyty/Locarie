@@ -1,5 +1,5 @@
 //
-//  BottomDraggable.swift
+//  BottomDrawerView.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/1.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-fileprivate struct Constants {
+private enum Constants {
     static let handlerWidth: CGFloat = 80
     static let handlerHeight: CGFloat = 5
     static let handlerPaddingTop: CGFloat = 15
@@ -16,26 +16,26 @@ fileprivate struct Constants {
 
 struct BottomDrawerView<Content: View>: View {
     let content: Content
-    
+
     @State var offsetY: CGFloat = 0
     @State var translation: CGSize = .zero
-    
+
     init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
-    
+
     init(offsetY: CGFloat, @ViewBuilder content: () -> Content) {
         self.content = content()
-        self._offsetY = State(initialValue: offsetY)
+        _offsetY = State(initialValue: offsetY)
     }
-    
+
     private var handler: some View {
         Capsule(style: .circular)
             .fill(.secondary)
             .frame(width: Constants.handlerWidth, height: Constants.handlerHeight)
             .padding(.top, Constants.handlerPaddingTop)
     }
-    
+
     func dragGesture(proxy: GeometryProxy) -> some Gesture {
         DragGesture()
             .onChanged { value in
@@ -43,7 +43,7 @@ struct BottomDrawerView<Content: View>: View {
                     translation = value.translation
                 }
             }
-            .onEnded { value in
+            .onEnded { _ in
                 withAnimation(
                     .interactiveSpring(response: 0.5, dampingFraction: 0.6)
                 ) {
@@ -58,10 +58,10 @@ struct BottomDrawerView<Content: View>: View {
                 }
             }
     }
-    
+
     var body: some View {
         GeometryReader { proxy in
-            VStack() {
+            VStack {
                 handler
                 content
             }
@@ -75,7 +75,7 @@ struct BottomDrawerView<Content: View>: View {
     }
 }
 
-fileprivate struct ContentView: View {
+private struct ContentView: View {
     var body: some View {
         VStack(alignment: .center) {
             Text("hello")
@@ -89,5 +89,5 @@ fileprivate struct ContentView: View {
     BottomDrawerView(offsetY: 200) {
         ContentView()
     }
-        .background(.blue)
+    .background(.blue)
 }

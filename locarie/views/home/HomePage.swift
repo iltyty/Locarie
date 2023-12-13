@@ -5,18 +5,18 @@
 //  Created by qiuty on 2023/10/31.
 //
 
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct HomePage: View {
     @AppStorage(GlobalConstants.userIdKey) var userId: Double = 0
     @EnvironmentObject var postViewModel: PostViewModel
-    
+
     @State private var mapRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D.CP,
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.1)
     )
-    
+
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
@@ -28,7 +28,7 @@ struct HomePage: View {
                                     .tint(Constants.mapMarkerColor)
                             }
                         }
-                        
+
                         VStack {
                             NavigationLink {
 //                                SearchPage()
@@ -41,7 +41,7 @@ struct HomePage: View {
                             PostCardView(post: postViewModel.posts[0], coverWidth: proxy.size.width * Constants.postCoverWidthProportion)
                         }
                     }
-                    
+
                     BottomTabView()
                 }
             }
@@ -50,14 +50,14 @@ struct HomePage: View {
 }
 
 extension Color {
-    static let mapMarkerOrange = Color(hex: 0xff571b)
-    
+    static let mapMarkerOrange = Color(hex: 0xFF571B)
+
     init(hex: UInt, alpha: Double = 1) {
         self.init(
             .sRGB,
-            red: Double((hex >> 16) & 0xff) / 255,
-            green: Double((hex >> 08) & 0xff) / 255,
-            blue: Double((hex >> 00) & 0xff) / 255,
+            red: Double((hex >> 16) & 0xFF) / 255,
+            green: Double((hex >> 08) & 0xFF) / 255,
+            blue: Double((hex >> 00) & 0xFF) / 255,
             opacity: alpha
         )
     }
@@ -69,13 +69,13 @@ extension CLLocationCoordinate2D {
     )
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let postCoverWidthProportion = 0.8
     static let mapMarkerColor = Color.mapMarkerOrange
 }
 
 #Preview {
-    return HomePage()
+    HomePage()
         .environmentObject(BottomTabViewRouter())
         .environmentObject(PostViewModel())
 }

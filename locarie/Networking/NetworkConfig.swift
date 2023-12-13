@@ -11,7 +11,7 @@ class NetworkConfig {
     static let shared = NetworkConfig()
     let urlConfig: URLSessionConfiguration
     let urlSession: URLSession
-    
+
     private init() {
         urlConfig = URLSessionConfiguration.default
         urlConfig.waitsForConnectivity = true

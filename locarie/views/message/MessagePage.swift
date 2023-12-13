@@ -10,18 +10,18 @@ import SwiftUI
 struct MessagePage: View {
     @State var searchText = "Search"
     @EnvironmentObject var messageViewModel: MessageViewModel
-    
+
     var messages: [User: [Message]] {
         messageViewModel.messages
     }
-    
+
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 0) {
                 SearchBarView(text: searchText)
                     .navigationTitle(Constants.navigationTitle)
                     .navigationBarTitleDisplayMode(.inline)
-                
+
                 List {
                     ForEach(messages.keys.sorted { $0.id < $1.id }) { user in
                         NavigationLink {
@@ -32,19 +32,19 @@ struct MessagePage: View {
                     }
                 }
                 .listStyle(.plain)
-                
+
                 BottomTabView()
             }
         }
     }
-    
-    struct Constants {
+
+    enum Constants {
         static let navigationTitle = "Message"
     }
 }
 
 #Preview {
-    return MessagePage()
+    MessagePage()
         .environmentObject(BottomTabViewRouter())
         .environmentObject(MessageViewModel())
 }

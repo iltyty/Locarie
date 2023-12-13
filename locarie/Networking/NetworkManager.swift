@@ -9,12 +9,13 @@ import Foundation
 
 class NetworkManager {
     static let shared = NetworkManager()
-    
+
     private init() {}
-    
+
     private func completionHandler(data: Data?, response: URLResponse?, error: Error?,
-            completion: @escaping (Result<Data, Error>) -> Void) {
-        if let error = error {
+                                   completion: @escaping (Result<Data, Error>) -> Void)
+    {
+        if let error {
             completion(.failure(error))
             return
         }
@@ -22,26 +23,26 @@ class NetworkManager {
             completion(.failure(NetworkError.unknownResponse(description: response?.description)))
             return
         }
-        guard (200...299).contains(httpResponse.statusCode) else {
+        guard (200 ... 299).contains(httpResponse.statusCode) else {
             completion(.failure(NetworkError.badStatusCode(httpResponse.statusCode)))
             return
         }
-        guard let data = data else {
+        guard let data else {
             completion(.failure(NetworkError.emptyData))
             return
         }
         completion(.success(data))
     }
-    
+
     // request with method GET/DELETE
     func request(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         NetworkConfig.shared.urlSession.dataTask(with: url) { data, response, error in
             self.completionHandler(data: data, response: response, error: error, completion: completion)
         }.resume()
     }
-    
+
     // request with method POST/PUT/PATCH
-    func request<T: Encodable>(httpRequest: HttpRequest<T>, completion: @escaping (Result<Data, Error>) -> Void) {
+    func request(httpRequest: HttpRequest<some Encodable>, completion: @escaping (Result<Data, Error>) -> Void) {
         var request = URLRequest(url: httpRequest.url)
         request.httpMethod = httpRequest.method.rawValue
         request.setValue(httpRequest.contentType.rawValue, forHTTPHeaderField: "Content-Type")
@@ -57,14 +58,14 @@ class NetworkManager {
 }
 
 enum HttpMethod: String {
-    case GET = "GET"
-    case POST = "POST"
-    case PUT = "PUT"
-    case DELETE = "DELETE"
-    case PATCH = "PATCH"
-    
+    case GET
+    case POST
+    case PUT
+    case DELETE
+    case PATCH
+
     func isUploadData() -> Bool {
-        return self == .POST || self == .PUT || self == .PATCH
+        self == .POST || self == .PUT || self == .PATCH
     }
 }
 

@@ -5,28 +5,28 @@
 //  Created by qiuty on 2023/11/8.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 struct PostDetailPage: View {
     let post: Post
     let locationManager = LocationManager()
-    
+
     init(_ post: Post) {
         self.post = post
     }
-    
+
     var distance: Double {
         guard let location = locationManager.location else { return 0 }
         return location.distance(from: post.businessLocation)
     }
-    
+
     @Environment(\.dismiss) var dismiss
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
                 let size = proxy.size
-                
+
                 underneathImageView(imageUrl: post.imageUrls.first, width: size.width, height: size.height)
 
                 ScrollView {
@@ -107,17 +107,17 @@ extension PostDetailPage {
 }
 
 extension UINavigationController {
-    open override func viewWillLayoutSubviews() {
+    override open func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         navigationBar.isHidden = true
     }
-    
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+
+    public func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
         true
     }
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let avatarSize: CGFloat = 36
     static let backButtonSize: CGFloat = 32
     static let contentVSpacing: CGFloat = 20

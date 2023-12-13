@@ -1,17 +1,17 @@
 //
-//  ContentView.swift
+//  LocarieView.swift
 //  locarie
 //
 //  Created by qiuty on 2023/10/30.
 //
 
-import SwiftUI
 import CoreLocation
+import SwiftUI
 
 struct LocarieView: View {
     @EnvironmentObject var cacheViewModel: LocalCacheViewModel
     @EnvironmentObject var viewRouter: BottomTabViewRouter
-    
+
     var body: some View {
         if !cacheViewModel.isLoggedIn() {
             LoginPage()
@@ -39,4 +39,3 @@ struct LocarieView: View {
         .environmentObject(PostViewModel())
         .environmentObject(MessageViewModel())
 }
-

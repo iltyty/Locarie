@@ -9,7 +9,7 @@ import Alamofire
 import Foundation
 import SwiftUI
 
-class APIServices {
+enum APIServices {
     static func handleError(_ error: Error) throws {
         if let afError = error.asAFError, let error = afError.underlyingError {
             throw error

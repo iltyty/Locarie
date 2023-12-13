@@ -9,11 +9,11 @@ import Foundation
 
 class LocalCacheViewModel: ObservableObject {
     @Published private var cache = LocalCache.shared
-    
+
     func isLoggedIn() -> Bool {
-        return cache.userId != 0
+        cache.userId != 0
     }
-    
+
     func setUserInfo(_ info: UserInfo) {
         cache.setUserInfo(info)
     }

@@ -1,5 +1,5 @@
 //
-//  TabView.swift
+//  BottomTabView.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/5.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-fileprivate struct Constants {
+private enum Constants {
     static let height: CGFloat = 60
     static let iconSize: CGFloat = 25
     static let horizontalPadding: CGFloat = 40
@@ -15,7 +15,7 @@ fileprivate struct Constants {
 
 struct BottomTabView: View {
     @EnvironmentObject var viewRouter: BottomTabViewRouter
-    
+
     var body: some View {
         HStack {
             BottomTabViewItem(page: .home, iconName: "location", viewRouter: viewRouter)
@@ -27,7 +27,7 @@ struct BottomTabView: View {
             BottomTabViewItem(page: .new, iconName: "plus.app", viewRouter: viewRouter)
                 .imageScale(.large)
             Spacer()
-            BottomTabViewItem(page: .message, iconName: "message", viewRouter: viewRouter)   .imageScale(.large)
+            BottomTabViewItem(page: .message, iconName: "message", viewRouter: viewRouter).imageScale(.large)
             Spacer()
             BottomTabViewItem(page: .profile, iconName: "person", viewRouter: viewRouter)
                 .imageScale(.large)

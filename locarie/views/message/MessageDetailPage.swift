@@ -5,18 +5,18 @@
 //  Created by qiuty on 2023/11/6.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
-//extension View {
+// extension View {
 //    func swipeToGoBack() -> some View {
 //        self.modifier(SwipeToGoBackModifier())
 //    }
-//}
+// }
 //
-//struct SwipeToGoBackModifier: ViewModifier {
+// struct SwipeToGoBackModifier: ViewModifier {
 //    @Environment(\.presentationMode) var presentationMode
-//    
+//
 //    func body(content: Content) -> some View {
 //        content
 //            .gesture(
@@ -28,24 +28,24 @@ import SwiftUI
 //                    }
 //            )
 //    }
-//}
+// }
 
 struct MessageDetailPage: View {
     var user: User
     @State var messages: [Message]
-    
+
     @State var message = "Message"
     @Environment(\.dismiss) var dismiss
-    
+
     init(user: User, messages: [Message]) {
-        self._messages = .init(initialValue: messages)
+        _messages = .init(initialValue: messages)
         self.user = user
     }
-    
+
     var body: some View {
         VStack {
             navigationBar(dismiss: dismiss, user: user)
-            
+
             ScrollView {
                 VStack(spacing: 20) {
                     ForEach(messages, id: \.self) { m in
@@ -53,18 +53,18 @@ struct MessageDetailPage: View {
                     }
                 }
             }
-            
+
             HStack {
                 Image(systemName: "camera")
                     .padding([.leading])
                     .padding([.trailing], Constants.iconPadding)
-                
+
                 TextField("Message", text: $message)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
-                
+
                 Spacer()
-                
+
                 Image(systemName: "location.fill")
                     .foregroundStyle(.blue)
                     .imageScale(.large)
@@ -84,12 +84,12 @@ struct MessageDetailPage: View {
     }
 }
 
-//extension UINavigationController {
+// extension UINavigationController {
 //    open override func viewDidLoad() {
 //        super.viewDidLoad()
 //        interactivePopGestureRecognizer?.delegate = nil
 //    }
-//}
+// }
 
 extension MessageDetailPage {
     func navigationBar(dismiss: DismissAction, user: User) -> some View {
@@ -108,14 +108,13 @@ extension MessageDetailPage {
     }
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let height: CGFloat = 50.0
     static let padding: CGFloat = 20.0
     static let iconPadding: CGFloat = 8.0
     static let cornerRadius: CGFloat = 25.0
     static let avatarSize: CGFloat = 42.0
 }
-
 
 #Preview {
     let messageVM = MessageViewModel()

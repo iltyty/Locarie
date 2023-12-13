@@ -13,7 +13,7 @@ struct locarieApp: App {
     @StateObject var viewRouter = BottomTabViewRouter()
     @StateObject var postViewModel = PostViewModel()
     @StateObject var messageViewModel = MessageViewModel()
-    
+
     var body: some Scene {
         WindowGroup {
             LocarieView()

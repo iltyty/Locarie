@@ -1,5 +1,5 @@
 //
-//  MessageRow.swift
+//  MessageRowView.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/1.
@@ -9,19 +9,19 @@ import SwiftUI
 
 struct MessageRowView: View {
     let message: Message
-    
+
     init(_ message: Message) {
         self.message = message
     }
-    
+
     var isSentBySelf: Bool {
         message.sender.id == 1
     }
-    
+
     var user: User {
         isSentBySelf ? message.receiver : message.sender
     }
-    
+
     var body: some View {
         HStack(alignment: .top) {
             AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
@@ -39,7 +39,7 @@ struct MessageRowView: View {
     }
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let avatarSize: CGFloat = 50
 }
 

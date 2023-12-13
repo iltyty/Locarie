@@ -5,32 +5,32 @@
 //  Created by qiuty on 2023/11/7.
 //
 
-import SwiftUI
 import PhotosUI
+import SwiftUI
 
 struct NewPostPage: View {
     @State var title = ""
     @State var content = ""
     @StateObject private var viewModel = PhotoViewModel()
-    
+
     var body: some View {
         GeometryReader { proxy in
             NavigationStack {
                 VStack {
                     photosPicker(imageSize: proxy.size.width * Constants.imageSizeProportion)
-                    
+
                     editor(
                         contentEditorHeight: proxy.size.height * Constants.contentEditorHeightProportion,
                         title: $title,
                         content: $content
                     )
-                    
+
                     shareButton
-                    
+
                     BottomTabView()
                 }
                 .navigationTitle(Constants.pageTitle)
-            .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
     }
@@ -104,7 +104,7 @@ extension NewPostPage {
     }
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let pageTitle = "Share"
     static let imageSizeProportion: CGFloat = 1 / 3.5
     static let contentEditorHeightProportion: CGFloat = 1 / 3

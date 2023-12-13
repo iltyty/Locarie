@@ -22,7 +22,7 @@ enum NetworkError: Error {
 enum ResultCode: Int {
     // parameters-related codes
     case invalieParameters = 101
-    
+
     // authentication-related codes
     case emailAlreadyInUse = 201
     case incorrectCredentials = 202

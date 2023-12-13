@@ -11,13 +11,13 @@ struct UserProfilePage: View {
     @AppStorage("uid") var uid: Double = 1
     @EnvironmentObject var postViewModel: PostViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
+
     init() {}
-    
+
     var user: User {
         UserViewModel.getUserById(uid) ?? User()
     }
-    
+
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
@@ -95,7 +95,7 @@ extension UserProfilePage {
     }
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let avatarSize: CGFloat = 80
     static let btnSettingsSize: CGFloat = 25
     static let btnEditHeight: CGFloat = 40

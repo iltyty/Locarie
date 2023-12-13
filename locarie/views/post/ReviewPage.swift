@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ReviewPage: View {
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(0..<10) { _ in
+                ForEach(0 ..< 10) { _ in
                     ReviewView()
                         .padding()
                 }
@@ -47,7 +47,7 @@ extension ReviewPage {
     }
 }
 
-fileprivate struct Constants {
+private enum Constants {
     static let navigationTitle = "Reviews"
 }
 

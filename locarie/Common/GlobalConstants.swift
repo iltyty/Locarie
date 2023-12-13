@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GlobalConstants {
+enum GlobalConstants {
     static let userIdKey = "userId"
     static let usernameKey = "username"
     static let jwtTokenKey = "jwt"

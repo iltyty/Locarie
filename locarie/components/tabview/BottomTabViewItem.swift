@@ -11,7 +11,7 @@ struct BottomTabViewItem: View {
     let page: Page
     let iconName: String
     @StateObject var viewRouter: BottomTabViewRouter
-    
+
     var body: some View {
         Image(systemName: iconName)
             .onTapGesture {

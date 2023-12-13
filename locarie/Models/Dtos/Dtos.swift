@@ -24,7 +24,7 @@ struct UserLoginResponse: Codable, UserInfo {
     let jwtToken: String
 }
 
-func structToDict<T: Codable>(data: T) throws -> [String: Any]? {
+func structToDict(data: some Codable) throws -> [String: Any]? {
     let jsonData = try JSONEncoder().encode(data)
     return try JSONSerialization.jsonObject(with: jsonData) as? [String: Any]
 }

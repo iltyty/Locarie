@@ -1,12 +1,12 @@
 //
-//  util.swift
+//  Util.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/11.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
 func getTimeDifferenceString(from time: Date) -> String {
     let calendar = Calendar.current
@@ -33,12 +33,12 @@ func getTimeDifferenceString(from time: Date) -> String {
 
 func formatOpeningTime(from openTime: DateComponents, to closeTime: DateComponents) -> String {
     String(format: "%02d:%02d - %02d:%02d", openTime.hour ?? 0, openTime.minute ?? 0,
-                     closeTime.hour ?? 0, closeTime.minute ?? 0)
+           closeTime.hour ?? 0, closeTime.minute ?? 0)
 }
 
 func formatDistance(distance: Double) -> String {
-    return switch distance {
-    case 0..<1000:
+    switch distance {
+    case 0 ..< 1000:
         String(format: "%.f m", distance)
     default:
         String(format: "%.1f km", distance / 1000)
@@ -60,7 +60,7 @@ func createLondonRegion() -> CLRegion {
     let center = CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278)
     let radius = 1000.0 // 半径为1公里
     let identifier = "London"
-    
+
     return CLCircularRegion(center: center, radius: radius, identifier: identifier)
 }
 
@@ -84,7 +84,7 @@ func load<T: Decodable>(_ filename: String) -> T? {
         print("Couldn't find \(filename) in main bundle")
         return nil
     }
-    
+
     let data: Data
     do {
         data = try Data(contentsOf: url)
@@ -92,7 +92,7 @@ func load<T: Decodable>(_ filename: String) -> T? {
         print("Couldn't load \(filename) from main bundle\n \(error)")
         return nil
     }
-    
+
     do {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
