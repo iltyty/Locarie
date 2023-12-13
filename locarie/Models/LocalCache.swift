@@ -13,14 +13,16 @@ struct LocalCache {
 
     @AppStorage(GlobalConstants.userIdKey)
     var userId = 0.0
+    @AppStorage(GlobalConstants.userTypeKey)
+    var userType = ""
     @AppStorage(GlobalConstants.usernameKey)
     var username = ""
+    @AppStorage(GlobalConstants.avatarUrlKey)
+    var avatarUrl = ""
     @AppStorage(GlobalConstants.jwtTokenKey)
     var jwtToken = ""
 
-    private init() {
-        clear()
-    }
+    private init() {}
 
     private func clear() {
         userId = 0

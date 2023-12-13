@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct UserProfilePage: View {
-    @AppStorage("uid") var uid: Double = 1
     @EnvironmentObject var postViewModel: PostViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
-    init() {}
+    private let cacheViewModel = LocalCacheViewModel()
 
-    var user: User {
-        UserViewModel.getUserById(uid) ?? User()
-    }
+    init() {}
 
     var body: some View {
         NavigationStack {
@@ -26,7 +23,7 @@ struct UserProfilePage: View {
                         topView.padding(.bottom)
                         bottomView(screenWidth: proxy.size.width)
                     }
-                    .background(Color(uiColor: UIColor.systemBackground))
+                    .background(.background)
                     BottomTabView()
                 }
             }
@@ -37,30 +34,46 @@ struct UserProfilePage: View {
 extension UserProfilePage {
     var topView: some View {
         VStack {
-            HStack {
-                Spacer()
-                Image(systemName: "gearshape")
-                    .resizable()
-                    .frame(
-                        width: Constants.btnSettingsSize,
-                        height: Constants.btnSettingsSize
-                    )
-                    .padding(.trailing)
-            }
-            AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
-            Text(user.username)
-//            Text("@CaptainAmerica")
-//                .foregroundStyle(.secondary)
-            Text("Edit Profile")
-                .foregroundStyle(.primary)
-                .padding()
-                .background(
-                    Capsule()
-                        .fill(colorScheme == .light ? .white : .gray)
-                        .frame(height: Constants.btnEditHeight)
-                        .shadow(radius: Constants.btnEditShadowRadius)
-                )
+            topViewSettings
+            topViewAvatar
+            topViewUsername
+            topViewBtnEdit
         }
+    }
+
+    var topViewSettings: some View {
+        HStack {
+            Spacer()
+            Image(systemName: "gearshape")
+                .resizable()
+                .frame(
+                    width: Constants.btnSettingsSize,
+                    height: Constants.btnSettingsSize
+                )
+                .padding(.trailing)
+        }
+    }
+
+    var topViewAvatar: some View {
+        cacheViewModel.getAvatarUrl().isEmpty
+            ? AvatarView(systemName: "person.crop.circle", size: Constants.avatarSize)
+            : AvatarView(imageUrl: cacheViewModel.getAvatarUrl(), size: Constants.avatarSize)
+    }
+
+    var topViewUsername: some View {
+        Text(cacheViewModel.getUsername())
+    }
+
+    var topViewBtnEdit: some View {
+        Text("Edit Profile")
+            .foregroundStyle(.primary)
+            .padding()
+            .background(
+                Capsule()
+                    .fill(colorScheme == .light ? .white : .gray)
+                    .frame(height: Constants.btnEditHeight)
+                    .shadow(radius: Constants.btnEditShadowRadius)
+            )
     }
 }
 
