@@ -8,15 +8,15 @@
 import Foundation
 
 struct Message: Hashable {
-    let sender: User
-    let receiver: User
-    let time: Date
-    let content: String
+  let sender: User
+  let receiver: User
+  let time: Date
+  let content: String
 
-    init(sender: User, receiver: User, content: String) {
-        self.sender = sender
-        self.receiver = receiver
-        time = Date.now
-        self.content = content
-    }
+  init(sender: User, receiver: User, content: String) {
+    self.sender = sender
+    self.receiver = receiver
+    time = Date.now
+    self.content = content
+  }
 }

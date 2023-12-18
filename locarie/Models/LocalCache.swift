@@ -9,30 +9,30 @@ import Foundation
 import SwiftUI
 
 struct LocalCache {
-    static var shared = LocalCache()
+  static var shared = LocalCache()
 
-    @AppStorage(GlobalConstants.userIdKey)
-    var userId = 0.0
-    @AppStorage(GlobalConstants.userTypeKey)
-    var userType = ""
-    @AppStorage(GlobalConstants.usernameKey)
-    var username = ""
-    @AppStorage(GlobalConstants.avatarUrlKey)
-    var avatarUrl = ""
-    @AppStorage(GlobalConstants.jwtTokenKey)
-    var jwtToken = ""
+  @AppStorage(GlobalConstants.userIdKey)
+  var userId = 0.0
+  @AppStorage(GlobalConstants.userTypeKey)
+  var userType = ""
+  @AppStorage(GlobalConstants.usernameKey)
+  var username = ""
+  @AppStorage(GlobalConstants.avatarUrlKey)
+  var avatarUrl = ""
+  @AppStorage(GlobalConstants.jwtTokenKey)
+  var jwtToken = ""
 
-    private init() {}
+  private init() {}
 
-    private func clear() {
-        userId = 0
-        username = ""
-        jwtToken = ""
-    }
+  private func clear() {
+    userId = 0
+    username = ""
+    jwtToken = ""
+  }
 
-    mutating func setUserInfo(_ info: UserInfo) {
-        userId = info.id
-        username = info.username
-        jwtToken = info.jwtToken
-    }
+  mutating func setUserInfo(_ info: UserInfo) {
+    userId = info.id
+    username = info.username
+    jwtToken = info.jwtToken
+  }
 }

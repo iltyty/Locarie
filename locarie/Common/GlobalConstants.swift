@@ -8,9 +8,9 @@
 import Foundation
 
 enum GlobalConstants {
-    static let userIdKey = "userId"
-    static let userTypeKey = "userType"
-    static let usernameKey = "username"
-    static let avatarUrlKey = "avatarUrl"
-    static let jwtTokenKey = "jwt"
+  static let userIdKey = "userId"
+  static let userTypeKey = "userType"
+  static let usernameKey = "username"
+  static let avatarUrlKey = "avatarUrl"
+  static let jwtTokenKey = "jwt"
 }

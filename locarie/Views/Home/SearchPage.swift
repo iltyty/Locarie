@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct SearchPage: View {
-    @Environment(\.dismiss) var dismiss
+  @Environment(\.dismiss) var dismiss
 
-    var body: some View {
-        VStack(spacing: 0) {
-            SearchBarView(title: "Search")
-            Color.clear
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    dismiss()
-                }
+  var body: some View {
+    VStack(spacing: 0) {
+      SearchBarView(title: "Search")
+      Color.clear
+        .contentShape(Rectangle())
+        .onTapGesture {
+          dismiss()
         }
-        .navigationBarBackButtonHidden()
-        .toolbar(.hidden)
     }
+    .navigationBarBackButtonHidden()
+    .toolbar(.hidden)
+  }
 }
 
 #Preview {
-    SearchPage()
+  SearchPage()
 }

@@ -8,17 +8,17 @@
 import Foundation
 
 struct PostCreateRequestDto: Codable {
-    var user: UserId
-    var title: String
-    var content: String
+  var user: UserId
+  var title: String
+  var content: String
 }
 
 struct PostCreateResponseDto: Codable {
-    let id: Int64
-    let title: String
-    let content: String
+  let id: Int64
+  let title: String
+  let content: String
 }
 
 struct UserId: Codable {
-    let id: Double
+  let id: Double
 }

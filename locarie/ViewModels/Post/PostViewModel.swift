@@ -9,24 +9,24 @@ import Foundation
 
 // getAllPosts() -> [Post]
 class PostViewModel: ObservableObject {
-    var posts: [Post] = []
-    var favoritePosts: [Post] = []
+  var posts: [Post] = []
+  var favoritePosts: [Post] = []
 
-    init() {
-        getAllPosts()
-        getFavoritePosts()
+  init() {
+    getAllPosts()
+    getFavoritePosts()
+  }
+
+  func getAllPosts() {
+    let data: [Post]? = load("posts.json")
+    if let data {
+      posts = data
     }
+  }
 
-    func getAllPosts() {
-        let data: [Post]? = load("posts.json")
-        if let data {
-            posts = data
-        }
-    }
+  func getFavoritePosts(uid _: Int = 1) {
+    favoritePosts = posts
+  }
 
-    func getFavoritePosts(uid _: Int = 1) {
-        favoritePosts = posts
-    }
-
-    func create() {}
+  func create() {}
 }

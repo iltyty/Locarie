@@ -8,49 +8,49 @@
 import SwiftUI
 
 struct ReviewPage: View {
-    @Environment(\.dismiss) var dismiss
+  @Environment(\.dismiss) var dismiss
 
-    var body: some View {
-        VStack {
-            ScrollView {
-                ForEach(0 ..< 10) { _ in
-                    ReviewView()
-                        .padding()
-                }
-            }
-            Divider()
-            Text("Add reviews")
-                .fontWeight(.bold)
-                .foregroundStyle(.orange)
-                .padding(.bottom)
+  var body: some View {
+    VStack {
+      ScrollView {
+        ForEach(0 ..< 10) { _ in
+          ReviewView()
+            .padding()
         }
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                navigationBar(dismiss)
-            }
-        }
-        .navigationBarBackButtonHidden()
-        .navigationTitle(Constants.navigationTitle)
-        .navigationBarTitleDisplayMode(.inline)
+      }
+      Divider()
+      Text("Add reviews")
+        .fontWeight(.bold)
+        .foregroundStyle(.orange)
+        .padding(.bottom)
     }
+    .toolbar {
+      ToolbarItem(placement: .topBarLeading) {
+        navigationBar(dismiss)
+      }
+    }
+    .navigationBarBackButtonHidden()
+    .navigationTitle(Constants.navigationTitle)
+    .navigationBarTitleDisplayMode(.inline)
+  }
 }
 
 extension ReviewPage {
-    func navigationBar(_ dismiss: DismissAction) -> some View {
-        HStack {
-            Image(systemName: "chevron.backward")
-                .imageScale(.large)
-                .onTapGesture {
-                    dismiss()
-                }
+  func navigationBar(_ dismiss: DismissAction) -> some View {
+    HStack {
+      Image(systemName: "chevron.backward")
+        .imageScale(.large)
+        .onTapGesture {
+          dismiss()
         }
     }
+  }
 }
 
 private enum Constants {
-    static let navigationTitle = "Reviews"
+  static let navigationTitle = "Reviews"
 }
 
 #Preview {
-    ReviewPage()
+  ReviewPage()
 }

@@ -110,7 +110,7 @@
 		50369A672B2DBCD9005D6B43 /* UserLoginDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginDto.swift; sourceTree = "<group>"; };
 		50369A6A2B2DBD67005D6B43 /* PostCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateDto.swift; sourceTree = "<group>"; };
 		50369A6C2B300908005D6B43 /* PostCreateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateService.swift; sourceTree = "<group>"; };
-		50369A6F2B304195005D6B43 /* PostCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateViewModel.swift; sourceTree = "<group>"; };
+		50369A6F2B304195005D6B43 /* PostCreateViewModel.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PostCreateViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
 		503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDrawerView.swift; sourceTree = "<group>"; };
 		5037D2C82AF2337400108F0F /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
 		5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheViewModel.swift; sourceTree = "<group>"; };
@@ -359,7 +359,10 @@
 				50AAB1962AEFA2ED003FEDF1 /* locarieUITests */,
 				50AAB17A2AEFA2E9003FEDF1 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
 		};
 		50AAB17A2AEFA2E9003FEDF1 /* Products */ = {
 			isa = PBXGroup;

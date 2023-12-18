@@ -8,43 +8,43 @@
 import SwiftUI
 
 struct MessageRowView: View {
-    let message: Message
+  let message: Message
 
-    init(_ message: Message) {
-        self.message = message
-    }
+  init(_ message: Message) {
+    self.message = message
+  }
 
-    var isSentBySelf: Bool {
-        message.sender.id == 1
-    }
+  var isSentBySelf: Bool {
+    message.sender.id == 1
+  }
 
-    var user: User {
-        isSentBySelf ? message.receiver : message.sender
-    }
+  var user: User {
+    isSentBySelf ? message.receiver : message.sender
+  }
 
-    var body: some View {
-        HStack(alignment: .top) {
-            AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
-            VStack(alignment: .leading) {
-                Text(user.username)
-                Text(message.content).lineLimit(1)
-            }
-            Spacer()
-            VStack {
-                Text("Status")
-                    .foregroundStyle(.secondary)
-                Image(systemName: "9.circle.fill")
-            }
-        }
+  var body: some View {
+    HStack(alignment: .top) {
+      AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
+      VStack(alignment: .leading) {
+        Text(user.username)
+        Text(message.content).lineLimit(1)
+      }
+      Spacer()
+      VStack {
+        Text("Status")
+          .foregroundStyle(.secondary)
+        Image(systemName: "9.circle.fill")
+      }
     }
+  }
 }
 
 private enum Constants {
-    static let avatarSize: CGFloat = 50
+  static let avatarSize: CGFloat = 50
 }
 
 #Preview {
-    let messageVM = MessageViewModel()
-    let lastMessage = messageVM.messages[User.business1]![0]
-    return MessageRowView(lastMessage)
+  let messageVM = MessageViewModel()
+  let lastMessage = messageVM.messages[User.business1]![0]
+  return MessageRowView(lastMessage)
 }

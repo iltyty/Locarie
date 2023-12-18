@@ -8,40 +8,60 @@
 import SwiftUI
 
 private enum Constants {
-    static let height: CGFloat = 60
-    static let iconSize: CGFloat = 25
-    static let horizontalPadding: CGFloat = 40
+  static let height: CGFloat = 60
+  static let iconSize: CGFloat = 25
+  static let horizontalPadding: CGFloat = 40
 }
 
 struct BottomTabView: View {
-    @EnvironmentObject var viewRouter: BottomTabViewRouter
+  @EnvironmentObject var viewRouter: BottomTabViewRouter
 
-    var body: some View {
-        HStack {
-            BottomTabViewItem(page: .home, iconName: "location", viewRouter: viewRouter)
-                .imageScale(.large)
-            Spacer()
-            BottomTabViewItem(page: .favorite, iconName: "bookmark", viewRouter: viewRouter)
-                .imageScale(.large)
-            Spacer()
-            BottomTabViewItem(page: .new, iconName: "plus.app", viewRouter: viewRouter)
-                .imageScale(.large)
-            Spacer()
-            BottomTabViewItem(page: .message, iconName: "message", viewRouter: viewRouter).imageScale(.large)
-            Spacer()
-            BottomTabViewItem(page: .profile, iconName: "person", viewRouter: viewRouter)
-                .imageScale(.large)
-        }
-        .frame(height: Constants.height)
-        .padding(.horizontal, Constants.horizontalPadding)
-        .background(.regularMaterial)
+  var body: some View {
+    HStack {
+      BottomTabViewItem(
+        page: .home,
+        iconName: "location",
+        viewRouter: viewRouter
+      )
+      .imageScale(.large)
+      Spacer()
+      BottomTabViewItem(
+        page: .favorite,
+        iconName: "bookmark",
+        viewRouter: viewRouter
+      )
+      .imageScale(.large)
+      Spacer()
+      BottomTabViewItem(
+        page: .new,
+        iconName: "plus.app",
+        viewRouter: viewRouter
+      )
+      .imageScale(.large)
+      Spacer()
+      BottomTabViewItem(
+        page: .message,
+        iconName: "message",
+        viewRouter: viewRouter
+      ).imageScale(.large)
+      Spacer()
+      BottomTabViewItem(
+        page: .profile,
+        iconName: "person",
+        viewRouter: viewRouter
+      )
+      .imageScale(.large)
     }
+    .frame(height: Constants.height)
+    .padding(.horizontal, Constants.horizontalPadding)
+    .background(.regularMaterial)
+  }
 }
 
 #Preview {
-    let viewRouter = BottomTabViewRouter()
-    return ZStack {
-        Color.blue
-        BottomTabView()
-    }.environmentObject(viewRouter)
+  let viewRouter = BottomTabViewRouter()
+  return ZStack {
+    Color.blue
+    BottomTabView()
+  }.environmentObject(viewRouter)
 }

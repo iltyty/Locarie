@@ -8,13 +8,13 @@
 import Foundation
 
 class NetworkConfig {
-    static let shared = NetworkConfig()
-    let urlConfig: URLSessionConfiguration
-    let urlSession: URLSession
+  static let shared = NetworkConfig()
+  let urlConfig: URLSessionConfiguration
+  let urlSession: URLSession
 
-    private init() {
-        urlConfig = URLSessionConfiguration.default
-        urlConfig.waitsForConnectivity = true
-        urlSession = URLSession(configuration: urlConfig)
-    }
+  private init() {
+    urlConfig = URLSessionConfiguration.default
+    urlConfig.waitsForConnectivity = true
+    urlSession = URLSession(configuration: urlConfig)
+  }
 }

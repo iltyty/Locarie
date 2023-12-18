@@ -9,24 +9,32 @@ import Alamofire
 import Foundation
 
 extension APIServices {
-    static func register(user: User) async throws -> ResponseDto<User> {
-        do {
-            let data = try prepareMultipartFormData(user, withName: "user", mimeType: "application/json")
-            return try await sendRegisterRequest(multipartFormData: data)
-        } catch {
-            try handleRegisterError(error)
-        }
-        throw LError.cannotReach
+  static func register(user: User) async throws -> ResponseDto<User> {
+    do {
+      let data = try prepareMultipartFormData(
+        user,
+        withName: "user",
+        mimeType: "application/json"
+      )
+      return try await sendRegisterRequest(multipartFormData: data)
+    } catch {
+      try handleRegisterError(error)
     }
+    throw LError.cannotReach
+  }
 
-    private static func sendRegisterRequest(multipartFormData data: MultipartFormData) async throws -> ResponseDto<User> {
-        try await AF
-            .upload(multipartFormData: data, to: APIEndpoints.userRegisterUrl)
-            .serializingDecodable(ResponseDto<User>.self)
-            .value
-    }
+  private static func sendRegisterRequest(
+    multipartFormData data: MultipartFormData
+  ) async throws
+    -> ResponseDto<User>
+  {
+    try await AF
+      .upload(multipartFormData: data, to: APIEndpoints.userRegisterUrl)
+      .serializingDecodable(ResponseDto<User>.self)
+      .value
+  }
 
-    private static func handleRegisterError(_ error: Error) throws {
-        try handleError(error)
-    }
+  private static func handleRegisterError(_ error: Error) throws {
+    try handleError(error)
+  }
 }

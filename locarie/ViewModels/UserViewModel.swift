@@ -9,27 +9,27 @@ import Foundation
 import SwiftUI
 
 class UserViewModel: ObservableObject {
-    @AppStorage("userId") var uid: Double = 0 // current user's id
+  @AppStorage("userId") var uid: Double = 0 // current user's id
 
-    static var users: [User] = []
+  static var users: [User] = []
 
-    init(uid: Double) {
-        self.uid = uid
+  init(uid: Double) {
+    self.uid = uid
+  }
+
+  static func loadUsers() {
+    if users.count > 0 {
+      return
     }
-
-    static func loadUsers() {
-        if users.count > 0 {
-            return
-        }
-        let data: [User]? = load("users.json")
-        if let data {
-            users = data
-        }
+    let data: [User]? = load("users.json")
+    if let data {
+      users = data
     }
+  }
 
-    // TODO: fetch the de-facto result from the backend
-    static func getUserById(_ id: Double) -> User? {
-        loadUsers()
-        return users.first(where: { $0.id == id })
-    }
+  // TODO: fetch the de-facto result from the backend
+  static func getUserById(_ id: Double) -> User? {
+    loadUsers()
+    return users.first(where: { $0.id == id })
+  }
 }

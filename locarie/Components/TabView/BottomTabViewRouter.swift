@@ -8,13 +8,13 @@
 import SwiftUI
 
 enum Page {
-    case home
-    case favorite
-    case new
-    case message
-    case profile
+  case home
+  case favorite
+  case new
+  case message
+  case profile
 }
 
 class BottomTabViewRouter: ObservableObject {
-    @Published var currentPage: Page = .home
+  @Published var currentPage: Page = .home
 }

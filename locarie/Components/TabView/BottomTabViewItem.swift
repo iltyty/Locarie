@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct BottomTabViewItem: View {
-    let page: Page
-    let iconName: String
-    @StateObject var viewRouter: BottomTabViewRouter
+  let page: Page
+  let iconName: String
+  @StateObject var viewRouter: BottomTabViewRouter
 
-    var body: some View {
-        Image(systemName: iconName)
-            .onTapGesture {
-                viewRouter.currentPage = page
-            }
-            .foregroundStyle(viewRouter.currentPage == page ? .blue : .gray)
-    }
+  var body: some View {
+    Image(systemName: iconName)
+      .onTapGesture {
+        viewRouter.currentPage = page
+      }
+      .foregroundStyle(viewRouter.currentPage == page ? .blue : .gray)
+  }
 }
 
 #Preview {
-    BottomTabViewItem(page: .home, iconName: "bookmark", viewRouter: BottomTabViewRouter())
+  BottomTabViewItem(
+    page: .home,
+    iconName: "bookmark",
+    viewRouter: BottomTabViewRouter()
+  )
 }

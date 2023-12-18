@@ -9,18 +9,18 @@ import SwiftUI
 
 @main
 struct locarieApp: App {
-    @StateObject var cacheViewModel = LocalCacheViewModel()
-    @StateObject var viewRouter = BottomTabViewRouter()
-    @StateObject var postViewModel = PostViewModel()
-    @StateObject var messageViewModel = MessageViewModel()
+  @StateObject var cacheViewModel = LocalCacheViewModel()
+  @StateObject var viewRouter = BottomTabViewRouter()
+  @StateObject var postViewModel = PostViewModel()
+  @StateObject var messageViewModel = MessageViewModel()
 
-    var body: some Scene {
-        WindowGroup {
-            LocarieView()
-                .environmentObject(cacheViewModel)
-                .environmentObject(viewRouter)
-                .environmentObject(postViewModel)
-                .environmentObject(messageViewModel)
-        }
+  var body: some Scene {
+    WindowGroup {
+      LocarieView()
+        .environmentObject(cacheViewModel)
+        .environmentObject(viewRouter)
+        .environmentObject(postViewModel)
+        .environmentObject(messageViewModel)
     }
+  }
 }

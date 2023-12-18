@@ -8,33 +8,33 @@
 import Foundation
 
 class LocalCacheViewModel: ObservableObject {
-    @Published private var cache = LocalCache.shared
+  @Published private var cache = LocalCache.shared
 
-    func isLoggedIn() -> Bool {
-        cache.userId != 0
-    }
+  func isLoggedIn() -> Bool {
+    cache.userId != 0
+  }
 
-    func getUserId() -> Double {
-        cache.userId
-    }
+  func getUserId() -> Double {
+    cache.userId
+  }
 
-    func getUserType() -> String {
-        cache.userType
-    }
+  func getUserType() -> String {
+    cache.userType
+  }
 
-    func getUsername() -> String {
-        cache.username
-    }
+  func getUsername() -> String {
+    cache.username
+  }
 
-    func getAvatarUrl() -> String {
-        cache.avatarUrl
-    }
+  func getAvatarUrl() -> String {
+    cache.avatarUrl
+  }
 
-    func getJwtToken() -> String {
-        cache.jwtToken
-    }
+  func getJwtToken() -> String {
+    cache.jwtToken
+  }
 
-    func setUserInfo(_ info: UserInfo) {
-        cache.setUserInfo(info)
-    }
+  func setUserInfo(_ info: UserInfo) {
+    cache.setUserInfo(info)
+  }
 }

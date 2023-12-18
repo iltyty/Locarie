@@ -9,121 +9,144 @@ import SwiftUI
 import UIKit
 
 struct PostDetailPage: View {
-    let post: Post
-    let locationManager = LocationManager()
+  let post: Post
+  let locationManager = LocationManager()
 
-    init(_ post: Post) {
-        self.post = post
-    }
+  init(_ post: Post) {
+    self.post = post
+  }
 
-    var distance: Double {
-        guard let location = locationManager.location else { return 0 }
-        return location.distance(from: post.businessLocation)
-    }
+  var distance: Double {
+    guard let location = locationManager.location else { return 0 }
+    return location.distance(from: post.businessLocation)
+  }
 
-    @Environment(\.dismiss) var dismiss
-    var body: some View {
-        GeometryReader { proxy in
-            ZStack(alignment: .top) {
-                let size = proxy.size
+  @Environment(\.dismiss) var dismiss
+  var body: some View {
+    GeometryReader { proxy in
+      ZStack(alignment: .top) {
+        let size = proxy.size
 
-                underneathImageView(imageUrl: post.imageUrls.first, width: size.width, height: size.height)
+        underneathImageView(
+          imageUrl: post.imageUrls.first,
+          width: size.width,
+          height: size.height
+        )
 
-                ScrollView {
-                    contentView(screenWidth: proxy.size.width)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 20).fill(.background))
-                        .padding(.top, proxy.size.height * Constants.contentTopPaddingProportion)
-                }
-                .overlay(alignment: .top) {
-                    scrollViewOverlay
-                }
-            }
+        ScrollView {
+          contentView(screenWidth: proxy.size.width)
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 20)
+              .fill(.background))
+            .padding(
+              .top,
+              proxy.size.height * Constants
+                .contentTopPaddingProportion
+            )
+        }
+        .overlay(alignment: .top) {
+          scrollViewOverlay
+        }
+      }
 //            .navigationBarBackButtonHidden()
-        }
     }
+  }
 }
 
 extension PostDetailPage {
-    func underneathImageView(imageUrl: String?, width: CGFloat, height: CGFloat) -> some View {
-        AsyncImageView(url: imageUrl ?? "", width: width, height: height) { image in
-            image
-                .resizable()
-                .scaledToFill()
-                .frame(width: width, height: height)
-                .ignoresSafeArea(edges: .top)
-        }
+  func underneathImageView(imageUrl: String?, width: CGFloat,
+                           height: CGFloat) -> some View
+  {
+    AsyncImageView(url: imageUrl ?? "", width: width,
+                   height: height)
+    { image in
+      image
+        .resizable()
+        .scaledToFill()
+        .frame(width: width, height: height)
+        .ignoresSafeArea(edges: .top)
     }
+  }
 }
 
 extension PostDetailPage {
-    func contentView(screenWidth: CGFloat) -> some View {
-        VStack(alignment: .leading, spacing: Constants.contentVSpacing) {
-            HStack {
-                Text(getTimeDifferenceString(from: post.time))
-                    .foregroundStyle(.green)
-                Text(formatDistance(distance: distance))
-                Spacer()
-            }
-            Text(post.title)
-            Text(post.content)
-            Divider()
-            Label(post.businessLocationName, systemImage: "location")
-                .lineLimit(1)
-            Label(formatOpeningTime(from: post.businessOpenTime, to: post.businessCloseTime), systemImage: "clock")
-            Divider()
-            NavigationLink {
-                ReviewPage()
-            } label: {
-                Label("Reviews", systemImage: "message")
-                    .tint(.primary)
-            }
-            PostCardView(post: post, coverWidth: screenWidth * 0.7)
-        }
+  func contentView(screenWidth: CGFloat) -> some View {
+    VStack(alignment: .leading, spacing: Constants.contentVSpacing) {
+      HStack {
+        Text(getTimeDifferenceString(from: post.time))
+          .foregroundStyle(.green)
+        Text(formatDistance(distance: distance))
+        Spacer()
+      }
+      Text(post.title)
+      Text(post.content)
+      Divider()
+      Label(post.businessLocationName, systemImage: "location")
+        .lineLimit(1)
+      Label(
+        formatOpeningTime(from: post.businessOpenTime,
+                          to: post.businessCloseTime),
+        systemImage: "clock"
+      )
+      Divider()
+      NavigationLink {
+        ReviewPage()
+      } label: {
+        Label("Reviews", systemImage: "message")
+          .tint(.primary)
+      }
+      PostCardView(post: post, coverWidth: screenWidth * 0.7)
     }
+  }
 }
 
 extension PostDetailPage {
-    var scrollViewOverlay: some View {
-        HStack {
-            Image(systemName: "chevron.backward")
-                .font(.system(size: Constants.backButtonSize))
-                .onTapGesture {
-                    dismiss()
-                }
-            NavigationLink {
-                BusinessHomePage(post.businessUser)
-            } label: {
-                AvatarView(imageUrl: post.businessAvatarUrl, size: Constants.avatarSize)
-            }
-            Text(post.businessName)
-                .fixedSize(horizontal: true, vertical: false)
-            Spacer()
-            Image(systemName: "ellipsis")
-                .font(.system(size: Constants.backButtonSize))
+  var scrollViewOverlay: some View {
+    HStack {
+      Image(systemName: "chevron.backward")
+        .font(.system(size: Constants.backButtonSize))
+        .onTapGesture {
+          dismiss()
         }
-        .padding(.horizontal)
+      NavigationLink {
+        BusinessHomePage(post.businessUser)
+      } label: {
+        AvatarView(
+          imageUrl: post.businessAvatarUrl,
+          size: Constants.avatarSize
+        )
+      }
+      Text(post.businessName)
+        .fixedSize(horizontal: true, vertical: false)
+      Spacer()
+      Image(systemName: "ellipsis")
+        .font(.system(size: Constants.backButtonSize))
     }
+    .padding(.horizontal)
+  }
 }
 
 extension UINavigationController {
-    override open func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        navigationBar.isHidden = true
-    }
+  override open func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    navigationBar.isHidden = true
+  }
 
-    public func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
-        true
-    }
+  public func gestureRecognizer(
+    _: UIGestureRecognizer,
+    shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer
+  ) -> Bool {
+    true
+  }
 }
 
 private enum Constants {
-    static let avatarSize: CGFloat = 36
-    static let backButtonSize: CGFloat = 32
-    static let contentVSpacing: CGFloat = 20
-    static let contentTopPaddingProportion: CGFloat = 2 / 3
+  static let avatarSize: CGFloat = 36
+  static let backButtonSize: CGFloat = 32
+  static let contentVSpacing: CGFloat = 20
+  static let contentTopPaddingProportion: CGFloat = 2 / 3
 }
 
 #Preview {
-    PostDetailPage(PostViewModel().posts[0])
+  PostDetailPage(PostViewModel().posts[0])
 }
