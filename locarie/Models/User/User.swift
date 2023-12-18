@@ -1,5 +1,5 @@
 //
-//  user.swift
+//  User.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/8.

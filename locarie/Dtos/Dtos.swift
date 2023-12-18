@@ -1,7 +1,6 @@
 //
 //  Dtos.swift
 //  locarie
-//
 //  Created by qiuty on 10/12/2023.
 //
 
@@ -11,19 +10,6 @@ struct ResponseDto<T: Decodable>: Decodable {
     let status: Int
     let message: String
     let data: T?
-}
-
-struct UserLoginRequestDto: Codable {
-    let email: String
-    let password: String
-}
-
-struct UserLoginResponse: Codable, UserInfo {
-    let id: Double
-    let type: String
-    let username: String
-    let avatarUrl: String
-    let jwtToken: String
 }
 
 func structToDict(data: some Codable) throws -> [String: Any]? {

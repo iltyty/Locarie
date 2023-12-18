@@ -25,6 +25,10 @@
 		50277F7D2AF117CE0045AB12 /* UserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7C2AF117CE0045AB12 /* UserProfilePage.swift */; };
 		50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7F2AF12A700045AB12 /* SearchBarView.swift */; };
 		50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F812AF1512E0045AB12 /* PostCardView.swift */; };
+		50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50369A672B2DBCD9005D6B43 /* UserLoginDto.swift */; };
+		50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50369A6A2B2DBD67005D6B43 /* PostCreateDto.swift */; };
+		50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50369A6C2B300908005D6B43 /* PostCreateService.swift */; };
+		50369A702B304196005D6B43 /* PostCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50369A6F2B304195005D6B43 /* PostCreateViewModel.swift */; };
 		503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */; };
 		5037D2C92AF2337400108F0F /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037D2C82AF2337400108F0F /* MessageRowView.swift */; };
 		5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */; };
@@ -103,6 +107,10 @@
 		50277F7C2AF117CE0045AB12 /* UserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePage.swift; sourceTree = "<group>"; };
 		50277F7F2AF12A700045AB12 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		50277F812AF1512E0045AB12 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
+		50369A672B2DBCD9005D6B43 /* UserLoginDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginDto.swift; sourceTree = "<group>"; };
+		50369A6A2B2DBD67005D6B43 /* PostCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateDto.swift; sourceTree = "<group>"; };
+		50369A6C2B300908005D6B43 /* PostCreateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateService.swift; sourceTree = "<group>"; };
+		50369A6F2B304195005D6B43 /* PostCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateViewModel.swift; sourceTree = "<group>"; };
 		503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDrawerView.swift; sourceTree = "<group>"; };
 		5037D2C82AF2337400108F0F /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
 		5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheViewModel.swift; sourceTree = "<group>"; };
@@ -198,6 +206,8 @@
 		500F661F2B257C4C0074FE3C /* Dtos */ = {
 			isa = PBXGroup;
 			children = (
+				50369A692B2DBD55005D6B43 /* Post */,
+				50369A662B2DBCBC005D6B43 /* User */,
 				500F66202B257D4D0074FE3C /* Dtos.swift */,
 			);
 			path = Dtos;
@@ -252,12 +262,63 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		50369A622B2DBC3B005D6B43 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				50B11AE72AFB8392002A7B91 /* User.swift */,
+				5054CDF22B28954E00645F5C /* UserInfo.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		50369A632B2DBC4B005D6B43 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				50E60DDC2AFF78D400CA088F /* Post.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		50369A642B2DBC54005D6B43 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				50B11AE52AFB8368002A7B91 /* Message.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		50369A662B2DBCBC005D6B43 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				50369A672B2DBCD9005D6B43 /* UserLoginDto.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		50369A692B2DBD55005D6B43 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				50369A6A2B2DBD67005D6B43 /* PostCreateDto.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		50369A6E2B30417A005D6B43 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				50E60DDE2AFF79A400CA088F /* PostViewModel.swift */,
+				50369A6F2B304195005D6B43 /* PostCreateViewModel.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
 		5054CDED2B288D1500645F5C /* APIServices */ = {
 			isa = PBXGroup;
 			children = (
 				50F85B442B242EE200D04787 /* APIServices.swift */,
 				5054CDEE2B288D3300645F5C /* UserLoginService.swift */,
 				5054CDF02B288D6C00645F5C /* UserRegisterService.swift */,
+				50369A6C2B300908005D6B43 /* PostCreateService.swift */,
 			);
 			path = APIServices;
 			sourceTree = "<group>";
@@ -313,12 +374,13 @@
 		50AAB17B2AEFA2E9003FEDF1 /* locarie */ = {
 			isa = PBXGroup;
 			children = (
+				50B11AE22AFB834A002A7B91 /* Models */,
+				500F661F2B257C4C0074FE3C /* Dtos */,
 				50F85B3B2B23EFF600D04787 /* Networking */,
 				50E60DED2B01F4F900CA088F /* Info.plist */,
 				5090C4352B04DDA3008931A6 /* Resources */,
 				50E60DE62AFF885200CA088F /* Common */,
 				50B11AE92AFB878A002A7B91 /* ViewModels */,
-				50B11AE22AFB834A002A7B91 /* Models */,
 				50B11ACC2AF9DDD9002A7B91 /* Views */,
 				50277F7E2AF12A640045AB12 /* Components */,
 				50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */,
@@ -400,12 +462,10 @@
 		50B11AE22AFB834A002A7B91 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				500F661F2B257C4C0074FE3C /* Dtos */,
-				50B11AE72AFB8392002A7B91 /* User.swift */,
-				50B11AE52AFB8368002A7B91 /* Message.swift */,
-				50E60DDC2AFF78D400CA088F /* Post.swift */,
+				50369A642B2DBC54005D6B43 /* Message */,
+				50369A632B2DBC4B005D6B43 /* Post */,
+				50369A622B2DBC3B005D6B43 /* User */,
 				500F66252B2854A80074FE3C /* LocalCache.swift */,
-				5054CDF22B28954E00645F5C /* UserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -413,8 +473,8 @@
 		50B11AE92AFB878A002A7B91 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				50369A6E2B30417A005D6B43 /* Post */,
 				50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */,
-				50E60DDE2AFF79A400CA088F /* PostViewModel.swift */,
 				50E60DE42AFF80B400CA088F /* UserViewModel.swift */,
 				5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */,
 				5054CDF42B289E7F00645F5C /* AuthViewModel.swift */,
@@ -589,6 +649,7 @@
 				50E60DDD2AFF78D400CA088F /* Post.swift in Sources */,
 				50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */,
 				50F85B3F2B23F12F00D04787 /* NetworkConfig.swift in Sources */,
+				50369A702B304196005D6B43 /* PostCreateViewModel.swift in Sources */,
 				50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */,
@@ -599,6 +660,7 @@
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,
 				50277F772AF117970045AB12 /* FavoritePage.swift in Sources */,
 				5037D2C92AF2337400108F0F /* MessageRowView.swift in Sources */,
+				50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */,
 				50277F742AF117700045AB12 /* HomePage.swift in Sources */,
 				509CDA342B1F1AE9004A6D22 /* RegisterPage.swift in Sources */,
 				50F85B452B242EE200D04787 /* APIServices.swift in Sources */,
@@ -617,6 +679,7 @@
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,
 				50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
+				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostPage.swift in Sources */,
 				500F66262B2854A90074FE3C /* LocalCache.swift in Sources */,
 				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
@@ -628,6 +691,7 @@
 				500F66242B25CE320074FE3C /* GlobalConstants.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
 				50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */,
+				50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */,
 				50277F7D2AF117CE0045AB12 /* UserProfilePage.swift in Sources */,
 				50B11ADA2AFB3661002A7B91 /* PostDetailPage.swift in Sources */,
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,

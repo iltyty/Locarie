@@ -25,9 +25,7 @@ struct RegisterPage: View {
             .alert(
                 alertTitle?.rawValue ?? "",
                 isPresented: $isAlertShowing
-            ) {
-                Button("OK") {}
-            }
+            ) { Button("OK") {} }
     }
 
     var overlayView: some View {

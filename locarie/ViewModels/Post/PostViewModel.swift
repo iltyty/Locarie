@@ -27,4 +27,6 @@ class PostViewModel: ObservableObject {
     func getFavoritePosts(uid _: Int = 1) {
         favoritePosts = posts
     }
+
+    func create() {}
 }

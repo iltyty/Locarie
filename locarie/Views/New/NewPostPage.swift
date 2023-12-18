@@ -9,24 +9,35 @@ import PhotosUI
 import SwiftUI
 
 struct NewPostPage: View {
-    @State var title = ""
-    @State var content = ""
-    @StateObject private var viewModel = PhotoViewModel()
+    @EnvironmentObject var cacheViewModel: LocalCacheViewModel
+    @StateObject private var postViewModel = PostCreateViewModel()
+    @StateObject private var photoViewModel = PhotoViewModel()
+
+    @State private var isLoading = false
+    @State private var isAlertShowing = false
+    @State private var alertTitle: AlertTitle?
 
     var body: some View {
+        contentView
+            .disabled(isLoading)
+            .overlay { overlayView }
+            .alert(
+                alertTitle?.rawValue ?? "",
+                isPresented: $isAlertShowing
+            ) { Button("OK") {} }
+    }
+
+    var contentView: some View {
         GeometryReader { proxy in
             NavigationStack {
                 VStack {
                     photosPicker(imageSize: proxy.size.width * Constants.imageSizeProportion)
-
                     editor(
                         contentEditorHeight: proxy.size.height * Constants.contentEditorHeightProportion,
-                        title: $title,
-                        content: $content
+                        title: $postViewModel.post.title,
+                        content: $postViewModel.post.content
                     )
-
                     shareButton
-
                     BottomTabView()
                 }
                 .navigationTitle(Constants.pageTitle)
@@ -34,19 +45,27 @@ struct NewPostPage: View {
             }
         }
     }
+
+    var overlayView: some View {
+        isLoading ? loadingView : nil
+    }
+
+    var loadingView: some View {
+        ProgressView().progressViewStyle(.circular)
+    }
 }
 
 extension NewPostPage {
     func photosPicker(imageSize: CGFloat) -> some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
-                ForEach(viewModel.attachments) { imageAttachment in
+                ForEach(photoViewModel.attachments) { imageAttachment in
                     ImageAttachmentView(
                         imageSize: imageSize, imageAttachment: imageAttachment
                     )
                 }
                 PhotosPicker(
-                    selection: $viewModel.selection,
+                    selection: $photoViewModel.selection,
                     matching: .images,
                     photoLibrary: .shared()
                 ) {
@@ -88,7 +107,7 @@ extension NewPostPage {
 extension NewPostPage {
     var shareButton: some View {
         Button {
-            print("tapped")
+            create()
         } label: {
             Text(Constants.btnShareText)
                 .font(.title2)
@@ -100,9 +119,73 @@ extension NewPostPage {
                         .frame(width: Constants.btnShareWidth, height: Constants.btnShareHeight)
                 )
                 .padding(.vertical)
+                .opacity(buttonOpacity)
         }
+        .disabled(isButtonDisabled)
+    }
+
+    var buttonOpacity: Double {
+        postViewModel.isFormValid ? 1 : 0.5
+    }
+
+    var isButtonDisabled: Bool {
+        !postViewModel.isFormValid
     }
 }
+
+extension NewPostPage {
+    private func create() {
+        isLoading = true
+        Task {
+            do {
+                let post = postViewModel.post
+                let user = UserId(id: cacheViewModel.getUserId())
+                let dto = PostCreateRequestDto(user: user, title: post.title, content: post.content)
+                let response = try await APIServices.createPost(dto: dto)
+                handleCreateResponse(response)
+            } catch {
+                handleCreateError(error)
+            }
+        }
+    }
+
+    private func handleCreateResponse(_ response: Response) {
+        isLoading = false
+        response.status == 0
+            ? handleCreateSuccess(response)
+            : handleCreateFailure(response)
+    }
+
+    private func handleCreateError(_: Error) {
+        isLoading = false
+        alertTitle = .unknownError
+        isAlertShowing = true
+    }
+
+    private func handleCreateSuccess(_: Response) {
+        alertTitle = .success
+        isAlertShowing = true
+        resetPage()
+    }
+
+    private func handleCreateFailure(_: Response) {
+        alertTitle = .unknownError
+        isAlertShowing = true
+    }
+
+    private func resetPage() {
+        postViewModel.reset()
+    }
+}
+
+extension NewPostPage {
+    private enum AlertTitle: String {
+        case success = "Share success"
+        case unknownError = "Something went wrong, please try again later"
+    }
+}
+
+private typealias Response = ResponseDto<PostCreateResponseDto>
 
 private enum Constants {
     static let pageTitle = "Share"
@@ -116,4 +199,5 @@ private enum Constants {
 #Preview {
     NewPostPage()
         .environmentObject(BottomTabViewRouter())
+        .environmentObject(LocalCacheViewModel())
 }
