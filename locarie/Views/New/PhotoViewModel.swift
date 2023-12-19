@@ -26,12 +26,21 @@ import SwiftUI
         default: false
         }
       }
+
+      var isFinished: Bool {
+        switch self {
+        case .finished: true
+        default: false
+        }
+      }
     }
 
     // An error that indicates why a photo has failed to load
     enum LoadingError: Error {
       case contentTypeNotSupported
     }
+
+    var data: Data // Image data
 
     private let pickerItem: PhotosPickerItem // A reference to a selected photo
     // in the picker
@@ -47,6 +56,7 @@ import SwiftUI
     // Creates an image attachment for the given picker item
     init(_ pickerItem: PhotosPickerItem) {
       self.pickerItem = pickerItem
+      data = Data()
     }
 
     // Loads the photo that the picker item features
@@ -60,6 +70,7 @@ import SwiftUI
           .loadTransferable(type: Data.self),
           let uiImage = UIImage(data: data)
         {
+          self.data = data
           status = .finished(Image(uiImage: uiImage))
         } else {
           throw LoadingError.contentTypeNotSupported
@@ -99,6 +110,10 @@ import SwiftUI
       attachments = newAttachments
       attachmentByIdentifier = newAttachmentByIdentifier
     }
+  }
+
+  func reset() {
+    selection.removeAll()
   }
 }
 

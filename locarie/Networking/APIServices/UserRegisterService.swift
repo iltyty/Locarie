@@ -11,11 +11,7 @@ import Foundation
 extension APIServices {
   static func register(user: User) async throws -> ResponseDto<User> {
     do {
-      let data = try prepareMultipartFormData(
-        user,
-        withName: "user",
-        mimeType: "application/json"
-      )
+      let data = try prepareMultipartFormJSONData(user, withName: "user")
       return try await sendRegisterRequest(multipartFormData: data)
     } catch {
       try handleRegisterError(error)

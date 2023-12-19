@@ -145,14 +145,12 @@ extension NewPostPage {
     isLoading = true
     Task {
       do {
-        let post = postViewModel.post
-        let user = UserId(id: cacheViewModel.getUserId())
-        let dto = PostCreateRequestDto(
-          user: user,
-          title: post.title,
-          content: post.content
+        let dto = prepareDto()
+        let images = prepareImages()
+        let response = try await APIServices.createPost(
+          dto: dto,
+          images: images
         )
-        let response = try await APIServices.createPost(dto: dto)
         handleCreateResponse(response)
       } catch {
         handleCreateError(error)
@@ -160,7 +158,26 @@ extension NewPostPage {
     }
   }
 
+  private func prepareDto() -> PostCreateRequestDto {
+    let post = postViewModel.post
+    let user = UserId(id: cacheViewModel.getUserId())
+    return PostCreateRequestDto(
+      user: user,
+      title: post.title,
+      content: post.content
+    )
+  }
+
+  private func prepareImages() -> [Data] {
+    photoViewModel.attachments.reduce(into: []) { partialResult, attachment in
+      if let status = attachment.status, status.isFinished {
+        partialResult.append(attachment.data)
+      }
+    }
+  }
+
   private func handleCreateResponse(_ response: Response) {
+    debugPrint(response)
     isLoading = false
     response.status == 0
       ? handleCreateSuccess(response)
@@ -186,6 +203,7 @@ extension NewPostPage {
 
   private func resetPage() {
     postViewModel.reset()
+    photoViewModel.reset()
   }
 }
 
