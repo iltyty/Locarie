@@ -19,64 +19,61 @@ struct HomePage: View {
 
   var body: some View {
     NavigationStack {
-      GeometryReader { proxy in
-        VStack(spacing: 0) {
-          ZStack(alignment: .top) {
-            Map(position: .constant(.region(mapRegion))) {
-              ForEach(postViewModel.posts) { post in
-                Marker(
-                  post.businessName,
-                  coordinate: post.businessLocationCoordinate
-                )
-                .tint(Constants.mapMarkerColor)
-              }
-            }
-
-            VStack {
-              NavigationLink {
-//                                SearchPage()
-                CustomBackSwipeView()
-              } label: {
-                SearchBarView(
-                  title: "Explore",
-                  isDisabled: true
-                )
-              }
-              .buttonStyle(PlainButtonStyle())
-              Spacer()
-              PostCardView(
-                post: postViewModel.posts[0],
-                coverWidth: proxy.size.width * Constants
-                  .postCoverWidthProportion
-              )
-            }
-          }
-
-          BottomTabView()
-        }
+      VStack(spacing: 0) {
+        contentView
+        BottomTabView()
       }
     }
   }
-}
 
-extension Color {
-  static let mapMarkerOrange = Color(hex: 0xFF571B)
+  var contentView: some View {
+    ZStack(alignment: .top) {
+      mapView
+      upperView
+    }
+  }
 
-  init(hex: UInt, alpha: Double = 1) {
-    self.init(
-      .sRGB,
-      red: Double((hex >> 16) & 0xFF) / 255,
-      green: Double((hex >> 08) & 0xFF) / 255,
-      blue: Double((hex >> 00) & 0xFF) / 255,
-      opacity: alpha
+  var mapView: some View {
+    Map(position: .constant(.region(mapRegion))) {
+      ForEach(postViewModel.posts) { post in
+        Marker(
+          post.businessName,
+          coordinate: post.businessLocationCoordinate
+        )
+        .tint(Constants.mapMarkerColor)
+      }
+    }
+  }
+
+  var upperView: some View {
+    GeometryReader { proxy in
+      VStack {
+        searchBar
+        Spacer()
+        cardView(proxy: proxy)
+      }
+    }
+  }
+
+  var searchBar: some View {
+    NavigationLink {
+      SearchPage()
+    } label: {
+      SearchBarView(
+        title: "Explore",
+        isDisabled: true
+      )
+    }
+    .buttonStyle(PlainButtonStyle())
+  }
+
+  func cardView(proxy: GeometryProxy) -> some View {
+    PostCardView(
+      post: postViewModel.posts[0],
+      coverWidth: proxy.size.width * Constants
+        .postCoverWidthProportion
     )
   }
-}
-
-extension CLLocationCoordinate2D {
-  static let CP = CLLocationCoordinate2D(
-    latitude: 51.546781359379445, longitude: -0.12298996843934423
-  )
 }
 
 private enum Constants {
