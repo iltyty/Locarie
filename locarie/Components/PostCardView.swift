@@ -10,7 +10,7 @@ import SwiftUI
 struct PostCardView: View {
   let post: Post
   let coverWidth: CGFloat
-  @ObservedObject var locationManager = LocationManager()
+  @StateObject var locationManager = LocationManager()
 
   var distance: Double {
     guard let location = locationManager.location else { return 0 }

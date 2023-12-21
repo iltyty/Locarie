@@ -16,4 +16,5 @@ enum APIEndpoints {
   static let userRegisterUrl = URL(string: userUrl + "/register")!
 
   static let postCreateUrl = URL(string: postUrl)!
+  static let postListNearbyUrl = URL(string: postUrl + "/nearby")!
 }

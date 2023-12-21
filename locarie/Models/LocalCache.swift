@@ -11,15 +11,15 @@ import SwiftUI
 struct LocalCache {
   static var shared = LocalCache()
 
-  @AppStorage(GlobalConstants.userIdKey)
+  @AppStorage(LocalCacheKeys.userIdKey)
   var userId = 0.0
-  @AppStorage(GlobalConstants.userTypeKey)
+  @AppStorage(LocalCacheKeys.userTypeKey)
   var userType = ""
-  @AppStorage(GlobalConstants.usernameKey)
+  @AppStorage(LocalCacheKeys.usernameKey)
   var username = ""
-  @AppStorage(GlobalConstants.avatarUrlKey)
+  @AppStorage(LocalCacheKeys.avatarUrlKey)
   var avatarUrl = ""
-  @AppStorage(GlobalConstants.jwtTokenKey)
+  @AppStorage(LocalCacheKeys.jwtTokenKey)
   var jwtToken = ""
 
   private init() {}

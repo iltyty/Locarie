@@ -8,7 +8,9 @@
 import CoreLocation
 import Foundation
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+final class LocationManager: NSObject, ObservableObject,
+  CLLocationManagerDelegate
+{
   private let geocoder = CLGeocoder()
   let manager: CLLocationManager
   var locationFeaturesEnabled = false
@@ -19,12 +21,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     manager = CLLocationManager()
     super.init()
     manager.delegate = self
-    requestLocation()
+    setup()
   }
 
-  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+  private func setup() {
     switch manager.authorizationStatus {
     case .authorizedWhenInUse, .authorizedAlways:
+      manager.requestLocation()
       enableLocationFeatures()
     case .restricted, .denied:
       disableLocationFeatures()
@@ -33,6 +36,17 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @unknown default:
       fatalError()
     }
+  }
+}
+
+extension LocationManager {
+  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    guard manager.authorizationStatus == .authorizedWhenInUse ||
+      manager.authorizationStatus == .authorizedAlways
+    else {
+      return
+    }
+    manager.requestLocation()
   }
 
   func enableLocationFeatures() {
@@ -48,18 +62,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     print("Unable to retrive the location")
   }
 
-  func requestLocation() {
-    manager.requestWhenInUseAuthorization()
-    manager.startUpdatingLocation()
-  }
-
   func locationManager(
     _: CLLocationManager,
     didUpdateLocations locations: [CLLocation]
   ) {
-    guard let location = locations.first else { return }
+    guard let location = locations.last else { return }
     self.location = location
-//        geocode()
   }
 
   private func geocode() {

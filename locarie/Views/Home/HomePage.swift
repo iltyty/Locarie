@@ -9,7 +9,6 @@ import MapKit
 import SwiftUI
 
 struct HomePage: View {
-  @AppStorage(GlobalConstants.userIdKey) var userId: Double = 0
   @EnvironmentObject var postViewModel: PostViewModel
 
   @State private var mapRegion = MKCoordinateRegion(
@@ -17,12 +16,17 @@ struct HomePage: View {
     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.1)
   )
 
+  @StateObject private var locationManager = LocationManager()
+
   var body: some View {
     NavigationStack {
       VStack(spacing: 0) {
         contentView
         BottomTabView()
       }
+    }
+    .onReceive(locationManager.$location) { location in
+      getNearbyPosts(withLocation: location)
     }
   }
 
@@ -75,6 +79,36 @@ struct HomePage: View {
     )
   }
 }
+
+extension HomePage {
+  private func getNearbyPosts(withLocation location: CLLocation?) {
+    guard let location else {
+      return
+    }
+    Task {
+      do {
+        let response = try await APIServices.listNearbyPosts(
+          latitude: location.coordinate.latitude,
+          longitude: location.coordinate.longitude,
+          distance: GlobalConstants.postsNearbyDistance
+        )
+        handleListResponse(response)
+      } catch {
+        handleListError(error)
+      }
+    }
+  }
+
+  private func handleListResponse(_ response: Response) {
+    debugPrint(response)
+  }
+
+  private func handleListError(_ error: Error) {
+    print(error)
+  }
+}
+
+private typealias Response = ResponseDto<[PostDto]>
 
 private enum Constants {
   static let postCoverWidthProportion = 0.8
