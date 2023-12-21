@@ -9,13 +9,13 @@ import MapKit
 import SwiftUI
 
 struct HomePage: View {
-  @EnvironmentObject var postViewModel: PostViewModel
-
+  @State var isShowing = true
   @State private var mapRegion = MKCoordinateRegion(
     center: CLLocationCoordinate2D.CP,
     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.1)
   )
 
+  @StateObject private var viewModel = PostListNearbyViewModel()
   @StateObject private var locationManager = LocationManager()
 
   var body: some View {
@@ -39,7 +39,7 @@ struct HomePage: View {
 
   var mapView: some View {
     Map(position: .constant(.region(mapRegion))) {
-      ForEach(postViewModel.posts) { post in
+      ForEach(viewModel.posts) { post in
         Marker(
           post.businessName,
           coordinate: post.businessLocationCoordinate
@@ -72,11 +72,15 @@ struct HomePage: View {
   }
 
   func cardView(proxy: GeometryProxy) -> some View {
-    PostCardView(
-      post: postViewModel.posts[0],
-      coverWidth: proxy.size.width * Constants
-        .postCoverWidthProportion
-    )
+    ScrollView {
+      ForEach(viewModel.posts) { post in
+        PostCardView(
+          post: post,
+          coverWidth: proxy.size.width * Constants
+            .postCoverWidthProportion
+        )
+      }
+    }
   }
 }
 
@@ -86,21 +90,11 @@ extension HomePage {
       return
     }
     Task {
-      do {
-        let response = try await APIServices.listNearbyPosts(
-          latitude: location.coordinate.latitude,
-          longitude: location.coordinate.longitude,
-          distance: GlobalConstants.postsNearbyDistance
-        )
-        handleListResponse(response)
-      } catch {
-        handleListError(error)
-      }
+      await viewModel.getNearbyPosts(
+        withLocation: location,
+        onError: handleListError
+      )
     }
-  }
-
-  private func handleListResponse(_ response: Response) {
-    debugPrint(response)
   }
 
   private func handleListError(_ error: Error) {
@@ -118,5 +112,4 @@ private enum Constants {
 #Preview {
   HomePage()
     .environmentObject(BottomTabViewRouter())
-    .environmentObject(PostViewModel())
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PostCardView: View {
-  let post: Post
+  let post: PostDto
   let coverWidth: CGFloat
   @StateObject var locationManager = LocationManager()
 
@@ -101,9 +101,4 @@ private enum Constants {
   static let coverAspectRatio: CGFloat = 4 / 3
   static let coverBorderRadius: CGFloat = 10.0
   static let bottomPadding: CGFloat = 15.0
-}
-
-#Preview {
-  PostCardView(post: PostViewModel().posts[0], coverWidth: 300)
-    .padding()
 }

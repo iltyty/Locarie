@@ -5,21 +5,54 @@
 //  Created by qiuty on 20/12/2023.
 //
 
+import CoreLocation
 import Foundation
 
-struct PostDto: Codable {
+struct PostDto: Codable, Identifiable {
   let id: Int64
   let time: Date
   let title: String
   let content: String
   let user: UserDto
+  let imageUrls: [String]
+}
 
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    id = try container.decode(Int64.self, forKey: .id)
-    time = try container.decode(Date.self, forKey: .time)
-    title = try container.decode(String.self, forKey: .title)
-    content = try container.decode(String.self, forKey: .content)
-    user = try container.decode(UserDto.self, forKey: .user)
+extension PostDto {
+  var businessName: String {
+    user.username
+  }
+
+  var businessAvatarUrl: String {
+    user.avatarUrl
+  }
+
+  var businessLocationCoordinate: CLLocationCoordinate2D {
+    CLLocationCoordinate2D(
+      latitude: user.location.latitude,
+      longitude: user.location.longitude
+    )
+  }
+}
+
+extension PostDto {
+  var businessOpenTime: DateComponents {
+    user.openTime
+  }
+
+  var businessCloseTime: DateComponents {
+    user.closeTime
+  }
+}
+
+extension PostDto {
+  var businessLocation: CLLocation {
+    CLLocation(
+      latitude: user.location.latitude,
+      longitude: user.location.longitude
+    )
+  }
+
+  var businessLocationName: String {
+    user.locationName
   }
 }

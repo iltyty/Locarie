@@ -84,7 +84,7 @@ extension UserProfilePage {
 }
 
 extension UserProfilePage {
-  func bottomView(screenWidth: CGFloat) -> some View {
+  func bottomView(screenWidth _: CGFloat) -> some View {
     VStack(spacing: Constants.bottomViewVSpacing) {
       HStack {
         Spacer()
@@ -98,9 +98,10 @@ extension UserProfilePage {
       Image(systemName: "map")
       Divider()
         .padding(.horizontal)
-      ForEach(postViewModel.favoritePosts) { post in
-        PostCardView(post: post, coverWidth: screenWidth * 0.8)
-      }
+      // FIXME: Post -> PostDto
+//      ForEach(postViewModel.favoritePosts) { post in
+//        PostCardView(post: post, coverWidth: screenWidth * 0.8)
+//      }
     }
     .padding(.top)
     .background(

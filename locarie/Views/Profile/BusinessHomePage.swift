@@ -10,9 +10,9 @@ import SwiftUI
 struct BusinessHomePage: View {
   @Environment(\.dismiss) var dismiss
 
-  let user: User
+  let user: UserDto
 
-  init(_ user: User) {
+  init(_ user: UserDto) {
     self.user = user
   }
 
@@ -195,8 +195,4 @@ private enum Constants {
   static let overlayViewBtnMapHeight: CGFloat = 50
   static let overlayViewDividerShadowRadius: CGFloat = 2
   static let overlayViewDividerShadowY: CGFloat = 2
-}
-
-#Preview {
-  BusinessHomePage(UserViewModel.getUserById(3)!)
 }

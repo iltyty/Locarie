@@ -9,10 +9,10 @@ import SwiftUI
 import UIKit
 
 struct PostDetailPage: View {
-  let post: Post
+  let post: PostDto
   let locationManager = LocationManager()
 
-  init(_ post: Post) {
+  init(_ post: PostDto) {
     self.post = post
   }
 
@@ -109,7 +109,7 @@ extension PostDetailPage {
           dismiss()
         }
       NavigationLink {
-        BusinessHomePage(post.businessUser)
+        BusinessHomePage(post.user)
       } label: {
         AvatarView(
           imageUrl: post.businessAvatarUrl,
@@ -145,8 +145,4 @@ private enum Constants {
   static let backButtonSize: CGFloat = 32
   static let contentVSpacing: CGFloat = 20
   static let contentTopPaddingProportion: CGFloat = 2 / 3
-}
-
-#Preview {
-  PostDetailPage(PostViewModel().posts[0])
 }

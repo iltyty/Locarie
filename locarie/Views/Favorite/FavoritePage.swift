@@ -45,13 +45,14 @@ struct FavoritePage: View {
                   )
                   .padding(.top, 10)
 
-                ForEach(postViewModel.favoritePosts) { post in
-                  PostCardView(
-                    post: post,
-                    coverWidth: proxy.size.width * Constants
-                      .postCoverWidthProportion
-                  )
-                }
+                // FIXME: Post -> PostDto
+//                ForEach(postViewModel.favoritePosts) { post in
+//                  PostCardView(
+//                    post: post,
+//                    coverWidth: proxy.size.width * Constants
+//                      .postCoverWidthProportion
+//                  )
+//                }
               }
               .background(
                 UnevenRoundedRectangle(
