@@ -14,7 +14,7 @@ struct NewLoginPage: View {
     NavigationView {
       VStack(spacing: Constants.formItemSpacing) {
         Spacer()
-        icon
+        locarieIcon
         Spacer()
         emailInput
         passwordInput
@@ -29,7 +29,7 @@ struct NewLoginPage: View {
     }
   }
 
-  var icon: some View {
+  var locarieIcon: some View {
     HStack {
       Spacer()
       Image("LocarieIcon")

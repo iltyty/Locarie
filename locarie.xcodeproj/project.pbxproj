@@ -46,6 +46,7 @@
 		5090C4392B04E5CF008931A6 /* posts.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4382B04E5CF008931A6 /* posts.json */; };
 		50998AEC2B35B839002196B5 /* NewLoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* NewLoginPage.swift */; };
 		50998AEE2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */; };
+		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		509CDA322B1F079D004A6D22 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA312B1F079D004A6D22 /* LoginPage.swift */; };
 		509CDA342B1F1AE9004A6D22 /* RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */; };
 		509CDA372B1F1AFE004A6D22 /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA362B1F1AFE004A6D22 /* CustomInputField.swift */; };
@@ -134,6 +135,7 @@
 		5090C4382B04E5CF008931A6 /* posts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = posts.json; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* NewLoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginPage.swift; sourceTree = "<group>"; };
 		50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterComponentBuilder.swift; sourceTree = "<group>"; };
+		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		509CDA312B1F079D004A6D22 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPage.swift; sourceTree = "<group>"; };
 		509CDA362B1F1AFE004A6D22 /* CustomInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputField.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				509CDA382B1F2414004A6D22 /* LoginRegisterUtil.swift */,
 				50998AEB2B35B839002196B5 /* NewLoginPage.swift */,
 				50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */,
+				50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostPage.swift in Sources */,
 				500F66262B2854A90074FE3C /* LocalCache.swift in Sources */,
+				50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */,
 				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
 				50E60DE82AFF885F00CA088F /* Util.swift in Sources */,
 				50B11AE62AFB8368002A7B91 /* Message.swift in Sources */,
