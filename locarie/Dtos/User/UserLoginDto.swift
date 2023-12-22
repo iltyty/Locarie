@@ -8,8 +8,8 @@
 import Foundation
 
 struct UserLoginRequestDto: Codable {
-  let email: String
-  let password: String
+  var email: String
+  var password: String
 }
 
 struct UserLoginResponse: Codable, UserInfo {

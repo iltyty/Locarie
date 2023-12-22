@@ -76,7 +76,7 @@ struct FavoritePage: View {
 
 private enum Constants {
   static let navigationTitle = "Followed"
-  static let mapMarkerColor: Color = .mapMarkerOrange
+  static let mapMarkerColor: Color = .locariePrimary
   static let handlerWidth: CGFloat = 80
   static let handlerHeight: CGFloat = 5
   static let postCoverWidthProportion = 0.8

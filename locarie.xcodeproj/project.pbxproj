@@ -14,7 +14,6 @@
 		5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5000C6CB2AF8CFB30057EF2D /* MessageDetailPage.swift */; };
 		5000C6CE2AF8D9A20057EF2D /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5000C6CD2AF8D9A20057EF2D /* MessageView.swift */; };
 		5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500477092B05DAAC0031AA94 /* AsyncImageView.swift */; };
-		5004770C2B06072E0031AA94 /* CustomBackSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5004770B2B06072E0031AA94 /* CustomBackSwipeView.swift */; };
 		500F66212B257D4D0074FE3C /* Dtos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F66202B257D4D0074FE3C /* Dtos.swift */; };
 		500F66242B25CE320074FE3C /* LocalCacheKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F66232B25CE320074FE3C /* LocalCacheKeys.swift */; };
 		500F66262B2854A90074FE3C /* LocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F66252B2854A80074FE3C /* LocalCache.swift */; };
@@ -45,6 +44,8 @@
 		5054CDF52B289E7F00645F5C /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF42B289E7F00645F5C /* AuthViewModel.swift */; };
 		5090C4372B04DDEA008931A6 /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4362B04DDEA008931A6 /* users.json */; };
 		5090C4392B04E5CF008931A6 /* posts.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4382B04E5CF008931A6 /* posts.json */; };
+		50998AEC2B35B839002196B5 /* NewLoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* NewLoginPage.swift */; };
+		50998AEE2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */; };
 		509CDA322B1F079D004A6D22 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA312B1F079D004A6D22 /* LoginPage.swift */; };
 		509CDA342B1F1AE9004A6D22 /* RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */; };
 		509CDA372B1F1AFE004A6D22 /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA362B1F1AFE004A6D22 /* CustomInputField.swift */; };
@@ -102,7 +103,6 @@
 		5000C6CB2AF8CFB30057EF2D /* MessageDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailPage.swift; sourceTree = "<group>"; };
 		5000C6CD2AF8D9A20057EF2D /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		500477092B05DAAC0031AA94 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
-		5004770B2B06072E0031AA94 /* CustomBackSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackSwipeView.swift; sourceTree = "<group>"; };
 		500F66202B257D4D0074FE3C /* Dtos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dtos.swift; sourceTree = "<group>"; };
 		500F66232B25CE320074FE3C /* LocalCacheKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheKeys.swift; sourceTree = "<group>"; };
 		500F66252B2854A80074FE3C /* LocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
@@ -132,6 +132,8 @@
 		5054CDF42B289E7F00645F5C /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		5090C4362B04DDEA008931A6 /* users.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
 		5090C4382B04E5CF008931A6 /* posts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = posts.json; sourceTree = "<group>"; };
+		50998AEB2B35B839002196B5 /* NewLoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginPage.swift; sourceTree = "<group>"; };
+		50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterComponentBuilder.swift; sourceTree = "<group>"; };
 		509CDA312B1F079D004A6D22 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPage.swift; sourceTree = "<group>"; };
 		509CDA362B1F1AFE004A6D22 /* CustomInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputField.swift; sourceTree = "<group>"; };
@@ -379,6 +381,8 @@
 				509CDA312B1F079D004A6D22 /* LoginPage.swift */,
 				509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */,
 				509CDA382B1F2414004A6D22 /* LoginRegisterUtil.swift */,
+				50998AEB2B35B839002196B5 /* NewLoginPage.swift */,
+				50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -470,7 +474,6 @@
 				50277F722AF117640045AB12 /* Home */,
 				50277F782AF117A70045AB12 /* Message */,
 				50277F7B2AF117C30045AB12 /* Profile */,
-				5004770B2B06072E0031AA94 /* CustomBackSwipeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				50E60DEA2B006FB100CA088F /* LocationManager.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
 				50E60DDD2AFF78D400CA088F /* Post.swift in Sources */,
+				50998AEC2B35B839002196B5 /* NewLoginPage.swift in Sources */,
 				50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */,
 				50369A702B304196005D6B43 /* PostCreateViewModel.swift in Sources */,
 				502A4FFC2B32D71500C0833A /* UserDto.swift in Sources */,
@@ -699,8 +703,8 @@
 				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+Extensions.swift in Sources */,
 				502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */,
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */,
+				50998AEE2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
-				5004770C2B06072E0031AA94 /* CustomBackSwipeView.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,
 				50277F772AF117970045AB12 /* FavoritePage.swift in Sources */,

@@ -9,6 +9,12 @@ import Foundation
 import SwiftUI
 
 class AuthViewModel: ObservableObject {
+  @Published var loginRequestDto: UserLoginRequestDto
+
+  init() {
+    loginRequestDto = UserLoginRequestDto(email: "", password: "")
+  }
+
   func login(
     email: String,
     password: String,

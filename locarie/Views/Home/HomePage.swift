@@ -106,7 +106,7 @@ private typealias Response = ResponseDto<[PostDto]>
 
 private enum Constants {
   static let postCoverWidthProportion = 0.8
-  static let mapMarkerColor = Color.mapMarkerOrange
+  static let mapMarkerColor = Color.locariePrimary
 }
 
 #Preview {
