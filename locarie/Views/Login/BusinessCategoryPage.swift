@@ -30,7 +30,7 @@ struct BusinessCategoryPage: View {
   }
 
   var tags: some View {
-    WrappingHStack {
+    WrappingHStack(alignment: .leading) {
       ForEach(Tag.allCases, id: \.self) { tag in
         TagView(tag)
       }

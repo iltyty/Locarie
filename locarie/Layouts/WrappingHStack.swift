@@ -11,10 +11,16 @@ import SwiftUI
 struct WrappingHStack: Layout {
   var vSpacing: CGFloat
   var hSpacing: CGFloat
+  var alignment: TextAlignment
 
-  init(vSpacing: CGFloat = 10, hSpacing: CGFloat = 10) {
+  init(
+    vSpacing: CGFloat = 10,
+    hSpacing: CGFloat = 10,
+    alignment: TextAlignment = .leading
+  ) {
     self.vSpacing = vSpacing
     self.hSpacing = hSpacing
+    self.alignment = alignment
   }
 
   func sizeThatFits(
@@ -25,7 +31,7 @@ struct WrappingHStack: Layout {
     let rows = getRows(subviews: subviews, totalWidth: proposal.width)
     return .init(
       width: rows.map(\.width).max() ?? 0,
-      height: rows.last?.viewRects.map(\.height).max() ?? 0
+      height: rows.last?.viewRects.map(\.maxY).max() ?? 0
     )
   }
 
@@ -75,7 +81,7 @@ struct WrappingHStack: Layout {
         let newY = previousRect.minY + rows.last!.height + vSpacing
         startNewRow(fromY: newY, withSize: size, rows: &rows)
       case false:
-        let x = previousRect.maxX + hSpacing
+        let x = previousRect.maxX + (previousView == nil ? 0 : hSpacing)
         let y = previousRect.minY
         appendRectToCurrentRow(withX: x, withY: y, withSize: size, rows: &rows)
       }
@@ -139,11 +145,12 @@ struct WrappingHStack: Layout {
   ) {
     var index = 0
     rows.forEach { row in
+      let minX = row.getMinX(in: bounds, alignment: alignment)
       row.viewRects.forEach { rect in
         let view = subviews[index]
         defer { index += 1 }
         view.place(
-          at: CGPoint(x: rect.minX + bounds.minX, y: rect.minY + bounds.minY),
+          at: CGPoint(x: rect.minX + minX, y: rect.minY + bounds.minY),
           proposal: .init(rect.size)
         )
       }
@@ -154,5 +161,15 @@ struct WrappingHStack: Layout {
     var viewRects = [CGRect]()
     var width: CGFloat { viewRects.last?.maxX ?? 0 }
     var height: CGFloat { viewRects.map(\.height).max() ?? 0 }
+    func getMinX(in bounds: CGRect, alignment: TextAlignment) -> CGFloat {
+      switch alignment {
+      case .leading:
+        bounds.minX
+      case .center:
+        bounds.minX + (bounds.width - width) / 2
+      case .trailing:
+        bounds.maxX - width
+      }
+    }
   }
 }
