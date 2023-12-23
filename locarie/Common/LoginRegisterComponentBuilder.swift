@@ -83,7 +83,14 @@ func primaryButtonBuilder(
 }
 
 func whiteButtonBuilder(
-  label: Label<some View, some View>,
+  text: String,
+  action: @escaping () -> Void
+) -> some View {
+  whiteButtonBuilder(label: Text(text), action: action)
+}
+
+func whiteButtonBuilder(
+  label: some View,
   action: @escaping () -> Void
 ) -> some View {
   Button {

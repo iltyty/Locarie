@@ -46,9 +46,10 @@ struct LoginOrRegisterPage: View {
   }
 
   var signupBusinessButton: some View {
-    primaryButtonBuilder(text: "Sign up for business") {
+    whiteButtonBuilder(text: "Sign up for business") {
       print("sign up business tapped")
     }
+    .tint(.primary)
   }
 
   var orText: some View {
