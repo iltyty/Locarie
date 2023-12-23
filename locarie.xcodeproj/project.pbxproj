@@ -49,9 +49,16 @@
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
 		50998AF42B35D376002196B5 /* RegularRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF32B35D376002196B5 /* RegularRegisterPage.swift */; };
-		50998AF72B35D4EA002196B5 /* UserRegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF62B35D4EA002196B5 /* UserRegisterViewModel.swift */; };
-		50998AFB2B35D512002196B5 /* UserRegisterRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AFA2B35D512002196B5 /* UserRegisterRequestDto.swift */; };
+		50998AF72B35D4EA002196B5 /* RegularUserRegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF62B35D4EA002196B5 /* RegularUserRegisterViewModel.swift */; };
+		50998AFB2B35D512002196B5 /* RegularUserRegisterRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AFA2B35D512002196B5 /* RegularUserRegisterRequestDto.swift */; };
 		50998AFE2B366C29002196B5 /* WrappingHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AFD2B366C29002196B5 /* WrappingHStack.swift */; };
+		50998B022B36842A002196B5 /* BusinessRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B012B36842A002196B5 /* BusinessRegisterPage.swift */; };
+		50998B042B3708FC002196B5 /* BusinessuserRegisterRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B032B3708FC002196B5 /* BusinessuserRegisterRequestDto.swift */; };
+		50998B062B37096B002196B5 /* BusinessUserRegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B052B37096B002196B5 /* BusinessUserRegisterViewModel.swift */; };
+		50998B082B370B34002196B5 /* BusinessCategoryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B072B370B34002196B5 /* BusinessCategoryPage.swift */; };
+		50998B0A2B370ED5002196B5 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B092B370ED5002196B5 /* TagView.swift */; };
+		50998B0C2B371086002196B5 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0B2B371086002196B5 /* Tag.swift */; };
+		50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */; };
 		509CDA322B1F079D004A6D22 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA312B1F079D004A6D22 /* LoginPage.swift */; };
 		509CDA342B1F1AE9004A6D22 /* RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */; };
 		509CDA372B1F1AFE004A6D22 /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA362B1F1AFE004A6D22 /* CustomInputField.swift */; };
@@ -143,9 +150,16 @@
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
 		50998AF32B35D376002196B5 /* RegularRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularRegisterPage.swift; sourceTree = "<group>"; };
-		50998AF62B35D4EA002196B5 /* UserRegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterViewModel.swift; sourceTree = "<group>"; };
-		50998AFA2B35D512002196B5 /* UserRegisterRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterRequestDto.swift; sourceTree = "<group>"; };
+		50998AF62B35D4EA002196B5 /* RegularUserRegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserRegisterViewModel.swift; sourceTree = "<group>"; };
+		50998AFA2B35D512002196B5 /* RegularUserRegisterRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserRegisterRequestDto.swift; sourceTree = "<group>"; };
 		50998AFD2B366C29002196B5 /* WrappingHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingHStack.swift; sourceTree = "<group>"; };
+		50998B012B36842A002196B5 /* BusinessRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessRegisterPage.swift; sourceTree = "<group>"; };
+		50998B032B3708FC002196B5 /* BusinessuserRegisterRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessuserRegisterRequestDto.swift; sourceTree = "<group>"; };
+		50998B052B37096B002196B5 /* BusinessUserRegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessUserRegisterViewModel.swift; sourceTree = "<group>"; };
+		50998B072B370B34002196B5 /* BusinessCategoryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCategoryPage.swift; sourceTree = "<group>"; };
+		50998B092B370ED5002196B5 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		50998B0B2B371086002196B5 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAddressPage.swift; sourceTree = "<group>"; };
 		509CDA312B1F079D004A6D22 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPage.swift; sourceTree = "<group>"; };
 		509CDA362B1F1AFE004A6D22 /* CustomInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputField.swift; sourceTree = "<group>"; };
@@ -282,6 +296,7 @@
 				503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */,
 				50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */,
 				500477092B05DAAC0031AA94 /* AsyncImageView.swift */,
+				50998B092B370ED5002196B5 /* TagView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -343,7 +358,8 @@
 			children = (
 				50369A672B2DBCD9005D6B43 /* UserLoginDto.swift */,
 				502A4FFB2B32D71500C0833A /* UserDto.swift */,
-				50998AFA2B35D512002196B5 /* UserRegisterRequestDto.swift */,
+				50998AFA2B35D512002196B5 /* RegularUserRegisterRequestDto.swift */,
+				50998B032B3708FC002196B5 /* BusinessuserRegisterRequestDto.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -390,7 +406,8 @@
 		50998AF52B35D4C1002196B5 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				50998AF62B35D4EA002196B5 /* UserRegisterViewModel.swift */,
+				50998AF62B35D4EA002196B5 /* RegularUserRegisterViewModel.swift */,
+				50998B052B37096B002196B5 /* BusinessUserRegisterViewModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -409,12 +426,13 @@
 				509CDA352B1F1AED004A6D22 /* Components */,
 				509CDA312B1F079D004A6D22 /* LoginPage.swift */,
 				509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */,
-				509CDA382B1F2414004A6D22 /* LoginRegisterUtil.swift */,
 				50998AEB2B35B839002196B5 /* NewLoginPage.swift */,
-				50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */,
 				50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */,
 				50998AF12B35D195002196B5 /* ResetPasswordPage.swift */,
 				50998AF32B35D376002196B5 /* RegularRegisterPage.swift */,
+				50998B012B36842A002196B5 /* BusinessRegisterPage.swift */,
+				50998B072B370B34002196B5 /* BusinessCategoryPage.swift */,
+				50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -546,6 +564,7 @@
 				50369A632B2DBC4B005D6B43 /* Post */,
 				50369A622B2DBC3B005D6B43 /* User */,
 				500F66252B2854A80074FE3C /* LocalCache.swift */,
+				50998B0B2B371086002196B5 /* Tag.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -569,6 +588,8 @@
 				50E60DE72AFF885F00CA088F /* Util.swift */,
 				50E60DE92B006FB100CA088F /* LocationManager.swift */,
 				500F66232B25CE320074FE3C /* LocalCacheKeys.swift */,
+				509CDA382B1F2414004A6D22 /* LoginRegisterUtil.swift */,
+				50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -725,6 +746,7 @@
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
 				50E60DEA2B006FB100CA088F /* LocationManager.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
+				50998B062B37096B002196B5 /* BusinessUserRegisterViewModel.swift in Sources */,
 				50E60DDD2AFF78D400CA088F /* Post.swift in Sources */,
 				50998AEC2B35B839002196B5 /* NewLoginPage.swift in Sources */,
 				50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */,
@@ -757,6 +779,7 @@
 				509CDA322B1F079D004A6D22 /* LoginPage.swift in Sources */,
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
 				50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */,
+				50998B0C2B371086002196B5 /* Tag.swift in Sources */,
 				5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */,
 				5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */,
 				509CDA392B1F2414004A6D22 /* LoginRegisterUtil.swift in Sources */,
@@ -764,11 +787,13 @@
 				50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */,
 				50B11AD72AFA28E9002A7B91 /* BusinessHomePage.swift in Sources */,
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,
+				50998B022B36842A002196B5 /* BusinessRegisterPage.swift in Sources */,
 				50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostPage.swift in Sources */,
 				500F66262B2854A90074FE3C /* LocalCache.swift in Sources */,
+				50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */,
 				50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */,
 				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
 				50E60DE82AFF885F00CA088F /* Util.swift in Sources */,
@@ -776,18 +801,21 @@
 				50F85B432B242CA000D04787 /* Errors.swift in Sources */,
 				50998AFE2B366C29002196B5 /* WrappingHStack.swift in Sources */,
 				5054CDF52B289E7F00645F5C /* AuthViewModel.swift in Sources */,
-				50998AF72B35D4EA002196B5 /* UserRegisterViewModel.swift in Sources */,
+				50998B042B3708FC002196B5 /* BusinessuserRegisterRequestDto.swift in Sources */,
+				50998AF72B35D4EA002196B5 /* RegularUserRegisterViewModel.swift in Sources */,
 				5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */,
+				50998B082B370B34002196B5 /* BusinessCategoryPage.swift in Sources */,
 				500F66242B25CE320074FE3C /* LocalCacheKeys.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
 				50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */,
 				50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */,
 				50277F7D2AF117CE0045AB12 /* UserProfilePage.swift in Sources */,
-				50998AFB2B35D512002196B5 /* UserRegisterRequestDto.swift in Sources */,
+				50998AFB2B35D512002196B5 /* RegularUserRegisterRequestDto.swift in Sources */,
 				50B11ADA2AFB3661002A7B91 /* PostDetailPage.swift in Sources */,
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
 				5000C6CE2AF8D9A20057EF2D /* MessageView.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
+				50998B0A2B370ED5002196B5 /* TagView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

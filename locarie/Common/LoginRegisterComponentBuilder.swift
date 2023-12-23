@@ -8,6 +8,18 @@
 import Foundation
 import SwiftUI
 
+func navigationTitleBuilder(title: String) -> some View {
+  HStack {
+    Image(systemName: "chevron.left")
+      .padding(.leading)
+    Spacer()
+    Text(title)
+      .font(.headline)
+      .fontWeight(.bold)
+    Spacer()
+  }
+}
+
 func formItemBuilder(
   hint: String,
   input: Binding<String>,
@@ -40,10 +52,23 @@ func formItemWithTitleBuilder(
 ) -> some View {
   VStack(alignment: .leading) {
     Text(title)
-      .fontWeight(.bold)
       .padding(.leading)
     formItemBuilder(hint: hint, input: input, isSecure: isSecure)
   }
+}
+
+func primaryForegroundItemBuilder(text: String) -> some View {
+  Text(text)
+    .frame(maxWidth: .infinity)
+    .foregroundStyle(.white)
+    .fontWeight(.bold)
+    .background(
+      RoundedRectangle(cornerRadius: Constants.formItemCornerRadius)
+        .fill(Color.locariePrimary)
+        .frame(height: Constants.formItemHeight)
+    )
+    .padding(.horizontal)
+    .frame(height: Constants.formItemHeight)
 }
 
 func primaryButtonBuilder(
@@ -53,17 +78,7 @@ func primaryButtonBuilder(
   Button {
     action()
   } label: {
-    Text(text)
-      .frame(maxWidth: .infinity)
-      .foregroundStyle(.white)
-      .fontWeight(.bold)
-      .background(
-        RoundedRectangle(cornerRadius: Constants.formItemCornerRadius)
-          .fill(Color.locariePrimary)
-          .frame(height: Constants.formItemHeight)
-      )
-      .padding(.horizontal)
-      .frame(height: Constants.formItemHeight)
+    primaryForegroundItemBuilder(text: text)
   }
 }
 

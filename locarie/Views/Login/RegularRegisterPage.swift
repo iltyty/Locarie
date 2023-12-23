@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegularRegisterPage: View {
-  @StateObject var registerViewModel = UserRegisterViewModel()
+  @StateObject var registerViewModel = RegularUserRegisterViewModel()
 
   @State var isNotificationReceived = false
   @State var isServiceAgreed = false
@@ -20,8 +20,9 @@ struct RegularRegisterPage: View {
       emailInput
       firstNameInput
       lastNameInput
+      usernameInput
       passwordInput
-      confirmPasswordInput
+//      confirmPasswordInput
       notificationPicker
       servicePicker
       Spacer()
@@ -59,6 +60,15 @@ struct RegularRegisterPage: View {
       title: "Last name",
       hint: "Last name",
       input: $registerViewModel.dto.lastName,
+      isSecure: false
+    )
+  }
+
+  var usernameInput: some View {
+    formItemWithTitleBuilder(
+      title: "Username",
+      hint: "Username",
+      input: $registerViewModel.dto.username,
       isSecure: false
     )
   }

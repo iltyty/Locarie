@@ -17,7 +17,8 @@ struct LoginOrRegisterPage: View {
         loginButton
         signupButton
         orText
-        signupForBusinessText
+//        signupForBusinessText
+        signupBusinessButton
         Spacer()
       }
     }
@@ -39,8 +40,14 @@ struct LoginOrRegisterPage: View {
   }
 
   var signupButton: some View {
-    primaryButtonBuilder(text: "Sign up") {
+    primaryButtonBuilder(text: "Sign up for regular") {
       print("sign up button tapped")
+    }
+  }
+
+  var signupBusinessButton: some View {
+    primaryButtonBuilder(text: "Sign up for business") {
+      print("sign up business tapped")
     }
   }
 
