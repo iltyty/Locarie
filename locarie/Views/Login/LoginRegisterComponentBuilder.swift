@@ -32,6 +32,20 @@ func formItemBuilder(
   .frame(height: Constants.formItemHeight)
 }
 
+func formItemWithTitleBuilder(
+  title: String,
+  hint: String,
+  input: Binding<String>,
+  isSecure: Bool
+) -> some View {
+  VStack(alignment: .leading) {
+    Text(title)
+      .fontWeight(.bold)
+      .padding(.leading)
+    formItemBuilder(hint: hint, input: input, isSecure: isSecure)
+  }
+}
+
 func primaryButtonBuilder(
   text: String,
   action: @escaping () -> Void
