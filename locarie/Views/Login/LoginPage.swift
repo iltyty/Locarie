@@ -2,88 +2,149 @@
 //  LoginPage.swift
 //  locarie
 //
-//  Created by qiuty on 05/12/2023.
+//  Created by qiuty on 22/12/2023.
 //
 
 import SwiftUI
 
 struct LoginPage: View {
-  @EnvironmentObject var cacheViewModel: LocalCacheViewModel
-
-  @State private var email: String = ""
-  @State private var password: String = ""
+  @StateObject private var authViewModel = LoginViewModel()
+  @StateObject private var cacheViewModel = LocalCacheViewModel()
 
   @State private var isLoading = false
   @State private var isAlertShowing = false
-  @State private var alertTitle: AlertTitle?
-
-  private let authViewModel = LoginViewModel()
+  @State private var alertTitle = AlertTitle.none
 
   var body: some View {
-    NavigationView {
-      makeLoginPageBackground(formTable)
-        .disabled(isLoading)
-        .overlay { overlayView }
-        .alert(
-          alertTitle?.rawValue ?? "",
-          isPresented: $isAlertShowing
-        ) {
-          Button("OK") {}
-        }
-    }
+    content
+      .disabled(isLoading)
+      .overlay(loadingOverlayView)
+      .alert(alertTitle.rawValue, isPresented: $isAlertShowing) {
+        Button("OK") {}
+      }
   }
 
-  var overlayView: some View {
-    isLoading ? loadingView.background(Color.white.opacity(0.05)) : nil
-  }
-
-  var loadingView: some View {
-    ProgressView().progressViewStyle(.circular)
-  }
-
-  var formTable: some View {
-    VStack(spacing: LoginRegisterPageConstants.tableItemSpace) {
-      makeLoginPageTitle("Login")
-      VStack(
-        alignment: .leading,
-        spacing: LoginRegisterPageConstants.tableInputSpace
-      ) {
-        makeLoginPageFieldInput(
-          text: "Email",
-          hint: "email",
-          input: $email,
-          isPassword: false
-        )
-        makeLoginPageFieldInput(
-          text: "Password",
-          hint: "password",
-          input: $password,
-          isPassword: true
-        )
-        btnLogin
-        NavigationLink {
-          RegisterPage()
-        } label: {
-          loginPageButtonLabel("Register")
-        }
+  var content: some View {
+    NavigationStack {
+      VStack(spacing: Constants.formItemSpacing) {
+        Spacer()
+        locarieIcon
+        Spacer()
+        emailInput
+        passwordInput
+        forgotPassword
+        loginButton
+        orText
+        googleButton
+        Spacer()
+        signUpText
+        Spacer()
       }
     }
   }
 
-  var btnLogin: some View {
-    loginPageButtonBuilder("Login") { login() }
-      .padding(.top, LoginRegisterPageConstants.btnPaddingTop)
+  var loadingOverlayView: some View {
+    isLoading ? loadingView : nil
+  }
+
+  var loadingView: some View {
+    ProgressView()
+      .progressViewStyle(.circular)
+      .background(.white.opacity(Constants.loadingBackgroundOpacity))
+  }
+
+  var locarieIcon: some View {
+    HStack {
+      Spacer()
+      Image("LocarieIcon")
+        .resizable()
+        .frame(
+          width: Constants.locarieIconSize,
+          height: Constants.locarieIconSize
+        )
+      Spacer()
+    }
+  }
+
+  var emailInput: some View {
+    formItemBuilder(
+      hint: "Email",
+      input: $authViewModel.dto.email,
+      isSecure: false
+    )
+  }
+
+  var passwordInput: some View {
+    formItemBuilder(
+      hint: "Password",
+      input: $authViewModel.dto.password,
+      isSecure: true
+    )
+  }
+
+  var forgotPassword: some View {
+    NavigationLink {
+      EmptyView()
+    } label: {
+      HStack {
+        Spacer()
+        Text("Forgot password?")
+          .padding(.horizontal)
+      }
+    }
+  }
+
+  var loginButton: some View {
+    primaryButtonBuilder(text: "Log in") {
+      login()
+    }
+    .disabled(!authViewModel.isFormValid)
+    .opacity(authViewModel.isFormValid ? 1 : Constants.buttonInvalidOpacity)
+  }
+
+  var orText: some View {
+    Text("or").foregroundStyle(.secondary)
+  }
+
+  var googleButton: some View {
+    let label = Label {
+      Text("Continue with Google")
+    } icon: {
+      Image("GoogleLogo")
+        .resizable()
+        .frame(
+          width: Constants.googleIconSize,
+          height: Constants.googleIconSize
+        )
+    }
+    return whiteButtonBuilder(label: label) {
+      print("google button tapped")
+    }
+    .tint(.primary)
+  }
+
+  var signUpText: some View {
+    HStack {
+      Text("Don't have an account?")
+        .foregroundStyle(.secondary)
+      NavigationLink {
+        EmptyView()
+      } label: {
+        Text("Sign up")
+      }
+    }
   }
 }
 
 extension LoginPage {
   private func login() {
-    isLoading = true
-    authViewModel.login(
-      onSuccess: handleLoginSuccess,
-      onFailure: handleLoginFailure,
-      onError: handleLoginError
-    )
+    Task {
+      authViewModel.login(
+        onSuccess: handleLoginSuccess,
+        onFailure: handleLoginFailure,
+        onError: handleLoginError
+      )
+    }
   }
 
   private func handleLoginSuccess(_ response: Response) {
@@ -110,27 +171,31 @@ extension LoginPage {
     isAlertShowing = true
   }
 
-  private func handleLoginError(_: Error) {
+  private func handleLoginError(_ error: Error) {
+    debugPrint(error)
     isLoading = false
     alertTitle = .unknownError
     isAlertShowing = true
   }
 }
 
-extension LoginPage {
-  private enum AlertTitle: String {
-    case success = "Login success"
-    case incorrectCredential = "Incorret email or password"
-    case unknownError = "Something went wrong, please try again later"
-  }
+private enum AlertTitle: String {
+  case success = "Login success"
+  case incorrectCredential = "Incorret email or password"
+  case unknownError = "Something went wrong, please try again later"
+  case none = ""
 }
 
-extension LoginPage {
-  private typealias Response = ResponseDto<LoginResponseDto>
-  private typealias Completion = (_ response: Response) -> Void
+private enum Constants {
+  static let locarieIconSize = 64.0
+  static let googleIconSize = 32.0
+  static let formItemSpacing = 15.0
+  static let loadingBackgroundOpacity = 0.05
+  static let buttonInvalidOpacity = 0.5
 }
+
+private typealias Response = ResponseDto<LoginResponseDto>
 
 #Preview {
   LoginPage()
-    .environmentObject(LocalCacheViewModel())
 }

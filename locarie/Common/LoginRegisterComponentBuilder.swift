@@ -57,6 +57,17 @@ func formItemWithTitleBuilder(
   }
 }
 
+func primaryButtonBuilder(
+  text: String,
+  action: @escaping () -> Void
+) -> some View {
+  Button {
+    action()
+  } label: {
+    primaryForegroundItemBuilder(text: text)
+  }
+}
+
 func primaryForegroundItemBuilder(text: String) -> some View {
   Text(text)
     .frame(maxWidth: .infinity)
@@ -69,17 +80,6 @@ func primaryForegroundItemBuilder(text: String) -> some View {
     )
     .padding(.horizontal)
     .frame(height: Constants.formItemHeight)
-}
-
-func primaryButtonBuilder(
-  text: String,
-  action: @escaping () -> Void
-) -> some View {
-  Button {
-    action()
-  } label: {
-    primaryForegroundItemBuilder(text: text)
-  }
 }
 
 func whiteButtonBuilder(
@@ -96,17 +96,25 @@ func whiteButtonBuilder(
   Button {
     action()
   } label: {
-    label
-      .frame(maxWidth: .infinity)
-      .background(
-        RoundedRectangle(cornerRadius: Constants.formItemCornerRadius)
-          .fill(.white)
-          .frame(height: Constants.formItemHeight)
-          .shadow(radius: Constants.formItemBackgroundShadow)
-      )
-      .padding(.horizontal)
-      .frame(height: Constants.formItemHeight)
+    whiteForegroundItemBuilder(label: label)
   }
+}
+
+func whiteForegroundItemBuilder(text: String) -> some View {
+  whiteForegroundItemBuilder(label: Text(text))
+}
+
+func whiteForegroundItemBuilder(label: some View) -> some View {
+  label
+    .frame(maxWidth: .infinity)
+    .background(
+      RoundedRectangle(cornerRadius: Constants.formItemCornerRadius)
+        .fill(.white)
+        .frame(height: Constants.formItemHeight)
+        .shadow(radius: Constants.formItemBackgroundShadow)
+    )
+    .padding(.horizontal)
+    .frame(height: Constants.formItemHeight)
 }
 
 private enum Constants {

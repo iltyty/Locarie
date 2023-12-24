@@ -16,6 +16,14 @@ struct UserProfilePage: View {
   init() {}
 
   var body: some View {
+    if cacheViewModel.isLoggedIn() {
+      content
+    } else {
+      loginOrRegister
+    }
+  }
+
+  var content: some View {
     NavigationStack {
       GeometryReader { proxy in
         VStack(spacing: 0) {
@@ -27,6 +35,13 @@ struct UserProfilePage: View {
           BottomTabView()
         }
       }
+    }
+  }
+
+  var loginOrRegister: some View {
+    VStack {
+      LoginOrRegisterPage()
+      BottomTabView()
     }
   }
 }

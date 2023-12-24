@@ -22,7 +22,7 @@ struct LocalCache {
   @AppStorage(LocalCacheKeys.jwtTokenKey)
   var jwtToken = ""
 
-  private init() {}
+  private init() { clear() }
 
   private func clear() {
     userId = 0

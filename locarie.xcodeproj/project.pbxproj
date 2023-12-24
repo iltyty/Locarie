@@ -44,7 +44,7 @@
 		5054CDF52B289E7F00645F5C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF42B289E7F00645F5C /* LoginViewModel.swift */; };
 		5090C4372B04DDEA008931A6 /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4362B04DDEA008931A6 /* users.json */; };
 		5090C4392B04E5CF008931A6 /* posts.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4382B04E5CF008931A6 /* posts.json */; };
-		50998AEC2B35B839002196B5 /* NewLoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* NewLoginPage.swift */; };
+		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
 		50998AEE2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
@@ -59,7 +59,6 @@
 		50998B0A2B370ED5002196B5 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B092B370ED5002196B5 /* TagView.swift */; };
 		50998B0C2B371086002196B5 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0B2B371086002196B5 /* Tag.swift */; };
 		50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */; };
-		509CDA322B1F079D004A6D22 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA312B1F079D004A6D22 /* LoginPage.swift */; };
 		509CDA342B1F1AE9004A6D22 /* RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */; };
 		509CDA372B1F1AFE004A6D22 /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA362B1F1AFE004A6D22 /* CustomInputField.swift */; };
 		509CDA392B1F2414004A6D22 /* LoginRegisterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA382B1F2414004A6D22 /* LoginRegisterUtil.swift */; };
@@ -145,7 +144,7 @@
 		5054CDF42B289E7F00645F5C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		5090C4362B04DDEA008931A6 /* users.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
 		5090C4382B04E5CF008931A6 /* posts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = posts.json; sourceTree = "<group>"; };
-		50998AEB2B35B839002196B5 /* NewLoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginPage.swift; sourceTree = "<group>"; };
+		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterComponentBuilder.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
@@ -160,7 +159,6 @@
 		50998B092B370ED5002196B5 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		50998B0B2B371086002196B5 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAddressPage.swift; sourceTree = "<group>"; };
-		509CDA312B1F079D004A6D22 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPage.swift; sourceTree = "<group>"; };
 		509CDA362B1F1AFE004A6D22 /* CustomInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputField.swift; sourceTree = "<group>"; };
 		509CDA382B1F2414004A6D22 /* LoginRegisterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterUtil.swift; sourceTree = "<group>"; };
@@ -424,9 +422,8 @@
 			isa = PBXGroup;
 			children = (
 				509CDA352B1F1AED004A6D22 /* Components */,
-				509CDA312B1F079D004A6D22 /* LoginPage.swift */,
 				509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */,
-				50998AEB2B35B839002196B5 /* NewLoginPage.swift */,
+				50998AEB2B35B839002196B5 /* LoginPage.swift */,
 				50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */,
 				50998AF12B35D195002196B5 /* ResetPasswordPage.swift */,
 				50998AF32B35D376002196B5 /* RegularRegisterPage.swift */,
@@ -748,7 +745,7 @@
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
 				50998B062B37096B002196B5 /* BusinessUserRegisterViewModel.swift in Sources */,
 				50E60DDD2AFF78D400CA088F /* Post.swift in Sources */,
-				50998AEC2B35B839002196B5 /* NewLoginPage.swift in Sources */,
+				50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */,
 				50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */,
 				50369A702B304196005D6B43 /* PostCreateViewModel.swift in Sources */,
 				50998AF42B35D376002196B5 /* RegularRegisterPage.swift in Sources */,
@@ -776,7 +773,6 @@
 				50B11ADF2AFB7850002A7B91 /* ReviewView.swift in Sources */,
 				50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */,
 				502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */,
-				509CDA322B1F079D004A6D22 /* LoginPage.swift in Sources */,
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
 				50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */,
 				50998B0C2B371086002196B5 /* Tag.swift in Sources */,

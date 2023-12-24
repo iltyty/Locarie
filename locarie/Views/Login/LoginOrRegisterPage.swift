@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginOrRegisterPage: View {
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack(spacing: Constants.spacing) {
         Spacer()
         locarieIcon
@@ -17,7 +17,6 @@ struct LoginOrRegisterPage: View {
         loginButton
         signupButton
         orText
-//        signupForBusinessText
         signupBusinessButton
         Spacer()
       }
@@ -34,34 +33,32 @@ struct LoginOrRegisterPage: View {
   }
 
   var loginButton: some View {
-    primaryButtonBuilder(text: "Log in") {
-      print("log in button tapped")
+    NavigationLink {
+      LoginPage()
+    } label: {
+      primaryForegroundItemBuilder(text: "Log in")
     }
   }
 
   var signupButton: some View {
-    primaryButtonBuilder(text: "Sign up for regular") {
-      print("sign up button tapped")
+    NavigationLink {
+      RegularRegisterPage()
+    } label: {
+      primaryForegroundItemBuilder(text: "Sign up for regular")
     }
   }
 
   var signupBusinessButton: some View {
-    whiteButtonBuilder(text: "Sign up for business") {
-      print("sign up business tapped")
+    NavigationLink {
+      BusinessRegisterPage()
+    } label: {
+      whiteForegroundItemBuilder(text: "Sign up for business")
+        .tint(.primary)
     }
-    .tint(.primary)
   }
 
   var orText: some View {
     Text("or").foregroundStyle(.secondary)
-  }
-
-  var signupForBusinessText: some View {
-    NavigationLink {
-      EmptyView()
-    } label: {
-      Text("Sign up for a business account")
-    }
   }
 }
 
