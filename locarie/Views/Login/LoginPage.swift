@@ -17,7 +17,7 @@ struct LoginPage: View {
   @State private var isAlertShowing = false
   @State private var alertTitle: AlertTitle?
 
-  private let authViewModel = AuthViewModel()
+  private let authViewModel = LoginViewModel()
 
   var body: some View {
     NavigationView {
@@ -80,8 +80,6 @@ extension LoginPage {
   private func login() {
     isLoading = true
     authViewModel.login(
-      email: email,
-      password: password,
       onSuccess: handleLoginSuccess,
       onFailure: handleLoginFailure,
       onError: handleLoginError
@@ -128,7 +126,7 @@ extension LoginPage {
 }
 
 extension LoginPage {
-  private typealias Response = ResponseDto<UserLoginResponse>
+  private typealias Response = ResponseDto<LoginResponseDto>
   private typealias Completion = (_ response: Response) -> Void
 }
 

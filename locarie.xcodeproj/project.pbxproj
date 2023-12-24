@@ -41,7 +41,7 @@
 		5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEE2B288D3300645F5C /* UserLoginService.swift */; };
 		5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF02B288D6C00645F5C /* UserRegisterService.swift */; };
 		5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF22B28954E00645F5C /* UserInfo.swift */; };
-		5054CDF52B289E7F00645F5C /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF42B289E7F00645F5C /* AuthViewModel.swift */; };
+		5054CDF52B289E7F00645F5C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF42B289E7F00645F5C /* LoginViewModel.swift */; };
 		5090C4372B04DDEA008931A6 /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4362B04DDEA008931A6 /* users.json */; };
 		5090C4392B04E5CF008931A6 /* posts.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4382B04E5CF008931A6 /* posts.json */; };
 		50998AEC2B35B839002196B5 /* NewLoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* NewLoginPage.swift */; };
@@ -142,7 +142,7 @@
 		5054CDEE2B288D3300645F5C /* UserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 		5054CDF02B288D6C00645F5C /* UserRegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterService.swift; sourceTree = "<group>"; };
 		5054CDF22B28954E00645F5C /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		5054CDF42B289E7F00645F5C /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		5054CDF42B289E7F00645F5C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		5090C4362B04DDEA008931A6 /* users.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
 		5090C4382B04E5CF008931A6 /* posts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = posts.json; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* NewLoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginPage.swift; sourceTree = "<group>"; };
@@ -574,7 +574,7 @@
 			children = (
 				50369A6E2B30417A005D6B43 /* Post */,
 				50998AF52B35D4C1002196B5 /* User */,
-				5054CDF42B289E7F00645F5C /* AuthViewModel.swift */,
+				5054CDF42B289E7F00645F5C /* LoginViewModel.swift */,
 				50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */,
 				5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */,
 				50E60DE42AFF80B400CA088F /* UserViewModel.swift */,
@@ -800,7 +800,7 @@
 				50B11AE62AFB8368002A7B91 /* Message.swift in Sources */,
 				50F85B432B242CA000D04787 /* Errors.swift in Sources */,
 				50998AFE2B366C29002196B5 /* WrappingHStack.swift in Sources */,
-				5054CDF52B289E7F00645F5C /* AuthViewModel.swift in Sources */,
+				5054CDF52B289E7F00645F5C /* LoginViewModel.swift in Sources */,
 				50998B042B3708FC002196B5 /* BusinessuserRegisterRequestDto.swift in Sources */,
 				50998AF72B35D4EA002196B5 /* RegularUserRegisterViewModel.swift in Sources */,
 				5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */,

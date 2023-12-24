@@ -1,30 +1,36 @@
 //
-//  AuthViewModel.swift
+//  LoginViewModel.swift
 //  locarie
 //
 //  Created by qiuty on 12/12/2023.
 //
 
+import Combine
 import Foundation
 import SwiftUI
 
-class AuthViewModel: ObservableObject {
-  @Published var loginRequestDto: UserLoginRequestDto
+final class LoginViewModel: ObservableObject {
+  @Published var dto: LoginRequestDto
+  @Published var isFormValid = false
+
+  private var publishers: Set<AnyCancellable> = []
 
   init() {
-    loginRequestDto = UserLoginRequestDto(email: "", password: "")
+    dto = LoginRequestDto(email: "", password: "")
+    isFormValidPublisher
+      .receive(on: RunLoop.main)
+      .assign(to: \.isFormValid, on: self)
+      .store(in: &publishers)
   }
 
   func login(
-    email: String,
-    password: String,
     onSuccess: @escaping Completion,
     onFailure: @escaping Completion,
     onError: @escaping (Error) -> Void
   ) {
     Task {
       do {
-        let dto = UserLoginRequestDto(email: email, password: password)
+        let dto = LoginRequestDto(email: dto.email, password: dto.password)
         let response = try await APIServices.login(dto: dto)
         handleLoginResponse(
           response,
@@ -42,6 +48,7 @@ class AuthViewModel: ObservableObject {
     onSuccess: Completion,
     onFailure: Completion
   ) {
+    debugPrint(response)
     response.status == 0
       ? handleLoginSuccess(response, completion: onSuccess)
       : handleLoginFailure(response, completion: onFailure)
@@ -66,7 +73,31 @@ class AuthViewModel: ObservableObject {
   }
 }
 
-extension AuthViewModel {
-  typealias Response = ResponseDto<UserLoginResponse>
+private extension LoginViewModel {
+  var isEmailValidPublisher: AnyPublisher<Bool, Never> {
+    $dto.map { dto in
+      !dto.email.isEmpty
+    }
+    .eraseToAnyPublisher()
+  }
+
+  var isPasswordValidPublisher: AnyPublisher<Bool, Never> {
+    $dto.map { dto in
+      !dto.password.isEmpty
+    }
+    .eraseToAnyPublisher()
+  }
+
+  var isFormValidPublisher: AnyPublisher<Bool, Never> {
+    Publishers.CombineLatest(isEmailValidPublisher, isPasswordValidPublisher)
+      .map { isEmailValid, isPasswordValid in
+        isEmailValid && isPasswordValid
+      }
+      .eraseToAnyPublisher()
+  }
+}
+
+extension LoginViewModel {
+  typealias Response = ResponseDto<LoginResponseDto>
   typealias Completion = (_ response: Response) -> Void
 }

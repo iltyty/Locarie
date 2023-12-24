@@ -8,8 +8,8 @@
 import Alamofire
 
 extension APIServices {
-  static func login(dto: UserLoginRequestDto) async throws
-    -> ResponseDto<UserLoginResponse>
+  static func login(dto: LoginRequestDto) async throws
+    -> ResponseDto<LoginResponseDto>
   {
     do {
       let parameters = try structToDict(data: dto)
@@ -21,7 +21,7 @@ extension APIServices {
   }
 
   private static func sendLoginRequest(parameters: Parameters?) async throws
-    -> ResponseDto<UserLoginResponse>
+    -> ResponseDto<LoginResponseDto>
   {
     try await AF
       .request(
@@ -29,7 +29,7 @@ extension APIServices {
         method: .post,
         parameters: parameters
       )
-      .serializingDecodable(ResponseDto<UserLoginResponse>.self)
+      .serializingDecodable(ResponseDto<LoginResponseDto>.self)
       .value
   }
 

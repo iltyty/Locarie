@@ -8,9 +8,23 @@
 import SwiftUI
 
 struct NewLoginPage: View {
-  @StateObject var authViewModel = AuthViewModel()
+  @StateObject private var authViewModel = LoginViewModel()
+  @StateObject private var cacheViewModel = LocalCacheViewModel()
+
+  @State private var isLoading = false
+  @State private var isAlertShowing = false
+  @State private var alertTitle = AlertTitle.none
 
   var body: some View {
+    content
+      .disabled(isLoading)
+      .overlay(loadingOverlayView)
+      .alert(alertTitle.rawValue, isPresented: $isAlertShowing) {
+        Button("OK") {}
+      }
+  }
+
+  var content: some View {
     NavigationView {
       VStack(spacing: Constants.formItemSpacing) {
         Spacer()
@@ -29,6 +43,16 @@ struct NewLoginPage: View {
     }
   }
 
+  var loadingOverlayView: some View {
+    isLoading ? loadingView : nil
+  }
+
+  var loadingView: some View {
+    ProgressView()
+      .progressViewStyle(.circular)
+      .background(.white.opacity(Constants.loadingBackgroundOpacity))
+  }
+
   var locarieIcon: some View {
     HStack {
       Spacer()
@@ -45,7 +69,7 @@ struct NewLoginPage: View {
   var emailInput: some View {
     formItemBuilder(
       hint: "Email",
-      input: $authViewModel.loginRequestDto.email,
+      input: $authViewModel.dto.email,
       isSecure: false
     )
   }
@@ -53,7 +77,7 @@ struct NewLoginPage: View {
   var passwordInput: some View {
     formItemBuilder(
       hint: "Password",
-      input: $authViewModel.loginRequestDto.password,
+      input: $authViewModel.dto.password,
       isSecure: true
     )
   }
@@ -72,8 +96,10 @@ struct NewLoginPage: View {
 
   var loginButton: some View {
     primaryButtonBuilder(text: "Log in") {
-      print("log in button tapped")
+      login()
     }
+    .disabled(!authViewModel.isFormValid)
+    .opacity(authViewModel.isFormValid ? 1 : Constants.buttonInvalidOpacity)
   }
 
   var orText: some View {
@@ -109,11 +135,65 @@ struct NewLoginPage: View {
   }
 }
 
+extension NewLoginPage {
+  private func login() {
+    Task {
+      authViewModel.login(
+        onSuccess: handleLoginSuccess,
+        onFailure: handleLoginFailure,
+        onError: handleLoginError
+      )
+    }
+  }
+
+  private func handleLoginSuccess(_ response: Response) {
+    isLoading = false
+    if let info = response.data {
+      cacheViewModel.setUserInfo(info)
+    }
+    alertTitle = .success
+    isAlertShowing = true
+  }
+
+  private func handleLoginFailure(_ response: Response) {
+    isLoading = false
+    if let code = ResultCode(rawValue: response.status) {
+      switch code {
+      case .incorrectCredentials:
+        alertTitle = .incorrectCredential
+      default:
+        alertTitle = .unknownError
+      }
+    } else {
+      alertTitle = .unknownError
+    }
+    isAlertShowing = true
+  }
+
+  private func handleLoginError(_ error: Error) {
+    debugPrint(error)
+    isLoading = false
+    alertTitle = .unknownError
+    isAlertShowing = true
+  }
+}
+
+private enum AlertTitle: String {
+  case success = "Login success"
+  case incorrectCredential = "Incorret email or password"
+  case unknownError = "Something went wrong, please try again later"
+  case none = ""
+}
+
 private enum Constants {
   static let locarieIconSize = 64.0
   static let googleIconSize = 32.0
   static let formItemSpacing = 15.0
+  static let loadingBackgroundOpacity = 0.05
+  static let buttonInvalidOpacity = 0.5
 }
+
+private typealias Response = ResponseDto<LoginResponseDto>
 
 #Preview {
   NewLoginPage()

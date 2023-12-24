@@ -16,7 +16,7 @@ struct RegisterPage: View {
   @State private var isAlertShowing = false
   @State private var alertTitle: AlertTitle?
 
-  private let authViewModel = AuthViewModel()
+  private let authViewModel = LoginViewModel()
 
   var body: some View {
     makeLoginPageBackground(content)
@@ -176,8 +176,6 @@ extension RegisterPage {
 extension RegisterPage {
   private func login() {
     authViewModel.login(
-      email: user.email,
-      password: user.password,
       onSuccess: handleLoginSuccess,
       onFailure: handleLoginFailure,
       onError: handleLoginError
@@ -225,7 +223,7 @@ extension RegisterPage {
 }
 
 extension RegisterPage {
-  private typealias Response = ResponseDto<UserLoginResponse>
+  private typealias Response = ResponseDto<LoginResponseDto>
   private typealias Completion = (_ response: Response) -> Void
 }
 

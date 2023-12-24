@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct UserLoginRequestDto: Codable {
+struct LoginRequestDto: Codable {
   var email: String
   var password: String
 }
 
-struct UserLoginResponse: Codable, UserInfo {
+struct LoginResponseDto: Codable, UserInfo {
   let id: Double
   let type: String
   let username: String
