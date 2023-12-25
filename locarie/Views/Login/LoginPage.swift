@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginPage: View {
-  @StateObject private var authViewModel = LoginViewModel()
+  @StateObject private var loginViewModel = LoginViewModel()
   @StateObject private var cacheViewModel = LocalCacheViewModel()
 
   @State private var isLoading = false
@@ -69,7 +69,7 @@ struct LoginPage: View {
   var emailInput: some View {
     formItemBuilder(
       hint: "Email",
-      input: $authViewModel.dto.email,
+      input: $loginViewModel.dto.email,
       isSecure: false
     )
   }
@@ -77,7 +77,7 @@ struct LoginPage: View {
   var passwordInput: some View {
     formItemBuilder(
       hint: "Password",
-      input: $authViewModel.dto.password,
+      input: $loginViewModel.dto.password,
       isSecure: true
     )
   }
@@ -98,8 +98,8 @@ struct LoginPage: View {
     primaryButtonBuilder(text: "Log in") {
       login()
     }
-    .disabled(!authViewModel.isFormValid)
-    .opacity(authViewModel.isFormValid ? 1 : Constants.buttonInvalidOpacity)
+    .disabled(isLoginButtonDisabled)
+    .opacity(loginButtonOpacity)
   }
 
   var orText: some View {
@@ -134,12 +134,20 @@ struct LoginPage: View {
       }
     }
   }
+
+  var isLoginButtonDisabled: Bool {
+    !loginViewModel.isFormValid
+  }
+
+  var loginButtonOpacity: CGFloat {
+    isLoginButtonDisabled ? Constants.buttonDisabledOpacity : 1
+  }
 }
 
 extension LoginPage {
   private func login() {
     Task {
-      authViewModel.login(
+      loginViewModel.login(
         onSuccess: handleLoginSuccess,
         onFailure: handleLoginFailure,
         onError: handleLoginError
@@ -191,7 +199,7 @@ private enum Constants {
   static let googleIconSize = 32.0
   static let formItemSpacing = 15.0
   static let loadingBackgroundOpacity = 0.05
-  static let buttonInvalidOpacity = 0.5
+  static let buttonDisabledOpacity = 0.5
 }
 
 private typealias Response = ResponseDto<LoginResponseDto>

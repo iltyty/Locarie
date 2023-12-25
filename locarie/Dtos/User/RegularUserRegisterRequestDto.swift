@@ -13,5 +13,4 @@ struct RegularUserRegisterRequestDto: Codable {
   var lastName = ""
   var username = ""
   var password = ""
-  var confirmPassword = ""
 }

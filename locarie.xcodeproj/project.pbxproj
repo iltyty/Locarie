@@ -59,6 +59,7 @@
 		50998B0A2B370ED5002196B5 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B092B370ED5002196B5 /* TagView.swift */; };
 		50998B0C2B371086002196B5 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0B2B371086002196B5 /* Tag.swift */; };
 		50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */; };
+		50998B102B39161D002196B5 /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0F2B39161D002196B5 /* RegexConstants.swift */; };
 		509CDA342B1F1AE9004A6D22 /* RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */; };
 		509CDA372B1F1AFE004A6D22 /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA362B1F1AFE004A6D22 /* CustomInputField.swift */; };
 		509CDA392B1F2414004A6D22 /* LoginRegisterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA382B1F2414004A6D22 /* LoginRegisterUtil.swift */; };
@@ -159,6 +160,7 @@
 		50998B092B370ED5002196B5 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		50998B0B2B371086002196B5 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAddressPage.swift; sourceTree = "<group>"; };
+		50998B0F2B39161D002196B5 /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
 		509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPage.swift; sourceTree = "<group>"; };
 		509CDA362B1F1AFE004A6D22 /* CustomInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputField.swift; sourceTree = "<group>"; };
 		509CDA382B1F2414004A6D22 /* LoginRegisterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterUtil.swift; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 				500F66232B25CE320074FE3C /* LocalCacheKeys.swift */,
 				509CDA382B1F2414004A6D22 /* LoginRegisterUtil.swift */,
 				50998AED2B35BAAD002196B5 /* LoginRegisterComponentBuilder.swift */,
+				50998B0F2B39161D002196B5 /* RegexConstants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */,
+				50998B102B39161D002196B5 /* RegexConstants.swift in Sources */,
 				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+Extensions.swift in Sources */,
 				502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */,
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */,

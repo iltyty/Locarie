@@ -22,7 +22,9 @@ final class LoginViewModel: ObservableObject {
       .assign(to: \.isFormValid, on: self)
       .store(in: &publishers)
   }
+}
 
+extension LoginViewModel {
   func login(
     onSuccess: @escaping Completion,
     onFailure: @escaping Completion,

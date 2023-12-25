@@ -22,7 +22,6 @@ struct RegularRegisterPage: View {
       lastNameInput
       usernameInput
       passwordInput
-//      confirmPasswordInput
       notificationPicker
       servicePicker
       Spacer()
@@ -89,16 +88,6 @@ struct RegularRegisterPage: View {
     }
   }
 
-  var confirmPasswordInput: some View {
-    formItemWithTitleBuilder(
-      title: "Confirm password",
-      hint: "Confirm password",
-      input: $registerViewModel.dto.confirmPassword,
-      isSecure: false
-    )
-    .padding(.bottom)
-  }
-
   var notificationPicker: some View {
     let systemName = isNotificationReceived ? "circle.fill" : "circle"
     return HStack(alignment: .top, spacing: Constants.pickerLineImageSpacing) {
@@ -135,6 +124,16 @@ struct RegularRegisterPage: View {
     primaryButtonBuilder(text: "Create Account") {
       print("create button tapped")
     }
+    .disabled(isButtonDisabled)
+    .opacity(buttonOpacity)
+  }
+
+  var isButtonDisabled: Bool {
+    !registerViewModel.isFormValid || !isServiceAgreed
+  }
+
+  var buttonOpacity: CGFloat {
+    isButtonDisabled ? Constants.buttonDisabledOpacity : 1
   }
 }
 
@@ -160,6 +159,7 @@ extension RegularRegisterPage {
 private enum Constants {
   static let spacing = 10.0
   static let pickerLineImageSpacing = 10.0
+  static let buttonDisabledOpacity = 0.5
 }
 
 #Preview {
