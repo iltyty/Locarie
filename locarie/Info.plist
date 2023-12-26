@@ -4,6 +4,8 @@
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to display nearby posts for you</string>
+	<key>MBXAccessToken</key>
+	<string>pk.eyJ1IjoibHVsdS1xIiwiYSI6ImNscWxwc3RsNDJ2YjcyanFmdnFmNGo5NHQifQ.KDGJ7IrR1Mosjs61rNVnXQ</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict/>

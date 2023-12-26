@@ -12,12 +12,12 @@ struct BusinessRegisterPage: View {
 
   var body: some View {
     NavigationView {
-      VStack(spacing: 50) {
+      VStack(spacing: Constants.vSpacing) {
         navigationTitle
         businessNameInput
         businessCategoryInput
         businessAddressInput
-        nextButton
+        createButton
         Spacer()
       }
     }
@@ -38,7 +38,7 @@ struct BusinessRegisterPage: View {
 
   var businessCategoryInput: some View {
     NavigationLink {
-      BusinessCategoryPage()
+      BusinessCategoryPage($registerViewModel.dto.businessCategory)
     } label: {
       formItemWithTitleBuilder(
         title: "Business category",
@@ -68,13 +68,28 @@ struct BusinessRegisterPage: View {
     .buttonStyle(.plain)
   }
 
-  var nextButton: some View {
+  var createButton: some View {
     NavigationLink {
-      BusinessCategoryPage()
+      RegularRegisterPage()
     } label: {
-      primaryForegroundItemBuilder(text: "Next")
+      primaryForegroundItemBuilder(text: "Create Account")
+        .disabled(isButtonDisabled)
+        .opacity(buttonOpacity)
     }
   }
+
+  var isButtonDisabled: Bool {
+    !registerViewModel.isFormValid
+  }
+
+  var buttonOpacity: CGFloat {
+    isButtonDisabled ? Constants.buttonDisabledOpacity : 1
+  }
+}
+
+private enum Constants {
+  static let vSpacing = 50.0
+  static let buttonDisabledOpacity = 0.5
 }
 
 #Preview {

@@ -57,7 +57,7 @@
 		50998B062B37096B002196B5 /* BusinessUserRegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B052B37096B002196B5 /* BusinessUserRegisterViewModel.swift */; };
 		50998B082B370B34002196B5 /* BusinessCategoryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B072B370B34002196B5 /* BusinessCategoryPage.swift */; };
 		50998B0A2B370ED5002196B5 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B092B370ED5002196B5 /* TagView.swift */; };
-		50998B0C2B371086002196B5 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0B2B371086002196B5 /* Tag.swift */; };
+		50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0B2B371086002196B5 /* BusinessCategory.swift */; };
 		50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */; };
 		50998B102B39161D002196B5 /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0F2B39161D002196B5 /* RegexConstants.swift */; };
 		509CDA342B1F1AE9004A6D22 /* RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */; };
@@ -81,6 +81,7 @@
 		50B11AE62AFB8368002A7B91 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AE52AFB8368002A7B91 /* Message.swift */; };
 		50B11AE82AFB8392002A7B91 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AE72AFB8392002A7B91 /* User.swift */; };
 		50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */; };
+		50B5DEBF2B3ADE1800C0A641 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */; };
 		50E60DDD2AFF78D400CA088F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDC2AFF78D400CA088F /* Post.swift */; };
 		50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDE2AFF79A400CA088F /* PostViewModel.swift */; };
 		50E60DE52AFF80B400CA088F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE42AFF80B400CA088F /* UserViewModel.swift */; };
@@ -158,7 +159,7 @@
 		50998B052B37096B002196B5 /* BusinessUserRegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessUserRegisterViewModel.swift; sourceTree = "<group>"; };
 		50998B072B370B34002196B5 /* BusinessCategoryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCategoryPage.swift; sourceTree = "<group>"; };
 		50998B092B370ED5002196B5 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
-		50998B0B2B371086002196B5 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		50998B0B2B371086002196B5 /* BusinessCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCategory.swift; sourceTree = "<group>"; };
 		50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAddressPage.swift; sourceTree = "<group>"; };
 		50998B0F2B39161D002196B5 /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
 		509CDA332B1F1AE9004A6D22 /* RegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPage.swift; sourceTree = "<group>"; };
@@ -185,6 +186,10 @@
 		50B11AE52AFB8368002A7B91 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		50B11AE72AFB8392002A7B91 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		50D058392B3A7FD200DE40AF /* MapboxCommon.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MapboxCommon.xcframework; path = ../../Downloads/artifacts/MapboxCommon.xcframework; sourceTree = "<group>"; };
+		50D0583A2B3A7FD200DE40AF /* Turf.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Turf.xcframework; path = ../../Downloads/artifacts/Turf.xcframework; sourceTree = "<group>"; };
+		50D0583B2B3A7FD200DE40AF /* MapboxMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MapboxMaps.xcframework; path = ../../Downloads/artifacts/MapboxMaps.xcframework; sourceTree = "<group>"; };
+		50D0583C2B3A7FD200DE40AF /* MapboxCoreMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MapboxCoreMaps.xcframework; path = ../../Downloads/artifacts/MapboxCoreMaps.xcframework; sourceTree = "<group>"; };
 		50E60DDC2AFF78D400CA088F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		50E60DDE2AFF79A400CA088F /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		50E60DE42AFF80B400CA088F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -201,6 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50B5DEBF2B3ADE1800C0A641 /* MapboxMaps in Frameworks */,
 				503905782B340A4E005B574F /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,6 +457,7 @@
 				50AAB18C2AEFA2ED003FEDF1 /* locarieTests */,
 				50AAB1962AEFA2ED003FEDF1 /* locarieUITests */,
 				50AAB17A2AEFA2E9003FEDF1 /* Products */,
+				50D058382B3A7FD200DE40AF /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -563,7 +570,7 @@
 				50369A632B2DBC4B005D6B43 /* Post */,
 				50369A622B2DBC3B005D6B43 /* User */,
 				500F66252B2854A80074FE3C /* LocalCache.swift */,
-				50998B0B2B371086002196B5 /* Tag.swift */,
+				50998B0B2B371086002196B5 /* BusinessCategory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -579,6 +586,17 @@
 				50E60DE42AFF80B400CA088F /* UserViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		50D058382B3A7FD200DE40AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				50D058392B3A7FD200DE40AF /* MapboxCommon.xcframework */,
+				50D0583C2B3A7FD200DE40AF /* MapboxCoreMaps.xcframework */,
+				50D0583B2B3A7FD200DE40AF /* MapboxMaps.xcframework */,
+				50D0583A2B3A7FD200DE40AF /* Turf.xcframework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		50E60DE62AFF885200CA088F /* Common */ = {
@@ -622,6 +640,7 @@
 			name = locarie;
 			packageProductDependencies = (
 				503905772B340A4E005B574F /* Alamofire */,
+				50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */,
 			);
 			productName = locarie;
 			productReference = 50AAB1792AEFA2E9003FEDF1 /* locarie.app */;
@@ -697,6 +716,7 @@
 			mainGroup = 50AAB1702AEFA2E9003FEDF1;
 			packageReferences = (
 				503905762B340A4E005B574F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				50B5DEBD2B3ADE1800C0A641 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
 			);
 			productRefGroup = 50AAB17A2AEFA2E9003FEDF1 /* Products */;
 			projectDirPath = "";
@@ -779,7 +799,7 @@
 				502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */,
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
 				50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */,
-				50998B0C2B371086002196B5 /* Tag.swift in Sources */,
+				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
 				5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */,
 				5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */,
 				509CDA392B1F2414004A6D22 /* LoginRegisterUtil.swift in Sources */,
@@ -1161,6 +1181,14 @@
 				minimumVersion = 5.8.1;
 			};
 		};
+		50B5DEBD2B3ADE1800C0A641 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1168,6 +1196,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 503905762B340A4E005B574F /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50B5DEBD2B3ADE1800C0A641 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */;
+			productName = MapboxMaps;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

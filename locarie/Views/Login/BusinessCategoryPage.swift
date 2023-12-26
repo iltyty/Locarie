@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct BusinessCategoryPage: View {
-  @StateObject var registerViewModel = BusinessUserRegisterViewModel()
+  @Environment(\.dismiss) var dismiss
+
+  @Binding var category: String
+
+  init(_ category: Binding<String>) {
+    _category = category
+  }
 
   var body: some View {
     VStack {
       navigationTitle
-      searchBar
       tags
-      Spacer()
       confirmButton
       Spacer()
     }
@@ -23,27 +27,45 @@ struct BusinessCategoryPage: View {
 
   var navigationTitle: some View {
     navigationTitleBuilder(title: "Business category")
-  }
-
-  var searchBar: some View {
-    SearchBarView()
+      .padding(.bottom, Constants.titlePadding)
   }
 
   var tags: some View {
     WrappingHStack(alignment: .leading) {
-      ForEach(Tag.allCases, id: \.self) { tag in
-        TagView(tag)
+      ForEach(BusinessCategory.allCases, id: \.self) { businessCategory in
+        let tag = businessCategory.rawValue
+        TagView(tag: tag, isSelected: tag == category)
+          .onTapGesture {
+            category = tag
+          }
       }
     }
+    .padding(.bottom)
   }
 
   var confirmButton: some View {
     primaryButtonBuilder(text: "Confirm") {
-      print("confirm button tapped")
+      dismiss()
     }
+    .disabled(isButtonDisabled)
+    .opacity(buttonOpacity)
+  }
+
+  var isButtonDisabled: Bool {
+    category.isEmpty
+  }
+
+  var buttonOpacity: CGFloat {
+    isButtonDisabled ? Constants.buttonDisabledOpacity : 1
   }
 }
 
+private enum Constants {
+  static let titlePadding = 100.0
+  static let buttonDisabledOpacity = 0.5
+}
+
 #Preview {
-  BusinessCategoryPage()
+  @State var category = ""
+  return BusinessCategoryPage($category)
 }

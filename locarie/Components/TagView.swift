@@ -8,23 +8,20 @@
 import SwiftUI
 
 struct TagView: View {
-  let tag: Tag
+  let tag: String
+  var isSelected: Bool
 
-  init(_ tag: Tag) {
+  init(tag: String, isSelected: Bool) {
     self.tag = tag
+    self.isSelected = isSelected
   }
 
-  @State var isSelected = false
-
   var body: some View {
-    Text(tag.rawValue)
-      .foregroundStyle(isSelected ? Color.locariePrimary : .primary)
+    Text(tag)
+      .foregroundStyle(isSelected ? Color.locariePrimary : .secondary)
       .padding(.horizontal, Constants.hPadding)
       .padding(.vertical, Constants.vPadding)
       .background(background)
-      .onTapGesture {
-        isSelected.toggle()
-      }
   }
 
   var background: some View {
@@ -41,5 +38,5 @@ private enum Constants {
 }
 
 #Preview {
-  TagView(.bar)
+  TagView(tag: "test", isSelected: true)
 }

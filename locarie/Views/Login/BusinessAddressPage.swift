@@ -6,18 +6,21 @@
 //
 
 import CoreLocation
-import MapKit
+@_spi(Experimental) import MapboxMaps
 import SwiftUI
 
 struct BusinessAddressPage: View {
   @StateObject var locationManager = LocationManager()
 
+  @State var viewport: Viewport = .followPuck(zoom: 13)
   @State var address = ""
 
   var body: some View {
-    navigationTitle
-    map
-    bottom
+    VStack {
+      navigationTitle
+      map
+      bottom
+    }
   }
 
   var navigationTitle: some View {
@@ -25,24 +28,46 @@ struct BusinessAddressPage: View {
   }
 
   var map: some View {
-    Map(position: .constant(.region(mapRegion))) {}
+    Map(viewport: $viewport) {
+      Puck2D(bearing: .heading)
+        .showsAccuracyRing(true)
+    }
+    .mapStyle(.streets)
   }
 
   var bottom: some View {
     VStack {
-      formItemWithTitleBuilder(
-        title: "Address name",
-        hint: "Address name",
-        input: $address,
-        isSecure: false
-      )
-      .padding(.vertical)
-      primaryButtonBuilder(text: "Confirm") {
-        print("confirm button tapped")
-      }
-      .padding(.bottom)
+      bottomSearchBar
+      confirmButton
     }
     .background(bottomBackground)
+  }
+
+  var bottomSearchBar: some View {
+    formItemWithTitleBuilder(
+      title: "Address name",
+      hint: "Address name",
+      input: $address,
+      isSecure: false
+    )
+    .padding(.vertical)
+  }
+
+  var confirmButton: some View {
+    primaryButtonBuilder(text: "Confirm") {
+      print("d")
+//      PlaceAutocomplete(accessToken: "sk.eyJ1IjoibHVsdS1xIiwiYSI6ImNscWxxaG1vNjJtbHIyam1lcmYyajQza2kifQ.eCqg31YOP24SQ-USbd0VjA")
+//        .suggestions(for: address) { result in
+//          switch result {
+//          case .success(let suggestions):
+//            print(suggestions)
+//
+//          case .failure(let error):
+//            debugPrint(error)
+//          }
+//        }
+    }
+    .padding(.bottom)
   }
 
   var bottomBackground: some View {
@@ -55,13 +80,13 @@ struct BusinessAddressPage: View {
 }
 
 extension BusinessAddressPage {
-  var mapRegion: MKCoordinateRegion {
-    .init(
-      center: mapCenterLocation,
-      latitudinalMeters: Constants.latitudinalMeters,
-      longitudinalMeters: Constants.longitudinalMeters
-    )
-  }
+//  var mapRegion: MKCoordinateRegion {
+//    .init(
+//      center: mapCenterLocation,
+//      latitudinalMeters: Constants.latitudinalMeters,
+//      longitudinalMeters: Constants.longitudinalMeters
+//    )
+//  }
 
   var mapCenterLocation: CLLocationCoordinate2D {
     guard let location = locationManager.location else {
