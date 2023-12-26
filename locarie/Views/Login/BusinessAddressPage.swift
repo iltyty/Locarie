@@ -10,10 +10,10 @@ import CoreLocation
 import SwiftUI
 
 struct BusinessAddressPage: View {
+  @StateObject private var addressViewModel = PlaceSuggestionsViewModel()
   @StateObject var locationManager = LocationManager()
 
-  @State var viewport: Viewport = .followPuck(zoom: 13)
-  @State var address = ""
+  @State private var viewport: Viewport = .followPuck(zoom: 13)
 
   var body: some View {
     VStack {
@@ -21,13 +21,19 @@ struct BusinessAddressPage: View {
       map
       bottom
     }
+    .onAppear { beginListeningToSearch() }
   }
 
-  var navigationTitle: some View {
+  private func beginListeningToSearch() {
+    let origin = locationManager.location?.coordinate ?? nil
+    addressViewModel.listenToSearch(withOrigin: origin)
+  }
+
+  private var navigationTitle: some View {
     navigationTitleBuilder(title: "Business address")
   }
 
-  var map: some View {
+  private var map: some View {
     Map(viewport: $viewport) {
       Puck2D(bearing: .heading)
         .showsAccuracyRing(true)
@@ -35,7 +41,7 @@ struct BusinessAddressPage: View {
     .mapStyle(.streets)
   }
 
-  var bottom: some View {
+  private var bottom: some View {
     VStack {
       bottomSearchBar
       confirmButton
@@ -43,17 +49,17 @@ struct BusinessAddressPage: View {
     .background(bottomBackground)
   }
 
-  var bottomSearchBar: some View {
+  private var bottomSearchBar: some View {
     formItemWithTitleBuilder(
       title: "Address name",
       hint: "Address name",
-      input: $address,
+      input: $addressViewModel.place,
       isSecure: false
     )
     .padding(.vertical)
   }
 
-  var confirmButton: some View {
+  private var confirmButton: some View {
     primaryButtonBuilder(text: "Confirm") {
       print("d")
 //      PlaceAutocomplete(accessToken: "sk.eyJ1IjoibHVsdS1xIiwiYSI6ImNscWxxaG1vNjJtbHIyam1lcmYyajQza2kifQ.eCqg31YOP24SQ-USbd0VjA")
@@ -70,7 +76,7 @@ struct BusinessAddressPage: View {
     .padding(.bottom)
   }
 
-  var bottomBackground: some View {
+  private var bottomBackground: some View {
     UnevenRoundedRectangle(
       topLeadingRadius: Constants.bottomBackgroundCornerRadius,
       topTrailingRadius: Constants.bottomBackgroundCornerRadius

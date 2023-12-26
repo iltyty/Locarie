@@ -82,6 +82,13 @@
 		50B11AE82AFB8392002A7B91 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AE72AFB8392002A7B91 /* User.swift */; };
 		50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */; };
 		50B5DEBF2B3ADE1800C0A641 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */; };
+		50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */; };
+		50B5DEC62B3B092F00C0A641 /* MapboxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEC52B3B092F00C0A641 /* MapboxService.swift */; };
+		50B5DECB2B3B099E00C0A641 /* PlaceSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DECA2B3B099E00C0A641 /* PlaceSuggestions.swift */; };
+		50B5DED12B3B162500C0A641 /* PlaceSuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DED02B3B162500C0A641 /* PlaceSuggestionsViewModel.swift */; };
+		50B5DED42B3B19AA00C0A641 /* MapboxError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DED32B3B19AA00C0A641 /* MapboxError.swift */; };
+		50B5DED72B3B270C00C0A641 /* PlaceSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DED62B3B270C00C0A641 /* PlaceSearcher.swift */; };
+		50B5DEDA2B3B2DCC00C0A641 /* PlaceSuggestionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DED92B3B2DCC00C0A641 /* PlaceSuggestionItem.swift */; };
 		50E60DDD2AFF78D400CA088F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDC2AFF78D400CA088F /* Post.swift */; };
 		50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDE2AFF79A400CA088F /* PostViewModel.swift */; };
 		50E60DE52AFF80B400CA088F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE42AFF80B400CA088F /* UserViewModel.swift */; };
@@ -186,6 +193,13 @@
 		50B11AE52AFB8368002A7B91 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		50B11AE72AFB8392002A7B91 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxAPIEndpoints.swift; sourceTree = "<group>"; };
+		50B5DEC52B3B092F00C0A641 /* MapboxService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxService.swift; sourceTree = "<group>"; };
+		50B5DECA2B3B099E00C0A641 /* PlaceSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSuggestions.swift; sourceTree = "<group>"; };
+		50B5DED02B3B162500C0A641 /* PlaceSuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSuggestionsViewModel.swift; sourceTree = "<group>"; };
+		50B5DED32B3B19AA00C0A641 /* MapboxError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxError.swift; sourceTree = "<group>"; };
+		50B5DED62B3B270C00C0A641 /* PlaceSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearcher.swift; sourceTree = "<group>"; };
+		50B5DED92B3B2DCC00C0A641 /* PlaceSuggestionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSuggestionItem.swift; sourceTree = "<group>"; };
 		50E60DDC2AFF78D400CA088F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		50E60DDE2AFF79A400CA088F /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		50E60DE42AFF80B400CA088F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -472,6 +486,7 @@
 		50AAB17B2AEFA2E9003FEDF1 /* locarie */ = {
 			isa = PBXGroup;
 			children = (
+				50B5DEC02B3B07B300C0A641 /* MapboxSDK */,
 				50E60DE62AFF885200CA088F /* Common */,
 				50277F7E2AF12A640045AB12 /* Components */,
 				500F661F2B257C4C0074FE3C /* Dtos */,
@@ -579,6 +594,68 @@
 				50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */,
 				5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */,
 				50E60DE42AFF80B400CA088F /* UserViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		50B5DEC02B3B07B300C0A641 /* MapboxSDK */ = {
+			isa = PBXGroup;
+			children = (
+				50B5DED82B3B28D900C0A641 /* ViewModels */,
+				50B5DED52B3B26FA00C0A641 /* UIComponents */,
+				50B5DED22B3B198300C0A641 /* Errors */,
+				50B5DEC92B3B099400C0A641 /* Dtos */,
+				50B5DEC82B3B096700C0A641 /* Models */,
+				50B5DEC72B3B095D00C0A641 /* Networking */,
+			);
+			path = MapboxSDK;
+			sourceTree = "<group>";
+		};
+		50B5DEC72B3B095D00C0A641 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */,
+				50B5DEC52B3B092F00C0A641 /* MapboxService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		50B5DEC82B3B096700C0A641 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		50B5DEC92B3B099400C0A641 /* Dtos */ = {
+			isa = PBXGroup;
+			children = (
+				50B5DECA2B3B099E00C0A641 /* PlaceSuggestions.swift */,
+			);
+			path = Dtos;
+			sourceTree = "<group>";
+		};
+		50B5DED22B3B198300C0A641 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				50B5DED32B3B19AA00C0A641 /* MapboxError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		50B5DED52B3B26FA00C0A641 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				50B5DED62B3B270C00C0A641 /* PlaceSearcher.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		50B5DED82B3B28D900C0A641 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				50B5DED02B3B162500C0A641 /* PlaceSuggestionsViewModel.swift */,
+				50B5DED92B3B2DCC00C0A641 /* PlaceSuggestionItem.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -746,6 +823,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */,
 				50B11AE82AFB8392002A7B91 /* User.swift in Sources */,
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
 				50E60DEA2B006FB100CA088F /* LocationManager.swift in Sources */,
@@ -773,6 +851,7 @@
 				5037D2C92AF2337400108F0F /* MessageRowView.swift in Sources */,
 				502A4FF62B32D48400C0833A /* PostListService.swift in Sources */,
 				50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */,
+				50B5DECB2B3B099E00C0A641 /* PlaceSuggestions.swift in Sources */,
 				50277F742AF117700045AB12 /* HomePage.swift in Sources */,
 				509CDA342B1F1AE9004A6D22 /* RegisterPage.swift in Sources */,
 				50F85B452B242EE200D04787 /* APIServices.swift in Sources */,
@@ -782,6 +861,7 @@
 				50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */,
 				502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */,
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
+				50B5DED42B3B19AA00C0A641 /* MapboxError.swift in Sources */,
 				50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */,
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
 				5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */,
@@ -807,6 +887,7 @@
 				5054CDF52B289E7F00645F5C /* LoginViewModel.swift in Sources */,
 				50998B042B3708FC002196B5 /* BusinessuserRegisterRequestDto.swift in Sources */,
 				50998AF72B35D4EA002196B5 /* RegularUserRegisterViewModel.swift in Sources */,
+				50B5DED72B3B270C00C0A641 /* PlaceSearcher.swift in Sources */,
 				5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */,
 				50998B082B370B34002196B5 /* BusinessCategoryPage.swift in Sources */,
 				500F66242B25CE320074FE3C /* LocalCacheKeys.swift in Sources */,
@@ -815,7 +896,10 @@
 				50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */,
 				50277F7D2AF117CE0045AB12 /* UserProfilePage.swift in Sources */,
 				50998AFB2B35D512002196B5 /* RegularUserRegisterRequestDto.swift in Sources */,
+				50B5DEC62B3B092F00C0A641 /* MapboxService.swift in Sources */,
 				50B11ADA2AFB3661002A7B91 /* PostDetailPage.swift in Sources */,
+				50B5DEDA2B3B2DCC00C0A641 /* PlaceSuggestionItem.swift in Sources */,
+				50B5DED12B3B162500C0A641 /* PlaceSuggestionsViewModel.swift in Sources */,
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
 				5000C6CE2AF8D9A20057EF2D /* MessageView.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
