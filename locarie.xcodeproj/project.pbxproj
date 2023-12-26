@@ -186,10 +186,6 @@
 		50B11AE52AFB8368002A7B91 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		50B11AE72AFB8392002A7B91 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
-		50D058392B3A7FD200DE40AF /* MapboxCommon.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MapboxCommon.xcframework; path = ../../Downloads/artifacts/MapboxCommon.xcframework; sourceTree = "<group>"; };
-		50D0583A2B3A7FD200DE40AF /* Turf.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Turf.xcframework; path = ../../Downloads/artifacts/Turf.xcframework; sourceTree = "<group>"; };
-		50D0583B2B3A7FD200DE40AF /* MapboxMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MapboxMaps.xcframework; path = ../../Downloads/artifacts/MapboxMaps.xcframework; sourceTree = "<group>"; };
-		50D0583C2B3A7FD200DE40AF /* MapboxCoreMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MapboxCoreMaps.xcframework; path = ../../Downloads/artifacts/MapboxCoreMaps.xcframework; sourceTree = "<group>"; };
 		50E60DDC2AFF78D400CA088F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		50E60DDE2AFF79A400CA088F /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		50E60DE42AFF80B400CA088F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -457,7 +453,6 @@
 				50AAB18C2AEFA2ED003FEDF1 /* locarieTests */,
 				50AAB1962AEFA2ED003FEDF1 /* locarieUITests */,
 				50AAB17A2AEFA2E9003FEDF1 /* Products */,
-				50D058382B3A7FD200DE40AF /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -586,17 +581,6 @@
 				50E60DE42AFF80B400CA088F /* UserViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		50D058382B3A7FD200DE40AF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				50D058392B3A7FD200DE40AF /* MapboxCommon.xcframework */,
-				50D0583C2B3A7FD200DE40AF /* MapboxCoreMaps.xcframework */,
-				50D0583B2B3A7FD200DE40AF /* MapboxMaps.xcframework */,
-				50D0583A2B3A7FD200DE40AF /* Turf.xcframework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		50E60DE62AFF885200CA088F /* Common */ = {
