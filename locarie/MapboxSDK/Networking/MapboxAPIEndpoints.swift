@@ -11,7 +11,9 @@ public enum MapboxAPIEndpoints {
   static let suggest = URL(
     string: "https://api.mapbox.com/search/searchbox/v1/suggest"
   )!
-  static let retrieve = URL(
-    string: "https://api.mapbox.com/search/searchbox/v1/retrieve"
-  )!
+  static func retrieve(mapboxId id: String) -> URL {
+    URL(
+      string: "https://api.mapbox.com/search/searchbox/v1/retrieve/\(id)"
+    )!
+  }
 }

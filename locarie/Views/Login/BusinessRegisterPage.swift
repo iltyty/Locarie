@@ -38,12 +38,12 @@ struct BusinessRegisterPage: View {
 
   var businessCategoryInput: some View {
     NavigationLink {
-      BusinessCategoryPage($registerViewModel.dto.businessCategory)
+      BusinessCategoryPage($registerViewModel.dto.category)
     } label: {
       formItemWithTitleBuilder(
         title: "Business category",
         hint: "Category",
-        input: $registerViewModel.dto.businessCategory,
+        input: $registerViewModel.dto.category,
         isSecure: false
       )
       .disabled(true)
@@ -54,12 +54,15 @@ struct BusinessRegisterPage: View {
 
   var businessAddressInput: some View {
     NavigationLink {
-      BusinessAddressPage()
+      BusinessAddressPage(
+        address: $registerViewModel.dto.address,
+        location: $registerViewModel.dto.location
+      )
     } label: {
       formItemWithTitleBuilder(
         title: "Business Address",
         hint: "Address",
-        input: $registerViewModel.dto.businessAddress,
+        input: $registerViewModel.dto.address,
         isSecure: false
       )
       .disabled(true)

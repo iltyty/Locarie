@@ -83,12 +83,16 @@
 		50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */; };
 		50B5DEBF2B3ADE1800C0A641 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */; };
 		50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */; };
-		50B5DEC62B3B092F00C0A641 /* MapboxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEC52B3B092F00C0A641 /* MapboxService.swift */; };
+		50B5DEC62B3B092F00C0A641 /* MapboxSuggestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEC52B3B092F00C0A641 /* MapboxSuggestionService.swift */; };
 		50B5DECB2B3B099E00C0A641 /* PlaceSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DECA2B3B099E00C0A641 /* PlaceSuggestions.swift */; };
 		50B5DED12B3B162500C0A641 /* PlaceSuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DED02B3B162500C0A641 /* PlaceSuggestionsViewModel.swift */; };
 		50B5DED42B3B19AA00C0A641 /* MapboxError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DED32B3B19AA00C0A641 /* MapboxError.swift */; };
 		50B5DED72B3B270C00C0A641 /* PlaceSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DED62B3B270C00C0A641 /* PlaceSearcher.swift */; };
 		50B5DEDA2B3B2DCC00C0A641 /* PlaceSuggestionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DED92B3B2DCC00C0A641 /* PlaceSuggestionItem.swift */; };
+		50B5DEDC2B3BE83500C0A641 /* MapboxRetrieveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEDB2B3BE83500C0A641 /* MapboxRetrieveService.swift */; };
+		50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEDD2B3BE89900C0A641 /* PlaceRetrieve.swift */; };
+		50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */; };
+		50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */; };
 		50E60DDD2AFF78D400CA088F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDC2AFF78D400CA088F /* Post.swift */; };
 		50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDE2AFF79A400CA088F /* PostViewModel.swift */; };
 		50E60DE52AFF80B400CA088F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE42AFF80B400CA088F /* UserViewModel.swift */; };
@@ -194,12 +198,16 @@
 		50B11AE72AFB8392002A7B91 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxAPIEndpoints.swift; sourceTree = "<group>"; };
-		50B5DEC52B3B092F00C0A641 /* MapboxService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxService.swift; sourceTree = "<group>"; };
+		50B5DEC52B3B092F00C0A641 /* MapboxSuggestionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxSuggestionService.swift; sourceTree = "<group>"; };
 		50B5DECA2B3B099E00C0A641 /* PlaceSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSuggestions.swift; sourceTree = "<group>"; };
 		50B5DED02B3B162500C0A641 /* PlaceSuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSuggestionsViewModel.swift; sourceTree = "<group>"; };
 		50B5DED32B3B19AA00C0A641 /* MapboxError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxError.swift; sourceTree = "<group>"; };
 		50B5DED62B3B270C00C0A641 /* PlaceSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearcher.swift; sourceTree = "<group>"; };
 		50B5DED92B3B2DCC00C0A641 /* PlaceSuggestionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSuggestionItem.swift; sourceTree = "<group>"; };
+		50B5DEDB2B3BE83500C0A641 /* MapboxRetrieveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxRetrieveService.swift; sourceTree = "<group>"; };
+		50B5DEDD2B3BE89900C0A641 /* PlaceRetrieve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRetrieve.swift; sourceTree = "<group>"; };
+		50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxBaseService.swift; sourceTree = "<group>"; };
+		50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRetrieveViewModel.swift; sourceTree = "<group>"; };
 		50E60DDC2AFF78D400CA088F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		50E60DDE2AFF79A400CA088F /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		50E60DE42AFF80B400CA088F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -615,7 +623,9 @@
 			isa = PBXGroup;
 			children = (
 				50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */,
-				50B5DEC52B3B092F00C0A641 /* MapboxService.swift */,
+				50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */,
+				50B5DEC52B3B092F00C0A641 /* MapboxSuggestionService.swift */,
+				50B5DEDB2B3BE83500C0A641 /* MapboxRetrieveService.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -631,6 +641,7 @@
 			isa = PBXGroup;
 			children = (
 				50B5DECA2B3B099E00C0A641 /* PlaceSuggestions.swift */,
+				50B5DEDD2B3BE89900C0A641 /* PlaceRetrieve.swift */,
 			);
 			path = Dtos;
 			sourceTree = "<group>";
@@ -647,6 +658,7 @@
 			isa = PBXGroup;
 			children = (
 				50B5DED62B3B270C00C0A641 /* PlaceSearcher.swift */,
+				50B5DED92B3B2DCC00C0A641 /* PlaceSuggestionItem.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -655,7 +667,7 @@
 			isa = PBXGroup;
 			children = (
 				50B5DED02B3B162500C0A641 /* PlaceSuggestionsViewModel.swift */,
-				50B5DED92B3B2DCC00C0A641 /* PlaceSuggestionItem.swift */,
+				50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -824,6 +836,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */,
+				50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */,
 				50B11AE82AFB8392002A7B91 /* User.swift in Sources */,
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
 				50E60DEA2B006FB100CA088F /* LocationManager.swift in Sources */,
@@ -836,6 +849,7 @@
 				50998AF42B35D376002196B5 /* RegularRegisterPage.swift in Sources */,
 				502A4FFC2B32D71500C0833A /* UserDto.swift in Sources */,
 				50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */,
+				50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */,
@@ -851,6 +865,7 @@
 				5037D2C92AF2337400108F0F /* MessageRowView.swift in Sources */,
 				502A4FF62B32D48400C0833A /* PostListService.swift in Sources */,
 				50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */,
+				50B5DEDC2B3BE83500C0A641 /* MapboxRetrieveService.swift in Sources */,
 				50B5DECB2B3B099E00C0A641 /* PlaceSuggestions.swift in Sources */,
 				50277F742AF117700045AB12 /* HomePage.swift in Sources */,
 				509CDA342B1F1AE9004A6D22 /* RegisterPage.swift in Sources */,
@@ -869,6 +884,7 @@
 				509CDA392B1F2414004A6D22 /* LoginRegisterUtil.swift in Sources */,
 				5000C6C92AF8C3440057EF2D /* SearchPage.swift in Sources */,
 				50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */,
+				50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */,
 				50B11AD72AFA28E9002A7B91 /* BusinessHomePage.swift in Sources */,
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,
 				50998B022B36842A002196B5 /* BusinessRegisterPage.swift in Sources */,
@@ -896,7 +912,7 @@
 				50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */,
 				50277F7D2AF117CE0045AB12 /* UserProfilePage.swift in Sources */,
 				50998AFB2B35D512002196B5 /* RegularUserRegisterRequestDto.swift in Sources */,
-				50B5DEC62B3B092F00C0A641 /* MapboxService.swift in Sources */,
+				50B5DEC62B3B092F00C0A641 /* MapboxSuggestionService.swift in Sources */,
 				50B11ADA2AFB3661002A7B91 /* PostDetailPage.swift in Sources */,
 				50B5DEDA2B3B2DCC00C0A641 /* PlaceSuggestionItem.swift in Sources */,
 				50B5DED12B3B162500C0A641 /* PlaceSuggestionsViewModel.swift in Sources */,

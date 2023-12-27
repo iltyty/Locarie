@@ -26,7 +26,7 @@ struct PlaceSuggestionItem: View {
   }
 
   var detail: some View {
-    Text(suggestion.fullAddress)
+    Text(suggestion.fullAddress ?? "")
       .lineLimit(1)
   }
 }

@@ -5,6 +5,7 @@
 //  Created by qiuty on 23/12/2023.
 //
 
+import CoreLocation
 import Foundation
 
 struct BusinessuserRegisterRequestDto: Codable {
@@ -15,6 +16,12 @@ struct BusinessuserRegisterRequestDto: Codable {
   var password = ""
 
   var businessName = ""
-  var businessCategory = ""
-  var businessAddress = ""
+  var category = ""
+  var address = ""
+  var location: BusinessLocation?
+}
+
+struct BusinessLocation: Codable {
+  var latitude = 0.0
+  var longitude = 0.0
 }

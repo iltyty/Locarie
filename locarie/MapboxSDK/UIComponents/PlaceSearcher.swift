@@ -9,7 +9,7 @@ import CoreLocation
 import SwiftUI
 
 struct PlaceSearcher: View {
-  @StateObject var viewModel = PlaceSuggestionsViewModel()
+  @ObservedObject var viewModel: PlaceSuggestionsViewModel
 
   private let origin: CLLocationCoordinate2D? = nil
 
@@ -26,7 +26,6 @@ struct PlaceSearcher: View {
     VStack {
       searchBar
       searchResult
-      Spacer()
     }
   }
 
@@ -46,6 +45,9 @@ struct PlaceSearcher: View {
         List {
           ForEach(suggestions, id: \.self) { suggestion in
             PlaceSuggestionItem(suggestion)
+              .onTapGesture {
+                viewModel.choose(suggestion)
+              }
           }
         }
         .listStyle(.plain)
@@ -83,5 +85,5 @@ private enum Constants {
 }
 
 #Preview {
-  PlaceSearcher()
+  PlaceSearcher(viewModel: PlaceSuggestionsViewModel())
 }

@@ -32,14 +32,14 @@ private extension BusinessUserRegisterViewModel {
 
   var isBusinessCategoryValidPublisher: AnyPublisher<Bool, Never> {
     $dto.map { dto in
-      !dto.businessCategory.isEmpty
+      !dto.category.isEmpty
     }
     .eraseToAnyPublisher()
   }
 
   var isBusinessAddressValidPublisher: AnyPublisher<Bool, Never> {
     $dto.map { dto in
-      !dto.businessAddress.isEmpty
+      !dto.address.isEmpty
     }
     .eraseToAnyPublisher()
   }
