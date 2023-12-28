@@ -52,7 +52,7 @@ extension PostDto {
     )
   }
 
-  var businessLocationName: String {
-    user.locationName
+  var businessAddress: String {
+    user.address
   }
 }

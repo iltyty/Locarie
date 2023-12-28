@@ -6,31 +6,29 @@
 //
 
 import Alamofire
+import Combine
 import Foundation
 
-extension APIServices {
-  static func register(user: User) async throws -> ResponseDto<User> {
-    do {
-      let data = try prepareMultipartFormJSONData(user, withName: "user")
-      return try await sendRegisterRequest(multipartFormData: data)
-    } catch {
-      try handleRegisterError(error)
-    }
-    throw LError.cannotReach
-  }
+protocol UserRegisterService {
+  func register(user: RegisterRequestDto)
+    -> AnyPublisher<RegisterResponse, Never>
+}
 
-  private static func sendRegisterRequest(
-    multipartFormData data: MultipartFormData
-  ) async throws
-    -> ResponseDto<User>
+final class UserRegisterServiceImpl: BaseAPIService, UserRegisterService {
+  static let shared = UserRegisterServiceImpl()
+  override private init() {}
+
+  func register(user: RegisterRequestDto)
+    -> AnyPublisher<RegisterResponse, Never>
   {
-    try await AF
-      .upload(multipartFormData: data, to: APIEndpoints.userRegisterUrl)
-      .serializingDecodable(ResponseDto<User>.self)
-      .value
-  }
-
-  private static func handleRegisterError(_ error: Error) throws {
-    try handleError(error)
+    let parameters = prepareParameters(withData: user)
+    return AF.request(APIEndpoints.userRegisterUrl, parameters: parameters)
+      .validate()
+      .publishDecodable(type: ResponseDto<UserDto>.self)
+      .map { self.mapResponse($0) }
+      .receive(on: RunLoop.main)
+      .eraseToAnyPublisher()
   }
 }
+
+typealias RegisterResponse = DataResponse<ResponseDto<UserDto>, NetworkError>

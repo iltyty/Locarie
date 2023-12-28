@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BusinessRegisterPage: View {
-  @StateObject var registerViewModel = BusinessUserRegisterViewModel()
+  @StateObject var viewModel = RegisterViewModel()
 
   var body: some View {
     NavigationView {
@@ -31,19 +31,19 @@ struct BusinessRegisterPage: View {
   var businessNameInput: some View {
     let text = "Business name"
     return formItemWithTitleBuilder(
-      title: text, hint: text, input: $registerViewModel.dto.businessName,
+      title: text, hint: text, input: $viewModel.dto.businessName,
       isSecure: false
     )
   }
 
   var businessCategoryInput: some View {
     NavigationLink {
-      BusinessCategoryPage($registerViewModel.dto.category)
+      BusinessCategoryPage($viewModel.dto.category)
     } label: {
       formItemWithTitleBuilder(
         title: "Business category",
         hint: "Category",
-        input: $registerViewModel.dto.category,
+        input: $viewModel.dto.category,
         isSecure: false
       )
       .disabled(true)
@@ -55,14 +55,14 @@ struct BusinessRegisterPage: View {
   var businessAddressInput: some View {
     NavigationLink {
       BusinessAddressPage(
-        address: $registerViewModel.dto.address,
-        location: $registerViewModel.dto.location
+        address: $viewModel.dto.address,
+        location: $viewModel.dto.location
       )
     } label: {
       formItemWithTitleBuilder(
         title: "Business Address",
         hint: "Address",
-        input: $registerViewModel.dto.address,
+        input: $viewModel.dto.address,
         isSecure: false
       )
       .disabled(true)
@@ -73,7 +73,7 @@ struct BusinessRegisterPage: View {
 
   var createButton: some View {
     NavigationLink {
-      RegularRegisterPage()
+      RegularRegisterPage(registerViewModel: viewModel)
     } label: {
       primaryForegroundItemBuilder(text: "Create Account")
         .disabled(isButtonDisabled)
@@ -82,7 +82,7 @@ struct BusinessRegisterPage: View {
   }
 
   var isButtonDisabled: Bool {
-    !registerViewModel.isFormValid
+    !viewModel.isBusinessFormValid
   }
 
   var buttonOpacity: CGFloat {

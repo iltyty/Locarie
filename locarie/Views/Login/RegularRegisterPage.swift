@@ -8,12 +8,48 @@
 import SwiftUI
 
 struct RegularRegisterPage: View {
-  @StateObject var registerViewModel = RegularUserRegisterViewModel()
+  @StateObject var registerViewModel: RegisterViewModel
+  @StateObject var loginViewModel = LoginViewModel()
 
   @State var isNotificationReceived = false
   @State var isServiceAgreed = false
 
+  @State var isLoading = false
+  @State var alertTitle = ""
+  @State var isAlertShowing = false
+
   var body: some View {
+    content
+      .disabled(isLoading)
+      .overlay { isLoading ? ProgressView() : nil }
+      .alert(alertTitle, isPresented: $isAlertShowing) { Button("OK") {} }
+      .onReceive(registerViewModel.$state) { state in
+        handleViewModelStateChange(state)
+      }
+  }
+
+  private func handleViewModelStateChange(_ state: RegisterViewModel.State) {
+    switch state {
+    case .loading:
+      isLoading = true
+    case .finished:
+      loginViewModel.setDto(from: registerViewModel.dto)
+      loginViewModel.login()
+    case let .failed(error):
+      if let backendError = error.backendError {
+        alertTitle = backendError.message
+      } else {
+        alertTitle = error.initialError.localizedDescription
+      }
+      isAlertShowing = true
+    default:
+      break
+    }
+  }
+}
+
+extension RegularRegisterPage {
+  var content: some View {
     VStack(spacing: Constants.spacing) {
       navigationTitle
       Spacer()
@@ -78,7 +114,7 @@ struct RegularRegisterPage: View {
         title: "Password",
         hint: "Password",
         input: $registerViewModel.dto.password,
-        isSecure: false
+        isSecure: true
       )
       Text("Minimum 8 characters or numbers.")
         .font(.caption)
@@ -163,5 +199,5 @@ private enum Constants {
 }
 
 #Preview {
-  RegularRegisterPage()
+  RegularRegisterPage(registerViewModel: RegisterViewModel())
 }

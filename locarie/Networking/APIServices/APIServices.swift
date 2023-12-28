@@ -9,6 +9,28 @@ import Alamofire
 import Foundation
 import SwiftUI
 
+class BaseAPIService {
+  func prepareParameters(withData data: Codable) -> Parameters? {
+    do {
+      let jsonData = try JSONEncoder().encode(data)
+      return try JSONSerialization.jsonObject(with: jsonData) as? Parameters
+    } catch {
+      return nil
+    }
+  }
+
+  func mapResponse<T>(_ response: DataResponsePublisher<T>
+    .Output) -> DataResponse<T, NetworkError>
+  {
+    response.mapError { error in
+      let backendError = response.data.flatMap { data in
+        try? JSONDecoder().decode(BackendError.self, from: data)
+      }
+      return NetworkError(initialError: error, backendError: backendError)
+    }
+  }
+}
+
 enum APIServices {
   static func prepareMultipartFormJSONData(
     _ data: Encodable,

@@ -42,7 +42,7 @@ struct LoginOrRegisterPage: View {
 
   var signupButton: some View {
     NavigationLink {
-      RegularRegisterPage()
+      RegularRegisterPage(registerViewModel: RegisterViewModel())
     } label: {
       primaryForegroundItemBuilder(text: "Sign up for regular")
     }

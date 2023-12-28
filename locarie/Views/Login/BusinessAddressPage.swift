@@ -158,8 +158,8 @@ private enum Constants {
 }
 
 #Preview {
-  var address = ""
-  var location = BusinessLocation()
+  let address = ""
+  let location = BusinessLocation()
   return BusinessAddressPage(
     address: .constant(address),
     location: .constant(location)

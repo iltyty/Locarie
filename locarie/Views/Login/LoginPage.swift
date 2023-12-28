@@ -13,15 +13,13 @@ struct LoginPage: View {
 
   @State private var isLoading = false
   @State private var isAlertShowing = false
-  @State private var alertTitle = AlertTitle.none
+  @State private var alertTitle = ""
 
   var body: some View {
     content
       .disabled(isLoading)
       .overlay(loadingOverlayView)
-      .alert(alertTitle.rawValue, isPresented: $isAlertShowing) {
-        Button("OK") {}
-      }
+      .alert(alertTitle, isPresented: $isAlertShowing) { Button("OK") {} }
   }
 
   var content: some View {
@@ -96,7 +94,7 @@ struct LoginPage: View {
 
   var loginButton: some View {
     primaryButtonBuilder(text: "Log in") {
-      login()
+      loginViewModel.login()
     }
     .disabled(isLoginButtonDisabled)
     .opacity(loginButtonOpacity)
@@ -142,56 +140,6 @@ struct LoginPage: View {
   var loginButtonOpacity: CGFloat {
     isLoginButtonDisabled ? Constants.buttonDisabledOpacity : 1
   }
-}
-
-extension LoginPage {
-  private func login() {
-    Task {
-      loginViewModel.login(
-        onSuccess: handleLoginSuccess,
-        onFailure: handleLoginFailure,
-        onError: handleLoginError
-      )
-    }
-  }
-
-  private func handleLoginSuccess(_ response: Response) {
-    isLoading = false
-    if let info = response.data {
-      cacheViewModel.setUserInfo(info)
-    }
-    alertTitle = .success
-    isAlertShowing = true
-  }
-
-  private func handleLoginFailure(_ response: Response) {
-    isLoading = false
-    if let code = ResultCode(rawValue: response.status) {
-      switch code {
-      case .incorrectCredentials:
-        alertTitle = .incorrectCredential
-      default:
-        alertTitle = .unknownError
-      }
-    } else {
-      alertTitle = .unknownError
-    }
-    isAlertShowing = true
-  }
-
-  private func handleLoginError(_ error: Error) {
-    debugPrint(error)
-    isLoading = false
-    alertTitle = .unknownError
-    isAlertShowing = true
-  }
-}
-
-private enum AlertTitle: String {
-  case success = "Login success"
-  case incorrectCredential = "Incorret email or password"
-  case unknownError = "Something went wrong, please try again later"
-  case none = ""
 }
 
 private enum Constants {

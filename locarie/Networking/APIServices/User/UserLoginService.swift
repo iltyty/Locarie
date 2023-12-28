@@ -6,34 +6,33 @@
 //
 
 import Alamofire
+import Combine
+import Foundation
 
-extension APIServices {
-  static func login(dto: LoginRequestDto) async throws
-    -> ResponseDto<LoginResponseDto>
-  {
-    do {
-      let parameters = try structToDict(data: dto)
-      return try await sendLoginRequest(parameters: parameters)
-    } catch {
-      try handleLoginError(error)
-    }
-    throw LError.cannotReach
-  }
+protocol LoginService {
+  func login(dto: LoginRequestDto) -> AnyPublisher<LoginResponse, Never>
+}
 
-  private static func sendLoginRequest(parameters: Parameters?) async throws
-    -> ResponseDto<LoginResponseDto>
-  {
-    try await AF
-      .request(
-        APIEndpoints.userLoginUrl,
-        method: .post,
-        parameters: parameters
-      )
-      .serializingDecodable(ResponseDto<LoginResponseDto>.self)
-      .value
-  }
+final class LoginServiceImpl: BaseAPIService, LoginService {
+  static let shared = LoginServiceImpl()
+  override private init() {}
 
-  private static func handleLoginError(_ error: Error) throws {
-    try handleError(error)
+  func login(dto: LoginRequestDto) -> AnyPublisher<LoginResponse, Never> {
+    let parameters = prepareParameters(withData: dto)
+    return AF.request(
+      APIEndpoints.userLoginUrl,
+      method: .post,
+      parameters: parameters
+    )
+    .validate()
+    .publishDecodable(type: ResponseDto<LoginResponseDto>.self)
+    .map { self.mapResponse($0) }
+    .receive(on: RunLoop.main)
+    .eraseToAnyPublisher()
   }
 }
+
+typealias LoginResponse = DataResponse<
+  ResponseDto<LoginResponseDto>,
+  NetworkError
+>

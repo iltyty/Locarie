@@ -64,7 +64,7 @@ extension BusinessHomePage {
       infoHeaderView
       buttonView
       Divider()
-      Label(user.locationName, systemImage: "location")
+      Label(user.address, systemImage: "location")
         .lineLimit(1)
       Label(
         formatOpeningTime(from: user.openTime, to: user.closeTime),

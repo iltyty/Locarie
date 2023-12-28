@@ -1,14 +1,14 @@
 //
-//  BusinessuserRegisterRequestDto.swift
+//  UserRegisterRequest.swift
 //  locarie
 //
-//  Created by qiuty on 23/12/2023.
+//  Created by qiuty on 28/12/2023.
 //
 
-import CoreLocation
 import Foundation
 
-struct BusinessuserRegisterRequestDto: Codable {
+struct RegisterRequestDto: Codable {
+  var type: UserType = .regular
   var email = ""
   var firstName = ""
   var lastName = ""
@@ -19,9 +19,4 @@ struct BusinessuserRegisterRequestDto: Codable {
   var category = ""
   var address = ""
   var location: BusinessLocation?
-}
-
-struct BusinessLocation: Codable {
-  var latitude = 0.0
-  var longitude = 0.0
 }

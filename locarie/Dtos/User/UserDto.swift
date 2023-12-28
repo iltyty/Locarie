@@ -9,11 +9,13 @@ import Foundation
 
 struct UserDto: Codable {
   let id: Int64
-  let type: String
+  let type: UserType
+  let email: String
+  let firstName: String
+  let lastName: String
   let username: String
   let avatarUrl: String
 
-  // the following fields are only valid for business users
   let category: String
   let coverUrl: String
   let homepageUrl: String
@@ -25,8 +27,18 @@ struct UserDto: Codable {
   let closeHour: Int
   let closeMinute: Int
 
-  let location: Location
-  let locationName: String
+  let address: String
+  let location: BusinessLocation
+}
+
+enum UserType: String, Codable {
+  case regular = "PLAIN"
+  case business = "BUSINESS"
+}
+
+struct BusinessLocation: Codable {
+  var latitude: Double = 0
+  var longitude: Double = 0
 }
 
 extension UserDto {
@@ -43,9 +55,4 @@ extension UserDto {
     dateComponents.minute = closeMinute
     return dateComponents
   }
-}
-
-struct Location: Codable {
-  let latitude: Double
-  let longitude: Double
 }

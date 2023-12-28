@@ -81,7 +81,7 @@ extension PostDetailPage {
       Text(post.title)
       Text(post.content)
       Divider()
-      Label(post.businessLocationName, systemImage: "location")
+      Label(post.businessAddress, systemImage: "location")
         .lineLimit(1)
       Label(
         formatOpeningTime(from: post.businessOpenTime,
