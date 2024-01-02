@@ -8,7 +8,7 @@
 import Foundation
 
 class LocalCacheViewModel: ObservableObject {
-  @Published private var cache = LocalCache.shared
+  @Published var cache = LocalCache.shared
 
   func isLoggedIn() -> Bool {
     cache.userId != 0

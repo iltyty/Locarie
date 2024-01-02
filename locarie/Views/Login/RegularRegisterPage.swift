@@ -8,43 +8,83 @@
 import SwiftUI
 
 struct RegularRegisterPage: View {
-  @StateObject var registerViewModel: RegisterViewModel
+  @Binding var path: [Route]
+
+  @EnvironmentObject var cacheViewModel: LocalCacheViewModel
+
+  @StateObject var registerViewModel = RegisterViewModel()
   @StateObject var loginViewModel = LoginViewModel()
 
-  @State var isNotificationReceived = false
-  @State var isServiceAgreed = false
+  @State private var isNotificationReceived = false
+  @State private var isServiceAgreed = false
 
-  @State var isLoading = false
-  @State var alertTitle = ""
-  @State var isAlertShowing = false
+  @State private var isLoading = false
+  @State private var alertTitle = ""
+  @State private var isAlertShowing = false
 
   var body: some View {
     content
       .disabled(isLoading)
       .overlay { isLoading ? ProgressView() : nil }
-      .alert(alertTitle, isPresented: $isAlertShowing) { Button("OK") {} }
+      .alert(alertTitle, isPresented: $isAlertShowing) {}
       .onReceive(registerViewModel.$state) { state in
-        handleViewModelStateChange(state)
+        handleRegisterStateChange(state)
+      }
+      .onReceive(loginViewModel.$state) { state in
+        handleLoginStateChange(state)
       }
   }
 
-  private func handleViewModelStateChange(_ state: RegisterViewModel.State) {
+  private func handleRegisterStateChange(_ state: RegisterViewModel.State) {
     switch state {
-    case .loading:
-      isLoading = true
     case .finished:
-      loginViewModel.setDto(from: registerViewModel.dto)
-      loginViewModel.login()
+      handleRegisterFinished()
     case let .failed(error):
-      if let backendError = error.backendError {
-        alertTitle = backendError.message
-      } else {
-        alertTitle = error.initialError.localizedDescription
-      }
-      isAlertShowing = true
+      isLoading = false
+      handleNetworkError(error)
     default:
-      break
+      return
     }
+  }
+
+  private func handleLoginStateChange(_ state: LoginViewModel.State) {
+    switch state {
+    case let .finished(info):
+      isLoading = false
+      handleLoginFinished(info: info)
+    case let .failed(error):
+      isLoading = false
+      handleNetworkError(error)
+    default:
+      return
+    }
+  }
+
+  private func handleRegisterFinished() {
+    loginViewModel.setDto(from: registerViewModel.dto)
+    loginViewModel.login()
+  }
+
+  private func handleLoginFinished(info: UserInfo?) {
+    guard let info else { return }
+    cacheViewModel.setUserInfo(info)
+    backToRoot()
+  }
+
+  private func handleNetworkError(_ error: NetworkError) {
+    isLoading = false
+    if let backendError = error.backendError {
+      alertTitle = backendError.message
+    } else if let initialError = error.initialError {
+      alertTitle = initialError.localizedDescription
+    } else {
+      alertTitle = "Something went wrong, please try again later"
+    }
+    isAlertShowing = true
+  }
+
+  private func backToRoot() {
+    path.removeAll()
   }
 }
 
@@ -158,7 +198,7 @@ extension RegularRegisterPage {
 
   var createButton: some View {
     primaryButtonBuilder(text: "Create Account") {
-      print("create button tapped")
+      registerViewModel.register()
     }
     .disabled(isButtonDisabled)
     .opacity(buttonOpacity)
@@ -173,14 +213,14 @@ extension RegularRegisterPage {
   }
 }
 
-extension RegularRegisterPage {
-  private func textWithPrimaryColor(_ text: String) -> some View {
+private extension RegularRegisterPage {
+  func textWithPrimaryColor(_ text: String) -> some View {
     Text(text)
       .foregroundStyle(Color.locariePrimary)
       .lineLimit(1)
   }
 
-  private func pickerLineImage(
+  func pickerLineImage(
     systemName: String,
     isFilled: Binding<Bool>
   ) -> some View {
@@ -192,6 +232,12 @@ extension RegularRegisterPage {
   }
 }
 
+private extension RegularRegisterPage {
+  func popToRoot() {
+    path = []
+  }
+}
+
 private enum Constants {
   static let spacing = 10.0
   static let pickerLineImageSpacing = 10.0
@@ -199,5 +245,9 @@ private enum Constants {
 }
 
 #Preview {
-  RegularRegisterPage(registerViewModel: RegisterViewModel())
+  RegularRegisterPage(
+    path: .constant([]),
+    registerViewModel: RegisterViewModel()
+  )
+  .environmentObject(LocalCacheViewModel())
 }

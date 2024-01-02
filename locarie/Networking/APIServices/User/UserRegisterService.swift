@@ -22,12 +22,17 @@ final class UserRegisterServiceImpl: BaseAPIService, UserRegisterService {
     -> AnyPublisher<RegisterResponse, Never>
   {
     let parameters = prepareParameters(withData: user)
-    return AF.request(APIEndpoints.userRegisterUrl, parameters: parameters)
-      .validate()
-      .publishDecodable(type: ResponseDto<UserDto>.self)
-      .map { self.mapResponse($0) }
-      .receive(on: RunLoop.main)
-      .eraseToAnyPublisher()
+    return AF.request(
+      APIEndpoints.userRegisterUrl,
+      method: .post,
+      parameters: parameters,
+      encoding: JSONEncoding.default
+    )
+    .validate()
+    .publishDecodable(type: ResponseDto<UserDto>.self)
+    .map { self.mapResponse($0) }
+    .receive(on: RunLoop.main)
+    .eraseToAnyPublisher()
   }
 }
 

@@ -18,9 +18,13 @@ final class RegisterViewModel: ObservableObject {
   private var networking: UserRegisterService
   private var subscriptions: Set<AnyCancellable> = []
 
-  init(networking: UserRegisterService = UserRegisterServiceImpl.shared) {
-    dto = RegisterRequestDto()
+  init(
+    type: UserType = .regular,
+    networking: UserRegisterService = UserRegisterServiceImpl.shared
+  ) {
     self.networking = networking
+    dto = RegisterRequestDto()
+    dto.type = type
     storeIsFormValidPublisher()
     storeIsBusinessFormValidPublisher()
   }
@@ -87,8 +91,18 @@ extension RegisterViewModel {
     if let error = response.error {
       state = .failed(error)
     } else {
-      state = .finished
+      let dto = response.value!
+      state = dto.status == 0 ? .finished
+        : .failed(newNetworkError(response: dto))
     }
+  }
+
+  private func newNetworkError(
+    response dto: ResponseDto<UserDto>
+  ) -> NetworkError {
+    let code = ResultCode(rawValue: dto.status) ?? .unknown
+    let backendError = BackendError(message: dto.message, code: code)
+    return NetworkError(initialError: nil, backendError: backendError)
   }
 }
 

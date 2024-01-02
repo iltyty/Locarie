@@ -96,6 +96,7 @@
 		50F549DB2B3CFCBA00D06F20 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */; };
 		50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DC2B3D079200D06F20 /* LoginViewModel.swift */; };
 		50F549E02B3D0F9000D06F20 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DF2B3D0F9000D06F20 /* NetworkError.swift */; };
+		50F549E32B4064D600D06F20 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549E22B4064D600D06F20 /* Route.swift */; };
 		50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */; };
 		50F85B432B242CA000D04787 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B422B242CA000D04787 /* Errors.swift */; };
 		50F85B452B242EE200D04787 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B442B242EE200D04787 /* APIServices.swift */; };
@@ -210,6 +211,7 @@
 		50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		50F549DC2B3D079200D06F20 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = locarie/ViewModels/User/LoginViewModel.swift; sourceTree = SOURCE_ROOT; };
 		50F549DF2B3D0F9000D06F20 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		50F549E22B4064D600D06F20 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		50F85B422B242CA000D04787 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		50F85B442B242EE200D04787 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 		50AAB17B2AEFA2E9003FEDF1 /* locarie */ = {
 			isa = PBXGroup;
 			children = (
+				50F549E12B4064C900D06F20 /* Enums */,
 				50B5DEC02B3B07B300C0A641 /* MapboxSDK */,
 				50E60DE62AFF885200CA088F /* Common */,
 				50277F7E2AF12A640045AB12 /* Components */,
@@ -686,6 +689,14 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
+		50F549E12B4064C900D06F20 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				50F549E22B4064D600D06F20 /* Route.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		50F85B3B2B23EFF600D04787 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -855,6 +866,7 @@
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */,
 				50998B102B39161D002196B5 /* RegexConstants.swift in Sources */,
+				50F549E32B4064D600D06F20 /* Route.swift in Sources */,
 				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+Extensions.swift in Sources */,
 				502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */,
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */,

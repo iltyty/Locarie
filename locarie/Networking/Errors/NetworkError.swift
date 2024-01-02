@@ -9,7 +9,7 @@ import Alamofire
 import Foundation
 
 struct NetworkError: Error {
-  let initialError: AFError
+  let initialError: AFError?
   let backendError: BackendError?
 }
 
@@ -25,4 +25,6 @@ enum ResultCode: Int, Codable {
   // authentication-related codes
   case emailAlreadyInUse = 201
   case incorrectCredentials = 202
+
+  case unknown
 }

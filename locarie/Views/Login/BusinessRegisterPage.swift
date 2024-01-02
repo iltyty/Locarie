@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct BusinessRegisterPage: View {
-  @StateObject var viewModel = RegisterViewModel()
+  @StateObject var viewModel = RegisterViewModel(type: .business)
+
+  @Binding var path: [Route]
 
   var body: some View {
-    NavigationView {
-      VStack(spacing: Constants.vSpacing) {
-        navigationTitle
-        businessNameInput
-        businessCategoryInput
-        businessAddressInput
-        createButton
-        Spacer()
-      }
+    VStack(spacing: Constants.vSpacing) {
+      navigationTitle
+      businessNameInput
+      businessCategoryInput
+      businessAddressInput
+      createButton
+      Spacer()
     }
   }
 
@@ -73,7 +73,7 @@ struct BusinessRegisterPage: View {
 
   var createButton: some View {
     NavigationLink {
-      RegularRegisterPage(registerViewModel: viewModel)
+      RegularRegisterPage(path: $path, registerViewModel: viewModel)
     } label: {
       primaryForegroundItemBuilder(text: "Create Account")
         .disabled(isButtonDisabled)
@@ -96,5 +96,5 @@ private enum Constants {
 }
 
 #Preview {
-  BusinessRegisterPage()
+  BusinessRegisterPage(path: .constant([]))
 }

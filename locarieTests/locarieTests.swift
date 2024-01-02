@@ -37,4 +37,34 @@ final class locarieTests: XCTestCase {
       // Put the code you want to measure the time of here.
     }
   }
+
+  func testUserDtoDecode() throws {
+    let decoder = JSONDecoder()
+    let data = """
+      {
+        "id": 1,
+        "type": "BUSINESS",
+        "username": "Iron man",
+        "firstName": "Tony",
+        "lastName": "Stark",
+        "email": "123@456.com",
+        "avatarUrl": null,
+        "businessName": "Iron shop",
+        "coverUrls": null,
+        "homepageUrl": null,
+        "category": "Bar",
+        "introduction": null,
+        "phone": null,
+        "openHour": null,
+        "openMinute": null,
+        "closeHour": null,
+        "closeMinute": null,
+        "location": null,
+        "address": "Shreeji Newsagents"
+      }
+    """
+    .data(using: .utf8)!
+    let dto = try decoder.decode(UserDto.self, from: data)
+    print(dto)
+  }
 }

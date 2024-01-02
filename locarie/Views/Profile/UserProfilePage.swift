@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct UserProfilePage: View {
+  @EnvironmentObject var cacheViewModel: LocalCacheViewModel
   @EnvironmentObject var postViewModel: PostViewModel
   @Environment(\.colorScheme) var colorScheme: ColorScheme
-
-  private let cacheViewModel = LocalCacheViewModel()
 
   init() {}
 
@@ -144,4 +143,5 @@ private enum Constants {
   UserProfilePage()
     .environmentObject(BottomTabViewRouter())
     .environmentObject(PostViewModel())
+    .environmentObject(LocalCacheViewModel())
 }

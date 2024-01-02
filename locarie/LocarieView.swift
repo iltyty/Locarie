@@ -30,4 +30,6 @@ struct LocarieView: View {
 #Preview {
   LocarieView()
     .environmentObject(BottomTabViewRouter())
+    .environmentObject(MessageViewModel())
+    .environmentObject(LocalCacheViewModel())
 }

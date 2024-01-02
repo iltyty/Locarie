@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct LoginOrRegisterPage: View {
+  @State var path: [Route] = []
+
   var body: some View {
-    NavigationStack {
+    NavigationStack(path: $path) {
       VStack(spacing: Constants.spacing) {
         Spacer()
         locarieIcon
@@ -41,19 +43,18 @@ struct LoginOrRegisterPage: View {
   }
 
   var signupButton: some View {
-    NavigationLink {
-      RegularRegisterPage(registerViewModel: RegisterViewModel())
-    } label: {
+    NavigationLink(value: Route.regularRegister) {
       primaryForegroundItemBuilder(text: "Sign up for regular")
     }
   }
 
   var signupBusinessButton: some View {
-    NavigationLink {
-      BusinessRegisterPage()
-    } label: {
+    NavigationLink(value: Route.businessRegister) {
       whiteForegroundItemBuilder(text: "Sign up for business")
         .tint(.primary)
+    }
+    .navigationDestination(for: Route.self) { route in
+      getRoutePage(route, path: $path)
     }
   }
 
@@ -69,4 +70,5 @@ private enum Constants {
 
 #Preview {
   LoginOrRegisterPage()
+    .environmentObject(LocalCacheViewModel())
 }

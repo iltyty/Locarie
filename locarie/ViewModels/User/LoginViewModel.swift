@@ -45,7 +45,8 @@ extension LoginViewModel {
     if let error = response.error {
       state = .failed(error)
     } else {
-      state = .finished
+      debugPrint(response.value)
+      state = .finished(response.value!.data)
     }
   }
 }
@@ -78,7 +79,7 @@ extension LoginViewModel {
   enum State {
     case idle
     case loading
-    case finished
+    case finished(UserInfo?)
     case failed(NetworkError)
   }
 }

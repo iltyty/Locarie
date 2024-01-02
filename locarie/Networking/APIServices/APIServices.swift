@@ -10,6 +10,10 @@ import Foundation
 import SwiftUI
 
 class BaseAPIService {
+  func jsonContentTypeHttpHeaders() -> HTTPHeaders {
+    [.contentType("application/json")]
+  }
+
   func prepareParameters(withData data: Codable) -> Parameters? {
     do {
       let jsonData = try JSONEncoder().encode(data)

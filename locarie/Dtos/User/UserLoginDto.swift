@@ -16,6 +16,6 @@ struct LoginResponseDto: Codable, UserInfo {
   let id: Double
   let type: String
   let username: String
-  let avatarUrl: String
+  let avatarUrl: String?
   let jwtToken: String
 }
