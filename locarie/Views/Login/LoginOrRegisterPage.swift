@@ -22,6 +22,9 @@ struct LoginOrRegisterPage: View {
         signupBusinessButton
         Spacer()
       }
+      .navigationDestination(for: Route.self) { route in
+        getRoutePage(route, path: $path)
+      }
     }
   }
 
@@ -35,26 +38,21 @@ struct LoginOrRegisterPage: View {
   }
 
   var loginButton: some View {
-    NavigationLink {
-      LoginPage()
-    } label: {
-      primaryForegroundItemBuilder(text: "Log in")
+    NavigationLink(value: Route.login) {
+      primaryColorFormItemBuilder(text: "Log in")
     }
   }
 
   var signupButton: some View {
     NavigationLink(value: Route.regularRegister) {
-      primaryForegroundItemBuilder(text: "Sign up for regular")
+      primaryColorFormItemBuilder(text: "Sign up for regular")
     }
   }
 
   var signupBusinessButton: some View {
     NavigationLink(value: Route.businessRegister) {
-      whiteForegroundItemBuilder(text: "Sign up for business")
+      backgroundColorFormItemBuilder(text: "Sign up for business")
         .tint(.primary)
-    }
-    .navigationDestination(for: Route.self) { route in
-      getRoutePage(route, path: $path)
     }
   }
 

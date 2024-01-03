@@ -21,24 +21,26 @@ struct ResetPasswordPage: View {
     }
   }
 
-  var navigationTitle: some View {
+  private var navigationTitle: some View {
     Text("Reset Password")
       .font(.headline)
       .fontWeight(.bold)
   }
 
-  var hint: some View {
+  private var hint: some View {
     Text("Type in your email to receive an email link to reset your password. ")
       .padding(.horizontal)
   }
 
-  var emailInput: some View {
-    formItemBuilder(hint: "Email", input: $email, isSecure: false)
+  private var emailInput: some View {
+    TextFormItem(hint: "Email", input: $email)
   }
 
-  var nextButton: some View {
-    primaryButtonBuilder(text: "Next") {
+  private var nextButton: some View {
+    Button {
       print("next button tapped")
+    } label: {
+      primaryColorFormItemBuilder(text: "Next")
     }
   }
 }

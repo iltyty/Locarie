@@ -26,7 +26,7 @@ struct BusinessCategoryPage: View {
   }
 
   var navigationTitle: some View {
-    navigationTitleBuilder(title: "Business category")
+    NavigationTitle("Business category")
       .padding(.bottom, Constants.titlePadding)
   }
 
@@ -44,8 +44,10 @@ struct BusinessCategoryPage: View {
   }
 
   var confirmButton: some View {
-    primaryButtonBuilder(text: "Confirm") {
+    Button {
       dismiss()
+    } label: {
+      primaryColorFormItemBuilder(text: "Confirm")
     }
     .disabled(isButtonDisabled)
     .opacity(buttonOpacity)

@@ -108,7 +108,7 @@ private extension BusinessAddressPage {
   }
 
   var navigationTitle: some View {
-    navigationTitleBuilder(title: "Business address")
+    NavigationTitle("Business address")
       .padding(.bottom)
       .background(.background)
   }
@@ -134,8 +134,10 @@ private extension BusinessAddressPage {
   }
 
   var confirmButton: some View {
-    primaryButtonBuilder(text: "Confirm") {
+    Button {
       dismiss()
+    } label: {
+      primaryColorFormItemBuilder(text: "Confirm")
     }
     .disabled(isButtonDisabled)
     .opacity(buttonOpacity)

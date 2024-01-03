@@ -45,9 +45,18 @@ extension LoginViewModel {
     if let error = response.error {
       state = .failed(error)
     } else {
-      debugPrint(response.value)
-      state = .finished(response.value!.data)
+      let dto = response.value!
+      state = dto.status == 0 ? .finished(dto.data)
+        : .failed(newNetworkError(response: dto))
     }
+  }
+
+  private func newNetworkError(
+    response dto: ResponseDto<LoginResponseDto>
+  ) -> NetworkError {
+    let code = ResultCode(rawValue: dto.status) ?? .unknown
+    let backendError = BackendError(message: dto.message, code: code)
+    return NetworkError(initialError: nil, backendError: backendError)
   }
 }
 

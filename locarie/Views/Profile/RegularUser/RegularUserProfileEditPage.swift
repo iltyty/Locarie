@@ -28,7 +28,7 @@ struct RegularUserProfileEditPage: View {
   }
 
   private var navigationTitle: some View {
-    navigationTitleBuilder(title: "Edit profile")
+    NavigationTitle("Edit profile")
   }
 
   private var avatarEditor: some View {
@@ -47,38 +47,34 @@ struct RegularUserProfileEditPage: View {
   }
 
   private var firstNameInput: some View {
-    formItemWithTitleBuilder(
+    TextFormItem(
       title: "First name",
       hint: "First name",
-      input: $profileViewModel.dto.firstName,
-      isSecure: false
+      input: $profileViewModel.dto.firstName
     )
   }
 
   private var lastNameInput: some View {
-    formItemWithTitleBuilder(
+    TextFormItem(
       title: "Last name",
       hint: "Last name",
-      input: $profileViewModel.dto.lastName,
-      isSecure: false
+      input: $profileViewModel.dto.lastName
     )
   }
 
   private var usernameInput: some View {
-    formItemWithTitleBuilder(
+    TextFormItem(
       title: "@Username",
       hint: "Username",
-      input: $profileViewModel.dto.username,
-      isSecure: false
+      input: $profileViewModel.dto.username
     )
   }
 
   private var emailInput: some View {
-    formItemWithTitleBuilder(
+    TextFormItem(
       title: "Email",
       hint: "Email",
-      input: $profileViewModel.dto.email,
-      isSecure: false
+      input: $profileViewModel.dto.email
     )
   }
 }

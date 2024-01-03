@@ -113,48 +113,43 @@ extension RegularRegisterPage {
   }
 
   var emailInput: some View {
-    formItemWithTitleBuilder(
+    TextFormItem(
       title: "Email",
       hint: "Email",
-      input: $registerViewModel.dto.email,
-      isSecure: false
+      input: $registerViewModel.dto.email
     )
   }
 
   var firstNameInput: some View {
-    formItemWithTitleBuilder(
+    TextFormItem(
       title: "First name",
       hint: "First name",
-      input: $registerViewModel.dto.firstName,
-      isSecure: false
+      input: $registerViewModel.dto.firstName
     )
   }
 
   var lastNameInput: some View {
-    formItemWithTitleBuilder(
+    TextFormItem(
       title: "Last name",
       hint: "Last name",
-      input: $registerViewModel.dto.lastName,
-      isSecure: false
+      input: $registerViewModel.dto.lastName
     )
   }
 
   var usernameInput: some View {
-    formItemWithTitleBuilder(
+    TextFormItem(
       title: "Username",
       hint: "Username",
-      input: $registerViewModel.dto.username,
-      isSecure: false
+      input: $registerViewModel.dto.username
     )
   }
 
   var passwordInput: some View {
     VStack(alignment: .leading) {
-      formItemWithTitleBuilder(
+      SecureFormItem(
         title: "Password",
         hint: "Password",
-        input: $registerViewModel.dto.password,
-        isSecure: true
+        input: $registerViewModel.dto.password
       )
       Text("Minimum 8 characters or numbers.")
         .font(.caption)
@@ -197,8 +192,10 @@ extension RegularRegisterPage {
   }
 
   var createButton: some View {
-    primaryButtonBuilder(text: "Create Account") {
+    Button {
       registerViewModel.register()
+    } label: {
+      primaryColorFormItemBuilder(text: "Create Account")
     }
     .disabled(isButtonDisabled)
     .opacity(buttonOpacity)

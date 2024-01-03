@@ -23,49 +23,41 @@ struct BusinessRegisterPage: View {
     }
   }
 
-  var navigationTitle: some View {
-    navigationTitleBuilder(title: "Create a business account")
-      .padding(.bottom)
+  private var navigationTitle: some View {
+    NavigationTitle("Create a business account").padding(.bottom)
   }
 
-  var businessNameInput: some View {
+  @ViewBuilder private var businessNameInput: some View {
     let text = "Business name"
-    return formItemWithTitleBuilder(
-      title: text, hint: text, input: $viewModel.dto.businessName,
-      isSecure: false
-    )
+    TextFormItem(title: text, hint: text, input: $viewModel.dto.businessName)
   }
 
-  var businessCategoryInput: some View {
+  private var businessCategoryInput: some View {
     NavigationLink {
       BusinessCategoryPage($viewModel.dto.category)
     } label: {
-      formItemWithTitleBuilder(
+      LinkFormItem(
         title: "Business category",
         hint: "Category",
-        input: $viewModel.dto.category,
-        isSecure: false
+        text: $viewModel.dto.category
       )
-      .disabled(true)
     }
     .tint(.primary)
     .buttonStyle(.plain)
   }
 
-  var businessAddressInput: some View {
+  private var businessAddressInput: some View {
     NavigationLink {
       BusinessAddressPage(
         address: $viewModel.dto.address,
         location: $viewModel.dto.location
       )
     } label: {
-      formItemWithTitleBuilder(
-        title: "Business Address",
+      LinkFormItem(
+        title: "Business address",
         hint: "Address",
-        input: $viewModel.dto.address,
-        isSecure: false
+        text: $viewModel.dto.address
       )
-      .disabled(true)
     }
     .tint(.primary)
     .buttonStyle(.plain)
@@ -75,7 +67,7 @@ struct BusinessRegisterPage: View {
     NavigationLink {
       RegularRegisterPage(path: $path, registerViewModel: viewModel)
     } label: {
-      primaryForegroundItemBuilder(text: "Create Account")
+      primaryColorFormItemBuilder(text: "Next")
         .disabled(isButtonDisabled)
         .opacity(buttonOpacity)
     }

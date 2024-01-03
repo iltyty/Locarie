@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LoginPage: View {
+  @Binding var path: [Route]
+
   @StateObject private var loginViewModel = LoginViewModel()
   @StateObject private var cacheViewModel = LocalCacheViewModel()
 
@@ -19,25 +21,63 @@ struct LoginPage: View {
     content
       .disabled(isLoading)
       .overlay(loadingOverlayView)
-      .alert(alertTitle, isPresented: $isAlertShowing) { Button("OK") {} }
+      .alert(alertTitle, isPresented: $isAlertShowing) {}
+      .onReceive(loginViewModel.$state) { state in
+        handleLoginStateChange(state)
+      }
   }
 
+  private func handleLoginStateChange(_ state: LoginViewModel.State) {
+    switch state {
+    case let .finished(info):
+      isLoading = false
+      handleLoginFinished(info: info)
+    case let .failed(error):
+      isLoading = false
+      handleNetworkError(error)
+    default:
+      return
+    }
+  }
+
+  private func handleLoginFinished(info: UserInfo?) {
+    guard let info else { return }
+    cacheViewModel.setUserInfo(info)
+    backToRoot()
+  }
+
+  private func handleNetworkError(_ error: NetworkError) {
+    isLoading = false
+    if let backendError = error.backendError {
+      alertTitle = backendError.message
+    } else if let initialError = error.initialError {
+      alertTitle = initialError.localizedDescription
+    } else {
+      alertTitle = "Something went wrong, please try again later"
+    }
+    isAlertShowing = true
+  }
+
+  private func backToRoot() {
+    path.removeAll()
+  }
+}
+
+private extension LoginPage {
   var content: some View {
-    NavigationStack {
-      VStack(spacing: Constants.formItemSpacing) {
-        Spacer()
-        locarieIcon
-        Spacer()
-        emailInput
-        passwordInput
-        forgotPassword
-        loginButton
-        orText
-        googleButton
-        Spacer()
-        signUpText
-        Spacer()
-      }
+    VStack(spacing: Constants.formItemSpacing) {
+      Spacer()
+      locarieIcon
+      Spacer()
+      emailInput
+      passwordInput
+      forgotPassword
+      loginButton
+      orText
+      googleButton
+      Spacer()
+      signUpText
+      Spacer()
     }
   }
 
@@ -65,25 +105,15 @@ struct LoginPage: View {
   }
 
   var emailInput: some View {
-    formItemBuilder(
-      hint: "Email",
-      input: $loginViewModel.dto.email,
-      isSecure: false
-    )
+    TextFormItem(hint: "Email", input: $loginViewModel.dto.email)
   }
 
   var passwordInput: some View {
-    formItemBuilder(
-      hint: "Password",
-      input: $loginViewModel.dto.password,
-      isSecure: true
-    )
+    SecureFormItem(hint: "Password", input: $loginViewModel.dto.password)
   }
 
   var forgotPassword: some View {
-    NavigationLink {
-      EmptyView()
-    } label: {
+    NavigationLink(value: Route.forgotPassword) {
       HStack {
         Spacer()
         Text("Forgot password?")
@@ -93,8 +123,10 @@ struct LoginPage: View {
   }
 
   var loginButton: some View {
-    primaryButtonBuilder(text: "Log in") {
+    Button {
       loginViewModel.login()
+    } label: {
+      primaryColorFormItemBuilder(text: "Log in")
     }
     .disabled(isLoginButtonDisabled)
     .opacity(loginButtonOpacity)
@@ -104,7 +136,7 @@ struct LoginPage: View {
     Text("or").foregroundStyle(.secondary)
   }
 
-  var googleButton: some View {
+  @ViewBuilder var googleButton: some View {
     let label = Label {
       Text("Continue with Google")
     } icon: {
@@ -115,8 +147,10 @@ struct LoginPage: View {
           height: Constants.googleIconSize
         )
     }
-    return whiteButtonBuilder(label: label) {
+    Button {
       print("google button tapped")
+    } label: {
+      backgroundColorFormItemBuilder(label: label)
     }
     .tint(.primary)
   }
@@ -125,9 +159,7 @@ struct LoginPage: View {
     HStack {
       Text("Don't have an account?")
         .foregroundStyle(.secondary)
-      NavigationLink {
-        EmptyView()
-      } label: {
+      NavigationLink(value: Route.regularRegister) {
         Text("Sign up")
       }
     }
@@ -150,8 +182,6 @@ private enum Constants {
   static let buttonDisabledOpacity = 0.5
 }
 
-private typealias Response = ResponseDto<LoginResponseDto>
-
 #Preview {
-  LoginPage()
+  LoginPage(path: .constant([]))
 }
