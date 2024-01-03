@@ -13,9 +13,9 @@ struct NavigationTitle<L: View, R: View>: View {
   let title: String
 
   init(
+    _ title: String,
     left: L = defaultTitleLeft(),
-    right: R = defaultTitleRight(),
-    _ title: String
+    right: R = defaultTitleRight()
   ) {
     self.left = left
     self.right = right
@@ -31,14 +31,6 @@ struct NavigationTitle<L: View, R: View>: View {
 }
 
 private extension NavigationTitle {
-  static func defaultTitleLeft() -> Image {
-    Image(systemName: "chevron.left")
-  }
-
-  static func defaultTitleRight() -> EmptyView {
-    EmptyView()
-  }
-
   func titleButtons(left: some View, right: some View) -> some View {
     HStack {
       left
@@ -53,6 +45,14 @@ private extension NavigationTitle {
       .font(.headline)
       .fontWeight(.bold)
   }
+}
+
+private func defaultTitleLeft() -> Image {
+  Image(systemName: "chevron.left")
+}
+
+private func defaultTitleRight() -> EmptyView {
+  EmptyView()
 }
 
 #Preview {

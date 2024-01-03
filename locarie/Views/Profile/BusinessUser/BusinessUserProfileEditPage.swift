@@ -135,7 +135,7 @@ private extension BusinessUserProfileEditPage {
 
   var bioInput: some View {
     NavigationLink {
-      BioPage()
+      BioEditPage(bio: $profileViewModel.dto.introduction)
     } label: {
       LinkFormItem(
         title: "Bio",

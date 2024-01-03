@@ -54,8 +54,9 @@
 		50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0B2B371086002196B5 /* BusinessCategory.swift */; };
 		50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */; };
 		50998B102B39161D002196B5 /* Regexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0F2B39161D002196B5 /* Regexes.swift */; };
-		509D5BC32B45610F00833021 /* BioPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC22B45610F00833021 /* BioPage.swift */; };
+		509D5BC32B45610F00833021 /* BioEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC22B45610F00833021 /* BioEditPage.swift */; };
 		509D5BC52B45611E00833021 /* OpeningHourPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC42B45611E00833021 /* OpeningHourPage.swift */; };
+		509D5BCA2B457F9800833021 /* BioEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC92B457F9800833021 /* BioEditViewModel.swift */; };
 		50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */; };
 		50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */; };
 		50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */; };
@@ -181,8 +182,9 @@
 		50998B0B2B371086002196B5 /* BusinessCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCategory.swift; sourceTree = "<group>"; };
 		50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAddressPage.swift; sourceTree = "<group>"; };
 		50998B0F2B39161D002196B5 /* Regexes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regexes.swift; sourceTree = "<group>"; };
-		509D5BC22B45610F00833021 /* BioPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioPage.swift; sourceTree = "<group>"; };
+		509D5BC22B45610F00833021 /* BioEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioEditPage.swift; sourceTree = "<group>"; };
 		509D5BC42B45611E00833021 /* OpeningHourPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourPage.swift; sourceTree = "<group>"; };
+		509D5BC92B457F9800833021 /* BioEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioEditViewModel.swift; sourceTree = "<group>"; };
 		50AAB1792AEFA2E9003FEDF1 /* locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieApp.swift; sourceTree = "<group>"; };
 		50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieView.swift; sourceTree = "<group>"; };
@@ -489,6 +491,30 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		509D5BC62B457F5900833021 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		509D5BC72B457F6400833021 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		509D5BC82B457F8000833021 /* TextEdit */ = {
+			isa = PBXGroup;
+			children = (
+				509D5BC92B457F9800833021 /* BioEditViewModel.swift */,
+			);
+			path = TextEdit;
+			sourceTree = "<group>";
+		};
 		50AAB1702AEFA2E9003FEDF1 = {
 			isa = PBXGroup;
 			children = (
@@ -617,11 +643,12 @@
 		50B11AE92AFB878A002A7B91 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				509D5BC82B457F8000833021 /* TextEdit */,
+				509D5BC72B457F6400833021 /* Cache */,
+				509D5BC62B457F5900833021 /* Message */,
 				50F549EE2B44657900D06F20 /* Photo */,
 				50369A6E2B30417A005D6B43 /* Post */,
 				50998AF52B35D4C1002196B5 /* User */,
-				5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */,
-				50B11AEA2AFB8795002A7B91 /* MessageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -760,7 +787,7 @@
 			children = (
 				50B11AD62AFA28E8002A7B91 /* BusinessHomePage.swift */,
 				50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */,
-				509D5BC22B45610F00833021 /* BioPage.swift */,
+				509D5BC22B45610F00833021 /* BioEditPage.swift */,
 				509D5BC42B45611E00833021 /* OpeningHourPage.swift */,
 			);
 			path = BusinessUser;
@@ -1010,11 +1037,12 @@
 				502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */,
 				50F54A032B45283C00D06F20 /* NavigationTitle.swift in Sources */,
 				50F54A182B4532F900D06F20 /* FormItemBackgroundBuilder.swift in Sources */,
+				509D5BCA2B457F9800833021 /* BioEditViewModel.swift in Sources */,
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
 				50F54A142B45320B00D06F20 /* LinkFormItem.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
-				509D5BC32B45610F00833021 /* BioPage.swift in Sources */,
+				509D5BC32B45610F00833021 /* BioEditPage.swift in Sources */,
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,
 				50277F772AF117970045AB12 /* FavoritePage.swift in Sources */,
 				5037D2C92AF2337400108F0F /* MessageRowView.swift in Sources */,
