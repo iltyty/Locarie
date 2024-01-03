@@ -50,7 +50,8 @@ struct RegularUserProfileEditPage: View {
     TextFormItem(
       title: "First name",
       hint: "First name",
-      input: $profileViewModel.dto.firstName
+      input: $profileViewModel.dto.firstName,
+      showIcon: true
     )
   }
 
@@ -58,7 +59,8 @@ struct RegularUserProfileEditPage: View {
     TextFormItem(
       title: "Last name",
       hint: "Last name",
-      input: $profileViewModel.dto.lastName
+      input: $profileViewModel.dto.lastName,
+      showIcon: true
     )
   }
 
@@ -66,7 +68,8 @@ struct RegularUserProfileEditPage: View {
     TextFormItem(
       title: "@Username",
       hint: "Username",
-      input: $profileViewModel.dto.username
+      input: $profileViewModel.dto.username,
+      showIcon: true
     )
   }
 
@@ -74,7 +77,8 @@ struct RegularUserProfileEditPage: View {
     TextFormItem(
       title: "Email",
       hint: "Email",
-      input: $profileViewModel.dto.email
+      input: $profileViewModel.dto.email,
+      showIcon: true
     )
   }
 }
