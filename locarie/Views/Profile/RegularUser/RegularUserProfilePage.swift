@@ -1,5 +1,5 @@
 //
-//  UserProfilePage.swift
+//  RegularUserProfilePage.swift
 //  locarie
 //
 //  Created by qiuty on 2023/10/31.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UserProfilePage: View {
+struct RegularUserProfilePage: View {
   @EnvironmentObject var cacheViewModel: LocalCacheViewModel
   @EnvironmentObject var postViewModel: PostViewModel
   @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -45,7 +45,7 @@ struct UserProfilePage: View {
   }
 }
 
-extension UserProfilePage {
+extension RegularUserProfilePage {
   var topView: some View {
     VStack {
       topViewSettings
@@ -97,7 +97,7 @@ extension UserProfilePage {
   }
 }
 
-extension UserProfilePage {
+extension RegularUserProfilePage {
   func bottomView(screenWidth _: CGFloat) -> some View {
     VStack(spacing: Constants.bottomViewVSpacing) {
       HStack {
@@ -140,7 +140,7 @@ private enum Constants {
 }
 
 #Preview {
-  UserProfilePage()
+  RegularUserProfilePage()
     .environmentObject(BottomTabViewRouter())
     .environmentObject(PostViewModel())
     .environmentObject(LocalCacheViewModel())

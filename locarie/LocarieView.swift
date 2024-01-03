@@ -22,7 +22,7 @@ struct LocarieView: View {
     case .message:
       MessagePage()
     case .profile:
-      UserProfilePage()
+      RegularUserProfilePage()
     }
   }
 }

@@ -63,7 +63,7 @@ extension NewPostPage {
       LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
         ForEach(photoViewModel.attachments) { imageAttachment in
           ImageAttachmentView(
-            imageSize: imageSize, imageAttachment: imageAttachment
+            size: imageSize, attachment: imageAttachment
           )
         }
         PhotosPicker(

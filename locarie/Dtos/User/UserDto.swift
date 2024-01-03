@@ -8,27 +8,27 @@
 import Foundation
 
 struct UserDto: Codable {
-  let id: Int64
-  let type: UserType
-  let email: String
-  let firstName: String
-  let lastName: String
-  let username: String
-  let avatarUrl: String
+  var id: Int64 = 0
+  var type: UserType = .regular
+  var email: String = ""
+  var firstName: String = ""
+  var lastName: String = ""
+  var username: String = ""
+  var avatarUrl: String = ""
 
-  let category: String
-  let coverUrl: String
-  let homepageUrl: String
-  let introduction: String
-  let phone: String
+  var category: String = ""
+  var coverUrl: String = ""
+  var homepageUrl: String = ""
+  var introduction: String = ""
+  var phone: String = ""
 
-  let openHour: Int
-  let openMinute: Int
-  let closeHour: Int
-  let closeMinute: Int
+  var openHour: Int = 0
+  var openMinute: Int = 0
+  var closeHour: Int = 0
+  var closeMinute: Int = 0
 
-  let address: String
-  let location: BusinessLocation
+  var address: String = ""
+  var location = BusinessLocation()
 }
 
 enum UserType: String, Codable {

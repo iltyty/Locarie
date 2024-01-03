@@ -1,5 +1,5 @@
 //
-//  RegexConstants.swift
+//  Regexes.swift
 //  locarie
 //
 //  Created by qiuty on 25/12/2023.

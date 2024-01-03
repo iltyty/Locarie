@@ -30,3 +30,11 @@ struct LocalCache {
     jwtToken = info.jwtToken
   }
 }
+
+enum LocalCacheKeys {
+  static let userIdKey = "userId"
+  static let userTypeKey = "userType"
+  static let usernameKey = "username"
+  static let avatarUrlKey = "avatarUrl"
+  static let jwtTokenKey = "jwt"
+}

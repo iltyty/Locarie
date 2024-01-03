@@ -1,5 +1,5 @@
 //
-//  LoginRegisterComponentBuilder.swift
+//  ComponentBuilder.swift
 //  locarie
 //
 //  Created by qiuty on 22/12/2023.
@@ -8,16 +8,26 @@
 import Foundation
 import SwiftUI
 
-func navigationTitleBuilder(title: String) -> some View {
-  HStack {
-    Image(systemName: "chevron.left")
-      .padding(.leading)
-    Spacer()
+func navigationTitleBuilder(
+  title: String,
+  left: some View = defaultNavigationLeftView(),
+  right: some View = EmptyView()
+) -> some View {
+  ZStack(alignment: .top) {
+    HStack {
+      left
+      Spacer()
+      right
+    }
     Text(title)
       .font(.headline)
       .fontWeight(.bold)
-    Spacer()
   }
+}
+
+private func defaultNavigationLeftView() -> some View {
+  Image(systemName: "chevron.left")
+    .padding(.leading)
 }
 
 func formItemBuilder(
@@ -115,6 +125,12 @@ func whiteForegroundItemBuilder(label: some View) -> some View {
     )
     .padding(.horizontal)
     .frame(height: Constants.formItemHeight)
+}
+
+func defaultAvatar(size: CGFloat) -> some View {
+  Circle()
+    .fill(Color.locariePrimary)
+    .frame(width: size, height: size)
 }
 
 private enum Constants {
