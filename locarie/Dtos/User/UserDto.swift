@@ -15,6 +15,7 @@ struct UserDto: Codable {
   var lastName: String = ""
   var username: String = ""
   var avatarUrl: String = ""
+  var birthday: Date = .init()
 
   var businessName: String = ""
   var category: String = ""
@@ -63,8 +64,16 @@ extension UserDto {
 }
 
 extension UserDto {
+  var formattedBirthday: String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MM/dd/yyyy"
+    return dateFormatter.string(from: birthday)
+  }
+}
+
+extension UserDto {
   enum CodingKeys: String, CodingKey {
-    case id, type, email, firstName, lastName, username, avatarUrl
+    case id, type, email, firstName, lastName, username, avatarUrl, birthday
     case category, coverUrl, homepageUrl, introduction, phone
     case openHour, openMinute, closeHour, closeMinute
     case address, location
@@ -86,6 +95,7 @@ extension UserDto {
     lastName = try container.decode(String.self, forKey: .lastName)
     username = try container.decode(String.self, forKey: .username)
     avatarUrl = decodeWithDefault(container, forKey: .avatarUrl)
+    birthday = decodeWithDefaule(container, forKey: .birthday)
 
     category = decodeWithDefault(container, forKey: .category)
     coverUrl = decodeWithDefault(container, forKey: .coverUrl)
@@ -138,5 +148,14 @@ private func decodeWithDefault<K: CodingKey>(
   default value: Double = 0
 ) -> Double {
   let result = try? container.decodeIfPresent(Double.self, forKey: key)
+  return result ?? value
+}
+
+private func decodeWithDefaule<K: CodingKey>(
+  _ container: KeyedDecodingContainer<K>,
+  forKey key: KeyedDecodingContainer<K>.Key,
+  default value: Date = Date()
+) -> Date {
+  let result = try? container.decodeIfPresent(Date.self, forKey: key)
   return result ?? value
 }

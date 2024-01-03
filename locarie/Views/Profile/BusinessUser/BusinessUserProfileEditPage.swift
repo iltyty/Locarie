@@ -13,8 +13,8 @@ struct BusinessUserProfileEditPage: View {
   @StateObject private var profileViewModel = ProfileViewModel()
   @StateObject private var photoViewModel = PhotoViewModel()
 
-  // - FIXME: move birthday to UserDto
-  @State var birthday = Date()
+  @State var birthday = ""
+  @State var isBirthdaySheetPresented = false
 
   var body: some View {
     GeometryReader { proxy in
@@ -37,6 +37,7 @@ struct BusinessUserProfileEditPage: View {
         }
       }
     }
+    .sheet(isPresented: $isBirthdaySheetPresented) { birthdaySheet }
   }
 }
 
@@ -87,7 +88,7 @@ private extension BusinessUserProfileEditPage {
   }
 
   func profileImagePickerBackground(width: CGFloat) -> some View {
-    RoundedRectangle(cornerRadius: 10)
+    RoundedRectangle(cornerRadius: Constants.profileImagePickerCornerRadius)
       .fill(.ultraThickMaterial)
       .frame(width: width, height: width / Constants.profileImageAspectRatio)
   }
@@ -108,7 +109,8 @@ private extension BusinessUserProfileEditPage {
     TextFormItem(
       title: text,
       hint: text,
-      input: $profileViewModel.dto.businessName
+      input: $profileViewModel.dto.businessName,
+      showIcon: true
     )
   }
 
@@ -116,7 +118,8 @@ private extension BusinessUserProfileEditPage {
     TextFormItem(
       title: "@Username (for business)",
       hint: "Username",
-      input: $profileViewModel.dto.username
+      input: $profileViewModel.dto.username,
+      showIcon: true
     )
   }
 
@@ -185,14 +188,18 @@ private extension BusinessUserProfileEditPage {
   @ViewBuilder
   var emailInput: some View {
     let text = "Email"
-    TextFormItem(title: text, hint: text, input: $profileViewModel.dto.email)
+    TextFormItem(
+      title: text, hint: text, input: $profileViewModel.dto.email,
+      showIcon: true
+    )
   }
 
   var phoneInput: some View {
     TextFormItem(
       title: "Phone",
       hint: "Phone optional",
-      input: $profileViewModel.dto.phone
+      input: $profileViewModel.dto.phone,
+      showIcon: true
     )
   }
 
@@ -202,22 +209,74 @@ private extension BusinessUserProfileEditPage {
     TextFormItem(
       title: text,
       hint: text,
-      input: $profileViewModel.dto.firstName
+      input: $profileViewModel.dto.firstName,
+      showIcon: true
     )
   }
 
   @ViewBuilder
   var lastNameInput: some View {
     let text = "Last Name"
-    TextFormItem(title: text, hint: text, input: $profileViewModel.dto.lastName)
+    TextFormItem(
+      title: text,
+      hint: text,
+      input: $profileViewModel.dto.lastName,
+      showIcon: true
+    )
   }
 
   @ViewBuilder
   var birthdayInput: some View {
-    // - FIXME: birthday edit
-    DatePicker("Birthday", selection: $birthday, displayedComponents: [.date])
-      .datePickerStyle(.graphical)
-      .padding(.horizontal)
+    LinkFormItem(title: "Birthday", hint: "Birthday", text: $birthday)
+      .onTapGesture {
+        isBirthdaySheetPresented = true
+      }
+  }
+}
+
+private extension BusinessUserProfileEditPage {
+  var birthdaySheet: some View {
+    VStack {
+      birthdaySheetButtons
+      birthdayPicker
+    }
+    .presentationDetents([.fraction(Constants.birthdaySheetHeightFraction)])
+  }
+
+  var birthdaySheetButtons: some View {
+    HStack {
+      birthdaySheetCancelButton
+      Spacer()
+      birthdaySheetDoneButton
+    }
+    .padding(.horizontal)
+  }
+
+  var birthdaySheetCancelButton: some View {
+    Button("Cancel") {
+      isBirthdaySheetPresented = false
+    }
+    .foregroundStyle(.secondary)
+  }
+
+  var birthdaySheetDoneButton: some View {
+    Button("Done") {
+      isBirthdaySheetPresented = false
+      birthday = profileViewModel.dto.formattedBirthday
+    }
+    .foregroundStyle(Color.locariePrimary)
+  }
+
+  var birthdayPicker: some View {
+    DatePicker(
+      "Birthday",
+      selection: $profileViewModel.dto.birthday,
+      in: ...Date(),
+      displayedComponents: [.date]
+    )
+    .labelsHidden()
+    .datePickerStyle(.wheel)
+    .padding(.horizontal)
   }
 }
 
@@ -225,6 +284,8 @@ private enum Constants {
   static let vSpacing = 24.0
   static let cameraIconSize = 48.0
   static let profileImageAspectRatio = 16.0 / 9
+  static let profileImagePickerCornerRadius = 10.0
+  static let birthdaySheetHeightFraction = 0.4
 }
 
 #Preview {
