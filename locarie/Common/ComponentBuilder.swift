@@ -30,6 +30,19 @@ private func defaultNavigationLeftView() -> some View {
     .padding(.leading)
 }
 
+func formItemWithTitleBuilder(
+  title: String,
+  hint: String,
+  input: Binding<String>,
+  isSecure: Bool
+) -> some View {
+  VStack(alignment: .leading) {
+    Text(title)
+      .padding(.leading)
+    formItemBuilder(hint: hint, input: input, isSecure: isSecure)
+  }
+}
+
 func formItemBuilder(
   hint: String,
   input: Binding<String>,
@@ -52,19 +65,6 @@ func formItemBuilder(
   )
   .padding(.horizontal)
   .frame(height: Constants.formItemHeight)
-}
-
-func formItemWithTitleBuilder(
-  title: String,
-  hint: String,
-  input: Binding<String>,
-  isSecure: Bool
-) -> some View {
-  VStack(alignment: .leading) {
-    Text(title)
-      .padding(.leading)
-    formItemBuilder(hint: hint, input: input, isSecure: isSecure)
-  }
 }
 
 func primaryButtonBuilder(
@@ -129,7 +129,11 @@ func whiteForegroundItemBuilder(label: some View) -> some View {
 
 func defaultAvatar(size: CGFloat) -> some View {
   Circle()
-    .fill(Color.locariePrimary)
+    .fill(LinearGradient(
+      colors: [.locariePrimary, .locariePrimary.opacity(0.5)],
+      startPoint: .topLeading,
+      endPoint: .bottomTrailing
+    ))
     .frame(width: size, height: size)
 }
 
