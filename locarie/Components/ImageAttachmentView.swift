@@ -9,7 +9,8 @@ import PhotosUI
 import SwiftUI
 
 struct ImageAttachmentView: View {
-  let size: CGFloat
+  let width: CGFloat
+  let height: CGFloat
   let isCircle: Bool
 
   @ObservedObject var imageAttachment: PhotoViewModel.ImageAttachment
@@ -19,8 +20,31 @@ struct ImageAttachmentView: View {
     isCircle: Bool = false,
     attachment: PhotoViewModel.ImageAttachment
   ) {
-    self.size = size
+    width = size
+    height = size
     self.isCircle = isCircle
+    imageAttachment = attachment
+  }
+
+  init(
+    width: CGFloat,
+    height: CGFloat,
+    attachment: PhotoViewModel.ImageAttachment
+  ) {
+    self.width = width
+    self.height = height
+    isCircle = false
+    imageAttachment = attachment
+  }
+
+  init(
+    width: CGFloat,
+    aspectRatio: CGFloat,
+    attachment: PhotoViewModel.ImageAttachment
+  ) {
+    self.width = width
+    height = width / aspectRatio
+    isCircle = false
     imageAttachment = attachment
   }
 
@@ -43,7 +67,7 @@ struct ImageAttachmentView: View {
   private func finishedImage(_ image: Image) -> some View {
     let clippedImage = image.resizable()
       .scaledToFill()
-      .frame(width: size, height: size)
+      .frame(width: width, height: height)
       .clipped()
     if isCircle {
       clippedImage.clipShape(Circle())
@@ -55,11 +79,11 @@ struct ImageAttachmentView: View {
 
   private var failedImage: some View {
     Image(systemName: "exclamationmark.triangle.fill")
-      .frame(width: size, height: size)
+      .frame(width: width, height: height)
   }
 
   private var progressView: some View {
-    ProgressView().frame(width: size, height: size)
+    ProgressView().frame(width: width, height: height)
   }
 }
 

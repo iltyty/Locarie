@@ -54,6 +54,8 @@
 		50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0B2B371086002196B5 /* BusinessCategory.swift */; };
 		50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */; };
 		50998B102B39161D002196B5 /* Regexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0F2B39161D002196B5 /* Regexes.swift */; };
+		509D5BC32B45610F00833021 /* BioPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC22B45610F00833021 /* BioPage.swift */; };
+		509D5BC52B45611E00833021 /* OpeningHourPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC42B45611E00833021 /* OpeningHourPage.swift */; };
 		50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */; };
 		50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */; };
 		50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */; };
@@ -108,6 +110,8 @@
 		50F54A142B45320B00D06F20 /* LinkFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A132B45320B00D06F20 /* LinkFormItem.swift */; };
 		50F54A162B45326400D06F20 /* LinkFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A152B45326400D06F20 /* LinkFormItemBuilder.swift */; };
 		50F54A182B4532F900D06F20 /* FormItemBackgroundBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */; };
+		50F54A1D2B454E0800D06F20 /* BusinessUserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */; };
+		50F54A202B45503900D06F20 /* AvatarEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1F2B45503800D06F20 /* AvatarEditor.swift */; };
 		50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */; };
 		50F85B432B242CA000D04787 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B422B242CA000D04787 /* Errors.swift */; };
 		50F85B452B242EE200D04787 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B442B242EE200D04787 /* APIServices.swift */; };
@@ -177,6 +181,8 @@
 		50998B0B2B371086002196B5 /* BusinessCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCategory.swift; sourceTree = "<group>"; };
 		50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAddressPage.swift; sourceTree = "<group>"; };
 		50998B0F2B39161D002196B5 /* Regexes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regexes.swift; sourceTree = "<group>"; };
+		509D5BC22B45610F00833021 /* BioPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioPage.swift; sourceTree = "<group>"; };
+		509D5BC42B45611E00833021 /* OpeningHourPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourPage.swift; sourceTree = "<group>"; };
 		50AAB1792AEFA2E9003FEDF1 /* locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieApp.swift; sourceTree = "<group>"; };
 		50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieView.swift; sourceTree = "<group>"; };
@@ -234,6 +240,8 @@
 		50F54A132B45320B00D06F20 /* LinkFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItem.swift; sourceTree = "<group>"; };
 		50F54A152B45326400D06F20 /* LinkFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItemBuilder.swift; sourceTree = "<group>"; };
 		50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemBackgroundBuilder.swift; sourceTree = "<group>"; };
+		50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessUserProfileEditPage.swift; sourceTree = "<group>"; };
+		50F54A1F2B45503800D06F20 /* AvatarEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEditor.swift; sourceTree = "<group>"; };
 		50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		50F85B422B242CA000D04787 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		50F85B442B242EE200D04787 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
@@ -325,6 +333,7 @@
 		50277F7B2AF117C30045AB12 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				50F54A1E2B45502500D06F20 /* Components */,
 				50F549EB2B44273900D06F20 /* BusinessUser */,
 				50F549EA2B44273100D06F20 /* RegularUser */,
 			);
@@ -750,6 +759,9 @@
 			isa = PBXGroup;
 			children = (
 				50B11AD62AFA28E8002A7B91 /* BusinessHomePage.swift */,
+				50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */,
+				509D5BC22B45610F00833021 /* BioPage.swift */,
+				509D5BC42B45611E00833021 /* OpeningHourPage.swift */,
 			);
 			path = BusinessUser;
 			sourceTree = "<group>";
@@ -808,6 +820,14 @@
 				50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */,
 			);
 			path = Form;
+			sourceTree = "<group>";
+		};
+		50F54A1E2B45502500D06F20 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				50F54A1F2B45503800D06F20 /* AvatarEditor.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		50F85B3B2B23EFF600D04787 /* Networking */ = {
@@ -994,6 +1014,7 @@
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
 				50F54A142B45320B00D06F20 /* LinkFormItem.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
+				509D5BC32B45610F00833021 /* BioPage.swift in Sources */,
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,
 				50277F772AF117970045AB12 /* FavoritePage.swift in Sources */,
 				5037D2C92AF2337400108F0F /* MessageRowView.swift in Sources */,
@@ -1010,6 +1031,7 @@
 				50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */,
 				502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */,
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
+				50F54A1D2B454E0800D06F20 /* BusinessUserProfileEditPage.swift in Sources */,
 				50B5DED42B3B19AA00C0A641 /* MapboxError.swift in Sources */,
 				50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */,
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
@@ -1030,11 +1052,13 @@
 				50B11ACF2AF9DE77002A7B91 /* NewPostPage.swift in Sources */,
 				500F66262B2854A90074FE3C /* LocalCache.swift in Sources */,
 				50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */,
+				509D5BC52B45611E00833021 /* OpeningHourPage.swift in Sources */,
 				50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */,
 				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
 				50E60DE82AFF885F00CA088F /* Util.swift in Sources */,
 				50B11AE62AFB8368002A7B91 /* Message.swift in Sources */,
 				50F85B432B242CA000D04787 /* Errors.swift in Sources */,
+				50F54A202B45503900D06F20 /* AvatarEditor.swift in Sources */,
 				50998AFE2B366C29002196B5 /* WrappingHStack.swift in Sources */,
 				50B5DED72B3B270C00C0A641 /* PlaceSearcher.swift in Sources */,
 				5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */,

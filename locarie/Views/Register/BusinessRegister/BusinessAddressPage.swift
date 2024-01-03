@@ -17,12 +17,12 @@ struct BusinessAddressPage: View {
   @StateObject private var suggestionViewModel = PlaceSuggestionsViewModel()
 
   @Binding var address: String
-  @Binding var location: BusinessLocation?
+  @Binding var location: BusinessLocation
 
   @State private var viewport: Viewport
 
   private var locationCoordinate: CLLocationCoordinate2D? {
-    guard let location else {
+    guard location.isValid else {
       return nil
     }
     return CLLocationCoordinate2D(
@@ -31,20 +31,21 @@ struct BusinessAddressPage: View {
     )
   }
 
-  init(address: Binding<String>, location: Binding<BusinessLocation?>) {
+  init(address: Binding<String>, location: Binding<BusinessLocation>) {
     _address = address
     _location = location
-    if let location = location.wrappedValue {
-      let coordinate = CLLocationCoordinate2D(
-        latitude: location.latitude, longitude: location.longitude
-      )
-      _viewport = .init(wrappedValue: .camera(
-        center: coordinate,
-        zoom: Constants.mapZoom
-      ))
-    } else {
+    guard location.wrappedValue.isValid else {
       _viewport = .init(wrappedValue: .followPuck(zoom: Constants.mapZoom))
+      return
     }
+    let location = location.wrappedValue
+    let coordinate = CLLocationCoordinate2D(
+      latitude: location.latitude, longitude: location.longitude
+    )
+    _viewport = .init(wrappedValue: .camera(
+      center: coordinate,
+      zoom: Constants.mapZoom
+    ))
   }
 
   var body: some View {
@@ -145,7 +146,7 @@ private extension BusinessAddressPage {
   }
 
   var isButtonDisabled: Bool {
-    location == nil
+    !location.isValid
   }
 
   var buttonOpacity: CGFloat {

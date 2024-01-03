@@ -18,5 +18,5 @@ struct RegisterRequestDto: Codable {
   var businessName = ""
   var category = ""
   var address = ""
-  var location: BusinessLocation?
+  var location = BusinessLocation()
 }

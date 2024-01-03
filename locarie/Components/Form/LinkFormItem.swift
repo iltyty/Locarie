@@ -21,7 +21,9 @@ struct LinkFormItem: View {
   var body: some View {
     VStack(alignment: .leading) {
       if !title.isEmpty {
-        Text(title).padding(.leading)
+        Text(title)
+          .fontWeight(.bold)
+          .padding(.leading)
       }
       linkFormItemBuilder(hint: hint, text: text)
     }

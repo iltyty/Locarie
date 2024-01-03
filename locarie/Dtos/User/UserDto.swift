@@ -16,6 +16,7 @@ struct UserDto: Codable {
   var username: String = ""
   var avatarUrl: String = ""
 
+  var businessName: String = ""
   var category: String = ""
   var coverUrl: String = ""
   var homepageUrl: String = ""
@@ -37,8 +38,12 @@ enum UserType: String, Codable {
 }
 
 struct BusinessLocation: Codable {
-  var latitude: Double = 0
-  var longitude: Double = 0
+  var latitude: Double = .nan
+  var longitude: Double = .nan
+
+  var isValid: Bool {
+    !latitude.isNaN && !longitude.isNaN
+  }
 }
 
 extension UserDto {

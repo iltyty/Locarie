@@ -11,14 +11,12 @@ import SwiftUI
 struct RegularUserProfileEditPage: View {
   @EnvironmentObject private var cacheViewModel: LocalCacheViewModel
 
-  @StateObject private var photoViewModel = PhotoViewModel()
   @StateObject private var profileViewModel = ProfileViewModel()
 
   var body: some View {
     VStack(spacing: Constants.vSpacing) {
       navigationTitle
       avatarEditor
-      avatarEditButton
       firstNameInput
       lastNameInput
       usernameInput
@@ -26,27 +24,18 @@ struct RegularUserProfileEditPage: View {
       Spacer()
     }
   }
+}
 
-  private var navigationTitle: some View {
+private extension RegularUserProfileEditPage {
+  var navigationTitle: some View {
     NavigationTitle("Edit profile")
   }
 
-  private var avatarEditor: some View {
-    PhotosPicker(
-      selection: $photoViewModel.selection,
-      maxSelectionCount: 1,
-      matching: .images,
-      photoLibrary: .shared()
-    ) { getAvatar() }
+  var avatarEditor: some View {
+    AvatarEditor()
   }
 
-  private var avatarEditButton: some View {
-    Button("Edit profile image") {
-      print("avatar button tapped")
-    }
-  }
-
-  private var firstNameInput: some View {
+  var firstNameInput: some View {
     TextFormItem(
       title: "First name",
       hint: "First name",
@@ -55,7 +44,7 @@ struct RegularUserProfileEditPage: View {
     )
   }
 
-  private var lastNameInput: some View {
+  var lastNameInput: some View {
     TextFormItem(
       title: "Last name",
       hint: "Last name",
@@ -64,7 +53,7 @@ struct RegularUserProfileEditPage: View {
     )
   }
 
-  private var usernameInput: some View {
+  var usernameInput: some View {
     TextFormItem(
       title: "@Username",
       hint: "Username",
@@ -73,7 +62,7 @@ struct RegularUserProfileEditPage: View {
     )
   }
 
-  private var emailInput: some View {
+  var emailInput: some View {
     TextFormItem(
       title: "Email",
       hint: "Email",
@@ -83,35 +72,8 @@ struct RegularUserProfileEditPage: View {
   }
 }
 
-private extension RegularUserProfileEditPage {
-  @ViewBuilder
-  func getAvatar() -> some View {
-    let avatarUrl = cacheViewModel.getAvatarUrl()
-    if !avatarUrl.isEmpty {
-      avatar(avatarUrl)
-    } else if !photoViewModel.attachments.isEmpty {
-      selectedImage()
-    } else {
-      defaultAvatar(size: Constants.avatarSize)
-    }
-  }
-
-  func avatar(_ url: String) -> some View {
-    AvatarView(imageUrl: url, size: Constants.avatarSize)
-  }
-
-  func selectedImage() -> some View {
-    ImageAttachmentView(
-      size: Constants.avatarSize,
-      isCircle: true,
-      attachment: photoViewModel.attachments[0]
-    )
-  }
-}
-
 private enum Constants {
   static let vSpacing = 24.0
-  static let avatarSize = 64.0
 }
 
 #Preview {
