@@ -44,7 +44,6 @@
 		5090C4372B04DDEA008931A6 /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4362B04DDEA008931A6 /* users.json */; };
 		5090C4392B04E5CF008931A6 /* posts.json in Resources */ = {isa = PBXBuildFile; fileRef = 5090C4382B04E5CF008931A6 /* posts.json */; };
 		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
-		50998AEE2B35BAAD002196B5 /* ComponentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AED2B35BAAD002196B5 /* ComponentBuilder.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
 		50998AF42B35D376002196B5 /* RegularRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF32B35D376002196B5 /* RegularRegisterPage.swift */; };
@@ -97,6 +96,12 @@
 		50F549E32B4064D600D06F20 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549E22B4064D600D06F20 /* Route.swift */; };
 		50F549E92B44266100D06F20 /* RegularUserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549E82B44266100D06F20 /* RegularUserProfileEditPage.swift */; };
 		50F549ED2B4428A100D06F20 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549EC2B4428A100D06F20 /* ProfileViewModel.swift */; };
+		50F549F12B44F47200D06F20 /* NavigationTitleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F02B44F47200D06F20 /* NavigationTitleBuilder.swift */; };
+		50F549F32B44F59C00D06F20 /* FormItemBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F22B44F59C00D06F20 /* FormItemBuilders.swift */; };
+		50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */; };
+		50F549F72B44F66B00D06F20 /* ButtonBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F62B44F66B00D06F20 /* ButtonBuilders.swift */; };
+		50F549F92B44F6AA00D06F20 /* PlainItemBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F82B44F6AA00D06F20 /* PlainItemBuilders.swift */; };
+		50F549FB2B44F71300D06F20 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549FA2B44F71300D06F20 /* Constants.swift */; };
 		50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */; };
 		50F85B432B242CA000D04787 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B422B242CA000D04787 /* Errors.swift */; };
 		50F85B452B242EE200D04787 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B442B242EE200D04787 /* APIServices.swift */; };
@@ -156,7 +161,6 @@
 		5090C4362B04DDEA008931A6 /* users.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
 		5090C4382B04E5CF008931A6 /* posts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = posts.json; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
-		50998AED2B35BAAD002196B5 /* ComponentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentBuilder.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
 		50998AF32B35D376002196B5 /* RegularRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularRegisterPage.swift; sourceTree = "<group>"; };
@@ -212,6 +216,12 @@
 		50F549E22B4064D600D06F20 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		50F549E82B44266100D06F20 /* RegularUserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserProfileEditPage.swift; sourceTree = "<group>"; };
 		50F549EC2B4428A100D06F20 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		50F549F02B44F47200D06F20 /* NavigationTitleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleBuilder.swift; sourceTree = "<group>"; };
+		50F549F22B44F59C00D06F20 /* FormItemBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemBuilders.swift; sourceTree = "<group>"; };
+		50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarBuilder.swift; sourceTree = "<group>"; };
+		50F549F62B44F66B00D06F20 /* ButtonBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBuilders.swift; sourceTree = "<group>"; };
+		50F549F82B44F6AA00D06F20 /* PlainItemBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainItemBuilders.swift; sourceTree = "<group>"; };
+		50F549FA2B44F71300D06F20 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		50F85B422B242CA000D04787 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		50F85B442B242EE200D04787 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
@@ -660,10 +670,10 @@
 		50E60DE62AFF885200CA088F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				50F549EF2B44F44C00D06F20 /* ComponentBuilders */,
 				50E60DE72AFF885F00CA088F /* Util.swift */,
 				50E60DE92B006FB100CA088F /* LocationManager.swift */,
 				500F66232B25CE320074FE3C /* LocalCacheKeys.swift */,
-				50998AED2B35BAAD002196B5 /* ComponentBuilder.swift */,
 				50998B0F2B39161D002196B5 /* Regexes.swift */,
 			);
 			path = Common;
@@ -735,6 +745,19 @@
 				50B11AD22AFA063B002A7B91 /* PhotoViewModel.swift */,
 			);
 			path = Photo;
+			sourceTree = "<group>";
+		};
+		50F549EF2B44F44C00D06F20 /* ComponentBuilders */ = {
+			isa = PBXGroup;
+			children = (
+				50F549F02B44F47200D06F20 /* NavigationTitleBuilder.swift */,
+				50F549F22B44F59C00D06F20 /* FormItemBuilders.swift */,
+				50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */,
+				50F549F62B44F66B00D06F20 /* ButtonBuilders.swift */,
+				50F549F82B44F6AA00D06F20 /* PlainItemBuilders.swift */,
+				50F549FA2B44F71300D06F20 /* Constants.swift */,
+			);
+			path = ComponentBuilders;
 			sourceTree = "<group>";
 		};
 		50F85B3B2B23EFF600D04787 /* Networking */ = {
@@ -904,14 +927,15 @@
 				50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */,
 				50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
+				50F549F12B44F47200D06F20 /* NavigationTitleBuilder.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */,
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
+				50F549F32B44F59C00D06F20 /* FormItemBuilders.swift in Sources */,
 				50F549E32B4064D600D06F20 /* Route.swift in Sources */,
 				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+Extensions.swift in Sources */,
 				502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */,
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */,
-				50998AEE2B35BAAD002196B5 /* ComponentBuilder.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,
@@ -921,6 +945,7 @@
 				50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */,
 				50B5DEDC2B3BE83500C0A641 /* MapboxRetrieveService.swift in Sources */,
 				50B5DECB2B3B099E00C0A641 /* PlaceSuggestions.swift in Sources */,
+				50F549FB2B44F71300D06F20 /* Constants.swift in Sources */,
 				50277F742AF117700045AB12 /* HomePage.swift in Sources */,
 				50F85B452B242EE200D04787 /* APIServices.swift in Sources */,
 				50E60DE52AFF80B400CA088F /* UserViewModel.swift in Sources */,
@@ -947,6 +972,7 @@
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostPage.swift in Sources */,
 				500F66262B2854A90074FE3C /* LocalCache.swift in Sources */,
+				50F549F72B44F66B00D06F20 /* ButtonBuilders.swift in Sources */,
 				50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */,
 				50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */,
 				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
@@ -971,6 +997,8 @@
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
 				5000C6CE2AF8D9A20057EF2D /* MessageView.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
+				50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */,
+				50F549F92B44F6AA00D06F20 /* PlainItemBuilders.swift in Sources */,
 				50998B0A2B370ED5002196B5 /* TagView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
