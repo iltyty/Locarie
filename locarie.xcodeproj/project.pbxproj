@@ -55,8 +55,10 @@
 		50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */; };
 		50998B102B39161D002196B5 /* Regexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0F2B39161D002196B5 /* Regexes.swift */; };
 		509D5BC32B45610F00833021 /* BioEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC22B45610F00833021 /* BioEditPage.swift */; };
-		509D5BC52B45611E00833021 /* OpeningHourPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC42B45611E00833021 /* OpeningHourPage.swift */; };
+		509D5BC52B45611E00833021 /* OpeningHourEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */; };
 		509D5BCA2B457F9800833021 /* BioEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC92B457F9800833021 /* BioEditViewModel.swift */; };
+		509D5BCC2B459CC900833021 /* OpeningHourSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */; };
+		509D5BCE2B45B01E00833021 /* DailyHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BCD2B45B01E00833021 /* DailyHours.swift */; };
 		50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */; };
 		50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */; };
 		50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */; };
@@ -183,8 +185,10 @@
 		50998B0D2B3723C2002196B5 /* BusinessAddressPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAddressPage.swift; sourceTree = "<group>"; };
 		50998B0F2B39161D002196B5 /* Regexes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regexes.swift; sourceTree = "<group>"; };
 		509D5BC22B45610F00833021 /* BioEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioEditPage.swift; sourceTree = "<group>"; };
-		509D5BC42B45611E00833021 /* OpeningHourPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourPage.swift; sourceTree = "<group>"; };
+		509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourEditPage.swift; sourceTree = "<group>"; };
 		509D5BC92B457F9800833021 /* BioEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioEditViewModel.swift; sourceTree = "<group>"; };
+		509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourSheet.swift; sourceTree = "<group>"; };
+		509D5BCD2B45B01E00833021 /* DailyHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHours.swift; sourceTree = "<group>"; };
 		50AAB1792AEFA2E9003FEDF1 /* locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieApp.swift; sourceTree = "<group>"; };
 		50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieView.swift; sourceTree = "<group>"; };
@@ -636,6 +640,7 @@
 				50369A622B2DBC3B005D6B43 /* User */,
 				500F66252B2854A80074FE3C /* LocalCache.swift */,
 				50998B0B2B371086002196B5 /* BusinessCategory.swift */,
+				509D5BCD2B45B01E00833021 /* DailyHours.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -788,7 +793,7 @@
 				50B11AD62AFA28E8002A7B91 /* BusinessHomePage.swift */,
 				50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */,
 				509D5BC22B45610F00833021 /* BioEditPage.swift */,
-				509D5BC42B45611E00833021 /* OpeningHourPage.swift */,
+				509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */,
 			);
 			path = BusinessUser;
 			sourceTree = "<group>";
@@ -853,6 +858,7 @@
 			isa = PBXGroup;
 			children = (
 				50F54A1F2B45503800D06F20 /* AvatarEditor.swift */,
+				509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1079,8 +1085,9 @@
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostPage.swift in Sources */,
 				500F66262B2854A90074FE3C /* LocalCache.swift in Sources */,
+				509D5BCE2B45B01E00833021 /* DailyHours.swift in Sources */,
 				50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */,
-				509D5BC52B45611E00833021 /* OpeningHourPage.swift in Sources */,
+				509D5BC52B45611E00833021 /* OpeningHourEditPage.swift in Sources */,
 				50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */,
 				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
 				50E60DE82AFF885F00CA088F /* Util.swift in Sources */,
@@ -1103,6 +1110,7 @@
 				50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */,
 				50B5DEDA2B3B2DCC00C0A641 /* PlaceSuggestionItem.swift in Sources */,
 				50B5DED12B3B162500C0A641 /* PlaceSuggestionsViewModel.swift in Sources */,
+				509D5BCC2B459CC900833021 /* OpeningHourSheet.swift in Sources */,
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
 				5000C6CE2AF8D9A20057EF2D /* MessageView.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,

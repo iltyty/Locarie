@@ -25,6 +25,7 @@ func inputFormItemBuilder(
     Spacer()
     if showIcon {
       Image(systemName: "square.and.pencil")
+        .foregroundStyle(.secondary)
         .onTapGesture {
           isFocused.wrappedValue = true
         }

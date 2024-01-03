@@ -13,6 +13,7 @@ func linkFormItemBuilder(hint: String, text: Binding<String>) -> some View {
     TextField(hint, text: text).disabled(true)
     Spacer()
     Image(systemName: "chevron.right")
+      .foregroundStyle(.secondary)
   }
   .padding(.horizontal)
   .background(formItemBackground(.background))

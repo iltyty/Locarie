@@ -14,7 +14,7 @@ struct BusinessUserProfileEditPage: View {
   @StateObject private var photoViewModel = PhotoViewModel()
 
   @State var birthday = ""
-  @State var isBirthdaySheetPresented = false
+  @State var isSheetPresented = false
 
   var body: some View {
     GeometryReader { proxy in
@@ -37,7 +37,7 @@ struct BusinessUserProfileEditPage: View {
         }
       }
     }
-    .sheet(isPresented: $isBirthdaySheetPresented) { birthdaySheet }
+    .sheet(isPresented: $isSheetPresented) { birthdaySheet }
   }
 }
 
@@ -165,7 +165,7 @@ private extension BusinessUserProfileEditPage {
 
   var openingHoursInput: some View {
     NavigationLink {
-      OpeningHourPage()
+      OpeningHourEditPage()
     } label: {
       // - FIXME: opening hour edit
       LinkFormItem(
@@ -229,7 +229,7 @@ private extension BusinessUserProfileEditPage {
   var birthdayInput: some View {
     LinkFormItem(title: "Birthday", hint: "Birthday", text: $birthday)
       .onTapGesture {
-        isBirthdaySheetPresented = true
+        isSheetPresented = true
       }
   }
 }
@@ -254,14 +254,14 @@ private extension BusinessUserProfileEditPage {
 
   var birthdaySheetCancelButton: some View {
     Button("Cancel") {
-      isBirthdaySheetPresented = false
+      isSheetPresented = false
     }
     .foregroundStyle(.secondary)
   }
 
   var birthdaySheetDoneButton: some View {
     Button("Done") {
-      isBirthdaySheetPresented = false
+      isSheetPresented = false
       birthday = profileViewModel.dto.formattedBirthday
     }
     .foregroundStyle(Color.locariePrimary)
