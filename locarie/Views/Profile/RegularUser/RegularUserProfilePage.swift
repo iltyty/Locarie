@@ -52,9 +52,14 @@ private extension RegularUserProfilePage {
   var settingsButton: some View {
     HStack {
       Spacer()
-      Image(systemName: "gearshape")
-        .font(.system(size: Constants.settingsButtonSize))
-        .padding(.trailing)
+      NavigationLink {
+        SettingsPage()
+      } label: {
+        Image(systemName: "gearshape")
+          .font(.system(size: Constants.settingsButtonSize))
+          .padding(.trailing)
+      }
+      .buttonStyle(.plain)
     }
   }
 
@@ -76,9 +81,14 @@ private extension RegularUserProfilePage {
   }
 
   var profileEditButton: some View {
-    Text("Edit Profile")
-      .padding()
-      .background(profileEditButtonBackground)
+    NavigationLink {
+      RegularUserProfileEditPage()
+    } label: {
+      Text("Edit Profile")
+        .padding()
+        .background(profileEditButtonBackground)
+    }
+    .buttonStyle(.plain)
   }
 
   var profileEditButtonBackground: some View {

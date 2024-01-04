@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SettingsPage: View {
+  @State var path = [Route]()
+
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
@@ -42,34 +44,38 @@ private extension SettingsPage {
 
   var myAccount: some View {
     NavigationLink {
-      EmptyView()
+      MyAccountPage()
     } label: {
       LinkSettingsItem(text: "My account")
     }
+    .buttonStyle(.plain)
   }
 
   var changePassword: some View {
     NavigationLink {
-      EmptyView()
+      ChangePasswordPage()
     } label: {
       LinkSettingsItem(text: "Change password")
     }
+    .buttonStyle(.plain)
   }
 
   var notifications: some View {
     NavigationLink {
-      EmptyView()
+      NotificationsPage()
     } label: {
       LinkSettingsItem(text: "Notifications")
     }
+    .buttonStyle(.plain)
   }
 
   var socialAccounts: some View {
     NavigationLink {
-      EmptyView()
+      SocialAccountsPage()
     } label: {
       LinkSettingsItem(text: "Social accounts")
     }
+    .buttonStyle(.plain)
   }
 
   var locarieForBusinessSectionTitle: some View {
@@ -77,11 +83,10 @@ private extension SettingsPage {
   }
 
   var signUpForBusiness: some View {
-    NavigationLink {
-      EmptyView()
-    } label: {
-      LinkSettingsItem(text: "Sign up for business account")
+    NavigationLink(value: Route.businessRegister) {
+      LinkSettingsItem(text: "Sign up for business account", highlighted: true)
     }
+    .buttonStyle(.plain)
   }
 
   var supportSectionTitle: some View {
@@ -90,10 +95,11 @@ private extension SettingsPage {
 
   var feedback: some View {
     NavigationLink {
-      EmptyView()
+      FeedbackPage()
     } label: {
       LinkSettingsItem(text: "Feedback")
     }
+    .buttonStyle(.plain)
   }
 
   var legalSectionTitle: some View {
@@ -102,26 +108,29 @@ private extension SettingsPage {
 
   var privacyPolicy: some View {
     NavigationLink {
-      EmptyView()
+      PrivacyPolicyPage()
     } label: {
       LinkSettingsItem(text: "Privacy policy")
     }
+    .buttonStyle(.plain)
   }
 
   var termsOfService: some View {
     NavigationLink {
-      EmptyView()
+      TermsOfServicePage()
     } label: {
       LinkSettingsItem(text: "Terms of services")
     }
+    .buttonStyle(.plain)
   }
 
   var termsOfUse: some View {
     NavigationLink {
-      EmptyView()
+      TermsOfUsePage()
     } label: {
       LinkSettingsItem(text: "Terms of use")
     }
+    .buttonStyle(.plain)
   }
 
   var logout: some View {

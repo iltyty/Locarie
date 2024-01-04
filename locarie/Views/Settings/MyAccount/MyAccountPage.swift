@@ -48,7 +48,7 @@ private extension MyAccountPage {
   }
 
   var username: some View {
-    TextSettingsItem(title: "@username", value: "username")
+    TextSettingsItem(title: "@Username", value: "username")
   }
 
   var firstName: some View {

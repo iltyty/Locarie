@@ -29,15 +29,15 @@ private extension FeedbackPage {
       title
       paragraph
       feedbackEditor
-      share
+      shareButton
     }
-    .padding(.horizontal)
   }
 
   var title: some View {
     Text("Share your feedback with us")
       .font(.headline)
       .foregroundStyle(Color.locariePrimary)
+      .padding(.horizontal)
   }
 
   var paragraph: some View {
@@ -46,6 +46,7 @@ private extension FeedbackPage {
 
     Please share it and let us know.
     """)
+    .padding(.horizontal)
   }
 
   var feedbackEditor: some View {
@@ -59,10 +60,11 @@ private extension FeedbackPage {
         Color.clear
           .frame(height: proxy.size.height * 0.2)
       }
+      .padding(.horizontal)
     }
   }
 
-  var share: some View {
+  var shareButton: some View {
     PrimaryColorButton(text: "Send") {
       print("share button tapped")
     }

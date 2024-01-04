@@ -11,20 +11,16 @@ struct LoginOrRegisterPage: View {
   @State var path: [Route] = []
 
   var body: some View {
-    NavigationStack(path: $path) {
-      VStack(spacing: Constants.spacing) {
-        Spacer()
-        locarieIcon
-        Spacer()
-        loginButton
-        signupButton
-        orText
-        signupBusinessButton
-        Spacer()
-      }
-      .navigationDestination(for: Route.self) { route in
-        getRoutePage(route, path: $path)
-      }
+    VStack(spacing: Constants.spacing) {
+      Spacer()
+      locarieIcon
+      Spacer()
+      loginButton
+      signupButton
+      orText
+      signupBusinessButton
+      Spacer()
+      BottomTabView()
     }
   }
 
@@ -68,5 +64,6 @@ private enum Constants {
 
 #Preview {
   LoginOrRegisterPage()
+    .environmentObject(BottomTabViewRouter())
     .environmentObject(LocalCacheViewModel())
 }

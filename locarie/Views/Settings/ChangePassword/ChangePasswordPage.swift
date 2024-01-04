@@ -33,8 +33,10 @@ private extension ChangePasswordPage {
   }
 
   var nextButton: some View {
-    PrimaryColorButton(text: "Next") {
-      print("next button tapped")
+    NavigationLink {
+      NewPasswordPage()
+    } label: {
+      primaryColorFormItemBuilder(text: "Next")
     }
   }
 }

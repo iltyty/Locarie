@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserProfilePage: View {
-  @StateObject private var cacheViewModel = LocalCacheViewModel()
+  @EnvironmentObject private var cacheViewModel: LocalCacheViewModel
 
   var body: some View {
     if !cacheViewModel.isLoggedIn() {
@@ -23,7 +23,9 @@ struct UserProfilePage: View {
 
 private extension UserProfilePage {
   var loginOrRegister: some View {
-    LoginOrRegisterPage()
+    VStack {
+      LoginOrRegisterPage()
+    }
   }
 
   var regularUserProfile: some View {
@@ -38,4 +40,5 @@ private extension UserProfilePage {
 
 #Preview {
   UserProfilePage()
+    .environmentObject(LocalCacheViewModel())
 }
