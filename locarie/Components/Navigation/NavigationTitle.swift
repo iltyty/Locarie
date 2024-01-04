@@ -11,21 +11,29 @@ struct NavigationTitle<L: View, R: View>: View {
   let left: L
   let right: R
   let title: String
+  let showDivider: Bool
 
   init(
     _ title: String,
     left: L = defaultTitleLeft(),
-    right: R = defaultTitleRight()
+    right: R = defaultTitleRight(),
+    divider showDivider: Bool = false
   ) {
     self.left = left
     self.right = right
     self.title = title
+    self.showDivider = showDivider
   }
 
   var body: some View {
-    ZStack(alignment: .top) {
-      titleButtons(left: left, right: right)
-      titleText(title)
+    VStack {
+      ZStack(alignment: .top) {
+        titleButtons(left: left, right: right)
+        titleText(title)
+      }
+      if showDivider {
+        Divider()
+      }
     }
   }
 }

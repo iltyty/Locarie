@@ -21,6 +21,8 @@
 		501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */; };
 		501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF262B462DE000D9D84F /* TextSettingsItem.swift */; };
 		501BAF2A2B462E7300D9D84F /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF292B462E7300D9D84F /* SettingsPage.swift */; };
+		501BAF2C2B46319700D9D84F /* MyAccountPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF2B2B46319700D9D84F /* MyAccountPage.swift */; };
+		501BAF2E2B46330600D9D84F /* SettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF2D2B46330600D9D84F /* SettingsConstants.swift */; };
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F772AF117970045AB12 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F762AF117970045AB12 /* FavoritePage.swift */; };
 		50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F792AF117B20045AB12 /* MessagePage.swift */; };
@@ -156,6 +158,8 @@
 		501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionTitle.swift; sourceTree = "<group>"; };
 		501BAF262B462DE000D9D84F /* TextSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSettingsItem.swift; sourceTree = "<group>"; };
 		501BAF292B462E7300D9D84F /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
+		501BAF2B2B46319700D9D84F /* MyAccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountPage.swift; sourceTree = "<group>"; };
+		501BAF2D2B46330600D9D84F /* SettingsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsConstants.swift; sourceTree = "<group>"; };
 		50277F732AF117700045AB12 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		50277F762AF117970045AB12 /* FavoritePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePage.swift; sourceTree = "<group>"; };
 		50277F792AF117B20045AB12 /* MessagePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePage.swift; sourceTree = "<group>"; };
@@ -331,6 +335,8 @@
 			isa = PBXGroup;
 			children = (
 				501BAF292B462E7300D9D84F /* SettingsPage.swift */,
+				501BAF2B2B46319700D9D84F /* MyAccountPage.swift */,
+				501BAF2D2B46330600D9D84F /* SettingsConstants.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1074,6 +1080,7 @@
 				50F54A182B4532F900D06F20 /* FormItemBackgroundBuilder.swift in Sources */,
 				509D5BCA2B457F9800833021 /* BioEditViewModel.swift in Sources */,
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */,
+				501BAF2C2B46319700D9D84F /* MyAccountPage.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
 				50F54A142B45320B00D06F20 /* LinkFormItem.swift in Sources */,
 				501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */,
@@ -1148,6 +1155,7 @@
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
 				50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */,
 				50998B0A2B370ED5002196B5 /* TagView.swift in Sources */,
+				501BAF2E2B46330600D9D84F /* SettingsConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

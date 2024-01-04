@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsPage: View {
   var body: some View {
     ScrollView {
-      VStack(alignment: .leading, spacing: Constants.vSpacing) {
+      VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
         navigationTitle
         accountSectionTitle
         myAccount
@@ -130,10 +130,6 @@ private extension SettingsPage {
     }
     .padding(.leading)
   }
-}
-
-private enum Constants {
-  static let vSpacing = 20.0
 }
 
 #Preview {
