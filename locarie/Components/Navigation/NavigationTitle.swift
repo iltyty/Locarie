@@ -13,6 +13,8 @@ struct NavigationTitle<L: View, R: View>: View {
   let title: String
   let showDivider: Bool
 
+  @Environment(\.dismiss) var dismiss
+
   init(
     _ title: String,
     left: L = defaultTitleLeft(),
@@ -41,7 +43,7 @@ struct NavigationTitle<L: View, R: View>: View {
 private extension NavigationTitle {
   func titleButtons(left: some View, right: some View) -> some View {
     HStack {
-      left
+      left.onTapGesture { dismiss() }
       Spacer()
       right
     }
