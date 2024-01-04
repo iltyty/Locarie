@@ -17,6 +17,10 @@
 		500F66212B257D4D0074FE3C /* Dtos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F66202B257D4D0074FE3C /* Dtos.swift */; };
 		500F66242B25CE320074FE3C /* LocalCacheKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F66232B25CE320074FE3C /* LocalCacheKeys.swift */; };
 		500F66262B2854A90074FE3C /* LocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F66252B2854A80074FE3C /* LocalCache.swift */; };
+		501BAF232B462C4F00D9D84F /* LinkSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF222B462C4F00D9D84F /* LinkSettingsItem.swift */; };
+		501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */; };
+		501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF262B462DE000D9D84F /* TextSettingsItem.swift */; };
+		501BAF2A2B462E7300D9D84F /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF292B462E7300D9D84F /* SettingsPage.swift */; };
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F772AF117970045AB12 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F762AF117970045AB12 /* FavoritePage.swift */; };
 		50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F792AF117B20045AB12 /* MessagePage.swift */; };
@@ -148,6 +152,10 @@
 		500F66202B257D4D0074FE3C /* Dtos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dtos.swift; sourceTree = "<group>"; };
 		500F66232B25CE320074FE3C /* LocalCacheKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheKeys.swift; sourceTree = "<group>"; };
 		500F66252B2854A80074FE3C /* LocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
+		501BAF222B462C4F00D9D84F /* LinkSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkSettingsItem.swift; sourceTree = "<group>"; };
+		501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionTitle.swift; sourceTree = "<group>"; };
+		501BAF262B462DE000D9D84F /* TextSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSettingsItem.swift; sourceTree = "<group>"; };
+		501BAF292B462E7300D9D84F /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		50277F732AF117700045AB12 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		50277F762AF117970045AB12 /* FavoritePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePage.swift; sourceTree = "<group>"; };
 		50277F792AF117B20045AB12 /* MessagePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePage.swift; sourceTree = "<group>"; };
@@ -309,6 +317,24 @@
 			path = Dtos;
 			sourceTree = "<group>";
 		};
+		501BAF212B462C3800D9D84F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				501BAF222B462C4F00D9D84F /* LinkSettingsItem.swift */,
+				501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */,
+				501BAF262B462DE000D9D84F /* TextSettingsItem.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		501BAF282B462E6A00D9D84F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				501BAF292B462E7300D9D84F /* SettingsPage.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		50277F722AF117640045AB12 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +375,7 @@
 		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				501BAF212B462C3800D9D84F /* Settings */,
 				50F54A082B452EA300D06F20 /* Buttons */,
 				50F54A012B45283000D06F20 /* Navigation */,
 				50F549EF2B44F44C00D06F20 /* ComponentBuilders */,
@@ -594,6 +621,7 @@
 		50B11ACC2AF9DDD9002A7B91 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				501BAF282B462E6A00D9D84F /* Settings */,
 				50F549E52B4425E900D06F20 /* Register */,
 				509CDA302B1F078E004A6D22 /* Login */,
 				50B11AD82AFB3654002A7B91 /* Post */,
@@ -1035,6 +1063,7 @@
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
 				50F54A0A2B452EAE00D06F20 /* PrimaryColorButton.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
+				501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */,
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
 				50F549F32B44F59C00D06F20 /* InputFormItemBuilder.swift in Sources */,
@@ -1047,6 +1076,7 @@
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
 				50F54A142B45320B00D06F20 /* LinkFormItem.swift in Sources */,
+				501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
 				509D5BC32B45610F00833021 /* BioEditPage.swift in Sources */,
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,
@@ -1079,7 +1109,9 @@
 				50B11AD72AFA28E9002A7B91 /* BusinessHomePage.swift in Sources */,
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,
 				50998B022B36842A002196B5 /* BusinessRegisterPage.swift in Sources */,
+				501BAF2A2B462E7300D9D84F /* SettingsPage.swift in Sources */,
 				50F549DB2B3CFCBA00D06F20 /* RegisterViewModel.swift in Sources */,
+				501BAF232B462C4F00D9D84F /* LinkSettingsItem.swift in Sources */,
 				50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
