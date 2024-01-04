@@ -26,6 +26,8 @@
 		501BAF312B46345500D9D84F /* PrivacyPolicyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF302B46345500D9D84F /* PrivacyPolicyPage.swift */; };
 		501BAF332B46353C00D9D84F /* TermsOfServicePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF322B46353C00D9D84F /* TermsOfServicePage.swift */; };
 		501BAF352B4635A900D9D84F /* TermsOfUsePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF342B4635A900D9D84F /* TermsOfUsePage.swift */; };
+		501BAF382B46364D00D9D84F /* FeedbackPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF372B46364D00D9D84F /* FeedbackPage.swift */; };
+		501BAF3A2B463D6900D9D84F /* TextEditorPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF392B463D6900D9D84F /* TextEditorPlus.swift */; };
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F772AF117970045AB12 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F762AF117970045AB12 /* FavoritePage.swift */; };
 		50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F792AF117B20045AB12 /* MessagePage.swift */; };
@@ -65,7 +67,7 @@
 		50998B102B39161D002196B5 /* Regexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0F2B39161D002196B5 /* Regexes.swift */; };
 		509D5BC32B45610F00833021 /* BioEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC22B45610F00833021 /* BioEditPage.swift */; };
 		509D5BC52B45611E00833021 /* OpeningHourEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */; };
-		509D5BCA2B457F9800833021 /* BioEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC92B457F9800833021 /* BioEditViewModel.swift */; };
+		509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC92B457F9800833021 /* TextEditViewModel.swift */; };
 		509D5BCC2B459CC900833021 /* OpeningHourSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */; };
 		509D5BCE2B45B01E00833021 /* DailyHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BCD2B45B01E00833021 /* DailyHours.swift */; };
 		50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */; };
@@ -166,6 +168,8 @@
 		501BAF302B46345500D9D84F /* PrivacyPolicyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyPage.swift; sourceTree = "<group>"; };
 		501BAF322B46353C00D9D84F /* TermsOfServicePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServicePage.swift; sourceTree = "<group>"; };
 		501BAF342B4635A900D9D84F /* TermsOfUsePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUsePage.swift; sourceTree = "<group>"; };
+		501BAF372B46364D00D9D84F /* FeedbackPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPage.swift; sourceTree = "<group>"; };
+		501BAF392B463D6900D9D84F /* TextEditorPlus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorPlus.swift; sourceTree = "<group>"; };
 		50277F732AF117700045AB12 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		50277F762AF117970045AB12 /* FavoritePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePage.swift; sourceTree = "<group>"; };
 		50277F792AF117B20045AB12 /* MessagePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePage.swift; sourceTree = "<group>"; };
@@ -204,7 +208,7 @@
 		50998B0F2B39161D002196B5 /* Regexes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regexes.swift; sourceTree = "<group>"; };
 		509D5BC22B45610F00833021 /* BioEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioEditPage.swift; sourceTree = "<group>"; };
 		509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourEditPage.swift; sourceTree = "<group>"; };
-		509D5BC92B457F9800833021 /* BioEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioEditViewModel.swift; sourceTree = "<group>"; };
+		509D5BC92B457F9800833021 /* TextEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditViewModel.swift; sourceTree = "<group>"; };
 		509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourSheet.swift; sourceTree = "<group>"; };
 		509D5BCD2B45B01E00833021 /* DailyHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHours.swift; sourceTree = "<group>"; };
 		50AAB1792AEFA2E9003FEDF1 /* locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,19 +331,21 @@
 			path = Dtos;
 			sourceTree = "<group>";
 		};
-		501BAF212B462C3800D9D84F /* Settings */ = {
+		501BAF212B462C3800D9D84F /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				501BAF222B462C4F00D9D84F /* LinkSettingsItem.swift */,
 				501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */,
 				501BAF262B462DE000D9D84F /* TextSettingsItem.swift */,
 			);
-			path = Settings;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		501BAF282B462E6A00D9D84F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				501BAF212B462C3800D9D84F /* Components */,
+				501BAF362B46364300D9D84F /* Feedback */,
 				501BAF2F2B46344800D9D84F /* Legal */,
 				501BAF292B462E7300D9D84F /* SettingsPage.swift */,
 				501BAF2B2B46319700D9D84F /* MyAccountPage.swift */,
@@ -356,6 +362,14 @@
 				501BAF342B4635A900D9D84F /* TermsOfUsePage.swift */,
 			);
 			path = Legal;
+			sourceTree = "<group>";
+		};
+		501BAF362B46364300D9D84F /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				501BAF372B46364D00D9D84F /* FeedbackPage.swift */,
+			);
+			path = Feedback;
 			sourceTree = "<group>";
 		};
 		50277F722AF117640045AB12 /* Home */ = {
@@ -398,7 +412,6 @@
 		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				501BAF212B462C3800D9D84F /* Settings */,
 				50F54A082B452EA300D06F20 /* Buttons */,
 				50F54A012B45283000D06F20 /* Navigation */,
 				50F549EF2B44F44C00D06F20 /* ComponentBuilders */,
@@ -411,6 +424,7 @@
 				50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */,
 				500477092B05DAAC0031AA94 /* AsyncImageView.swift */,
 				50998B092B370ED5002196B5 /* TagView.swift */,
+				501BAF392B463D6900D9D84F /* TextEditorPlus.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -564,7 +578,7 @@
 		509D5BC82B457F8000833021 /* TextEdit */ = {
 			isa = PBXGroup;
 			children = (
-				509D5BC92B457F9800833021 /* BioEditViewModel.swift */,
+				509D5BC92B457F9800833021 /* TextEditViewModel.swift */,
 			);
 			path = TextEdit;
 			sourceTree = "<group>";
@@ -1095,7 +1109,7 @@
 				502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */,
 				50F54A032B45283C00D06F20 /* NavigationTitle.swift in Sources */,
 				50F54A182B4532F900D06F20 /* FormItemBackgroundBuilder.swift in Sources */,
-				509D5BCA2B457F9800833021 /* BioEditViewModel.swift in Sources */,
+				509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */,
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */,
 				501BAF2C2B46319700D9D84F /* MyAccountPage.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
@@ -1112,6 +1126,7 @@
 				50B5DECB2B3B099E00C0A641 /* PlaceSuggestions.swift in Sources */,
 				50F549FB2B44F71300D06F20 /* Constants.swift in Sources */,
 				50277F742AF117700045AB12 /* HomePage.swift in Sources */,
+				501BAF382B46364D00D9D84F /* FeedbackPage.swift in Sources */,
 				50F85B452B242EE200D04787 /* APIServices.swift in Sources */,
 				50E60DE52AFF80B400CA088F /* UserViewModel.swift in Sources */,
 				50F549D92B3C85C500D06F20 /* UserRegisterRequest.swift in Sources */,
@@ -1159,6 +1174,7 @@
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
 				50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */,
 				501BAF352B4635A900D9D84F /* TermsOfUsePage.swift in Sources */,
+				501BAF3A2B463D6900D9D84F /* TextEditorPlus.swift in Sources */,
 				50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */,
 				50F549E02B3D0F9000D06F20 /* NetworkError.swift in Sources */,
 				50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */,

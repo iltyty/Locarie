@@ -10,17 +10,16 @@ import SwiftUI
 struct BioEditPage: View {
   @Binding var bio: String
 
-  @Environment(\.dismiss) var dismiss
-
-  @ObservedObject private var bioEditViewModel = BioEditViewModel()
+  @StateObject var bioEditViewModel = TextEditViewModel(limit: 150)
 
   @State private var hint = "Bio..."
+
+  @Environment(\.dismiss) var dismiss
 
   var body: some View {
     VStack(spacing: Constants.vSpacing) {
       navigationTitle
       bioEditor
-      remainingEditCount
     }
   }
 }
@@ -42,25 +41,7 @@ private extension BioEditPage {
   }
 
   var bioEditor: some View {
-    ZStack(alignment: .topLeading) {
-      if bioEditViewModel.text.isEmpty {
-        TextEditor(text: $hint)
-          .foregroundStyle(.secondary)
-          .padding(.horizontal)
-          .disabled(true)
-      }
-      TextEditor(text: $bioEditViewModel.text)
-        .padding(.horizontal)
-        .opacity(bioEditViewModel.text.isEmpty ? 0.25 : 1)
-    }
-  }
-
-  var remainingEditCount: some View {
-    HStack {
-      Spacer()
-      Text("\(bioEditViewModel.remainingCount)")
-        .padding()
-    }
+    TextEditorPlus(hint: "Bio...", viewModel: bioEditViewModel)
   }
 }
 

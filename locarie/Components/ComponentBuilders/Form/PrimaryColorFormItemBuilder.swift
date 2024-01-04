@@ -18,6 +18,5 @@ func primaryColorFormItemBuilder(label: some View) -> some View {
     .foregroundStyle(.white)
     .fontWeight(.bold)
     .background(formItemBackground(Color.locariePrimary))
-    .padding(.horizontal)
     .frame(height: ComponentBuilderConstants.formItemHeight)
 }

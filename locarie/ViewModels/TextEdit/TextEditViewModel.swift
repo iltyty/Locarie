@@ -1,5 +1,5 @@
 //
-//  BioEditViewModel.swift
+//  TextEditViewModel.swift
 //  locarie
 //
 //  Created by qiuty on 03/01/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class BioEditViewModel: ObservableObject {
+final class TextEditViewModel: ObservableObject {
   @Published var text = "" {
     didSet {
       if text.count > limit, oldValue.count <= limit {
@@ -21,7 +21,7 @@ final class BioEditViewModel: ObservableObject {
 
   let limit: Int
 
-  init(limit: Int = 150) {
+  init(limit: Int) {
     self.limit = limit
     remainingCount = limit
   }
