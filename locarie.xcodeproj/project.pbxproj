@@ -35,6 +35,7 @@
 		501BAF482B46527000D9D84F /* ChangePasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF472B46527000D9D84F /* ChangePasswordPage.swift */; };
 		501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF492B46538300D9D84F /* NewPasswordPage.swift */; };
 		501BAF4C2B4653FF00D9D84F /* ChangePasswordConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF4B2B4653FF00D9D84F /* ChangePasswordConstants.swift */; };
+		501BAF4E2B4655EF00D9D84F /* UserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF4D2B4655EF00D9D84F /* UserProfilePage.swift */; };
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F772AF117970045AB12 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F762AF117970045AB12 /* FavoritePage.swift */; };
 		50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F792AF117B20045AB12 /* MessagePage.swift */; };
@@ -184,6 +185,7 @@
 		501BAF472B46527000D9D84F /* ChangePasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPage.swift; sourceTree = "<group>"; };
 		501BAF492B46538300D9D84F /* NewPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordPage.swift; sourceTree = "<group>"; };
 		501BAF4B2B4653FF00D9D84F /* ChangePasswordConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordConstants.swift; sourceTree = "<group>"; };
+		501BAF4D2B4655EF00D9D84F /* UserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePage.swift; sourceTree = "<group>"; };
 		50277F732AF117700045AB12 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		50277F762AF117970045AB12 /* FavoritePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePage.swift; sourceTree = "<group>"; };
 		50277F792AF117B20045AB12 /* MessagePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePage.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				50F54A1E2B45502500D06F20 /* Components */,
 				50F549EB2B44273900D06F20 /* BusinessUser */,
 				50F549EA2B44273100D06F20 /* RegularUser */,
+				501BAF4D2B4655EF00D9D84F /* UserProfilePage.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1228,6 +1231,7 @@
 				50B5DED72B3B270C00C0A641 /* PlaceSearcher.swift in Sources */,
 				5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */,
 				50998B082B370B34002196B5 /* BusinessCategoryPage.swift in Sources */,
+				501BAF4E2B4655EF00D9D84F /* UserProfilePage.swift in Sources */,
 				500F66242B25CE320074FE3C /* LocalCacheKeys.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
 				50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */,

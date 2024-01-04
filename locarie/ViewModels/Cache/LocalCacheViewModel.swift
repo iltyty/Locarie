@@ -34,6 +34,10 @@ class LocalCacheViewModel: ObservableObject {
     cache.jwtToken
   }
 
+  func isRegularUser() -> Bool {
+    cache.isRegularUser()
+  }
+
   func setUserInfo(_ info: UserInfo) {
     cache.setUserInfo(info)
   }

@@ -8,67 +8,57 @@
 import SwiftUI
 
 struct RegularUserProfilePage: View {
-  @EnvironmentObject var cacheViewModel: LocalCacheViewModel
-  @EnvironmentObject var postViewModel: PostViewModel
-  @Environment(\.colorScheme) var colorScheme: ColorScheme
+  @StateObject private var cacheViewModel = LocalCacheViewModel()
 
-  init() {}
+  @State private var topSafeAreaHeight = 0.0
+  @State private var currentTab: Tab = .followed
+
+  @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
   var body: some View {
-    if cacheViewModel.isLoggedIn() {
-      content
-    } else {
-      loginOrRegister
-    }
-  }
-
-  var content: some View {
-    NavigationStack {
-      GeometryReader { proxy in
-        VStack(spacing: 0) {
-          ScrollView {
-            topView.padding(.bottom)
-            bottomView(screenWidth: proxy.size.width)
-          }
-          .background(.background)
-          BottomTabView()
-        }
+    GeometryReader { proxy in
+      VStack {
+        content
+        BottomTabView()
+      }
+      .ignoresSafeArea(edges: .top)
+      .onAppear {
+        topSafeAreaHeight = proxy.safeAreaInsets.top
       }
     }
   }
 
-  var loginOrRegister: some View {
-    VStack {
-      LoginOrRegisterPage()
-      BottomTabView()
+  var content: some View {
+    ScrollView {
+      topContent
+      bottomContent
     }
   }
 }
 
-extension RegularUserProfilePage {
-  var topView: some View {
+private extension RegularUserProfilePage {
+  var topContent: some View {
     VStack {
-      topViewSettings
-      topViewAvatar
-      topViewUsername
-      topViewBtnEdit
+      settingsButton
+      avatar
+      username
+      profileEditButton
     }
+    .padding(.top, topSafeAreaHeight)
+    .padding(.bottom)
+    .background(.thinMaterial)
   }
 
-  var topViewSettings: some View {
+  var settingsButton: some View {
     HStack {
       Spacer()
       Image(systemName: "gearshape")
-        .resizable()
-        .frame(
-          width: Constants.btnSettingsSize,
-          height: Constants.btnSettingsSize
-        )
+        .font(.system(size: Constants.settingsButtonSize))
         .padding(.trailing)
     }
   }
 
-  var topViewAvatar: some View {
+  var avatar: some View {
     cacheViewModel.getAvatarUrl().isEmpty
       ? AvatarView(
         systemName: "person.crop.circle",
@@ -80,68 +70,133 @@ extension RegularUserProfilePage {
       )
   }
 
-  var topViewUsername: some View {
+  var username: some View {
     Text(cacheViewModel.getUsername())
+      .frame(minHeight: Constants.usernameMinHeight)
   }
 
-  var topViewBtnEdit: some View {
+  var profileEditButton: some View {
     Text("Edit Profile")
-      .foregroundStyle(.primary)
       .padding()
-      .background(
-        Capsule()
-          .fill(colorScheme == .light ? .white : .gray)
-          .frame(height: Constants.btnEditHeight)
-          .shadow(radius: Constants.btnEditShadowRadius)
-      )
+      .background(profileEditButtonBackground)
+  }
+
+  var profileEditButtonBackground: some View {
+    Capsule()
+      .fill(colorScheme == .light ? .white : .gray)
+      .frame(height: Constants.editButtonHeight)
+      .shadow(radius: Constants.editButtonShadowRadius)
   }
 }
 
-extension RegularUserProfilePage {
-  func bottomView(screenWidth _: CGFloat) -> some View {
-    VStack(spacing: Constants.bottomViewVSpacing) {
-      HStack {
-        Spacer()
-        Label("Followed", systemImage: "bookmark")
-        Spacer()
-        Label("Saved", systemImage: "star")
-        Spacer()
+private extension RegularUserProfilePage {
+  var bottomContent: some View {
+    VStack(spacing: Constants.bottomContentVSpacing) {
+      tabs
+      mapIcon
+      switch currentTab {
+      case .followed: followedPosts
+      case .saved: savedPosts
       }
-      Divider()
-        .padding(.horizontal)
-      Image(systemName: "map")
-      Divider()
-        .padding(.horizontal)
-      // FIXME: Post -> PostDto
-//      ForEach(postViewModel.favoritePosts) { post in
-//        PostCardView(post: post, coverWidth: screenWidth * 0.8)
-//      }
+    }
+    .padding(.horizontal)
+    .background(bottomContentBackground)
+  }
+
+  var tabs: some View {
+    HStack {
+      followedTab
+      savedTab
     }
     .padding(.top)
-    .background(
-      UnevenRoundedRectangle(
-        topLeadingRadius: Constants.bottomViewBackgroundRadius,
-        topTrailingRadius: Constants.bottomViewBackgroundRadius
-      )
-      .fill(.background)
-      .shadow(radius: Constants.bottomViewShadowRadius)
+  }
+
+  var followedTab: some View {
+    HStack {
+      Spacer()
+      Label("Followed", systemImage: "bookmark")
+        .fontWeight(currentTab == .followed ? .bold : .regular)
+        .onTapGesture {
+          currentTab = .followed
+        }
+      Spacer()
+    }
+  }
+
+  var savedTab: some View {
+    HStack {
+      Spacer()
+      Label("Saved", systemImage: "star")
+        .fontWeight(currentTab == .saved ? .bold : .regular)
+        .onTapGesture {
+          currentTab = .saved
+        }
+      Spacer()
+    }
+  }
+
+  var mapIcon: some View {
+    VStack(spacing: Constants.bottomContentVSpacing) {
+      Divider()
+      Image(systemName: "map")
+      Divider()
+    }
+  }
+
+  var bottomContentBackground: some View {
+    UnevenRoundedRectangle(
+      topLeadingRadius: Constants.bottomContentackgroundRadius,
+      topTrailingRadius: Constants.bottomContentackgroundRadius
     )
+    .fill(.background)
+//    .shadow(radius: Constants.bottomContentShadowRadius)
+  }
+
+  var followedPosts: some View {
+    // - TODO: posts content
+    emptyFollowedPosts
+  }
+
+  var emptyFollowedPosts: some View {
+    VStack {
+      Spacer()
+      Text("No followed moments.").foregroundStyle(.secondary)
+      Spacer()
+    }
+  }
+
+  var savedPosts: some View {
+    // - TODO: posts content
+    emptySavedPosts
+  }
+
+  var emptySavedPosts: some View {
+    VStack {
+      Spacer()
+      Text("No saved moments.").foregroundStyle(.secondary)
+      Spacer()
+    }
+  }
+}
+
+private extension RegularUserProfilePage {
+  enum Tab {
+    case followed, saved
   }
 }
 
 private enum Constants {
-  static let avatarSize: CGFloat = 80
-  static let btnSettingsSize: CGFloat = 25
-  static let btnEditHeight: CGFloat = 40
-  static let btnEditShadowRadius: CGFloat = 2
-  static let bottomViewVSpacing: CGFloat = 20
-  static let bottomViewShadowRadius: CGFloat = 4
-  static let bottomViewBackgroundRadius: CGFloat = 10
+  static let settingsButtonSize = 25.0
+  static let avatarSize = 80.0
+  static let usernameMinHeight = 24.0
+  static let editButtonHeight = 40.0
+  static let editButtonShadowRadius = 2.0
+  static let bottomContentVSpacing = 20.0
+  static let bottomContentShadowRadius = 4.0
+  static let bottomContentackgroundRadius = 10.0
 }
 
 #Preview {
   RegularUserProfilePage()
     .environmentObject(BottomTabViewRouter())
-    .environmentObject(PostViewModel())
-    .environmentObject(LocalCacheViewModel())
 }

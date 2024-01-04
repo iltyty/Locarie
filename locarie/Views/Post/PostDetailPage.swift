@@ -48,7 +48,6 @@ struct PostDetailPage: View {
           scrollViewOverlay
         }
       }
-//            .navigationBarBackButtonHidden()
     }
   }
 }
