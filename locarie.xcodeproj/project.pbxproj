@@ -30,6 +30,8 @@
 		501BAF3A2B463D6900D9D84F /* TextEditorPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF392B463D6900D9D84F /* TextEditorPlus.swift */; };
 		501BAF3E2B464ECC00D9D84F /* NotificationsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF3D2B464ECC00D9D84F /* NotificationsPage.swift */; };
 		501BAF402B464F0600D9D84F /* ToggleSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF3F2B464F0600D9D84F /* ToggleSettingsItem.swift */; };
+		501BAF422B46503600D9D84F /* LabelSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF412B46503600D9D84F /* LabelSettingsItem.swift */; };
+		501BAF452B4650CA00D9D84F /* SocialAccountsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF442B4650CA00D9D84F /* SocialAccountsPage.swift */; };
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F772AF117970045AB12 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F762AF117970045AB12 /* FavoritePage.swift */; };
 		50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F792AF117B20045AB12 /* MessagePage.swift */; };
@@ -174,6 +176,8 @@
 		501BAF392B463D6900D9D84F /* TextEditorPlus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorPlus.swift; sourceTree = "<group>"; };
 		501BAF3D2B464ECC00D9D84F /* NotificationsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPage.swift; sourceTree = "<group>"; };
 		501BAF3F2B464F0600D9D84F /* ToggleSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingsItem.swift; sourceTree = "<group>"; };
+		501BAF412B46503600D9D84F /* LabelSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSettingsItem.swift; sourceTree = "<group>"; };
+		501BAF442B4650CA00D9D84F /* SocialAccountsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountsPage.swift; sourceTree = "<group>"; };
 		50277F732AF117700045AB12 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		50277F762AF117970045AB12 /* FavoritePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePage.swift; sourceTree = "<group>"; };
 		50277F792AF117B20045AB12 /* MessagePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePage.swift; sourceTree = "<group>"; };
@@ -342,6 +346,7 @@
 				501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */,
 				501BAF262B462DE000D9D84F /* TextSettingsItem.swift */,
 				501BAF3F2B464F0600D9D84F /* ToggleSettingsItem.swift */,
+				501BAF412B46503600D9D84F /* LabelSettingsItem.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 		501BAF282B462E6A00D9D84F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				501BAF432B4650BF00D9D84F /* SocialAccounts */,
 				501BAF3C2B464EC100D9D84F /* Notifications */,
 				501BAF3B2B464EB800D9D84F /* MyAccount */,
 				501BAF212B462C3800D9D84F /* Components */,
@@ -392,6 +398,14 @@
 				501BAF3D2B464ECC00D9D84F /* NotificationsPage.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		501BAF432B4650BF00D9D84F /* SocialAccounts */ = {
+			isa = PBXGroup;
+			children = (
+				501BAF442B4650CA00D9D84F /* SocialAccountsPage.swift */,
+			);
+			path = SocialAccounts;
 			sourceTree = "<group>";
 		};
 		50277F722AF117640045AB12 /* Home */ = {
@@ -1139,6 +1153,7 @@
 				501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
 				509D5BC32B45610F00833021 /* BioEditPage.swift in Sources */,
+				501BAF422B46503600D9D84F /* LabelSettingsItem.swift in Sources */,
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,
 				501BAF402B464F0600D9D84F /* ToggleSettingsItem.swift in Sources */,
 				50277F772AF117970045AB12 /* FavoritePage.swift in Sources */,
@@ -1213,6 +1228,7 @@
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
 				5000C6CE2AF8D9A20057EF2D /* MessageView.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
+				501BAF452B4650CA00D9D84F /* SocialAccountsPage.swift in Sources */,
 				50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */,
 				50998B0A2B370ED5002196B5 /* TagView.swift in Sources */,
 				501BAF2E2B46330600D9D84F /* SettingsConstants.swift in Sources */,
