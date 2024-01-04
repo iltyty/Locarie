@@ -17,5 +17,6 @@ struct PrimaryColorButton: View {
     } label: {
       primaryColorFormItemBuilder(text: text)
     }
+    .padding(.horizontal)
   }
 }

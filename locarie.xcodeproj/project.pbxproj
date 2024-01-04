@@ -32,6 +32,9 @@
 		501BAF402B464F0600D9D84F /* ToggleSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF3F2B464F0600D9D84F /* ToggleSettingsItem.swift */; };
 		501BAF422B46503600D9D84F /* LabelSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF412B46503600D9D84F /* LabelSettingsItem.swift */; };
 		501BAF452B4650CA00D9D84F /* SocialAccountsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF442B4650CA00D9D84F /* SocialAccountsPage.swift */; };
+		501BAF482B46527000D9D84F /* ChangePasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF472B46527000D9D84F /* ChangePasswordPage.swift */; };
+		501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF492B46538300D9D84F /* NewPasswordPage.swift */; };
+		501BAF4C2B4653FF00D9D84F /* ChangePasswordConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF4B2B4653FF00D9D84F /* ChangePasswordConstants.swift */; };
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F772AF117970045AB12 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F762AF117970045AB12 /* FavoritePage.swift */; };
 		50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F792AF117B20045AB12 /* MessagePage.swift */; };
@@ -178,6 +181,9 @@
 		501BAF3F2B464F0600D9D84F /* ToggleSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingsItem.swift; sourceTree = "<group>"; };
 		501BAF412B46503600D9D84F /* LabelSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSettingsItem.swift; sourceTree = "<group>"; };
 		501BAF442B4650CA00D9D84F /* SocialAccountsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountsPage.swift; sourceTree = "<group>"; };
+		501BAF472B46527000D9D84F /* ChangePasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPage.swift; sourceTree = "<group>"; };
+		501BAF492B46538300D9D84F /* NewPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordPage.swift; sourceTree = "<group>"; };
+		501BAF4B2B4653FF00D9D84F /* ChangePasswordConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordConstants.swift; sourceTree = "<group>"; };
 		50277F732AF117700045AB12 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		50277F762AF117970045AB12 /* FavoritePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePage.swift; sourceTree = "<group>"; };
 		50277F792AF117B20045AB12 /* MessagePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePage.swift; sourceTree = "<group>"; };
@@ -354,6 +360,7 @@
 		501BAF282B462E6A00D9D84F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				501BAF462B46526200D9D84F /* ChangePassword */,
 				501BAF432B4650BF00D9D84F /* SocialAccounts */,
 				501BAF3C2B464EC100D9D84F /* Notifications */,
 				501BAF3B2B464EB800D9D84F /* MyAccount */,
@@ -406,6 +413,16 @@
 				501BAF442B4650CA00D9D84F /* SocialAccountsPage.swift */,
 			);
 			path = SocialAccounts;
+			sourceTree = "<group>";
+		};
+		501BAF462B46526200D9D84F /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				501BAF472B46527000D9D84F /* ChangePasswordPage.swift */,
+				501BAF492B46538300D9D84F /* NewPasswordPage.swift */,
+				501BAF4B2B4653FF00D9D84F /* ChangePasswordConstants.swift */,
+			);
+			path = ChangePassword;
 			sourceTree = "<group>";
 		};
 		50277F722AF117640045AB12 /* Home */ = {
@@ -1132,6 +1149,7 @@
 				50F54A002B45279D00D06F20 /* SecureFormItem.swift in Sources */,
 				502A4FFC2B32D71500C0833A /* UserDto.swift in Sources */,
 				50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */,
+				501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */,
 				50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
 				50F54A0A2B452EAE00D06F20 /* PrimaryColorButton.swift in Sources */,
@@ -1144,6 +1162,7 @@
 				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+Extensions.swift in Sources */,
 				502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */,
 				50F54A032B45283C00D06F20 /* NavigationTitle.swift in Sources */,
+				501BAF4C2B4653FF00D9D84F /* ChangePasswordConstants.swift in Sources */,
 				50F54A182B4532F900D06F20 /* FormItemBackgroundBuilder.swift in Sources */,
 				509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */,
 				5000C6CC2AF8CFB30057EF2D /* MessageDetailPage.swift in Sources */,
@@ -1223,6 +1242,7 @@
 				50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */,
 				50B5DEDA2B3B2DCC00C0A641 /* PlaceSuggestionItem.swift in Sources */,
 				50B5DED12B3B162500C0A641 /* PlaceSuggestionsViewModel.swift in Sources */,
+				501BAF482B46527000D9D84F /* ChangePasswordPage.swift in Sources */,
 				509D5BCC2B459CC900833021 /* OpeningHourSheet.swift in Sources */,
 				501BAF332B46353C00D9D84F /* TermsOfServicePage.swift in Sources */,
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
