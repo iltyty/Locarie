@@ -52,9 +52,7 @@ private extension RegularUserProfilePage {
   var settingsButton: some View {
     HStack {
       Spacer()
-      NavigationLink {
-        SettingsPage()
-      } label: {
+      NavigationLink(value: Route.settings) {
         Image(systemName: "gearshape")
           .font(.system(size: Constants.settingsButtonSize))
           .padding(.trailing)
