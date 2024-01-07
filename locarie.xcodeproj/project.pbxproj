@@ -137,6 +137,7 @@
 		50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */; };
 		50F85B432B242CA000D04787 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B422B242CA000D04787 /* Errors.swift */; };
 		50F85B452B242EE200D04787 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B442B242EE200D04787 /* APIServices.swift */; };
+		50FDD8852B4AB93E003015F9 /* BusinessUserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -289,6 +290,7 @@
 		50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		50F85B422B242CA000D04787 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		50F85B442B242EE200D04787 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
+		50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessUserProfilePage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -915,6 +917,7 @@
 				50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */,
 				509D5BC22B45610F00833021 /* BioEditPage.swift */,
 				509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */,
+				50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */,
 			);
 			path = BusinessUser;
 			sourceTree = "<group>";
@@ -1184,6 +1187,7 @@
 				50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */,
 				50B5DEDC2B3BE83500C0A641 /* MapboxRetrieveService.swift in Sources */,
 				50B5DECB2B3B099E00C0A641 /* PlaceSuggestions.swift in Sources */,
+				50FDD8852B4AB93E003015F9 /* BusinessUserProfilePage.swift in Sources */,
 				50F549FB2B44F71300D06F20 /* Constants.swift in Sources */,
 				50277F742AF117700045AB12 /* HomePage.swift in Sources */,
 				501BAF382B46364D00D9D84F /* FeedbackPage.swift in Sources */,

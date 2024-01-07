@@ -66,7 +66,6 @@ private extension RegularUserProfilePage {
   var avatar: some View {
     cacheViewModel.getAvatarUrl().isEmpty
       ? AvatarView(
-        systemName: "person.crop.circle",
         size: Constants.avatarSize
       )
       : AvatarView(
@@ -159,7 +158,6 @@ private extension RegularUserProfilePage {
       topTrailingRadius: Constants.bottomContentackgroundRadius
     )
     .fill(.background)
-//    .shadow(radius: Constants.bottomContentShadowRadius)
   }
 
   var followedPosts: some View {

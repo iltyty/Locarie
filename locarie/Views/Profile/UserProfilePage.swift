@@ -33,8 +33,7 @@ private extension UserProfilePage {
   }
 
   var businessUserProfile: some View {
-    // - FIXME: BusinessUserProfilePage
-    EmptyView()
+    BusinessUserProfilePage()
   }
 }
 

@@ -10,17 +10,15 @@ import SwiftUI
 struct AvatarView: View {
   var name = ""
   var imageUrl = ""
-  var systemName = ""
   var size: CGFloat
+
+  init(size: CGFloat) {
+    self.size = size
+  }
 
   init(name: String, size: CGFloat) {
     self.size = size
     self.name = name
-  }
-
-  init(systemName: String, size: CGFloat) {
-    self.size = size
-    self.systemName = systemName
   }
 
   init(imageUrl: String, size: CGFloat) {
@@ -34,7 +32,7 @@ struct AvatarView: View {
     } else if !name.isEmpty {
       customImage
     } else {
-      systemImage
+      defaultAvatar(size: size)
     }
   }
 
@@ -55,20 +53,12 @@ struct AvatarView: View {
       .frame(width: size, height: size)
       .clipShape(Circle())
   }
-
-  var systemImage: some View {
-    Image(systemName: systemName)
-      .resizable()
-      .scaledToFill()
-      .frame(width: size, height: size)
-      .clipShape(Circle())
-  }
 }
 
 #Preview {
   VStack {
+    AvatarView(size: 128)
     AvatarView(imageUrl: "https://picsum.photos/200", size: 128)
-    AvatarView(systemName: "person.crop.circle.fill", size: 128)
     AvatarView(name: "LoginBackground", size: 128)
   }
 }
