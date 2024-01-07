@@ -30,6 +30,7 @@ struct BusinessUserProfilePage: View {
       profileImage
       profileContent
     }
+    .scrollBounceBehavior(.basedOnSize)
   }
 }
 
@@ -46,9 +47,7 @@ private extension BusinessUserProfilePage {
   var settingsButton: some View {
     HStack {
       Spacer()
-      NavigationLink {
-        SettingsPage()
-      } label: {
+      NavigationLink(value: Route.settings) {
         Image(systemName: "gearshape")
           .font(.system(size: Constants.settingsButtonIconSize))
           .padding(.trailing)

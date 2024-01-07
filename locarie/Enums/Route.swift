@@ -14,6 +14,7 @@ enum Route: String, Hashable, Codable {
   case businessRegister
   case regularRegister
   case forgotPassword
+  case settings
 }
 
 func getRoutePage(_ route: Route, path: Binding<[Route]>) -> some View {
@@ -29,6 +30,8 @@ func getRoutePage(_ route: Route, path: Binding<[Route]>) -> some View {
       RegularRegisterPage(path: path)
     case .forgotPassword:
       ResetPasswordPage()
+    case .settings:
+      SettingsPage()
     }
   }
 }
