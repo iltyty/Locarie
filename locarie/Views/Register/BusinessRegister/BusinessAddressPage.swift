@@ -152,7 +152,7 @@ private extension BusinessAddressPage {
   }
 
   var isButtonDisabled: Bool {
-    location != nil
+    location == nil
   }
 
   var buttonOpacity: CGFloat {
