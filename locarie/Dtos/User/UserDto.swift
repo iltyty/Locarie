@@ -30,7 +30,7 @@ struct UserDto: Codable {
   var closeMinute: Int = 0
 
   var address: String = ""
-  var location = BusinessLocation()
+  var location: BusinessLocation?
 }
 
 enum UserType: String, Codable {

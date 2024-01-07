@@ -28,8 +28,8 @@ extension PostDto {
 
   var businessLocationCoordinate: CLLocationCoordinate2D {
     CLLocationCoordinate2D(
-      latitude: user.location.latitude,
-      longitude: user.location.longitude
+      latitude: user.location?.latitude ?? .nan,
+      longitude: user.location?.longitude ?? .nan
     )
   }
 }
@@ -47,8 +47,8 @@ extension PostDto {
 extension PostDto {
   var businessLocation: CLLocation {
     CLLocation(
-      latitude: user.location.latitude,
-      longitude: user.location.longitude
+      latitude: user.location?.latitude ?? .nan,
+      longitude: user.location?.longitude ?? .nan
     )
   }
 

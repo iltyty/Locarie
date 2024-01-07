@@ -15,10 +15,9 @@ struct LocarieView: View {
 
   var body: some View {
     NavigationStack {
-      content
-        .navigationDestination(for: Route.self) { route in
-          getRoutePage(route, path: $path)
-        }
+      content.navigationDestination(for: Route.self) { route in
+        getRoutePage(route, path: $path)
+      }
     }
   }
 

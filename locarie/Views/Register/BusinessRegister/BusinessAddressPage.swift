@@ -17,12 +17,12 @@ struct BusinessAddressPage: View {
   @StateObject private var suggestionViewModel = PlaceSuggestionsViewModel()
 
   @Binding var address: String
-  @Binding var location: BusinessLocation
+  @Binding var location: BusinessLocation?
 
-  @State private var viewport: Viewport
+  @State private var viewport: Viewport = .followPuck(zoom: Constants.mapZoom)
 
   private var locationCoordinate: CLLocationCoordinate2D? {
-    guard location.isValid else {
+    guard let location else {
       return nil
     }
     return CLLocationCoordinate2D(
@@ -31,22 +31,22 @@ struct BusinessAddressPage: View {
     )
   }
 
-  init(address: Binding<String>, location: Binding<BusinessLocation>) {
-    _address = address
-    _location = location
-    guard location.wrappedValue.isValid else {
-      _viewport = .init(wrappedValue: .followPuck(zoom: Constants.mapZoom))
-      return
-    }
-    let location = location.wrappedValue
-    let coordinate = CLLocationCoordinate2D(
-      latitude: location.latitude, longitude: location.longitude
-    )
-    _viewport = .init(wrappedValue: .camera(
-      center: coordinate,
-      zoom: Constants.mapZoom
-    ))
-  }
+//  init(address: Binding<String>, location: Binding<BusinessLocation>) {
+//    _address = address
+//    _location = location
+//    guard location.wrappedValue.isValid else {
+//      _viewport = .init(wrappedValue: .followPuck(zoom: Constants.mapZoom))
+//      return
+//    }
+//    let location = location.wrappedValue
+//    let coordinate = CLLocationCoordinate2D(
+//      latitude: location.latitude, longitude: location.longitude
+//    )
+//    _viewport = .init(wrappedValue: .camera(
+//      center: coordinate,
+//      zoom: Constants.mapZoom
+//    ))
+//  }
 
   var body: some View {
     VStack {
@@ -59,6 +59,12 @@ struct BusinessAddressPage: View {
     }
     .onReceive(retrieveViewModel.$state) { state in
       handleRetrieveResult(state: state)
+    }
+    .onAppear {
+      guard let coordinate = locationCoordinate else {
+        return
+      }
+      viewport = .camera(center: coordinate, zoom: Constants.mapZoom)
     }
   }
 
@@ -146,7 +152,7 @@ private extension BusinessAddressPage {
   }
 
   var isButtonDisabled: Bool {
-    !location.isValid
+    location != nil
   }
 
   var buttonOpacity: CGFloat {
