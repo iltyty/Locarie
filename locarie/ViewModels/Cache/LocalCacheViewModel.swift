@@ -8,6 +8,9 @@
 import Foundation
 
 class LocalCacheViewModel: ObservableObject {
+  static let shared = LocalCacheViewModel()
+  private init() {}
+
   @Published var cache = LocalCache.shared
 
   func isLoggedIn() -> Bool {

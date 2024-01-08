@@ -9,7 +9,7 @@ import PhotosUI
 import SwiftUI
 
 struct NewPostPage: View {
-  @EnvironmentObject var cacheViewModel: LocalCacheViewModel
+  @StateObject var cacheViewModel = LocalCacheViewModel.shared
   @StateObject private var postViewModel = PostCreateViewModel()
   @StateObject private var photoViewModel = PhotoViewModel()
 
@@ -226,5 +226,4 @@ private enum Constants {
 #Preview {
   NewPostPage()
     .environmentObject(BottomTabViewRouter())
-    .environmentObject(LocalCacheViewModel())
 }

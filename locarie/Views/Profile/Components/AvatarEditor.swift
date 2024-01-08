@@ -9,8 +9,8 @@ import PhotosUI
 import SwiftUI
 
 struct AvatarEditor: View {
-  @StateObject private var cacheViewModel = LocalCacheViewModel()
   @StateObject private var photoViewModel = PhotoViewModel()
+  @StateObject private var cacheViewModel = LocalCacheViewModel.shared
 
   var body: some View {
     PhotosPicker(

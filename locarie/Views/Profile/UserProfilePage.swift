@@ -8,16 +8,13 @@
 import SwiftUI
 
 struct UserProfilePage: View {
-  @EnvironmentObject private var cacheViewModel: LocalCacheViewModel
+  @StateObject private var cacheViewModel = LocalCacheViewModel.shared
 
   var body: some View {
     if !cacheViewModel.isLoggedIn() {
       loginOrRegister
     } else if cacheViewModel.isRegularUser() {
       regularUserProfile
-        .onAppear {
-          print(cacheViewModel.cache.userType)
-        }
     } else {
       businessUserProfile
     }
@@ -44,5 +41,4 @@ private extension UserProfilePage {
   UserProfilePage()
     .environmentObject(Router.shared)
     .environmentObject(BottomTabViewRouter())
-    .environmentObject(LocalCacheViewModel())
 }

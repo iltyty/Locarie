@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegularUserProfilePage: View {
-  @StateObject private var cacheViewModel = LocalCacheViewModel()
+  @StateObject private var cacheViewModel = LocalCacheViewModel.shared
 
   @State private var topSafeAreaHeight = 0.0
   @State private var currentTab: Tab = .followed

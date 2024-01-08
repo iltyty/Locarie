@@ -43,5 +43,4 @@ struct LocarieView: View {
     .environmentObject(Router.shared)
     .environmentObject(BottomTabViewRouter())
     .environmentObject(MessageViewModel())
-    .environmentObject(LocalCacheViewModel())
 }

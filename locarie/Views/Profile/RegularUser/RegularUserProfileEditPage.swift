@@ -9,9 +9,8 @@ import PhotosUI
 import SwiftUI
 
 struct RegularUserProfileEditPage: View {
-  @EnvironmentObject private var cacheViewModel: LocalCacheViewModel
-
   @StateObject private var profileViewModel = ProfileUpdateViewModel()
+  @StateObject private var cacheViewModel = LocalCacheViewModel.shared
 
   var body: some View {
     VStack(spacing: Constants.vSpacing) {
@@ -78,5 +77,4 @@ private enum Constants {
 
 #Preview {
   RegularUserProfileEditPage()
-    .environmentObject(LocalCacheViewModel())
 }

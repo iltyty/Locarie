@@ -11,7 +11,7 @@ struct LoginPage: View {
   @EnvironmentObject var router: Router
 
   @StateObject private var loginViewModel = LoginViewModel()
-  @StateObject private var cacheViewModel = LocalCacheViewModel()
+  @StateObject private var cacheViewModel = LocalCacheViewModel.shared
 
   @State private var isLoading = false
   @State private var isAlertShowing = false

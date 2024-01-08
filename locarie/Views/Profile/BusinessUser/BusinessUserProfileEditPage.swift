@@ -9,8 +9,8 @@ import PhotosUI
 import SwiftUI
 
 struct BusinessUserProfileEditPage: View {
-  @StateObject private var cacheViewModel = LocalCacheViewModel()
-  @StateObject private var profileViewModel = ProfileUpdateViewModel()
+  @StateObject private var profileGetViewModel = ProfileGetViewModel()
+  @StateObject private var profileUpdateViewModel = ProfileUpdateViewModel()
   @StateObject private var photoViewModel = PhotoViewModel()
 
   @State var birthday = ""
@@ -109,7 +109,7 @@ private extension BusinessUserProfileEditPage {
     TextFormItem(
       title: text,
       hint: text,
-      input: $profileViewModel.dto.businessName,
+      input: $profileUpdateViewModel.dto.businessName,
       showIcon: true
     )
   }
@@ -118,19 +118,19 @@ private extension BusinessUserProfileEditPage {
     TextFormItem(
       title: "@Username (for business)",
       hint: "Username",
-      input: $profileViewModel.dto.username,
+      input: $profileUpdateViewModel.dto.username,
       showIcon: true
     )
   }
 
   var categoryInput: some View {
     NavigationLink {
-      BusinessCategoryPage($profileViewModel.dto.category)
+      BusinessCategoryPage($profileUpdateViewModel.dto.category)
     } label: {
       LinkFormItem(
         title: "Business Category",
         hint: "Category",
-        text: $profileViewModel.dto.category
+        text: $profileUpdateViewModel.dto.category
       )
     }
     .buttonStyle(.plain)
@@ -138,12 +138,12 @@ private extension BusinessUserProfileEditPage {
 
   var bioInput: some View {
     NavigationLink {
-      BioEditPage(bio: $profileViewModel.dto.introduction)
+      BioEditPage(bio: $profileUpdateViewModel.dto.introduction)
     } label: {
       LinkFormItem(
         title: "Bio",
         hint: "Bio",
-        text: $profileViewModel.dto.introduction
+        text: $profileUpdateViewModel.dto.introduction
       )
     }
     .buttonStyle(.plain)
@@ -154,11 +154,15 @@ private extension BusinessUserProfileEditPage {
     let text = "Location"
     NavigationLink {
       BusinessAddressPage(
-        address: $profileViewModel.dto.address,
-        location: $profileViewModel.dto.location
+        address: $profileUpdateViewModel.dto.address,
+        location: $profileUpdateViewModel.dto.location
       )
     } label: {
-      LinkFormItem(title: text, hint: text, text: $profileViewModel.dto.address)
+      LinkFormItem(
+        title: text,
+        hint: text,
+        text: $profileUpdateViewModel.dto.address
+      )
     }
     .buttonStyle(.plain)
   }
@@ -171,7 +175,7 @@ private extension BusinessUserProfileEditPage {
       LinkFormItem(
         title: "Opening hours",
         hint: "Edit opening hours",
-        text: $profileViewModel.dto.phone
+        text: $profileUpdateViewModel.dto.phone
       )
     }
     .buttonStyle(.plain)
@@ -181,7 +185,7 @@ private extension BusinessUserProfileEditPage {
     TextFormItem(
       title: "Link",
       hint: "Link optional",
-      input: $profileViewModel.dto.homepageUrl
+      input: $profileUpdateViewModel.dto.homepageUrl
     )
   }
 
@@ -189,7 +193,7 @@ private extension BusinessUserProfileEditPage {
   var emailInput: some View {
     let text = "Email"
     TextFormItem(
-      title: text, hint: text, input: $profileViewModel.dto.email,
+      title: text, hint: text, input: $profileUpdateViewModel.dto.email,
       showIcon: true
     )
   }
@@ -198,7 +202,7 @@ private extension BusinessUserProfileEditPage {
     TextFormItem(
       title: "Phone",
       hint: "Phone optional",
-      input: $profileViewModel.dto.phone,
+      input: $profileUpdateViewModel.dto.phone,
       showIcon: true
     )
   }
@@ -209,7 +213,7 @@ private extension BusinessUserProfileEditPage {
     TextFormItem(
       title: text,
       hint: text,
-      input: $profileViewModel.dto.firstName,
+      input: $profileUpdateViewModel.dto.firstName,
       showIcon: true
     )
   }
@@ -220,7 +224,7 @@ private extension BusinessUserProfileEditPage {
     TextFormItem(
       title: text,
       hint: text,
-      input: $profileViewModel.dto.lastName,
+      input: $profileUpdateViewModel.dto.lastName,
       showIcon: true
     )
   }
@@ -262,7 +266,7 @@ private extension BusinessUserProfileEditPage {
   var birthdaySheetDoneButton: some View {
     Button("Done") {
       isSheetPresented = false
-      birthday = profileViewModel.dto.formattedBirthday
+      birthday = profileUpdateViewModel.dto.formattedBirthday
     }
     .foregroundStyle(Color.locariePrimary)
   }
@@ -270,7 +274,7 @@ private extension BusinessUserProfileEditPage {
   var birthdayPicker: some View {
     DatePicker(
       "Birthday",
-      selection: $profileViewModel.dto.birthday,
+      selection: $profileUpdateViewModel.dto.birthday,
       in: ...Date(),
       displayedComponents: [.date]
     )

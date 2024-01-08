@@ -66,5 +66,4 @@ private enum Constants {
   LoginOrRegisterPage()
     .environmentObject(Router.shared)
     .environmentObject(BottomTabViewRouter())
-    .environmentObject(LocalCacheViewModel())
 }
