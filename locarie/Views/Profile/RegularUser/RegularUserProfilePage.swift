@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct RegularUserProfilePage: View {
-  @EnvironmentObject var router: Router
-
   @StateObject private var cacheViewModel = LocalCacheViewModel()
 
   @State private var topSafeAreaHeight = 0.0
@@ -25,7 +23,6 @@ struct RegularUserProfilePage: View {
       }
       .ignoresSafeArea(edges: .top)
       .onAppear {
-        print(router.path)
         topSafeAreaHeight = proxy.safeAreaInsets.top
       }
     }

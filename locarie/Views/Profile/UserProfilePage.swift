@@ -15,6 +15,9 @@ struct UserProfilePage: View {
       loginOrRegister
     } else if cacheViewModel.isRegularUser() {
       regularUserProfile
+        .onAppear {
+          print(cacheViewModel.cache.userType)
+        }
     } else {
       businessUserProfile
     }

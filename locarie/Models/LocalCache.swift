@@ -33,7 +33,7 @@ struct LocalCache {
   }
 
   func isRegularUser() -> Bool {
-    userType != UserType.regular.rawValue
+    userType == UserType.regular.rawValue
   }
 }
 
