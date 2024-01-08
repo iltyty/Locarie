@@ -11,7 +11,7 @@ import SwiftUI
 struct RegularUserProfileEditPage: View {
   @EnvironmentObject private var cacheViewModel: LocalCacheViewModel
 
-  @StateObject private var profileViewModel = ProfileViewModel()
+  @StateObject private var profileViewModel = ProfileUpdateViewModel()
 
   var body: some View {
     VStack(spacing: Constants.vSpacing) {

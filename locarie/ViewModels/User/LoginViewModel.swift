@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import SwiftUI
 
-final class LoginViewModel: ObservableObject {
+final class LoginViewModel: BaseViewModel {
   @Published var dto: LoginRequestDto
   @Published var state: State = .idle
   @Published var isFormValid = false
@@ -20,6 +20,7 @@ final class LoginViewModel: ObservableObject {
   init(networking: LoginService = LoginServiceImpl.shared) {
     self.networking = networking
     dto = LoginRequestDto(email: "", password: "")
+    super.init()
     isFormValidPublisher
       .receive(on: RunLoop.main)
       .assign(to: \.isFormValid, on: self)
@@ -49,14 +50,6 @@ extension LoginViewModel {
       state = dto.status == 0 ? .finished(dto.data)
         : .failed(newNetworkError(response: dto))
     }
-  }
-
-  private func newNetworkError(
-    response dto: ResponseDto<LoginResponseDto>
-  ) -> NetworkError {
-    let code = ResultCode(rawValue: dto.status) ?? .unknown
-    let backendError = BackendError(message: dto.message, code: code)
-    return NetworkError(initialError: nil, backendError: backendError)
   }
 }
 

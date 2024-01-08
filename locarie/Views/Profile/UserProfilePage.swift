@@ -39,6 +39,7 @@ private extension UserProfilePage {
 
 #Preview {
   UserProfilePage()
+    .environmentObject(Router.shared)
     .environmentObject(BottomTabViewRouter())
     .environmentObject(LocalCacheViewModel())
 }

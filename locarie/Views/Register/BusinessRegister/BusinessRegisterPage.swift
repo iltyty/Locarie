@@ -10,8 +10,6 @@ import SwiftUI
 struct BusinessRegisterPage: View {
   @StateObject var viewModel = RegisterViewModel(type: .business)
 
-  @Binding var path: [Route]
-
   var body: some View {
     VStack(spacing: Constants.vSpacing) {
       navigationTitle
@@ -65,7 +63,7 @@ struct BusinessRegisterPage: View {
 
   var createButton: some View {
     NavigationLink {
-      RegularRegisterPage(path: $path, registerViewModel: viewModel)
+      RegularRegisterPage(registerViewModel: viewModel)
     } label: {
       primaryColorFormItemBuilder(text: "Next")
         .disabled(isButtonDisabled)
@@ -88,5 +86,6 @@ private enum Constants {
 }
 
 #Preview {
-  BusinessRegisterPage(path: .constant([]))
+  BusinessRegisterPage()
+    .environmentObject(Router.shared)
 }

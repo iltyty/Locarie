@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct SettingsPage: View {
-  @State var path = [Route]()
-
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
@@ -83,7 +81,7 @@ private extension SettingsPage {
   }
 
   var signUpForBusiness: some View {
-    NavigationLink(value: Route.businessRegister) {
+    NavigationLink(value: Router.Destination.businessRegister) {
       LinkSettingsItem(text: "Sign up for business account", highlighted: true)
     }
     .buttonStyle(.plain)

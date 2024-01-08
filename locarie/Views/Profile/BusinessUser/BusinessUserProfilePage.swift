@@ -47,7 +47,7 @@ private extension BusinessUserProfilePage {
   var settingsButton: some View {
     HStack {
       Spacer()
-      NavigationLink(value: Route.settings) {
+      NavigationLink(value: Router.Destination.settings) {
         Image(systemName: "gearshape")
           .font(.system(size: Constants.settingsButtonIconSize))
           .padding(.trailing)
@@ -140,5 +140,7 @@ private enum Constants {
 }
 
 #Preview {
-  BusinessUserProfilePage().environmentObject(BottomTabViewRouter())
+  BusinessUserProfilePage()
+    .environmentObject(Router.shared)
+    .environmentObject(BottomTabViewRouter())
 }

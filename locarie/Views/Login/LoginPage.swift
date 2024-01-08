@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginPage: View {
-  @Binding var path: [Route]
+  @EnvironmentObject var router: Router
 
   @StateObject private var loginViewModel = LoginViewModel()
   @StateObject private var cacheViewModel = LocalCacheViewModel()
@@ -43,7 +43,7 @@ struct LoginPage: View {
   private func handleLoginFinished(info: UserInfo?) {
     guard let info else { return }
     cacheViewModel.setUserInfo(info)
-    backToRoot()
+    router.navigateToRoot()
   }
 
   private func handleNetworkError(_ error: NetworkError) {
@@ -56,10 +56,6 @@ struct LoginPage: View {
       alertTitle = "Something went wrong, please try again later"
     }
     isAlertShowing = true
-  }
-
-  private func backToRoot() {
-    path.removeAll()
   }
 }
 
@@ -113,7 +109,7 @@ private extension LoginPage {
   }
 
   var forgotPassword: some View {
-    NavigationLink(value: Route.forgotPassword) {
+    NavigationLink(value: Router.Destination.resetPassword) {
       HStack {
         Spacer()
         Text("Forgot password?")
@@ -159,7 +155,7 @@ private extension LoginPage {
     HStack {
       Text("Don't have an account?")
         .foregroundStyle(.secondary)
-      NavigationLink(value: Route.regularRegister) {
+      NavigationLink(value: Router.Destination.regularRegister) {
         Text("Sign up")
       }
     }
@@ -183,5 +179,5 @@ private enum Constants {
 }
 
 #Preview {
-  LoginPage(path: .constant([]))
+  LoginPage().environmentObject(Router.shared)
 }

@@ -19,11 +19,9 @@ struct HomePage: View {
   @StateObject private var locationManager = LocationManager()
 
   var body: some View {
-    NavigationStack {
-      VStack(spacing: 0) {
-        contentView
-        BottomTabView()
-      }
+    VStack(spacing: 0) {
+      contentView
+      BottomTabView()
     }
     .onReceive(locationManager.$location) { location in
       getNearbyPosts(withLocation: location)

@@ -20,32 +20,31 @@ struct FavoritePage: View {
   @State private var currentOffset: CGFloat = 0
 
   var body: some View {
-    NavigationStack {
-      GeometryReader { proxy in
-        VStack(spacing: 0) {
-          ZStack(alignment: .bottom) {
-            Map(position: .constant(.region(mapRegion))) {
-              ForEach(postViewModel.favoritePosts) { post in
-                Marker(
-                  post.businessName,
-                  coordinate: post.businessLocationCoordinate
-                )
-                .tint(Constants.mapMarkerColor)
-              }
+    GeometryReader { proxy in
+      VStack(spacing: 0) {
+        ZStack(alignment: .bottom) {
+          Map(position: .constant(.region(mapRegion))) {
+            ForEach(postViewModel.favoritePosts) { post in
+              Marker(
+                post.businessName,
+                coordinate: post.businessLocationCoordinate
+              )
+              .tint(Constants.mapMarkerColor)
             }
+          }
 
-            ScrollView {
-              Group {
-                Spacer()
-                Capsule(style: .circular)
-                  .fill(.secondary)
-                  .frame(
-                    width: Constants.handlerWidth,
-                    height: Constants.handlerHeight
-                  )
-                  .padding(.top, 10)
+          ScrollView {
+            Group {
+              Spacer()
+              Capsule(style: .circular)
+                .fill(.secondary)
+                .frame(
+                  width: Constants.handlerWidth,
+                  height: Constants.handlerHeight
+                )
+                .padding(.top, 10)
 
-                // FIXME: Post -> PostDto
+              // FIXME: Post -> PostDto
 //                ForEach(postViewModel.favoritePosts) { post in
 //                  PostCardView(
 //                    post: post,
@@ -53,23 +52,22 @@ struct FavoritePage: View {
 //                      .postCoverWidthProportion
 //                  )
 //                }
-              }
-              .background(
-                UnevenRoundedRectangle(
-                  topLeadingRadius: 10,
-                  topTrailingRadius: 10
-                ).fill(.background)
-              )
-              .padding(.top, proxy.size.height * 4 / 5)
             }
-            .scrollIndicators(.hidden)
+            .background(
+              UnevenRoundedRectangle(
+                topLeadingRadius: 10,
+                topTrailingRadius: 10
+              ).fill(.background)
+            )
+            .padding(.top, proxy.size.height * 4 / 5)
           }
-
-          BottomTabView()
+          .scrollIndicators(.hidden)
         }
-        .navigationTitle(Constants.navigationTitle)
-        .navigationBarTitleDisplayMode(.inline)
+
+        BottomTabView()
       }
+      .navigationTitle(Constants.navigationTitle)
+      .navigationBarTitleDisplayMode(.inline)
     }
   }
 }

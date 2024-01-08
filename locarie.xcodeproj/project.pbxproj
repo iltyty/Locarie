@@ -117,9 +117,8 @@
 		50F549DB2B3CFCBA00D06F20 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */; };
 		50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DC2B3D079200D06F20 /* LoginViewModel.swift */; };
 		50F549E02B3D0F9000D06F20 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DF2B3D0F9000D06F20 /* NetworkError.swift */; };
-		50F549E32B4064D600D06F20 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549E22B4064D600D06F20 /* Route.swift */; };
 		50F549E92B44266100D06F20 /* RegularUserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549E82B44266100D06F20 /* RegularUserProfileEditPage.swift */; };
-		50F549ED2B4428A100D06F20 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549EC2B4428A100D06F20 /* ProfileViewModel.swift */; };
+		50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */; };
 		50F549F32B44F59C00D06F20 /* InputFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F22B44F59C00D06F20 /* InputFormItemBuilder.swift */; };
 		50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */; };
 		50F549FB2B44F71300D06F20 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549FA2B44F71300D06F20 /* Constants.swift */; };
@@ -138,6 +137,12 @@
 		50F85B432B242CA000D04787 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B422B242CA000D04787 /* Errors.swift */; };
 		50F85B452B242EE200D04787 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B442B242EE200D04787 /* APIServices.swift */; };
 		50FDD8852B4AB93E003015F9 /* BusinessUserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */; };
+		50FDD8882B4AFC17003015F9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8872B4AFC17003015F9 /* Router.swift */; };
+		50FDD88A2B4B8B0D003015F9 /* ProfileGetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8892B4B8B0D003015F9 /* ProfileGetService.swift */; };
+		50FDD88C2B4B8FE0003015F9 /* ProfileUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD88B2B4B8FE0003015F9 /* ProfileUpdateService.swift */; };
+		50FDD88E2B4B9090003015F9 /* ProfileGetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD88D2B4B9090003015F9 /* ProfileGetViewModel.swift */; };
+		50FDD8902B4B9375003015F9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD88F2B4B9375003015F9 /* BaseViewModel.swift */; };
+		50FDD8922B4BC784003015F9 /* Binding+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8912B4BC784003015F9 /* Binding+Hashable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,9 +275,8 @@
 		50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		50F549DC2B3D079200D06F20 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = locarie/ViewModels/User/LoginViewModel.swift; sourceTree = SOURCE_ROOT; };
 		50F549DF2B3D0F9000D06F20 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		50F549E22B4064D600D06F20 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		50F549E82B44266100D06F20 /* RegularUserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserProfileEditPage.swift; sourceTree = "<group>"; };
-		50F549EC2B4428A100D06F20 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateViewModel.swift; sourceTree = "<group>"; };
 		50F549F22B44F59C00D06F20 /* InputFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormItemBuilder.swift; sourceTree = "<group>"; };
 		50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarBuilder.swift; sourceTree = "<group>"; };
 		50F549FA2B44F71300D06F20 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -291,6 +295,12 @@
 		50F85B422B242CA000D04787 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		50F85B442B242EE200D04787 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessUserProfilePage.swift; sourceTree = "<group>"; };
+		50FDD8872B4AFC17003015F9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		50FDD8892B4B8B0D003015F9 /* ProfileGetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGetService.swift; sourceTree = "<group>"; };
+		50FDD88B2B4B8FE0003015F9 /* ProfileUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateService.swift; sourceTree = "<group>"; };
+		50FDD88D2B4B9090003015F9 /* ProfileGetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGetViewModel.swift; sourceTree = "<group>"; };
+		50FDD88F2B4B9375003015F9 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		50FDD8912B4BC784003015F9 /* Binding+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Hashable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,6 +502,7 @@
 			children = (
 				502A4FEF2B32D34B00C0833A /* Color+Extensions.swift */,
 				502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+Extensions.swift */,
+				50FDD8912B4BC784003015F9 /* Binding+Hashable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -510,6 +521,8 @@
 			children = (
 				5054CDEE2B288D3300645F5C /* UserLoginService.swift */,
 				5054CDF02B288D6C00645F5C /* UserRegisterService.swift */,
+				50FDD8892B4B8B0D003015F9 /* ProfileGetService.swift */,
+				50FDD88B2B4B8FE0003015F9 /* ProfileUpdateService.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -594,7 +607,8 @@
 				50E60DE42AFF80B400CA088F /* UserViewModel.swift */,
 				50F549DC2B3D079200D06F20 /* LoginViewModel.swift */,
 				50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */,
-				50F549EC2B4428A100D06F20 /* ProfileViewModel.swift */,
+				50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */,
+				50FDD88D2B4B9090003015F9 /* ProfileGetViewModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -667,7 +681,6 @@
 		50AAB17B2AEFA2E9003FEDF1 /* locarie */ = {
 			isa = PBXGroup;
 			children = (
-				50F549E12B4064C900D06F20 /* Enums */,
 				50B5DEC02B3B07B300C0A641 /* MapboxSDK */,
 				50E60DE62AFF885200CA088F /* Common */,
 				50277F7E2AF12A640045AB12 /* Components */,
@@ -771,12 +784,14 @@
 		50B11AE92AFB878A002A7B91 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				50FDD8862B4AFC0B003015F9 /* Router */,
 				509D5BC82B457F8000833021 /* TextEdit */,
 				509D5BC72B457F6400833021 /* Cache */,
 				509D5BC62B457F5900833021 /* Message */,
 				50F549EE2B44657900D06F20 /* Photo */,
 				50369A6E2B30417A005D6B43 /* Post */,
 				50998AF52B35D4C1002196B5 /* User */,
+				50FDD88F2B4B9375003015F9 /* BaseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -864,14 +879,6 @@
 				50F549DF2B3D0F9000D06F20 /* NetworkError.swift */,
 			);
 			path = Errors;
-			sourceTree = "<group>";
-		};
-		50F549E12B4064C900D06F20 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				50F549E22B4064D600D06F20 /* Route.swift */,
-			);
-			path = Enums;
 			sourceTree = "<group>";
 		};
 		50F549E52B4425E900D06F20 /* Register */ = {
@@ -996,6 +1003,14 @@
 				50F85B422B242CA000D04787 /* Errors.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		50FDD8862B4AFC0B003015F9 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				50FDD8872B4AFC17003015F9 /* Router.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1145,7 +1160,7 @@
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
 				50E60DEA2B006FB100CA088F /* LocationManager.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
-				50F549ED2B4428A100D06F20 /* ProfileViewModel.swift in Sources */,
+				50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */,
 				50E60DDD2AFF78D400CA088F /* Post.swift in Sources */,
 				50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */,
 				50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */,
@@ -1164,7 +1179,6 @@
 				503794AC2AF1F44A00DA64F4 /* BottomDrawerView.swift in Sources */,
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
 				50F549F32B44F59C00D06F20 /* InputFormItemBuilder.swift in Sources */,
-				50F549E32B4064D600D06F20 /* Route.swift in Sources */,
 				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+Extensions.swift in Sources */,
 				502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */,
 				50F54A032B45283C00D06F20 /* NavigationTitle.swift in Sources */,
@@ -1198,12 +1212,14 @@
 				50277F7A2AF117B20045AB12 /* MessagePage.swift in Sources */,
 				501BAF3E2B464ECC00D9D84F /* NotificationsPage.swift in Sources */,
 				502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */,
+				50FDD8902B4B9375003015F9 /* BaseViewModel.swift in Sources */,
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
 				50F54A1D2B454E0800D06F20 /* BusinessUserProfileEditPage.swift in Sources */,
 				50B5DED42B3B19AA00C0A641 /* MapboxError.swift in Sources */,
 				50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */,
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
 				5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */,
+				50FDD8922B4BC784003015F9 /* Binding+Hashable.swift in Sources */,
 				5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */,
 				50F54A0C2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift in Sources */,
 				501BAF312B46345500D9D84F /* PrivacyPolicyPage.swift in Sources */,
@@ -1220,13 +1236,16 @@
 				50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
+				50FDD8882B4AFC17003015F9 /* Router.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostPage.swift in Sources */,
 				500F66262B2854A90074FE3C /* LocalCache.swift in Sources */,
 				509D5BCE2B45B01E00833021 /* DailyHours.swift in Sources */,
 				50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */,
+				50FDD88C2B4B8FE0003015F9 /* ProfileUpdateService.swift in Sources */,
 				509D5BC52B45611E00833021 /* OpeningHourEditPage.swift in Sources */,
 				50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */,
 				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
+				50FDD88A2B4B8B0D003015F9 /* ProfileGetService.swift in Sources */,
 				50E60DE82AFF885F00CA088F /* Util.swift in Sources */,
 				50B11AE62AFB8368002A7B91 /* Message.swift in Sources */,
 				50F85B432B242CA000D04787 /* Errors.swift in Sources */,
@@ -1253,6 +1272,7 @@
 				501BAF482B46527000D9D84F /* ChangePasswordPage.swift in Sources */,
 				509D5BCC2B459CC900833021 /* OpeningHourSheet.swift in Sources */,
 				501BAF332B46353C00D9D84F /* TermsOfServicePage.swift in Sources */,
+				50FDD88E2B4B9090003015F9 /* ProfileGetViewModel.swift in Sources */,
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
 				5000C6CE2AF8D9A20057EF2D /* MessageView.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,

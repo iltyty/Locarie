@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BusinessUserProfileEditPage: View {
   @StateObject private var cacheViewModel = LocalCacheViewModel()
-  @StateObject private var profileViewModel = ProfileViewModel()
+  @StateObject private var profileViewModel = ProfileUpdateViewModel()
   @StateObject private var photoViewModel = PhotoViewModel()
 
   @State var birthday = ""

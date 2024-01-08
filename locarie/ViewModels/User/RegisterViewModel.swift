@@ -9,7 +9,7 @@ import Alamofire
 import Combine
 import Foundation
 
-final class RegisterViewModel: ObservableObject {
+final class RegisterViewModel: BaseViewModel {
   @Published var dto: RegisterRequestDto
   @Published var state: State = .idle
   @Published var isFormValid = false
@@ -24,6 +24,7 @@ final class RegisterViewModel: ObservableObject {
   ) {
     self.networking = networking
     dto = RegisterRequestDto()
+    super.init()
     dto.type = type
     storeIsFormValidPublisher()
     storeIsBusinessFormValidPublisher()
@@ -95,14 +96,6 @@ extension RegisterViewModel {
       state = dto.status == 0 ? .finished
         : .failed(newNetworkError(response: dto))
     }
-  }
-
-  private func newNetworkError(
-    response dto: ResponseDto<UserDto>
-  ) -> NetworkError {
-    let code = ResultCode(rawValue: dto.status) ?? .unknown
-    let backendError = BackendError(message: dto.message, code: code)
-    return NetworkError(initialError: nil, backendError: backendError)
   }
 }
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct locarieApp: App {
+  @StateObject var router = Router.shared
   @StateObject var cacheViewModel = LocalCacheViewModel()
   @StateObject var viewRouter = BottomTabViewRouter()
   @StateObject var postViewModel = PostViewModel()
@@ -17,6 +18,7 @@ struct locarieApp: App {
   var body: some Scene {
     WindowGroup {
       LocarieView()
+        .environmentObject(router)
         .environmentObject(cacheViewModel)
         .environmentObject(viewRouter)
         .environmentObject(postViewModel)

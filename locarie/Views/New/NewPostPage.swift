@@ -29,22 +29,20 @@ struct NewPostPage: View {
 
   var contentView: some View {
     GeometryReader { proxy in
-      NavigationStack {
-        VStack {
-          photosPicker(imageSize: proxy.size.width * Constants
-            .imageSizeProportion)
-          editor(
-            contentEditorHeight: proxy.size.height * Constants
-              .contentEditorHeightProportion,
-            title: $postViewModel.post.title,
-            content: $postViewModel.post.content
-          )
-          shareButton
-          BottomTabView()
-        }
-        .navigationTitle(Constants.pageTitle)
-        .navigationBarTitleDisplayMode(.inline)
+      VStack {
+        photosPicker(imageSize: proxy.size.width * Constants
+          .imageSizeProportion)
+        editor(
+          contentEditorHeight: proxy.size.height * Constants
+            .contentEditorHeightProportion,
+          title: $postViewModel.post.title,
+          content: $postViewModel.post.content
+        )
+        shareButton
+        BottomTabView()
       }
+      .navigationTitle(Constants.pageTitle)
+      .navigationBarTitleDisplayMode(.inline)
     }
   }
 

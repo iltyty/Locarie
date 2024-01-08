@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RegularUserProfilePage: View {
+  @EnvironmentObject var router: Router
+
   @StateObject private var cacheViewModel = LocalCacheViewModel()
 
   @State private var topSafeAreaHeight = 0.0
@@ -23,6 +25,7 @@ struct RegularUserProfilePage: View {
       }
       .ignoresSafeArea(edges: .top)
       .onAppear {
+        print(router.path)
         topSafeAreaHeight = proxy.safeAreaInsets.top
       }
     }
@@ -52,7 +55,7 @@ private extension RegularUserProfilePage {
   var settingsButton: some View {
     HStack {
       Spacer()
-      NavigationLink(value: Route.settings) {
+      NavigationLink(value: Router.Destination.settings) {
         Image(systemName: "gearshape")
           .font(.system(size: Constants.settingsButtonSize))
           .padding(.trailing)
@@ -204,5 +207,6 @@ private enum Constants {
 
 #Preview {
   RegularUserProfilePage()
+    .environmentObject(Router.shared)
     .environmentObject(BottomTabViewRouter())
 }

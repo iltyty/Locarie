@@ -9,15 +9,15 @@ import CoreLocation
 import SwiftUI
 
 struct LocarieView: View {
-  @State var path = [Route]()
-
+  @EnvironmentObject var router: Router
   @EnvironmentObject var viewRouter: BottomTabViewRouter
 
   var body: some View {
-    NavigationStack {
-      content.navigationDestination(for: Route.self) { route in
-        getRoutePage(route, path: $path)
-      }
+    NavigationStack(path: $router.path) {
+      content
+        .navigationDestination(for: Router.Destination.self) { destination in
+          router.getDestinationPage(with: destination)
+        }
     }
   }
 
@@ -40,6 +40,7 @@ struct LocarieView: View {
 
 #Preview {
   LocarieView()
+    .environmentObject(Router.shared)
     .environmentObject(BottomTabViewRouter())
     .environmentObject(MessageViewModel())
     .environmentObject(LocalCacheViewModel())

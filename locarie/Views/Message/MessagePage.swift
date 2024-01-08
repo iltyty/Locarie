@@ -16,28 +16,26 @@ struct MessagePage: View {
   }
 
   var body: some View {
-    NavigationStack {
-      VStack(alignment: .leading, spacing: 0) {
-        SearchBarView(text: searchText)
-          .navigationTitle(Constants.navigationTitle)
-          .navigationBarTitleDisplayMode(.inline)
+    VStack(alignment: .leading, spacing: 0) {
+      SearchBarView(text: searchText)
+        .navigationTitle(Constants.navigationTitle)
+        .navigationBarTitleDisplayMode(.inline)
 
-        List {
-          ForEach(messages.keys.sorted { $0.id < $1.id }) { user in
-            NavigationLink {
-              MessageDetailPage(
-                user: user,
-                messages: messages[user]!
-              )
-            } label: {
-              MessageRowView(messages[user]!.last!)
-            }
+      List {
+        ForEach(messages.keys.sorted { $0.id < $1.id }) { user in
+          NavigationLink {
+            MessageDetailPage(
+              user: user,
+              messages: messages[user]!
+            )
+          } label: {
+            MessageRowView(messages[user]!.last!)
           }
         }
-        .listStyle(.plain)
-
-        BottomTabView()
       }
+      .listStyle(.plain)
+
+      BottomTabView()
     }
   }
 

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct RegularRegisterPage: View {
-  @Binding var path: [Route]
-
+  @EnvironmentObject var router: Router
   @EnvironmentObject var cacheViewModel: LocalCacheViewModel
 
   @StateObject var registerViewModel = RegisterViewModel()
@@ -68,7 +67,7 @@ struct RegularRegisterPage: View {
   private func handleLoginFinished(info: UserInfo?) {
     guard let info else { return }
     cacheViewModel.setUserInfo(info)
-    backToRoot()
+    router.navigateToRoot()
   }
 
   private func handleNetworkError(_ error: NetworkError) {
@@ -81,10 +80,6 @@ struct RegularRegisterPage: View {
       alertTitle = "Something went wrong, please try again later"
     }
     isAlertShowing = true
-  }
-
-  private func backToRoot() {
-    path.removeAll()
   }
 }
 
@@ -229,12 +224,6 @@ private extension RegularRegisterPage {
   }
 }
 
-private extension RegularRegisterPage {
-  func popToRoot() {
-    path = []
-  }
-}
-
 private enum Constants {
   static let spacing = 10.0
   static let pickerLineImageSpacing = 10.0
@@ -243,8 +232,8 @@ private enum Constants {
 
 #Preview {
   RegularRegisterPage(
-    path: .constant([]),
     registerViewModel: RegisterViewModel()
   )
+  .environmentObject(Router.shared)
   .environmentObject(LocalCacheViewModel())
 }

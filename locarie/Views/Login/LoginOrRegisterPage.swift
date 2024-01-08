@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginOrRegisterPage: View {
-  @State var path: [Route] = []
+  @EnvironmentObject var router: Router
 
   var body: some View {
     VStack(spacing: Constants.spacing) {
@@ -34,19 +34,19 @@ struct LoginOrRegisterPage: View {
   }
 
   var loginButton: some View {
-    NavigationLink(value: Route.login) {
+    NavigationLink(value: Router.Destination.login) {
       primaryColorFormItemBuilder(text: "Log in")
     }
   }
 
   var signupButton: some View {
-    NavigationLink(value: Route.regularRegister) {
+    NavigationLink(value: Router.Destination.regularRegister) {
       primaryColorFormItemBuilder(text: "Sign up for regular")
     }
   }
 
   var signupBusinessButton: some View {
-    NavigationLink(value: Route.businessRegister) {
+    NavigationLink(value: Router.Destination.businessRegister) {
       backgroundColorFormItemBuilder(text: "Sign up for business")
         .tint(.primary)
     }
@@ -64,6 +64,7 @@ private enum Constants {
 
 #Preview {
   LoginOrRegisterPage()
+    .environmentObject(Router.shared)
     .environmentObject(BottomTabViewRouter())
     .environmentObject(LocalCacheViewModel())
 }
