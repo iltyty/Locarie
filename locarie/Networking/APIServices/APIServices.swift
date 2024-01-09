@@ -14,6 +14,18 @@ class BaseAPIService {
     [.contentType("application/json")]
   }
 
+  func dateIso8601JsonParameterEncoder() -> JSONParameterEncoder {
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .iso8601
+    return JSONParameterEncoder(encoder: encoder)
+  }
+
+  func dateMillisecondsJsonParameterEncoder() -> JSONParameterEncoder {
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .millisecondsSince1970
+    return JSONParameterEncoder(encoder: encoder)
+  }
+
   func prepareParameters(withData data: Codable) -> Parameters? {
     do {
       let jsonData = try JSONEncoder().encode(data)

@@ -129,7 +129,6 @@
 		50F54A0C2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A0B2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift */; };
 		50F54A122B45318000D06F20 /* BackgroundColorFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A112B45318000D06F20 /* BackgroundColorFormItemBuilder.swift */; };
 		50F54A142B45320B00D06F20 /* LinkFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A132B45320B00D06F20 /* LinkFormItem.swift */; };
-		50F54A162B45326400D06F20 /* LinkFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A152B45326400D06F20 /* LinkFormItemBuilder.swift */; };
 		50F54A182B4532F900D06F20 /* FormItemBackgroundBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */; };
 		50F54A1D2B454E0800D06F20 /* BusinessUserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */; };
 		50F54A202B45503900D06F20 /* AvatarEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1F2B45503800D06F20 /* AvatarEditor.swift */; };
@@ -287,7 +286,6 @@
 		50F54A0B2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryColorFormItemBuilder.swift; sourceTree = "<group>"; };
 		50F54A112B45318000D06F20 /* BackgroundColorFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorFormItemBuilder.swift; sourceTree = "<group>"; };
 		50F54A132B45320B00D06F20 /* LinkFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItem.swift; sourceTree = "<group>"; };
-		50F54A152B45326400D06F20 /* LinkFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItemBuilder.swift; sourceTree = "<group>"; };
 		50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemBackgroundBuilder.swift; sourceTree = "<group>"; };
 		50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessUserProfileEditPage.swift; sourceTree = "<group>"; };
 		50F54A1F2B45503800D06F20 /* AvatarEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEditor.swift; sourceTree = "<group>"; };
@@ -979,7 +977,6 @@
 				50F549F22B44F59C00D06F20 /* InputFormItemBuilder.swift */,
 				50F54A112B45318000D06F20 /* BackgroundColorFormItemBuilder.swift */,
 				50F54A0B2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift */,
-				50F54A152B45326400D06F20 /* LinkFormItemBuilder.swift */,
 				50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */,
 			);
 			path = Form;
@@ -1155,7 +1152,6 @@
 			files = (
 				50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */,
 				50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */,
-				50F54A162B45326400D06F20 /* LinkFormItemBuilder.swift in Sources */,
 				50B11AE82AFB8392002A7B91 /* User.swift in Sources */,
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
 				50E60DEA2B006FB100CA088F /* LocationManager.swift in Sources */,

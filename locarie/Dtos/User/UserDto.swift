@@ -15,7 +15,7 @@ struct UserDto: Codable {
   var lastName: String = ""
   var username: String = ""
   var avatarUrl: String = ""
-  var birthday: Date = .init()
+  var birthday: Date?
 
   var businessName: String = ""
   var category: String = ""
@@ -65,6 +65,7 @@ extension UserDto {
 
 extension UserDto {
   var formattedBirthday: String {
+    guard let birthday else { return "" }
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "MM/dd/yyyy"
     return dateFormatter.string(from: birthday)
@@ -86,16 +87,22 @@ extension UserDto {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
 
+    id = try container.decode(Int64.self, forKey: .id)
     let typeRawValue = try container.decode(String.self, forKey: .type)
     type = UserType(rawValue: typeRawValue) ?? .regular
 
-    id = try container.decode(Int64.self, forKey: .id)
     email = try container.decode(String.self, forKey: .email)
     firstName = try container.decode(String.self, forKey: .firstName)
     lastName = try container.decode(String.self, forKey: .lastName)
     username = try container.decode(String.self, forKey: .username)
     avatarUrl = decodeWithDefault(container, forKey: .avatarUrl)
-    birthday = decodeWithDefaule(container, forKey: .birthday)
+    let birthdayString = try container.decodeIfPresent(
+      String.self,
+      forKey: .birthday
+    )
+    if let birthdayString {
+      birthday = ISO8601DateFormatter().date(from: birthdayString)
+    }
 
     businessName = decodeWithDefault(container, forKey: .businessName)
     category = decodeWithDefault(container, forKey: .category)
@@ -152,7 +159,7 @@ private func decodeWithDefault<K: CodingKey>(
   return result ?? value
 }
 
-private func decodeWithDefaule<K: CodingKey>(
+private func decodeWithDefault<K: CodingKey>(
   _ container: KeyedDecodingContainer<K>,
   forKey key: KeyedDecodingContainer<K>.Key,
   default value: Date = Date()

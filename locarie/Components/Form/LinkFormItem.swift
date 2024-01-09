@@ -21,11 +21,25 @@ struct LinkFormItem: View {
   var body: some View {
     VStack(alignment: .leading) {
       if !title.isEmpty {
-        Text(title)
-          .fontWeight(.bold)
-          .padding(.leading)
+        formTitle
       }
-      linkFormItemBuilder(hint: hint, text: text)
+      formText
     }
+  }
+
+  private var formTitle: some View {
+    Text(title).fontWeight(.bold).padding(.leading)
+  }
+
+  private var formText: some View {
+    HStack {
+      TextField(hint, text: text).disabled(true)
+      Spacer()
+      Image(systemName: "chevron.right").foregroundStyle(.secondary)
+    }
+    .padding(.horizontal)
+    .background(formItemBackground(.background))
+    .padding(.horizontal)
+    .frame(height: ComponentBuilderConstants.formItemHeight)
   }
 }

@@ -29,6 +29,7 @@ final class ProfileUpdateViewModel: BaseViewModel {
   }
 
   private func handleProfileUpdateResponse(_ response: ProfileUpdateResponse) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
     } else {

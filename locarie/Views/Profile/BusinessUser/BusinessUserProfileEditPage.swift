@@ -14,7 +14,8 @@ struct BusinessUserProfileEditPage: View {
   @StateObject private var profileUpdateViewModel = ProfileUpdateViewModel()
   @StateObject private var photoViewModel = PhotoViewModel()
 
-  @State var birthday = ""
+  @State var birthday = Date()
+  @State var birthdayFormatted = ""
   @State var isSheetPresented = false
 
   @Environment(\.dismiss) var dismiss
@@ -59,6 +60,10 @@ struct BusinessUserProfileEditPage: View {
   ) {
     if case let .finished(dto) = state {
       guard let dto else { return }
+      if let birthday = dto.birthday {
+        self.birthday = birthday
+      }
+      birthdayFormatted = dto.formattedBirthday
       profileUpdateViewModel.dto = dto
     }
   }
@@ -281,7 +286,7 @@ private extension BusinessUserProfileEditPage {
 
   @ViewBuilder
   var birthdayInput: some View {
-    LinkFormItem(title: "Birthday", hint: "Birthday", text: $birthday)
+    LinkFormItem(title: "Birthday", hint: "Birthday", text: $birthdayFormatted)
       .onTapGesture {
         isSheetPresented = true
       }
@@ -315,8 +320,9 @@ private extension BusinessUserProfileEditPage {
 
   var birthdaySheetDoneButton: some View {
     Button("Done") {
+      profileUpdateViewModel.dto.birthday = birthday
+      birthdayFormatted = profileUpdateViewModel.dto.formattedBirthday
       isSheetPresented = false
-      birthday = profileUpdateViewModel.dto.formattedBirthday
     }
     .foregroundStyle(Color.locariePrimary)
   }
@@ -324,7 +330,7 @@ private extension BusinessUserProfileEditPage {
   var birthdayPicker: some View {
     DatePicker(
       "Birthday",
-      selection: $profileUpdateViewModel.dto.birthday,
+      selection: $birthday,
       in: ...Date(),
       displayedComponents: [.date]
     )
