@@ -17,7 +17,6 @@ class BaseAPIService {
   func prepareParameters(withData data: Codable) -> Parameters? {
     do {
       let jsonData = try JSONEncoder().encode(data)
-      print(jsonData)
       return try JSONSerialization.jsonObject(with: jsonData) as? Parameters
     } catch {
       print(error)

@@ -5,6 +5,7 @@
 //  Created by qiuty on 03/01/2024.
 //
 
+import Alamofire
 import PhotosUI
 import SwiftUI
 
@@ -15,6 +16,10 @@ struct BusinessUserProfileEditPage: View {
 
   @State var birthday = ""
   @State var isSheetPresented = false
+
+  @Environment(\.dismiss) var dismiss
+
+  private let id = Int64(LocalCacheViewModel.shared.cache.userId)
 
   var body: some View {
     GeometryReader { proxy in
@@ -38,12 +43,58 @@ struct BusinessUserProfileEditPage: View {
       }
     }
     .sheet(isPresented: $isSheetPresented) { birthdaySheet }
+    .onAppear {
+      profileGetViewModel.getProfile(id: id)
+    }
+    .onReceive(profileGetViewModel.$state) { state in
+      handleProfileGetViewModelStateChange(state)
+    }
+    .onReceive(profileUpdateViewModel.$state) { state in
+      handleProfileUpdateViewModelStateChange(state)
+    }
+  }
+
+  private func handleProfileGetViewModelStateChange(
+    _ state: ProfileGetViewModel.State
+  ) {
+    if case let .finished(dto) = state {
+      guard let dto else { return }
+      profileUpdateViewModel.dto = dto
+    }
+  }
+
+  private func handleProfileUpdateViewModelStateChange(
+    _ state: ProfileUpdateViewModel.State
+  ) {
+    switch state {
+    case let .finished(dto):
+      handleProfileUpdateFinished(dto)
+    case let .failed(error):
+      handleProfileUpdateError(error)
+    default: return
+    }
+  }
+
+  private func handleProfileUpdateFinished(_: UserDto?) {
+    dismiss()
+  }
+
+  private func handleProfileUpdateError(_ error: NetworkError) {
+    print(error)
   }
 }
 
 private extension BusinessUserProfileEditPage {
   var navigationTitle: some View {
-    NavigationTitle("Edit profile")
+    NavigationTitle("Edit profile", right: saveButton)
+  }
+
+  var saveButton: some View {
+    Button("Save") {
+      profileUpdateViewModel.updateProfile(id: id)
+    }
+    .fontWeight(.bold)
+    .foregroundStyle(Color.locariePrimary)
   }
 
   func profileImagesEditor(width: CGFloat) -> some View {
@@ -171,7 +222,6 @@ private extension BusinessUserProfileEditPage {
     NavigationLink {
       OpeningHourEditPage()
     } label: {
-      // - FIXME: opening hour edit
       LinkFormItem(
         title: "Opening hours",
         hint: "Edit opening hours",

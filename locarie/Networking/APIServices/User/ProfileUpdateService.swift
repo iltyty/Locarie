@@ -23,12 +23,12 @@ final class ProfileUpdateServiceImpl: BaseAPIService, ProfileUpdateService {
     data dto: UserDto
   ) -> AnyPublisher<ProfileUpdateResponse, Never> {
     let endpoint = APIEndpoints.userUpdateProfileUrl(id: id)
-    let parameters = prepareParameters(withData: dto)
+//    let parameters = prepareParameters(withData: dto)
     return AF.request(
       endpoint,
       method: .post,
-      parameters: parameters,
-      encoding: JSONEncoding.default
+      parameters: dto,
+      encoder: JSONParameterEncoder.default
     )
     .validate()
     .publishDecodable(type: ResponseDto<UserDto>.self)

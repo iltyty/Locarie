@@ -74,7 +74,7 @@ extension UserDto {
 extension UserDto {
   enum CodingKeys: String, CodingKey {
     case id, type, email, firstName, lastName, username, avatarUrl, birthday
-    case category, coverUrl, homepageUrl, introduction, phone
+    case businessName, category, coverUrl, homepageUrl, introduction, phone
     case openHour, openMinute, closeHour, closeMinute
     case address, location
   }
@@ -97,6 +97,7 @@ extension UserDto {
     avatarUrl = decodeWithDefault(container, forKey: .avatarUrl)
     birthday = decodeWithDefaule(container, forKey: .birthday)
 
+    businessName = decodeWithDefault(container, forKey: .businessName)
     category = decodeWithDefault(container, forKey: .category)
     coverUrl = decodeWithDefault(container, forKey: .coverUrl)
     homepageUrl = decodeWithDefault(container, forKey: .homepageUrl)

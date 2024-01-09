@@ -19,7 +19,7 @@ final class ProfileUpdateViewModel: BaseViewModel {
     self.networking = networking
   }
 
-  func updateProfile(id: Int64, data dto: UserDto) {
+  func updateProfile(id: Int64) {
     networking.updateProfile(id: id, data: dto)
       .sink { [weak self] response in
         guard let self else { return }
@@ -29,6 +29,7 @@ final class ProfileUpdateViewModel: BaseViewModel {
   }
 
   private func handleProfileUpdateResponse(_ response: ProfileUpdateResponse) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
     } else {
