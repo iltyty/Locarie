@@ -23,7 +23,6 @@ final class ProfileUpdateServiceImpl: BaseAPIService, ProfileUpdateService {
     data dto: UserDto
   ) -> AnyPublisher<ProfileUpdateResponse, Never> {
     let endpoint = APIEndpoints.userUpdateProfileUrl(id: id)
-//    let parameters = prepareParameters(withData: dto)
     return AF.request(
       endpoint,
       method: .post,

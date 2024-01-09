@@ -53,8 +53,8 @@ private extension FeedbackPage {
     GeometryReader { proxy in
       VStack {
         TextEditorPlus(
-          hint: "Share your feedback...",
           viewModel: feedbackEditViewModel,
+          hint: "Share your feedback...",
           border: true
         )
         Color.clear

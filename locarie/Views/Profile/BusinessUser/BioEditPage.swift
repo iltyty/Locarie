@@ -10,7 +10,8 @@ import SwiftUI
 struct BioEditPage: View {
   @Binding var bio: String
 
-  @StateObject var bioEditViewModel = TextEditViewModel(limit: 150)
+  @StateObject var bioEditViewModel =
+    TextEditViewModel(limit: Constants.wordLimit)
 
   @State private var hint = "Bio..."
 
@@ -21,6 +22,9 @@ struct BioEditPage: View {
       navigationTitle
       bioEditor
     }
+    .onAppear {
+      bioEditViewModel.text = bio
+    }
   }
 }
 
@@ -30,23 +34,22 @@ private extension BioEditPage {
   }
 
   var doneButton: some View {
-    Button {
+    Button("Done") {
       bio = bioEditViewModel.text
       dismiss()
-    } label: {
-      Text("Done")
-        .fontWeight(.bold)
-        .foregroundStyle(Color.locariePrimary)
     }
+    .fontWeight(.bold)
+    .foregroundStyle(Color.locariePrimary)
   }
 
   var bioEditor: some View {
-    TextEditorPlus(hint: "Bio...", viewModel: bioEditViewModel)
+    TextEditorPlus(viewModel: bioEditViewModel, hint: "Bio...")
   }
 }
 
 private enum Constants {
   static let vSpacing = 24.0
+  static let wordLimit = 150
 }
 
 #Preview {

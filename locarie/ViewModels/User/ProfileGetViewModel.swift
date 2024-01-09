@@ -20,6 +20,9 @@ final class ProfileGetViewModel: BaseViewModel {
   }
 
   func getProfile(id: Int64) {
+    if case .finished = state {
+      return
+    }
     networking.getUserProfile(id: id)
       .sink { [weak self] response in
         guard let self else { return }

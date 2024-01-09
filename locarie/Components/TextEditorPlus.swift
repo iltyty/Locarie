@@ -15,12 +15,12 @@ struct TextEditorPlus: View {
   let showBorder: Bool
 
   init(
-    hint: String,
     viewModel: TextEditViewModel,
+    hint: String,
     border showBorder: Bool = false
   ) {
-    self.hint = hint
     self.viewModel = viewModel
+    self.hint = hint
     self.showBorder = showBorder
   }
 
@@ -35,7 +35,8 @@ struct TextEditorPlus: View {
   var background: some View {
     Group {
       if showBorder {
-        RoundedRectangle(cornerRadius: 20).stroke(.secondary)
+        RoundedRectangle(cornerRadius: Constants.borderCornerRadius)
+          .stroke(.secondary)
       } else {
         Color.clear
       }
@@ -73,9 +74,12 @@ private extension TextEditorPlus {
   }
 }
 
+private enum Constants {
+  static let borderCornerRadius = 20.0
+}
+
 #Preview {
   TextEditorPlus(
-    hint: "Share your feedback...",
-    viewModel: TextEditViewModel(limit: 500)
+    viewModel: TextEditViewModel(limit: 500), hint: "Share your feedback..."
   )
 }
