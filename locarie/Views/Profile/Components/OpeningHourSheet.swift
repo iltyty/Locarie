@@ -11,11 +11,11 @@ struct OpeningHourSheet: View {
   let title: String
 
   @Binding var isPresented: Bool
-  @Binding var dailyHours: DailyHours
+  @Binding var businessHours: BusinessHoursDto
 
-  @State var startTime = Date()
-  @State var endTime = Date()
-  @State var status: DailyHours.Status = .closed
+  @State var closed = false
+  @State var openingTime = Date()
+  @State var closingTime = Date()
 
   var body: some View {
     VStack(spacing: Constants.vSpacing) {
@@ -31,9 +31,14 @@ struct OpeningHourSheet: View {
   }
 
   func setupStates() {
-    startTime = dailyHours.startTime
-    endTime = dailyHours.endTime
-    status = dailyHours.status
+    closed = businessHours.closed
+    let calendar = Calendar.current
+    if let date = calendar.date(from: businessHours.openingTime) {
+      openingTime = date
+    }
+    if let date = calendar.date(from: businessHours.closingTime) {
+      closingTime = date
+    }
   }
 }
 
@@ -51,19 +56,19 @@ private extension OpeningHourSheet {
   }
 
   var statusPicker: some View {
-    Picker("Status", selection: $status) {
-      ForEach(DailyHours.Status.allCases, id: \.self) { status in
-        Text(status.rawValue.capitalized)
-      }
+    Picker("Status", selection: $closed) {
+      Text("Open").tag(false)
+      Text("Closed").tag(true)
     }
     .pickerStyle(.segmented)
   }
 
   var statusContent: some View {
     Group {
-      switch status {
-      case .open: openView
-      case .closed: closedView
+      if closed {
+        closedView
+      } else {
+        openView
       }
     }
     .frame(height: Constants.statusContentHeight)
@@ -99,8 +104,8 @@ private extension OpeningHourSheet {
   var startTimePicker: some View {
     DatePicker(
       "Opening time",
-      selection: $startTime,
-      in: ...endTime,
+      selection: $openingTime,
+      in: ...closingTime,
       displayedComponents: [.hourAndMinute]
     )
   }
@@ -108,8 +113,8 @@ private extension OpeningHourSheet {
   var endTimePicker: some View {
     DatePicker(
       "Closing time",
-      selection: $endTime,
-      in: startTime...,
+      selection: $closingTime,
+      in: openingTime...,
       displayedComponents: [.hourAndMinute]
     )
   }
@@ -135,16 +140,23 @@ private extension OpeningHourSheet {
 
   var doneButton: some View {
     Button("Done") {
-      isPresented = false
       setDailHours()
+      isPresented = false
     }
     .foregroundStyle(Color.locariePrimary)
   }
 
   func setDailHours() {
-    dailyHours.status = status
-    dailyHours.startTime = startTime
-    dailyHours.endTime = endTime
+    let calendar = Calendar.current
+    businessHours.closed = closed
+    businessHours.openingTime = calendar.dateComponents(
+      [.hour, .minute],
+      from: openingTime
+    )
+    businessHours.closingTime = calendar.dateComponents(
+      [.hour, .minute],
+      from: closingTime
+    )
   }
 }
 

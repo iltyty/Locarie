@@ -77,7 +77,6 @@
 		509D5BC52B45611E00833021 /* OpeningHourEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */; };
 		509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC92B457F9800833021 /* TextEditViewModel.swift */; };
 		509D5BCC2B459CC900833021 /* OpeningHourSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */; };
-		509D5BCE2B45B01E00833021 /* DailyHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BCD2B45B01E00833021 /* DailyHours.swift */; };
 		50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */; };
 		50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */; };
 		50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */; };
@@ -142,6 +141,7 @@
 		50FDD88E2B4B9090003015F9 /* ProfileGetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD88D2B4B9090003015F9 /* ProfileGetViewModel.swift */; };
 		50FDD8902B4B9375003015F9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD88F2B4B9375003015F9 /* BaseViewModel.swift */; };
 		50FDD8922B4BC784003015F9 /* Binding+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8912B4BC784003015F9 /* Binding+Hashable.swift */; };
+		50FDD8952B4D708B003015F9 /* BusinessHoursDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8942B4D708B003015F9 /* BusinessHoursDto.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,7 +231,6 @@
 		509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourEditPage.swift; sourceTree = "<group>"; };
 		509D5BC92B457F9800833021 /* TextEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditViewModel.swift; sourceTree = "<group>"; };
 		509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourSheet.swift; sourceTree = "<group>"; };
-		509D5BCD2B45B01E00833021 /* DailyHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHours.swift; sourceTree = "<group>"; };
 		50AAB1792AEFA2E9003FEDF1 /* locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieApp.swift; sourceTree = "<group>"; };
 		50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieView.swift; sourceTree = "<group>"; };
@@ -299,6 +298,7 @@
 		50FDD88D2B4B9090003015F9 /* ProfileGetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGetViewModel.swift; sourceTree = "<group>"; };
 		50FDD88F2B4B9375003015F9 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		50FDD8912B4BC784003015F9 /* Binding+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Hashable.swift"; sourceTree = "<group>"; };
+		50FDD8942B4D708B003015F9 /* BusinessHoursDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHoursDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +350,7 @@
 		500F661F2B257C4C0074FE3C /* Dtos */ = {
 			isa = PBXGroup;
 			children = (
+				50FDD8932B4D707B003015F9 /* BusinessHours */,
 				50369A692B2DBD55005D6B43 /* Post */,
 				50369A662B2DBCBC005D6B43 /* User */,
 				500F66202B257D4D0074FE3C /* Dtos.swift */,
@@ -774,7 +775,6 @@
 				50369A622B2DBC3B005D6B43 /* User */,
 				500F66252B2854A80074FE3C /* LocalCache.swift */,
 				50998B0B2B371086002196B5 /* BusinessCategory.swift */,
-				509D5BCD2B45B01E00833021 /* DailyHours.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1010,6 +1010,14 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		50FDD8932B4D707B003015F9 /* BusinessHours */ = {
+			isa = PBXGroup;
+			children = (
+				50FDD8942B4D708B003015F9 /* BusinessHoursDto.swift */,
+			);
+			path = BusinessHours;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1235,7 +1243,6 @@
 				50FDD8882B4AFC17003015F9 /* Router.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostPage.swift in Sources */,
 				500F66262B2854A90074FE3C /* LocalCache.swift in Sources */,
-				509D5BCE2B45B01E00833021 /* DailyHours.swift in Sources */,
 				50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */,
 				50FDD88C2B4B8FE0003015F9 /* ProfileUpdateService.swift in Sources */,
 				509D5BC52B45611E00833021 /* OpeningHourEditPage.swift in Sources */,
@@ -1273,6 +1280,7 @@
 				5000C6CE2AF8D9A20057EF2D /* MessageView.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
 				501BAF452B4650CA00D9D84F /* SocialAccountsPage.swift in Sources */,
+				50FDD8952B4D708B003015F9 /* BusinessHoursDto.swift in Sources */,
 				50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */,
 				50998B0A2B370ED5002196B5 /* TagView.swift in Sources */,
 				501BAF2E2B46330600D9D84F /* SettingsConstants.swift in Sources */,

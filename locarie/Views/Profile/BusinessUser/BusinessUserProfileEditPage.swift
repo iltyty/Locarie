@@ -225,12 +225,13 @@ private extension BusinessUserProfileEditPage {
 
   var openingHoursInput: some View {
     NavigationLink {
-      OpeningHourEditPage()
+      OpeningHourEditPage(businessHoursDtos: $profileUpdateViewModel.dto
+        .businessHours)
     } label: {
       LinkFormItem(
         title: "Opening hours",
         hint: "Edit opening hours",
-        text: $profileUpdateViewModel.dto.phone
+        text: $profileUpdateViewModel.dto.formattedBusinessHours
       )
     }
     .buttonStyle(.plain)

@@ -35,16 +35,6 @@ extension PostDto {
 }
 
 extension PostDto {
-  var businessOpenTime: DateComponents {
-    user.openTime
-  }
-
-  var businessCloseTime: DateComponents {
-    user.closeTime
-  }
-}
-
-extension PostDto {
   var businessLocation: CLLocation {
     CLLocation(
       latitude: user.location?.latitude ?? .nan,

@@ -36,8 +36,7 @@ extension Router {
          socialAccounts, feedback, privacyPolicy, termsOfUse, termsOfService
 
     case userProfile, regularUserProfile, businessUserProfile,
-         regularUserProfileEdit, businessUserProfileEdit,
-         businessOpeningHoursEdit
+         regularUserProfileEdit, businessUserProfileEdit
   }
 }
 
@@ -87,8 +86,6 @@ extension Router {
         RegularUserProfilePage()
       case .businessUserProfileEdit:
         BusinessUserProfileEditPage()
-      case .businessOpeningHoursEdit:
-        OpeningHourEditPage()
       }
     }
   }

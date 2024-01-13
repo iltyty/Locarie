@@ -65,11 +65,11 @@ extension BusinessHomePage {
       Divider()
       Label(user.address, systemImage: "location")
         .lineLimit(1)
-      Label(
-        formatOpeningTime(from: user.openTime, to: user.closeTime),
-        systemImage: "clock"
-      )
-      .lineLimit(1)
+//      Label(
+//        formatOpeningTime(from: user.openTime, to: user.closeTime),
+//        systemImage: "clock"
+//      )
+        .lineLimit(1)
       Label(user.homepageUrl, systemImage: "link")
         .lineLimit(1)
         .tint(.primary)

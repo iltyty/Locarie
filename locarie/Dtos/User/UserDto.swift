@@ -24,13 +24,10 @@ struct UserDto: Codable {
   var introduction: String = ""
   var phone: String = ""
 
-  var openHour: Int = 0
-  var openMinute: Int = 0
-  var closeHour: Int = 0
-  var closeMinute: Int = 0
-
   var address: String = ""
   var location: BusinessLocation?
+
+  var businessHours = [BusinessHoursDto]()
 }
 
 enum UserType: String, Codable {
@@ -48,27 +45,16 @@ struct BusinessLocation: Codable {
 }
 
 extension UserDto {
-  var openTime: DateComponents {
-    var dateComponents = DateComponents()
-    dateComponents.hour = openHour
-    dateComponents.minute = openMinute
-    return dateComponents
-  }
-
-  var closeTime: DateComponents {
-    var dateComponents = DateComponents()
-    dateComponents.hour = closeHour
-    dateComponents.minute = closeMinute
-    return dateComponents
-  }
-}
-
-extension UserDto {
   var formattedBirthday: String {
     guard let birthday else { return "" }
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "MM/dd/yyyy"
     return dateFormatter.string(from: birthday)
+  }
+
+  var formattedBusinessHours: String {
+    get { businessHours.map(\.formattedStatus).joined(separator: ", ") }
+    set {}
   }
 }
 
@@ -76,8 +62,7 @@ extension UserDto {
   enum CodingKeys: String, CodingKey {
     case id, type, email, firstName, lastName, username, avatarUrl, birthday
     case businessName, category, coverUrl, homepageUrl, introduction, phone
-    case openHour, openMinute, closeHour, closeMinute
-    case address, location
+    case address, location, businessHours
   }
 
   enum LocationCodingKeys: String, CodingKey {
@@ -111,11 +96,6 @@ extension UserDto {
     introduction = decodeWithDefault(container, forKey: .introduction)
     phone = decodeWithDefault(container, forKey: .phone)
 
-    openHour = decodeWithDefault(container, forKey: .openHour)
-    openMinute = decodeWithDefault(container, forKey: .openMinute)
-    closeHour = decodeWithDefault(container, forKey: .closeHour)
-    closeMinute = decodeWithDefault(container, forKey: .closeMinute)
-
     address = decodeWithDefault(container, forKey: .address)
     if try container.decodeNil(forKey: .location) {
       location = BusinessLocation(latitude: 0, longitude: 0)
@@ -129,6 +109,9 @@ extension UserDto {
         longitude: decodeWithDefault(locationContainer, forKey: .longitude)
       )
     }
+    businessHours = try container.decode(
+      [BusinessHoursDto].self, forKey: .businessHours
+    )
   }
 }
 

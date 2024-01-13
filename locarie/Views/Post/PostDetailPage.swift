@@ -82,11 +82,11 @@ extension PostDetailPage {
       Divider()
       Label(post.businessAddress, systemImage: "location")
         .lineLimit(1)
-      Label(
-        formatOpeningTime(from: post.businessOpenTime,
-                          to: post.businessCloseTime),
-        systemImage: "clock"
-      )
+//      Label(
+//        formatOpeningTime(from: post.businessOpenTime,
+//                          to: post.businessCloseTime),
+//        systemImage: "clock"
+//      )
       Divider()
       NavigationLink {
         ReviewPage()

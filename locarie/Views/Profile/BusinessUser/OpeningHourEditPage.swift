@@ -8,33 +8,52 @@
 import SwiftUI
 
 struct OpeningHourEditPage: View {
+  @Binding var businessHoursDtos: [BusinessHoursDto]
+
+  @State var currentDayIndex = 0
   @State var isSheetPresented = false
-  @State var currentKey: DailyHours.Day = .Sunday
-  @State var allDailyHours = defaultDailyHoursDict()
+  @State var allBusinessHours = allBusinessHoursDtos()
+
+  @Environment(\.dismiss) var dismiss
 
   var body: some View {
     VStack {
       navigationTitle
       days
     }
-    .sheet(isPresented: $isSheetPresented) { [currentKey] in
-      openingHourSheet(key: currentKey)
+    .onAppear {
+      setBusinessHours()
     }
+    .sheet(isPresented: $isSheetPresented) { [currentDayIndex] in
+      openingHourSheet(index: currentDayIndex)
+    }
+  }
+
+  private func setBusinessHours() {
+    allBusinessHours = businessHoursDtos
   }
 }
 
 private extension OpeningHourEditPage {
   var navigationTitle: some View {
-    NavigationTitle("Edit opening hours")
+    NavigationTitle("Edit opening hours", right: doneButton)
+  }
+
+  var doneButton: some View {
+    Button("Done") {
+      setBusinessHoursDtos()
+      dismiss()
+    }
+    .fontWeight(.bold)
+    .foregroundStyle(Color.locariePrimary)
   }
 
   var days: some View {
     List {
-      ForEach(sortedDays, id: \.self) { key in
-        let dailyHours = allDailyHours[key]!
-        DayItem(dailyHours)
+      ForEach(allBusinessHours.indices, id: \.self) { index in
+        BusinessHoursItem(allBusinessHours[index])
           .onTapGesture {
-            currentKey = key
+            currentDayIndex = index
             isSheetPresented = true
           }
       }
@@ -43,17 +62,16 @@ private extension OpeningHourEditPage {
     .listRowSpacing(Constants.listVSpacing)
   }
 
-  var sortedDays: [DailyHours.Day] {
-    Array(allDailyHours.keys)
-      .sorted()
+  var sortedDays: [BusinessHoursDto.DayOfWeek] {
+    BusinessHoursDto.DayOfWeek.allCases.sorted()
   }
 
-  func openingHourSheet(key: DailyHours.Day) -> some View {
-    let title = allDailyHours[key]!.day.rawValue.capitalized
+  func openingHourSheet(index: Int) -> some View {
+    let title = allBusinessHours[index].dayOfWeek.rawValue.capitalized
     return OpeningHourSheet(
       title: title,
       isPresented: $isSheetPresented,
-      dailyHours: binding(for: key)
+      businessHours: binding(for: index)
     )
     .presentationDetents([.fraction(Constants.sheetHeightFraction)])
     .padding(.horizontal)
@@ -61,36 +79,43 @@ private extension OpeningHourEditPage {
 }
 
 private extension OpeningHourEditPage {
-  func binding(for key: DailyHours.Day) -> Binding<DailyHours> {
+  func binding(for index: Int) -> Binding<BusinessHoursDto> {
     .init(
-      get: { allDailyHours[key]! },
-      set: { allDailyHours[key] = $0 }
+      get: { allBusinessHours[index] },
+      set: { allBusinessHours[index] = $0 }
     )
+  }
+
+  func setBusinessHoursDtos() {
+    businessHoursDtos.removeAll()
+    for hours in allBusinessHours {
+      businessHoursDtos.append(hours)
+    }
   }
 }
 
-struct DayItem: View {
-  let dailyHours: DailyHours
+struct BusinessHoursItem: View {
+  let businessHours: BusinessHoursDto
 
-  init(_ dailyHours: DailyHours) {
-    self.dailyHours = dailyHours
+  init(_ businessHours: BusinessHoursDto) {
+    self.businessHours = businessHours
   }
 
   var body: some View {
     HStack {
-      Text(dailyHours.day.rawValue)
+      Text(businessHours.dayOfWeek.rawValue)
       Spacer()
-      Text(dailyHours.formattedTime).foregroundStyle(.secondary)
+      Text(businessHours.formattedTime).foregroundStyle(.secondary)
       Image(systemName: "square.and.pencil")
         .foregroundStyle(.secondary)
     }
   }
 }
 
-private func defaultDailyHoursDict() -> [DailyHours.Day: DailyHours] {
-  Dictionary(uniqueKeysWithValues: DailyHours.Day.allCases.map {
-    ($0, DailyHours(day: $0))
-  })
+private func allBusinessHoursDtos() -> [BusinessHoursDto] {
+  BusinessHoursDto.DayOfWeek.allCases.sorted().map { dayOfWeek in
+    BusinessHoursDto(dayOfWeek: dayOfWeek)
+  }
 }
 
 private enum Constants {
@@ -99,5 +124,5 @@ private enum Constants {
 }
 
 #Preview {
-  OpeningHourEditPage()
+  OpeningHourEditPage(businessHoursDtos: .constant([]))
 }
