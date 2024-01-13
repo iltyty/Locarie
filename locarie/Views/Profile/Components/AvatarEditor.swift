@@ -27,10 +27,10 @@ private extension AvatarEditor {
   @ViewBuilder
   func getAvatar() -> some View {
     let avatarUrl = cacheViewModel.getAvatarUrl()
-    if !avatarUrl.isEmpty {
-      avatar(avatarUrl)
-    } else if !photoViewModel.attachments.isEmpty {
+    if !photoViewModel.attachments.isEmpty {
       selectedImage()
+    } else if !avatarUrl.isEmpty {
+      avatar(avatarUrl)
     } else {
       defaultAvatar(size: Constants.avatarSize)
     }
