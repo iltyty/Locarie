@@ -12,7 +12,10 @@ import SwiftUI
 struct BusinessUserProfileEditPage: View {
   @StateObject private var profileGetViewModel = ProfileGetViewModel()
   @StateObject private var profileUpdateViewModel = ProfileUpdateViewModel()
-  @StateObject private var photoViewModel = PhotoViewModel()
+  @StateObject private var avatarViewModel = AvatarUploadViewModel()
+  @StateObject private var profileImageViewModel = PhotoViewModel()
+
+  @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
 
   @State var birthday = Date()
   @State var birthdayFormatted = ""
@@ -50,42 +53,12 @@ struct BusinessUserProfileEditPage: View {
     .onReceive(profileGetViewModel.$state) { state in
       handleProfileGetViewModelStateChange(state)
     }
+    .onReceive(avatarViewModel.$state) { state in
+      handleAvatarUpdateStateChange(state)
+    }
     .onReceive(profileUpdateViewModel.$state) { state in
       handleProfileUpdateViewModelStateChange(state)
     }
-  }
-
-  private func handleProfileGetViewModelStateChange(
-    _ state: ProfileGetViewModel.State
-  ) {
-    if case let .finished(dto) = state {
-      guard let dto else { return }
-      if let birthday = dto.birthday {
-        self.birthday = birthday
-      }
-      birthdayFormatted = dto.formattedBirthday
-      profileUpdateViewModel.dto = dto
-    }
-  }
-
-  private func handleProfileUpdateViewModelStateChange(
-    _ state: ProfileUpdateViewModel.State
-  ) {
-    switch state {
-    case let .finished(dto):
-      handleProfileUpdateFinished(dto)
-    case let .failed(error):
-      handleProfileUpdateError(error)
-    default: return
-    }
-  }
-
-  private func handleProfileUpdateFinished(_: UserDto?) {
-    dismiss()
-  }
-
-  private func handleProfileUpdateError(_ error: NetworkError) {
-    print(error)
   }
 }
 
@@ -96,7 +69,7 @@ private extension BusinessUserProfileEditPage {
 
   var saveButton: some View {
     Button("Save") {
-      profileUpdateViewModel.updateProfile(id: id)
+      updateProfile()
     }
     .fontWeight(.bold)
     .foregroundStyle(Color.locariePrimary)
@@ -118,7 +91,7 @@ private extension BusinessUserProfileEditPage {
   }
 
   func profileImages(width: CGFloat) -> some View {
-    ForEach(photoViewModel.attachments) { attachment in
+    ForEach(profileImageViewModel.attachments) { attachment in
       ImageAttachmentView(
         width: width,
         aspectRatio: Constants.profileImageAspectRatio,
@@ -129,7 +102,7 @@ private extension BusinessUserProfileEditPage {
 
   func profileImagePicker(width: CGFloat) -> some View {
     PhotosPicker(
-      selection: $photoViewModel.selection,
+      selection: $profileImageViewModel.selection,
       maxSelectionCount: 1,
       matching: .images,
       photoLibrary: .shared()
@@ -156,7 +129,7 @@ private extension BusinessUserProfileEditPage {
   }
 
   var avatarEditor: some View {
-    AvatarEditor()
+    AvatarEditor(photoViewModel: avatarViewModel.photoViewModel)
   }
 
   @ViewBuilder
@@ -338,6 +311,55 @@ private extension BusinessUserProfileEditPage {
     .labelsHidden()
     .datePickerStyle(.wheel)
     .padding(.horizontal)
+  }
+}
+
+private extension BusinessUserProfileEditPage {
+  func updateProfile() {
+    avatarViewModel.upload(userId: Int64(cacheViewModel.getUserId()))
+    profileUpdateViewModel.updateProfile(id: id)
+  }
+
+  func handleProfileGetViewModelStateChange(
+    _ state: ProfileGetViewModel.State
+  ) {
+    if case let .finished(dto) = state {
+      guard let dto else { return }
+      if let birthday = dto.birthday {
+        self.birthday = birthday
+      }
+      birthdayFormatted = dto.formattedBirthday
+      profileUpdateViewModel.dto = dto
+    }
+  }
+
+  func handleAvatarUpdateStateChange(
+    _ state: AvatarUploadViewModel.State
+  ) {
+    if case let .finished(avatarUrl) = state {
+      guard let avatarUrl else { return }
+      cacheViewModel.setAvatarUrl(avatarUrl)
+    }
+  }
+
+  func handleProfileUpdateViewModelStateChange(
+    _ state: ProfileUpdateViewModel.State
+  ) {
+    switch state {
+    case let .finished(dto):
+      handleProfileUpdateFinished(dto)
+    case let .failed(error):
+      handleProfileUpdateError(error)
+    default: return
+    }
+  }
+
+  func handleProfileUpdateFinished(_: UserDto?) {
+    dismiss()
+  }
+
+  func handleProfileUpdateError(_ error: NetworkError) {
+    print(error)
   }
 }
 

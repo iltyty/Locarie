@@ -8,6 +8,8 @@
 import Foundation
 
 class BaseViewModel: ObservableObject {
+  let defaultImageMimeType = "image/jpeg"
+
   func newNetworkError(
     response dto: ResponseDto<some Decodable>
   ) -> NetworkError {

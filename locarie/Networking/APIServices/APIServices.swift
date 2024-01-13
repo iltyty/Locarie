@@ -36,9 +36,17 @@ class BaseAPIService {
     }
   }
 
-  func mapResponse<T>(_ response: DataResponsePublisher<T>
-    .Output) -> DataResponse<T, NetworkError>
-  {
+  func prepareImageMultipartData(
+    _ data: Data, withName name: String, filename: String, mimeType: String
+  ) -> MultipartFormData {
+    let result = MultipartFormData()
+    result.append(data, withName: name, fileName: filename, mimeType: mimeType)
+    return result
+  }
+
+  func mapResponse<T>(
+    _ response: DataResponsePublisher<T>.Output
+  ) -> DataResponse<T, NetworkError> {
     response.mapError { error in
       let backendError = response.data.flatMap { data in
         try? JSONDecoder().decode(BackendError.self, from: data)

@@ -9,6 +9,7 @@ import PhotosUI
 import SwiftUI
 
 struct RegularUserProfileEditPage: View {
+  @StateObject private var avatarViewModel = AvatarUploadViewModel()
   @StateObject private var profileViewModel = ProfileUpdateViewModel()
   @StateObject private var cacheViewModel = LocalCacheViewModel.shared
 
@@ -31,7 +32,7 @@ private extension RegularUserProfileEditPage {
   }
 
   var avatarEditor: some View {
-    AvatarEditor()
+    AvatarEditor(photoViewModel: avatarViewModel.photoViewModel)
   }
 
   var firstNameInput: some View {

@@ -18,6 +18,10 @@ enum APIEndpoints {
     URL(string: userUrl + "/\(id)")!
   }
 
+  static func userAvatarUrl(id: Int64) -> URL {
+    URL(string: userUrl + "/\(id)/avatar")!
+  }
+
   static func userUpdateProfileUrl(id: Int64) -> URL {
     URL(string: userUrl + "/\(id)")!
   }
