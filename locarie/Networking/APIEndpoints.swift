@@ -14,16 +14,12 @@ enum APIEndpoints {
 
   static let userLoginUrl = URL(string: userUrl + "/login")!
   static let userRegisterUrl = URL(string: userUrl + "/register")!
-  static func userGetProfileUrl(id: Int64) -> URL {
+  static func userProfileUrl(id: Int64) -> URL {
     URL(string: userUrl + "/\(id)")!
   }
 
   static func userAvatarUrl(id: Int64) -> URL {
     URL(string: userUrl + "/\(id)/avatar")!
-  }
-
-  static func userUpdateProfileUrl(id: Int64) -> URL {
-    URL(string: userUrl + "/\(id)")!
   }
 
   static let postCreateUrl = URL(string: postUrl)!

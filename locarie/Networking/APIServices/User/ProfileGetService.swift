@@ -18,7 +18,7 @@ final class ProfileGetServiceImpl: BaseAPIService, ProfileGetService {
   override private init() {}
 
   func getUserProfile(id: Int64) -> AnyPublisher<ProfileGetResponse, Never> {
-    let endpoint = APIEndpoints.userGetProfileUrl(id: id)
+    let endpoint = APIEndpoints.userProfileUrl(id: id)
     return AF.request(endpoint, method: .get)
       .validate()
       .publishDecodable(type: ResponseDto<UserDto>.self)

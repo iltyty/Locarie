@@ -22,7 +22,7 @@ final class ProfileUpdateServiceImpl: BaseAPIService, ProfileUpdateService {
     id: Int64,
     data dto: UserDto
   ) -> AnyPublisher<ProfileUpdateResponse, Never> {
-    let endpoint = APIEndpoints.userUpdateProfileUrl(id: id)
+    let endpoint = APIEndpoints.userProfileUrl(id: id)
     let encoder = dateIso8601JsonParameterEncoder()
     return AF.request(
       endpoint,

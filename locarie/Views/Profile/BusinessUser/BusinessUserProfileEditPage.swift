@@ -104,7 +104,7 @@ private extension BusinessUserProfileEditPage {
   func profileImagePicker(width: CGFloat) -> some View {
     PhotosPicker(
       selection: $profileImageViewModel.selection,
-      maxSelectionCount: 1,
+      maxSelectionCount: Constants.profileImageMaxCount,
       matching: .images,
       photoLibrary: .shared()
     ) { profileImagePickerContent(width: width) }
@@ -368,6 +368,7 @@ private extension BusinessUserProfileEditPage {
 private enum Constants {
   static let vSpacing = 24.0
   static let cameraIconSize = 48.0
+  static let profileImageMaxCount = 5
   static let profileImageAspectRatio = 16.0 / 9
   static let profileImagePickerCornerRadius = 10.0
   static let birthdaySheetHeightFraction = 0.4
