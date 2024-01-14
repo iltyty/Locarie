@@ -19,7 +19,7 @@ final class ProfileGetViewModel: BaseViewModel {
     self.networking = networking
   }
 
-  func getProfile(id: Int64) {
+  func getProfile(userId id: Int64) {
     if case .finished = state {
       return
     }

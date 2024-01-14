@@ -144,6 +144,8 @@
 		50FDD8952B4D708B003015F9 /* BusinessHoursDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8942B4D708B003015F9 /* BusinessHoursDto.swift */; };
 		50FDD8972B523B32003015F9 /* AvatarUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8962B523B32003015F9 /* AvatarUploadViewModel.swift */; };
 		50FDD8992B523B95003015F9 /* AvatarUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8982B523B95003015F9 /* AvatarUploadService.swift */; };
+		50FDD89B2B53D633003015F9 /* ProfileImagesUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD89A2B53D632003015F9 /* ProfileImagesUploadService.swift */; };
+		50FDD89D2B53D942003015F9 /* ProfileImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD89C2B53D942003015F9 /* ProfileImagesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -303,6 +305,8 @@
 		50FDD8942B4D708B003015F9 /* BusinessHoursDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHoursDto.swift; sourceTree = "<group>"; };
 		50FDD8962B523B32003015F9 /* AvatarUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarUploadViewModel.swift; sourceTree = "<group>"; };
 		50FDD8982B523B95003015F9 /* AvatarUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarUploadService.swift; sourceTree = "<group>"; };
+		50FDD89A2B53D632003015F9 /* ProfileImagesUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesUploadService.swift; sourceTree = "<group>"; };
+		50FDD89C2B53D942003015F9 /* ProfileImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -527,6 +531,7 @@
 				50FDD8892B4B8B0D003015F9 /* ProfileGetService.swift */,
 				50FDD88B2B4B8FE0003015F9 /* ProfileUpdateService.swift */,
 				50FDD8982B523B95003015F9 /* AvatarUploadService.swift */,
+				50FDD89A2B53D632003015F9 /* ProfileImagesUploadService.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -614,6 +619,7 @@
 				50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */,
 				50FDD88D2B4B9090003015F9 /* ProfileGetViewModel.swift */,
 				50FDD8962B523B32003015F9 /* AvatarUploadViewModel.swift */,
+				50FDD89C2B53D942003015F9 /* ProfileImagesViewModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1180,6 +1186,7 @@
 				50F54A002B45279D00D06F20 /* SecureFormItem.swift in Sources */,
 				502A4FFC2B32D71500C0833A /* UserDto.swift in Sources */,
 				50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */,
+				50FDD89D2B53D942003015F9 /* ProfileImagesViewModel.swift in Sources */,
 				501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */,
 				50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
@@ -1207,6 +1214,7 @@
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,
 				501BAF402B464F0600D9D84F /* ToggleSettingsItem.swift in Sources */,
 				50277F772AF117970045AB12 /* FavoritePage.swift in Sources */,
+				50FDD89B2B53D633003015F9 /* ProfileImagesUploadService.swift in Sources */,
 				5037D2C92AF2337400108F0F /* MessageRowView.swift in Sources */,
 				502A4FF62B32D48400C0833A /* PostListService.swift in Sources */,
 				50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */,

@@ -27,7 +27,7 @@ struct MyAccountPage: View {
       Spacer()
     }
     .onAppear {
-      profileViewModel.getProfile(id: cacheViewModel.getUserId())
+      profileViewModel.getProfile(userId: cacheViewModel.getUserId())
     }
   }
 }

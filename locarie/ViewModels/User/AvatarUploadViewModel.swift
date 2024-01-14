@@ -33,7 +33,7 @@ import Foundation
     )
     .sink { [weak self] response in
       guard let self else { return }
-      handleUploadResponse(response)
+      handleResponse(response)
     }
     .store(in: &subscriptions)
   }
@@ -63,8 +63,7 @@ import Foundation
     return defaultAvatarFilename
   }
 
-  private func handleUploadResponse(_ response: AvatarUploadResponse) {
-    debugPrint(response)
+  private func handleResponse(_ response: AvatarUploadResponse) {
     if let error = response.error {
       state = .failed(error)
     } else {

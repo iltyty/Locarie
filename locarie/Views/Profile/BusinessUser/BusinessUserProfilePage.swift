@@ -24,14 +24,14 @@ struct BusinessUserProfilePage: View {
       .onAppear {
         screenHeight = proxy.size.height
         topSafeAreaHeight = proxy.safeAreaInsets.top
-        profileViewModel.getProfile(id: cacheViewModel.getUserId())
+        profileViewModel.getProfile(userId: cacheViewModel.getUserId())
       }
     }
   }
 
   private var content: some View {
     ScrollView {
-      profileImage
+      profileImages
       profileContent
     }
     .scrollBounceBehavior(.basedOnSize)
@@ -39,13 +39,35 @@ struct BusinessUserProfilePage: View {
 }
 
 private extension BusinessUserProfilePage {
-  var profileImage: some View {
+  var profileImages: some View {
     ZStack(alignment: .top) {
-      Rectangle().fill(.thinMaterial)
+      if profileViewModel.dto.profileImageUrls.isEmpty {
+        rectangle
+      } else {
+        images
+      }
       settingsButton
     }
     .frame(height: Constants.profileImageHeightFraction * screenHeight)
     .background(.thinMaterial)
+  }
+
+  var images: some View {
+    AsyncImageView(
+      url: profileViewModel.dto.profileImageUrls.first ?? ""
+    ) { image in
+      image.resizable()
+        .scaledToFill()
+        .frame(
+          height: Constants.profileImageHeightFraction * screenHeight,
+          alignment: .center
+        )
+        .clipped()
+    }
+  }
+
+  var rectangle: some View {
+    Rectangle().fill(.thinMaterial)
   }
 
   var settingsButton: some View {
@@ -54,13 +76,17 @@ private extension BusinessUserProfilePage {
       NavigationLink(value: Router.Destination.settings) {
         Image(systemName: "gearshape")
           .font(.system(size: Constants.settingsButtonIconSize))
+          .padding(10)
+          .background(Circle().fill(.white))
           .padding(.trailing)
       }
       .buttonStyle(.plain)
     }
     .padding(.top, topSafeAreaHeight)
   }
+}
 
+private extension BusinessUserProfilePage {
   var profileContent: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
       avatarAndProfileEditButton

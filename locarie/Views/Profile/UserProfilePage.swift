@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserProfilePage: View {
-  @StateObject private var cacheViewModel = LocalCacheViewModel.shared
+  @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
 
   var body: some View {
     if !cacheViewModel.isLoggedIn() {

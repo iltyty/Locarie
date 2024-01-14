@@ -44,6 +44,27 @@ class BaseAPIService {
     return result
   }
 
+  func prepareImagesMultipartData(
+    _ data: [Data], withName name: String, filenames: [String],
+    mimeTypes: [String]
+  ) -> MultipartFormData {
+    let result = MultipartFormData()
+    guard data.count > 0, data.count == filenames.count,
+          data.count == mimeTypes.count
+    else {
+      return result
+    }
+    for i in data.indices {
+      result.append(
+        data[i],
+        withName: name,
+        fileName: filenames[i],
+        mimeType: mimeTypes[i]
+      )
+    }
+    return result
+  }
+
   func mapResponse<T>(
     _ response: DataResponsePublisher<T>.Output
   ) -> DataResponse<T, NetworkError> {

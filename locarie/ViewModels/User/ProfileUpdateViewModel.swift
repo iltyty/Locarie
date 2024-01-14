@@ -19,7 +19,7 @@ final class ProfileUpdateViewModel: BaseViewModel {
     self.networking = networking
   }
 
-  func updateProfile(id: Int64) {
+  func updateProfile(userId id: Int64) {
     networking.updateProfile(id: id, data: dto)
       .sink { [weak self] response in
         guard let self else { return }

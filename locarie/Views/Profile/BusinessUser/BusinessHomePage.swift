@@ -45,7 +45,7 @@ struct BusinessHomePage: View {
 
 extension BusinessHomePage {
   func underneathImageView(width: Double, height: Double) -> some View {
-    AsyncImageView(url: user.coverUrl, width: width,
+    AsyncImageView(url: user.profileImageUrls.first ?? "", width: width,
                    height: height)
     { image in
       image

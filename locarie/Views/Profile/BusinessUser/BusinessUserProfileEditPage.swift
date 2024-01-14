@@ -10,20 +10,18 @@ import PhotosUI
 import SwiftUI
 
 struct BusinessUserProfileEditPage: View {
+  @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
+
+  @StateObject private var avatarViewModel = AvatarUploadViewModel()
   @StateObject private var profileGetViewModel = ProfileGetViewModel()
   @StateObject private var profileUpdateViewModel = ProfileUpdateViewModel()
-  @StateObject private var avatarViewModel = AvatarUploadViewModel()
-  @StateObject private var profileImageViewModel = PhotoViewModel()
-
-  @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
+  @StateObject private var profileImagesViewModel = ProfileImagesViewModel()
 
   @State var birthday = Date()
   @State var birthdayFormatted = ""
   @State var isSheetPresented = false
 
   @Environment(\.dismiss) var dismiss
-
-  private let id = Int64(LocalCacheViewModel.shared.cache.userId)
 
   var body: some View {
     GeometryReader { proxy in
@@ -49,7 +47,7 @@ struct BusinessUserProfileEditPage: View {
     }
     .sheet(isPresented: $isSheetPresented) { birthdaySheet }
     .onAppear {
-      profileGetViewModel.getProfile(id: id)
+      profileGetViewModel.getProfile(userId: cacheViewModel.getUserId())
     }
     .onReceive(profileGetViewModel.$state) { state in
       handleProfileGetViewModelStateChange(state)
@@ -92,7 +90,7 @@ private extension BusinessUserProfileEditPage {
   }
 
   func profileImages(width: CGFloat) -> some View {
-    ForEach(profileImageViewModel.attachments) { attachment in
+    ForEach(profileImagesViewModel.photoViewModel.attachments) { attachment in
       ImageAttachmentView(
         width: width,
         aspectRatio: Constants.profileImageAspectRatio,
@@ -103,7 +101,7 @@ private extension BusinessUserProfileEditPage {
 
   func profileImagePicker(width: CGFloat) -> some View {
     PhotosPicker(
-      selection: $profileImageViewModel.selection,
+      selection: $profileImagesViewModel.photoViewModel.selection,
       maxSelectionCount: Constants.profileImageMaxCount,
       matching: .images,
       photoLibrary: .shared()
@@ -318,8 +316,10 @@ private extension BusinessUserProfileEditPage {
 
 private extension BusinessUserProfileEditPage {
   func updateProfile() {
-    avatarViewModel.upload(userId: Int64(cacheViewModel.getUserId()))
-    profileUpdateViewModel.updateProfile(id: id)
+    let userId = cacheViewModel.getUserId()
+    profileImagesViewModel.upload(userId: userId)
+    avatarViewModel.upload(userId: userId)
+    profileUpdateViewModel.updateProfile(userId: userId)
   }
 
   func handleProfileGetViewModelStateChange(

@@ -19,7 +19,7 @@ struct UserDto: Codable {
 
   var businessName: String = ""
   var category: String = ""
-  var coverUrl: String = ""
+  var profileImageUrls: [String] = []
   var homepageUrl: String = ""
   var introduction: String = ""
   var phone: String = ""
@@ -61,7 +61,8 @@ extension UserDto {
 extension UserDto {
   enum CodingKeys: String, CodingKey {
     case id, type, email, firstName, lastName, username, avatarUrl, birthday
-    case businessName, category, coverUrl, homepageUrl, introduction, phone
+    case businessName, category, profileImageUrls, homepageUrl, introduction,
+         phone
     case address, location, businessHours
   }
 
@@ -91,7 +92,7 @@ extension UserDto {
 
     businessName = decodeWithDefault(container, forKey: .businessName)
     category = decodeWithDefault(container, forKey: .category)
-    coverUrl = decodeWithDefault(container, forKey: .coverUrl)
+    profileImageUrls = decodeWithDefault(container, forKey: .profileImageUrls)
     homepageUrl = decodeWithDefault(container, forKey: .homepageUrl)
     introduction = decodeWithDefault(container, forKey: .introduction)
     phone = decodeWithDefault(container, forKey: .phone)
@@ -139,6 +140,15 @@ private func decodeWithDefault<K: CodingKey>(
   default value: Double = 0
 ) -> Double {
   let result = try? container.decodeIfPresent(Double.self, forKey: key)
+  return result ?? value
+}
+
+private func decodeWithDefault<K: CodingKey>(
+  _ container: KeyedDecodingContainer<K>,
+  forKey key: KeyedDecodingContainer<K>.Key,
+  default value: [String] = []
+) -> [String] {
+  let result = try? container.decodeIfPresent([String].self, forKey: key)
   return result ?? value
 }
 
