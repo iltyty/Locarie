@@ -16,7 +16,7 @@ final class PostCreateViewModel: ObservableObject {
   private var publishers: Set<AnyCancellable> = []
 
   init() {
-    let user = UserId(id: LocalCache.shared.userId)
+    let user = UserId(id: Int64(LocalCache.shared.userId))
     post = PostCreateRequestDto(user: user, title: "", content: "")
     isFormValidPublisher
       .receive(on: RunLoop.main)

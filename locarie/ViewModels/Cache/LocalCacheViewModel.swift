@@ -17,8 +17,8 @@ class LocalCacheViewModel: ObservableObject {
     cache.userId != 0
   }
 
-  func getUserId() -> Double {
-    cache.userId
+  func getUserId() -> Int64 {
+    Int64(cache.userId)
   }
 
   func getUserType() -> String {

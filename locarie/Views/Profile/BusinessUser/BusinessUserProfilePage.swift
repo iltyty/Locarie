@@ -24,7 +24,7 @@ struct BusinessUserProfilePage: View {
       .onAppear {
         screenHeight = proxy.size.height
         topSafeAreaHeight = proxy.safeAreaInsets.top
-        profileViewModel.getProfile(id: Int64(cacheViewModel.getUserId()))
+        profileViewModel.getProfile(id: cacheViewModel.getUserId())
       }
     }
   }
@@ -108,8 +108,8 @@ private extension BusinessUserProfilePage {
 
   @ViewBuilder
   var businessNameAndCategory: some View {
-    let businessName = profileViewModel.dto?.businessName ?? ""
-    let category = profileViewModel.dto?.category ?? ""
+    let businessName = profileViewModel.dto.businessName
+    let category = profileViewModel.dto.category
     HStack {
       Text(businessName).font(.headline)
       Spacer()
@@ -119,34 +119,32 @@ private extension BusinessUserProfilePage {
     }
   }
 
-  @ViewBuilder
   var businessBio: some View {
-    let bio = profileViewModel.dto?
-      .introduction ??
-      "Go to Edit Profile to personalize your business profile."
-    Text(bio)
-      .foregroundStyle(.secondary)
-      .lineLimit(2)
+    var bio = profileViewModel.dto.introduction
+    if bio.isEmpty {
+      bio = "Go to Edit Profile to personalize your business profile."
+    }
+    return Text(bio).foregroundStyle(.secondary).lineLimit(2)
   }
 
   var location: some View {
-    Label(profileViewModel.dto?.address ?? "", systemImage: "location")
+    Label(profileViewModel.dto.address, systemImage: "location")
   }
 
   var openingHours: some View {
     Label(
-      profileViewModel.dto?.formattedBusinessHours ?? "",
+      profileViewModel.dto.formattedBusinessHours,
       systemImage: "clock"
     )
     .lineLimit(1)
   }
 
   var link: some View {
-    Label(profileViewModel.dto?.homepageUrl ?? "", systemImage: "link")
+    Label(profileViewModel.dto.homepageUrl, systemImage: "link")
   }
 
   var phone: some View {
-    Label(profileViewModel.dto?.phone ?? "", systemImage: "phone")
+    Label(profileViewModel.dto.phone, systemImage: "phone")
   }
 }
 

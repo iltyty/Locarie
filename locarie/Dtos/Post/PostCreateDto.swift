@@ -20,5 +20,5 @@ struct PostCreateResponseDto: Codable {
 }
 
 struct UserId: Codable {
-  let id: Double
+  let id: Int64
 }

@@ -326,7 +326,7 @@ private extension BusinessUserProfileEditPage {
     _ state: ProfileGetViewModel.State
   ) {
     if case .finished = state {
-      guard let dto = profileGetViewModel.dto else { return }
+      let dto = profileGetViewModel.dto
       if let birthday = dto.birthday {
         self.birthday = birthday
       }
