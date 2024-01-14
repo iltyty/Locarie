@@ -11,6 +11,9 @@ struct BusinessUserProfilePage: View {
   @State private var screenHeight = 0.0
   @State private var topSafeAreaHeight = 0.0
 
+  @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
+  @StateObject private var profileViewModel = ProfileGetViewModel()
+
   var body: some View {
     GeometryReader { proxy in
       VStack {
@@ -21,6 +24,7 @@ struct BusinessUserProfilePage: View {
       .onAppear {
         screenHeight = proxy.size.height
         topSafeAreaHeight = proxy.safeAreaInsets.top
+        profileViewModel.getProfile(id: Int64(cacheViewModel.getUserId()))
       }
     }
   }
@@ -81,7 +85,10 @@ private extension BusinessUserProfilePage {
   }
 
   var avatar: some View {
-    AvatarView(size: Constants.avatarSize)
+    AvatarView(
+      imageUrl: cacheViewModel.getAvatarUrl(),
+      size: Constants.avatarSize
+    )
   }
 
   var profileEditButton: some View {
@@ -99,35 +106,47 @@ private extension BusinessUserProfilePage {
     Capsule().stroke(Color.locariePrimary)
   }
 
+  @ViewBuilder
   var businessNameAndCategory: some View {
+    let businessName = profileViewModel.dto?.businessName ?? ""
+    let category = profileViewModel.dto?.category ?? ""
     HStack {
-      Text("Business name").font(.headline)
+      Text(businessName).font(.headline)
       Spacer()
-      Text("Business category")
+      Text(category)
         .font(.callout)
         .foregroundStyle(.secondary)
     }
   }
 
+  @ViewBuilder
   var businessBio: some View {
-    Text("Go to Edit Profile to personalize your business profile.")
+    let bio = profileViewModel.dto?
+      .introduction ??
+      "Go to Edit Profile to personalize your business profile."
+    Text(bio)
       .foregroundStyle(.secondary)
+      .lineLimit(2)
   }
 
   var location: some View {
-    Label("Location", systemImage: "location")
+    Label(profileViewModel.dto?.address ?? "", systemImage: "location")
   }
 
   var openingHours: some View {
-    Label("Opening hours", systemImage: "clock")
+    Label(
+      profileViewModel.dto?.formattedBusinessHours ?? "",
+      systemImage: "clock"
+    )
+    .lineLimit(1)
   }
 
   var link: some View {
-    Label("Link", systemImage: "link")
+    Label(profileViewModel.dto?.homepageUrl ?? "", systemImage: "link")
   }
 
   var phone: some View {
-    Label("Phone", systemImage: "phone")
+    Label(profileViewModel.dto?.phone ?? "", systemImage: "phone")
   }
 }
 

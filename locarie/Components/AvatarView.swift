@@ -12,18 +12,14 @@ struct AvatarView: View {
   var imageUrl = ""
   var size: CGFloat
 
-  init(size: CGFloat) {
+  init(imageUrl: String = "", size: CGFloat) {
     self.size = size
+    self.imageUrl = imageUrl
   }
 
   init(name: String, size: CGFloat) {
     self.size = size
     self.name = name
-  }
-
-  init(imageUrl: String, size: CGFloat) {
-    self.size = size
-    self.imageUrl = imageUrl
   }
 
   var body: some View {

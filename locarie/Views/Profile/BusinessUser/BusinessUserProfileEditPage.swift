@@ -36,8 +36,9 @@ struct BusinessUserProfileEditPage: View {
           usernameInput
           categoryInput
           bioInput
-          openingHoursInput
           locationInput
+          openingHoursInput
+          linkInput
           emailInput
           phoneInput
           firstNameInput
@@ -214,7 +215,8 @@ private extension BusinessUserProfileEditPage {
     TextFormItem(
       title: "Link",
       hint: "Link optional",
-      input: $profileUpdateViewModel.dto.homepageUrl
+      input: $profileUpdateViewModel.dto.homepageUrl,
+      showIcon: true
     )
   }
 
@@ -323,8 +325,8 @@ private extension BusinessUserProfileEditPage {
   func handleProfileGetViewModelStateChange(
     _ state: ProfileGetViewModel.State
   ) {
-    if case let .finished(dto) = state {
-      guard let dto else { return }
+    if case .finished = state {
+      guard let dto = profileGetViewModel.dto else { return }
       if let birthday = dto.birthday {
         self.birthday = birthday
       }

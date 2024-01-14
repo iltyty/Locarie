@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 final class ProfileGetViewModel: BaseViewModel {
-  @Published var dto = UserDto()
+  @Published var dto: UserDto?
   @Published var state: State = .idle
 
   private let networking: ProfileGetService
@@ -36,8 +36,12 @@ final class ProfileGetViewModel: BaseViewModel {
       state = .failed(error)
     } else {
       let dto = response.value!
-      state = dto.status == 0 ? .finished(dto.data)
-        : .failed(newNetworkError(response: dto))
+      if dto.status == 0 {
+        self.dto = dto.data
+        state = .finished
+      } else {
+        state = .failed(newNetworkError(response: dto))
+      }
     }
   }
 }
@@ -46,7 +50,7 @@ extension ProfileGetViewModel {
   enum State {
     case idle
     case loading
-    case finished(UserDto?)
+    case finished
     case failed(NetworkError)
   }
 }
