@@ -82,6 +82,5 @@ private enum Constants {
 
 #Preview {
   FavoritePage()
-    .environmentObject(BottomTabViewRouter())
     .environmentObject(PostViewModel())
 }

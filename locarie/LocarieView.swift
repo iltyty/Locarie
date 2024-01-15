@@ -9,8 +9,8 @@ import CoreLocation
 import SwiftUI
 
 struct LocarieView: View {
-  @EnvironmentObject var router: Router
-  @EnvironmentObject var viewRouter: BottomTabViewRouter
+  @ObservedObject var router = Router.shared
+  @ObservedObject var viewRouter = BottomTabViewRouter.shared
 
   var body: some View {
     NavigationStack(path: $router.path) {
@@ -40,7 +40,5 @@ struct LocarieView: View {
 
 #Preview {
   LocarieView()
-    .environmentObject(Router.shared)
-    .environmentObject(BottomTabViewRouter())
     .environmentObject(MessageViewModel())
 }

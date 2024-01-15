@@ -14,41 +14,36 @@ private enum Constants {
 }
 
 struct BottomTabView: View {
-  @EnvironmentObject var viewRouter: BottomTabViewRouter
+  @ObservedObject var viewRouter = BottomTabViewRouter.shared
 
   var body: some View {
     HStack {
       BottomTabViewItem(
         page: .home,
-        iconName: "location",
-        viewRouter: viewRouter
+        iconName: "location"
       )
       .imageScale(.large)
       Spacer()
       BottomTabViewItem(
         page: .favorite,
-        iconName: "bookmark",
-        viewRouter: viewRouter
+        iconName: "bookmark"
       )
       .imageScale(.large)
       Spacer()
       BottomTabViewItem(
         page: .new,
-        iconName: "plus.app",
-        viewRouter: viewRouter
+        iconName: "plus.app"
       )
       .imageScale(.large)
       Spacer()
       BottomTabViewItem(
         page: .message,
-        iconName: "message",
-        viewRouter: viewRouter
+        iconName: "message"
       ).imageScale(.large)
       Spacer()
       BottomTabViewItem(
         page: .profile,
-        iconName: "person",
-        viewRouter: viewRouter
+        iconName: "person"
       )
       .imageScale(.large)
     }
@@ -59,9 +54,8 @@ struct BottomTabView: View {
 }
 
 #Preview {
-  let viewRouter = BottomTabViewRouter()
-  return ZStack {
+  ZStack {
     Color.blue
     BottomTabView()
-  }.environmentObject(viewRouter)
+  }
 }

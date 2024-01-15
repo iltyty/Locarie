@@ -177,6 +177,4 @@ private enum Constants {
 
 #Preview {
   BusinessUserProfilePage()
-    .environmentObject(Router.shared)
-    .environmentObject(BottomTabViewRouter())
 }

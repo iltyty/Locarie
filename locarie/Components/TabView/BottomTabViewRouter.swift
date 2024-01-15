@@ -16,5 +16,8 @@ enum Page {
 }
 
 class BottomTabViewRouter: ObservableObject {
+  static let shared = BottomTabViewRouter()
+  private init() {}
+
   @Published var currentPage: Page = .home
 }

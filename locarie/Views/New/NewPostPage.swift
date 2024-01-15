@@ -225,5 +225,4 @@ private enum Constants {
 
 #Preview {
   NewPostPage()
-    .environmentObject(BottomTabViewRouter())
 }

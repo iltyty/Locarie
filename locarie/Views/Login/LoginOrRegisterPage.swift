@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct LoginOrRegisterPage: View {
-  @EnvironmentObject var router: Router
-
   var body: some View {
     VStack(spacing: Constants.spacing) {
       Spacer()
@@ -64,6 +62,4 @@ private enum Constants {
 
 #Preview {
   LoginOrRegisterPage()
-    .environmentObject(Router.shared)
-    .environmentObject(BottomTabViewRouter())
 }

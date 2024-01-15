@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct BottomTabViewItem: View {
+  @ObservedObject var viewRouter = BottomTabViewRouter.shared
+
   let page: Page
   let iconName: String
-  @StateObject var viewRouter: BottomTabViewRouter
 
   var body: some View {
     Image(systemName: iconName)
@@ -24,7 +25,6 @@ struct BottomTabViewItem: View {
 #Preview {
   BottomTabViewItem(
     page: .home,
-    iconName: "bookmark",
-    viewRouter: BottomTabViewRouter()
+    iconName: "bookmark"
   )
 }

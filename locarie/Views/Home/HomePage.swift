@@ -109,5 +109,4 @@ private enum Constants {
 
 #Preview {
   HomePage()
-    .environmentObject(BottomTabViewRouter())
 }

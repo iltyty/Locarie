@@ -46,6 +46,5 @@ struct MessagePage: View {
 
 #Preview {
   MessagePage()
-    .environmentObject(BottomTabViewRouter())
     .environmentObject(MessageViewModel())
 }
