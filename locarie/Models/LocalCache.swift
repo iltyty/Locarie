@@ -35,8 +35,8 @@ struct LocalCache {
     jwtToken = cache.jwtToken
   }
 
-  func isRegularUser() -> Bool {
-    userType == UserType.regular.rawValue
+  func isBusinessUser() -> Bool {
+    userType == UserType.business.rawValue
   }
 
   mutating func setAvatarUrl(_ url: String) {

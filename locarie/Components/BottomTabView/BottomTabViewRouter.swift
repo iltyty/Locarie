@@ -7,17 +7,17 @@
 
 import SwiftUI
 
+class BottomTabViewRouter: ObservableObject {
+  static let shared = BottomTabViewRouter()
+  private init() {}
+
+  @Published var currentPage: Page = .home
+}
+
 enum Page {
   case home
   case favorite
   case new
   case message
   case profile
-}
-
-class BottomTabViewRouter: ObservableObject {
-  static let shared = BottomTabViewRouter()
-  private init() {}
-
-  @Published var currentPage: Page = .home
 }

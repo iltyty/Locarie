@@ -41,13 +41,12 @@ class LocalCacheViewModel: ObservableObject {
     cache.jwtToken
   }
 
-  func isRegularUser() -> Bool {
-    cache.isRegularUser()
+  func isBusinessUser() -> Bool {
+    cache.isBusinessUser()
   }
 
   func setAvatarUrl(_ url: String) {
-//    cache.avatarUrl = avatarUrl
-    cache.setAvatarUrl(url)
+    cache.avatarUrl = url
   }
 
   func setUserInfo(_ info: UserInfo) {

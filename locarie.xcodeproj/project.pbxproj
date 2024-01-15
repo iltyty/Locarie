@@ -145,6 +145,7 @@
 		50FDD89D2B53D942003015F9 /* ProfileImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD89C2B53D942003015F9 /* ProfileImagesViewModel.swift */; };
 		50FDD89F2B53E988003015F9 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD89E2B53E988003015F9 /* Banner.swift */; };
 		50FDD8A12B54D9D0003015F9 /* UserDefaults+Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */; };
+		50FDD8A52B551282003015F9 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 50FDD8A42B551282003015F9 /* BottomSheet */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50B5DEBF2B3ADE1800C0A641 /* MapboxMaps in Frameworks */,
+				50FDD8A52B551282003015F9 /* BottomSheet in Frameworks */,
 				503905782B340A4E005B574F /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,14 +336,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5000C6C32AF7CD3D0057EF2D /* TabView */ = {
+		5000C6C32AF7CD3D0057EF2D /* BottomTabView */ = {
 			isa = PBXGroup;
 			children = (
 				5000C6C12AF7C7350057EF2D /* BottomTabView.swift */,
 				5000C6C42AF8B9EF0057EF2D /* BottomTabViewRouter.swift */,
 				5000C6C62AF8BA580057EF2D /* BottomTabViewItem.swift */,
 			);
-			path = TabView;
+			path = BottomTabView;
 			sourceTree = "<group>";
 		};
 		5000C6CA2AF8CF190057EF2D /* Components */ = {
@@ -491,7 +493,7 @@
 				50F54A012B45283000D06F20 /* Navigation */,
 				50F549EF2B44F44C00D06F20 /* ComponentBuilders */,
 				50F549FC2B4525EB00D06F20 /* Form */,
-				5000C6C32AF7CD3D0057EF2D /* TabView */,
+				5000C6C32AF7CD3D0057EF2D /* BottomTabView */,
 				50277F7F2AF12A700045AB12 /* SearchBarView.swift */,
 				50277F812AF1512E0045AB12 /* PostCardView.swift */,
 				503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */,
@@ -1054,6 +1056,7 @@
 			packageProductDependencies = (
 				503905772B340A4E005B574F /* Alamofire */,
 				50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */,
+				50FDD8A42B551282003015F9 /* BottomSheet */,
 			);
 			productName = locarie;
 			productReference = 50AAB1792AEFA2E9003FEDF1 /* locarie.app */;
@@ -1130,6 +1133,7 @@
 			packageReferences = (
 				503905762B340A4E005B574F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				50B5DEBD2B3ADE1800C0A641 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
+				50FDD8A32B551282003015F9 /* XCRemoteSwiftPackageReference "BottomSheet" */,
 			);
 			productRefGroup = 50AAB17A2AEFA2E9003FEDF1 /* Products */;
 			projectDirPath = "";
@@ -1657,6 +1661,14 @@
 				minimumVersion = 11.0.0;
 			};
 		};
+		50FDD8A32B551282003015F9 /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lucaszischka/BottomSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1669,6 +1681,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 50B5DEBD2B3ADE1800C0A641 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */;
 			productName = MapboxMaps;
+		};
+		50FDD8A42B551282003015F9 /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50FDD8A32B551282003015F9 /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -13,10 +13,10 @@ struct UserProfilePage: View {
   var body: some View {
     if !cacheViewModel.isLoggedIn() {
       loginOrRegister
-    } else if cacheViewModel.isRegularUser() {
-      regularUserProfile
-    } else {
+    } else if cacheViewModel.isBusinessUser() {
       businessUserProfile
+    } else {
+      regularUserProfile
     }
   }
 }
