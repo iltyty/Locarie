@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LocalCache {
   static var shared = LocalCache()
+  private init() {}
 
   @AppStorage(LocalCacheKeys.userIdKey.rawValue)
   var userId = 0.0
@@ -22,18 +23,24 @@ struct LocalCache {
   @AppStorage(LocalCacheKeys.avatarUrlKey.rawValue)
   var avatarUrl = ""
 
-  private init() {}
-
   mutating func setUserInfo(_ info: UserInfo) {
-    userId = info.id
-    userType = info.type
+    userId = Double(info.id)
+    userType = info.type.rawValue
     username = info.username
-    jwtToken = info.jwtToken
-    avatarUrl = info.avatarUrl ?? ""
+    avatarUrl = info.avatarUrl
+  }
+
+  mutating func setUserCache(_ cache: UserCache) {
+    setUserInfo(cache)
+    jwtToken = cache.jwtToken
   }
 
   func isRegularUser() -> Bool {
     userType == UserType.regular.rawValue
+  }
+
+  mutating func setAvatarUrl(_ url: String) {
+    avatarUrl = url
   }
 }
 

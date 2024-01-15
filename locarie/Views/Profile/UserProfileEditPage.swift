@@ -57,11 +57,14 @@ struct UserProfileEditPage: View {
     .onAppear {
       profileGetViewModel.getProfile(userId: cacheViewModel.getUserId())
     }
-    .onReceive(profileGetViewModel.$state) { state in
-      handleProfileGetViewModelStateChange(state)
-    }
     .onReceive(avatarViewModel.$state) { state in
       handleAvatarUpdateStateChange(state)
+    }
+    .onReceive(profileImagesViewModel.$state) { state in
+      handleProfileImagesUpdateStateChange(state)
+    }
+    .onReceive(profileGetViewModel.$state) { state in
+      handleProfileGetViewModelStateChange(state)
     }
     .onReceive(profileUpdateViewModel.$state) { state in
       handleProfileUpdateViewModelStateChange(state)
@@ -379,6 +382,14 @@ private extension UserProfileEditPage {
     }
   }
 
+  func handleProfileImagesUpdateStateChange(
+    _ state: ProfileImagesViewModel.State
+  ) {
+    if case .finished = state {
+      URLCache.imageCache.removeAllCachedResponses()
+    }
+  }
+
   func handleProfileUpdateViewModelStateChange(
     _ state: ProfileUpdateViewModel.State
   ) {
@@ -391,7 +402,10 @@ private extension UserProfileEditPage {
     }
   }
 
-  func handleProfileUpdateFinished(_: UserDto?) {
+  func handleProfileUpdateFinished(_ dto: UserDto?) {
+    if let dto {
+      cacheViewModel.setUserInfo(dto)
+    }
     dismiss()
   }
 

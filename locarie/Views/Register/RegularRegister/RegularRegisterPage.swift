@@ -48,9 +48,9 @@ struct RegularRegisterPage: View {
 
   private func handleLoginStateChange(_ state: LoginViewModel.State) {
     switch state {
-    case let .finished(info):
+    case let .finished(cache):
       isLoading = false
-      handleLoginFinished(info: info)
+      handleLoginFinished(cache: cache)
     case let .failed(error):
       isLoading = false
       handleNetworkError(error)
@@ -64,9 +64,9 @@ struct RegularRegisterPage: View {
     loginViewModel.login()
   }
 
-  private func handleLoginFinished(info: UserInfo?) {
-    guard let info else { return }
-    cacheViewModel.setUserInfo(info)
+  private func handleLoginFinished(cache: UserCache?) {
+    guard let cache else { return }
+    cacheViewModel.setUserCache(cache)
     router.navigateToRoot()
   }
 

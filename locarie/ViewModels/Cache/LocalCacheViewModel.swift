@@ -45,11 +45,16 @@ class LocalCacheViewModel: ObservableObject {
     cache.isRegularUser()
   }
 
-  func setAvatarUrl(_ avatarUrl: String) {
-    cache.avatarUrl = avatarUrl
+  func setAvatarUrl(_ url: String) {
+//    cache.avatarUrl = avatarUrl
+    cache.setAvatarUrl(url)
   }
 
   func setUserInfo(_ info: UserInfo) {
     cache.setUserInfo(info)
+  }
+
+  func setUserCache(_ userCache: UserCache) {
+    cache.setUserCache(userCache)
   }
 }

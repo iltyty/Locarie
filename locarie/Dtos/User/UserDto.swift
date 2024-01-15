@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserDto: Codable {
+struct UserDto: Codable, UserInfo {
   var id: Int64 = 0
   var type: UserType = .regular
   var email: String = ""

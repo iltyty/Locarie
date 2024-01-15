@@ -11,7 +11,7 @@ struct RegularUserProfilePage: View {
   @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
 
   @State private var topSafeAreaHeight = 0.0
-  @State private var currentTab: Tab = .followed
+  @State private var currentTab = Tab.followed
 
   @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
@@ -62,14 +62,11 @@ private extension RegularUserProfilePage {
   }
 
   var avatar: some View {
-    cacheViewModel.getAvatarUrl().isEmpty
-      ? AvatarView(
-        size: Constants.avatarSize
-      )
-      : AvatarView(
-        imageUrl: cacheViewModel.getAvatarUrl(),
-        size: Constants.avatarSize
-      )
+    AvatarView(
+      imageUrl: cacheViewModel.getAvatarUrl(),
+      size: Constants.avatarSize
+    )
+    .id(UUID())
   }
 
   var username: some View {

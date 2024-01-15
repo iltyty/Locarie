@@ -25,6 +25,7 @@ extension URLSession {
 
 struct AsyncImageView<Content: View>: View {
   @State var phase: AsyncImagePhase
+
   var urlRequest: URLRequest? = nil
   let width: Double
   let height: Double
@@ -99,7 +100,7 @@ struct AsyncImageTestView: View {
 
   var body: some View {
     VStack {
-      AsyncImageView(url: "https://i.ibb.co/QMnRsgG/cover-jolene.jpg") { image in
+      AsyncImageView(url: "https://picsum.photos/600") { image in
         image
           .resizable()
           .scaledToFit()

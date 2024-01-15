@@ -17,7 +17,6 @@ struct locarieApp: App {
   var body: some Scene {
     WindowGroup {
       LocarieView()
-        .environmentObject(router)
         .environmentObject(postViewModel)
         .environmentObject(messageViewModel)
     }

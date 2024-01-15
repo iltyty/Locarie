@@ -12,10 +12,10 @@ struct LoginRequestDto: Codable {
   var password: String
 }
 
-struct LoginResponseDto: Codable, UserInfo {
-  let id: Double
-  let type: String
+struct LoginResponseDto: Codable, UserCache {
+  let id: Int64
+  let type: UserType
   let username: String
-  let avatarUrl: String?
+  let avatarUrl: String
   let jwtToken: String
 }

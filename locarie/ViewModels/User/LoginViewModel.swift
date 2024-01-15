@@ -82,7 +82,7 @@ extension LoginViewModel {
   enum State {
     case idle
     case loading
-    case finished(UserInfo?)
+    case finished(UserCache?)
     case failed(NetworkError)
   }
 }

@@ -6,9 +6,14 @@
 //
 
 protocol UserInfo {
-  var id: Double { get }
-  var type: String { get }
+  var id: Int64 { get }
+  var type: UserType { get }
   var username: String { get }
-  var avatarUrl: String? { get }
+  var avatarUrl: String { get }
+}
+
+protocol UserToken {
   var jwtToken: String { get }
 }
+
+protocol UserCache: UserInfo, UserToken {}
