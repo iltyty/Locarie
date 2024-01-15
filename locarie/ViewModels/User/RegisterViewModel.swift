@@ -89,7 +89,6 @@ extension RegisterViewModel {
   }
 
   private func handleRegisterResponse(_ response: RegisterResponse) {
-    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
     } else {

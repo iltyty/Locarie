@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginPage: View {
-  @EnvironmentObject var router: Router
+  @ObservedObject var router = Router.shared
 
   @StateObject private var loginViewModel = LoginViewModel()
   @StateObject private var cacheViewModel = LocalCacheViewModel.shared
@@ -179,5 +179,5 @@ private enum Constants {
 }
 
 #Preview {
-  LoginPage().environmentObject(Router.shared)
+  LoginPage()
 }
