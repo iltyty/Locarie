@@ -44,13 +44,25 @@ private extension MyAccountPage {
   }
 
   var businessType: some View {
-    let category = profileViewModel.dto.category
-    return TextSettingsItem(title: "Business type", value: category)
+    Group {
+      if profileViewModel.dto.type == .regular {
+        EmptyView()
+      } else {
+        let category = profileViewModel.dto.category
+        TextSettingsItem(title: "Business type", value: category)
+      }
+    }
   }
 
   var businessName: some View {
-    let name = profileViewModel.dto.businessName
-    return TextSettingsItem(title: "Business name", value: name)
+    Group {
+      if profileViewModel.dto.type == .regular {
+        EmptyView()
+      } else {
+        let name = profileViewModel.dto.businessName
+        TextSettingsItem(title: "Business name", value: name)
+      }
+    }
   }
 
   var email: some View {
