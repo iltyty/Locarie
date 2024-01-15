@@ -28,8 +28,8 @@ struct BusinessUserProfileEditPage: View {
       ScrollView {
         VStack(spacing: Constants.vSpacing) {
           navigationTitle
-          avatarEditor
           profileImagesEditor(width: proxy.size.width * 0.8)
+          avatarEditor
           businessNameInput
           usernameInput
           categoryInput
@@ -90,22 +90,46 @@ private extension BusinessUserProfileEditPage {
   }
 
   func profileImages(width: CGFloat) -> some View {
-    ForEach(profileImagesViewModel.photoViewModel.attachments) { attachment in
-      ImageAttachmentView(
-        width: width,
-        aspectRatio: Constants.profileImageAspectRatio,
-        attachment: attachment
-      )
+    let urls = profileGetViewModel.dto.profileImageUrls
+    print(maxSelectionCount)
+    return Group {
+      ForEach(urls.indices, id: \.self) { i in
+        AsyncImageView(url: urls[i]) { image in
+          image.resizable()
+            .aspectRatio(Constants.profileImageAspectRatio, contentMode: .fill)
+            .frame(width: width, alignment: .center)
+            .clipShape(
+              RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
+            )
+            .clipped()
+        }
+        .frame(width: width)
+      }
+      ForEach(profileImagesViewModel.photoViewModel.attachments) { attachment in
+        ImageAttachmentView(
+          width: width,
+          aspectRatio: Constants.profileImageAspectRatio,
+          attachment: attachment
+        )
+      }
     }
   }
 
   func profileImagePicker(width: CGFloat) -> some View {
     PhotosPicker(
       selection: $profileImagesViewModel.photoViewModel.selection,
-      maxSelectionCount: Constants.profileImageMaxCount,
+      maxSelectionCount: maxSelectionCount,
       matching: .images,
       photoLibrary: .shared()
-    ) { profileImagePickerContent(width: width) }
+    ) {
+      profileImagePickerContent(width: width)
+    }
+    .disabled(maxSelectionCount == 0)
+  }
+
+  var maxSelectionCount: Int {
+    max(0, Constants.profileImageMaxCount -
+      profileGetViewModel.dto.profileImageUrls.count)
   }
 
   func profileImagePickerContent(width: CGFloat) -> some View {
@@ -369,6 +393,7 @@ private enum Constants {
   static let vSpacing = 24.0
   static let cameraIconSize = 48.0
   static let profileImageMaxCount = 5
+  static let profileImageCornerRadius = 5.0
   static let profileImageAspectRatio = 16.0 / 9
   static let profileImagePickerCornerRadius = 10.0
   static let birthdaySheetHeightFraction = 0.4

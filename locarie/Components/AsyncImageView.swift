@@ -116,6 +116,7 @@ struct AsyncImageTestView: View {
 }
 
 private enum Constants {
+  static let cornerRadius = 5.0
   static let memoryCacheCapacity = 50 * 1024 * 1024
   static let diskCacheCapacity = 500 * 1024 * 104
 }
