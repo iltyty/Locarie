@@ -110,9 +110,7 @@ private extension BusinessUserProfilePage {
   }
 
   var profileEditButton: some View {
-    NavigationLink {
-      BusinessUserProfileEditPage()
-    } label: {
+    NavigationLink(value: Router.Destination.userProfileEdit) {
       Text("Edit profile")
         .foregroundStyle(Color.locariePrimary)
         .padding(Constants.settingsButtonTextPadding)

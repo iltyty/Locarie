@@ -78,9 +78,7 @@ private extension RegularUserProfilePage {
   }
 
   var profileEditButton: some View {
-    NavigationLink {
-      RegularUserProfileEditPage()
-    } label: {
+    NavigationLink(value: Router.Destination.userProfileEdit) {
       Text("Edit Profile")
         .padding()
         .background(profileEditButtonBackground)

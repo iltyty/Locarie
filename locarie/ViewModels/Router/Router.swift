@@ -35,8 +35,7 @@ extension Router {
     case settings, myAccount, changePassword, newPassword, notifications,
          socialAccounts, feedback, privacyPolicy, termsOfUse, termsOfService
 
-    case userProfile, regularUserProfile, businessUserProfile,
-         regularUserProfileEdit, businessUserProfileEdit
+    case userProfile, regularUserProfile, businessUserProfile, userProfileEdit
   }
 }
 
@@ -82,10 +81,8 @@ extension Router {
         RegularUserProfilePage()
       case .businessUserProfile:
         BusinessUserProfilePage()
-      case .regularUserProfileEdit:
-        RegularUserProfilePage()
-      case .businessUserProfileEdit:
-        BusinessUserProfileEditPage()
+      case .userProfileEdit:
+        UserProfileEditPage()
       }
     }
   }

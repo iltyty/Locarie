@@ -1,5 +1,5 @@
 //
-//  BusinessUserProfileEditPage.swift
+//  UserProfileEditPage.swift
 //  locarie
 //
 //  Created by qiuty on 03/01/2024.
@@ -9,7 +9,7 @@ import Alamofire
 import PhotosUI
 import SwiftUI
 
-struct BusinessUserProfileEditPage: View {
+struct UserProfileEditPage: View {
   @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
 
   @StateObject private var avatarViewModel = AvatarUploadViewModel()
@@ -28,17 +28,25 @@ struct BusinessUserProfileEditPage: View {
       ScrollView {
         VStack(spacing: Constants.vSpacing) {
           navigationTitle
-          profileImagesEditor(width: proxy.size.width * 0.8)
+          if isBusinessUser {
+            profileImagesEditor(width: proxy.size.width * 0.8)
+          }
           avatarEditor
-          businessNameInput
+          if isBusinessUser {
+            businessNameInput
+          }
           usernameInput
-          categoryInput
-          bioInput
-          locationInput
-          openingHoursInput
-          linkInput
+          if isBusinessUser {
+            categoryInput
+            bioInput
+            locationInput
+            openingHoursInput
+            linkInput
+          }
           emailInput
-          phoneInput
+          if isBusinessUser {
+            phoneInput
+          }
           firstNameInput
           lastNameInput
           birthdayInput
@@ -59,9 +67,13 @@ struct BusinessUserProfileEditPage: View {
       handleProfileUpdateViewModelStateChange(state)
     }
   }
+
+  private var isBusinessUser: Bool {
+    profileGetViewModel.dto.type == .business
+  }
 }
 
-private extension BusinessUserProfileEditPage {
+private extension UserProfileEditPage {
   var navigationTitle: some View {
     NavigationTitle("Edit profile", right: saveButton)
   }
@@ -167,7 +179,7 @@ private extension BusinessUserProfileEditPage {
 
   var usernameInput: some View {
     TextFormItem(
-      title: "@Username (for business)",
+      title: "@Username",
       hint: "Username",
       input: $profileUpdateViewModel.dto.username,
       showIcon: true
@@ -290,7 +302,7 @@ private extension BusinessUserProfileEditPage {
   }
 }
 
-private extension BusinessUserProfileEditPage {
+private extension UserProfileEditPage {
   var birthdaySheet: some View {
     VStack {
       birthdaySheetButtons
@@ -337,7 +349,7 @@ private extension BusinessUserProfileEditPage {
   }
 }
 
-private extension BusinessUserProfileEditPage {
+private extension UserProfileEditPage {
   func updateProfile() {
     let userId = cacheViewModel.getUserId()
     profileImagesViewModel.upload(userId: userId)
@@ -399,5 +411,5 @@ private enum Constants {
 }
 
 #Preview {
-  BusinessUserProfileEditPage()
+  UserProfileEditPage()
 }

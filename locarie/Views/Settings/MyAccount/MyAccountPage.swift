@@ -91,7 +91,7 @@ private extension MyAccountPage {
 
   var editProfile: some View {
     NavigationLink("Edit profile") {
-      BusinessUserProfileEditPage()
+      UserProfileEditPage()
     }
     .padding()
   }

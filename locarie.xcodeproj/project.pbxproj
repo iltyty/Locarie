@@ -116,7 +116,6 @@
 		50F549DB2B3CFCBA00D06F20 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */; };
 		50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DC2B3D079200D06F20 /* LoginViewModel.swift */; };
 		50F549E02B3D0F9000D06F20 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DF2B3D0F9000D06F20 /* NetworkError.swift */; };
-		50F549E92B44266100D06F20 /* RegularUserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549E82B44266100D06F20 /* RegularUserProfileEditPage.swift */; };
 		50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */; };
 		50F549F32B44F59C00D06F20 /* InputFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F22B44F59C00D06F20 /* InputFormItemBuilder.swift */; };
 		50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */; };
@@ -129,7 +128,7 @@
 		50F54A122B45318000D06F20 /* BackgroundColorFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A112B45318000D06F20 /* BackgroundColorFormItemBuilder.swift */; };
 		50F54A142B45320B00D06F20 /* LinkFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A132B45320B00D06F20 /* LinkFormItem.swift */; };
 		50F54A182B4532F900D06F20 /* FormItemBackgroundBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */; };
-		50F54A1D2B454E0800D06F20 /* BusinessUserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */; };
+		50F54A1D2B454E0800D06F20 /* UserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1C2B454E0800D06F20 /* UserProfileEditPage.swift */; };
 		50F54A202B45503900D06F20 /* AvatarEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1F2B45503800D06F20 /* AvatarEditor.swift */; };
 		50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */; };
 		50F85B432B242CA000D04787 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B422B242CA000D04787 /* Errors.swift */; };
@@ -278,7 +277,6 @@
 		50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		50F549DC2B3D079200D06F20 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = locarie/ViewModels/User/LoginViewModel.swift; sourceTree = SOURCE_ROOT; };
 		50F549DF2B3D0F9000D06F20 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		50F549E82B44266100D06F20 /* RegularUserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserProfileEditPage.swift; sourceTree = "<group>"; };
 		50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateViewModel.swift; sourceTree = "<group>"; };
 		50F549F22B44F59C00D06F20 /* InputFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormItemBuilder.swift; sourceTree = "<group>"; };
 		50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarBuilder.swift; sourceTree = "<group>"; };
@@ -291,7 +289,7 @@
 		50F54A112B45318000D06F20 /* BackgroundColorFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorFormItemBuilder.swift; sourceTree = "<group>"; };
 		50F54A132B45320B00D06F20 /* LinkFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItem.swift; sourceTree = "<group>"; };
 		50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemBackgroundBuilder.swift; sourceTree = "<group>"; };
-		50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessUserProfileEditPage.swift; sourceTree = "<group>"; };
+		50F54A1C2B454E0800D06F20 /* UserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileEditPage.swift; sourceTree = "<group>"; };
 		50F54A1F2B45503800D06F20 /* AvatarEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEditor.swift; sourceTree = "<group>"; };
 		50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		50F85B422B242CA000D04787 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -481,6 +479,7 @@
 				50F54A1E2B45502500D06F20 /* Components */,
 				50F549EB2B44273900D06F20 /* BusinessUser */,
 				50F549EA2B44273100D06F20 /* RegularUser */,
+				50F54A1C2B454E0800D06F20 /* UserProfileEditPage.swift */,
 				501BAF4D2B4655EF00D9D84F /* UserProfilePage.swift */,
 			);
 			path = Profile;
@@ -925,7 +924,6 @@
 			isa = PBXGroup;
 			children = (
 				50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */,
-				50F549E82B44266100D06F20 /* RegularUserProfileEditPage.swift */,
 			);
 			path = RegularUser;
 			sourceTree = "<group>";
@@ -934,7 +932,6 @@
 			isa = PBXGroup;
 			children = (
 				50B11AD62AFA28E8002A7B91 /* BusinessHomePage.swift */,
-				50F54A1C2B454E0800D06F20 /* BusinessUserProfileEditPage.swift */,
 				509D5BC22B45610F00833021 /* BioEditPage.swift */,
 				509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */,
 				50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */,
@@ -1237,7 +1234,7 @@
 				502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */,
 				50FDD8902B4B9375003015F9 /* BaseViewModel.swift in Sources */,
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
-				50F54A1D2B454E0800D06F20 /* BusinessUserProfileEditPage.swift in Sources */,
+				50F54A1D2B454E0800D06F20 /* UserProfileEditPage.swift in Sources */,
 				50B5DED42B3B19AA00C0A641 /* MapboxError.swift in Sources */,
 				50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */,
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
@@ -1247,7 +1244,6 @@
 				501BAF312B46345500D9D84F /* PrivacyPolicyPage.swift in Sources */,
 				5000C6C92AF8C3440057EF2D /* SearchPage.swift in Sources */,
 				50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */,
-				50F549E92B44266100D06F20 /* RegularUserProfileEditPage.swift in Sources */,
 				50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */,
 				50B11AD72AFA28E9002A7B91 /* BusinessHomePage.swift in Sources */,
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,
