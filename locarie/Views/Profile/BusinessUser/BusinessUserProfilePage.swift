@@ -44,30 +44,22 @@ private extension BusinessUserProfilePage {
       if profileViewModel.dto.profileImageUrls.isEmpty {
         rectangle
       } else {
-        images
+        banner
       }
       settingsButton
     }
-    .frame(height: Constants.profileImageHeightFraction * screenHeight)
-    .background(.thinMaterial)
   }
 
-  var images: some View {
-    AsyncImageView(
-      url: profileViewModel.dto.profileImageUrls.first ?? ""
-    ) { image in
-      image.resizable()
-        .scaledToFill()
-        .frame(
-          height: Constants.profileImageHeightFraction * screenHeight,
-          alignment: .center
-        )
-        .clipped()
-    }
+  var banner: some View {
+    Banner(
+      urls: profileViewModel.dto.profileImageUrls,
+      height: Constants.profileImageHeightFraction * screenHeight
+    )
   }
 
   var rectangle: some View {
     Rectangle().fill(.thinMaterial)
+      .frame(height: Constants.profileImageHeightFraction * screenHeight)
   }
 
   var settingsButton: some View {
@@ -76,7 +68,7 @@ private extension BusinessUserProfilePage {
       NavigationLink(value: Router.Destination.settings) {
         Image(systemName: "gearshape")
           .font(.system(size: Constants.settingsButtonIconSize))
-          .padding(10)
+          .padding(Constants.settingsButtonIconPadding)
           .background(Circle().fill(.white))
           .padding(.trailing)
       }
@@ -176,6 +168,7 @@ private extension BusinessUserProfilePage {
 
 private enum Constants {
   static let profileImageHeightFraction = 0.25
+  static let settingsButtonIconPadding = 10.0
   static let settingsButtonIconSize = 24.0
   static let settingsButtonTextPadding = 10.0
   static let avatarSize = 64.0

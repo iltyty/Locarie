@@ -146,6 +146,7 @@
 		50FDD8992B523B95003015F9 /* AvatarUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8982B523B95003015F9 /* AvatarUploadService.swift */; };
 		50FDD89B2B53D633003015F9 /* ProfileImagesUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD89A2B53D632003015F9 /* ProfileImagesUploadService.swift */; };
 		50FDD89D2B53D942003015F9 /* ProfileImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD89C2B53D942003015F9 /* ProfileImagesViewModel.swift */; };
+		50FDD89F2B53E988003015F9 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD89E2B53E988003015F9 /* Banner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -307,6 +308,7 @@
 		50FDD8982B523B95003015F9 /* AvatarUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarUploadService.swift; sourceTree = "<group>"; };
 		50FDD89A2B53D632003015F9 /* ProfileImagesUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesUploadService.swift; sourceTree = "<group>"; };
 		50FDD89C2B53D942003015F9 /* ProfileImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesViewModel.swift; sourceTree = "<group>"; };
+		50FDD89E2B53E988003015F9 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,6 +502,7 @@
 				500477092B05DAAC0031AA94 /* AsyncImageView.swift */,
 				50998B092B370ED5002196B5 /* TagView.swift */,
 				501BAF392B463D6900D9D84F /* TextEditorPlus.swift */,
+				50FDD89E2B53E988003015F9 /* Banner.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1274,6 +1277,7 @@
 				50998B082B370B34002196B5 /* BusinessCategoryPage.swift in Sources */,
 				501BAF4E2B4655EF00D9D84F /* UserProfilePage.swift in Sources */,
 				500F66242B25CE320074FE3C /* LocalCacheKeys.swift in Sources */,
+				50FDD89F2B53E988003015F9 /* Banner.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
 				50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */,
 				501BAF352B4635A900D9D84F /* TermsOfUsePage.swift in Sources */,
