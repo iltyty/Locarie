@@ -31,8 +31,10 @@ struct SearchBarView: View {
     )
     .padding(Constants.padding)
   }
+}
 
-  private enum Constants {
+extension SearchBarView {
+  enum Constants {
     static let height: CGFloat = 50.0
     static let padding: CGFloat = 20.0
     static let iconPadding: CGFloat = 10.0

@@ -22,7 +22,7 @@ struct PostCardView: View {
       PostDetailPage(post)
     } label: {
       VStack(alignment: .leading, spacing: 8) {
-        cover(width: coverWidth).padding([.horizontal, .top])
+        cover(width: coverWidth).padding([.horizontal])
         content.padding(.horizontal)
       }
       .background(
@@ -31,7 +31,7 @@ struct PostCardView: View {
       )
       .tint(.primary)
     }
-    .buttonStyle(FlatLinkStyle())
+    .buttonStyle(.plain)
   }
 }
 
@@ -48,22 +48,23 @@ extension PostCardView {
 
   func coverBuilder(imageUrl: String, width: CGFloat) -> some View {
     let height = width / Constants.coverAspectRatio
-    return AsyncImageView(url: imageUrl, width: width,
-                          height: height)
-    { image in
+    return AsyncImageView(
+      url: imageUrl, width: width, height: height
+    ) { image in
       image
         .resizable()
         .scaledToFill()
         .frame(width: width, height: height)
         .clipped()
         .listRowInsets(EdgeInsets())
-        .clipShape(RoundedRectangle(cornerRadius: Constants
-            .coverBorderRadius))
+        .clipShape(
+          RoundedRectangle(cornerRadius: Constants.coverBorderRadius)
+        )
     }
   }
 }
 
-extension PostCardView {
+private extension PostCardView {
   var content: some View {
     VStack(alignment: .leading, spacing: 10) {
       HStack {
@@ -87,12 +88,6 @@ extension PostCardView {
       }
       .padding([.bottom], Constants.bottomPadding)
     }
-  }
-}
-
-struct FlatLinkStyle: ButtonStyle {
-  func makeBody(configuration: Configuration) -> some View {
-    configuration.label
   }
 }
 

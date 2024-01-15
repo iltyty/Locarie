@@ -5,33 +5,46 @@
 //  Created by qiuty on 2023/10/31.
 //
 
+import BottomSheet
 import MapKit
 import SwiftUI
 
 struct HomePage: View {
-  @State var isShowing = true
+  @StateObject private var viewModel = PostListNearbyViewModel()
+  @StateObject private var locationManager = LocationManager()
+
   @State private var mapRegion = MKCoordinateRegion(
     center: CLLocationCoordinate2D.CP,
     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.1)
   )
+  @State var bottomSheetPosition = BottomSheetPosition.dynamicBottom
 
-  @StateObject private var viewModel = PostListNearbyViewModel()
-  @StateObject private var locationManager = LocationManager()
+  @State private var screenWidth: CGFloat = 0
+  @State private var topSafeAreaHeight: CGFloat = 0
+  @State private var selectedTag: String = ""
 
   var body: some View {
-    VStack(spacing: 0) {
-      contentView
-      BottomTabView()
+    GeometryReader { proxy in
+      VStack(spacing: 0) {
+        content
+        BottomTabView()
+      }
+      .onAppear {
+        screenWidth = proxy.size.width
+        topSafeAreaHeight = proxy.safeAreaInsets.top
+      }
     }
     .onReceive(locationManager.$location) { location in
       getNearbyPosts(withLocation: location)
     }
   }
+}
 
-  var contentView: some View {
+private extension HomePage {
+  var content: some View {
     ZStack(alignment: .top) {
       mapView
-      upperView
+      contentView
     }
   }
 
@@ -47,14 +60,16 @@ struct HomePage: View {
     }
   }
 
-  var upperView: some View {
-    GeometryReader { proxy in
-      VStack {
-        searchBar
-        Spacer()
-        cardView(proxy: proxy)
-      }
+  var contentView: some View {
+    VStack {
+      searchBar
+      Spacer()
     }
+    .bottomSheet(
+      bottomSheetPosition: $bottomSheetPosition,
+      switchablePositions: bottomSheetPositions
+    ) { bottomSheetContent }
+    .customBackground { postListBackground }
   }
 
   var searchBar: some View {
@@ -69,21 +84,70 @@ struct HomePage: View {
     .buttonStyle(PlainButtonStyle())
   }
 
-  func cardView(proxy: GeometryProxy) -> some View {
-    ScrollView {
+  var bottomSheetContent: some View {
+    VStack {
+      postTags
+      postList
+    }
+  }
+
+  var postList: some View {
+    VStack {
       ForEach(viewModel.posts) { post in
         PostCardView(
           post: post,
-          coverWidth: proxy.size.width * Constants
-            .postCoverWidthProportion
+          coverWidth: screenWidth * Constants.postCoverWidthProportion
+        )
+      }
+      ForEach(viewModel.posts) { post in
+        PostCardView(
+          post: post,
+          coverWidth: screenWidth * Constants.postCoverWidthProportion
         )
       }
     }
   }
+
+  var postTags: some View {
+    ScrollView(.horizontal) {
+      HStack {
+        Spacer()
+        ForEach(BusinessCategory.allCases, id: \.self) { category in
+          let isSelected = category.rawValue == selectedTag
+          TagView(tag: category.rawValue, isSelected: isSelected)
+            .onTapGesture {
+              if selectedTag != category.rawValue {
+                selectedTag = category.rawValue
+              } else {
+                selectedTag = ""
+              }
+            }
+        }
+        Spacer()
+      }
+      .padding(.horizontal)
+    }
+  }
+
+  var postListBackground: some View {
+    UnevenRoundedRectangle(
+      topLeadingRadius: Constants.bottomSheetCornerRadius,
+      topTrailingRadius: Constants.bottomSheetCornerRadius
+    )
+    .fill(.background)
+  }
+
+  var bottomSheetPositions: [BottomSheetPosition] {
+    [.dynamicBottom, .dynamic, .absoluteTop(bottomSheetTopPosition)]
+  }
+
+  var bottomSheetTopPosition: CGFloat {
+    topSafeAreaHeight + SearchBarView.Constants.height
+  }
 }
 
-extension HomePage {
-  private func getNearbyPosts(withLocation location: CLLocation?) {
+private extension HomePage {
+  func getNearbyPosts(withLocation location: CLLocation?) {
     guard let location else {
       return
     }
@@ -95,17 +159,18 @@ extension HomePage {
     }
   }
 
-  private func handleListError(_ error: Error) {
+  func handleListError(_ error: Error) {
     print(error)
   }
 }
 
-private typealias Response = ResponseDto<[PostDto]>
-
 private enum Constants {
   static let postCoverWidthProportion = 0.8
   static let mapMarkerColor = Color.locariePrimary
+  static let bottomSheetCornerRadius = 10.0
 }
+
+private typealias Response = ResponseDto<[PostDto]>
 
 #Preview {
   HomePage()

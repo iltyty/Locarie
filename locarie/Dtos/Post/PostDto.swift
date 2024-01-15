@@ -46,3 +46,20 @@ extension PostDto {
     user.address
   }
 }
+
+extension PostDto {
+  enum CodingKeys: String, CodingKey {
+    case id, time, title, content, user, imageUrls
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let timeString = try container.decode(String.self, forKey: .time)
+    id = try container.decode(Int64.self, forKey: .id)
+    time = ISO8601DateFormatter().date(from: timeString) ?? Date()
+    title = try container.decode(String.self, forKey: .title)
+    content = try container.decode(String.self, forKey: .content)
+    user = try container.decode(UserDto.self, forKey: .user)
+    imageUrls = try container.decode([String].self, forKey: .imageUrls)
+  }
+}
