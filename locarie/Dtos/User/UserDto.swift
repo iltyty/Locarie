@@ -110,9 +110,13 @@ extension UserDto {
         longitude: decodeWithDefault(locationContainer, forKey: .longitude)
       )
     }
-    businessHours = try container.decode(
-      [BusinessHoursDto].self, forKey: .businessHours
-    )
+    if try container.decodeNil(forKey: .businessHours) {
+      businessHours = []
+    } else {
+      businessHours = try container.decode(
+        [BusinessHoursDto].self, forKey: .businessHours
+      )
+    }
   }
 }
 

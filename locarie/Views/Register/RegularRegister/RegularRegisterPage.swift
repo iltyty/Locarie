@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegularRegisterPage: View {
-  @EnvironmentObject var router: Router
+  @ObservedObject var router = Router.shared
 
   @StateObject var cacheViewModel = LocalCacheViewModel.shared
   @StateObject var registerViewModel = RegisterViewModel()
@@ -232,5 +232,4 @@ private enum Constants {
 
 #Preview {
   RegularRegisterPage(registerViewModel: RegisterViewModel())
-    .environmentObject(Router.shared)
 }

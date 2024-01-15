@@ -91,7 +91,6 @@ private extension BusinessUserProfileEditPage {
 
   func profileImages(width: CGFloat) -> some View {
     let urls = profileGetViewModel.dto.profileImageUrls
-    print(maxSelectionCount)
     return Group {
       ForEach(urls.indices, id: \.self) { i in
         AsyncImageView(url: urls[i]) { image in
