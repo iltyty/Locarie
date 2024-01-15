@@ -9,7 +9,6 @@ import MapKit
 import SwiftUI
 
 struct FavoritePage: View {
-  @EnvironmentObject var postViewModel: PostViewModel
   @State private var mapRegion = MKCoordinateRegion(
     center: CLLocationCoordinate2D.CP,
     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -23,15 +22,7 @@ struct FavoritePage: View {
     GeometryReader { proxy in
       VStack(spacing: 0) {
         ZStack(alignment: .bottom) {
-          Map(position: .constant(.region(mapRegion))) {
-            ForEach(postViewModel.favoritePosts) { post in
-              Marker(
-                post.businessName,
-                coordinate: post.businessLocationCoordinate
-              )
-              .tint(Constants.mapMarkerColor)
-            }
-          }
+          Map(position: .constant(.region(mapRegion))) {}
 
           ScrollView {
             Group {
@@ -43,15 +34,6 @@ struct FavoritePage: View {
                   height: Constants.handlerHeight
                 )
                 .padding(.top, 10)
-
-              // FIXME: Post -> PostDto
-//                ForEach(postViewModel.favoritePosts) { post in
-//                  PostCardView(
-//                    post: post,
-//                    coverWidth: proxy.size.width * Constants
-//                      .postCoverWidthProportion
-//                  )
-//                }
             }
             .background(
               UnevenRoundedRectangle(
@@ -82,5 +64,4 @@ private enum Constants {
 
 #Preview {
   FavoritePage()
-    .environmentObject(PostViewModel())
 }

@@ -108,7 +108,6 @@
 		50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */; };
 		50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */; };
 		50E60DDD2AFF78D400CA088F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDC2AFF78D400CA088F /* Post.swift */; };
-		50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDE2AFF79A400CA088F /* PostViewModel.swift */; };
 		50E60DE52AFF80B400CA088F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE42AFF80B400CA088F /* UserViewModel.swift */; };
 		50E60DE82AFF885F00CA088F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE72AFF885F00CA088F /* Util.swift */; };
 		50E60DEA2B006FB100CA088F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE92B006FB100CA088F /* LocationManager.swift */; };
@@ -268,7 +267,6 @@
 		50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxBaseService.swift; sourceTree = "<group>"; };
 		50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRetrieveViewModel.swift; sourceTree = "<group>"; };
 		50E60DDC2AFF78D400CA088F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		50E60DDE2AFF79A400CA088F /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		50E60DE42AFF80B400CA088F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		50E60DE72AFF885F00CA088F /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		50E60DE92B006FB100CA088F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -488,20 +486,17 @@
 		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				50FDD8A22B550927003015F9 /* Images */,
 				50F54A082B452EA300D06F20 /* Buttons */,
 				50F54A012B45283000D06F20 /* Navigation */,
 				50F549EF2B44F44C00D06F20 /* ComponentBuilders */,
 				50F549FC2B4525EB00D06F20 /* Form */,
 				5000C6C32AF7CD3D0057EF2D /* TabView */,
-				50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */,
 				50277F7F2AF12A700045AB12 /* SearchBarView.swift */,
 				50277F812AF1512E0045AB12 /* PostCardView.swift */,
 				503794AB2AF1F44A00DA64F4 /* BottomDrawerView.swift */,
-				50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */,
-				500477092B05DAAC0031AA94 /* AsyncImageView.swift */,
 				50998B092B370ED5002196B5 /* TagView.swift */,
 				501BAF392B463D6900D9D84F /* TextEditorPlus.swift */,
-				50FDD89E2B53E988003015F9 /* Banner.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -586,7 +581,6 @@
 		50369A6E2B30417A005D6B43 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				50E60DDE2AFF79A400CA088F /* PostViewModel.swift */,
 				50369A6F2B304195005D6B43 /* PostCreateViewModel.swift */,
 				503905792B341418005B574F /* PostListNearbyViewModel.swift */,
 			);
@@ -1030,6 +1024,17 @@
 			path = BusinessHours;
 			sourceTree = "<group>";
 		};
+		50FDD8A22B550927003015F9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				500477092B05DAAC0031AA94 /* AsyncImageView.swift */,
+				50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */,
+				50FDD89E2B53E988003015F9 /* Banner.swift */,
+				50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1275,7 +1280,6 @@
 				500F66242B25CE320074FE3C /* LocalCacheKeys.swift in Sources */,
 				50FDD89F2B53E988003015F9 /* Banner.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
-				50E60DDF2AFF79A400CA088F /* PostViewModel.swift in Sources */,
 				501BAF352B4635A900D9D84F /* TermsOfUsePage.swift in Sources */,
 				501BAF3A2B463D6900D9D84F /* TextEditorPlus.swift in Sources */,
 				50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */,
