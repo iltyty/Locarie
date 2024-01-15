@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SettingsPage: View {
+  @ObservedObject var cacheViewModel = LocalCacheViewModel.shared
+
+  @Environment(\.dismiss) var dismiss
+
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
@@ -133,7 +137,8 @@ private extension SettingsPage {
 
   var logout: some View {
     Button("Log out") {
-      print("log out button tapped")
+      cacheViewModel.clean()
+      dismiss()
     }
     .padding(.leading)
   }

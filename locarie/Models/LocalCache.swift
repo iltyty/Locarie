@@ -11,15 +11,15 @@ import SwiftUI
 struct LocalCache {
   static var shared = LocalCache()
 
-  @AppStorage(LocalCacheKeys.userIdKey)
+  @AppStorage(LocalCacheKeys.userIdKey.rawValue)
   var userId = 0.0
-  @AppStorage(LocalCacheKeys.userTypeKey)
+  @AppStorage(LocalCacheKeys.userTypeKey.rawValue)
   var userType = ""
-  @AppStorage(LocalCacheKeys.usernameKey)
+  @AppStorage(LocalCacheKeys.usernameKey.rawValue)
   var username = ""
-  @AppStorage(LocalCacheKeys.jwtTokenKey)
+  @AppStorage(LocalCacheKeys.jwtTokenKey.rawValue)
   var jwtToken = ""
-  @AppStorage(LocalCacheKeys.avatarUrlKey)
+  @AppStorage(LocalCacheKeys.avatarUrlKey.rawValue)
   var avatarUrl = ""
 
   private init() {}
@@ -37,10 +37,10 @@ struct LocalCache {
   }
 }
 
-enum LocalCacheKeys {
-  static let userIdKey = "userId"
-  static let userTypeKey = "userType"
-  static let usernameKey = "username"
-  static let avatarUrlKey = "avatarUrl"
-  static let jwtTokenKey = "jwtToken"
+enum LocalCacheKeys: String, CaseIterable {
+  case userIdKey = "userId"
+  case userTypeKey = "userType"
+  case usernameKey = "username"
+  case avatarUrlKey = "avatarUrl"
+  case jwtTokenKey = "jwtToken"
 }

@@ -140,13 +140,13 @@
 		50FDD88C2B4B8FE0003015F9 /* ProfileUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD88B2B4B8FE0003015F9 /* ProfileUpdateService.swift */; };
 		50FDD88E2B4B9090003015F9 /* ProfileGetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD88D2B4B9090003015F9 /* ProfileGetViewModel.swift */; };
 		50FDD8902B4B9375003015F9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD88F2B4B9375003015F9 /* BaseViewModel.swift */; };
-		50FDD8922B4BC784003015F9 /* Binding+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8912B4BC784003015F9 /* Binding+Hashable.swift */; };
 		50FDD8952B4D708B003015F9 /* BusinessHoursDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8942B4D708B003015F9 /* BusinessHoursDto.swift */; };
 		50FDD8972B523B32003015F9 /* AvatarUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8962B523B32003015F9 /* AvatarUploadViewModel.swift */; };
 		50FDD8992B523B95003015F9 /* AvatarUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8982B523B95003015F9 /* AvatarUploadService.swift */; };
 		50FDD89B2B53D633003015F9 /* ProfileImagesUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD89A2B53D632003015F9 /* ProfileImagesUploadService.swift */; };
 		50FDD89D2B53D942003015F9 /* ProfileImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD89C2B53D942003015F9 /* ProfileImagesViewModel.swift */; };
 		50FDD89F2B53E988003015F9 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD89E2B53E988003015F9 /* Banner.swift */; };
+		50FDD8A12B54D9D0003015F9 /* UserDefaults+Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -302,13 +302,13 @@
 		50FDD88B2B4B8FE0003015F9 /* ProfileUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateService.swift; sourceTree = "<group>"; };
 		50FDD88D2B4B9090003015F9 /* ProfileGetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGetViewModel.swift; sourceTree = "<group>"; };
 		50FDD88F2B4B9375003015F9 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
-		50FDD8912B4BC784003015F9 /* Binding+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Hashable.swift"; sourceTree = "<group>"; };
 		50FDD8942B4D708B003015F9 /* BusinessHoursDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHoursDto.swift; sourceTree = "<group>"; };
 		50FDD8962B523B32003015F9 /* AvatarUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarUploadViewModel.swift; sourceTree = "<group>"; };
 		50FDD8982B523B95003015F9 /* AvatarUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarUploadService.swift; sourceTree = "<group>"; };
 		50FDD89A2B53D632003015F9 /* ProfileImagesUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesUploadService.swift; sourceTree = "<group>"; };
 		50FDD89C2B53D942003015F9 /* ProfileImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesViewModel.swift; sourceTree = "<group>"; };
 		50FDD89E2B53E988003015F9 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
+		50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Reset.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -512,7 +512,7 @@
 			children = (
 				502A4FEF2B32D34B00C0833A /* Color+Extensions.swift */,
 				502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+Extensions.swift */,
-				50FDD8912B4BC784003015F9 /* Binding+Hashable.swift */,
+				50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1187,6 +1187,7 @@
 				50369A702B304196005D6B43 /* PostCreateViewModel.swift in Sources */,
 				50998AF42B35D376002196B5 /* RegularRegisterPage.swift in Sources */,
 				50F54A002B45279D00D06F20 /* SecureFormItem.swift in Sources */,
+				50FDD8A12B54D9D0003015F9 /* UserDefaults+Reset.swift in Sources */,
 				502A4FFC2B32D71500C0833A /* UserDto.swift in Sources */,
 				50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */,
 				50FDD89D2B53D942003015F9 /* ProfileImagesViewModel.swift in Sources */,
@@ -1241,7 +1242,6 @@
 				50B11AEB2AFB8795002A7B91 /* MessageViewModel.swift in Sources */,
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
 				5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */,
-				50FDD8922B4BC784003015F9 /* Binding+Hashable.swift in Sources */,
 				5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */,
 				50F54A0C2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift in Sources */,
 				501BAF312B46345500D9D84F /* PrivacyPolicyPage.swift in Sources */,
