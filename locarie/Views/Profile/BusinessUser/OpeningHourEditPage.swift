@@ -30,7 +30,9 @@ struct OpeningHourEditPage: View {
   }
 
   private func setBusinessHours() {
-    allBusinessHours = businessHoursDtos
+    if !businessHoursDtos.isEmpty {
+      allBusinessHours = businessHoursDtos
+    }
   }
 }
 
