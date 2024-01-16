@@ -70,6 +70,7 @@ private extension HomePage {
       switchablePositions: bottomSheetPositions
     ) { bottomSheetContent }
     .customBackground { postListBackground }
+    .enableAppleScrollBehavior()
   }
 
   var searchBar: some View {
@@ -165,12 +166,10 @@ private extension HomePage {
 }
 
 private enum Constants {
-  static let postCoverWidthProportion = 0.8
   static let mapMarkerColor = Color.locariePrimary
+  static let postCoverWidthProportion = 0.8
   static let bottomSheetCornerRadius = 10.0
 }
-
-private typealias Response = ResponseDto<[PostDto]>
 
 #Preview {
   HomePage()

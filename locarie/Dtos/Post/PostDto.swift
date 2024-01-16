@@ -32,9 +32,7 @@ extension PostDto {
       longitude: user.location?.longitude ?? .nan
     )
   }
-}
 
-extension PostDto {
   var businessLocation: CLLocation {
     CLLocation(
       latitude: user.location?.latitude ?? .nan,
@@ -44,6 +42,10 @@ extension PostDto {
 
   var businessAddress: String {
     user.address
+  }
+
+  var openUtil: String {
+    user.openUtil
   }
 }
 

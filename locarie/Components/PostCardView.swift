@@ -83,10 +83,14 @@ private extension PostCardView {
           size: Constants.avatarSize
         )
         Text(post.businessName)
+        Text(post.openUtil).foregroundStyle(.secondary)
         Spacer()
         Image(systemName: "map")
       }
       .padding([.bottom], Constants.bottomPadding)
+    }
+    .onAppear {
+      print("open until: \(post.openUtil)")
     }
   }
 }

@@ -59,6 +59,40 @@ extension UserDto {
 }
 
 extension UserDto {
+  var openUtil: String {
+    guard businessHours.count == 7 else { return "" }
+    guard let todayBusinessHours else { return "" }
+    if isNowClosed {
+      return "Closed"
+    }
+    return "Open util: \(todayBusinessHours.formattedClosingTime)"
+  }
+
+  private var todayBusinessHours: BusinessHoursDto? {
+    businessHours.first { $0.dayOfWeek == dayOfWeek }
+  }
+
+  private var dayOfWeek: BusinessHoursDto.DayOfWeek {
+    let index = Calendar.current.component(.weekday, from: Date()) - 1
+    return BusinessHoursDto.DayOfWeek.allCases[index]
+  }
+
+  private var isNowClosed: Bool {
+    guard let todayBusinessHours else { return false }
+    if todayBusinessHours.closed { return true }
+    let now = Date()
+    let closingTime = todayBusinessHours.closingTime
+    let closingDate = Calendar.current.date(
+      bySettingHour: closingTime.hour ?? 0,
+      minute: closingTime.minute ?? 0,
+      second: 0,
+      of: now
+    )!
+    return now > closingDate
+  }
+}
+
+extension UserDto {
   enum CodingKeys: String, CodingKey {
     case id, type, email, firstName, lastName, username, avatarUrl, birthday
     case businessName, category, profileImageUrls, homepageUrl, introduction,
