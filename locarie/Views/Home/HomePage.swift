@@ -10,6 +10,8 @@ import MapKit
 import SwiftUI
 
 struct HomePage: View {
+  @State var screenSize: CGSize = .zero
+
   @StateObject private var viewModel = PostListNearbyViewModel()
   @StateObject private var locationManager = LocationManager()
 
@@ -17,9 +19,7 @@ struct HomePage: View {
     center: CLLocationCoordinate2D.CP,
     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.1)
   )
-  @State var bottomSheetPosition = BottomSheetPosition.dynamicBottom
-
-  @State private var screenWidth: CGFloat = 0
+  @State private var bottomSheetPosition = BottomSheetPosition.absoluteTop(300)
   @State private var topSafeAreaHeight: CGFloat = 0
   @State private var selectedTag: String = ""
 
@@ -30,7 +30,6 @@ struct HomePage: View {
         BottomTabView()
       }
       .onAppear {
-        screenWidth = proxy.size.width
         topSafeAreaHeight = proxy.safeAreaInsets.top
       }
     }
@@ -97,13 +96,13 @@ private extension HomePage {
       ForEach(viewModel.posts) { post in
         PostCardView(
           post: post,
-          coverWidth: screenWidth * Constants.postCoverWidthProportion
+          coverWidth: screenSize.width * Constants.postCoverWidthProportion
         )
       }
       ForEach(viewModel.posts) { post in
         PostCardView(
           post: post,
-          coverWidth: screenWidth * Constants.postCoverWidthProportion
+          coverWidth: screenSize.width * Constants.postCoverWidthProportion
         )
       }
     }
@@ -139,11 +138,11 @@ private extension HomePage {
   }
 
   var bottomSheetPositions: [BottomSheetPosition] {
-    [.dynamicBottom, .dynamic, .absoluteTop(bottomSheetTopPosition)]
+    [.dynamicBottom, .absoluteTop(300), .absoluteTop(bottomSheetTopPosition)]
   }
 
   var bottomSheetTopPosition: CGFloat {
-    topSafeAreaHeight + SearchBarView.Constants.height
+    screenSize.height - topSafeAreaHeight - SearchBarView.Constants.height - 20
   }
 }
 
@@ -172,5 +171,5 @@ private enum Constants {
 }
 
 #Preview {
-  HomePage()
+  HomePage(screenSize: CGSize(width: 393, height: 759))
 }

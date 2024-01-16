@@ -9,30 +9,22 @@ import SwiftUI
 import UIKit
 
 struct PostDetailPage: View {
+  @Environment(\.dismiss) var dismiss
+
+  @State private var screenSize: CGSize = .zero
+
   let post: PostDto
   let locationManager = LocationManager()
-
-  init(_ post: PostDto) {
-    self.post = post
-  }
 
   var distance: Double {
     guard let location = locationManager.location else { return 0 }
     return location.distance(from: post.businessLocation)
   }
 
-  @Environment(\.dismiss) var dismiss
   var body: some View {
     GeometryReader { proxy in
       ZStack(alignment: .top) {
-        let size = proxy.size
-
-        underneathImageView(
-          imageUrl: post.imageUrls.first,
-          width: size.width,
-          height: size.height
-        )
-
+        images
         ScrollView {
           contentView(screenWidth: proxy.size.width)
             .padding()
@@ -48,23 +40,17 @@ struct PostDetailPage: View {
           scrollViewOverlay
         }
       }
+      .onAppear {
+        screenSize = proxy.size
+      }
     }
   }
 }
 
-extension PostDetailPage {
-  func underneathImageView(imageUrl: String?, width: CGFloat,
-                           height: CGFloat) -> some View
-  {
-    AsyncImageView(url: imageUrl ?? "", width: width,
-                   height: height)
-    { image in
-      image
-        .resizable()
-        .scaledToFill()
-        .frame(width: width, height: height)
-        .ignoresSafeArea(edges: .top)
-    }
+private extension PostDetailPage {
+  var images: some View {
+    Banner(urls: post.imageUrls, height: screenSize.height)
+      .ignoresSafeArea(edges: .top)
   }
 }
 

@@ -13,32 +13,30 @@ struct LocarieView: View {
   @ObservedObject var viewRouter = BottomTabViewRouter.shared
 
   var body: some View {
-    NavigationStack(path: $router.path) {
-      content
+    GeometryReader { proxy in
+      NavigationStack(path: $router.path) {
+        Group {
+          switch viewRouter.currentPage {
+          case .home:
+            HomePage(screenSize: proxy.size)
+          case .favorite:
+            FavoritePage()
+          case .new:
+            NewPostPage()
+          case .message:
+            MessagePage()
+          case .profile:
+            UserProfilePage()
+          }
+        }
         .navigationDestination(for: Router.Destination.self) { destination in
           router.getDestinationPage(with: destination)
         }
-    }
-  }
-
-  @ViewBuilder
-  var content: some View {
-    switch viewRouter.currentPage {
-    case .home:
-      HomePage()
-    case .favorite:
-      FavoritePage()
-    case .new:
-      NewPostPage()
-    case .message:
-      MessagePage()
-    case .profile:
-      UserProfilePage()
+      }
     }
   }
 }
 
 #Preview {
-  LocarieView()
-    .environmentObject(MessageViewModel())
+  LocarieView().environmentObject(MessageViewModel())
 }

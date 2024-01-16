@@ -15,7 +15,7 @@ struct PostCardView: View {
 
   var body: some View {
     NavigationLink {
-      PostDetailPage(post)
+      PostDetailPage(post: post)
     } label: {
       VStack(alignment: .leading, spacing: Constants.vSpacing) {
         cover
@@ -55,7 +55,7 @@ private extension PostCardView {
         .clipped()
         .listRowInsets(EdgeInsets())
         .clipShape(RoundedRectangle(cornerRadius: Constants.coverBorderRadius))
-    }
+    }.frame(width: width, height: height)
   }
 }
 
