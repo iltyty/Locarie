@@ -42,6 +42,7 @@ struct PostDetailPage: View {
       }
       .onAppear {
         screenSize = proxy.size
+        print(screenSize)
       }
     }
   }

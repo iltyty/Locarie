@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-private enum Constants {
-  static let handlerWidth: CGFloat = 80
-  static let handlerHeight: CGFloat = 5
-  static let handlerPaddingTop: CGFloat = 15
-  static let handlerCorderRadius: CGFloat = 20
-}
-
 struct BottomDrawerView<Content: View>: View {
   let content: Content
 
@@ -26,7 +19,27 @@ struct BottomDrawerView<Content: View>: View {
 
   init(offsetY: CGFloat, @ViewBuilder content: () -> Content) {
     self.content = content()
-    _offsetY = State(initialValue: offsetY)
+    self.offsetY = offsetY
+  }
+
+  var body: some View {
+    GeometryReader { proxy in
+      VStack {
+        handler
+        ScrollView {
+          content
+        }
+      }
+      .onAppear {
+        print(proxy.size)
+      }
+      .frame(width: proxy.size.width, alignment: .top)
+      .background(.white)
+      .mask(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
+      .offset(y: translation.height + offsetY)
+      .gesture(dragGesture(proxy: proxy))
+      .ignoresSafeArea(edges: .bottom)
+    }
   }
 
   private var handler: some View {
@@ -61,31 +74,25 @@ struct BottomDrawerView<Content: View>: View {
         }
       }
   }
-
-  var body: some View {
-    GeometryReader { proxy in
-      VStack {
-        handler
-        content
-      }
-      .frame(width: proxy.size.width, alignment: .top)
-      .background(.white)
-      .mask(RoundedRectangle(cornerRadius: 20))
-      .offset(y: translation.height + offsetY)
-      .gesture(dragGesture(proxy: proxy))
-      .ignoresSafeArea(edges: .bottom)
-    }
-  }
 }
 
 private struct ContentView: View {
   var body: some View {
-    VStack(alignment: .center) {
-      Text("hello")
-      Text("content line 1")
-      Text("content line 2")
+    ScrollView {
+      VStack {
+        ForEach(1 ..< 100, id: \.self) { i in
+          Text("\(i)").frame(width: .infinity)
+        }
+      }
     }
   }
+}
+
+private enum Constants {
+  static let handlerWidth: CGFloat = 80
+  static let handlerHeight: CGFloat = 5
+  static let handlerPaddingTop: CGFloat = 15
+  static let handlerCorderRadius: CGFloat = 20
 }
 
 #Preview {

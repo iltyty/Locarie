@@ -10,6 +10,7 @@ import MapKit
 import SwiftUI
 
 struct HomePage: View {
+  @State var isSheetPresented = true
   @State var screenSize: CGSize = .zero
 
   @StateObject private var viewModel = PostListNearbyViewModel()
@@ -19,7 +20,6 @@ struct HomePage: View {
     center: CLLocationCoordinate2D.CP,
     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.1)
   )
-  @State private var bottomSheetPosition = BottomSheetPosition.absoluteTop(300)
   @State private var topSafeAreaHeight: CGFloat = 0
   @State private var selectedTag: String = ""
 
@@ -63,13 +63,10 @@ private extension HomePage {
     VStack {
       searchBar
       Spacer()
+      BottomDrawerView(offsetY: 200) {
+        bottomSheetContent
+      }
     }
-    .bottomSheet(
-      bottomSheetPosition: $bottomSheetPosition,
-      switchablePositions: bottomSheetPositions
-    ) { bottomSheetContent }
-    .customBackground { postListBackground }
-    .enableAppleScrollBehavior()
   }
 
   var searchBar: some View {
@@ -93,12 +90,6 @@ private extension HomePage {
 
   var postList: some View {
     VStack {
-      ForEach(viewModel.posts) { post in
-        PostCardView(
-          post: post,
-          coverWidth: screenSize.width * Constants.postCoverWidthProportion
-        )
-      }
       ForEach(viewModel.posts) { post in
         PostCardView(
           post: post,
@@ -135,14 +126,6 @@ private extension HomePage {
       topTrailingRadius: Constants.bottomSheetCornerRadius
     )
     .fill(.background)
-  }
-
-  var bottomSheetPositions: [BottomSheetPosition] {
-    [.dynamicBottom, .absoluteTop(300), .absoluteTop(bottomSheetTopPosition)]
-  }
-
-  var bottomSheetTopPosition: CGFloat {
-    screenSize.height - topSafeAreaHeight - SearchBarView.Constants.height - 20
   }
 }
 
