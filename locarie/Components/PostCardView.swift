@@ -8,58 +8,53 @@
 import SwiftUI
 
 struct PostCardView: View {
-  let post: PostDto
-  let coverWidth: CGFloat
   @StateObject var locationManager = LocationManager()
 
-  var distance: Double {
-    guard let location = locationManager.location else { return 0 }
-    return location.distance(from: post.businessLocation)
-  }
+  let post: PostDto
+  let coverWidth: CGFloat
 
   var body: some View {
     NavigationLink {
       PostDetailPage(post)
     } label: {
-      VStack(alignment: .leading, spacing: 8) {
-        cover(width: coverWidth).padding([.horizontal])
-        content.padding(.horizontal)
+      VStack(alignment: .leading, spacing: Constants.vSpacing) {
+        cover
+        content
       }
-      .background(
-        RoundedRectangle(cornerRadius: Constants.coverBorderRadius)
-          .fill(.background)
-      )
-      .tint(.primary)
+      .background(background)
     }
+    .tint(.primary)
     .buttonStyle(.plain)
+  }
+
+  private var background: some View {
+    RoundedRectangle(cornerRadius: Constants.coverBorderRadius)
+      .fill(.background)
   }
 }
 
-extension PostCardView {
-  func cover(width: CGFloat) -> some View {
+private extension PostCardView {
+  var cover: some View {
     ScrollView(.horizontal, showsIndicators: false) {
       HStack {
         ForEach(post.imageUrls, id: \.self) { imageUrl in
-          coverBuilder(imageUrl: imageUrl, width: width)
+          coverBuilder(imageUrl: imageUrl, width: coverWidth)
         }
       }
+      .padding(.horizontal)
     }
   }
 
   func coverBuilder(imageUrl: String, width: CGFloat) -> some View {
     let height = width / Constants.coverAspectRatio
-    return AsyncImageView(
-      url: imageUrl, width: width, height: height
-    ) { image in
+    return AsyncImageView(url: imageUrl) { image in
       image
         .resizable()
         .scaledToFill()
         .frame(width: width, height: height)
         .clipped()
         .listRowInsets(EdgeInsets())
-        .clipShape(
-          RoundedRectangle(cornerRadius: Constants.coverBorderRadius)
-        )
+        .clipShape(RoundedRectangle(cornerRadius: Constants.coverBorderRadius))
     }
   }
 }
@@ -67,35 +62,60 @@ extension PostCardView {
 private extension PostCardView {
   var content: some View {
     VStack(alignment: .leading, spacing: 10) {
-      HStack {
-        Text(getTimeDifferenceString(from: post.time))
-          .foregroundStyle(.green)
-        Text("·")
-        Text(formatDistance(distance: distance))
-          .foregroundStyle(.secondary)
-      }
-      Text(post.title)
-        .font(.title2)
-        .listRowSeparator(.hidden)
-      HStack {
-        AvatarView(
-          imageUrl: post.businessAvatarUrl,
-          size: Constants.avatarSize
-        )
-        Text(post.businessName)
-        Text(post.openUtil).foregroundStyle(.secondary)
-        Spacer()
-        Image(systemName: "map")
-      }
-      .padding([.bottom], Constants.bottomPadding)
+      status
+      title
+      info
     }
-    .onAppear {
-      print("open until: \(post.openUtil)")
+    .padding(.horizontal)
+    .padding(.bottom, Constants.bottomPadding)
+  }
+
+  var status: some View {
+    HStack {
+      Text(getTimeDifferenceString(from: post.time)).foregroundStyle(.green)
+      Text("·")
+      Text(formatDistance(distance: distance)).foregroundStyle(.secondary)
     }
+  }
+
+  var title: some View {
+    Text(post.title).font(.title2).listRowSeparator(.hidden)
+  }
+
+  var info: some View {
+    HStack {
+      userAvatar
+      businessName
+      openUntil
+      Spacer()
+      mapButton
+    }
+  }
+
+  var userAvatar: some View {
+    AvatarView(imageUrl: post.businessAvatarUrl, size: Constants.avatarSize)
+  }
+
+  var businessName: some View {
+    Text(post.businessName)
+  }
+
+  var openUntil: some View {
+    Text(post.openUtil).foregroundStyle(.secondary)
+  }
+
+  var mapButton: some View {
+    Image(systemName: "map")
+  }
+
+  var distance: Double {
+    guard let location = locationManager.location else { return 0 }
+    return location.distance(from: post.businessLocation)
   }
 }
 
 private enum Constants {
+  static let vSpacing = 8.0
   static let avatarSize: CGFloat = 32
   static let coverAspectRatio: CGFloat = 4 / 3
   static let coverBorderRadius: CGFloat = 10.0
