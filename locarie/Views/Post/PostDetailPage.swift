@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 
 struct PostDetailPage: View {
   @Environment(\.dismiss) var dismiss
@@ -25,24 +24,10 @@ struct PostDetailPage: View {
     GeometryReader { proxy in
       ZStack(alignment: .top) {
         images
-        ScrollView {
-          contentView(screenWidth: proxy.size.width)
-            .padding()
-            .background(RoundedRectangle(cornerRadius: 20)
-              .fill(.background))
-            .padding(
-              .top,
-              proxy.size.height * Constants
-                .contentTopPaddingProportion
-            )
-        }
-        .overlay(alignment: .top) {
-          scrollViewOverlay
-        }
+        content
       }
       .onAppear {
         screenSize = proxy.size
-        print(screenSize)
       }
     }
   }
@@ -50,85 +35,121 @@ struct PostDetailPage: View {
 
 private extension PostDetailPage {
   var images: some View {
-    Banner(urls: post.imageUrls, height: screenSize.height)
-      .ignoresSafeArea(edges: .top)
+    Banner(urls: post.imageUrls, height: screenSize.height, indicator: false)
   }
-}
 
-extension PostDetailPage {
-  func contentView(screenWidth: CGFloat) -> some View {
-    VStack(alignment: .leading, spacing: Constants.contentVSpacing) {
-      HStack {
-        Text(getTimeDifferenceString(from: post.time))
-          .foregroundStyle(.green)
-        Text(formatDistance(distance: distance))
-        Spacer()
+  var content: some View {
+    VStack {
+      topBar
+      bottomInfo
+    }
+  }
+
+  var topBar: some View {
+    HStack {
+      backButton
+      businessUser
+      Spacer()
+      moreButton
+    }
+    .padding(.horizontal)
+  }
+
+  var bottomInfo: some View {
+    BottomSheet(detents: [.medium, .absoluteTop(100)]) {
+      ScrollView {
+        contentView.padding(.vertical)
       }
-      Text(post.title)
-      Text(post.content)
-      Divider()
-      Label(post.businessAddress, systemImage: "location")
-        .lineLimit(1)
-//      Label(
-//        formatOpeningTime(from: post.businessOpenTime,
-//                          to: post.businessCloseTime),
-//        systemImage: "clock"
-//      )
-      Divider()
-      NavigationLink {
-        ReviewPage()
-      } label: {
-        Label("Reviews", systemImage: "message")
-          .tint(.primary)
-      }
-      PostCardView(post: post, coverWidth: screenWidth * 0.7)
     }
   }
 }
 
-extension PostDetailPage {
-  var scrollViewOverlay: some View {
+private extension PostDetailPage {
+  var backButton: some View {
+    Image(systemName: "chevron.backward")
+      .font(.system(size: Constants.topBarButtonSize))
+      .background(topBarButtonBackground)
+      .padding(.trailing, Constants.topBarBackButtonTrailingPadding)
+      .onTapGesture { dismiss() }
+  }
+
+  var businessUser: some View {
     HStack {
-      Image(systemName: "chevron.backward")
-        .font(.system(size: Constants.backButtonSize))
-        .onTapGesture {
-          dismiss()
-        }
       NavigationLink {
         BusinessHomePage(post.user)
       } label: {
         AvatarView(
           imageUrl: post.businessAvatarUrl,
-          size: Constants.avatarSize
+          size: Constants.topBarButtonBackgroundSize
         )
       }
-      Text(post.businessName)
-        .fixedSize(horizontal: true, vertical: false)
-      Spacer()
-      Image(systemName: "ellipsis")
-        .font(.system(size: Constants.backButtonSize))
+      Text(post.businessName).fixedSize(horizontal: true, vertical: false)
     }
-    .padding(.horizontal)
+    .padding(.trailing)
+    .background(Capsule().fill(.background))
+  }
+
+  var moreButton: some View {
+    Image(systemName: "ellipsis")
+      .font(.system(size: Constants.topBarButtonSize))
+      .background(topBarButtonBackground)
+  }
+
+  var topBarButtonBackground: some View {
+    Circle()
+      .fill(.background)
+      .frame(
+        width: Constants.topBarButtonBackgroundSize,
+        height: Constants.topBarButtonBackgroundSize
+      )
   }
 }
 
-extension UINavigationController {
-  override open func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    navigationBar.isHidden = true
+extension PostDetailPage {
+  var contentView: some View {
+    VStack(alignment: .leading, spacing: Constants.contentVSpacing) {
+      Group {
+        postStatus
+        postTitle
+        postContent
+        Divider()
+        businessAddress
+        Divider()
+      }
+      .padding(.horizontal)
+      postCard
+    }
   }
 
-  public func gestureRecognizer(
-    _: UIGestureRecognizer,
-    shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer
-  ) -> Bool {
-    true
+  var postStatus: some View {
+    HStack {
+      Text(getTimeDifferenceString(from: post.time))
+        .foregroundStyle(.green)
+      Text(formatDistance(distance: distance))
+      Spacer()
+    }
+  }
+
+  var postTitle: some View {
+    Text(post.title)
+  }
+
+  var postContent: some View {
+    Text(post.content)
+  }
+
+  var businessAddress: some View {
+    Label(post.businessAddress, systemImage: "location").lineLimit(1)
+  }
+
+  var postCard: some View {
+    PostCardView(post: post, coverWidth: screenSize.width * 0.7)
   }
 }
 
 private enum Constants {
-  static let avatarSize: CGFloat = 36
-  static let backButtonSize: CGFloat = 32
+  static let topBarButtonSize: CGFloat = 30
+  static let topBarButtonBackgroundSize: CGFloat = 40
+  static let topBarBackButtonTrailingPadding: CGFloat = 20
   static let contentVSpacing: CGFloat = 20
-  static let contentTopPaddingProportion: CGFloat = 2 / 3
 }

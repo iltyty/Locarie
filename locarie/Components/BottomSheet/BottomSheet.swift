@@ -38,7 +38,6 @@ struct BottomSheet<Content: View>: View {
       .background(background)
       .offset(y: translation.height + offsetY)
       .onAppear {
-        print(proxy.safeAreaInsets)
         screenHeight = proxy.frame(in: .global).size.height
         offsetY = detents.first!.getOffset(screenHeight: screenHeight)
       }

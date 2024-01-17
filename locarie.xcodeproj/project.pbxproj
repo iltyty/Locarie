@@ -43,7 +43,7 @@
 		50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7F2AF12A700045AB12 /* SearchBarView.swift */; };
 		50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F812AF1512E0045AB12 /* PostCardView.swift */; };
 		502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FEF2B32D34B00C0833A /* Color+Extensions.swift */; };
-		502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+Extensions.swift */; };
+		502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+London.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */; };
 		502A4FF62B32D48400C0833A /* PostListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF52B32D48400C0833A /* PostListService.swift */; };
 		502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF72B32D4CD00C0833A /* PostListDto.swift */; };
 		502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF92B32D68B00C0833A /* PostDto.swift */; };
@@ -75,6 +75,8 @@
 		50998B102B39161D002196B5 /* Regexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0F2B39161D002196B5 /* Regexes.swift */; };
 		509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC04C2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift */; };
 		509AC04F2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC04E2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift */; };
+		509AC0512B57832400A79CDB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC0502B57832400A79CDB /* LocationManager.swift */; };
+		509AC0532B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC0522B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift */; };
 		509D5BC32B45610F00833021 /* BioEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC22B45610F00833021 /* BioEditPage.swift */; };
 		509D5BC52B45611E00833021 /* OpeningHourEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */; };
 		509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC92B457F9800833021 /* TextEditViewModel.swift */; };
@@ -112,7 +114,6 @@
 		50E60DDD2AFF78D400CA088F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDC2AFF78D400CA088F /* Post.swift */; };
 		50E60DE52AFF80B400CA088F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE42AFF80B400CA088F /* UserViewModel.swift */; };
 		50E60DE82AFF885F00CA088F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE72AFF885F00CA088F /* Util.swift */; };
-		50E60DEA2B006FB100CA088F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE92B006FB100CA088F /* LocationManager.swift */; };
 		50F549D92B3C85C500D06F20 /* UserRegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549D82B3C85C500D06F20 /* UserRegisterRequest.swift */; };
 		50F549DB2B3CFCBA00D06F20 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */; };
 		50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DC2B3D079200D06F20 /* LoginViewModel.swift */; };
@@ -203,7 +204,7 @@
 		50277F7F2AF12A700045AB12 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		50277F812AF1512E0045AB12 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
 		502A4FEF2B32D34B00C0833A /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
-		502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extensions.swift"; sourceTree = "<group>"; };
+		502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+London.swift"; sourceTree = "<group>"; };
 		502A4FF52B32D48400C0833A /* PostListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListService.swift; sourceTree = "<group>"; };
 		502A4FF72B32D4CD00C0833A /* PostListDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListDto.swift; sourceTree = "<group>"; };
 		502A4FF92B32D68B00C0833A /* PostDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDto.swift; sourceTree = "<group>"; };
@@ -234,6 +235,8 @@
 		50998B0F2B39161D002196B5 /* Regexes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regexes.swift; sourceTree = "<group>"; };
 		509AC04C2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheet+BottomSheetDetent.swift"; sourceTree = "<group>"; };
 		509AC04E2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheet+GetOffsetY.swift"; sourceTree = "<group>"; };
+		509AC0502B57832400A79CDB /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		509AC0522B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+NavigationBarHidden.swift"; sourceTree = "<group>"; };
 		509D5BC22B45610F00833021 /* BioEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioEditPage.swift; sourceTree = "<group>"; };
 		509D5BC42B45611E00833021 /* OpeningHourEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourEditPage.swift; sourceTree = "<group>"; };
 		509D5BC92B457F9800833021 /* TextEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditViewModel.swift; sourceTree = "<group>"; };
@@ -273,7 +276,6 @@
 		50E60DDC2AFF78D400CA088F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		50E60DE42AFF80B400CA088F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		50E60DE72AFF885F00CA088F /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		50E60DE92B006FB100CA088F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		50E60DED2B01F4F900CA088F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50F549D82B3C85C500D06F20 /* UserRegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterRequest.swift; sourceTree = "<group>"; };
 		50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
@@ -509,8 +511,9 @@
 			isa = PBXGroup;
 			children = (
 				502A4FEF2B32D34B00C0833A /* Color+Extensions.swift */,
-				502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+Extensions.swift */,
+				502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */,
 				50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */,
+				509AC0522B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -893,8 +896,8 @@
 		50E60DE62AFF885200CA088F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				509AC0502B57832400A79CDB /* LocationManager.swift */,
 				50E60DE72AFF885F00CA088F /* Util.swift */,
-				50E60DE92B006FB100CA088F /* LocationManager.swift */,
 				500F66232B25CE320074FE3C /* LocalCacheKeys.swift */,
 				50998B0F2B39161D002196B5 /* Regexes.swift */,
 			);
@@ -1201,7 +1204,6 @@
 				50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */,
 				50B11AE82AFB8392002A7B91 /* User.swift in Sources */,
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
-				50E60DEA2B006FB100CA088F /* LocationManager.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
 				50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */,
 				50E60DDD2AFF78D400CA088F /* Post.swift in Sources */,
@@ -1224,7 +1226,7 @@
 				503794AC2AF1F44A00DA64F4 /* BottomSheet.swift in Sources */,
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
 				50F549F32B44F59C00D06F20 /* InputFormItemBuilder.swift in Sources */,
-				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+Extensions.swift in Sources */,
+				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+London.swift in Sources */,
 				502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */,
 				50F54A032B45283C00D06F20 /* NavigationTitle.swift in Sources */,
 				501BAF4C2B4653FF00D9D84F /* ChangePasswordConstants.swift in Sources */,
@@ -1280,6 +1282,7 @@
 				50F549DB2B3CFCBA00D06F20 /* RegisterViewModel.swift in Sources */,
 				501BAF232B462C4F00D9D84F /* LinkSettingsItem.swift in Sources */,
 				50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */,
+				509AC0512B57832400A79CDB /* LocationManager.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
 				50FDD8882B4AFC17003015F9 /* Router.swift in Sources */,
@@ -1298,6 +1301,7 @@
 				50998AFE2B366C29002196B5 /* WrappingHStack.swift in Sources */,
 				50B5DED72B3B270C00C0A641 /* PlaceSearcher.swift in Sources */,
 				5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */,
+				509AC0532B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift in Sources */,
 				50998B082B370B34002196B5 /* BusinessCategoryPage.swift in Sources */,
 				501BAF4E2B4655EF00D9D84F /* UserProfilePage.swift in Sources */,
 				500F66242B25CE320074FE3C /* LocalCacheKeys.swift in Sources */,

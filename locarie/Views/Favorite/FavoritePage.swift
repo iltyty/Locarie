@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FavoritePage: View {
   @State private var mapRegion = MKCoordinateRegion(
-    center: CLLocationCoordinate2D.CP,
+    center: CLLocationCoordinate2D.london,
     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
   )
   @State private var atTheTop = false

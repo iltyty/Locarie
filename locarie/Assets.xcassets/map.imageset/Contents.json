@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "login-bg.jpeg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "map.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

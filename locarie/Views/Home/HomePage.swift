@@ -5,20 +5,16 @@
 //  Created by qiuty on 2023/10/31.
 //
 
-import BottomSheet
-import MapKit
+@_spi(Experimental) import MapboxMaps
 import SwiftUI
 
 struct HomePage: View {
   @State var screenSize: CGSize = .zero
 
-  @StateObject private var viewModel = PostListNearbyViewModel()
+  @StateObject private var postViewModel = PostListNearbyViewModel()
   @StateObject private var locationManager = LocationManager()
 
-  @State private var mapRegion = MKCoordinateRegion(
-    center: CLLocationCoordinate2D.CP,
-    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.1)
-  )
+  @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
   @State private var topSafeAreaHeight: CGFloat = 0
   @State private var selectedTag: String = ""
 
@@ -29,7 +25,11 @@ struct HomePage: View {
         BottomTabView()
       }
       .onAppear {
+        screenSize = proxy.size
         topSafeAreaHeight = proxy.safeAreaInsets.top
+      }
+      .onChange(of: proxy.size) { _, size in
+        screenSize = size
       }
     }
     .onReceive(locationManager.$location) { location in
@@ -47,15 +47,22 @@ private extension HomePage {
   }
 
   var mapView: some View {
-    Map(position: .constant(.region(mapRegion))) {
-      ForEach(viewModel.posts) { post in
-        Marker(
-          post.businessName,
-          coordinate: post.businessLocationCoordinate
-        )
-        .tint(Constants.mapMarkerColor)
+    Map(viewport: $viewport) {
+      Puck2D()
+
+      ForEvery(postViewModel.posts) { post in
+        MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
+          Image("map").foregroundStyle(Color.locariePrimary)
+            .onTapGesture {
+              viewport = .camera(
+                center: post.businessLocationCoordinate,
+                zoom: 12
+              )
+            }
+        }
       }
     }
+    .ignoresSafeArea(edges: .all)
   }
 
   var contentView: some View {
@@ -89,7 +96,7 @@ private extension HomePage {
 
   var postList: some View {
     VStack {
-      ForEach(viewModel.posts) { post in
+      ForEach(postViewModel.posts) { post in
         PostCardView(
           post: post,
           coverWidth: screenSize.width * Constants.postCoverWidthProportion
@@ -134,7 +141,7 @@ private extension HomePage {
       return
     }
     Task {
-      await viewModel.getNearbyPosts(
+      await postViewModel.getNearbyPosts(
         withLocation: location,
         onError: handleListError
       )

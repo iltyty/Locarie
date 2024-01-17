@@ -48,6 +48,7 @@ private extension BusinessUserProfilePage {
       }
       settingsButton
     }
+    .frame(height: Constants.profileImageHeightFraction * screenHeight)
   }
 
   var banner: some View {
