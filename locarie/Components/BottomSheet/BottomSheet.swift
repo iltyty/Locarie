@@ -68,7 +68,7 @@ private extension BottomSheet {
   }
 
   func dragGesture(proxy _: GeometryProxy) -> some Gesture {
-    DragGesture()
+    DragGesture(coordinateSpace: .global)
       .onChanged { value in
         if offsetY != 0 || value.translation.height > 0 {
           translation = value.translation
