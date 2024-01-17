@@ -10,7 +10,6 @@ import MapKit
 import SwiftUI
 
 struct HomePage: View {
-  @State var isSheetPresented = true
   @State var screenSize: CGSize = .zero
 
   @StateObject private var viewModel = PostListNearbyViewModel()
@@ -63,7 +62,7 @@ private extension HomePage {
     VStack {
       searchBar
       Spacer()
-      BottomDrawerView(offsetY: 200) {
+      BottomSheet {
         bottomSheetContent
       }
     }
