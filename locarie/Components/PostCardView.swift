@@ -15,7 +15,7 @@ struct PostCardView: View {
 
   var body: some View {
     NavigationLink {
-      PostDetailPage(post: post)
+      PostDetailPage(uid: post.user.id)
     } label: {
       VStack(alignment: .leading, spacing: Constants.vSpacing) {
         status

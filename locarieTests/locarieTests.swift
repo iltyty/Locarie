@@ -28,7 +28,6 @@ final class locarieTests: XCTestCase {
     // encounters an uncaught error.
     // Mark your test async to allow awaiting for asynchronous code to complete.
     // Check the results with assertions afterwards.
-    UserViewModel.loadUsers()
   }
 
   func testPerformanceExample() throws {

@@ -89,7 +89,6 @@
 		50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */; };
 		50B11ADF2AFB7850002A7B91 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11ADE2AFB7850002A7B91 /* ReviewView.swift */; };
 		50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AE02AFB7A46002A7B91 /* ReviewPage.swift */; };
-		50B11AE82AFB8392002A7B91 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AE72AFB8392002A7B91 /* User.swift */; };
 		50B5DEBF2B3ADE1800C0A641 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */; };
 		50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */; };
 		50B5DEC62B3B092F00C0A641 /* MapboxSuggestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEC52B3B092F00C0A641 /* MapboxSuggestionService.swift */; };
@@ -104,8 +103,6 @@
 		50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */; };
 		50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9832B6F41260025A0D9 /* CircleButton.swift */; };
 		50CBC9862B6F42FD0025A0D9 /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */; };
-		50E60DDD2AFF78D400CA088F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDC2AFF78D400CA088F /* Post.swift */; };
-		50E60DE52AFF80B400CA088F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE42AFF80B400CA088F /* UserViewModel.swift */; };
 		50E60DE82AFF885F00CA088F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE72AFF885F00CA088F /* Util.swift */; };
 		50F549D92B3C85C500D06F20 /* UserRegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549D82B3C85C500D06F20 /* UserRegisterRequest.swift */; };
 		50F549DB2B3CFCBA00D06F20 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */; };
@@ -245,7 +242,6 @@
 		50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		50B11ADE2AFB7850002A7B91 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		50B11AE02AFB7A46002A7B91 /* ReviewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPage.swift; sourceTree = "<group>"; };
-		50B11AE72AFB8392002A7B91 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxAPIEndpoints.swift; sourceTree = "<group>"; };
 		50B5DEC52B3B092F00C0A641 /* MapboxSuggestionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxSuggestionService.swift; sourceTree = "<group>"; };
 		50B5DECA2B3B099E00C0A641 /* PlaceSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSuggestions.swift; sourceTree = "<group>"; };
@@ -259,8 +255,6 @@
 		50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRetrieveViewModel.swift; sourceTree = "<group>"; };
 		50CBC9832B6F41260025A0D9 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
-		50E60DDC2AFF78D400CA088F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		50E60DE42AFF80B400CA088F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		50E60DE72AFF885F00CA088F /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		50E60DED2B01F4F900CA088F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50F549D82B3C85C500D06F20 /* UserRegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterRequest.swift; sourceTree = "<group>"; };
@@ -502,18 +496,9 @@
 		50369A622B2DBC3B005D6B43 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				50B11AE72AFB8392002A7B91 /* User.swift */,
 				5054CDF22B28954E00645F5C /* UserInfo.swift */,
 			);
 			path = User;
-			sourceTree = "<group>";
-		};
-		50369A632B2DBC4B005D6B43 /* Post */ = {
-			isa = PBXGroup;
-			children = (
-				50E60DDC2AFF78D400CA088F /* Post.swift */,
-			);
-			path = Post;
 			sourceTree = "<group>";
 		};
 		50369A662B2DBCBC005D6B43 /* User */ = {
@@ -558,7 +543,6 @@
 		50998AF52B35D4C1002196B5 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				50E60DE42AFF80B400CA088F /* UserViewModel.swift */,
 				50F549DC2B3D079200D06F20 /* LoginViewModel.swift */,
 				50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */,
 				50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */,
@@ -734,7 +718,6 @@
 		50B11AE22AFB834A002A7B91 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				50369A632B2DBC4B005D6B43 /* Post */,
 				50369A622B2DBC3B005D6B43 /* User */,
 				500F66252B2854A80074FE3C /* LocalCache.swift */,
 				50998B0B2B371086002196B5 /* BusinessCategory.swift */,
@@ -1131,11 +1114,9 @@
 			files = (
 				50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */,
 				50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */,
-				50B11AE82AFB8392002A7B91 /* User.swift in Sources */,
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
 				50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */,
-				50E60DDD2AFF78D400CA088F /* Post.swift in Sources */,
 				50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */,
 				50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */,
 				50F549FE2B45260100D06F20 /* TextFormItem.swift in Sources */,
@@ -1184,7 +1165,6 @@
 				50277F742AF117700045AB12 /* HomePage.swift in Sources */,
 				501BAF382B46364D00D9D84F /* FeedbackPage.swift in Sources */,
 				50F85B452B242EE200D04787 /* APIServices.swift in Sources */,
-				50E60DE52AFF80B400CA088F /* UserViewModel.swift in Sources */,
 				50F549D92B3C85C500D06F20 /* UserRegisterRequest.swift in Sources */,
 				50B11ADF2AFB7850002A7B91 /* ReviewView.swift in Sources */,
 				501BAF3E2B464ECC00D9D84F /* NotificationsPage.swift in Sources */,
