@@ -67,35 +67,53 @@ private extension HomePage {
 
   var contentView: some View {
     VStack {
-      searchBar
+      topContent
       Spacer()
-      BottomSheet {
+      BottomSheet(detents: [.minimum, .large]) {
         bottomSheetContent
       }
     }
   }
 
-  var searchBar: some View {
-    NavigationLink {
-      SearchPage()
-    } label: {
-      SearchBarView(
-        title: "Explore",
-        isDisabled: true
-      )
+  var topContent: some View {
+    HStack {
+      CircleButton(systemName: "magnifyingglass")
+      Spacer()
+      CapsuleButton {
+        Label("London", systemImage: "map")
+      }
+      Spacer()
+      CircleButton(systemName: "bookmark")
     }
-    .buttonStyle(PlainButtonStyle())
+    .padding([.top, .horizontal])
+    .padding(.horizontal)
   }
 
   var bottomSheetContent: some View {
     VStack {
-      postTags
+      bottomSheetTitle
       postList
     }
   }
 
+  var bottomSheetTitle: some View {
+    Text("Discover this area")
+      .fontWeight(.semibold)
+      .padding(.bottom)
+  }
+
+  @ViewBuilder
   var postList: some View {
-    VStack {
+    if postViewModel.posts.isEmpty {
+      Text("No post in this area.")
+        .foregroundStyle(.secondary)
+    } else {
+      ForEach(postViewModel.posts) { post in
+        PostCardView(
+          post: post,
+          coverWidth: screenSize.width * Constants.postCoverWidthProportion
+        )
+      }
       ForEach(postViewModel.posts) { post in
         PostCardView(
           post: post,
@@ -103,35 +121,6 @@ private extension HomePage {
         )
       }
     }
-  }
-
-  var postTags: some View {
-    ScrollView(.horizontal) {
-      HStack {
-        Spacer()
-        ForEach(BusinessCategory.allCases, id: \.self) { category in
-          let isSelected = category.rawValue == selectedTag
-          TagView(tag: category.rawValue, isSelected: isSelected)
-            .onTapGesture {
-              if selectedTag != category.rawValue {
-                selectedTag = category.rawValue
-              } else {
-                selectedTag = ""
-              }
-            }
-        }
-        Spacer()
-      }
-      .padding(.horizontal)
-    }
-  }
-
-  var postListBackground: some View {
-    UnevenRoundedRectangle(
-      topLeadingRadius: Constants.bottomSheetCornerRadius,
-      topTrailingRadius: Constants.bottomSheetCornerRadius
-    )
-    .fill(.background)
   }
 }
 
@@ -155,7 +144,7 @@ private extension HomePage {
 
 private enum Constants {
   static let mapMarkerColor = Color.locariePrimary
-  static let postCoverWidthProportion = 0.8
+  static let postCoverWidthProportion = 0.95
   static let bottomSheetCornerRadius = 10.0
 }
 

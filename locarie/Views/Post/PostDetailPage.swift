@@ -23,7 +23,6 @@ struct PostDetailPage: View {
   var body: some View {
     GeometryReader { proxy in
       ZStack(alignment: .top) {
-        images
         content
       }
       .onAppear {
@@ -34,10 +33,6 @@ struct PostDetailPage: View {
 }
 
 private extension PostDetailPage {
-  var images: some View {
-    Banner(urls: post.imageUrls, height: screenSize.height, indicator: false)
-  }
-
   var content: some View {
     VStack {
       topBar

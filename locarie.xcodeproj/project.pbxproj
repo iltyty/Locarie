@@ -102,6 +102,8 @@
 		50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEDD2B3BE89900C0A641 /* PlaceRetrieve.swift */; };
 		50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */; };
 		50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */; };
+		50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9832B6F41260025A0D9 /* CircleButton.swift */; };
+		50CBC9862B6F42FD0025A0D9 /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */; };
 		50E60DDD2AFF78D400CA088F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DDC2AFF78D400CA088F /* Post.swift */; };
 		50E60DE52AFF80B400CA088F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE42AFF80B400CA088F /* UserViewModel.swift */; };
 		50E60DE82AFF885F00CA088F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE72AFF885F00CA088F /* Util.swift */; };
@@ -255,6 +257,8 @@
 		50B5DEDD2B3BE89900C0A641 /* PlaceRetrieve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRetrieve.swift; sourceTree = "<group>"; };
 		50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxBaseService.swift; sourceTree = "<group>"; };
 		50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRetrieveViewModel.swift; sourceTree = "<group>"; };
+		50CBC9832B6F41260025A0D9 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
 		50E60DDC2AFF78D400CA088F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		50E60DE42AFF80B400CA088F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		50E60DE72AFF885F00CA088F /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -923,6 +927,8 @@
 			isa = PBXGroup;
 			children = (
 				50F54A092B452EAE00D06F20 /* PrimaryColorButton.swift */,
+				50CBC9832B6F41260025A0D9 /* CircleButton.swift */,
+				50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1144,6 +1150,7 @@
 				50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
 				50F54A0A2B452EAE00D06F20 /* PrimaryColorButton.swift in Sources */,
+				50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomSheet.swift in Sources */,
@@ -1161,6 +1168,7 @@
 				50F54A142B45320B00D06F20 /* LinkFormItem.swift in Sources */,
 				501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
+				50CBC9862B6F42FD0025A0D9 /* CapsuleButton.swift in Sources */,
 				509D5BC32B45610F00833021 /* BioEditPage.swift in Sources */,
 				501BAF422B46503600D9D84F /* LabelSettingsItem.swift in Sources */,
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,

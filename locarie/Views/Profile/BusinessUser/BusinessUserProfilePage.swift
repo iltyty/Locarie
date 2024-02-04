@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BusinessUserProfilePage: View {
+  @State private var screenWidth = 0.0
   @State private var screenHeight = 0.0
   @State private var topSafeAreaHeight = 0.0
 
@@ -22,6 +23,7 @@ struct BusinessUserProfilePage: View {
       }
       .ignoresSafeArea(edges: .top)
       .onAppear {
+        screenWidth = proxy.size.width
         screenHeight = proxy.size.height
         topSafeAreaHeight = proxy.safeAreaInsets.top
         profileViewModel.getProfile(userId: cacheViewModel.getUserId())
@@ -54,6 +56,7 @@ private extension BusinessUserProfilePage {
   var banner: some View {
     Banner(
       urls: profileViewModel.dto.profileImageUrls,
+      width: screenWidth,
       height: Constants.profileImageHeightFraction * screenHeight
     )
   }

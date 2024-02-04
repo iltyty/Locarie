@@ -87,7 +87,7 @@ private extension BottomSheet {
 
 enum BottomSheetConstants {
   static let backgroundCornerRadius = 20.0
-  static let handlerWidth = 80.0
+  static let handlerWidth = 60.0
   static let handlerHeight = 5.0
   static let handlerPaddingTop = 15.0
 }
