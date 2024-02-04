@@ -9,14 +9,9 @@ import SwiftUI
 
 @main
 struct locarieApp: App {
-  @StateObject var router = Router.shared
-  @StateObject var viewRouter = BottomTabViewRouter.shared
-  @StateObject var messageViewModel = MessageViewModel()
-
   var body: some Scene {
     WindowGroup {
       LocarieView()
-        .environmentObject(messageViewModel)
     }
   }
 }

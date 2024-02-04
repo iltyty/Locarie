@@ -18,12 +18,8 @@ struct LocarieView: View {
         switch viewRouter.currentPage {
         case .home:
           HomePage()
-        case .favorite:
-          FavoritePage()
         case .new:
           NewPostPage()
-        case .message:
-          MessagePage()
         case .profile:
           UserProfilePage()
         }
@@ -36,5 +32,5 @@ struct LocarieView: View {
 }
 
 #Preview {
-  LocarieView().environmentObject(MessageViewModel())
+  LocarieView()
 }

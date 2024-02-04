@@ -11,23 +11,21 @@ struct BottomTabView: View {
   @ObservedObject var viewRouter = BottomTabViewRouter.shared
   @ObservedObject var cacheViewModel = LocalCacheViewModel.shared
 
-  private let iconNames = [
-    "location", "bookmark", "plus.app", "message", "person",
-  ]
+  private let iconNames = ["location", "plus.app", "person"]
 
   var body: some View {
     HStack {
+      Spacer()
       homePage
       Spacer()
-      favoritePage
       Spacer()
       if cacheViewModel.isBusinessUser() {
         newPostPage
         Spacer()
+        Spacer()
       }
-      messagePage
-      Spacer()
       profilePage
+      Spacer()
     }
     .imageScale(.large)
     .frame(height: Constants.height)
@@ -44,24 +42,10 @@ private extension BottomTabView {
     )
   }
 
-  var favoritePage: some View {
-    BottomTabViewItem(
-      page: .favorite,
-      iconName: "bookmark"
-    )
-  }
-
   var newPostPage: some View {
     BottomTabViewItem(
       page: .new,
       iconName: "plus.app"
-    )
-  }
-
-  var messagePage: some View {
-    BottomTabViewItem(
-      page: .message,
-      iconName: "message"
     )
   }
 
