@@ -46,9 +46,12 @@ private extension PostCardView {
   }
 
   var cover: some View {
-    let height = coverWidth / Constants.coverAspectRatio
-    return Banner(urls: post.imageUrls, width: coverWidth, height: height)
-      .clipShape(RoundedRectangle(cornerRadius: Constants.coverBorderRadius))
+    SwitchableBanner(
+      width: coverWidth,
+      height: coverWidth / Constants.coverAspectRatio,
+      mainImageUrls: post.imageUrls,
+      secondaryImageUrl: post.user.profileImageUrls[0]
+    )
   }
 
   var title: some View {

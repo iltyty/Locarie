@@ -27,11 +27,10 @@ struct Banner: View {
         .tag(i)
       }
     }
+    .frame(width: width, height: height)
     .clipShape(
       RoundedRectangle(cornerRadius: rounded ? Constants.cornerRadius : 0)
     )
-    .ignoresSafeArea()
-    .frame(width: width, height: height)
     .tabViewStyle(.page(indexDisplayMode: indicator ? .always : .never))
   }
 }
@@ -56,7 +55,7 @@ struct BannerTestView: View {
 }
 
 private enum Constants {
-  static let cornerRadius = 25.0
+  static let cornerRadius = 20.0
 }
 
 #Preview {

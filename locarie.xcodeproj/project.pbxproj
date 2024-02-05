@@ -103,6 +103,7 @@
 		50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */; };
 		50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9832B6F41260025A0D9 /* CircleButton.swift */; };
 		50CBC9862B6F42FD0025A0D9 /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */; };
+		50CBC9882B6FCDBA0025A0D9 /* SwitchableBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9872B6FCDBA0025A0D9 /* SwitchableBanner.swift */; };
 		50E60DE82AFF885F00CA088F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E60DE72AFF885F00CA088F /* Util.swift */; };
 		50F549D92B3C85C500D06F20 /* UserRegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549D82B3C85C500D06F20 /* UserRegisterRequest.swift */; };
 		50F549DB2B3CFCBA00D06F20 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */; };
@@ -255,6 +256,7 @@
 		50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRetrieveViewModel.swift; sourceTree = "<group>"; };
 		50CBC9832B6F41260025A0D9 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
+		50CBC9872B6FCDBA0025A0D9 /* SwitchableBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchableBanner.swift; sourceTree = "<group>"; };
 		50E60DE72AFF885F00CA088F /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		50E60DED2B01F4F900CA088F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50F549D82B3C85C500D06F20 /* UserRegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterRequest.swift; sourceTree = "<group>"; };
@@ -970,6 +972,7 @@
 				50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */,
 				50FDD89E2B53E988003015F9 /* Banner.swift */,
 				50B11AD42AFA0F65002A7B91 /* ImageAttachmentView.swift */,
+				50CBC9872B6FCDBA0025A0D9 /* SwitchableBanner.swift */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1232,6 +1235,7 @@
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
 				501BAF452B4650CA00D9D84F /* SocialAccountsPage.swift in Sources */,
 				50FDD8952B4D708B003015F9 /* BusinessHoursDto.swift in Sources */,
+				50CBC9882B6FCDBA0025A0D9 /* SwitchableBanner.swift in Sources */,
 				50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */,
 				50998B0A2B370ED5002196B5 /* TagView.swift in Sources */,
 				501BAF2E2B46330600D9D84F /* SettingsConstants.swift in Sources */,
