@@ -12,11 +12,13 @@ struct PostDetailPage: View {
   @Environment(\.dismiss) var dismiss
 
   @StateObject private var profileVM = ProfileGetViewModel()
-  @StateObject private var postVM = PostListNearbyViewModel()
+  @StateObject private var listNearbyPostsVM = PostListNearbyViewModel()
+  @StateObject private var listUserPostsVM = ListUserPostsViewModel()
 
   @State private var screenSize: CGSize = .zero
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
   @State private var user = UserDto()
+  @State private var post = PostDto()
 
   @State private var showingDetailedProfile = false
   @State private var showingPostContentCover = false
@@ -25,31 +27,22 @@ struct PostDetailPage: View {
   let uid: Int64
   let locationManager = LocationManager()
 
-  var distance: Double {
-    guard let location = locationManager.location else { return 0 }
-    return location.distance(
-      from: CLLocation(
-        latitude: user.location?.latitude ?? 0,
-        longitude: user.location?.longitude ?? 0
-      )
-    )
-  }
-
   var body: some View {
     GeometryReader { proxy in
       ZStack(alignment: .top) {
         mapView
         content
-        if showingBusinessProfileCover {
-          businessProfileCover
-        }
         if showingPostContentCover {
           postContentCover
+        }
+        if showingBusinessProfileCover {
+          businessProfileCover
         }
       }
       .onAppear {
         screenSize = proxy.size
         profileVM.getProfile(userId: uid)
+        listUserPostsVM.getUserPosts(id: uid)
       }
     }
     .onReceive(profileVM.$state) { state in
@@ -73,7 +66,7 @@ private extension PostDetailPage {
     Map(viewport: $viewport) {
       Puck2D()
 
-      ForEvery(postVM.posts) { post in
+      ForEvery(listNearbyPostsVM.posts) { post in
         MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
           Image("map").foregroundStyle(Color.locariePrimary)
             .onTapGesture {
@@ -105,6 +98,7 @@ private extension PostDetailPage {
         if showingDetailedProfile {
           detailedProfile
         }
+        posts
       }
     }
   }
@@ -197,6 +191,58 @@ private extension PostDetailPage {
 }
 
 private extension PostDetailPage {
+  var posts: some View {
+    ForEach(listUserPostsVM.posts) { post in
+      PostCardView(
+        post: post,
+        coverWidth: screenSize.width * Constants.postCoverImageWidthProportion
+      )
+      .onTapGesture {
+        self.post = post
+        toggleShowingPostContentCover()
+      }
+    }
+  }
+}
+
+private extension PostDetailPage {
+  var postContentCover: some View {
+    VStack(alignment: .leading) {
+      coverTopBar
+      Spacer()
+      postImages
+      postStatus
+      coverBottom
+      Spacer()
+    }
+    .padding(.horizontal)
+    .background(.thickMaterial.opacity(Constants.coverBackgroundOpacity))
+    .contentShape(Rectangle())
+    .onTapGesture {
+      toggleShowingPostContentCover()
+    }
+  }
+
+  var postImages: some View {
+    Banner(
+      urls: post.imageUrls,
+      width: screenSize.width * Constants.postCoverImageWidthProportion,
+      height: screenSize.height * Constants.postCoverImageHeightProportion,
+      rounded: true
+    )
+    .padding(.bottom)
+  }
+
+  var postStatus: some View {
+    HStack {
+      Text(getTimeDifferenceString(from: post.time)).foregroundStyle(.green)
+      Text("·")
+      Text(formatDistance(distance: distance)).foregroundStyle(.secondary)
+    }
+  }
+}
+
+private extension PostDetailPage {
   var businessProfileCover: some View {
     VStack(alignment: .leading) {
       coverTopBar
@@ -214,30 +260,23 @@ private extension PostDetailPage {
   }
 
   var profileImages: some View {
-    HStack {
-      Banner(
-        urls: user.profileImageUrls,
-        width: screenSize.width * Constants.profileCoverImageWidthProportion,
-        height: screenSize.height * Constants.profileCoverImageHeightProportion,
-        rounded: true
-      )
-    }
+    Banner(
+      urls: user.profileImageUrls,
+      width: screenSize.width * Constants.profileCoverImageWidthProportion,
+      height: screenSize.height * Constants.profileCoverImageHeightProportion,
+      rounded: true
+    )
     .padding(.bottom)
   }
-}
 
-private extension PostDetailPage {
-  var postContentCover: some View {
-    VStack(alignment: .leading) {
-      coverTopBar
-      Spacer()
-      coverBottom
-    }
-    .padding(.horizontal)
-    .presentationBackground(.ultraThinMaterial)
-    .onTapGesture {
-      toggleShowingPostContentCover()
-    }
+  var distance: Double {
+    guard let location = locationManager.location else { return 0 }
+    return location.distance(
+      from: CLLocation(
+        latitude: user.location?.latitude ?? 0,
+        longitude: user.location?.longitude ?? 0
+      )
+    )
   }
 }
 
@@ -249,16 +288,9 @@ private extension PostDetailPage {
   }
 
   func toggleShowingPostContentCover() {
-    withTransaction(coverTransaction) {
+    withAnimation(.spring) {
       showingPostContentCover.toggle()
     }
-  }
-
-  var coverTransaction: Transaction {
-    var transaction = Transaction()
-    transaction.disablesAnimations = true
-    transaction.animation = .linear(duration: 0.5)
-    return transaction
   }
 }
 

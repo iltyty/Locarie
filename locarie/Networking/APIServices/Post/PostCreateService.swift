@@ -39,7 +39,7 @@ extension APIServices {
     -> ResponseDto<PostCreateResponseDto>
   {
     try await AF
-      .upload(multipartFormData: data, to: APIEndpoints.postCreateUrl)
+      .upload(multipartFormData: data, to: APIEndpoints.createPostUrl)
       .serializingDecodable(ResponseDto<PostCreateResponseDto>.self)
       .value
   }

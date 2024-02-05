@@ -40,7 +40,7 @@ final class PostListNearbyViewModel: BaseViewModel {
     .store(in: &subscriptions)
   }
 
-  private func handleResponse(_ response: PostListNearbyResponse) {
+  private func handleResponse(_ response: ListNearbyPostsResponse) {
     if let error = response.error {
       state = .failed(error)
     } else {

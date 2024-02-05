@@ -14,18 +14,12 @@ struct PostCardView: View {
   let coverWidth: CGFloat
 
   var body: some View {
-    NavigationLink {
-      PostDetailPage(uid: post.user.id)
-    } label: {
-      VStack(alignment: .leading, spacing: Constants.vSpacing) {
-        status
-        cover
-        title
-        tags
-      }
+    VStack(alignment: .leading, spacing: Constants.vSpacing) {
+      status
+      cover
+      title
+      tags
     }
-    .tint(.primary)
-    .buttonStyle(.plain)
   }
 
   private var background: some View {

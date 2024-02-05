@@ -26,6 +26,9 @@ enum APIEndpoints {
     URL(string: userUrl + "/\(id)/profile-images")!
   }
 
-  static let postCreateUrl = URL(string: postUrl)!
-  static let postListNearbyUrl = URL(string: postUrl + "/nearby")!
+  static let createPostUrl = URL(string: postUrl)!
+  static let listNearbyPosts = URL(string: postUrl + "/nearby")!
+  static func listUserPosts(id: Int64) -> URL {
+    URL(string: postUrl + "/user/\(id)")!
+  }
 }

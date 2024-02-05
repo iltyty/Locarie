@@ -15,6 +15,15 @@ struct PostDto: Codable, Identifiable {
   let content: String
   let user: UserDto
   let imageUrls: [String]
+
+  init() {
+    id = 0
+    time = Date()
+    title = ""
+    content = ""
+    user = UserDto()
+    imageUrls = []
+  }
 }
 
 extension PostDto {

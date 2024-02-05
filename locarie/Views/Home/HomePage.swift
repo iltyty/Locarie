@@ -111,16 +111,16 @@ private extension HomePage {
         .foregroundStyle(.secondary)
     } else {
       ForEach(postListVM.posts) { post in
-        PostCardView(
-          post: post,
-          coverWidth: screenSize.width * Constants.postCoverWidthProportion
-        )
-      }
-      ForEach(postListVM.posts) { post in
-        PostCardView(
-          post: post,
-          coverWidth: screenSize.width * Constants.postCoverWidthProportion
-        )
+        NavigationLink {
+          PostDetailPage(uid: post.user.id)
+        } label: {
+          PostCardView(
+            post: post,
+            coverWidth: screenSize.width * Constants.postCoverWidthProportion
+          )
+        }
+        .tint(.primary)
+        .buttonStyle(.plain)
       }
     }
   }

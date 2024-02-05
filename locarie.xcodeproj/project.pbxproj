@@ -51,6 +51,7 @@
 		503794AC2AF1F44A00DA64F4 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503794AB2AF1F44A00DA64F4 /* BottomSheet.swift */; };
 		503905782B340A4E005B574F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 503905772B340A4E005B574F /* Alamofire */; };
 		5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503905792B341418005B574F /* PostListNearbyViewModel.swift */; };
+		504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504794A62B70D2A20038D31F /* ListUserPostsViewModel.swift */; };
 		5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */; };
 		5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEE2B288D3300645F5C /* UserLoginService.swift */; };
 		5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF02B288D6C00645F5C /* UserRegisterService.swift */; };
@@ -202,6 +203,7 @@
 		50369A6F2B304195005D6B43 /* PostCreateViewModel.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PostCreateViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
 		503794AB2AF1F44A00DA64F4 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		503905792B341418005B574F /* PostListNearbyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListNearbyViewModel.swift; sourceTree = "<group>"; };
+		504794A62B70D2A20038D31F /* ListUserPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUserPostsViewModel.swift; sourceTree = "<group>"; };
 		5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheViewModel.swift; sourceTree = "<group>"; };
 		5054CDEE2B288D3300645F5C /* UserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 		5054CDF02B288D6C00645F5C /* UserRegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterService.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 			children = (
 				50369A6F2B304195005D6B43 /* PostCreateViewModel.swift */,
 				503905792B341418005B574F /* PostListNearbyViewModel.swift */,
+				504794A62B70D2A20038D31F /* ListUserPostsViewModel.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1118,6 +1121,7 @@
 				50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */,
 				50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */,
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
+				504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
 				50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */,
 				50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */,
@@ -1404,7 +1408,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"locarie/Preview Content\"";
-				DEVELOPMENT_TEAM = LL3436DYQK;
+				DEVELOPMENT_TEAM = WF4SXSCLV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = locarie/Info.plist;
