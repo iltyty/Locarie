@@ -11,7 +11,7 @@ import SwiftUI
 struct HomePage: View {
   @State var screenSize: CGSize = .zero
 
-  @StateObject private var postViewModel = PostListNearbyViewModel()
+  @StateObject private var postListVM = PostListNearbyViewModel()
   @StateObject private var locationManager = LocationManager()
 
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
@@ -33,7 +33,9 @@ struct HomePage: View {
       }
     }
     .onReceive(locationManager.$location) { location in
-      getNearbyPosts(withLocation: location)
+      if let location {
+        postListVM.getNearbyPosts(withLocation: location)
+      }
     }
   }
 }
@@ -50,7 +52,7 @@ private extension HomePage {
     Map(viewport: $viewport) {
       Puck2D()
 
-      ForEvery(postViewModel.posts) { post in
+      ForEvery(postListVM.posts) { post in
         MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
           Image("map").foregroundStyle(Color.locariePrimary)
             .onTapGesture {
@@ -104,41 +106,23 @@ private extension HomePage {
 
   @ViewBuilder
   var postList: some View {
-    if postViewModel.posts.isEmpty {
+    if postListVM.posts.isEmpty {
       Text("No post in this area.")
         .foregroundStyle(.secondary)
     } else {
-      ForEach(postViewModel.posts) { post in
+      ForEach(postListVM.posts) { post in
         PostCardView(
           post: post,
           coverWidth: screenSize.width * Constants.postCoverWidthProportion
         )
       }
-      ForEach(postViewModel.posts) { post in
+      ForEach(postListVM.posts) { post in
         PostCardView(
           post: post,
           coverWidth: screenSize.width * Constants.postCoverWidthProportion
         )
       }
     }
-  }
-}
-
-private extension HomePage {
-  func getNearbyPosts(withLocation location: CLLocation?) {
-    guard let location else {
-      return
-    }
-    Task {
-      await postViewModel.getNearbyPosts(
-        withLocation: location,
-        onError: handleListError
-      )
-    }
-  }
-
-  func handleListError(_ error: Error) {
-    print(error)
   }
 }
 

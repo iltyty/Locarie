@@ -5,43 +5,62 @@
 //  Created by qiuty on 21/12/2023.
 //
 
+import Combine
 import CoreLocation
 import Foundation
 
-final class PostListNearbyViewModel: ObservableObject {
-  @Published var posts = [PostDto]()
+final class PostListNearbyViewModel: BaseViewModel {
+  @Published var posts: [PostDto] = []
+  @Published var state: State = .idle
 
-  func getNearbyPosts(
-    withLocation location: CLLocation,
-    onError: (Error) -> Void
-  ) async {
-    do {
-      let response = try await APIServices.listNearbyPosts(
-        latitude: location.coordinate.latitude,
-        longitude: location.coordinate.longitude,
-        distance: GlobalConstants.postsNearbyDistance
-      )
-      handleListResponse(response)
-    } catch {
-      onError(error)
+  private let networking: PostListService
+  private var subscriptions: Set<AnyCancellable> = []
+
+  init(_ networking: PostListService = PostListServiceImpl.shared) {
+    self.networking = networking
+  }
+
+  func getNearbyPosts(withLocation location: CLLocation) {
+    getNearbyPosts(
+      latitude: location.coordinate.latitude,
+      longitude: location.coordinate.longitude
+    )
+  }
+
+  func getNearbyPosts(latitude: Double, longitude: Double) {
+    networking.listNearbyPosts(
+      latitude: latitude,
+      longitude: longitude,
+      distance: GlobalConstants.postsNearbyDistance
+    )
+    .sink { [weak self] response in
+      guard let self else { return }
+      handleResponse(response)
     }
+    .store(in: &subscriptions)
   }
 
-  private func handleListResponse(_ response: Response) {
-    response.status == 0
-      ? handleListSuccess(response)
-      : handleListFailure(response)
-  }
-
-  private func handleListSuccess(_ response: Response) {
-    if let posts = response.data {
-      self.posts = posts
+  private func handleResponse(_ response: PostListNearbyResponse) {
+    if let error = response.error {
+      state = .failed(error)
+    } else {
+      let dto = response.value!
+      if dto.status != 0 {
+        state = .failed(newNetworkError(response: dto))
+      } else {
+        if let data = dto.data {
+          posts = data
+        }
+      }
     }
-  }
-
-  private func handleListFailure(_ response: Response) {
-    print(response.message)
   }
 }
 
-private typealias Response = ResponseDto<[PostDto]>
+extension PostListNearbyViewModel {
+  enum State {
+    case idle
+    case loading
+    case finished
+    case failed(NetworkError)
+  }
+}
