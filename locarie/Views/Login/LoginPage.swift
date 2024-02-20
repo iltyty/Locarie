@@ -62,6 +62,7 @@ struct LoginPage: View {
 private extension LoginPage {
   var content: some View {
     VStack(spacing: Constants.formItemSpacing) {
+      navigationBar
       Spacer()
       locarieIcon
       Spacer()
@@ -69,12 +70,14 @@ private extension LoginPage {
       passwordInput
       forgotPassword
       loginButton
-      orText
-      googleButton
       Spacer()
       signUpText
       Spacer()
     }
+  }
+
+  var navigationBar: some View {
+    NavigationTitle()
   }
 
   var loadingOverlayView: some View {
@@ -101,18 +104,24 @@ private extension LoginPage {
   }
 
   var emailInput: some View {
-    TextFormItem(hint: "Email", input: $loginViewModel.dto.email)
+    TextEditFormItemWithNoTitle(hint: "Email", text: $loginViewModel.dto.email)
+      .padding(.horizontal)
   }
 
   var passwordInput: some View {
-    SecureFormItem(hint: "Password", input: $loginViewModel.dto.password)
+    TextEditFormItemWithNoTitle(
+      hint: "Password",
+      isSecure: true,
+      text: $loginViewModel.dto.password
+    )
+    .padding(.horizontal)
   }
 
   var forgotPassword: some View {
     NavigationLink(value: Router.Destination.resetPassword) {
       HStack {
         Spacer()
-        Text("Forgot password?")
+        Text("Forgotten password")
           .padding(.horizontal)
       }
     }
@@ -122,7 +131,7 @@ private extension LoginPage {
     Button {
       loginViewModel.login()
     } label: {
-      primaryColorFormItemBuilder(text: "Log in")
+      BackgroundButtonFormItem(title: "Log in", isFullWidth: false)
     }
     .disabled(isLoginButtonDisabled)
     .opacity(loginButtonOpacity)
@@ -156,7 +165,7 @@ private extension LoginPage {
       Text("Don't have an account?")
         .foregroundStyle(.secondary)
       NavigationLink(value: Router.Destination.regularRegister) {
-        Text("Sign up")
+        Text("Sign up").fontWeight(.semibold)
       }
     }
   }

@@ -9,12 +9,17 @@ import SwiftUI
 
 struct TextEditFormItemWithNoTitle: View {
   let hint: String
+  var isSecure = false
 
   @Binding var text: String
 
   var body: some View {
     HStack {
-      TextField(hint, text: $text)
+      if isSecure {
+        SecureField(hint, text: $text)
+      } else {
+        TextField(hint, text: $text)
+      }
     }
     .padding(.horizontal)
     .frame(height: FormItemCommonConstants.height)
@@ -24,7 +29,7 @@ struct TextEditFormItemWithNoTitle: View {
 
   private var background: some View {
     RoundedRectangle(cornerRadius: FormItemCommonConstants.cornerRadius)
-      .stroke(.secondary)
+      .stroke(FormItemCommonConstants.strokeColor)
   }
 }
 

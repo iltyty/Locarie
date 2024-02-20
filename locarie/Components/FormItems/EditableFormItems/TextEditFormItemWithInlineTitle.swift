@@ -47,7 +47,7 @@ struct TextEditFormItemWithInlineTitle: View {
 
   private var background: some View {
     RoundedRectangle(cornerRadius: FormItemCommonConstants.cornerRadius)
-      .stroke(.secondary)
+      .stroke(FormItemCommonConstants.strokeColor)
   }
 }
 

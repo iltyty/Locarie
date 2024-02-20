@@ -16,7 +16,7 @@ struct NavigationTitle<L: View, R: View>: View {
   @Environment(\.dismiss) var dismiss
 
   init(
-    _ title: String,
+    _ title: String = "",
     left: L = defaultTitleLeft(),
     right: R = defaultTitleRight(),
     divider showDivider: Bool = false
@@ -43,7 +43,10 @@ struct NavigationTitle<L: View, R: View>: View {
 private extension NavigationTitle {
   func titleButtons(left: some View, right: some View) -> some View {
     HStack {
-      left.onTapGesture { dismiss() }
+      left
+        .onTapGesture {
+          dismiss()
+        }
       Spacer()
       right
     }
@@ -57,12 +60,20 @@ private extension NavigationTitle {
   }
 }
 
-private func defaultTitleLeft() -> Image {
+private func defaultTitleLeft() -> some View {
   Image(systemName: "chevron.left")
+    .resizable()
+    .scaledToFit()
+    .fontWeight(.semibold)
+    .frame(width: Constants.leftIconSize, height: Constants.leftIconSize)
 }
 
 private func defaultTitleRight() -> EmptyView {
   EmptyView()
+}
+
+private enum Constants {
+  static let leftIconSize: CGFloat = 18
 }
 
 #Preview {
