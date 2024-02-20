@@ -8,21 +8,17 @@
 import Foundation
 
 final class TextEditViewModel: ObservableObject {
+  let limit: Int
+
+  init(limit: Int) {
+    self.limit = limit
+  }
+
   @Published var text = "" {
     didSet {
       if text.count > limit, oldValue.count <= limit {
         text = oldValue
       }
-      remainingCount = limit - text.count
     }
-  }
-
-  @Published var remainingCount: Int
-
-  let limit: Int
-
-  init(limit: Int) {
-    self.limit = limit
-    remainingCount = limit
   }
 }

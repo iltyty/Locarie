@@ -69,7 +69,9 @@ private extension TextEditorPlus {
   var remainingWordCount: some View {
     HStack {
       Spacer()
-      Text("\(viewModel.remainingCount)").padding()
+      Text("\(viewModel.text.count)/\(viewModel.limit)")
+        .foregroundStyle(.secondary)
+        .padding()
     }
   }
 }
