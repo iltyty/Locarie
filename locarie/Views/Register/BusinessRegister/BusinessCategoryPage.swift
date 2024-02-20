@@ -29,7 +29,6 @@ struct BusinessCategoryPage: View {
       Spacer()
       confirmButton
     }
-    .padding(.horizontal)
     .onAppear {
       for i in 0 ..< allCategories.count {
         if categories.contains(allCategories[i]) {
@@ -46,6 +45,7 @@ struct BusinessCategoryPage: View {
 
   private var text: some View {
     Text("Please select the categories that match your business.")
+      .padding(.horizontal)
       .padding(.bottom, Constants.textBottomPadding)
   }
 
@@ -59,6 +59,7 @@ struct BusinessCategoryPage: View {
           }
       }
     }
+    .padding(.horizontal)
   }
 
   var confirmButton: some View {
@@ -70,6 +71,7 @@ struct BusinessCategoryPage: View {
     } label: {
       StrokeButtonFormItem(title: "Select")
     }
+    .padding(.horizontal)
     .padding(.bottom)
     .disabled(isButtonDisabled)
     .opacity(buttonOpacity)

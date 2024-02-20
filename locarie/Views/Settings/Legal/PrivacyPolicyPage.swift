@@ -10,7 +10,7 @@ import SwiftUI
 struct PrivacyPolicyPage: View {
   var body: some View {
     VStack {
-      navigationTitle
+      navigationBar
       privacyPolicy
       Spacer()
     }
@@ -18,8 +18,9 @@ struct PrivacyPolicyPage: View {
 }
 
 private extension PrivacyPolicyPage {
-  var navigationTitle: some View {
+  var navigationBar: some View {
     NavigationTitle("Privacy policy", divider: true)
+      .padding(.bottom)
   }
 
   var privacyPolicy: some View {

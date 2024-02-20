@@ -50,6 +50,7 @@ private extension NavigationTitle {
       Spacer()
       right
     }
+    .padding(.horizontal)
   }
 
   func titleText(_ text: String) -> some View {
@@ -76,5 +77,5 @@ private enum Constants {
 }
 
 #Preview {
-  NavigationTitle("Navigation Title")
+  NavigationTitle("Navigation Title", divider: true)
 }

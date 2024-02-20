@@ -13,6 +13,12 @@ struct BusinessRegisterPage: View {
   var body: some View {
     VStack(spacing: Constants.vSpacing) {
       navigationTitle
+      content
+    }
+  }
+
+  private var content: some View {
+    VStack(spacing: Constants.vSpacing) {
       businessNameInput
       businessCategoryInput
       businessAddressInput

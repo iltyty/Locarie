@@ -10,7 +10,7 @@ import SwiftUI
 struct TermsOfUsePage: View {
   var body: some View {
     VStack {
-      navigationTitle
+      navigationBar
       termsOfUse
       Spacer()
     }
@@ -18,8 +18,9 @@ struct TermsOfUsePage: View {
 }
 
 private extension TermsOfUsePage {
-  var navigationTitle: some View {
+  var navigationBar: some View {
     NavigationTitle("Terms of use", divider: true)
+      .padding(.bottom)
   }
 
   var termsOfUse: some View {

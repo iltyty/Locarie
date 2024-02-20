@@ -22,16 +22,19 @@ struct RegularRegisterPage: View {
   @State private var isAlertShowing = false
 
   var body: some View {
-    content
-      .disabled(isLoading)
-      .overlay { isLoading ? ProgressView() : nil }
-      .alert(alertTitle, isPresented: $isAlertShowing) {}
-      .onReceive(registerViewModel.$state) { state in
-        handleRegisterStateChange(state)
-      }
-      .onReceive(loginViewModel.$state) { state in
-        handleLoginStateChange(state)
-      }
+    VStack(spacing: Constants.spacing) {
+      navigationBar
+      content
+    }
+    .disabled(isLoading)
+    .overlay { isLoading ? ProgressView() : nil }
+    .alert(alertTitle, isPresented: $isAlertShowing) {}
+    .onReceive(registerViewModel.$state) { state in
+      handleRegisterStateChange(state)
+    }
+    .onReceive(loginViewModel.$state) { state in
+      handleLoginStateChange(state)
+    }
   }
 
   private func handleRegisterStateChange(_ state: RegisterViewModel.State) {
@@ -86,8 +89,6 @@ struct RegularRegisterPage: View {
 extension RegularRegisterPage {
   var content: some View {
     VStack(spacing: Constants.spacing) {
-      navigationBar
-      Spacer()
       emailInput
       firstNameInput
       lastNameInput
@@ -102,6 +103,7 @@ extension RegularRegisterPage {
 
   var navigationBar: some View {
     NavigationTitle("Create an account")
+      .padding(.bottom)
   }
 
   var emailInput: some View {
