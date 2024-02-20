@@ -101,6 +101,7 @@ private extension PostDetailPage {
         posts
       }
     }
+    .ignoresSafeArea(edges: .bottom)
   }
 }
 
@@ -143,7 +144,9 @@ private extension PostDetailPage {
       .foregroundStyle(.secondary)
       .background(Capsule().fill(.background))
       .onTapGesture {
-        showingDetailedProfile.toggle()
+        withAnimation(.spring) {
+          showingDetailedProfile.toggle()
+        }
       }
   }
 }
@@ -195,7 +198,7 @@ private extension PostDetailPage {
     ForEach(listUserPostsVM.posts) { post in
       PostCardView(
         post: post,
-        coverWidth: screenSize.width * Constants.postCoverImageWidthProportion
+        width: screenSize.width - 20
       )
       .onTapGesture {
         self.post = post
@@ -226,7 +229,7 @@ private extension PostDetailPage {
   var postImages: some View {
     Banner(
       urls: post.imageUrls,
-      width: screenSize.width * Constants.postCoverImageWidthProportion,
+      width: screenSize.width,
       height: screenSize.height * Constants.postCoverImageHeightProportion,
       rounded: true
     )
@@ -262,7 +265,7 @@ private extension PostDetailPage {
   var profileImages: some View {
     Banner(
       urls: user.profileImageUrls,
-      width: screenSize.width * Constants.profileCoverImageWidthProportion,
+      width: screenSize.width - 20,
       height: screenSize.height * Constants.profileCoverImageHeightProportion,
       rounded: true
     )

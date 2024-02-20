@@ -30,7 +30,7 @@ struct SwitchableBanner: View {
         mainImages
       }
     }
-    .frame(width: width, height: height)
+    .frame(height: height)
   }
 
   private var secondaryContent: some View {
@@ -105,7 +105,7 @@ private enum Constants {
 #Preview {
   GeometryReader { proxy in
     SwitchableBanner(
-      width: proxy.size.width * 0.95,
+      width: proxy.size.width,
       height: proxy.size.height / 2,
       mainImageUrls: [
         "https://images.unsplash.com/photo-1682685796766-0fddd3e480de?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8",
@@ -114,5 +114,6 @@ private enum Constants {
       ],
       secondaryImageUrl: "https://plus.unsplash.com/premium_photo-1699596809632-22848594654c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D"
     )
+    .padding()
   }
 }

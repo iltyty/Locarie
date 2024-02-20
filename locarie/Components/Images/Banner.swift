@@ -21,7 +21,7 @@ struct Banner: View {
           image
             .resizable()
             .scaledToFill()
-            .frame(height: height, alignment: .center)
+            .frame(width: width, height: height, alignment: .center)
             .clipped()
         }
         .tag(i)

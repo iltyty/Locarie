@@ -8,7 +8,7 @@
 import Foundation
 
 extension BottomSheet {
-  func getOffsetY() -> CGFloat {
+  func getDetentAndOffset() -> (BottomSheetDetent, CGFloat) {
     let currentOffset = translation.height + offsetY
     var minDiffIndex = -1
     var minDiff = CGFloat.greatestFiniteMagnitude
@@ -21,6 +21,6 @@ extension BottomSheet {
         minDiffIndex = index
       }
     }
-    return detentOffsets[minDiffIndex]
+    return (detents[minDiffIndex], detentOffsets[minDiffIndex])
   }
 }

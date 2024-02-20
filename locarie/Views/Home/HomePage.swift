@@ -116,7 +116,7 @@ private extension HomePage {
         } label: {
           PostCardView(
             post: post,
-            coverWidth: screenSize.width * Constants.postCoverWidthProportion
+            width: screenSize.width - 20
           )
         }
         .tint(.primary)

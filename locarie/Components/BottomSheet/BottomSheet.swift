@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct BottomSheet<Content: View>: View {
   let content: Content
@@ -13,6 +14,7 @@ struct BottomSheet<Content: View>: View {
 
   @State var offsetY: CGFloat = 0
   @State var translation: CGSize = .zero
+  @State var currentDetent: BottomSheetDetent = .minimum
 
   @State var screenHeight: CGFloat = 0
 
@@ -20,22 +22,37 @@ struct BottomSheet<Content: View>: View {
     detents: [BottomSheetDetent] = [.minimum, .medium],
     @ViewBuilder content: () -> Content
   ) {
+    self.content = content()
     if detents.isEmpty {
       self.detents = [.minimum, .medium]
+      currentDetent = .minimum
     } else {
       self.detents = detents
+      currentDetent = detents[0]
     }
-    self.content = content()
   }
 
   var body: some View {
     GeometryReader { proxy in
       VStack {
-        handler.gesture(dragGesture(proxy: proxy))
-        content
+        handler
+        ScrollViewReader { _ in
+          ScrollView {
+            HStack {
+              Spacer()
+              content
+              Spacer()
+            }
+          }
+        }
+        .scrollIndicators(.hidden)
+        .scrollDisabled(isScrollDisabled)
+        .onAppear {
+          UIScrollView.appearance().bounces = false
+        }
       }
-      .frame(width: proxy.size.width, alignment: .top)
       .background(background)
+      .highPriorityGesture(dragGesture)
       .offset(y: translation.height + offsetY)
       .onAppear {
         screenHeight = proxy.frame(in: .global).size.height
@@ -45,6 +62,13 @@ struct BottomSheet<Content: View>: View {
         screenHeight = newSize.height
         offsetY = detents.first!.getOffset(screenHeight: screenHeight)
       }
+    }
+  }
+
+  private var isScrollDisabled: Bool {
+    switch currentDetent {
+    case .minimum: true
+    default: false
     }
   }
 
@@ -67,18 +91,26 @@ private extension BottomSheet {
       .padding(.top, BottomSheetConstants.handlerPaddingTop)
   }
 
-  func dragGesture(proxy _: GeometryProxy) -> some Gesture {
+  var dragGesture: some Gesture {
     DragGesture(coordinateSpace: .global)
       .onChanged { value in
         if offsetY != 0 || value.translation.height > 0 {
           translation = value.translation
         }
       }
-      .onEnded { _ in
+      .onEnded { value in
         withAnimation(
-          .interactiveSpring(response: 0.5, dampingFraction: 0.6)
+          .interactiveSpring(response: 0.5, dampingFraction: 1)
         ) {
-          offsetY = getOffsetY()
+          if value.velocity.height > .init(1000) {
+            currentDetent = .minimum
+            offsetY = currentDetent.getOffset(screenHeight: screenHeight)
+          } else if value.velocity.height < .init(-1000) {
+            currentDetent = .large
+            offsetY = currentDetent.getOffset(screenHeight: screenHeight)
+          } else {
+            (currentDetent, offsetY) = getDetentAndOffset()
+          }
           translation = .zero
         }
       }
@@ -93,16 +125,10 @@ enum BottomSheetConstants {
 }
 
 #Preview {
-  BottomSheet(detents: [.minimum, .medium, .large]) {
-    ScrollView {
-      VStack {
-        ForEach(1 ..< 100, id: \.self) { i in
-          HStack {
-            Spacer()
-            Text("This is text \(i)")
-            Spacer()
-          }
-        }
+  BottomSheet(detents: [.minimum, .large]) {
+    VStack {
+      ForEach(1 ..< 100, id: \.self) { i in
+        Text("This is text \(i)")
       }
     }
   }
