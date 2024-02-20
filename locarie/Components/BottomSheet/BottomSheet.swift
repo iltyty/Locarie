@@ -36,23 +36,16 @@ struct BottomSheet<Content: View>: View {
     GeometryReader { proxy in
       VStack {
         handler
-        ScrollViewReader { _ in
-          ScrollView {
-            HStack {
-              Spacer()
-              content
-              Spacer()
-            }
+        ScrollView {
+          HStack {
+            Spacer()
+            content
+            Spacer()
           }
         }
         .scrollIndicators(.hidden)
-        .scrollDisabled(isScrollDisabled)
-        .onAppear {
-          UIScrollView.appearance().bounces = false
-        }
       }
       .background(background)
-      .highPriorityGesture(dragGesture)
       .offset(y: translation.height + offsetY)
       .onAppear {
         screenHeight = proxy.frame(in: .global).size.height
@@ -62,13 +55,6 @@ struct BottomSheet<Content: View>: View {
         screenHeight = newSize.height
         offsetY = detents.first!.getOffset(screenHeight: screenHeight)
       }
-    }
-  }
-
-  private var isScrollDisabled: Bool {
-    switch currentDetent {
-    case .minimum: true
-    default: false
     }
   }
 
@@ -82,13 +68,16 @@ struct BottomSheet<Content: View>: View {
 
 private extension BottomSheet {
   var handler: some View {
-    Capsule()
-      .fill(.secondary)
-      .frame(
-        width: BottomSheetConstants.handlerWidth,
-        height: BottomSheetConstants.handlerHeight
-      )
-      .padding(.top, BottomSheetConstants.handlerPaddingTop)
+    VStack {
+      Capsule()
+        .fill(Color(hex: BottomSheetConstants.handlerColor))
+        .frame(
+          width: BottomSheetConstants.handlerWidth,
+          height: BottomSheetConstants.handlerHeight
+        )
+        .gesture(dragGesture)
+    }
+    .frame(height: BottomSheetConstants.handlerBgHeight)
   }
 
   var dragGesture: some Gesture {
@@ -102,10 +91,14 @@ private extension BottomSheet {
         withAnimation(
           .interactiveSpring(response: 0.5, dampingFraction: 1)
         ) {
-          if value.velocity.height > .init(1000) {
+          if value.velocity
+            .height > .init(BottomSheetConstants.speedThreshold)
+          {
             currentDetent = .minimum
             offsetY = currentDetent.getOffset(screenHeight: screenHeight)
-          } else if value.velocity.height < .init(-1000) {
+          } else if value.velocity
+            .height < .init(-BottomSheetConstants.speedThreshold)
+          {
             currentDetent = .large
             offsetY = currentDetent.getOffset(screenHeight: screenHeight)
           } else {
@@ -119,9 +112,11 @@ private extension BottomSheet {
 
 enum BottomSheetConstants {
   static let backgroundCornerRadius = 20.0
-  static let handlerWidth = 60.0
-  static let handlerHeight = 5.0
-  static let handlerPaddingTop = 15.0
+  static let handlerColor: UInt = 0xD9D9D9
+  static let handlerWidth = 48.0
+  static let handlerHeight = 6.0
+  static let handlerBgHeight = 24.0
+  static let speedThreshold = 1000.0
 }
 
 #Preview {

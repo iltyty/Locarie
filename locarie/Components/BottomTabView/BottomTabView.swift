@@ -16,7 +16,7 @@ struct BottomTabView: View {
       Spacer()
       homePage
       Spacer()
-      if !cacheViewModel.isBusinessUser() {
+      if cacheViewModel.isBusinessUser() {
         newPostPage
         Spacer()
       }

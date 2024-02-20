@@ -38,7 +38,7 @@
 		50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */; };
 		50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7F2AF12A700045AB12 /* SearchBarView.swift */; };
 		50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F812AF1512E0045AB12 /* PostCardView.swift */; };
-		502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FEF2B32D34B00C0833A /* Color+Extensions.swift */; };
+		502A4FF02B32D34B00C0833A /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FEF2B32D34B00C0833A /* Color+Hex.swift */; };
 		502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+London.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */; };
 		502A4FF62B32D48400C0833A /* PostListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF52B32D48400C0833A /* PostListService.swift */; };
 		502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF72B32D4CD00C0833A /* PostListDto.swift */; };
@@ -191,7 +191,7 @@
 		50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserProfilePage.swift; sourceTree = "<group>"; };
 		50277F7F2AF12A700045AB12 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		50277F812AF1512E0045AB12 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
-		502A4FEF2B32D34B00C0833A /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		502A4FEF2B32D34B00C0833A /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+London.swift"; sourceTree = "<group>"; };
 		502A4FF52B32D48400C0833A /* PostListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListService.swift; sourceTree = "<group>"; };
 		502A4FF72B32D4CD00C0833A /* PostListDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListDto.swift; sourceTree = "<group>"; };
@@ -467,7 +467,7 @@
 		502A4FEE2B32D32D00C0833A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				502A4FEF2B32D34B00C0833A /* Color+Extensions.swift */,
+				502A4FEF2B32D34B00C0833A /* Color+Hex.swift */,
 				502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */,
 				50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */,
 				509AC0522B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift */,
@@ -1145,7 +1145,7 @@
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
 				50F549F32B44F59C00D06F20 /* InputFormItemBuilder.swift in Sources */,
 				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+London.swift in Sources */,
-				502A4FF02B32D34B00C0833A /* Color+Extensions.swift in Sources */,
+				502A4FF02B32D34B00C0833A /* Color+Hex.swift in Sources */,
 				50F54A032B45283C00D06F20 /* NavigationTitle.swift in Sources */,
 				501BAF4C2B4653FF00D9D84F /* ChangePasswordConstants.swift in Sources */,
 				50F54A182B4532F900D06F20 /* FormItemBackgroundBuilder.swift in Sources */,

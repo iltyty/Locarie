@@ -1,5 +1,5 @@
 //
-//  Color+Extensions.swift
+//  Color+Hex.swift
 //  locarie
 //
 //  Created by qiuty on 20/12/2023.

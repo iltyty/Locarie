@@ -39,7 +39,7 @@ extension BottomSheet {
     }
 
     private func maxOffset(screenHeight height: CGFloat) -> CGFloat {
-      height - BottomSheetConstants.handlerPaddingTop - 60
+      height - BottomSheetConstants.handlerBgHeight - 60
     }
   }
 }
