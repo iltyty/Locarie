@@ -51,9 +51,9 @@ struct LoginPage: View {
     if let backendError = error.backendError {
       alertTitle = backendError.message
     } else if let initialError = error.initialError {
-      alertTitle = initialError.localizedDescription
+      alertTitle = ErrorMessage.network.rawValue
     } else {
-      alertTitle = "Something went wrong, please try again later"
+      alertTitle = ErrorMessage.unknown.rawValue
     }
     isAlertShowing = true
   }

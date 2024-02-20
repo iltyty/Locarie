@@ -43,6 +43,7 @@ extension LoginViewModel {
   }
 
   private func handleLoginResponse(_ response: LoginResponse) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
     } else {

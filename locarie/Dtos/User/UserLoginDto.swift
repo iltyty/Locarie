@@ -18,4 +18,14 @@ struct LoginResponseDto: Codable, UserCache {
   let username: String
   let avatarUrl: String
   let jwtToken: String
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(Int64.self, forKey: .id)
+    type = try container.decode(UserType.self, forKey: .type)
+    username = try container.decode(String.self, forKey: .username)
+    avatarUrl = try container
+      .decodeIfPresent(String.self, forKey: .avatarUrl) ?? ""
+    jwtToken = try container.decode(String.self, forKey: .jwtToken)
+  }
 }

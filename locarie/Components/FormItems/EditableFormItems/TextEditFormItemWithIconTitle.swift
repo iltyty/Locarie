@@ -33,7 +33,7 @@ struct TextEditFormItemWithIconTitle: View {
   }
 
   private var textEditView: some View {
-    TextField(hint, text: $text)
+    TextField(hint, text: $text).textInputAutocapitalization(.never)
   }
 
   private var background: some View {

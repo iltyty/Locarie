@@ -36,6 +36,7 @@ struct TextEditFormItemWithBlockTitle: View {
         TextField(hint, text: $text)
       }
     }
+    .textInputAutocapitalization(.never)
     .padding(.horizontal)
     .frame(height: FormItemCommonConstants.height)
     .background(background)

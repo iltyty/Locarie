@@ -21,6 +21,7 @@ struct TextEditFormItemWithNoTitle: View {
         TextField(hint, text: $text)
       }
     }
+    .textInputAutocapitalization(.never)
     .padding(.horizontal)
     .frame(height: FormItemCommonConstants.height)
     .frame(maxWidth: .infinity)

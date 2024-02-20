@@ -28,3 +28,8 @@ enum ResultCode: Int, Codable {
 
   case unknown
 }
+
+enum ErrorMessage: String {
+  case network = "Network error, please try again later"
+  case unknown = "Something went wrong, please try again later"
+}
