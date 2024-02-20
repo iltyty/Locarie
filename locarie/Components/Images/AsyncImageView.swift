@@ -100,14 +100,15 @@ struct AsyncImageTestView: View {
 
   var body: some View {
     VStack {
-      AsyncImageView(url: "https://picsum.photos/600") { image in
+      AsyncImageView(url: "https://picsum.photos/600", width: 300,
+                     height: 300)
+      { image in
         image
           .resizable()
           .scaledToFit()
           .clipShape(Circle())
           .frame(width: 300, height: 300)
       }
-      .frame(width: 300, height: 300)
       .id(id)
       Button("modify") {
         id = UUID()

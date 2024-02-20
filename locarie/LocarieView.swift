@@ -24,6 +24,7 @@ struct LocarieView: View {
           UserProfilePage()
         }
       }
+      .ignoresSafeArea(edges: .bottom)
       .navigationDestination(for: Router.Destination.self) { destination in
         router.getDestinationPage(with: destination)
       }

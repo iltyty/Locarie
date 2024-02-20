@@ -11,26 +11,31 @@ struct BottomTabView: View {
   @ObservedObject var viewRouter = BottomTabViewRouter.shared
   @ObservedObject var cacheViewModel = LocalCacheViewModel.shared
 
-  private let iconNames = ["location", "plus.app", "person"]
-
   var body: some View {
     HStack {
       Spacer()
       homePage
       Spacer()
-      Spacer()
-      if cacheViewModel.isBusinessUser() {
+      if !cacheViewModel.isBusinessUser() {
         newPostPage
-        Spacer()
         Spacer()
       }
       profilePage
       Spacer()
     }
-    .imageScale(.large)
     .frame(height: Constants.height)
-    .padding(.horizontal, Constants.horizontalPadding)
-    .background(.regularMaterial)
+    .offset(y: Constants.offset)
+    .background(background)
+    .ignoresSafeArea(edges: .bottom)
+  }
+
+  private var background: some View {
+    UnevenRoundedRectangle(
+      topLeadingRadius: Constants.cornerRadius,
+      topTrailingRadius: Constants.cornerRadius
+    )
+    .fill(.background)
+    .shadow(radius: Constants.shadowRadius)
   }
 }
 
@@ -38,34 +43,37 @@ private extension BottomTabView {
   var homePage: some View {
     BottomTabViewItem(
       page: .home,
-      iconName: "location"
+      iconName: "HomeIcon",
+      selectedIconName: "SelectedHomeIcon"
     )
   }
 
   var newPostPage: some View {
     BottomTabViewItem(
       page: .new,
-      iconName: "plus.app"
+      iconName: "PlusIcon"
     )
   }
 
   var profilePage: some View {
     BottomTabViewItem(
       page: .profile,
-      iconName: "person"
+      iconName: "ProfileIcon"
     )
   }
 }
 
 private enum Constants {
-  static let height: CGFloat = 60
-  static let iconSize: CGFloat = 25
-  static let horizontalPadding: CGFloat = 40
+  static let height: CGFloat = 90
+  static let offset: CGFloat = -10
+  static let cornerRadius: CGFloat = 20
+  static let shadowRadius: CGFloat = 2
 }
 
 #Preview {
-  ZStack {
-    Color.blue
+  ZStack(alignment: .bottom) {
+    Color.white
     BottomTabView()
   }
+  .ignoresSafeArea(edges: .bottom)
 }
