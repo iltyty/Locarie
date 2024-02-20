@@ -93,9 +93,7 @@ extension RegularRegisterPage {
       lastNameInput
       usernameInput
       passwordInput
-      notificationPicker
-      servicePicker
-      Spacer()
+      bottomText
       createButton
       Spacer()
     }
@@ -153,6 +151,15 @@ extension RegularRegisterPage {
     }
   }
 
+  var bottomText: some View {
+    VStack(alignment: .leading, spacing: Constants.bottomVSpacing) {
+      notificationPicker
+      servicePicker
+      noteText
+    }
+    .padding(.horizontal)
+  }
+
   var notificationPicker: some View {
     let systemName = isNotificationReceived ? "circle.fill" : "circle"
     return HStack(alignment: .top, spacing: Constants.pickerLineImageSpacing) {
@@ -161,7 +168,6 @@ extension RegularRegisterPage {
       Spacer()
     }
     .font(.footnote)
-    .padding()
   }
 
   var servicePicker: some View {
@@ -169,7 +175,7 @@ extension RegularRegisterPage {
     return HStack(alignment: .top, spacing: Constants.pickerLineImageSpacing) {
       pickerLineImage(systemName: systemName, isFilled: $isServiceAgreed)
       WrappingHStack(hSpacing: 0) {
-        Text("I agree to the ").fixedSize(horizontal: true, vertical: false)
+        Text("I agree to the ")
         textWithPrimaryColor("Privacy Policy")
         Text(", ")
         textWithPrimaryColor("Terms of use")
@@ -182,7 +188,14 @@ extension RegularRegisterPage {
       }
     }
     .font(.footnote)
-    .padding(.horizontal)
+  }
+
+  var noteText: some View {
+    Text(
+      "Note: If the user shares false information or any action violates our safety regulations, necessary actions will be taken."
+    )
+    .font(.footnote)
+    .foregroundStyle(.secondary)
   }
 
   var createButton: some View {
@@ -226,6 +239,7 @@ private extension RegularRegisterPage {
 
 private enum Constants {
   static let spacing = 10.0
+  static let bottomVSpacing = 12.0
   static let pickerLineImageSpacing = 10.0
   static let buttonDisabledOpacity = 0.5
 }
