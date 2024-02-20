@@ -19,7 +19,6 @@ struct TextEditFormItemWithIconTitle: View {
       textEditView
       Spacer()
     }
-    .fontWeight(.semibold)
     .padding(.horizontal)
     .frame(maxWidth: .infinity)
     .frame(height: FormItemCommonConstants.height)

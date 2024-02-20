@@ -19,11 +19,12 @@ struct TextEditFormItemWithBlockTitle: View {
       titleView
       textEditView
     }
-    .fontWeight(.semibold)
   }
 
   private var titleView: some View {
-    Text(title).padding(.leading)
+    Text(title)
+      .padding(.leading)
+      .fontWeight(.semibold)
   }
 
   @ViewBuilder

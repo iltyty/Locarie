@@ -20,7 +20,6 @@ struct TextEditFormItemWithInlineTitle: View {
       Spacer()
       iconView
     }
-    .fontWeight(.semibold)
     .padding(.horizontal)
     .frame(maxWidth: .infinity)
     .frame(height: FormItemCommonConstants.height)
@@ -31,6 +30,7 @@ struct TextEditFormItemWithInlineTitle: View {
     HStack {
       Text(title)
     }
+    .fontWeight(.semibold)
     .frame(width: Constants.titleWidth, alignment: .leading)
   }
 

@@ -50,7 +50,6 @@ private extension NavigationTitle {
       Spacer()
       right
     }
-    .padding(.horizontal)
   }
 
   func titleText(_ text: String) -> some View {

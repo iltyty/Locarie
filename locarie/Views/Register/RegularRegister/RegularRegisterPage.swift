@@ -86,7 +86,7 @@ struct RegularRegisterPage: View {
 extension RegularRegisterPage {
   var content: some View {
     VStack(spacing: Constants.spacing) {
-      navigationTitle
+      navigationBar
       Spacer()
       emailInput
       firstNameInput
@@ -99,57 +99,56 @@ extension RegularRegisterPage {
       createButton
       Spacer()
     }
+    .padding(.horizontal)
   }
 
-  var navigationTitle: some View {
-    Text("Create an account")
-      .font(.headline)
-      .fontWeight(.bold)
+  var navigationBar: some View {
+    NavigationTitle("Create an account")
   }
 
   var emailInput: some View {
-    TextFormItem(
+    TextEditFormItemWithBlockTitle(
       title: "Email",
       hint: "Email",
-      input: $registerViewModel.dto.email
+      text: $registerViewModel.dto.email
     )
   }
 
   var firstNameInput: some View {
-    TextFormItem(
+    TextEditFormItemWithBlockTitle(
       title: "First name",
       hint: "First name",
-      input: $registerViewModel.dto.firstName
+      text: $registerViewModel.dto.firstName
     )
   }
 
   var lastNameInput: some View {
-    TextFormItem(
+    TextEditFormItemWithBlockTitle(
       title: "Last name",
       hint: "Last name",
-      input: $registerViewModel.dto.lastName
+      text: $registerViewModel.dto.lastName
     )
   }
 
   var usernameInput: some View {
-    TextFormItem(
-      title: "Username",
+    TextEditFormItemWithBlockTitle(
+      title: "@Username",
       hint: "Username",
-      input: $registerViewModel.dto.username
+      text: $registerViewModel.dto.username
     )
   }
 
   var passwordInput: some View {
     VStack(alignment: .leading) {
-      SecureFormItem(
+      TextEditFormItemWithBlockTitle(
         title: "Password",
         hint: "Password",
-        input: $registerViewModel.dto.password
+        isSecure: true,
+        text: $registerViewModel.dto.password
       )
       Text("Minimum 8 characters or numbers.")
-        .font(.caption)
+        .font(.footnote)
         .foregroundStyle(.secondary)
-        .padding(.leading)
         .padding(.leading)
     }
   }
@@ -161,8 +160,8 @@ extension RegularRegisterPage {
       Text("I do not wish to receive notifications with updates and news.")
       Spacer()
     }
-    .padding(.horizontal)
-    .font(.caption)
+    .font(.footnote)
+    .padding()
   }
 
   var servicePicker: some View {
@@ -182,15 +181,15 @@ extension RegularRegisterPage {
         Spacer()
       }
     }
+    .font(.footnote)
     .padding(.horizontal)
-    .font(.caption)
   }
 
   var createButton: some View {
     Button {
       registerViewModel.register()
     } label: {
-      primaryColorFormItemBuilder(text: "Create Account")
+      BackgroundButtonFormItem(title: "Create Account")
     }
     .disabled(isButtonDisabled)
     .opacity(buttonOpacity)
@@ -208,6 +207,7 @@ extension RegularRegisterPage {
 private extension RegularRegisterPage {
   func textWithPrimaryColor(_ text: String) -> some View {
     Text(text)
+      .fontWeight(.semibold)
       .foregroundStyle(Color.locariePrimary)
       .lineLimit(1)
   }
