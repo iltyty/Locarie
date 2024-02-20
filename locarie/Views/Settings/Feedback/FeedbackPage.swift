@@ -13,14 +13,14 @@ struct FeedbackPage: View {
 
   var body: some View {
     VStack {
-      navigationTitle
+      navigationBar
       content
     }
   }
 }
 
 private extension FeedbackPage {
-  var navigationTitle: some View {
+  var navigationBar: some View {
     NavigationTitle("Feedback", divider: true)
   }
 
@@ -34,10 +34,10 @@ private extension FeedbackPage {
   }
 
   var title: some View {
-    Text("Share your feedback with us")
+    Text("Share your feedback with us.")
       .font(.headline)
       .foregroundStyle(Color.locariePrimary)
-      .padding(.horizontal)
+      .padding()
   }
 
   var paragraph: some View {
@@ -46,6 +46,7 @@ private extension FeedbackPage {
 
     Please share it and let us know.
     """)
+    .font(.callout)
     .padding(.horizontal)
   }
 
@@ -58,15 +59,22 @@ private extension FeedbackPage {
           border: true
         )
         Color.clear
-          .frame(height: proxy.size.height * 0.2)
+          .frame(height: proxy.size.height * 0.3)
       }
       .padding(.horizontal)
     }
   }
 
   var shareButton: some View {
-    PrimaryColorButton(text: "Send") {
-      print("share button tapped")
+    Button {
+      print("send")
+    } label: {
+      HStack {
+        Spacer()
+        BackgroundButtonFormItem(title: "Send")
+        Spacer()
+      }
+      .padding(.horizontal)
     }
   }
 }
