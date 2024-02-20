@@ -56,6 +56,7 @@
 		5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEE2B288D3300645F5C /* UserLoginService.swift */; };
 		5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF02B288D6C00645F5C /* UserRegisterService.swift */; };
 		5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF22B28954E00645F5C /* UserInfo.swift */; };
+		5055689C2B84894D00FD21E4 /* StrokeFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055689B2B84894C00FD21E4 /* StrokeFormItemBuilder.swift */; };
 		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
@@ -208,6 +209,7 @@
 		5054CDEE2B288D3300645F5C /* UserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 		5054CDF02B288D6C00645F5C /* UserRegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterService.swift; sourceTree = "<group>"; };
 		5054CDF22B28954E00645F5C /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		5055689B2B84894C00FD21E4 /* StrokeFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeFormItemBuilder.swift; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
@@ -928,6 +930,7 @@
 				50F54A112B45318000D06F20 /* BackgroundColorFormItemBuilder.swift */,
 				50F54A0B2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift */,
 				50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */,
+				5055689B2B84894C00FD21E4 /* StrokeFormItemBuilder.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -1196,6 +1199,7 @@
 				501BAF232B462C4F00D9D84F /* LinkSettingsItem.swift in Sources */,
 				50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */,
 				509AC0512B57832400A79CDB /* LocationManager.swift in Sources */,
+				5055689C2B84894D00FD21E4 /* StrokeFormItemBuilder.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
 				50FDD8882B4AFC17003015F9 /* Router.swift in Sources */,

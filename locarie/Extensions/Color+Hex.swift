@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Color {
-  static let locariePrimary = Color(hex: 0xFF571B)
+  static let locariePrimary = Color(hex: 0xFF5800)
 
   init(hex: UInt, alpha: Double = 1) {
     self.init(

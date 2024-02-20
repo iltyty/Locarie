@@ -14,10 +14,12 @@ func primaryColorFormItemBuilder(text: String) -> some View {
 
 func primaryColorFormItemBuilder(label: some View) -> some View {
   label
-    .frame(maxWidth: .infinity)
+    .fontWeight(.semibold)
     .foregroundStyle(.white)
     .fontWeight(.bold)
     .background(formItemBackground(Color.locariePrimary))
-    .padding(.horizontal)
-    .frame(height: ComponentBuilderConstants.formItemHeight)
+    .frame(
+      width: ComponentBuilderConstants.formItemWidth,
+      height: ComponentBuilderConstants.formItemHeight
+    )
 }

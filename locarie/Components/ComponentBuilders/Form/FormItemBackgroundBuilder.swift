@@ -11,6 +11,17 @@ import SwiftUI
 func formItemBackground(_ color: some ShapeStyle) -> some View {
   RoundedRectangle(cornerRadius: ComponentBuilderConstants.formItemCornerRadius)
     .fill(color)
-    .frame(height: ComponentBuilderConstants.formItemHeight)
-    .shadow(radius: ComponentBuilderConstants.formItemBackgroundShadow)
+    .frame(
+      width: ComponentBuilderConstants.formItemWidth,
+      height: ComponentBuilderConstants.formItemHeight
+    )
+}
+
+func formItemStrokeBackground(_ color: some ShapeStyle) -> some View {
+  RoundedRectangle(cornerRadius: ComponentBuilderConstants.formItemCornerRadius)
+    .stroke(color)
+    .frame(
+      width: ComponentBuilderConstants.formItemWidth,
+      height: ComponentBuilderConstants.formItemHeight
+    )
 }

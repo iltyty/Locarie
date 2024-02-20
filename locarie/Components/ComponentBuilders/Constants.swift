@@ -6,6 +6,7 @@
 //
 
 enum ComponentBuilderConstants {
+  static let formItemWidth = 292.0
   static let formItemHeight = 48.0
   static let formItemCornerRadius = 25.0
   static let formItemBackgroundShadow = 2.0
