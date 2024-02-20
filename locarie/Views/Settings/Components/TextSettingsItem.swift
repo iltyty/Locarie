@@ -14,7 +14,7 @@ struct TextSettingsItem: View {
   var body: some View {
     VStack {
       HStack {
-        Text(title).fontWeight(.bold)
+        Text(title).fontWeight(.semibold)
         Spacer()
         Text(value).foregroundStyle(.secondary)
       }

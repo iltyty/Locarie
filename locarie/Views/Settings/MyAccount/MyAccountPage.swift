@@ -15,8 +15,8 @@ struct MyAccountPage: View {
     VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
       navigationTitle
       accountType
-      businessType
       businessName
+      businessCategories
       email
       username
       firstName
@@ -43,20 +43,6 @@ private extension MyAccountPage {
     return TextSettingsItem(title: "Account type", value: accountType)
   }
 
-  var businessType: some View {
-    Group {
-      if profileViewModel.dto.type == .regular {
-        EmptyView()
-      } else {
-        let categories = profileViewModel.dto.categories
-        TextSettingsItem(
-          title: "Business type",
-          value: categories.joined(separator: ", ")
-        )
-      }
-    }
-  }
-
   var businessName: some View {
     Group {
       if profileViewModel.dto.type == .regular {
@@ -64,6 +50,20 @@ private extension MyAccountPage {
       } else {
         let name = profileViewModel.dto.businessName
         TextSettingsItem(title: "Business name", value: name)
+      }
+    }
+  }
+
+  var businessCategories: some View {
+    Group {
+      if profileViewModel.dto.type == .regular {
+        EmptyView()
+      } else {
+        let categories = profileViewModel.dto.categories
+        TextSettingsItem(
+          title: "Business categories",
+          value: categories.joined(separator: ", ")
+        )
       }
     }
   }
