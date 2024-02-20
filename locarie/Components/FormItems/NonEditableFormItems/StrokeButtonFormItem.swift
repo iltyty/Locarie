@@ -9,14 +9,25 @@ import SwiftUI
 
 struct StrokeButtonFormItem: View {
   let title: String
+  var isFullWidth = true
   var color: Color = .locariePrimary
 
   var body: some View {
+    Group {
+      if isFullWidth {
+        content.frame(maxWidth: .infinity)
+      } else {
+        content.frame(width: Constants.width)
+      }
+    }
+    .frame(height: FormItemCommonConstants.height)
+    .background(background)
+  }
+
+  private var content: some View {
     Text(title)
       .fontWeight(.semibold)
       .foregroundStyle(color)
-      .frame(width: Constants.width, height: FormItemCommonConstants.height)
-      .background(background)
       .tint(color)
   }
 
@@ -32,7 +43,7 @@ private enum Constants {
 
 #Preview {
   VStack {
-    StrokeButtonFormItem(title: "Sign up")
+    StrokeButtonFormItem(title: "Sign up", isFullWidth: false)
     StrokeButtonFormItem(
       title: "Sign up for a business account",
       color: Color(hex: 0x326AFB)

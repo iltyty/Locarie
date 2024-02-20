@@ -16,9 +16,10 @@ struct BusinessRegisterPage: View {
       businessNameInput
       businessCategoryInput
       businessAddressInput
-      createButton
       Spacer()
+      nextButton
     }
+    .padding(.horizontal)
   }
 
   private var navigationTitle: some View {
@@ -27,16 +28,20 @@ struct BusinessRegisterPage: View {
 
   @ViewBuilder private var businessNameInput: some View {
     let text = "Business name"
-    TextFormItem(title: text, hint: text, input: $viewModel.dto.businessName)
+    TextEditFormItemWithBlockTitle(
+      title: text,
+      hint: text,
+      text: $viewModel.dto.businessName
+    )
   }
 
   private var businessCategoryInput: some View {
     NavigationLink {
       BusinessCategoryPage($viewModel.dto.category)
     } label: {
-      LinkFormItem(
+      LinkFormItemWithBlockTitle(
         title: "Business category",
-        hint: "Category",
+        hint: "Select your category",
         text: $viewModel.dto.category
       )
     }
@@ -51,7 +56,7 @@ struct BusinessRegisterPage: View {
         location: $viewModel.dto.location
       )
     } label: {
-      LinkFormItem(
+      LinkFormItemWithBlockTitle(
         title: "Business address",
         hint: "Address",
         text: $viewModel.dto.address
@@ -61,11 +66,12 @@ struct BusinessRegisterPage: View {
     .buttonStyle(.plain)
   }
 
-  var createButton: some View {
+  var nextButton: some View {
     NavigationLink {
       RegularRegisterPage(registerViewModel: viewModel)
     } label: {
-      primaryColorFormItemBuilder(text: "Next")
+      StrokeButtonFormItem(title: "Next step")
+        .padding(.bottom)
         .disabled(isButtonDisabled)
         .opacity(buttonOpacity)
     }
@@ -81,8 +87,8 @@ struct BusinessRegisterPage: View {
 }
 
 private enum Constants {
-  static let vSpacing = 50.0
-  static let buttonDisabledOpacity = 0.5
+  static let vSpacing: CGFloat = 16
+  static let buttonDisabledOpacity: CGFloat = 0.5
 }
 
 #Preview {
