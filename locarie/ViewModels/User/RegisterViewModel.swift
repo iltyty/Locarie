@@ -155,7 +155,7 @@ private extension RegisterViewModel {
 
   var isBusinessCategoryValidPublisher: AnyPublisher<Bool, Never> {
     $dto.map { dto in
-      !dto.category.isEmpty
+      !dto.categories.isEmpty
     }
     .eraseToAnyPublisher()
   }

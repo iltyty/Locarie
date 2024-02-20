@@ -191,12 +191,12 @@ private extension UserProfileEditPage {
 
   var categoryInput: some View {
     NavigationLink {
-      BusinessCategoryPage($profileUpdateViewModel.dto.category)
+      BusinessCategoryPage(categories: $profileUpdateViewModel.dto.categories)
     } label: {
-      LinkFormItem(
+      LinkFormItemWithBlockTitle(
         title: "Business Category",
         hint: "Category",
-        text: $profileUpdateViewModel.dto.category
+        textArray: $profileUpdateViewModel.dto.categories
       )
     }
     .buttonStyle(.plain)

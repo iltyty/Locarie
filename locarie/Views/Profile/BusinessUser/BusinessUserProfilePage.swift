@@ -129,13 +129,15 @@ private extension BusinessUserProfilePage {
   @ViewBuilder
   var businessNameAndCategory: some View {
     let businessName = profileViewModel.dto.businessName
-    let category = profileViewModel.dto.category
+    let categories = profileViewModel.dto.categories
     HStack {
       Text(businessName).font(.headline)
       Spacer()
-      Text(category)
-        .font(.callout)
-        .foregroundStyle(.secondary)
+      ForEach(categories, id: \.self) { category in
+        Text(category)
+          .font(.callout)
+          .foregroundStyle(.secondary)
+      }
     }
   }
 

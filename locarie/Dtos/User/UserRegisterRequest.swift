@@ -16,7 +16,7 @@ struct RegisterRequestDto: Codable {
   var password = ""
 
   var businessName = ""
-  var category = ""
+  var categories: [String] = []
   var address = ""
   var location: BusinessLocation?
 }

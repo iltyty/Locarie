@@ -127,8 +127,9 @@ extension BusinessHomePage {
       HStack {
         Text(user.username)
         Spacer()
-        Text(user.category)
-          .foregroundStyle(.secondary)
+        ForEach(user.categories, id: \.self) { category in
+          Text(category).foregroundStyle(.secondary)
+        }
       }
 
       Text(user.introduction)

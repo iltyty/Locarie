@@ -48,8 +48,11 @@ private extension MyAccountPage {
       if profileViewModel.dto.type == .regular {
         EmptyView()
       } else {
-        let category = profileViewModel.dto.category
-        TextSettingsItem(title: "Business type", value: category)
+        let categories = profileViewModel.dto.categories
+        TextSettingsItem(
+          title: "Business type",
+          value: categories.joined(separator: ", ")
+        )
       }
     }
   }

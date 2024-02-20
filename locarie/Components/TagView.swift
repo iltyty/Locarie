@@ -21,6 +21,7 @@ struct TagView: View {
       .foregroundStyle(isSelected ? Color.locariePrimary : .secondary)
       .padding(.horizontal, Constants.hPadding)
       .padding(.vertical, Constants.vPadding)
+      .frame(height: Constants.height)
       .background(background)
   }
 
@@ -32,9 +33,10 @@ struct TagView: View {
 }
 
 private enum Constants {
-  static let cornerRadius = 20.0
-  static let hPadding = 10.0
-  static let vPadding = 5.0
+  static let height: CGFloat = 40
+  static let cornerRadius: CGFloat = 20
+  static let hPadding: CGFloat = 10
+  static let vPadding: CGFloat = 5
 }
 
 #Preview {

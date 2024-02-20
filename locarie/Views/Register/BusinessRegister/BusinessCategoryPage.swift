@@ -10,51 +10,73 @@ import SwiftUI
 struct BusinessCategoryPage: View {
   @Environment(\.dismiss) var dismiss
 
-  @Binding var category: String
+  @Binding var categories: [String]
 
-  init(_ category: Binding<String>) {
-    _category = category
+  @State var isSelected: [Bool] = .init(
+    repeating: false,
+    count: BusinessCategory.allCases.count
+  )
+
+  private var allCategories: [String] {
+    BusinessCategory.allCases.map(\.rawValue)
   }
 
   var body: some View {
-    VStack {
+    VStack(alignment: .leading) {
       navigationTitle
+      text
       tags
-      confirmButton
       Spacer()
+      confirmButton
+    }
+    .padding(.horizontal)
+    .onAppear {
+      for i in 0 ..< allCategories.count {
+        if categories.contains(allCategories[i]) {
+          isSelected[i] = true
+        }
+      }
     }
   }
 
-  var navigationTitle: some View {
+  private var navigationTitle: some View {
     NavigationTitle("Business category")
-      .padding(.bottom, Constants.titlePadding)
+      .padding(.bottom, Constants.titleBottomPadding)
+  }
+
+  private var text: some View {
+    Text("Please select the categories that match your business.")
+      .padding(.bottom, Constants.textBottomPadding)
   }
 
   var tags: some View {
-    WrappingHStack(alignment: .leading) {
-      ForEach(BusinessCategory.allCases, id: \.self) { businessCategory in
-        let tag = businessCategory.rawValue
-        TagView(tag: tag, isSelected: tag == category)
+    VStack(alignment: .leading, spacing: Constants.tagVSpacing) {
+      ForEach(allCategories.indices, id: \.self) { i in
+        let tag = allCategories[i]
+        TagView(tag: tag, isSelected: isSelected[i])
           .onTapGesture {
-            category = tag
+            isSelected[i].toggle()
           }
       }
     }
-    .padding(.bottom)
   }
 
   var confirmButton: some View {
     Button {
+      categories = allCategories.enumerated().filter { i, _ in
+        isSelected[i]
+      }.map(\.element)
       dismiss()
     } label: {
-      primaryColorFormItemBuilder(text: "Confirm")
+      StrokeButtonFormItem(title: "Select")
     }
+    .padding(.bottom)
     .disabled(isButtonDisabled)
     .opacity(buttonOpacity)
   }
 
   var isButtonDisabled: Bool {
-    category.isEmpty
+    isSelected.filter { $0 }.isEmpty
   }
 
   var buttonOpacity: CGFloat {
@@ -63,11 +85,12 @@ struct BusinessCategoryPage: View {
 }
 
 private enum Constants {
-  static let titlePadding = 100.0
-  static let buttonDisabledOpacity = 0.5
+  static let titleBottomPadding: CGFloat = 100
+  static let textBottomPadding: CGFloat = 50
+  static let tagVSpacing: CGFloat = 30
+  static let buttonDisabledOpacity: CGFloat = 0.5
 }
 
 #Preview {
-  @State var category = ""
-  return BusinessCategoryPage($category)
+  BusinessCategoryPage(categories: .constant([]))
 }

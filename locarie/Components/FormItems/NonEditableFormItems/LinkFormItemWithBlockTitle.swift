@@ -10,13 +10,55 @@ import SwiftUI
 struct LinkFormItemWithBlockTitle: View {
   let title: String
   let hint: String
+  let isBindingText: Bool
 
   @Binding var text: String
+  @Binding var textArray: [String]
+
+  init(
+    title: String,
+    hint: String,
+    text: Binding<String>
+  ) {
+    self.title = title
+    self.hint = hint
+    isBindingText = true
+    _text = text
+    _textArray = .constant([])
+  }
+
+  init(
+    title: String,
+    hint: String,
+    textArray: Binding<[String]>
+  ) {
+    self.title = title
+    self.hint = hint
+    isBindingText = false
+    _text = .constant("")
+    _textArray = textArray
+  }
+
+  private var isShowingHint: Bool {
+    if isBindingText {
+      text.isEmpty
+    } else {
+      textArray.joined(separator: ", ").isEmpty
+    }
+  }
+
+  private var textContent: String {
+    if isBindingText {
+      isShowingHint ? hint : text
+    } else {
+      isShowingHint ? hint : textArray.joined(separator: ", ")
+    }
+  }
 
   var body: some View {
     VStack(alignment: .leading) {
       titleView
-      textEditView
+      contentView
     }
   }
 
@@ -27,7 +69,7 @@ struct LinkFormItemWithBlockTitle: View {
   }
 
   @ViewBuilder
-  private var textEditView: some View {
+  private var contentView: some View {
     HStack {
       textView
       Spacer()
@@ -37,8 +79,8 @@ struct LinkFormItemWithBlockTitle: View {
   }
 
   private var textView: some View {
-    TextField(hint, text: $text)
-      .disabled(true)
+    Text(textContent)
+      .foregroundStyle(isShowingHint ? .secondary : .primary)
       .padding(.leading)
       .frame(height: FormItemCommonConstants.height)
   }
@@ -60,9 +102,21 @@ private enum Constants {
 }
 
 #Preview {
-  LinkFormItemWithBlockTitle(
-    title: "Business address",
-    hint: "Address",
-    text: .constant("")
-  )
+  VStack {
+    LinkFormItemWithBlockTitle(
+      title: "Business address",
+      hint: "Address",
+      text: .constant("")
+    )
+    LinkFormItemWithBlockTitle(
+      title: "Business categories",
+      hint: "Categories",
+      textArray: .constant([])
+    )
+    LinkFormItemWithBlockTitle(
+      title: "Business categories",
+      hint: "Categories",
+      textArray: .constant(["Food & Drinks", "Shop", "Lifestyle"])
+    )
+  }
 }
