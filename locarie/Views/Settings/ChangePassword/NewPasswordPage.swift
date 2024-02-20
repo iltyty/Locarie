@@ -12,11 +12,9 @@ struct NewPasswordPage: View {
   @State var newPasswordConfirm = ""
 
   var body: some View {
-    VStack(spacing: ChangePasswordConstants.vSpacing) {
+    VStack(alignment: .leading, spacing: ChangePasswordConstants.vSpacing) {
       navigationTitle
-      Spacer()
-      newPasswordInput
-      newPasswordConfirmInput
+      input
       nextButton
       Spacer()
     }
@@ -26,25 +24,58 @@ struct NewPasswordPage: View {
 private extension NewPasswordPage {
   var navigationTitle: some View {
     NavigationTitle("Change password", divider: true)
+      .padding(.bottom, ChangePasswordConstants.navigationBarBottomPadding)
+  }
+
+  var input: some View {
+    VStack(alignment: .leading, spacing: Constants.vSpacing) {
+      newPasswordInput
+      passwordNote
+      newPasswordConfirmInput
+    }
   }
 
   @ViewBuilder
   var newPasswordInput: some View {
     let title = "New password"
-    TextFormItem(title: title, hint: "Password", input: $newPassword)
+    TextEditFormItemWithBlockTitle(
+      title: title,
+      hint: "Password",
+      text: $newPassword
+    )
+    .padding(.horizontal)
+  }
+
+  var passwordNote: some View {
+    Text("Minimum 8 characters or numbers.")
+      .font(.footnote)
+      .foregroundStyle(.secondary)
+      .padding(.leading)
+      .padding(.horizontal)
   }
 
   @ViewBuilder
   var newPasswordConfirmInput: some View {
-    let title = "New password confirm"
-    TextFormItem(title: title, hint: "Password", input: $newPasswordConfirm)
+    let title = "Confirm new password"
+    TextEditFormItemWithBlockTitle(
+      title: title,
+      hint: "Password",
+      text: $newPasswordConfirm
+    )
+    .padding(.horizontal)
   }
 
   var nextButton: some View {
-    PrimaryColorButton(text: "Next") {
-      print("next button tapped")
+    HStack {
+      Spacer()
+      BackgroundButtonFormItem(title: "Done", isFullWidth: false)
+      Spacer()
     }
   }
+}
+
+private enum Constants {
+  static let vSpacing: CGFloat = 12
 }
 
 #Preview {

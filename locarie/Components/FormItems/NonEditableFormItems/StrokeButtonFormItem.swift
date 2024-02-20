@@ -10,14 +10,17 @@ import SwiftUI
 struct StrokeButtonFormItem: View {
   let title: String
   var isFullWidth = true
+  var isFixedWidth = false
   var color: Color = .locariePrimary
 
   var body: some View {
     Group {
-      if isFullWidth {
+      if isFixedWidth {
+        content.frame(width: Constants.width)
+      } else if isFullWidth {
         content.frame(maxWidth: .infinity)
       } else {
-        content.frame(width: Constants.width)
+        content
       }
     }
     .frame(height: FormItemCommonConstants.height)
@@ -26,6 +29,7 @@ struct StrokeButtonFormItem: View {
 
   private var content: some View {
     Text(title)
+      .padding(.horizontal, Constants.textHPadding)
       .fontWeight(.semibold)
       .foregroundStyle(color)
       .tint(color)
@@ -39,6 +43,7 @@ struct StrokeButtonFormItem: View {
 
 private enum Constants {
   static let width: CGFloat = 292
+  static let textHPadding: CGFloat = 48
 }
 
 #Preview {

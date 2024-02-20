@@ -12,8 +12,7 @@ struct ChangePasswordPage: View {
 
   var body: some View {
     VStack(spacing: ChangePasswordConstants.vSpacing) {
-      navigationTitle
-      Spacer()
+      navigationBar
       passwordInput
       nextButton
       Spacer()
@@ -22,21 +21,27 @@ struct ChangePasswordPage: View {
 }
 
 private extension ChangePasswordPage {
-  var navigationTitle: some View {
+  var navigationBar: some View {
     NavigationTitle("Change password", divider: true)
+      .padding(.bottom, ChangePasswordConstants.navigationBarBottomPadding)
   }
 
   @ViewBuilder
   var passwordInput: some View {
     let title = "Type in your current password"
-    TextFormItem(title: title, hint: "Password", input: $password)
+    TextEditFormItemWithBlockTitle(
+      title: title,
+      hint: "Password",
+      text: $password
+    )
+    .padding(.horizontal)
   }
 
   var nextButton: some View {
     NavigationLink {
       NewPasswordPage()
     } label: {
-      primaryColorFormItemBuilder(text: "Next")
+      StrokeButtonFormItem(title: "Next", isFullWidth: false)
     }
   }
 }
