@@ -64,6 +64,7 @@
 		505568CA2B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C92B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift */; };
 		505568CC2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568CB2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift */; };
 		505568CF2B84BB7500FD21E4 /* ButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568CE2B84BB7500FD21E4 /* ButtonFormItem.swift */; };
+		505568D12B84BCA000FD21E4 /* LinkFormItem1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */; };
 		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
@@ -224,6 +225,7 @@
 		505568C92B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithBlockTitle.swift; sourceTree = "<group>"; };
 		505568CB2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithIconTitle.swift; sourceTree = "<group>"; };
 		505568CE2B84BB7500FD21E4 /* ButtonFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFormItem.swift; sourceTree = "<group>"; };
+		505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItem1.swift; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 			isa = PBXGroup;
 			children = (
 				505568CE2B84BB7500FD21E4 /* ButtonFormItem.swift */,
+				505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */,
 			);
 			path = NonEditableFormItems;
 			sourceTree = "<group>";
@@ -1187,6 +1190,7 @@
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
 				504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
+				505568D12B84BCA000FD21E4 /* LinkFormItem1.swift in Sources */,
 				50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */,
 				50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */,
 				50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */,
