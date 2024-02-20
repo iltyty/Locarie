@@ -1,5 +1,5 @@
 //
-//  OpeningHourEditPage.swift
+//  OpeningHoursEditPage.swift
 //  locarie
 //
 //  Created by qiuty on 03/01/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OpeningHourEditPage: View {
+struct OpeningHoursEditPage: View {
   @Binding var businessHoursDtos: [BusinessHoursDto]
 
   @State var currentDayIndex = 0
@@ -37,7 +37,7 @@ struct OpeningHourEditPage: View {
   }
 }
 
-private extension OpeningHourEditPage {
+private extension OpeningHoursEditPage {
   var navigationBar: some View {
     NavigationTitle("Edit opening hours", right: doneButton, divider: true)
       .padding(.bottom)
@@ -81,7 +81,7 @@ private extension OpeningHourEditPage {
   }
 }
 
-private extension OpeningHourEditPage {
+private extension OpeningHoursEditPage {
   func binding(for index: Int) -> Binding<BusinessHoursDto> {
     .init(
       get: { allBusinessHours[index] },
@@ -127,5 +127,5 @@ private enum Constants {
 }
 
 #Preview {
-  OpeningHourEditPage(businessHoursDtos: .constant([]))
+  OpeningHoursEditPage(businessHoursDtos: .constant([]))
 }
