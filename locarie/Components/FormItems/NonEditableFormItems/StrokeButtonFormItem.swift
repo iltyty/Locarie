@@ -1,5 +1,5 @@
 //
-//  ButtonFormItem.swift
+//  StrokeButtonFormItem.swift
 //  locarie
 //
 //  Created by qiuty on 20/02/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ButtonFormItem: View {
+struct StrokeButtonFormItem: View {
   let title: String
   let color: Color
 
@@ -32,8 +32,8 @@ private enum Constants {
 
 #Preview {
   VStack {
-    ButtonFormItem(title: "Sign up", color: .locariePrimary)
-    ButtonFormItem(
+    StrokeButtonFormItem(title: "Sign up", color: .locariePrimary)
+    StrokeButtonFormItem(
       title: "Sign up for a business account",
       color: Color(hex: 0x326AFB)
     )

@@ -57,13 +57,13 @@
 		5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF02B288D6C00645F5C /* UserRegisterService.swift */; };
 		5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF22B28954E00645F5C /* UserInfo.swift */; };
 		5055689C2B84894D00FD21E4 /* StrokeFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055689B2B84894C00FD21E4 /* StrokeFormItemBuilder.swift */; };
-		505568C22B8499CC00FD21E4 /* FormItemWithBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568BC2B8499CB00FD21E4 /* FormItemWithBackground.swift */; };
+		505568C22B8499CC00FD21E4 /* BackgroundButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568BC2B8499CB00FD21E4 /* BackgroundButtonFormItem.swift */; };
 		505568C42B8499CC00FD21E4 /* TextEditFormItemWithInlineTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C02B8499CB00FD21E4 /* TextEditFormItemWithInlineTitle.swift */; };
 		505568C62B84A19000FD21E4 /* FormItemCommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C52B84A19000FD21E4 /* FormItemCommonConstants.swift */; };
 		505568C82B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C72B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift */; };
 		505568CA2B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C92B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift */; };
 		505568CC2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568CB2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift */; };
-		505568CF2B84BB7500FD21E4 /* ButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568CE2B84BB7500FD21E4 /* ButtonFormItem.swift */; };
+		505568CF2B84BB7500FD21E4 /* StrokeButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568CE2B84BB7500FD21E4 /* StrokeButtonFormItem.swift */; };
 		505568D12B84BCA000FD21E4 /* LinkFormItem1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */; };
 		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
@@ -218,13 +218,13 @@
 		5054CDF02B288D6C00645F5C /* UserRegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterService.swift; sourceTree = "<group>"; };
 		5054CDF22B28954E00645F5C /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		5055689B2B84894C00FD21E4 /* StrokeFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeFormItemBuilder.swift; sourceTree = "<group>"; };
-		505568BC2B8499CB00FD21E4 /* FormItemWithBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormItemWithBackground.swift; sourceTree = "<group>"; };
+		505568BC2B8499CB00FD21E4 /* BackgroundButtonFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundButtonFormItem.swift; sourceTree = "<group>"; };
 		505568C02B8499CB00FD21E4 /* TextEditFormItemWithInlineTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithInlineTitle.swift; sourceTree = "<group>"; };
 		505568C52B84A19000FD21E4 /* FormItemCommonConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemCommonConstants.swift; sourceTree = "<group>"; };
 		505568C72B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithNoTitle.swift; sourceTree = "<group>"; };
 		505568C92B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithBlockTitle.swift; sourceTree = "<group>"; };
 		505568CB2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithIconTitle.swift; sourceTree = "<group>"; };
-		505568CE2B84BB7500FD21E4 /* ButtonFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFormItem.swift; sourceTree = "<group>"; };
+		505568CE2B84BB7500FD21E4 /* StrokeButtonFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButtonFormItem.swift; sourceTree = "<group>"; };
 		505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItem1.swift; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
@@ -567,28 +567,11 @@
 		505568B92B8499CB00FD21E4 /* FormItems */ = {
 			isa = PBXGroup;
 			children = (
-				505568BB2B8499CB00FD21E4 /* FormItemsWithBackground */,
-				505568BE2B8499CB00FD21E4 /* FormItemsWithStorke */,
+				505568BF2B8499CB00FD21E4 /* EditableFormItems */,
+				505568CD2B84BB2700FD21E4 /* NonEditableFormItems */,
 				505568C52B84A19000FD21E4 /* FormItemCommonConstants.swift */,
 			);
 			path = FormItems;
-			sourceTree = "<group>";
-		};
-		505568BB2B8499CB00FD21E4 /* FormItemsWithBackground */ = {
-			isa = PBXGroup;
-			children = (
-				505568BC2B8499CB00FD21E4 /* FormItemWithBackground.swift */,
-			);
-			path = FormItemsWithBackground;
-			sourceTree = "<group>";
-		};
-		505568BE2B8499CB00FD21E4 /* FormItemsWithStorke */ = {
-			isa = PBXGroup;
-			children = (
-				505568BF2B8499CB00FD21E4 /* EditableFormItems */,
-				505568CD2B84BB2700FD21E4 /* NonEditableFormItems */,
-			);
-			path = FormItemsWithStorke;
 			sourceTree = "<group>";
 		};
 		505568BF2B8499CB00FD21E4 /* EditableFormItems */ = {
@@ -605,7 +588,8 @@
 		505568CD2B84BB2700FD21E4 /* NonEditableFormItems */ = {
 			isa = PBXGroup;
 			children = (
-				505568CE2B84BB7500FD21E4 /* ButtonFormItem.swift */,
+				505568BC2B8499CB00FD21E4 /* BackgroundButtonFormItem.swift */,
+				505568CE2B84BB7500FD21E4 /* StrokeButtonFormItem.swift */,
 				505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */,
 			);
 			path = NonEditableFormItems;
@@ -1210,7 +1194,7 @@
 				50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */,
-				505568C22B8499CC00FD21E4 /* FormItemWithBackground.swift in Sources */,
+				505568C22B8499CC00FD21E4 /* BackgroundButtonFormItem.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomSheet.swift in Sources */,
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
 				50F549F32B44F59C00D06F20 /* InputFormItemBuilder.swift in Sources */,
@@ -1268,7 +1252,7 @@
 				50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */,
 				509AC0512B57832400A79CDB /* LocationManager.swift in Sources */,
 				5055689C2B84894D00FD21E4 /* StrokeFormItemBuilder.swift in Sources */,
-				505568CF2B84BB7500FD21E4 /* ButtonFormItem.swift in Sources */,
+				505568CF2B84BB7500FD21E4 /* StrokeButtonFormItem.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
 				50FDD8882B4AFC17003015F9 /* Router.swift in Sources */,

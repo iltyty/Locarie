@@ -1,5 +1,5 @@
 //
-//  FormItemWithBackground.swift
+//  BackgroundButtonFormItem.swift
 //  locarie
 //
 //  Created by qiuty on 20/02/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormItemWithBackground: View {
+struct BackgroundButtonFormItem: View {
   let text: String
   var isFullWidth: Bool = true
   let color: Color = .locariePrimary
@@ -43,9 +43,9 @@ private enum Constants {
 
 #Preview {
   VStack {
-    FormItemWithBackground(text: "Log in")
-    FormItemWithBackground(text: "Log in", isFullWidth: false)
-    FormItemWithBackground(
+    BackgroundButtonFormItem(text: "Log in")
+    BackgroundButtonFormItem(text: "Log in", isFullWidth: false)
+    BackgroundButtonFormItem(
       text: "Sign up for a business account",
       isFullWidth: false
     )
