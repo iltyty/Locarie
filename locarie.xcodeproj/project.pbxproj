@@ -61,6 +61,7 @@
 		505568C42B8499CC00FD21E4 /* TextEditFormItemWithInlineTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C02B8499CB00FD21E4 /* TextEditFormItemWithInlineTitle.swift */; };
 		505568C62B84A19000FD21E4 /* FormItemCommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C52B84A19000FD21E4 /* FormItemCommonConstants.swift */; };
 		505568C82B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C72B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift */; };
+		505568CA2B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C92B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift */; };
 		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
@@ -218,6 +219,7 @@
 		505568C02B8499CB00FD21E4 /* TextEditFormItemWithInlineTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithInlineTitle.swift; sourceTree = "<group>"; };
 		505568C52B84A19000FD21E4 /* FormItemCommonConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemCommonConstants.swift; sourceTree = "<group>"; };
 		505568C72B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithNoTitle.swift; sourceTree = "<group>"; };
+		505568C92B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithBlockTitle.swift; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 		505568BF2B8499CB00FD21E4 /* EditableFormItems */ = {
 			isa = PBXGroup;
 			children = (
+				505568C92B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift */,
 				505568C02B8499CB00FD21E4 /* TextEditFormItemWithInlineTitle.swift */,
 				505568C72B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift */,
 			);
@@ -1283,6 +1286,7 @@
 				505568C82B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift in Sources */,
 				50B5DEDA2B3B2DCC00C0A641 /* PlaceSuggestionItem.swift in Sources */,
 				50B5DED12B3B162500C0A641 /* PlaceSuggestionsViewModel.swift in Sources */,
+				505568CA2B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift in Sources */,
 				501BAF482B46527000D9D84F /* ChangePasswordPage.swift in Sources */,
 				509D5BCC2B459CC900833021 /* OpeningHourSheet.swift in Sources */,
 				501BAF332B46353C00D9D84F /* TermsOfServicePage.swift in Sources */,
