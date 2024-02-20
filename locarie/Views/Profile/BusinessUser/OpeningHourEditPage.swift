@@ -18,8 +18,9 @@ struct OpeningHourEditPage: View {
 
   var body: some View {
     VStack {
-      navigationTitle
+      navigationBar
       days
+      Spacer()
     }
     .onAppear {
       setBusinessHours()
@@ -37,8 +38,9 @@ struct OpeningHourEditPage: View {
 }
 
 private extension OpeningHourEditPage {
-  var navigationTitle: some View {
-    NavigationTitle("Edit opening hours", right: doneButton)
+  var navigationBar: some View {
+    NavigationTitle("Edit opening hours", right: doneButton, divider: true)
+      .padding(.bottom)
   }
 
   var doneButton: some View {
@@ -51,7 +53,7 @@ private extension OpeningHourEditPage {
   }
 
   var days: some View {
-    List {
+    VStack(spacing: Constants.vSpacing) {
       ForEach(allBusinessHours.indices, id: \.self) { index in
         BusinessHoursItem(allBusinessHours[index])
           .onTapGesture {
@@ -60,8 +62,7 @@ private extension OpeningHourEditPage {
           }
       }
     }
-    .listStyle(.plain)
-    .listRowSpacing(Constants.listVSpacing)
+    .padding(.horizontal)
   }
 
   var sortedDays: [BusinessHoursDto.DayOfWeek] {
@@ -121,7 +122,7 @@ private func allBusinessHoursDtos() -> [BusinessHoursDto] {
 }
 
 private enum Constants {
-  static let listVSpacing = 10.0
+  static let vSpacing = 40.0
   static let sheetHeightFraction = 0.4
 }
 
