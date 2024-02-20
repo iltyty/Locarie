@@ -34,20 +34,20 @@ struct LoginOrRegisterPage: View {
 
   var loginButton: some View {
     NavigationLink(value: Router.Destination.login) {
-      primaryColorFormItemBuilder(text: "Log in")
+      BackgroundButtonFormItem(title: "Log in", isFixedWidth: true)
     }
   }
 
   var signupButton: some View {
     NavigationLink(value: Router.Destination.regularRegister) {
-      strokeFormItemBuilder(text: "Sign up", color: Color.locariePrimary)
+      StrokeButtonFormItem(title: "Sign up")
     }
   }
 
   var signupBusinessButton: some View {
     NavigationLink(value: Router.Destination.businessRegister) {
-      strokeFormItemBuilder(
-        text: "Sign up for a business account",
+      StrokeButtonFormItem(
+        title: "Sign up for a business account",
         color: Constants.businessButtonColor
       )
     }

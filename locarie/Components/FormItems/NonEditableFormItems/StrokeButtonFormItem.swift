@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StrokeButtonFormItem: View {
   let title: String
-  let color: Color
+  var color: Color = .locariePrimary
 
   var body: some View {
     Text(title)
@@ -32,7 +32,7 @@ private enum Constants {
 
 #Preview {
   VStack {
-    StrokeButtonFormItem(title: "Sign up", color: .locariePrimary)
+    StrokeButtonFormItem(title: "Sign up")
     StrokeButtonFormItem(
       title: "Sign up for a business account",
       color: Color(hex: 0x326AFB)

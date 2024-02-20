@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct BackgroundButtonFormItem: View {
-  let text: String
+  let title: String
   var isFullWidth: Bool = true
+  var isFixedWidth: Bool = false
   let color: Color = .locariePrimary
 
   var body: some View {
     Group {
-      if isFullWidth {
+      if isFixedWidth {
+        content.frame(width: Constants.width)
+      } else if isFullWidth {
         content.frame(maxWidth: .infinity)
       } else {
         content
@@ -24,7 +27,7 @@ struct BackgroundButtonFormItem: View {
   }
 
   private var content: some View {
-    Text(text)
+    Text(title)
       .padding(.horizontal, Constants.textHPadding)
       .fontWeight(.semibold)
       .foregroundStyle(.white)
@@ -38,15 +41,17 @@ struct BackgroundButtonFormItem: View {
 }
 
 private enum Constants {
+  static let width: CGFloat = 292
   static let textHPadding: CGFloat = 48
 }
 
 #Preview {
   VStack {
-    BackgroundButtonFormItem(text: "Log in")
-    BackgroundButtonFormItem(text: "Log in", isFullWidth: false)
+    BackgroundButtonFormItem(title: "Log in")
+    BackgroundButtonFormItem(title: "Log in", isFullWidth: false)
+    BackgroundButtonFormItem(title: "Log in", isFixedWidth: true)
     BackgroundButtonFormItem(
-      text: "Sign up for a business account",
+      title: "Sign up for a business account",
       isFullWidth: false
     )
   }
