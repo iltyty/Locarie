@@ -95,7 +95,7 @@ struct BusinessRegisterPage: View {
 
 private enum Constants {
   static let vSpacing: CGFloat = 16
-  static let titleBottomPadding: CGFloat = 100
+  static let titleBottomPadding: CGFloat = 80
   static let buttonDisabledOpacity: CGFloat = 0.5
 }
 

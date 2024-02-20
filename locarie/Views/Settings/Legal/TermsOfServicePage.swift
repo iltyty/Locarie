@@ -20,7 +20,6 @@ struct TermsOfServicePage: View {
 private extension TermsOfServicePage {
   var navigationBar: some View {
     NavigationTitle("Terms of service", divider: true)
-      .padding(.bottom)
   }
 
   var termsOfService: some View {

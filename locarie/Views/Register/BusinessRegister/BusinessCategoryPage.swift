@@ -87,7 +87,7 @@ struct BusinessCategoryPage: View {
 }
 
 private enum Constants {
-  static let titleBottomPadding: CGFloat = 100
+  static let titleBottomPadding: CGFloat = 80
   static let textBottomPadding: CGFloat = 50
   static let tagVSpacing: CGFloat = 30
   static let buttonDisabledOpacity: CGFloat = 0.5

@@ -116,8 +116,6 @@ private extension BusinessAddressPage {
 
   var navigationTitle: some View {
     NavigationTitle("Business address")
-      .padding(.bottom)
-      .background(.background)
   }
 
   var map: some View {

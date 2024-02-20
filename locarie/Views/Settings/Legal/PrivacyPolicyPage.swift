@@ -20,7 +20,6 @@ struct PrivacyPolicyPage: View {
 private extension PrivacyPolicyPage {
   var navigationBar: some View {
     NavigationTitle("Privacy policy", divider: true)
-      .padding(.bottom)
   }
 
   var privacyPolicy: some View {

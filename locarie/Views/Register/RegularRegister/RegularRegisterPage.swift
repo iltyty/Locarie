@@ -103,7 +103,6 @@ extension RegularRegisterPage {
 
   var navigationBar: some View {
     NavigationTitle("Create an account")
-      .padding(.bottom)
   }
 
   var emailInput: some View {

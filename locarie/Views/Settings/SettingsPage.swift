@@ -15,12 +15,10 @@ struct SettingsPage: View {
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
-        navigationTitle
+        navigationBar
         accountSectionTitle
         myAccount
         changePassword
-        notifications
-        socialAccounts
         locarieForBusinessSectionTitle
         signUpForBusiness
         supportSectionTitle
@@ -36,8 +34,8 @@ struct SettingsPage: View {
 }
 
 private extension SettingsPage {
-  var navigationTitle: some View {
-    NavigationTitle("Account")
+  var navigationBar: some View {
+    NavigationTitle("Account", divider: true)
   }
 
   var accountSectionTitle: some View {
@@ -62,24 +60,6 @@ private extension SettingsPage {
     .buttonStyle(.plain)
   }
 
-  var notifications: some View {
-    NavigationLink {
-      NotificationsPage()
-    } label: {
-      LinkSettingsItem(text: "Notifications")
-    }
-    .buttonStyle(.plain)
-  }
-
-  var socialAccounts: some View {
-    NavigationLink {
-      SocialAccountsPage()
-    } label: {
-      LinkSettingsItem(text: "Social accounts")
-    }
-    .buttonStyle(.plain)
-  }
-
   var locarieForBusinessSectionTitle: some View {
     SettingsSectionTitle(text: "Locarie for business")
   }
@@ -87,6 +67,7 @@ private extension SettingsPage {
   var signUpForBusiness: some View {
     NavigationLink(value: Router.Destination.businessRegister) {
       LinkSettingsItem(text: "Sign up for business account", highlighted: true)
+        .fontWeight(.semibold)
     }
     .buttonStyle(.plain)
   }
@@ -140,6 +121,7 @@ private extension SettingsPage {
       cacheViewModel.clean()
       dismiss()
     }
+    .fontWeight(.semibold)
     .padding(.leading)
   }
 }

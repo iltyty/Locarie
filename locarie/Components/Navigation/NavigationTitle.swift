@@ -37,6 +37,7 @@ struct NavigationTitle<L: View, R: View>: View {
         Divider()
       }
     }
+    .padding(.bottom)
   }
 }
 
