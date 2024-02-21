@@ -56,7 +56,6 @@
 		5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEE2B288D3300645F5C /* UserLoginService.swift */; };
 		5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF02B288D6C00645F5C /* UserRegisterService.swift */; };
 		5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF22B28954E00645F5C /* UserInfo.swift */; };
-		5055689C2B84894D00FD21E4 /* StrokeFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055689B2B84894C00FD21E4 /* StrokeFormItemBuilder.swift */; };
 		505568C22B8499CC00FD21E4 /* BackgroundButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568BC2B8499CB00FD21E4 /* BackgroundButtonFormItem.swift */; };
 		505568C42B8499CC00FD21E4 /* TextEditFormItemWithInlineTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C02B8499CB00FD21E4 /* TextEditFormItemWithInlineTitle.swift */; };
 		505568C62B84A19000FD21E4 /* FormItemCommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C52B84A19000FD21E4 /* FormItemCommonConstants.swift */; };
@@ -64,7 +63,7 @@
 		505568CA2B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568C92B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift */; };
 		505568CC2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568CB2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift */; };
 		505568CF2B84BB7500FD21E4 /* StrokeButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568CE2B84BB7500FD21E4 /* StrokeButtonFormItem.swift */; };
-		505568D12B84BCA000FD21E4 /* LinkFormItem1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */; };
+		505568D12B84BCA000FD21E4 /* LinkFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568D02B84BCA000FD21E4 /* LinkFormItem.swift */; };
 		5075FCB52B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */; };
 		5075FCBA2B8605BD005E4A8B /* CoverTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCB92B8605BD005E4A8B /* CoverTopView.swift */; };
 		5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBB2B86190B005E4A8B /* PostCover.swift */; };
@@ -125,17 +124,9 @@
 		50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DC2B3D079200D06F20 /* LoginViewModel.swift */; };
 		50F549E02B3D0F9000D06F20 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DF2B3D0F9000D06F20 /* NetworkError.swift */; };
 		50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */; };
-		50F549F32B44F59C00D06F20 /* InputFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F22B44F59C00D06F20 /* InputFormItemBuilder.swift */; };
 		50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */; };
 		50F549FB2B44F71300D06F20 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549FA2B44F71300D06F20 /* Constants.swift */; };
-		50F549FE2B45260100D06F20 /* TextFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549FD2B45260100D06F20 /* TextFormItem.swift */; };
-		50F54A002B45279D00D06F20 /* SecureFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549FF2B45279D00D06F20 /* SecureFormItem.swift */; };
 		50F54A032B45283C00D06F20 /* NavigationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A022B45283C00D06F20 /* NavigationTitle.swift */; };
-		50F54A0A2B452EAE00D06F20 /* PrimaryColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A092B452EAE00D06F20 /* PrimaryColorButton.swift */; };
-		50F54A0C2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A0B2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift */; };
-		50F54A122B45318000D06F20 /* BackgroundColorFormItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A112B45318000D06F20 /* BackgroundColorFormItemBuilder.swift */; };
-		50F54A142B45320B00D06F20 /* LinkFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A132B45320B00D06F20 /* LinkFormItem.swift */; };
-		50F54A182B4532F900D06F20 /* FormItemBackgroundBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */; };
 		50F54A1D2B454E0800D06F20 /* UserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1C2B454E0800D06F20 /* UserProfileEditPage.swift */; };
 		50F54A202B45503900D06F20 /* AvatarEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1F2B45503800D06F20 /* AvatarEditor.swift */; };
 		50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */; };
@@ -222,7 +213,6 @@
 		5054CDEE2B288D3300645F5C /* UserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 		5054CDF02B288D6C00645F5C /* UserRegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterService.swift; sourceTree = "<group>"; };
 		5054CDF22B28954E00645F5C /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		5055689B2B84894C00FD21E4 /* StrokeFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeFormItemBuilder.swift; sourceTree = "<group>"; };
 		505568BC2B8499CB00FD21E4 /* BackgroundButtonFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundButtonFormItem.swift; sourceTree = "<group>"; };
 		505568C02B8499CB00FD21E4 /* TextEditFormItemWithInlineTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithInlineTitle.swift; sourceTree = "<group>"; };
 		505568C52B84A19000FD21E4 /* FormItemCommonConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemCommonConstants.swift; sourceTree = "<group>"; };
@@ -230,7 +220,7 @@
 		505568C92B84A65D00FD21E4 /* TextEditFormItemWithBlockTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithBlockTitle.swift; sourceTree = "<group>"; };
 		505568CB2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithIconTitle.swift; sourceTree = "<group>"; };
 		505568CE2B84BB7500FD21E4 /* StrokeButtonFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButtonFormItem.swift; sourceTree = "<group>"; };
-		505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItem1.swift; sourceTree = "<group>"; };
+		505568D02B84BCA000FD21E4 /* LinkFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItem.swift; sourceTree = "<group>"; };
 		5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItemWithBlockTitle.swift; sourceTree = "<group>"; };
 		5075FCB92B8605BD005E4A8B /* CoverTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverTopView.swift; sourceTree = "<group>"; };
 		5075FCBB2B86190B005E4A8B /* PostCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCover.swift; sourceTree = "<group>"; };
@@ -294,17 +284,9 @@
 		50F549DC2B3D079200D06F20 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = locarie/ViewModels/User/LoginViewModel.swift; sourceTree = SOURCE_ROOT; };
 		50F549DF2B3D0F9000D06F20 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateViewModel.swift; sourceTree = "<group>"; };
-		50F549F22B44F59C00D06F20 /* InputFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormItemBuilder.swift; sourceTree = "<group>"; };
 		50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarBuilder.swift; sourceTree = "<group>"; };
 		50F549FA2B44F71300D06F20 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		50F549FD2B45260100D06F20 /* TextFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFormItem.swift; sourceTree = "<group>"; };
-		50F549FF2B45279D00D06F20 /* SecureFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureFormItem.swift; sourceTree = "<group>"; };
 		50F54A022B45283C00D06F20 /* NavigationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitle.swift; sourceTree = "<group>"; };
-		50F54A092B452EAE00D06F20 /* PrimaryColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryColorButton.swift; sourceTree = "<group>"; };
-		50F54A0B2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryColorFormItemBuilder.swift; sourceTree = "<group>"; };
-		50F54A112B45318000D06F20 /* BackgroundColorFormItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorFormItemBuilder.swift; sourceTree = "<group>"; };
-		50F54A132B45320B00D06F20 /* LinkFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItem.swift; sourceTree = "<group>"; };
-		50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemBackgroundBuilder.swift; sourceTree = "<group>"; };
 		50F54A1C2B454E0800D06F20 /* UserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileEditPage.swift; sourceTree = "<group>"; };
 		50F54A1F2B45503800D06F20 /* AvatarEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEditor.swift; sourceTree = "<group>"; };
 		50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
@@ -482,7 +464,6 @@
 				5000C6C32AF7CD3D0057EF2D /* BottomTabView */,
 				50F54A082B452EA300D06F20 /* Buttons */,
 				50F549EF2B44F44C00D06F20 /* ComponentBuilders */,
-				50F549FC2B4525EB00D06F20 /* Form */,
 				505568B92B8499CB00FD21E4 /* FormItems */,
 				50FDD8A22B550927003015F9 /* Images */,
 				50F54A012B45283000D06F20 /* Navigation */,
@@ -601,7 +582,7 @@
 			children = (
 				505568BC2B8499CB00FD21E4 /* BackgroundButtonFormItem.swift */,
 				505568CE2B84BB7500FD21E4 /* StrokeButtonFormItem.swift */,
-				505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */,
+				505568D02B84BCA000FD21E4 /* LinkFormItem.swift */,
 				5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */,
 			);
 			path = NonEditableFormItems;
@@ -959,21 +940,10 @@
 		50F549EF2B44F44C00D06F20 /* ComponentBuilders */ = {
 			isa = PBXGroup;
 			children = (
-				50F54A0D2B452FB200D06F20 /* Form */,
 				50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */,
 				50F549FA2B44F71300D06F20 /* Constants.swift */,
 			);
 			path = ComponentBuilders;
-			sourceTree = "<group>";
-		};
-		50F549FC2B4525EB00D06F20 /* Form */ = {
-			isa = PBXGroup;
-			children = (
-				50F549FD2B45260100D06F20 /* TextFormItem.swift */,
-				50F549FF2B45279D00D06F20 /* SecureFormItem.swift */,
-				50F54A132B45320B00D06F20 /* LinkFormItem.swift */,
-			);
-			path = Form;
 			sourceTree = "<group>";
 		};
 		50F54A012B45283000D06F20 /* Navigation */ = {
@@ -987,23 +957,10 @@
 		50F54A082B452EA300D06F20 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				50F54A092B452EAE00D06F20 /* PrimaryColorButton.swift */,
 				50CBC9832B6F41260025A0D9 /* CircleButton.swift */,
 				50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */,
 			);
 			path = Buttons;
-			sourceTree = "<group>";
-		};
-		50F54A0D2B452FB200D06F20 /* Form */ = {
-			isa = PBXGroup;
-			children = (
-				50F549F22B44F59C00D06F20 /* InputFormItemBuilder.swift */,
-				50F54A112B45318000D06F20 /* BackgroundColorFormItemBuilder.swift */,
-				50F54A0B2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift */,
-				50F54A172B4532F900D06F20 /* FormItemBackgroundBuilder.swift */,
-				5055689B2B84894C00FD21E4 /* StrokeFormItemBuilder.swift */,
-			);
-			path = Form;
 			sourceTree = "<group>";
 		};
 		50F54A1E2B45502500D06F20 /* Components */ = {
@@ -1198,15 +1155,13 @@
 				5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */,
 				504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
-				505568D12B84BCA000FD21E4 /* LinkFormItem1.swift in Sources */,
+				505568D12B84BCA000FD21E4 /* LinkFormItem.swift in Sources */,
 				50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */,
 				50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */,
 				50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */,
-				50F549FE2B45260100D06F20 /* TextFormItem.swift in Sources */,
 				50369A702B304196005D6B43 /* PostCreateViewModel.swift in Sources */,
 				50998AF42B35D376002196B5 /* RegularRegisterPage.swift in Sources */,
 				505568C42B8499CC00FD21E4 /* TextEditFormItemWithInlineTitle.swift in Sources */,
-				50F54A002B45279D00D06F20 /* SecureFormItem.swift in Sources */,
 				50FDD8A12B54D9D0003015F9 /* UserDefaults+Reset.swift in Sources */,
 				502A4FFC2B32D71500C0833A /* UserDto.swift in Sources */,
 				50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */,
@@ -1214,7 +1169,6 @@
 				501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */,
 				50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
-				50F54A0A2B452EAE00D06F20 /* PrimaryColorButton.swift in Sources */,
 				50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */,
@@ -1222,17 +1176,14 @@
 				505568C22B8499CC00FD21E4 /* BackgroundButtonFormItem.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomSheet.swift in Sources */,
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
-				50F549F32B44F59C00D06F20 /* InputFormItemBuilder.swift in Sources */,
 				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+London.swift in Sources */,
 				502A4FF02B32D34B00C0833A /* Color+Hex.swift in Sources */,
 				50F54A032B45283C00D06F20 /* NavigationTitle.swift in Sources */,
 				501BAF4C2B4653FF00D9D84F /* ChangePasswordConstants.swift in Sources */,
-				50F54A182B4532F900D06F20 /* FormItemBackgroundBuilder.swift in Sources */,
 				50FDD8992B523B95003015F9 /* AvatarUploadService.swift in Sources */,
 				509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */,
 				501BAF2C2B46319700D9D84F /* MyAccountPage.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
-				50F54A142B45320B00D06F20 /* LinkFormItem.swift in Sources */,
 				501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
 				50CBC9862B6F42FD0025A0D9 /* CapsuleButton.swift in Sources */,
@@ -1264,7 +1215,6 @@
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
 				5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */,
 				5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */,
-				50F54A0C2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift in Sources */,
 				5075FCC02B861C66005E4A8B /* BusinessProfileCover.swift in Sources */,
 				501BAF312B46345500D9D84F /* PrivacyPolicyPage.swift in Sources */,
 				5000C6C92AF8C3440057EF2D /* SearchPage.swift in Sources */,
@@ -1278,7 +1228,6 @@
 				501BAF232B462C4F00D9D84F /* LinkSettingsItem.swift in Sources */,
 				50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */,
 				509AC0512B57832400A79CDB /* LocationManager.swift in Sources */,
-				5055689C2B84894D00FD21E4 /* StrokeFormItemBuilder.swift in Sources */,
 				505568CF2B84BB7500FD21E4 /* StrokeButtonFormItem.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
@@ -1312,7 +1261,6 @@
 				50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */,
 				50B5DEC62B3B092F00C0A641 /* MapboxSuggestionService.swift in Sources */,
 				509AC04F2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift in Sources */,
-				50F54A122B45318000D06F20 /* BackgroundColorFormItemBuilder.swift in Sources */,
 				50B11ADA2AFB3661002A7B91 /* PostDetailPage.swift in Sources */,
 				50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */,
 				505568C82B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift in Sources */,

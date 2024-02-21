@@ -141,25 +141,6 @@ private extension LoginPage {
     Text("or").foregroundStyle(.secondary)
   }
 
-  @ViewBuilder var googleButton: some View {
-    let label = Label {
-      Text("Continue with Google")
-    } icon: {
-      Image("GoogleLogo")
-        .resizable()
-        .frame(
-          width: Constants.googleIconSize,
-          height: Constants.googleIconSize
-        )
-    }
-    Button {
-      print("google button tapped")
-    } label: {
-      backgroundColorFormItemBuilder(label: label)
-    }
-    .tint(.primary)
-  }
-
   var signUpText: some View {
     HStack {
       Text("Don't have an account?")

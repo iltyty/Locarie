@@ -31,23 +31,6 @@ struct BusinessAddressPage: View {
     )
   }
 
-//  init(address: Binding<String>, location: Binding<BusinessLocation>) {
-//    _address = address
-//    _location = location
-//    guard location.wrappedValue.isValid else {
-//      _viewport = .init(wrappedValue: .followPuck(zoom: Constants.mapZoom))
-//      return
-//    }
-//    let location = location.wrappedValue
-//    let coordinate = CLLocationCoordinate2D(
-//      latitude: location.latitude, longitude: location.longitude
-//    )
-//    _viewport = .init(wrappedValue: .camera(
-//      center: coordinate,
-//      zoom: Constants.mapZoom
-//    ))
-//  }
-
   var body: some View {
     VStack {
       top
@@ -142,7 +125,7 @@ private extension BusinessAddressPage {
     Button {
       dismiss()
     } label: {
-      primaryColorFormItemBuilder(text: "Confirm")
+      StrokeButtonFormItem(title: "Select")
     }
     .disabled(isButtonDisabled)
     .opacity(buttonOpacity)

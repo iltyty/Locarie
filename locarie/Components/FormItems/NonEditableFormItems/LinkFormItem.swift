@@ -1,5 +1,5 @@
 //
-//  LinkFormItem1.swift
+//  LinkFormItem.swift
 //  locarie
 //
 //  Created by qiuty on 20/02/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LinkFormItem1: View {
+struct LinkFormItem: View {
   let title: String
   let hint: String
 
@@ -59,12 +59,12 @@ private enum Constants {
 
 #Preview {
   VStack {
-    LinkFormItem1(
+    LinkFormItem(
       title: "Business name",
       hint: "Business name",
       text: .constant("")
     )
-    LinkFormItem1(
+    LinkFormItem(
       title: "Email",
       hint: "Email",
       text: .constant("email@example.com")

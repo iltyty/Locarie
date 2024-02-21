@@ -172,20 +172,18 @@ private extension UserProfileEditPage {
   @ViewBuilder
   var businessNameInput: some View {
     let text = "Business name"
-    TextFormItem(
+    TextEditFormItemWithInlineTitle(
       title: text,
       hint: text,
-      input: $profileUpdateViewModel.dto.businessName,
-      showIcon: true
+      text: $profileUpdateViewModel.dto.businessName
     )
   }
 
   var usernameInput: some View {
-    TextFormItem(
+    TextEditFormItemWithInlineTitle(
       title: "@Username",
       hint: "Username",
-      input: $profileUpdateViewModel.dto.username,
-      showIcon: true
+      text: $profileUpdateViewModel.dto.username
     )
   }
 
@@ -248,51 +246,46 @@ private extension UserProfileEditPage {
   }
 
   var linkInput: some View {
-    TextFormItem(
+    TextEditFormItemWithInlineTitle(
       title: "Link",
       hint: "Link optional",
-      input: $profileUpdateViewModel.dto.homepageUrl,
-      showIcon: true
+      text: $profileUpdateViewModel.dto.homepageUrl
     )
   }
 
   @ViewBuilder
   var emailInput: some View {
     let text = "Email"
-    TextFormItem(
-      title: text, hint: text, input: $profileUpdateViewModel.dto.email,
-      showIcon: true
+    TextEditFormItemWithInlineTitle(
+      title: text, hint: text, text: $profileUpdateViewModel.dto.email
     )
   }
 
   var phoneInput: some View {
-    TextFormItem(
+    TextEditFormItemWithInlineTitle(
       title: "Phone",
       hint: "Phone optional",
-      input: $profileUpdateViewModel.dto.phone,
-      showIcon: true
+      text: $profileUpdateViewModel.dto.phone
     )
   }
 
   @ViewBuilder
   var firstNameInput: some View {
     let text = "First Name"
-    TextFormItem(
+    TextEditFormItemWithInlineTitle(
       title: text,
       hint: text,
-      input: $profileUpdateViewModel.dto.firstName,
-      showIcon: true
+      text: $profileUpdateViewModel.dto.firstName
     )
   }
 
   @ViewBuilder
   var lastNameInput: some View {
     let text = "Last Name"
-    TextFormItem(
+    TextEditFormItemWithInlineTitle(
       title: text,
       hint: text,
-      input: $profileUpdateViewModel.dto.lastName,
-      showIcon: true
+      text: $profileUpdateViewModel.dto.lastName
     )
   }
 
