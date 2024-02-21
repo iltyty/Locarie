@@ -16,7 +16,10 @@ struct PostDetailPage: View {
   @StateObject private var listUserPostsVM = ListUserPostsViewModel()
 
   @State private var screenSize: CGSize = .zero
-  @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
+  @State private var viewport: Viewport = .camera(
+    center: .london,
+    zoom: Constants.mapZoom
+  )
 
   @State private var user = UserDto()
   @State private var post = PostDto()
@@ -73,7 +76,7 @@ private extension PostDetailPage {
             .onTapGesture {
               viewport = .camera(
                 center: post.businessLocationCoordinate,
-                zoom: 12
+                zoom: Constants.mapZoom
               )
             }
         }
@@ -93,14 +96,10 @@ private extension PostDetailPage {
 
   var bottomContent: some View {
     BottomSheet(detents: [.minimum, .large]) {
-      VStack(alignment: .leading) {
-        profile
-        categories
-        if showingDetailedProfile {
-          detailedProfile
-        }
-        posts
-      }
+      BusinessProfileView(
+        user: user,
+        isPresentingCover: $showingBusinessProfileCover
+      )
     }
     .ignoresSafeArea(edges: .bottom)
   }
@@ -121,91 +120,6 @@ private extension PostDetailPage {
 
   var moreButton: some View {
     CircleButton(systemName: "ellipsis")
-  }
-}
-
-private extension PostDetailPage {
-  var profile: some View {
-    HStack {
-      avatar
-      nameAndNeighborhood
-      Spacer()
-      profileButton
-    }
-  }
-
-  var avatar: some View {
-    AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
-      .onTapGesture {
-        toggleShowingBusinessProfileCover()
-      }
-  }
-
-  var nameAndNeighborhood: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      Text(user.businessName)
-      Text("Marylebone")
-    }
-  }
-
-  var profileButton: some View {
-    Text(showingDetailedProfile ? "Hide profile" : "See profile")
-      .foregroundStyle(.secondary)
-      .background(Capsule().fill(.background))
-      .onTapGesture {
-        withAnimation(.spring) {
-          showingDetailedProfile.toggle()
-        }
-      }
-  }
-}
-
-private extension PostDetailPage {
-  var detailedProfile: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      bio
-      favoriteCount
-      address
-      openUntil
-      seeAllButton
-    }
-  }
-
-  var bio: some View {
-    Text(user.introduction)
-  }
-
-  var favoriteCount: some View {
-    Label("26", systemImage: "bookmark")
-  }
-
-  var address: some View {
-    Label(user.address, systemImage: "map")
-  }
-
-  var openUntil: some View {
-    Label(user.openUtil, systemImage: "clock")
-  }
-
-  var seeAllButton: some View {
-    Label("See all", systemImage: "text.justify")
-      .foregroundStyle(.secondary)
-  }
-}
-
-private extension PostDetailPage {
-  var posts: some View {
-    ScrollView {
-      VStack {
-        ForEach(listUserPostsVM.posts) { post in
-          PostCardView(post)
-            .onTapGesture {
-              self.post = post
-              toggleShowingPostContentCover()
-            }
-        }
-      }
-    }
   }
 }
 
@@ -232,12 +146,9 @@ private extension PostDetailPage {
 }
 
 private enum Constants {
-  static let avatarSize = 72.0
-  static let vSpacing = 15.0
-  static let profileCoverImageWidthProportion = 0.9
-  static let profileCoverImageHeightProportion = 0.3
-  static let postCoverImageWidthProportion = 0.9
-  static let postCoverImageHeightProportion = 0.6
+  static let avatarSize: CGFloat = 72
+  static let vSpacing: CGFloat = 15
+  static let mapZoom: CGFloat = 12
 }
 
 #Preview {

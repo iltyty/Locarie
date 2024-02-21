@@ -69,6 +69,7 @@
 		5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBB2B86190B005E4A8B /* PostCover.swift */; };
 		5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBD2B861A06005E4A8B /* CoverCommonConstants.swift */; };
 		5075FCC02B861C66005E4A8B /* BusinessProfileCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBF2B861C66005E4A8B /* BusinessProfileCover.swift */; };
+		5075FCC32B865860005E4A8B /* BusinessProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCC22B865860005E4A8B /* BusinessProfileView.swift */; };
 		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
@@ -226,6 +227,7 @@
 		5075FCBB2B86190B005E4A8B /* PostCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCover.swift; sourceTree = "<group>"; };
 		5075FCBD2B861A06005E4A8B /* CoverCommonConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverCommonConstants.swift; sourceTree = "<group>"; };
 		5075FCBF2B861C66005E4A8B /* BusinessProfileCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfileCover.swift; sourceTree = "<group>"; };
+		5075FCC22B865860005E4A8B /* BusinessProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfileView.swift; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5075FCC12B865815005E4A8B /* Profile */,
 				5075FCB82B860547005E4A8B /* FullScreenCovers */,
 				509AC04A2B56806F00A79CDB /* BottomSheet */,
 				5000C6C32AF7CD3D0057EF2D /* BottomTabView */,
@@ -597,6 +600,14 @@
 				5075FCBF2B861C66005E4A8B /* BusinessProfileCover.swift */,
 			);
 			path = FullScreenCovers;
+			sourceTree = "<group>";
+		};
+		5075FCC12B865815005E4A8B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				5075FCC22B865860005E4A8B /* BusinessProfileView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		50998AF52B35D4C1002196B5 /* User */ = {
@@ -1185,6 +1196,7 @@
 				501BAF2C2B46319700D9D84F /* MyAccountPage.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
 				501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */,
+				5075FCC32B865860005E4A8B /* BusinessProfileView.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
 				50CBC9862B6F42FD0025A0D9 /* CapsuleButton.swift in Sources */,
 				5075FCB52B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift in Sources */,

@@ -9,16 +9,13 @@
 import SwiftUI
 
 struct BusinessUserProfilePage: View {
-  @State private var showingDetailProfile = false
-  @State private var showingProfileCover = false
-
   @State private var screenSize: CGSize = .zero
   @State private var viewport: Viewport = .camera(
     center: .london, zoom: Constants.mapZoom
   )
+  @State private var showingProfileCover = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
-  @StateObject private var postsVM = ListUserPostsViewModel()
   @StateObject private var profileVM = ProfileGetViewModel()
 
   var body: some View {
@@ -34,7 +31,6 @@ struct BusinessUserProfilePage: View {
       }
       .onAppear {
         screenSize = proxy.size
-        postsVM.getUserPosts(id: cacheVM.getUserId())
         profileVM.getProfile(userId: cacheVM.getUserId())
       }
       .onReceive(profileVM.$dto) { dto in
@@ -78,7 +74,10 @@ private extension BusinessUserProfilePage {
       buttons
       Spacer()
       BottomSheet(detents: [.medium, .fraction(0.67)]) {
-        profile
+        BusinessProfileView(
+          user: profileVM.dto,
+          isPresentingCover: $showingProfileCover
+        )
       }
     }
   }
@@ -134,208 +133,6 @@ private extension BusinessUserProfilePage {
 }
 
 private extension BusinessUserProfilePage {
-  var profile: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      avatarRow
-      ScrollView {
-        VStack(alignment: .leading, spacing: Constants.vSpacing) {
-          categories
-          businessBio
-          if showingDetailProfile {
-            detailProfile
-          }
-          numPostsTitle
-          posts
-        }
-      }
-    }
-    .padding(.horizontal)
-  }
-
-  var avatarRow: some View {
-    HStack {
-      avatar
-      businessName
-      Spacer()
-      detailButton
-    }
-  }
-
-  var avatar: some View {
-    ZStack(alignment: .bottomTrailing) {
-      AvatarView(
-        imageUrl: cacheVM.getAvatarUrl(),
-        size: Constants.avatarSize
-      )
-      avatarEditIcon
-    }
-  }
-
-  var avatarEditIcon: some View {
-    Circle()
-      .fill(.background)
-      .stroke(.secondary)
-      .frame(
-        width: Constants.avatarIconBgSize,
-        height: Constants.avatarIconBgSize
-      )
-      .overlay {
-        Image("BlueEditIcon")
-          .resizable()
-          .scaledToFill()
-          .frame(
-            width: Constants.avatarIconSize,
-            height: Constants.avatarIconSize
-          )
-      }
-      .onTapGesture {
-        withAnimation(.spring) {
-          showingProfileCover = true
-        }
-      }
-  }
-
-  var businessName: some View {
-    Text(profileVM.dto.businessName)
-      .font(.headline)
-      .fontWeight(.bold)
-  }
-
-  var detailButton: some View {
-    Button {
-      withAnimation(.spring) {
-        showingDetailProfile.toggle()
-      }
-    } label: {
-      Image(systemName: showingDetailProfile ? "chevron.up" : "chevron.down")
-    }
-    .buttonStyle(.plain)
-  }
-
-  var categories: some View {
-    ScrollView(.horizontal) {
-      HStack {
-        ForEach(profileVM.dto.categories, id: \.self) { category in
-          TagView(tag: category, isSelected: false)
-        }
-      }
-    }
-  }
-
-  var detailProfile: some View {
-    VStack(alignment: .leading, spacing: Constants.detailProfileVSpacing) {
-      favoredBy
-      location
-      openingHours
-      link
-      phone
-      Divider()
-    }
-  }
-
-  var favoredBy: some View {
-    Label("\(profileVM.dto.favoredByCount)", systemImage: "bookmark")
-  }
-
-  var businessBio: some View {
-    var bio = profileVM.dto.introduction
-    if bio.isEmpty {
-      bio = "Go set up the profile!"
-    }
-    return Text(bio).foregroundStyle(.secondary).lineLimit(2)
-  }
-
-  var location: some View {
-    Label {
-      Text(profileVM.dto.address)
-    } icon: {
-      Image("BlueMap")
-        .resizable()
-        .scaledToFit()
-        .frame(
-          width: Constants.profileIconSize,
-          height: Constants.profileIconSize
-        )
-    }
-  }
-
-  var openingHours: some View {
-    Label {
-      openingHoursText
-    } icon: {
-      Image(systemName: "clock")
-    }
-    .lineLimit(1)
-  }
-
-  @ViewBuilder
-  var openingHoursText: some View {
-    let text = profileVM.dto.formattedBusinessHours
-    text.isEmpty
-      ? Text("Opening hours").foregroundStyle(.secondary)
-      : Text(text)
-  }
-
-  var link: some View {
-    Label {
-      linkText
-    } icon: {
-      Image(systemName: "link")
-    }
-  }
-
-  @ViewBuilder
-  var linkText: some View {
-    let text = profileVM.dto.homepageUrl
-    text.isEmpty
-      ? Text("Link").foregroundStyle(.secondary)
-      : Text(text)
-  }
-
-  var phone: some View {
-    Label {
-      phoneText
-    } icon: {
-      Image(systemName: "phone")
-    }
-  }
-
-  @ViewBuilder
-  var phoneText: some View {
-    let text = profileVM.dto.phone
-    text.isEmpty
-      ? Text("Phone number").foregroundStyle(.secondary)
-      : Text(text)
-  }
-}
-
-private extension BusinessUserProfilePage {
-  @ViewBuilder
-  var numPostsTitle: some View {
-    Group {
-      if postsVM.posts.isEmpty {
-        HStack(spacing: 0) {
-          Text("No ").foregroundStyle(Color.locariePrimary)
-          Text("post yet")
-        }
-      } else {
-        HStack(spacing: 0) {
-          Text("\(postsVM.posts.count) ").foregroundStyle(Color.locariePrimary)
-          Text("posts")
-        }
-      }
-    }
-    .fontWeight(.semibold)
-  }
-
-  var posts: some View {
-    ForEach(postsVM.posts) { post in
-      PostCardView(post)
-    }
-  }
-}
-
-private extension BusinessUserProfilePage {
   var profileCover: some View {
     BusinessProfileCover(
       user: profileVM.dto,
@@ -346,24 +143,16 @@ private extension BusinessUserProfilePage {
 
 private enum Constants {
   static let vSpacing: CGFloat = 16
-  static let detailProfileVSpacing: CGFloat = 20
 
   static let mapZoom: CGFloat = 12
   static let buttonShadowRadius: CGFloat = 2.0
 
   static let profileEditButtonBorderColor: Color = .init(hex: 0xD9D9D9)
   static let profileEditButtonIconSize: CGFloat = 16
-  static let profileImageHeightFraction = 0.25
-
-  static let profileIconSize: CGFloat = 16
 
   static let settingsButtonIconPadding: CGFloat = 10
   static let settingsButtonIconSize: CGFloat = 24
   static let settingsButtonTextPadding: CGFloat = 10
-
-  static let avatarSize: CGFloat = 72
-  static let avatarIconSize: CGFloat = 12
-  static let avatarIconBgSize: CGFloat = 24
 }
 
 #Preview {
