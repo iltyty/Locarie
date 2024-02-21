@@ -43,13 +43,7 @@ private extension PostCover {
   }
 
   var postImages: some View {
-    Banner(
-      urls: post.imageUrls,
-      width: 250,
-      height: 400,
-      rounded: true
-    )
-    .padding(.bottom)
+    Banner(urls: post.imageUrls).padding(.bottom)
   }
 
   var postStatus: some View {

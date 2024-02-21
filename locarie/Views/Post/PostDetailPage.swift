@@ -200,7 +200,7 @@ private extension PostDetailPage {
         ForEach(listUserPostsVM.posts) { post in
           PostCardView(
             post: post,
-            width: screenSize.width - 20
+            width: screenSize.width
           )
           .onTapGesture {
             self.post = post

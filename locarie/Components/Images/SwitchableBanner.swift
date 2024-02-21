@@ -54,12 +54,7 @@ struct SwitchableBanner: View {
   }
 
   private var mainImages: some View {
-    Banner(
-      urls: mainImageUrls,
-      width: bannerWidth,
-      height: bannerHeight,
-      rounded: true
-    )
+    Banner(urls: mainImageUrls)
   }
 
   private var bannerWidth: CGFloat {

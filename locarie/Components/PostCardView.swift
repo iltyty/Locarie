@@ -40,12 +40,13 @@ private extension PostCardView {
   }
 
   var cover: some View {
-    SwitchableBanner(
-      width: width,
-      height: width / Constants.coverAspectRatio,
-      mainImageUrls: post.imageUrls,
-      secondaryImageUrl: post.user.profileImageUrls.first ?? ""
-    )
+    Banner(urls: post.imageUrls, isPortrait: false)
+//    SwitchableBanner(
+//      width: width,
+//      height: width / Constants.coverAspectRatio,
+//      mainImageUrls: post.imageUrls,
+//      secondaryImageUrl: post.user.profileImageUrls.first ?? ""
+//    )
   }
 
   var content: some View {

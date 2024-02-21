@@ -14,10 +14,10 @@ struct BusinessProfileCover: View {
   var body: some View {
     VStack(alignment: .leading) {
       coverTop
-      Spacer()
+      blank
       profileImages
       coverBottom
-      Spacer()
+      blank
     }
     .padding(.horizontal)
     .background(.thickMaterial.opacity(CoverCommonConstants.backgroundOpacity))
@@ -42,13 +42,7 @@ private extension BusinessProfileCover {
   }
 
   var profileImages: some View {
-    Banner(
-      urls: user.profileImageUrls,
-      width: 250,
-      height: 200,
-      rounded: true
-    )
-    .padding(.bottom)
+    Banner(urls: user.profileImageUrls, isPortrait: false).padding(.bottom)
   }
 
   var coverBottom: some View {
