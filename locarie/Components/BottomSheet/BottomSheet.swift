@@ -36,14 +36,11 @@ struct BottomSheet<Content: View>: View {
     GeometryReader { proxy in
       VStack {
         handler
-        ScrollView {
-          HStack {
-            Spacer()
-            content
-            Spacer()
-          }
+        HStack {
+          Spacer()
+          content
+          Spacer()
         }
-        .scrollIndicators(.hidden)
       }
       .background(background)
       .offset(y: translation.height + offsetY)
@@ -121,9 +118,11 @@ enum BottomSheetConstants {
 
 #Preview {
   BottomSheet(detents: [.minimum, .large]) {
-    VStack {
-      ForEach(1 ..< 100, id: \.self) { i in
-        Text("This is text \(i)")
+    ScrollView {
+      VStack {
+        ForEach(1 ..< 100, id: \.self) { i in
+          Text("This is text \(i)")
+        }
       }
     }
   }

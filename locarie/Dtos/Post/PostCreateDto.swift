@@ -9,13 +9,11 @@ import Foundation
 
 struct PostCreateRequestDto: Codable {
   var user: UserId
-  var title: String
   var content: String
 }
 
 struct PostCreateResponseDto: Codable {
   let id: Int64
-  let title: String
   let content: String
 }
 

@@ -131,13 +131,17 @@ private extension BusinessUserProfilePage {
   var profile: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
       avatarRow
-      categories
-      businessBio
-      if showingDetailProfile {
-        detailProfile
+      ScrollView {
+        VStack(alignment: .leading, spacing: Constants.vSpacing) {
+          categories
+          businessBio
+          if showingDetailProfile {
+            detailProfile
+          }
+          numPostsTitle
+          posts
+        }
       }
-      numPostsTitle
-      posts
     }
     .padding(.horizontal)
   }
@@ -283,7 +287,7 @@ private extension BusinessUserProfilePage {
         }
       } else {
         HStack(spacing: 0) {
-          Text("\(postsVM.posts.count) ")
+          Text("\(postsVM.posts.count) ").foregroundStyle(Color.locariePrimary)
           Text("posts")
         }
       }

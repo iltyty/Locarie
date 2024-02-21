@@ -9,21 +9,11 @@ import CoreLocation
 import Foundation
 
 struct PostDto: Codable, Identifiable {
-  let id: Int64
-  let time: Date
-  let title: String
-  let content: String
-  let user: UserDto
-  let imageUrls: [String]
-
-  init() {
-    id = 0
-    time = Date()
-    title = ""
-    content = ""
-    user = UserDto()
-    imageUrls = []
-  }
+  var id: Int64 = 0
+  var time = Date()
+  var content = ""
+  var user = UserDto()
+  var imageUrls: [String] = []
 }
 
 extension PostDto {
@@ -60,7 +50,7 @@ extension PostDto {
 
 extension PostDto {
   enum CodingKeys: String, CodingKey {
-    case id, time, title, content, user, imageUrls
+    case id, time, content, user, imageUrls
   }
 
   init(from decoder: Decoder) throws {
@@ -68,7 +58,6 @@ extension PostDto {
     let timeString = try container.decode(String.self, forKey: .time)
     id = try container.decode(Int64.self, forKey: .id)
     time = ISO8601DateFormatter().date(from: timeString) ?? Date()
-    title = try container.decode(String.self, forKey: .title)
     content = try container.decode(String.self, forKey: .content)
     user = try container.decode(UserDto.self, forKey: .user)
     imageUrls = try container.decode([String].self, forKey: .imageUrls)

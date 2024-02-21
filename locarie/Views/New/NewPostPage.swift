@@ -35,7 +35,6 @@ struct NewPostPage: View {
         editor(
           contentEditorHeight: proxy.size.height * Constants
             .contentEditorHeightProportion,
-          title: $postViewModel.post.title,
           content: $postViewModel.post.content
         )
         shareButton
@@ -88,14 +87,9 @@ extension NewPostPage {
 
 extension NewPostPage {
   func editor(
-    contentEditorHeight: CGFloat, title: Binding<String>,
-    content: Binding<String>
+    contentEditorHeight: CGFloat, content: Binding<String>
   ) -> some View {
     VStack {
-      TextField("Title", text: title)
-        .padding(.horizontal)
-      Divider()
-        .padding(.horizontal)
       TextField("Paragraph", text: content)
         .padding([.horizontal, .top])
         .frame(height: contentEditorHeight, alignment: .top)
@@ -161,7 +155,6 @@ extension NewPostPage {
     let user = UserId(id: cacheViewModel.getUserId())
     return PostCreateRequestDto(
       user: user,
-      title: post.title,
       content: post.content
     )
   }

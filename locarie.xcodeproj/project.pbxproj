@@ -66,6 +66,10 @@
 		505568CF2B84BB7500FD21E4 /* StrokeButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568CE2B84BB7500FD21E4 /* StrokeButtonFormItem.swift */; };
 		505568D12B84BCA000FD21E4 /* LinkFormItem1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */; };
 		5075FCB52B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */; };
+		5075FCBA2B8605BD005E4A8B /* CoverTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCB92B8605BD005E4A8B /* CoverTopView.swift */; };
+		5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBB2B86190B005E4A8B /* PostCover.swift */; };
+		5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBD2B861A06005E4A8B /* CoverCommonConstants.swift */; };
+		5075FCC02B861C66005E4A8B /* BusinessProfileCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBF2B861C66005E4A8B /* BusinessProfileCover.swift */; };
 		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
@@ -228,6 +232,10 @@
 		505568CE2B84BB7500FD21E4 /* StrokeButtonFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButtonFormItem.swift; sourceTree = "<group>"; };
 		505568D02B84BCA000FD21E4 /* LinkFormItem1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItem1.swift; sourceTree = "<group>"; };
 		5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItemWithBlockTitle.swift; sourceTree = "<group>"; };
+		5075FCB92B8605BD005E4A8B /* CoverTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverTopView.swift; sourceTree = "<group>"; };
+		5075FCBB2B86190B005E4A8B /* PostCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCover.swift; sourceTree = "<group>"; };
+		5075FCBD2B861A06005E4A8B /* CoverCommonConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverCommonConstants.swift; sourceTree = "<group>"; };
+		5075FCBF2B861C66005E4A8B /* BusinessProfileCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfileCover.swift; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
@@ -469,6 +477,7 @@
 		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5075FCB82B860547005E4A8B /* FullScreenCovers */,
 				509AC04A2B56806F00A79CDB /* BottomSheet */,
 				5000C6C32AF7CD3D0057EF2D /* BottomTabView */,
 				50F54A082B452EA300D06F20 /* Buttons */,
@@ -596,6 +605,17 @@
 				5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */,
 			);
 			path = NonEditableFormItems;
+			sourceTree = "<group>";
+		};
+		5075FCB82B860547005E4A8B /* FullScreenCovers */ = {
+			isa = PBXGroup;
+			children = (
+				5075FCBD2B861A06005E4A8B /* CoverCommonConstants.swift */,
+				5075FCB92B8605BD005E4A8B /* CoverTopView.swift */,
+				5075FCBB2B86190B005E4A8B /* PostCover.swift */,
+				5075FCBF2B861C66005E4A8B /* BusinessProfileCover.swift */,
+			);
+			path = FullScreenCovers;
 			sourceTree = "<group>";
 		};
 		50998AF52B35D4C1002196B5 /* User */ = {
@@ -1175,6 +1195,7 @@
 				50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */,
 				50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */,
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
+				5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */,
 				504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
 				505568D12B84BCA000FD21E4 /* LinkFormItem1.swift in Sources */,
@@ -1196,6 +1217,7 @@
 				50F54A0A2B452EAE00D06F20 /* PrimaryColorButton.swift in Sources */,
 				50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
+				5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */,
 				501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */,
 				505568C22B8499CC00FD21E4 /* BackgroundButtonFormItem.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomSheet.swift in Sources */,
@@ -1243,6 +1265,7 @@
 				5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */,
 				5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */,
 				50F54A0C2B452F4E00D06F20 /* PrimaryColorFormItemBuilder.swift in Sources */,
+				5075FCC02B861C66005E4A8B /* BusinessProfileCover.swift in Sources */,
 				501BAF312B46345500D9D84F /* PrivacyPolicyPage.swift in Sources */,
 				5000C6C92AF8C3440057EF2D /* SearchPage.swift in Sources */,
 				50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */,
@@ -1266,6 +1289,7 @@
 				50FDD88C2B4B8FE0003015F9 /* ProfileUpdateService.swift in Sources */,
 				509D5BC52B45611E00833021 /* OpeningHoursEditPage.swift in Sources */,
 				50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */,
+				5075FCBA2B8605BD005E4A8B /* CoverTopView.swift in Sources */,
 				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
 				50FDD88A2B4B8B0D003015F9 /* ProfileGetService.swift in Sources */,
 				50E60DE82AFF885F00CA088F /* Util.swift in Sources */,

@@ -17,7 +17,7 @@ struct PostCardView: View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
       status
       cover
-      title
+      content
       tags
     }
   }
@@ -44,12 +44,14 @@ private extension PostCardView {
       width: width,
       height: width / Constants.coverAspectRatio,
       mainImageUrls: post.imageUrls,
-      secondaryImageUrl: post.user.profileImageUrls[0]
+      secondaryImageUrl: post.user.profileImageUrls.first ?? ""
     )
   }
 
-  var title: some View {
-    Text(post.title).font(.title2).listRowSeparator(.hidden)
+  var content: some View {
+    Text(post.content)
+      .font(.title2)
+      .listRowSeparator(.hidden)
   }
 
   var tags: some View {
