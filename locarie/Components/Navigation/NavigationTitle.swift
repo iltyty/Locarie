@@ -12,6 +12,7 @@ struct NavigationTitle<L: View, R: View>: View {
   let right: R
   let title: String
   let showDivider: Bool
+  let padding: Bool
 
   @Environment(\.dismiss) var dismiss
 
@@ -19,12 +20,14 @@ struct NavigationTitle<L: View, R: View>: View {
     _ title: String = "",
     left: L = defaultTitleLeft(),
     right: R = defaultTitleRight(),
-    divider showDivider: Bool = false
+    divider showDivider: Bool = false,
+    padding: Bool = false
   ) {
     self.left = left
     self.right = right
     self.title = title
     self.showDivider = showDivider
+    self.padding = padding
   }
 
   var body: some View {
@@ -38,6 +41,7 @@ struct NavigationTitle<L: View, R: View>: View {
       }
     }
     .padding(.bottom)
+    .padding(.bottom, padding ? Constants.bottomPadding : 0)
   }
 }
 
@@ -75,6 +79,7 @@ private func defaultTitleRight() -> EmptyView {
 
 private enum Constants {
   static let leftIconSize: CGFloat = 18
+  static let bottomPadding: CGFloat = 80
 }
 
 #Preview {

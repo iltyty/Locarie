@@ -11,9 +11,14 @@ struct ResetPasswordPage: View {
   @State var email = ""
 
   var body: some View {
+    VStack {
+      navigationBar
+      content
+    }
+  }
+
+  private var content: some View {
     VStack(spacing: Constants.spacing) {
-      navigationTitle
-      Spacer()
       hint
       emailInput
       nextButton
@@ -21,26 +26,26 @@ struct ResetPasswordPage: View {
     }
   }
 
-  private var navigationTitle: some View {
-    Text("Reset Password")
-      .font(.headline)
-      .fontWeight(.bold)
+  private var navigationBar: some View {
+    NavigationTitle("Reset Password", divider: true, padding: true)
   }
 
   private var hint: some View {
     Text("Type in your email to receive an email link to reset your password. ")
+      .fontWeight(.semibold)
       .padding(.horizontal)
   }
 
   private var emailInput: some View {
-    TextFormItem(hint: "Email", input: $email)
+    TextEditFormItemWithNoTitle(hint: "Email", text: $email)
+      .padding(.horizontal)
   }
 
   private var nextButton: some View {
     Button {
       print("next button tapped")
     } label: {
-      primaryColorFormItemBuilder(text: "Next")
+      BackgroundButtonFormItem(title: "Next", isFullWidth: false)
     }
   }
 }
