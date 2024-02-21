@@ -114,10 +114,7 @@ private extension HomePage {
         NavigationLink {
           PostDetailPage(uid: post.user.id)
         } label: {
-          PostCardView(
-            post: post,
-            width: screenSize.width - 20
-          )
+          PostCardView(post)
         }
         .tint(.primary)
         .buttonStyle(.plain)

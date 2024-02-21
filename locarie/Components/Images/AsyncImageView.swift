@@ -70,7 +70,7 @@ struct AsyncImageView<Content: View>: View {
       case let .success(image):
         modifier(image)
       default:
-        Image(systemName: "questionmark")
+        Image("DefaultImage")
       }
     }
     .frame(width: width, height: height)

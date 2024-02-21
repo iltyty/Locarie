@@ -198,14 +198,11 @@ private extension PostDetailPage {
     ScrollView {
       VStack {
         ForEach(listUserPostsVM.posts) { post in
-          PostCardView(
-            post: post,
-            width: screenSize.width
-          )
-          .onTapGesture {
-            self.post = post
-            toggleShowingPostContentCover()
-          }
+          PostCardView(post)
+            .onTapGesture {
+              self.post = post
+              toggleShowingPostContentCover()
+            }
         }
       }
     }

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct BusinessUserProfilePage: View {
   @State private var showingDetailProfile = false
+  @State private var showingProfileCover = false
 
   @State private var screenSize: CGSize = .zero
   @State private var viewport: Viewport = .camera(
@@ -22,9 +23,14 @@ struct BusinessUserProfilePage: View {
 
   var body: some View {
     GeometryReader { proxy in
-      VStack {
-        content
-        BottomTabView()
+      ZStack {
+        VStack {
+          content
+          BottomTabView()
+        }
+        if showingProfileCover {
+          profileCover
+        }
       }
       .onAppear {
         screenSize = proxy.size
@@ -156,10 +162,37 @@ private extension BusinessUserProfilePage {
   }
 
   var avatar: some View {
-    AvatarView(
-      imageUrl: cacheVM.getAvatarUrl(),
-      size: Constants.avatarSize
-    )
+    ZStack(alignment: .bottomTrailing) {
+      AvatarView(
+        imageUrl: cacheVM.getAvatarUrl(),
+        size: Constants.avatarSize
+      )
+      avatarEditIcon
+    }
+  }
+
+  var avatarEditIcon: some View {
+    Circle()
+      .fill(.background)
+      .stroke(.secondary)
+      .frame(
+        width: Constants.avatarIconBgSize,
+        height: Constants.avatarIconBgSize
+      )
+      .overlay {
+        Image("BlueEditIcon")
+          .resizable()
+          .scaledToFill()
+          .frame(
+            width: Constants.avatarIconSize,
+            height: Constants.avatarIconSize
+          )
+      }
+      .onTapGesture {
+        withAnimation(.spring) {
+          showingProfileCover = true
+        }
+      }
   }
 
   var businessName: some View {
@@ -297,9 +330,17 @@ private extension BusinessUserProfilePage {
 
   var posts: some View {
     ForEach(postsVM.posts) { post in
-      // - TODO: post card width
-      PostCardView(post: post, width: 250)
+      PostCardView(post)
     }
+  }
+}
+
+private extension BusinessUserProfilePage {
+  var profileCover: some View {
+    BusinessProfileCover(
+      user: profileVM.dto,
+      isPresenting: $showingProfileCover
+    )
   }
 }
 
@@ -319,7 +360,10 @@ private enum Constants {
   static let settingsButtonIconPadding: CGFloat = 10
   static let settingsButtonIconSize: CGFloat = 24
   static let settingsButtonTextPadding: CGFloat = 10
+
   static let avatarSize: CGFloat = 72
+  static let avatarIconSize: CGFloat = 12
+  static let avatarIconBgSize: CGFloat = 24
 }
 
 #Preview {

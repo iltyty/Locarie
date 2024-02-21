@@ -11,7 +11,10 @@ struct PostCardView: View {
   @StateObject var locationManager = LocationManager()
 
   let post: PostDto
-  let width: CGFloat
+
+  init(_ post: PostDto) {
+    self.post = post
+  }
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
@@ -41,12 +44,6 @@ private extension PostCardView {
 
   var cover: some View {
     Banner(urls: post.imageUrls, isPortrait: false)
-//    SwitchableBanner(
-//      width: width,
-//      height: width / Constants.coverAspectRatio,
-//      mainImageUrls: post.imageUrls,
-//      secondaryImageUrl: post.user.profileImageUrls.first ?? ""
-//    )
   }
 
   var content: some View {
