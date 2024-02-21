@@ -29,10 +29,18 @@ struct StrokeButtonFormItem: View {
 
   private var content: some View {
     Text(title)
-      .padding(.horizontal, Constants.textHPadding)
+      .padding(.horizontal, textHPadding)
       .fontWeight(.semibold)
       .foregroundStyle(color)
       .tint(color)
+  }
+
+  private var textHPadding: CGFloat {
+    if isFullWidth || isFixedWidth {
+      0
+    } else {
+      Constants.textHPadding
+    }
   }
 
   private var background: some View {
@@ -51,6 +59,11 @@ private enum Constants {
     StrokeButtonFormItem(title: "Sign up", isFullWidth: false)
     StrokeButtonFormItem(
       title: "Sign up for a business account",
+      color: Color(hex: 0x326AFB)
+    )
+    StrokeButtonFormItem(
+      title: "Sign up for a business account",
+      isFixedWidth: true,
       color: Color(hex: 0x326AFB)
     )
   }

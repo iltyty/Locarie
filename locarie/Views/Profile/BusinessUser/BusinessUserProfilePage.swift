@@ -5,15 +5,20 @@
 //  Created by qiuty on 07/01/2024.
 //
 
+@_spi(Experimental) import MapboxMaps
 import SwiftUI
 
 struct BusinessUserProfilePage: View {
-  @State private var screenWidth = 0.0
-  @State private var screenHeight = 0.0
-  @State private var topSafeAreaHeight = 0.0
+  @State private var showingDetailProfile = false
 
-  @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
-  @StateObject private var profileViewModel = ProfileGetViewModel()
+  @State private var screenSize: CGSize = .zero
+  @State private var viewport: Viewport = .camera(
+    center: .london, zoom: Constants.mapZoom
+  )
+
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+  @StateObject private var postsVM = ListUserPostsViewModel()
+  @StateObject private var profileVM = ProfileGetViewModel()
 
   var body: some View {
     GeometryReader { proxy in
@@ -21,49 +26,90 @@ struct BusinessUserProfilePage: View {
         content
         BottomTabView()
       }
-      .ignoresSafeArea(edges: .top)
       .onAppear {
-        screenWidth = proxy.size.width
-        screenHeight = proxy.size.height
-        topSafeAreaHeight = proxy.safeAreaInsets.top
-        profileViewModel.getProfile(userId: cacheViewModel.getUserId())
+        screenSize = proxy.size
+        postsVM.getUserPosts(id: cacheVM.getUserId())
+        profileVM.getProfile(userId: cacheVM.getUserId())
+      }
+      .onReceive(profileVM.$dto) { dto in
+        viewport = .camera(
+          center: dto.coordinate,
+          zoom: Constants.mapZoom
+        )
       }
     }
+    .ignoresSafeArea(edges: .bottom)
   }
 
   private var content: some View {
-    ScrollView {
-      profileImages
-      profileContent
+    ZStack {
+      mapView
+      contentView
     }
-    .scrollBounceBehavior(.basedOnSize)
   }
 }
 
 private extension BusinessUserProfilePage {
-  var profileImages: some View {
-    ZStack(alignment: .top) {
-      if profileViewModel.dto.profileImageUrls.isEmpty {
-        rectangle
-      } else {
-        banner
+  var mapView: some View {
+    Map(viewport: $viewport) {
+      MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
+        Image("map")
+          .onTapGesture {
+            viewport = .camera(
+              center: profileVM.dto.coordinate,
+              zoom: Constants.mapZoom
+            )
+          }
+      }
+    }
+    .ignoresSafeArea(edges: .all)
+  }
+}
+
+private extension BusinessUserProfilePage {
+  var contentView: some View {
+    VStack {
+      buttons
+      Spacer()
+      BottomSheet(detents: [.medium, .fraction(0.67)]) {
+        profile
+      }
+    }
+  }
+
+  var buttons: some View {
+    ZStack {
+      HStack {
+        Spacer()
+        profileEditButton
+        Spacer()
       }
       settingsButton
     }
-    .frame(height: Constants.profileImageHeightFraction * screenHeight)
   }
 
-  var banner: some View {
-    Banner(
-      urls: profileViewModel.dto.profileImageUrls,
-      width: screenWidth,
-      height: Constants.profileImageHeightFraction * screenHeight
-    )
+  var profileEditButton: some View {
+    NavigationLink(value: Router.Destination.userProfileEdit) {
+      HStack {
+        Image("EditIcon")
+          .resizable()
+          .scaledToFit()
+          .frame(
+            width: Constants.profileEditButtonIconSize,
+            height: Constants.profileEditButtonIconSize
+          )
+        Text("Edit profile")
+      }
+      .padding(Constants.settingsButtonTextPadding)
+      .background(profileEditButtonBackground)
+    }
+    .buttonStyle(.plain)
   }
 
-  var rectangle: some View {
-    Rectangle().fill(.thinMaterial)
-      .frame(height: Constants.profileImageHeightFraction * screenHeight)
+  var profileEditButtonBackground: some View {
+    Capsule()
+      .fill(.background)
+      .shadow(radius: Constants.buttonShadowRadius)
   }
 
   var settingsButton: some View {
@@ -78,105 +124,198 @@ private extension BusinessUserProfilePage {
       }
       .buttonStyle(.plain)
     }
-    .padding(.top, topSafeAreaHeight)
   }
 }
 
 private extension BusinessUserProfilePage {
-  var profileContent: some View {
+  var profile: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      avatarAndProfileEditButton
-      businessNameAndCategory
+      avatarRow
+      categories
       businessBio
-      Divider()
+      if showingDetailProfile {
+        detailProfile
+      }
+      numPostsTitle
+      posts
+    }
+    .padding(.horizontal)
+  }
+
+  var avatarRow: some View {
+    HStack {
+      avatar
+      businessName
+      Spacer()
+      detailButton
+    }
+  }
+
+  var avatar: some View {
+    AvatarView(
+      imageUrl: cacheVM.getAvatarUrl(),
+      size: Constants.avatarSize
+    )
+  }
+
+  var businessName: some View {
+    Text(profileVM.dto.businessName)
+      .font(.headline)
+      .fontWeight(.bold)
+  }
+
+  var detailButton: some View {
+    Button {
+      withAnimation(.spring) {
+        showingDetailProfile.toggle()
+      }
+    } label: {
+      Image(systemName: showingDetailProfile ? "chevron.up" : "chevron.down")
+    }
+    .buttonStyle(.plain)
+  }
+
+  var categories: some View {
+    ScrollView(.horizontal) {
+      HStack {
+        ForEach(profileVM.dto.categories, id: \.self) { category in
+          TagView(tag: category, isSelected: false)
+        }
+      }
+    }
+  }
+
+  var detailProfile: some View {
+    VStack(alignment: .leading, spacing: Constants.detailProfileVSpacing) {
+      favoredBy
       location
       openingHours
       link
       phone
       Divider()
     }
-    .padding()
   }
 
-  var avatarAndProfileEditButton: some View {
-    HStack {
-      avatar
-      Spacer()
-      profileEditButton
-    }
-  }
-
-  var avatar: some View {
-    AvatarView(
-      imageUrl: cacheViewModel.getAvatarUrl(),
-      size: Constants.avatarSize
-    )
-  }
-
-  var profileEditButton: some View {
-    NavigationLink(value: Router.Destination.userProfileEdit) {
-      Text("Edit profile")
-        .foregroundStyle(Color.locariePrimary)
-        .padding(Constants.settingsButtonTextPadding)
-        .background(profileEditButtonBackground)
-    }
-  }
-
-  var profileEditButtonBackground: some View {
-    Capsule().stroke(Color.locariePrimary)
-  }
-
-  @ViewBuilder
-  var businessNameAndCategory: some View {
-    let businessName = profileViewModel.dto.businessName
-    let categories = profileViewModel.dto.categories
-    HStack {
-      Text(businessName).font(.headline)
-      Spacer()
-      ForEach(categories, id: \.self) { category in
-        Text(category)
-          .font(.callout)
-          .foregroundStyle(.secondary)
-      }
-    }
+  var favoredBy: some View {
+    Label("\(profileVM.dto.favoredByCount)", systemImage: "bookmark")
   }
 
   var businessBio: some View {
-    var bio = profileViewModel.dto.introduction
+    var bio = profileVM.dto.introduction
     if bio.isEmpty {
-      bio = "Go to Edit Profile to personalize your business profile."
+      bio = "Go set up the profile!"
     }
     return Text(bio).foregroundStyle(.secondary).lineLimit(2)
   }
 
   var location: some View {
-    Label(profileViewModel.dto.address, systemImage: "location")
+    Label {
+      Text(profileVM.dto.address)
+    } icon: {
+      Image("BlueMap")
+        .resizable()
+        .scaledToFit()
+        .frame(
+          width: Constants.profileIconSize,
+          height: Constants.profileIconSize
+        )
+    }
   }
 
   var openingHours: some View {
-    Label(
-      profileViewModel.dto.formattedBusinessHours,
-      systemImage: "clock"
-    )
+    Label {
+      openingHoursText
+    } icon: {
+      Image(systemName: "clock")
+    }
     .lineLimit(1)
   }
 
+  @ViewBuilder
+  var openingHoursText: some View {
+    let text = profileVM.dto.formattedBusinessHours
+    text.isEmpty
+      ? Text("Opening hours").foregroundStyle(.secondary)
+      : Text(text)
+  }
+
   var link: some View {
-    Label(profileViewModel.dto.homepageUrl, systemImage: "link")
+    Label {
+      linkText
+    } icon: {
+      Image(systemName: "link")
+    }
+  }
+
+  @ViewBuilder
+  var linkText: some View {
+    let text = profileVM.dto.homepageUrl
+    text.isEmpty
+      ? Text("Link").foregroundStyle(.secondary)
+      : Text(text)
   }
 
   var phone: some View {
-    Label(profileViewModel.dto.phone, systemImage: "phone")
+    Label {
+      phoneText
+    } icon: {
+      Image(systemName: "phone")
+    }
+  }
+
+  @ViewBuilder
+  var phoneText: some View {
+    let text = profileVM.dto.phone
+    text.isEmpty
+      ? Text("Phone number").foregroundStyle(.secondary)
+      : Text(text)
+  }
+}
+
+private extension BusinessUserProfilePage {
+  @ViewBuilder
+  var numPostsTitle: some View {
+    Group {
+      if postsVM.posts.isEmpty {
+        HStack(spacing: 0) {
+          Text("No ").foregroundStyle(Color.locariePrimary)
+          Text("post yet")
+        }
+      } else {
+        HStack(spacing: 0) {
+          Text("\(postsVM.posts.count) ")
+          Text("posts")
+        }
+      }
+    }
+    .fontWeight(.semibold)
+  }
+
+  var posts: some View {
+    ForEach(postsVM.posts) { post in
+      // - TODO: post card width
+      PostCardView(post: post, width: 250)
+    }
   }
 }
 
 private enum Constants {
+  static let vSpacing: CGFloat = 16
+  static let detailProfileVSpacing: CGFloat = 20
+
+  static let mapZoom: CGFloat = 12
+  static let buttonShadowRadius: CGFloat = 2.0
+
+  static let profileEditButtonBorderColor: Color = .init(hex: 0xD9D9D9)
+  static let profileEditButtonIconSize: CGFloat = 16
   static let profileImageHeightFraction = 0.25
-  static let settingsButtonIconPadding = 10.0
-  static let settingsButtonIconSize = 24.0
-  static let settingsButtonTextPadding = 10.0
-  static let avatarSize = 64.0
-  static let vSpacing = 24.0
+
+  static let profileIconSize: CGFloat = 16
+
+  static let settingsButtonIconPadding: CGFloat = 10
+  static let settingsButtonIconSize: CGFloat = 24
+  static let settingsButtonTextPadding: CGFloat = 10
+  static let avatarSize: CGFloat = 72
 }
 
 #Preview {

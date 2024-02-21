@@ -5,6 +5,7 @@
 //  Created by qiuty on 20/12/2023.
 //
 
+import CoreLocation
 import Foundation
 
 struct UserDto: Codable, UserInfo {
@@ -28,6 +29,10 @@ struct UserDto: Codable, UserInfo {
   var location: BusinessLocation?
 
   var businessHours = [BusinessHoursDto]()
+
+  var favoredByCount: Int = 0
+  var favoritePostsCount: Int = 0
+  var favoriteBusinessesCount: Int = 0
 }
 
 enum UserType: String, Codable {
@@ -55,6 +60,19 @@ extension UserDto {
   var formattedBusinessHours: String {
     get { businessHours.map(\.formattedStatus).joined(separator: ", ") }
     set {}
+  }
+}
+
+extension UserDto {
+  var coordinate: CLLocationCoordinate2D {
+    if let location {
+      CLLocationCoordinate2D(
+        latitude: location.latitude,
+        longitude: location.longitude
+      )
+    } else {
+      CLLocationCoordinate2D.london
+    }
   }
 }
 
@@ -98,6 +116,7 @@ extension UserDto {
     case businessName, categories, profileImageUrls, homepageUrl, introduction,
          phone
     case address, location, businessHours
+    case favoredByCount, favoritePostsCount, favoriteBusinessesCount
   }
 
   enum LocationCodingKeys: String, CodingKey {
@@ -151,6 +170,14 @@ extension UserDto {
         [BusinessHoursDto].self, forKey: .businessHours
       )
     }
+
+    favoredByCount = try container.decode(Int.self, forKey: .favoredByCount)
+    favoritePostsCount = try container.decode(
+      Int.self, forKey: .favoritePostsCount
+    )
+    favoriteBusinessesCount = try container.decode(
+      Int.self, forKey: .favoriteBusinessesCount
+    )
   }
 }
 

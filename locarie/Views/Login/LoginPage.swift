@@ -50,7 +50,7 @@ struct LoginPage: View {
     isLoading = false
     if let backendError = error.backendError {
       alertTitle = backendError.message
-    } else if let initialError = error.initialError {
+    } else if error.initialError != nil {
       alertTitle = ErrorMessage.network.rawValue
     } else {
       alertTitle = ErrorMessage.unknown.rawValue

@@ -53,7 +53,7 @@ struct BusinessCategoryPage: View {
     VStack(alignment: .leading, spacing: Constants.tagVSpacing) {
       ForEach(allCategories.indices, id: \.self) { i in
         let tag = allCategories[i]
-        TagView(tag: tag, isSelected: isSelected[i])
+        TagView(tag: tag, isSelected: isSelected[i], large: true)
           .onTapGesture {
             isSelected[i].toggle()
           }

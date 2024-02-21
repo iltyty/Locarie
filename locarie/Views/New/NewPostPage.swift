@@ -182,7 +182,8 @@ extension NewPostPage {
       : handleCreateFailure(response)
   }
 
-  private func handleCreateError(_: Error) {
+  private func handleCreateError(_ error: Error) {
+    debugPrint(error)
     isLoading = false
     alertTitle = .unknownError
     isAlertShowing = true
@@ -205,8 +206,8 @@ extension NewPostPage {
   }
 }
 
-extension NewPostPage {
-  private enum AlertTitle: String {
+private extension NewPostPage {
+  enum AlertTitle: String {
     case success = "Share success"
     case unknownError = "Something went wrong, please try again later"
   }

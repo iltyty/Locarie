@@ -40,7 +40,7 @@ struct LoginOrRegisterPage: View {
 
   var signupButton: some View {
     NavigationLink(value: Router.Destination.regularRegister) {
-      StrokeButtonFormItem(title: "Sign up", isFullWidth: false)
+      StrokeButtonFormItem(title: "Sign up", isFixedWidth: true)
     }
   }
 
@@ -48,7 +48,7 @@ struct LoginOrRegisterPage: View {
     NavigationLink(value: Router.Destination.businessRegister) {
       StrokeButtonFormItem(
         title: "Sign up for a business account",
-        isFullWidth: false,
+        isFixedWidth: true,
         color: Constants.businessButtonColor
       )
     }
