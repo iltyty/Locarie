@@ -47,26 +47,10 @@ private extension BusinessProfileCover {
 
   var coverBottom: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      categories
-      address
-      openUntil
+      ProfileCategories(user)
+      ProfileAddress(user)
+      ProfileOpenUntil(user)
     }
-  }
-
-  var categories: some View {
-    HStack {
-      ForEach(user.categories, id: \.self) { category in
-        TagView(tag: category)
-      }
-    }
-  }
-
-  var address: some View {
-    Label(user.address, systemImage: "map")
-  }
-
-  var openUntil: some View {
-    Label(user.openUtil, systemImage: "clock")
   }
 }
 

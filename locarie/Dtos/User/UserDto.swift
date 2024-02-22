@@ -78,8 +78,8 @@ extension UserDto {
 
 extension UserDto {
   var openUtil: String {
-    guard businessHours.count == 7 else { return "" }
-    guard let todayBusinessHours else { return "" }
+    guard businessHours.count == 7 else { return "Closed" }
+    guard let todayBusinessHours else { return "Closed" }
     if isNowClosed {
       return "Closed"
     }

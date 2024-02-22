@@ -69,7 +69,19 @@
 		5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBB2B86190B005E4A8B /* PostCover.swift */; };
 		5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBD2B861A06005E4A8B /* CoverCommonConstants.swift */; };
 		5075FCC02B861C66005E4A8B /* BusinessProfileCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBF2B861C66005E4A8B /* BusinessProfileCover.swift */; };
-		5075FCC32B865860005E4A8B /* BusinessProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCC22B865860005E4A8B /* BusinessProfileView.swift */; };
+		5075FCC32B865860005E4A8B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCC22B865860005E4A8B /* ProfileView.swift */; };
+		5075FCC52B86E6F8005E4A8B /* ProfileFavoredByCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCC42B86E6F8005E4A8B /* ProfileFavoredByCount.swift */; };
+		5075FCC72B86E757005E4A8B /* ProfileAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCC62B86E757005E4A8B /* ProfileAddress.swift */; };
+		5075FCC92B86E7A5005E4A8B /* ProfileConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCC82B86E7A5005E4A8B /* ProfileConstants.swift */; };
+		5075FCCB2B86E7FE005E4A8B /* ProfileOpeningHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCCA2B86E7FE005E4A8B /* ProfileOpeningHours.swift */; };
+		5075FCCD2B86E8A0005E4A8B /* ProfileLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCCC2B86E8A0005E4A8B /* ProfileLink.swift */; };
+		5075FCCF2B86E8DB005E4A8B /* ProfilePhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCCE2B86E8DB005E4A8B /* ProfilePhone.swift */; };
+		5075FCD12B86E932005E4A8B /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCD02B86E932005E4A8B /* ProfileDetail.swift */; };
+		5075FCD32B86F225005E4A8B /* ProfileAvatarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCD22B86F225005E4A8B /* ProfileAvatarRow.swift */; };
+		5075FCD52B870968005E4A8B /* ProfileCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCD42B870968005E4A8B /* ProfileCategories.swift */; };
+		5075FCD72B870A05005E4A8B /* ProfileBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCD62B870A05005E4A8B /* ProfileBio.swift */; };
+		5075FCD92B870A40005E4A8B /* ProfilePostsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCD82B870A40005E4A8B /* ProfilePostsCount.swift */; };
+		5075FCDB2B870BBF005E4A8B /* ProfileOpenUntil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCDA2B870BBF005E4A8B /* ProfileOpenUntil.swift */; };
 		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
@@ -227,7 +239,19 @@
 		5075FCBB2B86190B005E4A8B /* PostCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCover.swift; sourceTree = "<group>"; };
 		5075FCBD2B861A06005E4A8B /* CoverCommonConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverCommonConstants.swift; sourceTree = "<group>"; };
 		5075FCBF2B861C66005E4A8B /* BusinessProfileCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfileCover.swift; sourceTree = "<group>"; };
-		5075FCC22B865860005E4A8B /* BusinessProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfileView.swift; sourceTree = "<group>"; };
+		5075FCC22B865860005E4A8B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		5075FCC42B86E6F8005E4A8B /* ProfileFavoredByCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFavoredByCount.swift; sourceTree = "<group>"; };
+		5075FCC62B86E757005E4A8B /* ProfileAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAddress.swift; sourceTree = "<group>"; };
+		5075FCC82B86E7A5005E4A8B /* ProfileConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileConstants.swift; sourceTree = "<group>"; };
+		5075FCCA2B86E7FE005E4A8B /* ProfileOpeningHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOpeningHours.swift; sourceTree = "<group>"; };
+		5075FCCC2B86E8A0005E4A8B /* ProfileLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLink.swift; sourceTree = "<group>"; };
+		5075FCCE2B86E8DB005E4A8B /* ProfilePhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhone.swift; sourceTree = "<group>"; };
+		5075FCD02B86E932005E4A8B /* ProfileDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
+		5075FCD22B86F225005E4A8B /* ProfileAvatarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAvatarRow.swift; sourceTree = "<group>"; };
+		5075FCD42B870968005E4A8B /* ProfileCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCategories.swift; sourceTree = "<group>"; };
+		5075FCD62B870A05005E4A8B /* ProfileBio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBio.swift; sourceTree = "<group>"; };
+		5075FCD82B870A40005E4A8B /* ProfilePostsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostsCount.swift; sourceTree = "<group>"; };
+		5075FCDA2B870BBF005E4A8B /* ProfileOpenUntil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOpenUntil.swift; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
@@ -605,7 +629,19 @@
 		5075FCC12B865815005E4A8B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				5075FCC22B865860005E4A8B /* BusinessProfileView.swift */,
+				5075FCC22B865860005E4A8B /* ProfileView.swift */,
+				5075FCC42B86E6F8005E4A8B /* ProfileFavoredByCount.swift */,
+				5075FCC62B86E757005E4A8B /* ProfileAddress.swift */,
+				5075FCC82B86E7A5005E4A8B /* ProfileConstants.swift */,
+				5075FCCA2B86E7FE005E4A8B /* ProfileOpeningHours.swift */,
+				5075FCCC2B86E8A0005E4A8B /* ProfileLink.swift */,
+				5075FCCE2B86E8DB005E4A8B /* ProfilePhone.swift */,
+				5075FCD02B86E932005E4A8B /* ProfileDetail.swift */,
+				5075FCD22B86F225005E4A8B /* ProfileAvatarRow.swift */,
+				5075FCD42B870968005E4A8B /* ProfileCategories.swift */,
+				5075FCD62B870A05005E4A8B /* ProfileBio.swift */,
+				5075FCD82B870A40005E4A8B /* ProfilePostsCount.swift */,
+				5075FCDA2B870BBF005E4A8B /* ProfileOpenUntil.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1163,6 +1199,7 @@
 				50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */,
 				50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */,
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
+				5075FCC52B86E6F8005E4A8B /* ProfileFavoredByCount.swift in Sources */,
 				5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */,
 				504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
@@ -1184,6 +1221,7 @@
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */,
 				501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */,
+				5075FCD32B86F225005E4A8B /* ProfileAvatarRow.swift in Sources */,
 				505568C22B8499CC00FD21E4 /* BackgroundButtonFormItem.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomSheet.swift in Sources */,
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
@@ -1196,7 +1234,8 @@
 				501BAF2C2B46319700D9D84F /* MyAccountPage.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
 				501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */,
-				5075FCC32B865860005E4A8B /* BusinessProfileView.swift in Sources */,
+				5075FCC92B86E7A5005E4A8B /* ProfileConstants.swift in Sources */,
+				5075FCC32B865860005E4A8B /* ProfileView.swift in Sources */,
 				50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */,
 				50CBC9862B6F42FD0025A0D9 /* CapsuleButton.swift in Sources */,
 				5075FCB52B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift in Sources */,
@@ -1208,12 +1247,15 @@
 				50FDD89B2B53D633003015F9 /* ProfileImagesUploadService.swift in Sources */,
 				509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */,
 				502A4FF62B32D48400C0833A /* PostListService.swift in Sources */,
+				5075FCCF2B86E8DB005E4A8B /* ProfilePhone.swift in Sources */,
+				5075FCD72B870A05005E4A8B /* ProfileBio.swift in Sources */,
 				50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */,
 				50B5DEDC2B3BE83500C0A641 /* MapboxRetrieveService.swift in Sources */,
 				50B5DECB2B3B099E00C0A641 /* PlaceSuggestions.swift in Sources */,
 				50FDD8852B4AB93E003015F9 /* BusinessUserProfilePage.swift in Sources */,
 				50F549FB2B44F71300D06F20 /* Constants.swift in Sources */,
 				50277F742AF117700045AB12 /* HomePage.swift in Sources */,
+				5075FCCD2B86E8A0005E4A8B /* ProfileLink.swift in Sources */,
 				501BAF382B46364D00D9D84F /* FeedbackPage.swift in Sources */,
 				50F85B452B242EE200D04787 /* APIServices.swift in Sources */,
 				50F549D92B3C85C500D06F20 /* UserRegisterRequest.swift in Sources */,
@@ -1227,11 +1269,14 @@
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
 				5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */,
 				5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */,
+				5075FCC72B86E757005E4A8B /* ProfileAddress.swift in Sources */,
 				5075FCC02B861C66005E4A8B /* BusinessProfileCover.swift in Sources */,
 				501BAF312B46345500D9D84F /* PrivacyPolicyPage.swift in Sources */,
 				5000C6C92AF8C3440057EF2D /* SearchPage.swift in Sources */,
 				50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */,
 				50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */,
+				5075FCD92B870A40005E4A8B /* ProfilePostsCount.swift in Sources */,
+				5075FCDB2B870BBF005E4A8B /* ProfileOpenUntil.swift in Sources */,
 				50B11AD72AFA28E9002A7B91 /* BusinessHomePage.swift in Sources */,
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,
 				50998B022B36842A002196B5 /* BusinessRegisterPage.swift in Sources */,
@@ -1243,6 +1288,7 @@
 				505568CF2B84BB7500FD21E4 /* StrokeButtonFormItem.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
+				5075FCCB2B86E7FE005E4A8B /* ProfileOpeningHours.swift in Sources */,
 				50FDD8882B4AFC17003015F9 /* Router.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostPage.swift in Sources */,
 				500F66262B2854A90074FE3C /* LocalCache.swift in Sources */,
@@ -1252,6 +1298,7 @@
 				50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */,
 				5075FCBA2B8605BD005E4A8B /* CoverTopView.swift in Sources */,
 				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
+				5075FCD52B870968005E4A8B /* ProfileCategories.swift in Sources */,
 				50FDD88A2B4B8B0D003015F9 /* ProfileGetService.swift in Sources */,
 				50E60DE82AFF885F00CA088F /* Util.swift in Sources */,
 				50F85B432B242CA000D04787 /* Errors.swift in Sources */,
@@ -1284,6 +1331,7 @@
 				501BAF332B46353C00D9D84F /* TermsOfServicePage.swift in Sources */,
 				50FDD88E2B4B9090003015F9 /* ProfileGetViewModel.swift in Sources */,
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
+				5075FCD12B86E932005E4A8B /* ProfileDetail.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
 				501BAF452B4650CA00D9D84F /* SocialAccountsPage.swift in Sources */,
 				50FDD8952B4D708B003015F9 /* BusinessHoursDto.swift in Sources */,
