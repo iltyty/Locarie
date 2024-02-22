@@ -97,6 +97,7 @@ private extension PostDetailPage {
   var bottomContent: some View {
     BottomSheet(detents: [.minimum, .large]) {
       ProfileView(
+        id: uid,
         user: user,
         isPresentingCover: $showingBusinessProfileCover
       )

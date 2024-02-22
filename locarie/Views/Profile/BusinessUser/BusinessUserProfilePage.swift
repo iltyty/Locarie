@@ -75,6 +75,7 @@ private extension BusinessUserProfilePage {
       Spacer()
       BottomSheet(detents: [.medium, .fraction(0.67)]) {
         ProfileView(
+          id: cacheVM.getUserId(),
           user: profileVM.dto,
           isPresentingCover: $showingProfileCover
         )

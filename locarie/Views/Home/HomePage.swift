@@ -92,9 +92,11 @@ private extension HomePage {
   }
 
   var bottomSheetContent: some View {
-    VStack {
-      bottomSheetTitle
-      postList
+    ScrollView {
+      VStack {
+        bottomSheetTitle
+        postList
+      }
     }
   }
 

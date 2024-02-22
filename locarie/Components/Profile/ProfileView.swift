@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ProfileView: View {
+  let id: Int64
   let user: UserDto
 
   @Binding var isPresentingCover: Bool
 
   @State private var isPresentingDetail = false
 
-  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
-  @ObservedObject private var postsVM = ListUserPostsViewModel()
+  @StateObject private var postsVM = ListUserPostsViewModel()
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
@@ -37,7 +37,7 @@ struct ProfileView: View {
       }
     }
     .onAppear {
-      postsVM.getUserPosts(id: cacheVM.getUserId())
+      postsVM.getUserPosts(id: id)
     }
   }
 }
