@@ -8,47 +8,41 @@
 import SwiftUI
 
 struct RegularUserProfilePage: View {
-  @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
-  @State private var topSafeAreaHeight = 0.0
-  @State private var currentTab = Tab.followed
-
-  @Environment(\.colorScheme) private var colorScheme: ColorScheme
+  @State private var screenHeight: CGFloat = 0
+  @State private var currentTab: Tab = .followed
 
   var body: some View {
     GeometryReader { proxy in
-      VStack {
-        content
-        BottomTabView()
+      ZStack {
+        Color.black.opacity(0.05).ignoresSafeArea(edges: .all)
+        VStack {
+          content
+          BottomTabView()
+        }
       }
-      .ignoresSafeArea(edges: .top)
       .onAppear {
-        topSafeAreaHeight = proxy.safeAreaInsets.top
+        screenHeight = proxy.size.height
       }
     }
+    .ignoresSafeArea(edges: .bottom)
   }
 
-  var content: some View {
-    ScrollView {
-      topContent
-      bottomContent
+  private var content: some View {
+    VStack {
+      settingsButton
+      Spacer()
+      avatarRow
+      Spacer()
+      BottomSheet(detents: [.medium]) {
+        sheetContent
+      }
     }
   }
 }
 
 private extension RegularUserProfilePage {
-  var topContent: some View {
-    VStack {
-      settingsButton
-      avatar
-      username
-      profileEditButton
-    }
-    .padding(.top, topSafeAreaHeight)
-    .padding(.bottom)
-    .background(.thinMaterial)
-  }
-
   var settingsButton: some View {
     HStack {
       Spacer()
@@ -61,17 +55,28 @@ private extension RegularUserProfilePage {
     }
   }
 
+  var avatarRow: some View {
+    HStack {
+      avatar
+      username
+      Spacer()
+      profileEditButton
+    }
+    .padding(.horizontal)
+    .padding(.top, screenHeight * Constants.avatarRowTopPaddingFraction)
+  }
+
   var avatar: some View {
     AvatarView(
-      imageUrl: cacheViewModel.getAvatarUrl(),
+      imageUrl: cacheVM.getAvatarUrl(),
       size: Constants.avatarSize
     )
-    .id(UUID())
   }
 
   var username: some View {
-    Text(cacheViewModel.getUsername())
-      .frame(minHeight: Constants.usernameMinHeight)
+    Text(cacheVM.getUsername())
+      .font(.headline)
+      .fontWeight(.semibold)
   }
 
   var profileEditButton: some View {
@@ -85,116 +90,109 @@ private extension RegularUserProfilePage {
 
   var profileEditButtonBackground: some View {
     Capsule()
-      .fill(colorScheme == .light ? .white : .gray)
+      .fill(.background)
       .frame(height: Constants.editButtonHeight)
       .shadow(radius: Constants.editButtonShadowRadius)
   }
 }
 
 private extension RegularUserProfilePage {
-  var bottomContent: some View {
-    VStack(spacing: Constants.bottomContentVSpacing) {
+  var sheetContent: some View {
+    VStack {
       tabs
-      mapIcon
-      switch currentTab {
-      case .followed: followedPosts
-      case .saved: savedPosts
+      ScrollView {
+        VStack {
+          tabContent
+        }
       }
     }
-    .padding(.horizontal)
-    .background(bottomContentBackground)
   }
 
   var tabs: some View {
-    HStack {
-      followedTab
-      savedTab
+    ScrollView(.horizontal) {
+      HStack(spacing: Constants.tabHPadding) {
+        followedTab
+        savedTab
+      }
     }
-    .padding(.top)
   }
 
   var followedTab: some View {
-    HStack {
-      Spacer()
-      Label("Followed", systemImage: "bookmark")
-        .fontWeight(currentTab == .followed ? .bold : .regular)
-        .onTapGesture {
-          currentTab = .followed
-        }
-      Spacer()
-    }
+    Label("Followed", systemImage: "bookmark")
+      .padding(.horizontal, Constants.tabTextHPadding)
+      .frame(height: Constants.tabHeight)
+      .background(
+        Capsule()
+          .stroke(currentTab == .followed ? .primary : Constants.tabStrokeColor)
+      )
+      .onTapGesture {
+        currentTab = .followed
+      }
   }
 
   var savedTab: some View {
-    HStack {
-      Spacer()
-      Label("Saved", systemImage: "star")
-        .fontWeight(currentTab == .saved ? .bold : .regular)
-        .onTapGesture {
-          currentTab = .saved
-        }
-      Spacer()
+    Label("Saved", systemImage: "star")
+      .padding(.horizontal, Constants.tabTextHPadding)
+      .frame(height: Constants.tabHeight)
+      .background(
+        Capsule()
+          .stroke(currentTab == .saved ? .primary : Constants.tabStrokeColor)
+      )
+      .onTapGesture {
+        currentTab = .saved
+      }
+  }
+
+  @ViewBuilder
+  var tabContent: some View {
+    switch currentTab {
+    case .followed: followedUsers
+    case .saved: savedPosts
     }
   }
 
-  var mapIcon: some View {
-    VStack(spacing: Constants.bottomContentVSpacing) {
-      Divider()
-      Image(systemName: "map")
-      Divider()
-    }
-  }
-
-  var bottomContentBackground: some View {
-    UnevenRoundedRectangle(
-      topLeadingRadius: Constants.bottomContentackgroundRadius,
-      topTrailingRadius: Constants.bottomContentackgroundRadius
-    )
-    .fill(.background)
-  }
-
-  var followedPosts: some View {
-    // - TODO: posts content
+  var followedUsers: some View {
     emptyFollowedPosts
   }
 
   var emptyFollowedPosts: some View {
     VStack {
       Spacer()
-      Text("No followed moments.").foregroundStyle(.secondary)
+      Text("No followed business.").foregroundStyle(.secondary)
       Spacer()
     }
   }
 
   var savedPosts: some View {
-    // - TODO: posts content
     emptySavedPosts
   }
 
   var emptySavedPosts: some View {
     VStack {
       Spacer()
-      Text("No saved moments.").foregroundStyle(.secondary)
+      Text("No saved post.").foregroundStyle(.secondary)
       Spacer()
     }
   }
 }
 
-private extension RegularUserProfilePage {
-  enum Tab {
-    case followed, saved
-  }
+private enum Tab {
+  case followed, saved
 }
 
 private enum Constants {
-  static let settingsButtonSize = 25.0
-  static let avatarSize = 80.0
-  static let usernameMinHeight = 24.0
-  static let editButtonHeight = 40.0
-  static let editButtonShadowRadius = 2.0
-  static let bottomContentVSpacing = 20.0
-  static let bottomContentShadowRadius = 4.0
-  static let bottomContentackgroundRadius = 10.0
+  static let avatarSize: CGFloat = 72
+  static let avatarRowTopPaddingFraction: CGFloat = 0.1
+
+  static let settingsButtonSize: CGFloat = 25
+
+  static let tabHeight: CGFloat = 40
+  static let tabHPadding: CGFloat = 10
+  static let tabTextHPadding: CGFloat = 10
+  static let tabStrokeColor: Color = .init(hex: 0xF0F0F0)
+
+  static let editButtonHeight: CGFloat = 40
+  static let editButtonShadowRadius: CGFloat = 2
 }
 
 #Preview {

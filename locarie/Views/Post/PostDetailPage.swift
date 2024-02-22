@@ -49,6 +49,7 @@ struct PostDetailPage: View {
         listUserPostsVM.getUserPosts(id: uid)
       }
     }
+    .ignoresSafeArea(edges: .bottom)
     .onReceive(profileVM.$state) { state in
       if case .finished = state {
         user = profileVM.dto
@@ -63,6 +64,7 @@ private extension PostDetailPage {
       topContent
       Spacer()
       bottomContent
+      bottomBar
     }
   }
 
@@ -89,6 +91,7 @@ private extension PostDetailPage {
     HStack {
       backButton
       Spacer()
+      shareButton
       moreButton
     }
     .padding(.horizontal)
@@ -96,13 +99,15 @@ private extension PostDetailPage {
 
   var bottomContent: some View {
     BottomSheet(detents: [.minimum, .large]) {
-      ProfileView(
-        id: uid,
-        user: user,
-        isPresentingCover: $showingBusinessProfileCover
-      )
+      ScrollView {
+        ProfileView(
+          id: uid,
+          user: user,
+          isPresentingCover: $showingBusinessProfileCover
+        )
+      }
+      .scrollIndicators(.hidden)
     }
-    .ignoresSafeArea(edges: .bottom)
   }
 
   var categories: some View {
@@ -112,11 +117,19 @@ private extension PostDetailPage {
       }
     }
   }
+
+  var bottomBar: some View {
+    BusinessBottomBar()
+  }
 }
 
 private extension PostDetailPage {
   var backButton: some View {
     CircleButton(systemName: "chevron.backward")
+  }
+
+  var shareButton: some View {
+    CircleButton(name: "ShareIcon")
   }
 
   var moreButton: some View {

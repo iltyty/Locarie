@@ -19,6 +19,7 @@ struct PostCover: View {
       postImages
       postStatus
       blank
+      favoriteButton
     }
     .padding(.horizontal)
     .background(.thickMaterial.opacity(CoverCommonConstants.backgroundOpacity))
@@ -67,4 +68,27 @@ private extension PostCover {
       )
     )
   }
+
+  var favoriteButton: some View {
+    HStack {
+      Spacer()
+      Button {
+        print("tapped")
+      } label: {
+        Image(systemName: "star")
+          .resizable()
+          .background(favoriteButtonBackground)
+      }
+    }
+  }
+
+  var favoriteButtonBackground: some View {
+    Circle()
+      .fill(.background)
+      .shadow(radius: Constants.favoriteButtonShadowRadius)
+  }
+}
+
+private enum Constants {
+  static let favoriteButtonShadowRadius: CGFloat = 2
 }

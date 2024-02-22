@@ -52,6 +52,7 @@
 		504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504794A62B70D2A20038D31F /* ListUserPostsViewModel.swift */; };
 		50530B8F2B87514D009C1F92 /* RegularUserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50530B8E2B87514C009C1F92 /* RegularUserProfileEditPage.swift */; };
 		50530B912B875185009C1F92 /* UserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50530B902B875185009C1F92 /* UserProfileEditPage.swift */; };
+		50530B932B8775FD009C1F92 /* BusinessBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50530B922B8775FD009C1F92 /* BusinessBottomBar.swift */; };
 		5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */; };
 		5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEE2B288D3300645F5C /* UserLoginService.swift */; };
 		5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF02B288D6C00645F5C /* UserRegisterService.swift */; };
@@ -223,6 +224,7 @@
 		504794A62B70D2A20038D31F /* ListUserPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUserPostsViewModel.swift; sourceTree = "<group>"; };
 		50530B8E2B87514C009C1F92 /* RegularUserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserProfileEditPage.swift; sourceTree = "<group>"; };
 		50530B902B875185009C1F92 /* UserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileEditPage.swift; sourceTree = "<group>"; };
+		50530B922B8775FD009C1F92 /* BusinessBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessBottomBar.swift; sourceTree = "<group>"; };
 		5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheViewModel.swift; sourceTree = "<group>"; };
 		5054CDEE2B288D3300645F5C /* UserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 		5054CDF02B288D6C00645F5C /* UserRegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterService.swift; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 				50277F812AF1512E0045AB12 /* PostCardView.swift */,
 				50998B092B370ED5002196B5 /* TagView.swift */,
 				501BAF392B463D6900D9D84F /* TextEditorPlus.swift */,
+				50530B922B8775FD009C1F92 /* BusinessBottomBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1191,6 +1194,7 @@
 				504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
 				505568D12B84BCA000FD21E4 /* LinkFormItemWithInlineTitle.swift in Sources */,
+				50530B932B8775FD009C1F92 /* BusinessBottomBar.swift in Sources */,
 				50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */,
 				50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */,
 				50277F802AF12A700045AB12 /* SearchBarView.swift in Sources */,
