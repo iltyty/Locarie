@@ -28,7 +28,11 @@ struct PostCover: View {
 
 private extension PostCover {
   var coverTop: some View {
-    CoverTopView(user: post.user, isPresenting: $isPresenting)
+    CoverTopView(
+      user: post.user,
+      sharePreviewText: post.content,
+      isPresenting: $isPresenting
+    )
   }
 
   var blank: some View {

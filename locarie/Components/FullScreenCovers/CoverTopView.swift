@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CoverTopView: View {
   let user: UserDto
+  let sharePreviewText: String
+
   @Binding var isPresenting: Bool
 
   var body: some View {
@@ -17,13 +19,12 @@ struct CoverTopView: View {
       avatar
       businessName
       Spacer()
-      coverMoreButton
+      shareButton
     }
   }
 
   var dismissButton: some View {
-    Image(systemName: "multiply")
-      .font(.system(size: Constants.dismissButtonSize))
+    buttonBuilder(Image(systemName: "multiply"))
       .onTapGesture {
         withAnimation(.spring) {
           isPresenting = false
@@ -40,14 +41,31 @@ struct CoverTopView: View {
     Text(user.businessName).fontWeight(.semibold)
   }
 
-  var coverMoreButton: some View {
-    Image(systemName: "ellipsis")
-      .font(.system(size: Constants.dismissButtonSize))
+  @ViewBuilder
+  var shareButton: some View {
+    let link = URL(string: "https://www.hackingwithswift.com")!
+    ShareLink(
+      item: link,
+      preview: SharePreview(sharePreviewText, image: Image("LocarieIcon"))
+    ) {
+      buttonBuilder(Image("ShareIcon"))
+    }
+  }
+
+  var moreButton: some View {
+    buttonBuilder(Image(systemName: "ellipsis"))
+  }
+
+  func buttonBuilder(_ image: Image) -> some View {
+    image
+      .resizable()
+      .scaledToFit()
+      .frame(width: Constants.buttonSize, height: Constants.buttonSize)
   }
 }
 
 private enum Constants {
   static let avatarSize: CGFloat = 40
   static let avatarLeadingPadding: CGFloat = 16
-  static let dismissButtonSize: CGFloat = 36
+  static let buttonSize: CGFloat = 18
 }

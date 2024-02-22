@@ -29,7 +29,11 @@ struct BusinessProfileCover: View {
 
 private extension BusinessProfileCover {
   var coverTop: some View {
-    CoverTopView(user: user, isPresenting: $isPresenting)
+    CoverTopView(
+      user: user,
+      sharePreviewText: user.businessName,
+      isPresenting: $isPresenting
+    )
   }
 
   var blank: some View {
