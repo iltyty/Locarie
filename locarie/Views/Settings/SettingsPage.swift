@@ -14,20 +14,23 @@ struct SettingsPage: View {
 
   var body: some View {
     ScrollView {
-      VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
+      VStack {
         navigationBar
-        accountSectionTitle
-        myAccount
-        changePassword
-        locarieForBusinessSectionTitle
-        signUpForBusiness
-        supportSectionTitle
-        feedback
-        legalSectionTitle
-        privacyPolicy
-        termsOfService
-        termsOfUse
-        logout
+        VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
+          accountSectionTitle
+          myAccount
+          changePassword
+          locarieForBusinessSectionTitle
+          signUpForBusiness
+          supportSectionTitle
+          feedback
+          legalSectionTitle
+          privacyPolicy
+          termsOfService
+          termsOfUse
+          logout
+        }
+        .padding(.top)
       }
     }
   }
@@ -35,7 +38,7 @@ struct SettingsPage: View {
 
 private extension SettingsPage {
   var navigationBar: some View {
-    NavigationTitle("Account", divider: true)
+    NavigationBar("Account", divider: true)
   }
 
   var accountSectionTitle: some View {

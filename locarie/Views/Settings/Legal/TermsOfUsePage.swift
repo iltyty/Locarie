@@ -11,7 +11,11 @@ struct TermsOfUsePage: View {
   var body: some View {
     VStack {
       navigationBar
-      termsOfUse
+      VStack(alignment: .leading) {
+        termsOfUseTitle
+        termsOfUseContent
+      }
+      .padding([.top, .horizontal])
       Spacer()
     }
   }
@@ -19,15 +23,7 @@ struct TermsOfUsePage: View {
 
 private extension TermsOfUsePage {
   var navigationBar: some View {
-    NavigationTitle("Terms of use", divider: true)
-  }
-
-  var termsOfUse: some View {
-    VStack(alignment: .leading) {
-      termsOfUseTitle
-      termsOfUseContent
-    }
-    .padding(.horizontal)
+    NavigationBar("Terms of use", divider: true)
   }
 
   var termsOfUseTitle: some View {

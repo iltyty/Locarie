@@ -23,8 +23,7 @@ struct NewPasswordPage: View {
 
 private extension NewPasswordPage {
   var navigationTitle: some View {
-    NavigationTitle("Change password", divider: true)
-      .padding(.bottom, ChangePasswordConstants.navigationBarBottomPadding)
+    NavigationBar("Change password", divider: true, padding: true)
   }
 
   var input: some View {

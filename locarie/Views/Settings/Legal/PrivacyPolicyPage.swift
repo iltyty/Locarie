@@ -11,7 +11,11 @@ struct PrivacyPolicyPage: View {
   var body: some View {
     VStack {
       navigationBar
-      privacyPolicy
+      VStack(alignment: .leading) {
+        privacyPolicyTitle
+        privacyPolicyContent
+      }
+      .padding([.top, .horizontal])
       Spacer()
     }
   }
@@ -19,15 +23,7 @@ struct PrivacyPolicyPage: View {
 
 private extension PrivacyPolicyPage {
   var navigationBar: some View {
-    NavigationTitle("Privacy policy", divider: true)
-  }
-
-  var privacyPolicy: some View {
-    VStack(alignment: .leading) {
-      privacyPolicyTitle
-      privacyPolicyContent
-    }
-    .padding(.horizontal)
+    NavigationBar("Privacy policy", divider: true)
   }
 
   var privacyPolicyTitle: some View {

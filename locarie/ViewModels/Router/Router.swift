@@ -32,8 +32,8 @@ extension Router {
     case loginOrRegister, login, regularRegister, businessRegister,
          resetPassword
 
-    case settings, myAccount, changePassword, newPassword, notifications,
-         socialAccounts, feedback, privacyPolicy, termsOfUse, termsOfService
+    case settings, myAccount, changePassword, newPassword,
+         feedback, privacyPolicy, termsOfUse, termsOfService
 
     case userProfile, regularUserProfile, businessUserProfile, userProfileEdit
   }
@@ -62,10 +62,6 @@ extension Router {
         ChangePasswordPage()
       case .newPassword:
         NewPasswordPage()
-      case .notifications:
-        NotificationsPage()
-      case .socialAccounts:
-        SocialAccountsPage()
       case .feedback:
         FeedbackPage()
       case .privacyPolicy:

@@ -33,9 +33,12 @@ struct BusinessAddressPage: View {
 
   var body: some View {
     VStack {
-      top
-      middle
-      bottom
+      navigationBar
+      VStack {
+        middle
+        bottom
+      }
+      .padding(.top)
     }
     .onReceive(suggestionViewModel.$state) { state in
       handleSuggestionChoice(state: state)
@@ -82,10 +85,6 @@ struct BusinessAddressPage: View {
 }
 
 private extension BusinessAddressPage {
-  var top: some View {
-    navigationTitle
-  }
-
   var middle: some View {
     ZStack(alignment: .top) {
       map
@@ -97,8 +96,8 @@ private extension BusinessAddressPage {
     confirmButton
   }
 
-  var navigationTitle: some View {
-    NavigationTitle("Business address")
+  var navigationBar: some View {
+    NavigationBar("Business address")
   }
 
   var map: some View {

@@ -29,8 +29,7 @@ struct BusinessRegisterPage: View {
   }
 
   private var navigationTitle: some View {
-    NavigationTitle("Create a business account")
-      .padding(.bottom, Constants.titleBottomPadding)
+    NavigationBar("Create a business account", padding: true)
   }
 
   @ViewBuilder private var businessNameInput: some View {
@@ -95,7 +94,6 @@ struct BusinessRegisterPage: View {
 
 private enum Constants {
   static let vSpacing: CGFloat = 16
-  static let titleBottomPadding: CGFloat = 80
   static let buttonDisabledOpacity: CGFloat = 0.5
 }
 

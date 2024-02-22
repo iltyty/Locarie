@@ -27,7 +27,7 @@ struct ResetPasswordPage: View {
   }
 
   private var navigationBar: some View {
-    NavigationTitle("Reset Password", divider: true, padding: true)
+    NavigationBar("Reset Password", divider: true, padding: true)
   }
 
   private var hint: some View {

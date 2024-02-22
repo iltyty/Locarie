@@ -98,11 +98,11 @@ extension RegularRegisterPage {
       createButton
       Spacer()
     }
-    .padding(.horizontal)
+    .padding([.top, .horizontal])
   }
 
   var navigationBar: some View {
-    NavigationTitle("Create an account")
+    NavigationBar("Create an account")
   }
 
   var emailInput: some View {

@@ -18,9 +18,9 @@ struct TextSettingsItem: View {
         Spacer()
         Text(value).foregroundStyle(.secondary)
       }
+      .lineLimit(1)
       Divider()
     }
-    .padding(.horizontal)
   }
 }
 

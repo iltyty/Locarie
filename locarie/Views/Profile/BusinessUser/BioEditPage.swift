@@ -30,7 +30,7 @@ struct BioEditPage: View {
 
 private extension BioEditPage {
   var navigationTitle: some View {
-    NavigationTitle("Edit Bio", right: doneButton, divider: true)
+    NavigationBar("Edit Bio", right: doneButton, divider: true)
   }
 
   var doneButton: some View {

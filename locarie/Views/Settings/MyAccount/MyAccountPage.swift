@@ -12,19 +12,22 @@ struct MyAccountPage: View {
   @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
 
   var body: some View {
-    VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
-      navigationTitle
-      accountType
-      businessName
-      businessCategories
-      email
-      username
-      firstName
-      lastName
-      version
-      editProfile
-      deleteAccount
-      Spacer()
+    VStack {
+      navigationBar
+      VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
+        accountType
+        businessName
+        businessCategories
+        email
+        username
+        firstName
+        lastName
+        version
+        editProfile
+        deleteAccount
+        Spacer()
+      }
+      .padding([.top, .horizontal])
     }
     .onAppear {
       profileViewModel.getProfile(userId: cacheViewModel.getUserId())
@@ -33,8 +36,8 @@ struct MyAccountPage: View {
 }
 
 private extension MyAccountPage {
-  var navigationTitle: some View {
-    NavigationTitle("My account", divider: true)
+  var navigationBar: some View {
+    NavigationBar("My account", divider: true)
   }
 
   var accountType: some View {
@@ -96,7 +99,7 @@ private extension MyAccountPage {
     NavigationLink("Edit profile") {
       UserProfileEditPage()
     }
-    .padding()
+    .padding(.vertical)
   }
 
   var deleteAccount: some View {
@@ -104,7 +107,6 @@ private extension MyAccountPage {
       print("delete account button tapped")
     }
     .foregroundStyle(.red)
-    .padding(.horizontal)
   }
 }
 

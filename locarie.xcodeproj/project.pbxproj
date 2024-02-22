@@ -26,10 +26,8 @@
 		501BAF352B4635A900D9D84F /* TermsOfUsePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF342B4635A900D9D84F /* TermsOfUsePage.swift */; };
 		501BAF382B46364D00D9D84F /* FeedbackPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF372B46364D00D9D84F /* FeedbackPage.swift */; };
 		501BAF3A2B463D6900D9D84F /* TextEditorPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF392B463D6900D9D84F /* TextEditorPlus.swift */; };
-		501BAF3E2B464ECC00D9D84F /* NotificationsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF3D2B464ECC00D9D84F /* NotificationsPage.swift */; };
 		501BAF402B464F0600D9D84F /* ToggleSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF3F2B464F0600D9D84F /* ToggleSettingsItem.swift */; };
 		501BAF422B46503600D9D84F /* LabelSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF412B46503600D9D84F /* LabelSettingsItem.swift */; };
-		501BAF452B4650CA00D9D84F /* SocialAccountsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF442B4650CA00D9D84F /* SocialAccountsPage.swift */; };
 		501BAF482B46527000D9D84F /* ChangePasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF472B46527000D9D84F /* ChangePasswordPage.swift */; };
 		501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF492B46538300D9D84F /* NewPasswordPage.swift */; };
 		501BAF4C2B4653FF00D9D84F /* ChangePasswordConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF4B2B4653FF00D9D84F /* ChangePasswordConstants.swift */; };
@@ -140,7 +138,7 @@
 		50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */; };
 		50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */; };
 		50F549FB2B44F71300D06F20 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549FA2B44F71300D06F20 /* Constants.swift */; };
-		50F54A032B45283C00D06F20 /* NavigationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A022B45283C00D06F20 /* NavigationTitle.swift */; };
+		50F54A032B45283C00D06F20 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A022B45283C00D06F20 /* NavigationBar.swift */; };
 		50F54A1D2B454E0800D06F20 /* UserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1C2B454E0800D06F20 /* UserProfileEditPage.swift */; };
 		50F54A202B45503900D06F20 /* AvatarEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1F2B45503800D06F20 /* AvatarEditor.swift */; };
 		50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */; };
@@ -198,10 +196,8 @@
 		501BAF342B4635A900D9D84F /* TermsOfUsePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUsePage.swift; sourceTree = "<group>"; };
 		501BAF372B46364D00D9D84F /* FeedbackPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPage.swift; sourceTree = "<group>"; };
 		501BAF392B463D6900D9D84F /* TextEditorPlus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorPlus.swift; sourceTree = "<group>"; };
-		501BAF3D2B464ECC00D9D84F /* NotificationsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPage.swift; sourceTree = "<group>"; };
 		501BAF3F2B464F0600D9D84F /* ToggleSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingsItem.swift; sourceTree = "<group>"; };
 		501BAF412B46503600D9D84F /* LabelSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSettingsItem.swift; sourceTree = "<group>"; };
-		501BAF442B4650CA00D9D84F /* SocialAccountsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountsPage.swift; sourceTree = "<group>"; };
 		501BAF472B46527000D9D84F /* ChangePasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPage.swift; sourceTree = "<group>"; };
 		501BAF492B46538300D9D84F /* NewPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordPage.swift; sourceTree = "<group>"; };
 		501BAF4B2B4653FF00D9D84F /* ChangePasswordConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordConstants.swift; sourceTree = "<group>"; };
@@ -314,7 +310,7 @@
 		50F549EC2B4428A100D06F20 /* ProfileUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateViewModel.swift; sourceTree = "<group>"; };
 		50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarBuilder.swift; sourceTree = "<group>"; };
 		50F549FA2B44F71300D06F20 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		50F54A022B45283C00D06F20 /* NavigationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitle.swift; sourceTree = "<group>"; };
+		50F54A022B45283C00D06F20 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		50F54A1C2B454E0800D06F20 /* UserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileEditPage.swift; sourceTree = "<group>"; };
 		50F54A1F2B45503800D06F20 /* AvatarEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEditor.swift; sourceTree = "<group>"; };
 		50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
@@ -399,8 +395,6 @@
 			isa = PBXGroup;
 			children = (
 				501BAF462B46526200D9D84F /* ChangePassword */,
-				501BAF432B4650BF00D9D84F /* SocialAccounts */,
-				501BAF3C2B464EC100D9D84F /* Notifications */,
 				501BAF3B2B464EB800D9D84F /* MyAccount */,
 				501BAF212B462C3800D9D84F /* Components */,
 				501BAF362B46364300D9D84F /* Feedback */,
@@ -435,22 +429,6 @@
 				501BAF2B2B46319700D9D84F /* MyAccountPage.swift */,
 			);
 			path = MyAccount;
-			sourceTree = "<group>";
-		};
-		501BAF3C2B464EC100D9D84F /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				501BAF3D2B464ECC00D9D84F /* NotificationsPage.swift */,
-			);
-			path = Notifications;
-			sourceTree = "<group>";
-		};
-		501BAF432B4650BF00D9D84F /* SocialAccounts */ = {
-			isa = PBXGroup;
-			children = (
-				501BAF442B4650CA00D9D84F /* SocialAccountsPage.swift */,
-			);
-			path = SocialAccounts;
 			sourceTree = "<group>";
 		};
 		501BAF462B46526200D9D84F /* ChangePassword */ = {
@@ -1008,7 +986,7 @@
 		50F54A012B45283000D06F20 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				50F54A022B45283C00D06F20 /* NavigationTitle.swift */,
+				50F54A022B45283C00D06F20 /* NavigationBar.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -1238,7 +1216,7 @@
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
 				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+London.swift in Sources */,
 				502A4FF02B32D34B00C0833A /* Color+Hex.swift in Sources */,
-				50F54A032B45283C00D06F20 /* NavigationTitle.swift in Sources */,
+				50F54A032B45283C00D06F20 /* NavigationBar.swift in Sources */,
 				501BAF4C2B4653FF00D9D84F /* ChangePasswordConstants.swift in Sources */,
 				50FDD8992B523B95003015F9 /* AvatarUploadService.swift in Sources */,
 				509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */,
@@ -1271,7 +1249,6 @@
 				50F85B452B242EE200D04787 /* APIServices.swift in Sources */,
 				50F549D92B3C85C500D06F20 /* UserRegisterRequest.swift in Sources */,
 				50B11ADF2AFB7850002A7B91 /* ReviewView.swift in Sources */,
-				501BAF3E2B464ECC00D9D84F /* NotificationsPage.swift in Sources */,
 				502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */,
 				50FDD8902B4B9375003015F9 /* BaseViewModel.swift in Sources */,
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
@@ -1345,7 +1322,6 @@
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
 				5075FCD12B86E932005E4A8B /* ProfileDetail.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
-				501BAF452B4650CA00D9D84F /* SocialAccountsPage.swift in Sources */,
 				50FDD8952B4D708B003015F9 /* BusinessHoursDto.swift in Sources */,
 				50CBC9882B6FCDBA0025A0D9 /* SwitchableBanner.swift in Sources */,
 				50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */,

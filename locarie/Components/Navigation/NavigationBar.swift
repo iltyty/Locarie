@@ -1,5 +1,5 @@
 //
-//  NavigationTitle.swift
+//  NavigationBar.swift
 //  locarie
 //
 //  Created by qiuty on 03/01/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NavigationTitle<L: View, R: View>: View {
+struct NavigationBar<L: View, R: View>: View {
   let left: L
   let right: R
   let title: String
@@ -40,12 +40,11 @@ struct NavigationTitle<L: View, R: View>: View {
         Divider()
       }
     }
-    .padding(.bottom)
     .padding(.bottom, padding ? Constants.bottomPadding : 0)
   }
 }
 
-private extension NavigationTitle {
+private extension NavigationBar {
   func titleButtons(left: some View, right: some View) -> some View {
     HStack {
       left
@@ -79,9 +78,9 @@ private func defaultTitleRight() -> EmptyView {
 
 private enum Constants {
   static let leftIconSize: CGFloat = 18
-  static let bottomPadding: CGFloat = 80
+  static let bottomPadding: CGFloat = 100
 }
 
 #Preview {
-  NavigationTitle("Navigation Title", divider: true)
+  NavigationBar("Navigation Title", divider: true)
 }

@@ -77,7 +77,7 @@ private extension LoginPage {
   }
 
   var navigationBar: some View {
-    NavigationTitle()
+    NavigationBar()
   }
 
   var loadingOverlayView: some View {

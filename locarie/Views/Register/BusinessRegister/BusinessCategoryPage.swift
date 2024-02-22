@@ -23,7 +23,7 @@ struct BusinessCategoryPage: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      navigationTitle
+      navigationBar
       text
       tags
       Spacer()
@@ -38,9 +38,8 @@ struct BusinessCategoryPage: View {
     }
   }
 
-  private var navigationTitle: some View {
-    NavigationTitle("Business category")
-      .padding(.bottom, Constants.titleBottomPadding)
+  private var navigationBar: some View {
+    NavigationBar("Business category", padding: true)
   }
 
   private var text: some View {

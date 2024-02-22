@@ -24,7 +24,7 @@ struct UserProfileEditPage: View {
   @Environment(\.dismiss) var dismiss
 
   var body: some View {
-    VStack {
+    VStack(spacing: 0) {
       navigationBar
       ScrollView {
         content
@@ -73,7 +73,7 @@ struct UserProfileEditPage: View {
       lastNameInput
       birthdayInput
     }
-    .padding(.horizontal)
+    .padding([.top, .horizontal])
   }
 
   private var isBusinessUser: Bool {
@@ -83,7 +83,7 @@ struct UserProfileEditPage: View {
 
 private extension UserProfileEditPage {
   var navigationBar: some View {
-    NavigationTitle("Edit profile", right: saveButton, divider: true)
+    NavigationBar("Edit profile", right: saveButton, divider: true)
   }
 
   var saveButton: some View {

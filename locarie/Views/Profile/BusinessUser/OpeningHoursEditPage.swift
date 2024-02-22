@@ -39,7 +39,7 @@ struct OpeningHoursEditPage: View {
 
 private extension OpeningHoursEditPage {
   var navigationBar: some View {
-    NavigationTitle("Edit opening hours", right: doneButton, divider: true)
+    NavigationBar("Edit opening hours", right: doneButton, divider: true)
       .padding(.bottom)
   }
 
