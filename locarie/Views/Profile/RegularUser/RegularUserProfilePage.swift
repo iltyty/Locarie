@@ -120,29 +120,51 @@ private extension RegularUserProfilePage {
   }
 
   var followedTab: some View {
-    Label("Followed", systemImage: "bookmark")
-      .padding(.horizontal, Constants.tabTextHPadding)
-      .frame(height: Constants.tabHeight)
-      .background(
-        Capsule()
-          .stroke(currentTab == .followed ? .primary : Constants.tabStrokeColor)
-      )
-      .onTapGesture {
-        currentTab = .followed
+    Label {
+      HStack {
+        Text("Followed")
+        Text("\(favoriteBusinessVM.users.count)")
+          .foregroundStyle(Color.locariePrimary)
       }
+    } icon: {
+      Image(systemName: "bookmark")
+    }
+    .fontWeight(isFollowedTabSelected ? .semibold : .regular)
+    .padding(.horizontal, Constants.tabTextHPadding)
+    .frame(height: Constants.tabHeight)
+    .background(
+      Capsule()
+        .stroke(isFollowedTabSelected ? .primary : Constants.tabStrokeColor)
+    )
+    .onTapGesture {
+      currentTab = .followed
+    }
+  }
+
+  var isFollowedTabSelected: Bool {
+    currentTab == .followed
   }
 
   var savedTab: some View {
-    Label("Saved", systemImage: "star")
-      .padding(.horizontal, Constants.tabTextHPadding)
-      .frame(height: Constants.tabHeight)
-      .background(
-        Capsule()
-          .stroke(currentTab == .saved ? .primary : Constants.tabStrokeColor)
-      )
-      .onTapGesture {
-        currentTab = .saved
+    Label {
+      HStack {
+        Text("Saved")
+        Text("\(favoritePostsVM.posts.count)")
+          .foregroundStyle(Color.locariePrimary)
       }
+    } icon: {
+      Image(systemName: "star")
+    }
+    .fontWeight(!isFollowedTabSelected ? .semibold : .regular)
+    .padding(.horizontal, Constants.tabTextHPadding)
+    .frame(height: Constants.tabHeight)
+    .background(
+      Capsule()
+        .stroke(!isFollowedTabSelected ? .primary : Constants.tabStrokeColor)
+    )
+    .onTapGesture {
+      currentTab = .saved
+    }
   }
 
   @ViewBuilder
