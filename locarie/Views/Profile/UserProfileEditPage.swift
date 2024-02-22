@@ -11,7 +11,7 @@ struct UserProfileEditPage: View {
   @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
 
   var body: some View {
-    if !cacheViewModel.isBusinessUser() {
+    if cacheViewModel.isBusinessUser() {
       BusinessProfileEditPage()
     } else {
       RegularUserProfileEditPage()

@@ -48,7 +48,8 @@ struct BottomTabViewItem: View {
         url: iconUrl, width: Constants.size, height: Constants.size
       ) { image in
         image.resizable()
-          .scaledToFit()
+          .scaledToFill()
+          .clipShape(Circle())
           .frame(width: Constants.size, height: Constants.size)
       }
     }
@@ -66,6 +67,10 @@ private enum Constants {
       page: .home,
       iconName: "HomeIcon",
       selectedIconName: "SelectedHomeIcon"
+    )
+    BottomTabViewItem(
+      page: .profile,
+      iconUrl: LocalCacheViewModel.shared.getAvatarUrl()
     )
   }
 }

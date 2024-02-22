@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct BottomTabView: View {
+  @ObservedObject var cacheVM = LocalCacheViewModel.shared
   @ObservedObject var viewRouter = BottomTabViewRouter.shared
-  @ObservedObject var cacheViewModel = LocalCacheViewModel.shared
 
   var body: some View {
     HStack {
       Spacer()
       homePage
       Spacer()
-      if cacheViewModel.isBusinessUser() {
+      if cacheVM.isBusinessUser() {
         newPostPage
         Spacer()
       }
@@ -55,11 +55,20 @@ private extension BottomTabView {
     )
   }
 
+  @ViewBuilder
   var profilePage: some View {
-    BottomTabViewItem(
-      page: .profile,
-      iconName: "ProfileIcon"
-    )
+    let avatarUrl = cacheVM.getAvatarUrl()
+    if avatarUrl.isEmpty {
+      BottomTabViewItem(
+        page: .profile,
+        iconName: "ProfileIcon"
+      )
+    } else {
+      BottomTabViewItem(
+        page: .profile,
+        iconUrl: avatarUrl
+      )
+    }
   }
 }
 

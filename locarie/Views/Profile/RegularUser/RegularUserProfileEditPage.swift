@@ -125,6 +125,7 @@ private extension RegularUserProfileEditPage {
 
   func handleProfileUpdateFinished(_ dto: UserDto?) {
     if let dto {
+      print(dto)
       cacheVM.setUserInfo(dto)
     }
     dismiss()
