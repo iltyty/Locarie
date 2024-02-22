@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct BusinessBottomBar: View {
+  var businessId: Int64
+
+  @State private var alreadyFollowed = false
+
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+
+  @StateObject private var favoriteBusinessVM = FavoriteBusinessViewModel()
+
   var body: some View {
     ZStack(alignment: .top) {
       background
@@ -19,16 +27,47 @@ struct BusinessBottomBar: View {
       .padding(.top, Constants.topPadding)
       .padding(.horizontal, Constants.hPadding)
     }
+    .onAppear {
+      favoriteBusinessVM.checkFavoredBy(
+        userId: cacheVM.getUserId(),
+        businessId: businessId
+      )
+    }
+    .onReceive(favoriteBusinessVM.$alreadyFollowed) { followed in
+      print(followed)
+      alreadyFollowed = followed
+    }
+    .onReceive(favoriteBusinessVM.$state, perform: { state in
+      switch state {
+      case .favoriteFinished:
+        alreadyFollowed = true
+      case .unfavoriteFinished:
+        alreadyFollowed = false
+      default: break
+      }
+    })
     .fontWeight(.semibold)
     .frame(height: Constants.height)
     .ignoresSafeArea(edges: .bottom)
   }
 
   private var favoriteButton: some View {
-    Image(systemName: "bookmark")
+    Image(systemName: favoriteButtonSystemName)
       .resizable()
       .scaledToFit()
       .frame(height: Constants.iconSize)
+      .foregroundStyle(
+        alreadyFollowed ? Color.locariePrimary : .primary
+      )
+      .onTapGesture { favoriteButtonTapped() }
+  }
+
+  private var favoriteButtonSystemName: String {
+    if alreadyFollowed {
+      "bookmark.fill"
+    } else {
+      "bookmark"
+    }
   }
 
   private var directionButton: some View {
@@ -48,6 +87,18 @@ struct BusinessBottomBar: View {
     .fill(.background)
     .shadow(radius: Constants.shadowRadius)
   }
+
+  private func favoriteButtonTapped() {
+    if alreadyFollowed {
+      favoriteBusinessVM.unfavorite(
+        userId: cacheVM.getUserId(), businessId: businessId
+      )
+    } else {
+      favoriteBusinessVM.favorite(
+        userId: cacheVM.getUserId(), businessId: businessId
+      )
+    }
+  }
 }
 
 private enum Constants {
@@ -62,9 +113,5 @@ private enum Constants {
 }
 
 #Preview {
-  ZStack(alignment: .bottom) {
-    Color.pink
-    BusinessBottomBar()
-  }
-  .ignoresSafeArea(edges: .bottom)
+  BusinessBottomBar(businessId: 1)
 }

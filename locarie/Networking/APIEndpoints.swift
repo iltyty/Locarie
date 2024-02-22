@@ -12,6 +12,14 @@ enum APIEndpoints {
   static let userUrl = baseUrl + "/users"
   static let postUrl = baseUrl + "/posts"
 
+  static let favoritePostUrl = postUrl + "/favorite"
+  static let unfavoritePostUrl = postUrl + "/unfavorite"
+  static let postIsFavoredByUrl = postUrl + "/is-favored-by"
+
+  static let favoriteBusinessUrl = userUrl + "/favorite"
+  static let unfavoriteBusinessUrl = userUrl + "/unfavorite"
+  static let businessIsFavoredByUrl = userUrl + "/is-favored-by"
+
   static let userLoginUrl = URL(string: userUrl + "/login")!
   static let userRegisterUrl = URL(string: userUrl + "/register")!
   static func userProfileUrl(id: Int64) -> URL {

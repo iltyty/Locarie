@@ -11,9 +11,12 @@ import SwiftUI
 struct PostDetailPage: View {
   @Environment(\.dismiss) var dismiss
 
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+
   @StateObject private var profileVM = ProfileGetViewModel()
   @StateObject private var listNearbyPostsVM = PostListNearbyViewModel()
   @StateObject private var listUserPostsVM = ListUserPostsViewModel()
+  @StateObject private var favoritePostVM = FavoritePostViewModel()
 
   @State private var screenSize: CGSize = .zero
   @State private var viewport: Viewport = .camera(
@@ -119,7 +122,7 @@ private extension PostDetailPage {
   }
 
   var bottomBar: some View {
-    BusinessBottomBar()
+    BusinessBottomBar(businessId: uid)
   }
 }
 
