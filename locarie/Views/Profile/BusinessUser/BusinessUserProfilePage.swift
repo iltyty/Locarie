@@ -13,26 +13,47 @@ struct BusinessUserProfilePage: View {
   @State private var viewport: Viewport = .camera(
     center: .london, zoom: Constants.mapZoom
   )
-  @State private var showingProfileCover = false
+
+  @State private var presentingCover = false
+  @State private var presentingDialog = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var profileVM = ProfileGetViewModel()
 
   var body: some View {
     GeometryReader { proxy in
-      ZStack {
+      ZStack(alignment: .bottom) {
         VStack {
           content
           BottomTabView()
         }
-        if showingProfileCover {
-          profileCover
+        if presentingCover {
+          BusinessProfileCover(
+            user: profileVM.dto,
+            isPresenting: $presentingCover
+          )
+        }
+        if presentingDialog {
+          dialogBackground
+            .ignoresSafeArea(edges: .top)
+        }
+        VStack {
+          if presentingDialog {
+            ProfileEditDialog(isPresenting: $presentingDialog)
+              .transition(.move(edge: .bottom))
+          }
         }
       }
       .onAppear {
+        withAnimation(.spring) {
+          presentingDialog = true
+        }
         screenSize = proxy.size
         profileVM.getProfile(userId: cacheVM.getUserId())
       }
+      .onDisappear(perform: {
+        presentingDialog = false
+      })
       .onReceive(profileVM.$dto) { dto in
         viewport = .camera(
           center: dto.coordinate,
@@ -77,7 +98,7 @@ private extension BusinessUserProfilePage {
         ProfileView(
           id: cacheVM.getUserId(),
           user: profileVM.dto,
-          isPresentingCover: $showingProfileCover
+          isPresentingCover: $presentingCover
         )
       }
     }
@@ -134,16 +155,23 @@ private extension BusinessUserProfilePage {
 }
 
 private extension BusinessUserProfilePage {
-  var profileCover: some View {
-    BusinessProfileCover(
-      user: profileVM.dto,
-      isPresenting: $showingProfileCover
-    )
+  var dialogBackground: some View {
+    Color
+      .black
+      .opacity(Constants.dialogBgOpacity)
+      .onTapGesture {
+        withAnimation(.spring) {
+          presentingDialog = false
+        }
+      }
   }
 }
 
 private enum Constants {
   static let vSpacing: CGFloat = 16
+
+  static let dialogBgOpacity: CGFloat = 0.2
+  static let dialogAnimationDuration: CGFloat = 1
 
   static let mapZoom: CGFloat = 12
   static let buttonShadowRadius: CGFloat = 2.0

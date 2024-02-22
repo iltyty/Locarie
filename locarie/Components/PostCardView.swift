@@ -21,7 +21,7 @@ struct PostCardView: View {
       status
       cover
       content
-      tags
+      categories
     }
   }
 
@@ -52,11 +52,8 @@ private extension PostCardView {
       .listRowSeparator(.hidden)
   }
 
-  var tags: some View {
-    HStack {
-      TagView(tag: "Food & Drink", isSelected: false)
-      TagView(tag: "Shop", isSelected: false)
-    }
+  var categories: some View {
+    ProfileCategories(post.user)
   }
 }
 

@@ -82,6 +82,7 @@
 		5075FCD72B870A05005E4A8B /* ProfileBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCD62B870A05005E4A8B /* ProfileBio.swift */; };
 		5075FCD92B870A40005E4A8B /* ProfilePostsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCD82B870A40005E4A8B /* ProfilePostsCount.swift */; };
 		5075FCDB2B870BBF005E4A8B /* ProfileOpenUntil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCDA2B870BBF005E4A8B /* ProfileOpenUntil.swift */; };
+		5075FCDE2B8717C2005E4A8B /* ProfileEditDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCDD2B8717C2005E4A8B /* ProfileEditDialog.swift */; };
 		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
 		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
@@ -252,6 +253,7 @@
 		5075FCD62B870A05005E4A8B /* ProfileBio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBio.swift; sourceTree = "<group>"; };
 		5075FCD82B870A40005E4A8B /* ProfilePostsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostsCount.swift; sourceTree = "<group>"; };
 		5075FCDA2B870BBF005E4A8B /* ProfileOpenUntil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOpenUntil.swift; sourceTree = "<group>"; };
+		5075FCDD2B8717C2005E4A8B /* ProfileEditDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditDialog.swift; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
 		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
@@ -646,6 +648,15 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		5075FCDC2B8717A5005E4A8B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */,
+				5075FCDD2B8717C2005E4A8B /* ProfileEditDialog.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		50998AF52B35D4C1002196B5 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -968,6 +979,7 @@
 		50F549EB2B44273900D06F20 /* BusinessUser */ = {
 			isa = PBXGroup;
 			children = (
+				5075FCDC2B8717A5005E4A8B /* Components */,
 				50B11AD62AFA28E8002A7B91 /* BusinessHomePage.swift */,
 				509D5BC22B45610F00833021 /* BioEditPage.swift */,
 				509D5BC42B45611E00833021 /* OpeningHoursEditPage.swift */,
@@ -1014,7 +1026,6 @@
 			isa = PBXGroup;
 			children = (
 				50F54A1F2B45503800D06F20 /* AvatarEditor.swift */,
-				509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1276,6 +1287,7 @@
 				50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */,
 				50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */,
 				5075FCD92B870A40005E4A8B /* ProfilePostsCount.swift in Sources */,
+				5075FCDE2B8717C2005E4A8B /* ProfileEditDialog.swift in Sources */,
 				5075FCDB2B870BBF005E4A8B /* ProfileOpenUntil.swift in Sources */,
 				50B11AD72AFA28E9002A7B91 /* BusinessHomePage.swift in Sources */,
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,

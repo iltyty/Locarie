@@ -5,7 +5,6 @@
 //  Created by qiuty on 2023/10/30.
 //
 
-import CoreLocation
 import SwiftUI
 
 struct LocarieView: View {
