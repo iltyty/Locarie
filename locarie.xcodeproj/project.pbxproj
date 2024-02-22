@@ -57,6 +57,7 @@
 		50530B982B878087009C1F92 /* FavoritePostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50530B972B878087009C1F92 /* FavoritePostService.swift */; };
 		50530B9B2B878B07009C1F92 /* FavoritePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50530B9A2B878B07009C1F92 /* FavoritePostViewModel.swift */; };
 		50530B9D2B878E18009C1F92 /* FavoriteBusinessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50530B9C2B878E18009C1F92 /* FavoriteBusinessViewModel.swift */; };
+		50530B9F2B87A193009C1F92 /* BusinessRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50530B9E2B87A193009C1F92 /* BusinessRowView.swift */; };
 		5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */; };
 		5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEE2B288D3300645F5C /* UserLoginService.swift */; };
 		5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF02B288D6C00645F5C /* UserRegisterService.swift */; };
@@ -233,6 +234,7 @@
 		50530B972B878087009C1F92 /* FavoritePostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostService.swift; sourceTree = "<group>"; };
 		50530B9A2B878B07009C1F92 /* FavoritePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostViewModel.swift; sourceTree = "<group>"; };
 		50530B9C2B878E18009C1F92 /* FavoriteBusinessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBusinessViewModel.swift; sourceTree = "<group>"; };
+		50530B9E2B87A193009C1F92 /* BusinessRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessRowView.swift; sourceTree = "<group>"; };
 		5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheViewModel.swift; sourceTree = "<group>"; };
 		5054CDEE2B288D3300645F5C /* UserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 		5054CDF02B288D6C00645F5C /* UserRegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterService.swift; sourceTree = "<group>"; };
@@ -1033,6 +1035,7 @@
 			isa = PBXGroup;
 			children = (
 				50F54A1F2B45503800D06F20 /* AvatarEditor.swift */,
+				50530B9E2B87A193009C1F92 /* BusinessRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1216,6 +1219,7 @@
 			files = (
 				50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */,
 				50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */,
+				50530B9F2B87A193009C1F92 /* BusinessRowView.swift in Sources */,
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
 				5075FCC52B86E6F8005E4A8B /* ProfileFavoredByCount.swift in Sources */,
 				5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */,
