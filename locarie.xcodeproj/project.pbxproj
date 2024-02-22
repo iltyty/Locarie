@@ -50,6 +50,8 @@
 		503905782B340A4E005B574F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 503905772B340A4E005B574F /* Alamofire */; };
 		5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503905792B341418005B574F /* PostListNearbyViewModel.swift */; };
 		504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504794A62B70D2A20038D31F /* ListUserPostsViewModel.swift */; };
+		50530B8F2B87514D009C1F92 /* RegularUserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50530B8E2B87514C009C1F92 /* RegularUserProfileEditPage.swift */; };
+		50530B912B875185009C1F92 /* UserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50530B902B875185009C1F92 /* UserProfileEditPage.swift */; };
 		5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */; };
 		5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDEE2B288D3300645F5C /* UserLoginService.swift */; };
 		5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5054CDF02B288D6C00645F5C /* UserRegisterService.swift */; };
@@ -139,7 +141,7 @@
 		50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */; };
 		50F549FB2B44F71300D06F20 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549FA2B44F71300D06F20 /* Constants.swift */; };
 		50F54A032B45283C00D06F20 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A022B45283C00D06F20 /* NavigationBar.swift */; };
-		50F54A1D2B454E0800D06F20 /* UserProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1C2B454E0800D06F20 /* UserProfileEditPage.swift */; };
+		50F54A1D2B454E0800D06F20 /* BusinessProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1C2B454E0800D06F20 /* BusinessProfileEditPage.swift */; };
 		50F54A202B45503900D06F20 /* AvatarEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1F2B45503800D06F20 /* AvatarEditor.swift */; };
 		50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */; };
 		50F85B432B242CA000D04787 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B422B242CA000D04787 /* Errors.swift */; };
@@ -219,6 +221,8 @@
 		503794AB2AF1F44A00DA64F4 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		503905792B341418005B574F /* PostListNearbyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListNearbyViewModel.swift; sourceTree = "<group>"; };
 		504794A62B70D2A20038D31F /* ListUserPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUserPostsViewModel.swift; sourceTree = "<group>"; };
+		50530B8E2B87514C009C1F92 /* RegularUserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserProfileEditPage.swift; sourceTree = "<group>"; };
+		50530B902B875185009C1F92 /* UserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileEditPage.swift; sourceTree = "<group>"; };
 		5054CDEB2B28807800645F5C /* LocalCacheViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheViewModel.swift; sourceTree = "<group>"; };
 		5054CDEE2B288D3300645F5C /* UserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 		5054CDF02B288D6C00645F5C /* UserRegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterService.swift; sourceTree = "<group>"; };
@@ -311,7 +315,7 @@
 		50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarBuilder.swift; sourceTree = "<group>"; };
 		50F549FA2B44F71300D06F20 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		50F54A022B45283C00D06F20 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		50F54A1C2B454E0800D06F20 /* UserProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileEditPage.swift; sourceTree = "<group>"; };
+		50F54A1C2B454E0800D06F20 /* BusinessProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfileEditPage.swift; sourceTree = "<group>"; };
 		50F54A1F2B45503800D06F20 /* AvatarEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEditor.swift; sourceTree = "<group>"; };
 		50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		50F85B422B242CA000D04787 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -456,8 +460,8 @@
 				50F54A1E2B45502500D06F20 /* Components */,
 				50F549EB2B44273900D06F20 /* BusinessUser */,
 				50F549EA2B44273100D06F20 /* RegularUser */,
-				50F54A1C2B454E0800D06F20 /* UserProfileEditPage.swift */,
 				501BAF4D2B4655EF00D9D84F /* UserProfilePage.swift */,
+				50530B902B875185009C1F92 /* UserProfileEditPage.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -841,7 +845,6 @@
 				50B5DED52B3B26FA00C0A641 /* UIComponents */,
 				50B5DED22B3B198300C0A641 /* Errors */,
 				50B5DEC92B3B099400C0A641 /* Dtos */,
-				50B5DEC82B3B096700C0A641 /* Models */,
 				50B5DEC72B3B095D00C0A641 /* Networking */,
 			);
 			path = MapboxSDK;
@@ -856,13 +859,6 @@
 				50B5DEDB2B3BE83500C0A641 /* MapboxRetrieveService.swift */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		50B5DEC82B3B096700C0A641 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		50B5DEC92B3B099400C0A641 /* Dtos */ = {
@@ -950,6 +946,7 @@
 			isa = PBXGroup;
 			children = (
 				50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */,
+				50530B8E2B87514C009C1F92 /* RegularUserProfileEditPage.swift */,
 			);
 			path = RegularUser;
 			sourceTree = "<group>";
@@ -958,10 +955,11 @@
 			isa = PBXGroup;
 			children = (
 				5075FCDC2B8717A5005E4A8B /* Components */,
-				50B11AD62AFA28E8002A7B91 /* BusinessHomePage.swift */,
 				509D5BC22B45610F00833021 /* BioEditPage.swift */,
-				509D5BC42B45611E00833021 /* OpeningHoursEditPage.swift */,
+				50B11AD62AFA28E8002A7B91 /* BusinessHomePage.swift */,
 				50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */,
+				509D5BC42B45611E00833021 /* OpeningHoursEditPage.swift */,
+				50F54A1C2B454E0800D06F20 /* BusinessProfileEditPage.swift */,
 			);
 			path = BusinessUser;
 			sourceTree = "<group>";
@@ -1233,6 +1231,7 @@
 				505568C62B84A19000FD21E4 /* FormItemCommonConstants.swift in Sources */,
 				5000C6C72AF8BA580057EF2D /* BottomTabViewItem.swift in Sources */,
 				501BAF402B464F0600D9D84F /* ToggleSettingsItem.swift in Sources */,
+				50530B8F2B87514D009C1F92 /* RegularUserProfileEditPage.swift in Sources */,
 				50FDD89B2B53D633003015F9 /* ProfileImagesUploadService.swift in Sources */,
 				509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */,
 				502A4FF62B32D48400C0833A /* PostListService.swift in Sources */,
@@ -1252,7 +1251,7 @@
 				502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */,
 				50FDD8902B4B9375003015F9 /* BaseViewModel.swift in Sources */,
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
-				50F54A1D2B454E0800D06F20 /* UserProfileEditPage.swift in Sources */,
+				50F54A1D2B454E0800D06F20 /* BusinessProfileEditPage.swift in Sources */,
 				50B5DED42B3B19AA00C0A641 /* MapboxError.swift in Sources */,
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
 				5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */,
@@ -1309,6 +1308,7 @@
 				50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */,
 				50B5DEC62B3B092F00C0A641 /* MapboxSuggestionService.swift in Sources */,
 				509AC04F2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift in Sources */,
+				50530B912B875185009C1F92 /* UserProfileEditPage.swift in Sources */,
 				50B11ADA2AFB3661002A7B91 /* PostDetailPage.swift in Sources */,
 				50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */,
 				505568C82B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift in Sources */,
