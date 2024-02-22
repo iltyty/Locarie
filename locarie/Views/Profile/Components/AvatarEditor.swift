@@ -14,18 +14,21 @@ struct AvatarEditor: View {
   @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
 
   var body: some View {
-    PhotosPicker(
-      selection: $photoViewModel.selection,
-      maxSelectionCount: 1,
-      matching: .images,
-      photoLibrary: .shared()
-    ) { getAvatar() }
+    VStack {
+      avatar
+      PhotosPicker(
+        selection: $photoViewModel.selection,
+        maxSelectionCount: 1,
+        matching: .images,
+        photoLibrary: .shared()
+      ) { text }
+    }
   }
 }
 
 private extension AvatarEditor {
   @ViewBuilder
-  func getAvatar() -> some View {
+  var avatar: some View {
     let avatarUrl = cacheViewModel.getAvatarUrl()
     if !photoViewModel.attachments.isEmpty {
       selectedImage()
@@ -47,10 +50,17 @@ private extension AvatarEditor {
       attachment: photoViewModel.attachments[0]
     )
   }
+
+  var text: some View {
+    Text("Edit profile image")
+      .foregroundStyle(Constants.textColor)
+      .font(.footnote)
+  }
 }
 
 private enum Constants {
-  static let avatarSize = 64.0
+  static let avatarSize: CGFloat = 64
+  static let textColor: Color = .init(hex: 0x326AFB)
 }
 
 #Preview {

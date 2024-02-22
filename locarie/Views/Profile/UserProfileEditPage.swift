@@ -24,33 +24,10 @@ struct UserProfileEditPage: View {
   @Environment(\.dismiss) var dismiss
 
   var body: some View {
-    GeometryReader { proxy in
+    VStack {
+      navigationBar
       ScrollView {
-        VStack(spacing: Constants.vSpacing) {
-          navigationTitle
-          if isBusinessUser {
-            profileImagesEditor(width: proxy.size.width * 0.8)
-          }
-          avatarEditor
-          if isBusinessUser {
-            businessNameInput
-          }
-          usernameInput
-          if isBusinessUser {
-            categoryInput
-            bioInput
-            locationInput
-            openingHoursInput
-            linkInput
-          }
-          emailInput
-          if isBusinessUser {
-            phoneInput
-          }
-          firstNameInput
-          lastNameInput
-          birthdayInput
-        }
+        content
       }
     }
     .sheet(isPresented: $isSheetPresented) { birthdaySheet }
@@ -71,14 +48,42 @@ struct UserProfileEditPage: View {
     }
   }
 
+  private var content: some View {
+    VStack(alignment: .leading, spacing: Constants.vSpacing) {
+      if isBusinessUser {
+        profileImagesEditor
+      }
+      avatarEditor
+      if isBusinessUser {
+        businessNameInput
+      }
+      usernameInput
+      if isBusinessUser {
+        categoryInput
+        bioInput
+        locationInput
+        openingHoursInput
+        linkInput
+      }
+      if isBusinessUser {
+        phoneInput
+      }
+      personalDetailTitle
+      firstNameInput
+      lastNameInput
+      birthdayInput
+    }
+    .padding(.horizontal)
+  }
+
   private var isBusinessUser: Bool {
     profileGetViewModel.dto.type == .business
   }
 }
 
 private extension UserProfileEditPage {
-  var navigationTitle: some View {
-    NavigationTitle("Edit profile", right: saveButton)
+  var navigationBar: some View {
+    NavigationTitle("Edit profile", right: saveButton, divider: true)
   }
 
   var saveButton: some View {
@@ -89,39 +94,39 @@ private extension UserProfileEditPage {
     .foregroundStyle(Color.locariePrimary)
   }
 
-  func profileImagesEditor(width: CGFloat) -> some View {
+  var profileImagesEditor: some View {
     VStack(alignment: .leading) {
       Text("Edit profile images")
-        .fontWeight(.bold)
-        .padding(.leading)
+        .fontWeight(.semibold)
       ScrollView(.horizontal) {
         HStack {
-          profileImages(width: width)
-          profileImagePicker(width: width)
+          profileImages
+          profileImagePicker
         }
-        .padding(.horizontal)
       }
+      .scrollIndicators(.hidden)
     }
   }
 
-  func profileImages(width: CGFloat) -> some View {
+  @ViewBuilder
+  var profileImages: some View {
     let urls = profileGetViewModel.dto.profileImageUrls
-    return Group {
+    HStack {
       ForEach(urls.indices, id: \.self) { i in
         AsyncImageView(url: urls[i]) { image in
           image.resizable()
             .aspectRatio(Constants.profileImageAspectRatio, contentMode: .fill)
-            .frame(width: width, alignment: .center)
+            .frame(width: Constants.profileImageWidth, alignment: .center)
             .clipShape(
               RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
             )
             .clipped()
         }
-        .frame(width: width)
+        .frame(width: Constants.profileImageWidth)
       }
       ForEach(profileImagesViewModel.photoViewModel.attachments) { attachment in
         ImageAttachmentView(
-          width: width,
+          width: Constants.profileImageWidth,
           aspectRatio: Constants.profileImageAspectRatio,
           attachment: attachment
         )
@@ -129,14 +134,14 @@ private extension UserProfileEditPage {
     }
   }
 
-  func profileImagePicker(width: CGFloat) -> some View {
+  var profileImagePicker: some View {
     PhotosPicker(
       selection: $profileImagesViewModel.photoViewModel.selection,
       maxSelectionCount: maxSelectionCount,
       matching: .images,
       photoLibrary: .shared()
     ) {
-      profileImagePickerContent(width: width)
+      profileImagePickerContent(width: Constants.profileImageWidth)
     }
     .disabled(maxSelectionCount == 0)
   }
@@ -166,7 +171,11 @@ private extension UserProfileEditPage {
   }
 
   var avatarEditor: some View {
-    AvatarEditor(photoViewModel: avatarViewModel.photoViewModel)
+    HStack {
+      Spacer()
+      AvatarEditor(photoViewModel: avatarViewModel.photoViewModel)
+      Spacer()
+    }
   }
 
   @ViewBuilder
@@ -191,9 +200,9 @@ private extension UserProfileEditPage {
     NavigationLink {
       BusinessCategoryPage(categories: $profileUpdateViewModel.dto.categories)
     } label: {
-      LinkFormItemWithBlockTitle(
-        title: "Business Category",
-        hint: "Category",
+      LinkFormItemWithInlineTitle(
+        title: "Categories",
+        hint: "Categories",
         textArray: $profileUpdateViewModel.dto.categories
       )
     }
@@ -204,7 +213,7 @@ private extension UserProfileEditPage {
     NavigationLink {
       BioEditPage(bio: $profileUpdateViewModel.dto.introduction)
     } label: {
-      LinkFormItem(
+      LinkFormItemWithInlineTitle(
         title: "Bio",
         hint: "Bio",
         text: $profileUpdateViewModel.dto.introduction
@@ -222,7 +231,7 @@ private extension UserProfileEditPage {
         location: $profileUpdateViewModel.dto.location
       )
     } label: {
-      LinkFormItem(
+      LinkFormItemWithInlineTitle(
         title: text,
         hint: text,
         text: $profileUpdateViewModel.dto.address
@@ -236,7 +245,7 @@ private extension UserProfileEditPage {
       OpeningHoursEditPage(businessHoursDtos: $profileUpdateViewModel.dto
         .businessHours)
     } label: {
-      LinkFormItem(
+      LinkFormItemWithInlineTitle(
         title: "Opening hours",
         hint: "Edit opening hours",
         text: $profileUpdateViewModel.dto.formattedBusinessHours
@@ -247,26 +256,23 @@ private extension UserProfileEditPage {
 
   var linkInput: some View {
     TextEditFormItemWithInlineTitle(
-      title: "Link",
-      hint: "Link optional",
+      title: "Add link",
+      hint: "Add link (optional)",
       text: $profileUpdateViewModel.dto.homepageUrl
-    )
-  }
-
-  @ViewBuilder
-  var emailInput: some View {
-    let text = "Email"
-    TextEditFormItemWithInlineTitle(
-      title: text, hint: text, text: $profileUpdateViewModel.dto.email
     )
   }
 
   var phoneInput: some View {
     TextEditFormItemWithInlineTitle(
       title: "Phone",
-      hint: "Phone optional",
+      hint: "Phone (optional)",
       text: $profileUpdateViewModel.dto.phone
     )
+  }
+
+  var personalDetailTitle: some View {
+    Text("Personal details")
+      .fontWeight(.semibold)
   }
 
   @ViewBuilder
@@ -291,10 +297,12 @@ private extension UserProfileEditPage {
 
   @ViewBuilder
   var birthdayInput: some View {
-    LinkFormItem(title: "Birthday", hint: "Birthday", text: $birthdayFormatted)
-      .onTapGesture {
-        isSheetPresented = true
-      }
+    LinkFormItemWithInlineTitle(
+      title: "Birthday", hint: "Birthday", text: $birthdayFormatted
+    )
+    .onTapGesture {
+      isSheetPresented = true
+    }
   }
 }
 
@@ -408,13 +416,15 @@ private extension UserProfileEditPage {
 }
 
 private enum Constants {
-  static let vSpacing = 24.0
-  static let cameraIconSize = 48.0
+  static let vSpacing: CGFloat = 16
+  static let cameraIconSize: CGFloat = 48
+  static let profileImageWidth: CGFloat = 200
+  static let profileImageHeight: CGFloat = 150
   static let profileImageMaxCount = 5
-  static let profileImageCornerRadius = 5.0
-  static let profileImageAspectRatio = 16.0 / 9
-  static let profileImagePickerCornerRadius = 10.0
-  static let birthdaySheetHeightFraction = 0.4
+  static let profileImageCornerRadius: CGFloat = 5
+  static let profileImageAspectRatio: CGFloat = 4 / 3
+  static let profileImagePickerCornerRadius: CGFloat = 10
+  static let birthdaySheetHeightFraction: CGFloat = 0.4
 }
 
 #Preview {
