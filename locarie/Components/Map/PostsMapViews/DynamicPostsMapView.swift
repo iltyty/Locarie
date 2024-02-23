@@ -11,7 +11,7 @@ import SwiftUI
 struct DynamicPostsMapView: View {
   @Binding var selectedPost: PostDto
 
-  let neighborVM: NeighborhoodLookupViewModel?
+  var neighborVM: NeighborhoodLookupViewModel? = nil
 
   @ObservedObject var postVM: PostListNearbyViewModel
 

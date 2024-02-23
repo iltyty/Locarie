@@ -37,7 +37,7 @@ private extension HomePage {
       topContent
       Spacer()
       BottomSheet(detents: [.minimum, .large]) {
-        bottomSheetContent
+        PostList(posts: postVM.posts, selectedPost: $selectedPost)
       }
       BottomTabView().background(.background)
     }
@@ -51,58 +51,14 @@ private extension HomePage {
         Label(neighborVM.neighborhood, image: "BlueMap")
       }
       Spacer()
-      CircleButton(systemName: "bookmark")
+      NavigationLink(value: Router.Destination.favorite) {
+        CircleButton(systemName: "bookmark")
+      }
+      .tint(.primary)
+      .buttonStyle(.plain)
     }
     .fontWeight(.semibold)
     .padding([.horizontal, .bottom])
-  }
-
-  var bottomSheetContent: some View {
-    ScrollView {
-      VStack {
-        bottomSheetTitle
-        postList
-      }
-    }
-  }
-
-  var bottomSheetTitle: some View {
-    ZStack {
-      Text("Discover this area")
-        .fontWeight(.semibold)
-        .padding(.bottom)
-      HStack {
-        Spacer()
-        Link(destination: navigationUrl) {
-          NavigationButton()
-        }
-      }
-    }
-  }
-
-  var navigationUrl: URL {
-    let coordinate = selectedPost.businessLocationCoordinate
-    return URL(
-      string: "https://www.google.com/maps?saddr=&daddr=\(coordinate.latitude),\(coordinate.longitude)&directionsmode=walking"
-    )!
-  }
-
-  @ViewBuilder
-  var postList: some View {
-    if postVM.posts.isEmpty {
-      Text("No post in this area.")
-        .foregroundStyle(.secondary)
-    } else {
-      ForEach(postVM.posts) { post in
-        NavigationLink {
-          PostDetailPage(uid: post.user.id)
-        } label: {
-          PostCardView(post)
-        }
-        .tint(.primary)
-        .buttonStyle(.plain)
-      }
-    }
   }
 }
 

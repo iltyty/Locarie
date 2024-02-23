@@ -31,6 +31,7 @@ final class FavoritePostServiceImpl:
   {
     let endpoint = APIEndpoints.favoritePostUrl
     let params = prepareIdsParams(userId: userId, postId: postId)
+    print(userId, postId)
     return AF.request(endpoint, method: .post, parameters: params)
       .validate()
       .publishDecodable(type: ResponseDto<Bool>.self)

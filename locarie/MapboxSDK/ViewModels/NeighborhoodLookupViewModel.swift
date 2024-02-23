@@ -10,7 +10,7 @@ import CoreLocation
 import Foundation
 
 public final class NeighborhoodLookupViewModel: ObservableObject {
-  @Published var neighborhood = ""
+  @Published var neighborhood = "Neighborhood"
   @Published var state: State = .idle
 
   private let networking: MapboxNeighborhoodLookupService

@@ -29,6 +29,8 @@ final class Router: ObservableObject {
 
 extension Router {
   enum Destination: Hashable {
+    case favorite
+
     case loginOrRegister, login, regularRegister, businessRegister,
          resetPassword
 
@@ -43,6 +45,8 @@ extension Router {
   func getDestinationPage(with destination: Destination) -> some View {
     Group {
       switch destination {
+      case .favorite:
+        FavoritePage()
       case .loginOrRegister:
         LoginOrRegisterPage()
       case .login:

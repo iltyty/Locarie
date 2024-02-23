@@ -39,7 +39,6 @@ private extension BusinessStatus {
       Text("·")
       openStatus
     }
-    .border(.pink)
     .font(.callout)
     .foregroundStyle(.secondary)
   }

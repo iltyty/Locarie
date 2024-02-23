@@ -121,7 +121,6 @@ extension FavoriteBusinessViewModel {
   private func handleCheckResponse(
     _ response: BusinessIsFavoredByResponse
   ) {
-    debugPrint(response)
     if let error = response.error {
       state = .checkFailed(error)
     } else {
