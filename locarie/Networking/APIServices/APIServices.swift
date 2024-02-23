@@ -36,35 +36,6 @@ class BaseAPIService {
     }
   }
 
-  func prepareImageMultipartData(
-    _ data: Data, withName name: String, filename: String, mimeType: String
-  ) -> MultipartFormData {
-    let result = MultipartFormData()
-    result.append(data, withName: name, fileName: filename, mimeType: mimeType)
-    return result
-  }
-
-  func prepareImagesMultipartData(
-    _ data: [Data], withName name: String, filenames: [String],
-    mimeTypes: [String]
-  ) -> MultipartFormData {
-    let result = MultipartFormData()
-    guard data.count > 0, data.count == filenames.count,
-          data.count == mimeTypes.count
-    else {
-      return result
-    }
-    for i in data.indices {
-      result.append(
-        data[i],
-        withName: name,
-        fileName: filenames[i],
-        mimeType: mimeTypes[i]
-      )
-    }
-    return result
-  }
-
   func mapResponse<T>(
     _ response: DataResponsePublisher<T>.Output
   ) -> DataResponse<T, NetworkError> {
@@ -77,37 +48,65 @@ class BaseAPIService {
   }
 }
 
-enum APIServices {
-  static func prepareMultipartFormJSONData(
-    _ data: Encodable,
-    withName name: String
-  ) throws -> MultipartFormData {
+extension BaseAPIService {
+  func prepareImageMultipartData(
+    _ data: Data, withName name: String, filename: String, mimeType: String
+  ) -> MultipartFormData {
     let result = MultipartFormData()
-    let jsonData = try JSONEncoder().encode(data)
-    result.append(jsonData, withName: name, mimeType: "application/json")
+    result.append(data, withName: name, fileName: filename, mimeType: mimeType)
     return result
   }
 
-  static func prepareMultipartFormImagesData(
-    multipartFormData data: MultipartFormData,
+  func prepareImagesMultipartData(
+    _ images: [Data], withName name: String, filenames: [String],
+    mimeTypes: [String]
+  ) -> MultipartFormData {
+    let result = MultipartFormData()
+    guard images.count > 0, images.count == filenames.count,
+          images.count == mimeTypes.count
+    else {
+      return result
+    }
+    for i in images.indices {
+      result.append(
+        images[i],
+        withName: name,
+        fileName: filenames[i],
+        mimeType: mimeTypes[i]
+      )
+    }
+    return result
+  }
+
+  func mergeMultipartFormImagesData(
+    _ data: MultipartFormData,
     images: [Data],
-    withName name: String
-  ) throws -> MultipartFormData {
-    images.enumerated().forEach { index, image in
+    withName name: String,
+    filenames: [String],
+    mimeTypes: [String]
+  ) -> MultipartFormData {
+    images.enumerated().forEach { i, image in
       data.append(
         image,
         withName: name,
-        fileName: "\(index + 1).jpg",
-        mimeType: "image/jpeg"
+        fileName: filenames[i],
+        mimeType: mimeTypes[i]
       )
     }
     return data
   }
 
-  static func handleError(_ error: Error) throws {
-    if let afError = error.asAFError, let error = afError.underlyingError {
-      throw error
-    }
-    throw error
+  func prepareMultipartFormJSONData(
+    _ data: Encodable,
+    withName name: String
+  ) -> MultipartFormData {
+    let result = MultipartFormData()
+    let jsonData = try? JSONEncoder().encode(data)
+    result.append(
+      jsonData ?? Data(),
+      withName: name,
+      mimeType: "application/json"
+    )
+    return result
   }
 }

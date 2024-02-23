@@ -11,10 +11,9 @@ import SwiftUI
 struct NewPostPage: View {
   @State private var isLoading = false
   @State private var isAlertShowing = false
-  @State private var alertTitle: AlertTitle?
+  @State private var alertMessage = ""
 
-  @StateObject private var postViewModel = PostCreateViewModel()
-  @StateObject private var photoViewModel = PhotoViewModel()
+  @StateObject private var postVM = PostCreateViewModel()
 
   var body: some View {
     VStack {
@@ -26,9 +25,27 @@ struct NewPostPage: View {
     .disabled(isLoading)
     .overlay { overlayView }
     .alert(
-      alertTitle?.rawValue ?? "",
+      alertMessage,
       isPresented: $isAlertShowing
-    ) { Button("OK") {} }
+    ) {
+      Button("OK") {}
+    }
+    .onReceive(postVM.$state) { state in
+      switch state {
+      case .loading:
+        isLoading = true
+      case .finished:
+        alertMessage = "Post success"
+        isAlertShowing = true
+        postVM.reset()
+      case let .failed(error):
+        // - TODO: alert message
+        alertMessage = error.backendError?.message ??
+          "Something went wrong, please try again later"
+        isAlertShowing = true
+      default: break
+      }
+    }
   }
 
   var overlayView: some View {
@@ -44,15 +61,15 @@ extension NewPostPage {
   var photosPicker: some View {
     ScrollView(.horizontal) {
       HStack {
-        ForEach(photoViewModel.attachments) { imageAttachment in
+        ForEach(postVM.photoVM.attachments) { attachment in
           ImageAttachmentView(
             width: Constants.imageWidth,
             height: Constants.imageHeight,
-            attachment: imageAttachment
+            attachment: attachment
           )
         }
         PhotosPicker(
-          selection: $photoViewModel.selection,
+          selection: $postVM.photoVM.selection,
           matching: .images,
           photoLibrary: .shared()
         ) {
@@ -76,7 +93,7 @@ extension NewPostPage {
 private extension NewPostPage {
   var paragraphInput: some View {
     VStack {
-      TextField("Paragraph", text: $postViewModel.post.content)
+      TextField("Paragraph", text: $postVM.post.content)
         .padding([.horizontal, .top])
         .frame(height: Constants.inputHeight, alignment: .top)
       Divider()
@@ -89,7 +106,7 @@ private extension NewPostPage {
 extension NewPostPage {
   var shareButton: some View {
     Button {
-      create()
+      postVM.create()
     } label: {
       BackgroundButtonFormItem(title: "Post")
         .padding()
@@ -99,89 +116,13 @@ extension NewPostPage {
   }
 
   var buttonOpacity: Double {
-    postViewModel.isFormValid ? 1 : 0.5
+    postVM.isFormValid ? 1 : 0.5
   }
 
   var isButtonDisabled: Bool {
-    !postViewModel.isFormValid
+    !postVM.isFormValid
   }
 }
-
-extension NewPostPage {
-  private func create() {
-    isLoading = true
-    Task {
-      do {
-        let dto = prepareDto()
-        let images = prepareImages()
-        let response = try await APIServices.createPost(
-          dto: dto,
-          images: images
-        )
-        handleCreateResponse(response)
-      } catch {
-        handleCreateError(error)
-      }
-    }
-  }
-
-  private func prepareDto() -> PostCreateRequestDto {
-    let post = postViewModel.post
-    let user = UserId(id: LocalCacheViewModel.shared.getUserId())
-    return PostCreateRequestDto(
-      user: user,
-      content: post.content
-    )
-  }
-
-  private func prepareImages() -> [Data] {
-    photoViewModel.attachments.reduce(into: []) { partialResult, attachment in
-      if let status = attachment.status, status.isFinished {
-        partialResult.append(attachment.data)
-      }
-    }
-  }
-
-  private func handleCreateResponse(_ response: Response) {
-    debugPrint(response)
-    isLoading = false
-    response.status == 0
-      ? handleCreateSuccess(response)
-      : handleCreateFailure(response)
-  }
-
-  private func handleCreateError(_ error: Error) {
-    debugPrint(error)
-    isLoading = false
-    alertTitle = .unknownError
-    isAlertShowing = true
-  }
-
-  private func handleCreateSuccess(_: Response) {
-    alertTitle = .success
-    isAlertShowing = true
-    resetPage()
-  }
-
-  private func handleCreateFailure(_: Response) {
-    alertTitle = .unknownError
-    isAlertShowing = true
-  }
-
-  private func resetPage() {
-    postViewModel.reset()
-    photoViewModel.reset()
-  }
-}
-
-private extension NewPostPage {
-  enum AlertTitle: String {
-    case success = "Share success"
-    case unknownError = "Something went wrong, please try again later"
-  }
-}
-
-private typealias Response = ResponseDto<PostCreateResponseDto>
 
 private enum Constants {
   static let imageWidth: CGFloat = 210

@@ -6,45 +6,53 @@
 //
 
 import Alamofire
+import Combine
 import Foundation
 
-extension APIServices {
-  static func createPost(dto: PostCreateRequestDto, images: [Data]) async throws
-    -> ResponseDto<PostCreateResponseDto>
-  {
-    do {
-      let data = try prepareMultipartFormData(dto: dto, images: images)
-      return try await sendPostCreationRequest(multipartFormData: data)
-    } catch {
-      try handlePostCreationError(error)
-    }
-    throw LError.cannotReach
+protocol PostCreateService {
+  func create(
+    _ dto: PostCreateRequestDto,
+    images: [Data],
+    filenames: [String],
+    mimeTypes: [String]
+  ) -> AnyPublisher<PostCreateResponse, Never>
+}
+
+final class PostCreateServiceImpl: BaseAPIService, PostCreateService {
+  static let shared = PostCreateServiceImpl()
+  override private init() {}
+
+  func create(
+    _ dto: PostCreateRequestDto,
+    images: [Data],
+    filenames: [String],
+    mimeTypes: [String]
+  ) -> AnyPublisher<PostCreateResponse, Never> {
+    let data = prepareMultipartFormData(
+      dto, images: images, filenames: filenames, mimeTypes: mimeTypes
+    )
+    return AF.upload(multipartFormData: data, to: APIEndpoints.createPostUrl)
+      .validate()
+      .publishDecodable(type: ResponseDto<PostCreateResponseDto>.self)
+      .map { self.mapResponse($0) }
+      .receive(on: RunLoop.main)
+      .eraseToAnyPublisher()
   }
 
-  private static func prepareMultipartFormData(
-    dto: PostCreateRequestDto,
-    images: [Data]
-  ) throws -> MultipartFormData {
-    let data = try prepareMultipartFormJSONData(dto, withName: "post")
-    return try prepareMultipartFormImagesData(
-      multipartFormData: data,
-      images: images,
-      withName: "images"
+  private func prepareMultipartFormData(
+    _ dto: PostCreateRequestDto,
+    images: [Data],
+    filenames: [String],
+    mimeTypes: [String]
+  ) -> MultipartFormData {
+    let json = prepareMultipartFormJSONData(dto, withName: "post")
+    return mergeMultipartFormImagesData(
+      json, images: images, withName: "images", filenames: filenames,
+      mimeTypes: mimeTypes
     )
   }
-
-  private static func sendPostCreationRequest(
-    multipartFormData data: MultipartFormData
-  ) async throws
-    -> ResponseDto<PostCreateResponseDto>
-  {
-    try await AF
-      .upload(multipartFormData: data, to: APIEndpoints.createPostUrl)
-      .serializingDecodable(ResponseDto<PostCreateResponseDto>.self)
-      .value
-  }
-
-  private static func handlePostCreationError(_ error: Error) throws {
-    try handleError(error)
-  }
 }
+
+typealias PostCreateResponse = DataResponse<
+  ResponseDto<PostCreateResponseDto>, NetworkError
+>

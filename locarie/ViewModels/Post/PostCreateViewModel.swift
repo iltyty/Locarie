@@ -8,33 +8,109 @@
 import Combine
 import Foundation
 
-final class PostCreateViewModel: ObservableObject {
+@MainActor final class PostCreateViewModel: BaseViewModel {
+  private let networking: PostCreateService
   @Published var post: PostCreateRequestDto
 
   @Published var isFormValid = false
+  @Published var state: State = .idle
+  @Published var photoVM = PhotoViewModel()
 
-  private var publishers: Set<AnyCancellable> = []
+  private var subscriptions: Set<AnyCancellable> = []
 
-  init() {
-    let user = UserId(id: Int64(LocalCache.shared.userId))
+  init(_ networking: PostCreateService = PostCreateServiceImpl.shared) {
+    let user = UserId(id: Int64(LocalCacheViewModel.shared.getUserId()))
     post = PostCreateRequestDto(user: user, content: "")
+    self.networking = networking
+    super.init()
+    storeIsFormValidPublisher()
+  }
+
+  private func storeIsFormValidPublisher() {
     isFormValidPublisher
       .receive(on: RunLoop.main)
       .assign(to: \.isFormValid, on: self)
-      .store(in: &publishers)
+      .store(in: &subscriptions)
   }
 
   func reset() {
     post.content = ""
   }
+
+  func create() {
+    guard !photoVM.attachments.isEmpty else { return }
+    let data = getImagesData()
+    let filenames = getImageFilenames()
+    let mimeTypes = getImageMimeTypes()
+    networking.create(
+      post, images: data, filenames: filenames, mimeTypes: mimeTypes
+    )
+    .sink { [weak self] response in
+      guard let self else { return }
+      handleResponse(response)
+    }
+    .store(in: &subscriptions)
+  }
+
+  private func getImagesData() -> [Data] {
+    photoVM.attachments.map(\.data)
+  }
+
+  private func getImageFilenames() -> [String] {
+    photoVM.selection.enumerated().map { i, item in
+      let fileExtension = item.supportedContentTypes.first?
+        .preferredFilenameExtension ?? ".jpg"
+      return "\(i + 1).\(fileExtension)"
+    }
+  }
+
+  private func getImageMimeTypes() -> [String] {
+    photoVM.selection.map { item in
+      item.supportedContentTypes.first?
+        .preferredMIMEType ?? defaultImageMimeType
+    }
+  }
+
+  private func handleResponse(_ response: PostCreateResponse) {
+    if let error = response.error {
+      state = .failed(error)
+      return
+    }
+    if response.value!.status == 0 {
+      state = .finished
+      return
+    }
+    state = .failed(newNetworkError(response: response.value!))
+  }
 }
 
 private extension PostCreateViewModel {
   var isFormValidPublisher: AnyPublisher<Bool, Never> {
+    Publishers.CombineLatest(
+      isContentValidPublisher, isImagesValidPublisher
+    )
+    .map { $0 && $1 }
+    .eraseToAnyPublisher()
+  }
+
+  var isContentValidPublisher: AnyPublisher<Bool, Never> {
     $post
-      .map { post in
-        !post.content.isEmpty
-      }
+      .map { !$0.content.isEmpty }
       .eraseToAnyPublisher()
+  }
+
+  var isImagesValidPublisher: AnyPublisher<Bool, Never> {
+    $photoVM
+      .map { !$0.attachments.isEmpty }
+      .eraseToAnyPublisher()
+  }
+}
+
+extension PostCreateViewModel {
+  enum State {
+    case idle
+    case loading
+    case finished
+    case failed(NetworkError)
   }
 }
