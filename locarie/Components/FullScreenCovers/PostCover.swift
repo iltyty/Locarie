@@ -20,6 +20,7 @@ struct PostCover: View {
     VStack(alignment: .leading) {
       coverTop
       blank
+      content
       postImages
       postStatus
       blank
@@ -58,6 +59,10 @@ private extension PostCover {
       sharePreviewText: post.content,
       isPresenting: $isPresenting
     )
+  }
+
+  var content: some View {
+    Text(post.content).font(.headline)
   }
 
   var blank: some View {
