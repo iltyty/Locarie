@@ -7,7 +7,13 @@
 
 import Foundation
 
-struct RegisterRequestDto: Codable {
+protocol UserLocation: Codable {
+  var address: String { get set }
+  var neighborhood: String { get set }
+  var location: BusinessLocation? { get set }
+}
+
+struct RegisterRequestDto: UserLocation {
   var type: UserType = .regular
   var email = ""
   var firstName = ""
@@ -18,5 +24,6 @@ struct RegisterRequestDto: Codable {
   var businessName = ""
   var categories: [String] = []
   var address = ""
+  var neighborhood = ""
   var location: BusinessLocation?
 }

@@ -214,10 +214,7 @@ private extension BusinessProfileEditPage {
   var locationInput: some View {
     let text = "Location"
     NavigationLink {
-      BusinessAddressPage(
-        address: $profileUpdateViewModel.dto.address,
-        location: $profileUpdateViewModel.dto.location
-      )
+      BusinessAddressPage(dto: $profileUpdateViewModel.dto)
     } label: {
       LinkFormItemWithInlineTitle(
         title: text,

@@ -8,7 +8,7 @@
 import CoreLocation
 import Foundation
 
-struct UserDto: Codable, Identifiable, UserInfo {
+struct UserDto: Codable, Identifiable, UserInfo, UserLocation {
   var id: Int64 = 0
   var type: UserType = .regular
   var email: String = ""

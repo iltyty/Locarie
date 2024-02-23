@@ -57,10 +57,7 @@ struct BusinessRegisterPage: View {
 
   private var businessAddressInput: some View {
     NavigationLink {
-      BusinessAddressPage(
-        address: $viewModel.dto.address,
-        location: $viewModel.dto.location
-      )
+      BusinessAddressPage(dto: $viewModel.dto)
     } label: {
       LinkFormItemWithBlockTitle(
         title: "Business address",
