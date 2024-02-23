@@ -26,6 +26,7 @@ struct UserDto: Codable, Identifiable, UserInfo {
   var phone: String = ""
 
   var address: String = ""
+  var neighborhood: String = ""
   var location: BusinessLocation?
 
   var businessHours = [BusinessHoursDto]()
@@ -64,14 +65,21 @@ extension UserDto {
 }
 
 extension UserDto {
+  var clLocation: CLLocation {
+    .init(
+      latitude: location?.latitude ?? .nan,
+      longitude: location?.longitude ?? .nan
+    )
+  }
+
   var coordinate: CLLocationCoordinate2D {
     if let location {
-      CLLocationCoordinate2D(
+      .init(
         latitude: location.latitude,
         longitude: location.longitude
       )
     } else {
-      CLLocationCoordinate2D.london
+      .london
     }
   }
 }
@@ -95,8 +103,8 @@ extension UserDto {
     return BusinessHoursDto.DayOfWeek.allCases[index]
   }
 
-  private var isNowClosed: Bool {
-    guard let todayBusinessHours else { return false }
+  var isNowClosed: Bool {
+    guard let todayBusinessHours else { return true }
     if todayBusinessHours.closed { return true }
     let now = Date()
     let closingTime = todayBusinessHours.closingTime
@@ -115,7 +123,7 @@ extension UserDto {
     case id, type, email, firstName, lastName, username, avatarUrl, birthday
     case businessName, categories, profileImageUrls, homepageUrl, introduction,
          phone
-    case address, location, businessHours
+    case address, neighborhood, location, businessHours
     case favoredByCount, favoritePostsCount, favoriteBusinessesCount
   }
 
@@ -151,6 +159,7 @@ extension UserDto {
     phone = decodeWithDefault(container, forKey: .phone)
 
     address = decodeWithDefault(container, forKey: .address)
+    neighborhood = decodeWithDefault(container, forKey: .neighborhood)
     if try container.decodeNil(forKey: .location) {
       location = BusinessLocation(latitude: 0, longitude: 0)
     } else {

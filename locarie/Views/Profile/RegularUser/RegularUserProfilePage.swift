@@ -66,7 +66,7 @@ private extension RegularUserProfilePage {
       avatar
       username
       Spacer()
-      profileEditButton
+      ProfileEditButton()
     }
     .padding(.horizontal)
     .padding(.top, screenHeight * Constants.avatarRowTopPaddingFraction)
@@ -81,24 +81,8 @@ private extension RegularUserProfilePage {
 
   var username: some View {
     Text(cacheVM.getUsername())
-      .font(.headline)
+      .font(.title3)
       .fontWeight(.semibold)
-  }
-
-  var profileEditButton: some View {
-    NavigationLink(value: Router.Destination.userProfileEdit) {
-      Text("Edit Profile")
-        .padding()
-        .background(profileEditButtonBackground)
-    }
-    .buttonStyle(.plain)
-  }
-
-  var profileEditButtonBackground: some View {
-    Capsule()
-      .fill(.background)
-      .frame(height: Constants.editButtonHeight)
-      .shadow(radius: Constants.editButtonShadowRadius)
   }
 }
 

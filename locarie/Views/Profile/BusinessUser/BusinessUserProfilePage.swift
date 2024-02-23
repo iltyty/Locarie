@@ -108,35 +108,11 @@ private extension BusinessUserProfilePage {
     ZStack {
       HStack {
         Spacer()
-        profileEditButton
+        ProfileEditButton()
         Spacer()
       }
       settingsButton
     }
-  }
-
-  var profileEditButton: some View {
-    NavigationLink(value: Router.Destination.userProfileEdit) {
-      HStack {
-        Image("EditIcon")
-          .resizable()
-          .scaledToFit()
-          .frame(
-            width: Constants.profileEditButtonIconSize,
-            height: Constants.profileEditButtonIconSize
-          )
-        Text("Edit profile")
-      }
-      .padding(Constants.settingsButtonTextPadding)
-      .background(profileEditButtonBackground)
-    }
-    .buttonStyle(.plain)
-  }
-
-  var profileEditButtonBackground: some View {
-    Capsule()
-      .fill(.background)
-      .shadow(radius: Constants.buttonShadowRadius)
   }
 
   var settingsButton: some View {
@@ -175,9 +151,6 @@ private enum Constants {
 
   static let mapZoom: CGFloat = 12
   static let buttonShadowRadius: CGFloat = 2.0
-
-  static let profileEditButtonBorderColor: Color = .init(hex: 0xD9D9D9)
-  static let profileEditButtonIconSize: CGFloat = 16
 
   static let settingsButtonIconPadding: CGFloat = 10
   static let settingsButtonIconSize: CGFloat = 24
