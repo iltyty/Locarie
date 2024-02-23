@@ -20,6 +20,13 @@ final class PostListNearbyViewModel: BaseViewModel {
     self.networking = networking
   }
 
+  func getNearbyPosts(withLocation location: CLLocationCoordinate2D) {
+    getNearbyPosts(
+      latitude: location.latitude,
+      longitude: location.longitude
+    )
+  }
+
   func getNearbyPosts(withLocation location: CLLocation) {
     getNearbyPosts(
       latitude: location.coordinate.latitude,

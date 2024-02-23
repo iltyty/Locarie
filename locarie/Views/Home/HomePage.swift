@@ -9,86 +9,29 @@
 import SwiftUI
 
 struct HomePage: View {
-  @StateObject private var locationManager = LocationManager()
-  @StateObject private var postListVM = PostListNearbyViewModel()
+  @StateObject private var postVM = PostListNearbyViewModel()
   @StateObject private var neighborVM = NeighborhoodLookupViewModel()
 
-  @State private var cameraChanged = false
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
 
   var body: some View {
     ZStack {
-      mapView
+      DynamicPostsMapView(
+        selectedPost: $selectedPost,
+        neighborVM: neighborVM,
+        postVM: postVM
+      )
       contentView
     }
     .ignoresSafeArea(edges: .bottom)
-    .onAppear {
-      updateNeighborhood(.london)
-    }
-    .onReceive(locationManager.$location) { location in
-      if let location {
-        postListVM.getNearbyPosts(withLocation: location)
-      }
-    }
-    .onReceive(postListVM.$posts) { posts in
+    .onReceive(postVM.$posts) { posts in
       selectedPost = posts.first ?? PostDto()
     }
   }
 }
 
 private extension HomePage {
-  var mapView: some View {
-    Map(viewport: $viewport) {
-      Puck2D()
-
-      ForEvery(postListVM.posts) { post in
-        MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
-          BusinessMapAvatar(
-            url: post.user.avatarUrl,
-            amplified: post.id == selectedPost.id
-          )
-          .onTapGesture {
-            selectedPost = post
-          }
-        }
-      }
-    }
-    .onCameraChanged { state in
-      if needUpdatingNeighborhood {
-        updateNeighborhood(state.cameraState.center)
-      }
-    }
-    .ignoresSafeArea(edges: .all)
-    .gesture(dragGesture)
-    .gesture(magnifyGesture)
-  }
-
-  var needUpdatingNeighborhood: Bool {
-    if !cameraChanged {
-      return false
-    }
-    switch neighborVM.state {
-    case .loading: return false
-    default: return true
-    }
-  }
-
-  var dragGesture: some Gesture {
-    DragGesture(minimumDistance: 20, coordinateSpace: .global)
-      .onEnded { _ in cameraChanged = true }
-  }
-
-  var magnifyGesture: some Gesture {
-    MagnifyGesture(minimumScaleDelta: 0.1)
-      .onEnded { _ in cameraChanged = true }
-  }
-
-  func updateNeighborhood(_ center: CLLocationCoordinate2D) {
-    neighborVM.lookup(forLocation: center)
-    cameraChanged = false
-  }
-
   var contentView: some View {
     VStack(spacing: 0) {
       topContent
@@ -146,11 +89,11 @@ private extension HomePage {
 
   @ViewBuilder
   var postList: some View {
-    if postListVM.posts.isEmpty {
+    if postVM.posts.isEmpty {
       Text("No post in this area.")
         .foregroundStyle(.secondary)
     } else {
-      ForEach(postListVM.posts) { post in
+      ForEach(postVM.posts) { post in
         NavigationLink {
           PostDetailPage(uid: post.user.id)
         } label: {
@@ -161,12 +104,6 @@ private extension HomePage {
       }
     }
   }
-}
-
-private enum Constants {
-  static let mapMarkerColor = Color.locariePrimary
-  static let postCoverWidthProportion = 0.95
-  static let bottomSheetCornerRadius = 10.0
 }
 
 #Preview {
