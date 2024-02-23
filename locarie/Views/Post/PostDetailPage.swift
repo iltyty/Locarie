@@ -48,11 +48,13 @@ struct PostDetailPage: View {
       }
       .onAppear {
         screenSize = proxy.size
-        profileVM.getProfile(userId: uid)
-        listUserPostsVM.getUserPosts(id: uid)
       }
     }
     .ignoresSafeArea(edges: .bottom)
+    .onAppear {
+      profileVM.getProfile(userId: uid)
+      listUserPostsVM.getUserPosts(id: uid)
+    }
     .onReceive(profileVM.$state) { state in
       if case .finished = state {
         user = profileVM.dto
@@ -102,21 +104,27 @@ private extension PostDetailPage {
 
   var bottomContent: some View {
     BottomSheet(detents: [.minimum, .large]) {
-      ScrollView {
-        ProfileView(
-          id: uid,
+      VStack(alignment: .leading) {
+        BusinessHomeAvatarRow(
           user: user,
-          isPresentingCover: $showingBusinessProfileCover
+          isPresentingDetail: $showingDetailedProfile
         )
-      }
-      .scrollIndicators(.hidden)
-    }
-  }
-
-  var categories: some View {
-    HStack {
-      ForEach(user.categories, id: \.self) { category in
-        TagView(tag: category)
+        ScrollView {
+          VStack(alignment: .leading, spacing: Constants.vSpacing) {
+            ProfileCategories(user)
+            ProfileBio(user)
+            if showingDetailedProfile {
+              ProfileDetail(user)
+            }
+            ProfilePostsCount(listUserPostsVM.posts)
+            ForEach(listUserPostsVM.posts) { p in
+              PostCardView(p).onTapGesture {
+                post = p
+                showingPostCover = true
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -129,6 +137,9 @@ private extension PostDetailPage {
 private extension PostDetailPage {
   var backButton: some View {
     CircleButton(systemName: "chevron.backward")
+      .onTapGesture {
+        dismiss()
+      }
   }
 
   var shareButton: some View {

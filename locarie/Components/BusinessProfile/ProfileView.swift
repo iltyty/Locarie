@@ -19,8 +19,8 @@ struct ProfileView: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      ProfileAvatarRow(
-        user,
+      BusinessProfileAvatarRow(
+        user: user,
         isPresentingCover: $isPresentingCover,
         isPresentingDetail: $isPresentingDetail
       )

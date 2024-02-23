@@ -10,7 +10,11 @@ import SwiftUI
 struct PostCover: View {
   let post: PostDto
   @Binding var isPresenting: Bool
-  let locationManager = LocationManager()
+
+  private let cacheVM = LocalCacheViewModel.shared
+  private let locationManager = LocationManager()
+  @State private var alreadySaved = false
+  @StateObject private var favoritePostVM = FavoritePostViewModel()
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -20,10 +24,30 @@ struct PostCover: View {
       postStatus
       blank
       favoriteButton
+      blank
     }
     .padding(.horizontal)
     .background(.thickMaterial.opacity(CoverCommonConstants.backgroundOpacity))
     .contentShape(Rectangle())
+    .onAppear {
+      favoritePostVM.checkFavoredBy(userId: userId, postId: post.id)
+    }
+    .onReceive(favoritePostVM.$alreadySaved) { saved in
+      alreadySaved = saved
+    }
+    .onReceive(favoritePostVM.$state, perform: { state in
+      switch state {
+      case .favoriteFinished:
+        alreadySaved = true
+      case .unfavoriteFinished:
+        alreadySaved = false
+      default: break
+      }
+    })
+  }
+
+  private var userId: Int64 {
+    cacheVM.getUserId()
   }
 }
 
@@ -72,23 +96,50 @@ private extension PostCover {
   var favoriteButton: some View {
     HStack {
       Spacer()
-      Button {
-        print("tapped")
-      } label: {
-        Image(systemName: "star")
-          .resizable()
-          .background(favoriteButtonBackground)
-      }
+      favoriteButtonBackground
+        .overlay { favoriteIcon }
+        .onTapGesture {
+          if alreadySaved {
+            favoritePostVM.unfavorite(userId: userId, postId: post.id)
+          } else {
+            favoritePostVM.favorite(userId: userId, postId: post.id)
+          }
+        }
+    }
+  }
+
+  var favoriteIcon: some View {
+    Image(systemName: favoriteIconSystemName)
+      .resizable()
+      .scaledToFit()
+      .foregroundStyle(alreadySaved ? Color.locariePrimary : .primary)
+      .frame(
+        width: Constants.favoriteButtonIconSize,
+        height: Constants.favoriteButtonIconSize
+      )
+  }
+
+  var favoriteIconSystemName: String {
+    if alreadySaved {
+      "star.fill"
+    } else {
+      "star"
     }
   }
 
   var favoriteButtonBackground: some View {
     Circle()
       .fill(.background)
+      .frame(
+        width: Constants.favoriteButtonBackgroundSize,
+        height: Constants.favoriteButtonBackgroundSize
+      )
       .shadow(radius: Constants.favoriteButtonShadowRadius)
   }
 }
 
 private enum Constants {
   static let favoriteButtonShadowRadius: CGFloat = 2
+  static let favoriteButtonIconSize: CGFloat = 28
+  static let favoriteButtonBackgroundSize: CGFloat = 60
 }

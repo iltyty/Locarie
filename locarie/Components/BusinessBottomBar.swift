@@ -34,7 +34,6 @@ struct BusinessBottomBar: View {
       )
     }
     .onReceive(favoriteBusinessVM.$alreadyFollowed) { followed in
-      print(followed)
       alreadyFollowed = followed
     }
     .onReceive(favoriteBusinessVM.$state, perform: { state in

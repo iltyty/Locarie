@@ -74,7 +74,7 @@ final class FavoritePostServiceImpl:
   func isFavoredBy(userId: Int64, postId: Int64)
     -> AnyPublisher<BusinessIsFavoredByResponse, Never>
   {
-    let endpoint = APIEndpoints.businessIsFavoredByUrl
+    let endpoint = APIEndpoints.postIsFavoredByUrl
     let params = prepareIdsParams(userId: userId, postId: postId)
     return AF.request(endpoint, method: .get, parameters: params)
       .validate()

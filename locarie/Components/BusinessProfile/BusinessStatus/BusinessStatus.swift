@@ -1,16 +1,16 @@
 //
-//  BusinessRowView.swift
+//  BusinessStatus.swift
 //  locarie
 //
-//  Created by qiuty on 22/02/2024.
+//  Created by qiuty on 23/02/2024.
 //
 
 import SwiftUI
 
-struct BusinessRowView: View {
+struct BusinessStatus: View {
   let user: UserDto
 
-  private let locationManager = LocationManager()
+  @ObservedObject private var locationManager = LocationManager()
 
   init(_ user: UserDto) {
     self.user = user
@@ -18,30 +18,13 @@ struct BusinessRowView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      HStack {
-        avatar
-        info
-      }
-      categories
-    }
-  }
-}
-
-private extension BusinessRowView {
-  var avatar: some View {
-    AvatarView(
-      imageUrl: user.avatarUrl,
-      size: Constants.avatarSize
-    )
-  }
-
-  var info: some View {
-    VStack(alignment: .leading) {
       businessName
       statusRow
     }
   }
+}
 
+private extension BusinessStatus {
   var businessName: some View {
     Text(user.businessName)
       .font(.title3)
@@ -56,6 +39,8 @@ private extension BusinessRowView {
       Text("·")
       openStatus
     }
+    .border(.pink)
+    .font(.callout)
     .foregroundStyle(.secondary)
   }
 
@@ -76,18 +61,4 @@ private extension BusinessRowView {
       Text("Open").foregroundStyle(LocarieColors.green)
     }
   }
-
-  var categories: some View {
-    ScrollView(.horizontal) {
-      HStack {
-        ForEach(user.categories, id: \.self) { category in
-          TagView(tag: category, isSelected: false)
-        }
-      }
-    }
-  }
-}
-
-private enum Constants {
-  static let avatarSize: CGFloat = 72
 }

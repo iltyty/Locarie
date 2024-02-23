@@ -16,6 +16,8 @@ struct RegularUserProfilePage: View {
   @State private var screenHeight: CGFloat = 0
   @State private var currentTab: Tab = .followed
 
+  @State private var isPresentingCover = false
+
   var body: some View {
     GeometryReader { proxy in
       ZStack {
@@ -167,7 +169,10 @@ private extension RegularUserProfilePage {
       ScrollView {
         VStack(alignment: .leading, spacing: Constants.vSpacing) {
           ForEach(favoriteBusinessVM.users) { user in
-            BusinessRowView(user)
+            BusinessFollowedAvatarRow(
+              user: user,
+              isPresentingCover: $isPresentingCover
+            )
           }
         }
       }

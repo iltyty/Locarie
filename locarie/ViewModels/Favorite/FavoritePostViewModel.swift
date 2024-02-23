@@ -120,6 +120,7 @@ extension FavoritePostViewModel {
   private func handleCheckResponse(
     _ response: PostIsFavoredByResponse
   ) {
+    debugPrint(response)
     if let error = response.error {
       state = .checkFailed(error)
     } else {

@@ -13,12 +13,16 @@ struct BusinessUserProfilePage: View {
   @State private var viewport: Viewport = .camera(
     center: .london, zoom: Constants.mapZoom
   )
+  @State private var post = PostDto()
 
-  @State private var presentingCover = false
+  @State private var presentingProfileDetail = false
+  @State private var presentingProfileCover = false
+  @State private var presentingPostCover = false
   @State private var presentingDialog = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var profileVM = ProfileGetViewModel()
+  @StateObject private var postsVM = ListUserPostsViewModel()
 
   var body: some View {
     GeometryReader { proxy in
@@ -27,11 +31,14 @@ struct BusinessUserProfilePage: View {
           content
           BottomTabView()
         }
-        if presentingCover {
+        if presentingProfileCover {
           BusinessProfileCover(
             user: profileVM.dto,
-            isPresenting: $presentingCover
+            isPresenting: $presentingProfileCover
           )
+        }
+        if presentingPostCover {
+          PostCover(post: post, isPresenting: $presentingPostCover)
         }
         if presentingDialog {
           dialogBackground
@@ -49,7 +56,8 @@ struct BusinessUserProfilePage: View {
           presentingDialog = true
         }
         screenSize = proxy.size
-        profileVM.getProfile(userId: cacheVM.getUserId())
+        profileVM.getProfile(userId: userId)
+        postsVM.getUserPosts(id: userId)
       }
       .onDisappear(perform: {
         presentingDialog = false
@@ -70,6 +78,14 @@ struct BusinessUserProfilePage: View {
       contentView
     }
   }
+
+  private var user: UserDto {
+    profileVM.dto
+  }
+
+  private var userId: Int64 {
+    cacheVM.getUserId()
+  }
 }
 
 private extension BusinessUserProfilePage {
@@ -79,7 +95,7 @@ private extension BusinessUserProfilePage {
         Image("map")
           .onTapGesture {
             viewport = .camera(
-              center: profileVM.dto.coordinate,
+              center: user.coordinate,
               zoom: Constants.mapZoom
             )
           }
@@ -95,11 +111,30 @@ private extension BusinessUserProfilePage {
       buttons
       Spacer()
       BottomSheet(detents: [.medium, .fraction(0.67)]) {
-        ProfileView(
-          id: cacheVM.getUserId(),
-          user: profileVM.dto,
-          isPresentingCover: $presentingCover
-        )
+        VStack(alignment: .leading) {
+          BusinessProfileAvatarRow(
+            user: user,
+            isPresentingCover: $presentingProfileCover,
+            isPresentingDetail: $presentingProfileDetail
+          )
+          ScrollView {
+            VStack(alignment: .leading, spacing: Constants.vSpacing) {
+              ProfileCategories(user)
+              ProfileBio(user)
+              if presentingProfileDetail {
+                ProfileDetail(user)
+              }
+              ProfilePostsCount(postsVM.posts)
+              ForEach(postsVM.posts) { p in
+                PostCardView(p)
+                  .onTapGesture {
+                    post = p
+                    presentingPostCover = true
+                  }
+              }
+            }
+          }
+        }
       }
     }
   }
