@@ -24,6 +24,7 @@
 		500FB23B2B88369000E14DEE /* BusinessProfileDetailButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB23A2B88369000E14DEE /* BusinessProfileDetailButton.swift */; };
 		500FB23D2B88371200E14DEE /* BusinessHomeAvatarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB23C2B88371200E14DEE /* BusinessHomeAvatarRow.swift */; };
 		500FB23F2B88379500E14DEE /* BusinessFollowedAvatarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB23E2B88379500E14DEE /* BusinessFollowedAvatarRow.swift */; };
+		500FB2422B885C7400E14DEE /* BusinessMapAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB2412B885C7400E14DEE /* BusinessMapAvatar.swift */; };
 		501BAF232B462C4F00D9D84F /* LinkSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF222B462C4F00D9D84F /* LinkSettingsItem.swift */; };
 		501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */; };
 		501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF262B462DE000D9D84F /* TextSettingsItem.swift */; };
@@ -210,6 +211,7 @@
 		500FB23A2B88369000E14DEE /* BusinessProfileDetailButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfileDetailButton.swift; sourceTree = "<group>"; };
 		500FB23C2B88371200E14DEE /* BusinessHomeAvatarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHomeAvatarRow.swift; sourceTree = "<group>"; };
 		500FB23E2B88379500E14DEE /* BusinessFollowedAvatarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessFollowedAvatarRow.swift; sourceTree = "<group>"; };
+		500FB2412B885C7400E14DEE /* BusinessMapAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessMapAvatar.swift; sourceTree = "<group>"; };
 		501BAF222B462C4F00D9D84F /* LinkSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkSettingsItem.swift; sourceTree = "<group>"; };
 		501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionTitle.swift; sourceTree = "<group>"; };
 		501BAF262B462DE000D9D84F /* TextSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSettingsItem.swift; sourceTree = "<group>"; };
@@ -440,6 +442,14 @@
 			path = BusinessStatus;
 			sourceTree = "<group>";
 		};
+		500FB2402B885C5900E14DEE /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				500FB2412B885C7400E14DEE /* BusinessMapAvatar.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		501BAF212B462C3800D9D84F /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,6 +536,7 @@
 		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				500FB2402B885C5900E14DEE /* Map */,
 				5075FCC12B865815005E4A8B /* BusinessProfile */,
 				5075FCB82B860547005E4A8B /* FullScreenCovers */,
 				509AC04A2B56806F00A79CDB /* BottomSheet */,
@@ -1324,6 +1335,7 @@
 				501BAF402B464F0600D9D84F /* ToggleSettingsItem.swift in Sources */,
 				50530B8F2B87514D009C1F92 /* RegularUserProfileEditPage.swift in Sources */,
 				50FDD89B2B53D633003015F9 /* ProfileImagesUploadService.swift in Sources */,
+				500FB2422B885C7400E14DEE /* BusinessMapAvatar.swift in Sources */,
 				509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */,
 				502A4FF62B32D48400C0833A /* PostListService.swift in Sources */,
 				5075FCCF2B86E8DB005E4A8B /* ProfilePhone.swift in Sources */,

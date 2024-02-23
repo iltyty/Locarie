@@ -14,9 +14,8 @@ struct HomePage: View {
   @StateObject private var postListVM = PostListNearbyViewModel()
   @StateObject private var locationManager = LocationManager()
 
+  @State private var selectedPost = PostDto()
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
-  @State private var topSafeAreaHeight: CGFloat = 0
-  @State private var selectedTag: String = ""
 
   var body: some View {
     GeometryReader { proxy in
@@ -26,7 +25,6 @@ struct HomePage: View {
       }
       .onAppear {
         screenSize = proxy.size
-        topSafeAreaHeight = proxy.safeAreaInsets.top
       }
       .onChange(of: proxy.size) { _, size in
         screenSize = size
@@ -36,6 +34,9 @@ struct HomePage: View {
       if let location {
         postListVM.getNearbyPosts(withLocation: location)
       }
+    }
+    .onReceive(postListVM.$posts) { posts in
+      selectedPost = posts.first ?? PostDto()
     }
   }
 }
@@ -54,13 +55,13 @@ private extension HomePage {
 
       ForEvery(postListVM.posts) { post in
         MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
-          Image("map").foregroundStyle(Color.locariePrimary)
-            .onTapGesture {
-              viewport = .camera(
-                center: post.businessLocationCoordinate,
-                zoom: 12
-              )
-            }
+          BusinessMapAvatar(
+            url: post.user.avatarUrl,
+            amplified: post.id == selectedPost.id
+          )
+          .onTapGesture {
+            selectedPost = post
+          }
         }
       }
     }
