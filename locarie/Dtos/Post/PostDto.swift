@@ -18,7 +18,7 @@ struct PostDto: Codable, Identifiable {
 
 extension PostDto {
   var businessName: String {
-    user.username
+    user.businessName
   }
 
   var businessAvatarUrl: String {
