@@ -33,7 +33,6 @@ public final class NeighborhoodLookupViewModel: ObservableObject {
   }
 
   private func handleLookupResponse(_ response: PlaceReverseLookupResponse) {
-    debugPrint(response)
     if let error = response.error {
       state = error
         .isSessionTaskError ? .failed(.noInternet) : .failed(.unknown(error))

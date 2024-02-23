@@ -29,7 +29,7 @@ struct CapsuleButton<Content: View>: View {
 }
 
 private enum Constants {
-  static let height = 48.0
+  static let height = 40.0
   static let shadow = 2.0
 }
 
