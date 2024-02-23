@@ -140,8 +140,6 @@
 		50B11AD72AFA28E9002A7B91 /* BusinessHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AD62AFA28E8002A7B91 /* BusinessHomePage.swift */; };
 		50B11ADA2AFB3661002A7B91 /* PostDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AD92AFB3660002A7B91 /* PostDetailPage.swift */; };
 		50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */; };
-		50B11ADF2AFB7850002A7B91 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11ADE2AFB7850002A7B91 /* ReviewView.swift */; };
-		50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B11AE02AFB7A46002A7B91 /* ReviewPage.swift */; };
 		50B5DEBF2B3ADE1800C0A641 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */; };
 		50B5DEC22B3B07D300C0A641 /* MapboxAPIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */; };
 		50B5DEC62B3B092F00C0A641 /* MapboxSuggestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEC52B3B092F00C0A641 /* MapboxSuggestionService.swift */; };
@@ -339,8 +337,6 @@
 		50B11AD62AFA28E8002A7B91 /* BusinessHomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHomePage.swift; sourceTree = "<group>"; };
 		50B11AD92AFB3660002A7B91 /* PostDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailPage.swift; sourceTree = "<group>"; };
 		50B11ADB2AFB51F5002A7B91 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
-		50B11ADE2AFB7850002A7B91 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
-		50B11AE02AFB7A46002A7B91 /* ReviewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPage.swift; sourceTree = "<group>"; };
 		50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxAPIEndpoints.swift; sourceTree = "<group>"; };
 		50B5DEC52B3B092F00C0A641 /* MapboxSuggestionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxSuggestionService.swift; sourceTree = "<group>"; };
 		50B5DECA2B3B099E00C0A641 /* PlaceSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSuggestions.swift; sourceTree = "<group>"; };
@@ -924,37 +920,19 @@
 				50F549E52B4425E900D06F20 /* Register */,
 				509CDA302B1F078E004A6D22 /* Login */,
 				50B11AD82AFB3654002A7B91 /* Post */,
-				50B11ACD2AF9DE68002A7B91 /* New */,
 				50277F722AF117640045AB12 /* Home */,
 				50277F7B2AF117C30045AB12 /* Profile */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		50B11ACD2AF9DE68002A7B91 /* New */ = {
-			isa = PBXGroup;
-			children = (
-				50B11ACE2AF9DE77002A7B91 /* NewPostPage.swift */,
-			);
-			path = New;
-			sourceTree = "<group>";
-		};
 		50B11AD82AFB3654002A7B91 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				50B11ADD2AFB781E002A7B91 /* components */,
+				50B11ACE2AF9DE77002A7B91 /* NewPostPage.swift */,
 				50B11AD92AFB3660002A7B91 /* PostDetailPage.swift */,
-				50B11AE02AFB7A46002A7B91 /* ReviewPage.swift */,
 			);
 			path = Post;
-			sourceTree = "<group>";
-		};
-		50B11ADD2AFB781E002A7B91 /* components */ = {
-			isa = PBXGroup;
-			children = (
-				50B11ADE2AFB7850002A7B91 /* ReviewView.swift */,
-			);
-			path = components;
 			sourceTree = "<group>";
 		};
 		50B11AE22AFB834A002A7B91 /* Models */ = {
@@ -1409,7 +1387,6 @@
 				501BAF382B46364D00D9D84F /* FeedbackPage.swift in Sources */,
 				50F85B452B242EE200D04787 /* APIServices.swift in Sources */,
 				50F549D92B3C85C500D06F20 /* UserRegisterRequest.swift in Sources */,
-				50B11ADF2AFB7850002A7B91 /* ReviewView.swift in Sources */,
 				502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */,
 				500FB2302B88334E00E14DEE /* BusinessProfileAvatar.swift in Sources */,
 				50FDD8902B4B9375003015F9 /* BaseViewModel.swift in Sources */,
@@ -1452,7 +1429,6 @@
 				50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */,
 				5075FCBA2B8605BD005E4A8B /* CoverTopView.swift in Sources */,
 				50530B9D2B878E18009C1F92 /* FavoriteBusinessViewModel.swift in Sources */,
-				50B11AE12AFB7A46002A7B91 /* ReviewPage.swift in Sources */,
 				5075FCD52B870968005E4A8B /* ProfileCategories.swift in Sources */,
 				50FDD88A2B4B8B0D003015F9 /* ProfileGetService.swift in Sources */,
 				50E60DE82AFF885F00CA088F /* Util.swift in Sources */,

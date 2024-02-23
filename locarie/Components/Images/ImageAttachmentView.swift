@@ -88,7 +88,7 @@ struct ImageAttachmentView: View {
 }
 
 private enum Constants {
-  static let cornerRadius = 5.0
+  static let cornerRadius: CGFloat = 18
 }
 
 #Preview {

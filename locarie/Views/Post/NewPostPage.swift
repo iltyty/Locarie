@@ -9,40 +9,26 @@ import PhotosUI
 import SwiftUI
 
 struct NewPostPage: View {
-  @StateObject var cacheViewModel = LocalCacheViewModel.shared
-  @StateObject private var postViewModel = PostCreateViewModel()
-  @StateObject private var photoViewModel = PhotoViewModel()
-
   @State private var isLoading = false
   @State private var isAlertShowing = false
   @State private var alertTitle: AlertTitle?
 
-  var body: some View {
-    contentView
-      .disabled(isLoading)
-      .overlay { overlayView }
-      .alert(
-        alertTitle?.rawValue ?? "",
-        isPresented: $isAlertShowing
-      ) { Button("OK") {} }
-  }
+  @StateObject private var postViewModel = PostCreateViewModel()
+  @StateObject private var photoViewModel = PhotoViewModel()
 
-  var contentView: some View {
-    GeometryReader { proxy in
-      VStack {
-        photosPicker(imageSize: proxy.size.width * Constants
-          .imageSizeProportion)
-        editor(
-          contentEditorHeight: proxy.size.height * Constants
-            .contentEditorHeightProportion,
-          content: $postViewModel.post.content
-        )
-        shareButton
-        BottomTabView()
-      }
-      .navigationTitle(Constants.pageTitle)
-      .navigationBarTitleDisplayMode(.inline)
+  var body: some View {
+    VStack {
+      photosPicker
+      paragraphInput
+      shareButton
+      BottomTabView()
     }
+    .disabled(isLoading)
+    .overlay { overlayView }
+    .alert(
+      alertTitle?.rawValue ?? "",
+      isPresented: $isAlertShowing
+    ) { Button("OK") {} }
   }
 
   var overlayView: some View {
@@ -55,12 +41,14 @@ struct NewPostPage: View {
 }
 
 extension NewPostPage {
-  func photosPicker(imageSize: CGFloat) -> some View {
-    ScrollView {
-      LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+  var photosPicker: some View {
+    ScrollView(.horizontal) {
+      HStack {
         ForEach(photoViewModel.attachments) { imageAttachment in
           ImageAttachmentView(
-            size: imageSize, attachment: imageAttachment
+            width: Constants.imageWidth,
+            height: Constants.imageHeight,
+            attachment: imageAttachment
           )
         }
         PhotosPicker(
@@ -71,28 +59,26 @@ extension NewPostPage {
           Image(systemName: "camera")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: imageSize / 3)
+            .frame(width: Constants.imageWidth / 4)
             .foregroundStyle(.orange)
-            .frame(width: imageSize, height: imageSize)
+            .frame(width: Constants.imageWidth, height: Constants.imageHeight)
             .background(
-              RoundedRectangle(cornerRadius: 5)
+              RoundedRectangle(cornerRadius: Constants.imageCornerRadius)
                 .fill(.thickMaterial)
             )
         }
       }
-      .padding()
     }
+    .padding()
   }
 }
 
-extension NewPostPage {
-  func editor(
-    contentEditorHeight: CGFloat, content: Binding<String>
-  ) -> some View {
+private extension NewPostPage {
+  var paragraphInput: some View {
     VStack {
-      TextField("Paragraph", text: content)
+      TextField("Paragraph", text: $postViewModel.post.content)
         .padding([.horizontal, .top])
-        .frame(height: contentEditorHeight, alignment: .top)
+        .frame(height: Constants.inputHeight, alignment: .top)
       Divider()
         .padding(.horizontal)
       Spacer()
@@ -105,19 +91,8 @@ extension NewPostPage {
     Button {
       create()
     } label: {
-      Text(Constants.btnShareText)
-        .font(.title2)
-        .foregroundStyle(.white)
-        .fontWeight(.bold)
-        .background(
-          Capsule()
-            .fill(.orange)
-            .frame(
-              width: Constants.btnShareWidth,
-              height: Constants.btnShareHeight
-            )
-        )
-        .padding(.vertical)
+      BackgroundButtonFormItem(title: "Post")
+        .padding()
         .opacity(buttonOpacity)
     }
     .disabled(isButtonDisabled)
@@ -152,7 +127,7 @@ extension NewPostPage {
 
   private func prepareDto() -> PostCreateRequestDto {
     let post = postViewModel.post
-    let user = UserId(id: cacheViewModel.getUserId())
+    let user = UserId(id: LocalCacheViewModel.shared.getUserId())
     return PostCreateRequestDto(
       user: user,
       content: post.content
@@ -209,12 +184,10 @@ private extension NewPostPage {
 private typealias Response = ResponseDto<PostCreateResponseDto>
 
 private enum Constants {
-  static let pageTitle = "Share"
-  static let imageSizeProportion: CGFloat = 1 / 3.5
-  static let contentEditorHeightProportion: CGFloat = 1 / 3
-  static let btnShareText = "share"
-  static let btnShareWidth: CGFloat = 180
-  static let btnShareHeight: CGFloat = 50
+  static let imageWidth: CGFloat = 210
+  static let imageHeight: CGFloat = 280
+  static let imageCornerRadius: CGFloat = 18
+  static let inputHeight: CGFloat = 100
 }
 
 #Preview {
