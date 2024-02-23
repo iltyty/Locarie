@@ -5,6 +5,7 @@
 //  Created by qiuty on 26/12/2023.
 //
 
+import CoreLocation
 import Foundation
 
 public enum MapboxAPIEndpoints {
@@ -16,4 +17,8 @@ public enum MapboxAPIEndpoints {
       string: "https://api.mapbox.com/search/searchbox/v1/retrieve/\(id)"
     )!
   }
+
+  static let reverse = URL(
+    string: "https://api.mapbox.com/search/geocode/v6/reverse"
+  )!
 }

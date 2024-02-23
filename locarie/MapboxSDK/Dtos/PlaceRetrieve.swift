@@ -19,17 +19,3 @@ public struct PlaceRetrieveDto: Codable {
 struct PlaceGeometry: Codable {
   let coordinates: [Double]
 }
-
-struct PlaceProperty: Codable {
-  let name: String
-  let namePreferred: String?
-  let address: String?
-  let fullAddress: String?
-  let placeFormatted: String?
-  let coordinates: PlaceCoordinate
-}
-
-struct PlaceCoordinate: Codable {
-  let latitude: Double
-  let longitude: Double
-}

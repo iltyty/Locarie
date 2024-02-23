@@ -25,6 +25,10 @@
 		500FB23D2B88371200E14DEE /* BusinessHomeAvatarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB23C2B88371200E14DEE /* BusinessHomeAvatarRow.swift */; };
 		500FB23F2B88379500E14DEE /* BusinessFollowedAvatarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB23E2B88379500E14DEE /* BusinessFollowedAvatarRow.swift */; };
 		500FB2422B885C7400E14DEE /* BusinessMapAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB2412B885C7400E14DEE /* BusinessMapAvatar.swift */; };
+		500FB2452B8889FD00E14DEE /* MapboxNeighborhoodLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB2442B8889FD00E14DEE /* MapboxNeighborhoodLookupService.swift */; };
+		500FB2472B888A8500E14DEE /* PlaceReverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB2462B888A8500E14DEE /* PlaceReverse.swift */; };
+		500FB2492B888BAE00E14DEE /* PlaceProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB2482B888BAE00E14DEE /* PlaceProperty.swift */; };
+		500FB24B2B88902400E14DEE /* NeighborhoodLookupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB24A2B88902400E14DEE /* NeighborhoodLookupViewModel.swift */; };
 		501BAF232B462C4F00D9D84F /* LinkSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF222B462C4F00D9D84F /* LinkSettingsItem.swift */; };
 		501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */; };
 		501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF262B462DE000D9D84F /* TextSettingsItem.swift */; };
@@ -212,6 +216,10 @@
 		500FB23C2B88371200E14DEE /* BusinessHomeAvatarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHomeAvatarRow.swift; sourceTree = "<group>"; };
 		500FB23E2B88379500E14DEE /* BusinessFollowedAvatarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessFollowedAvatarRow.swift; sourceTree = "<group>"; };
 		500FB2412B885C7400E14DEE /* BusinessMapAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessMapAvatar.swift; sourceTree = "<group>"; };
+		500FB2442B8889FD00E14DEE /* MapboxNeighborhoodLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxNeighborhoodLookupService.swift; sourceTree = "<group>"; };
+		500FB2462B888A8500E14DEE /* PlaceReverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceReverse.swift; sourceTree = "<group>"; };
+		500FB2482B888BAE00E14DEE /* PlaceProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceProperty.swift; sourceTree = "<group>"; };
+		500FB24A2B88902400E14DEE /* NeighborhoodLookupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodLookupViewModel.swift; sourceTree = "<group>"; };
 		501BAF222B462C4F00D9D84F /* LinkSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkSettingsItem.swift; sourceTree = "<group>"; };
 		501BAF242B462DA500D9D84F /* SettingsSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionTitle.swift; sourceTree = "<group>"; };
 		501BAF262B462DE000D9D84F /* TextSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSettingsItem.swift; sourceTree = "<group>"; };
@@ -448,6 +456,17 @@
 				500FB2412B885C7400E14DEE /* BusinessMapAvatar.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		500FB2432B8889E300E14DEE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */,
+				50B5DEC52B3B092F00C0A641 /* MapboxSuggestionService.swift */,
+				50B5DEDB2B3BE83500C0A641 /* MapboxRetrieveService.swift */,
+				500FB2442B8889FD00E14DEE /* MapboxNeighborhoodLookupService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		501BAF212B462C3800D9D84F /* Components */ = {
@@ -944,10 +963,8 @@
 		50B5DEC72B3B095D00C0A641 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				500FB2432B8889E300E14DEE /* Services */,
 				50B5DEC12B3B07D300C0A641 /* MapboxAPIEndpoints.swift */,
-				50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */,
-				50B5DEC52B3B092F00C0A641 /* MapboxSuggestionService.swift */,
-				50B5DEDB2B3BE83500C0A641 /* MapboxRetrieveService.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -957,6 +974,8 @@
 			children = (
 				50B5DECA2B3B099E00C0A641 /* PlaceSuggestions.swift */,
 				50B5DEDD2B3BE89900C0A641 /* PlaceRetrieve.swift */,
+				500FB2462B888A8500E14DEE /* PlaceReverse.swift */,
+				500FB2482B888BAE00E14DEE /* PlaceProperty.swift */,
 			);
 			path = Dtos;
 			sourceTree = "<group>";
@@ -983,6 +1002,7 @@
 			children = (
 				50B5DED02B3B162500C0A641 /* PlaceSuggestionsViewModel.swift */,
 				50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */,
+				500FB24A2B88902400E14DEE /* NeighborhoodLookupViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1297,10 +1317,12 @@
 				50B11AD52AFA0F65002A7B91 /* ImageAttachmentView.swift in Sources */,
 				500FB23B2B88369000E14DEE /* BusinessProfileDetailButton.swift in Sources */,
 				50FDD89D2B53D942003015F9 /* ProfileImagesViewModel.swift in Sources */,
+				500FB2492B888BAE00E14DEE /* PlaceProperty.swift in Sources */,
 				500FB22E2B88334000E14DEE /* BusinessHomeAvatar.swift in Sources */,
 				501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */,
 				50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */,
 				500FB23F2B88379500E14DEE /* BusinessFollowedAvatarRow.swift in Sources */,
+				500FB24B2B88902400E14DEE /* NeighborhoodLookupViewModel.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
 				50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
@@ -1318,6 +1340,7 @@
 				50FDD8992B523B95003015F9 /* AvatarUploadService.swift in Sources */,
 				509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */,
 				501BAF2C2B46319700D9D84F /* MyAccountPage.swift in Sources */,
+				500FB2472B888A8500E14DEE /* PlaceReverse.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
 				501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */,
 				50530B9B2B878B07009C1F92 /* FavoritePostViewModel.swift in Sources */,
@@ -1427,6 +1450,7 @@
 				501BAF332B46353C00D9D84F /* TermsOfServicePage.swift in Sources */,
 				50FDD88E2B4B9090003015F9 /* ProfileGetViewModel.swift in Sources */,
 				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
+				500FB2452B8889FD00E14DEE /* MapboxNeighborhoodLookupService.swift in Sources */,
 				5075FCD12B86E932005E4A8B /* ProfileDetail.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
 				50FDD8952B4D708B003015F9 /* BusinessHoursDto.swift in Sources */,

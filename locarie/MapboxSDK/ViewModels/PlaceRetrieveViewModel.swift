@@ -21,7 +21,6 @@ public final class PlaceRetrieveViewModel: ObservableObject {
 
   func retrieve(mapboxId: String) {
     networking.retrievePlace(forId: mapboxId)
-      .receive(on: DispatchQueue.main)
       .sink { [weak self] completion in
         guard let self else { return }
         handleSinkCompletion(completion)

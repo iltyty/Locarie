@@ -9,26 +9,22 @@
 import SwiftUI
 
 struct HomePage: View {
-  @State var screenSize: CGSize = .zero
-
-  @StateObject private var postListVM = PostListNearbyViewModel()
   @StateObject private var locationManager = LocationManager()
+  @StateObject private var postListVM = PostListNearbyViewModel()
+  @StateObject private var neighborVM = NeighborhoodLookupViewModel()
 
+  @State private var cameraChanged = false
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
 
   var body: some View {
-    GeometryReader { proxy in
-      VStack(spacing: 0) {
-        content
-        BottomTabView()
-      }
-      .onAppear {
-        screenSize = proxy.size
-      }
-      .onChange(of: proxy.size) { _, size in
-        screenSize = size
-      }
+    ZStack {
+      mapView
+      contentView
+    }
+    .ignoresSafeArea(edges: .bottom)
+    .onAppear {
+      updateNeighborhood(.london)
     }
     .onReceive(locationManager.$location) { location in
       if let location {
@@ -42,13 +38,6 @@ struct HomePage: View {
 }
 
 private extension HomePage {
-  var content: some View {
-    ZStack(alignment: .top) {
-      mapView
-      contentView
-    }
-  }
-
   var mapView: some View {
     Map(viewport: $viewport) {
       Puck2D()
@@ -65,16 +54,49 @@ private extension HomePage {
         }
       }
     }
+    .onCameraChanged { state in
+      if needUpdatingNeighborhood {
+        updateNeighborhood(state.cameraState.center)
+      }
+    }
     .ignoresSafeArea(edges: .all)
+    .gesture(dragGesture)
+    .gesture(magnifyGesture)
+  }
+
+  var needUpdatingNeighborhood: Bool {
+    if !cameraChanged {
+      return false
+    }
+    switch neighborVM.state {
+    case .loading: return false
+    default: return true
+    }
+  }
+
+  var dragGesture: some Gesture {
+    DragGesture(minimumDistance: 20, coordinateSpace: .global)
+      .onEnded { _ in cameraChanged = true }
+  }
+
+  var magnifyGesture: some Gesture {
+    MagnifyGesture(minimumScaleDelta: 0.1)
+      .onEnded { _ in cameraChanged = true }
+  }
+
+  func updateNeighborhood(_ center: CLLocationCoordinate2D) {
+    neighborVM.lookup(forLocation: center)
+    cameraChanged = false
   }
 
   var contentView: some View {
-    VStack {
+    VStack(spacing: 0) {
       topContent
       Spacer()
       BottomSheet(detents: [.minimum, .large]) {
         bottomSheetContent
       }
+      BottomTabView().background(.background)
     }
   }
 
@@ -83,13 +105,13 @@ private extension HomePage {
       CircleButton(systemName: "magnifyingglass")
       Spacer()
       CapsuleButton {
-        Label("London", systemImage: "map")
+        Label(neighborVM.neighborhood, image: "BlueMap")
       }
       Spacer()
       CircleButton(systemName: "bookmark")
     }
-    .padding([.top, .horizontal])
-    .padding(.horizontal)
+    .fontWeight(.semibold)
+    .padding([.horizontal, .bottom])
   }
 
   var bottomSheetContent: some View {
@@ -133,5 +155,5 @@ private enum Constants {
 }
 
 #Preview {
-  HomePage(screenSize: CGSize(width: 393, height: 759))
+  HomePage()
 }

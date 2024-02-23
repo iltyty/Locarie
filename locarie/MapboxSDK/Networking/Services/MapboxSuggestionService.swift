@@ -35,6 +35,7 @@ public extension MapboxSuggestionServiceImpl {
         decoder: jsonDecoder
       )
       .value()
+      .receive(on: RunLoop.main)
       .eraseToAnyPublisher()
   }
 
@@ -42,17 +43,15 @@ public extension MapboxSuggestionServiceImpl {
     forQuery query: String,
     withOrigin origin: CLLocationCoordinate2D?
   ) -> Parameters {
-    let baseParams = prepareAuthParameters()
+    let authParams = prepareAuthParameters()
     let queryParams = prepareQueryParameters(forQuery: query)
+    let countryParams = prepareCountryParams()
     let originParam = prepareOriginParameter(with: origin)
-    return mergeParameters(baseParams, queryParams, originParam)
+    return mergeParameters(authParams, queryParams, countryParams, originParam)
   }
 
   private func prepareQueryParameters(forQuery query: String) -> Parameters {
-    [
-      "q": query,
-      "country": "GB",
-    ]
+    ["q": query]
   }
 
   private func prepareOriginParameter(

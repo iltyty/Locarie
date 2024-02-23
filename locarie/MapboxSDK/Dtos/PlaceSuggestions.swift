@@ -7,6 +7,10 @@
 
 import Foundation
 
+public struct PlaceSuggestionsResponseDto: Codable {
+  let suggestions: [PlaceSuggestionDto]
+}
+
 public struct PlaceSuggestionDto: Codable, Hashable {
   let name: String
   let namePreferred: String?
@@ -15,8 +19,4 @@ public struct PlaceSuggestionDto: Codable, Hashable {
   let fullAddress: String?
   let placeFormatted: String?
   let distance: Double?
-}
-
-public struct PlaceSuggestionsResponseDto: Codable {
-  let suggestions: [PlaceSuggestionDto]
 }

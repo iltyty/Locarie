@@ -31,6 +31,7 @@ public final class MapboxRetrieveServiceImpl: MapboxBaseService,
         type: PlaceRetrieveResponseDto.self, decoder: jsonDecoder
       )
       .value()
+      .receive(on: RunLoop.main)
       .eraseToAnyPublisher()
   }
 }

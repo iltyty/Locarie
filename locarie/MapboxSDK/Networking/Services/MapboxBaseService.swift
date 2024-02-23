@@ -30,6 +30,14 @@ public class MapboxBaseService {
     return accessToken ?? ""
   }
 
+  func prepareAccessTokenParam() -> Parameters {
+    ["access_token": accessToken]
+  }
+
+  func prepareCountryParams() -> Parameters {
+    ["country": "gb"]
+  }
+
   func prepareAuthParameters() -> Parameters {
     [
       "access_token": accessToken,

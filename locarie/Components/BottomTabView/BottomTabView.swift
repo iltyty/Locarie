@@ -81,7 +81,7 @@ private enum Constants {
 
 #Preview {
   ZStack(alignment: .bottom) {
-    Color.white
+    Color.pink
     BottomTabView()
   }
   .ignoresSafeArea(edges: .bottom)
