@@ -13,25 +13,24 @@ struct SettingsPage: View {
   @Environment(\.dismiss) var dismiss
 
   var body: some View {
-    ScrollView {
-      VStack {
-        navigationBar
-        VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
-          accountSectionTitle
-          myAccount
-          changePassword
-          locarieForBusinessSectionTitle
-          signUpForBusiness
-          supportSectionTitle
-          feedback
-          legalSectionTitle
-          privacyPolicy
-          termsOfService
-          termsOfUse
-          logout
-        }
-        .padding(.top)
+    VStack {
+      navigationBar
+      VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
+        accountSectionTitle
+        myAccount
+        changePassword
+        locarieForBusinessSectionTitle
+        signUpForBusiness
+        supportSectionTitle
+        feedback
+        legalSectionTitle
+        privacyPolicy
+        termsOfService
+        termsOfUse
+        logout
+        Spacer()
       }
+      .padding(.top)
     }
   }
 }

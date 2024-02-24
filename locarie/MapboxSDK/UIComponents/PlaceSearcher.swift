@@ -14,18 +14,12 @@ struct PlaceSearcher: View {
   private let origin: CLLocationCoordinate2D? = nil
 
   var body: some View {
-    content
-      .onAppear { beginListeningToSearch() }
-  }
-
-  private func beginListeningToSearch() {
-    viewModel.listenToSearch(withOrigin: origin)
-  }
-
-  private var content: some View {
     VStack {
       searchBar
       searchResult
+    }
+    .onAppear {
+      viewModel.listenToSearch(withOrigin: origin)
     }
   }
 
@@ -85,5 +79,8 @@ private enum Constants {
 }
 
 #Preview {
-  PlaceSearcher(viewModel: PlaceSuggestionsViewModel())
+  ZStack {
+    Color.pink
+    PlaceSearcher(viewModel: PlaceSuggestionsViewModel())
+  }
 }

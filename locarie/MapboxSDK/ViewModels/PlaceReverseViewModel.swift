@@ -1,5 +1,5 @@
 //
-//  NeighborhoodLookupViewModel.swift
+//  PlaceReverseViewModel.swift
 //  locarie
 //
 //  Created by qiuty on 23/02/2024.
@@ -9,7 +9,8 @@ import Combine
 import CoreLocation
 import Foundation
 
-public final class NeighborhoodLookupViewModel: ObservableObject {
+public final class PlaceReverseViewModel: ObservableObject {
+  @Published var address = ""
   @Published var neighborhood = "Neighborhood"
   @Published var state: State = .idle
 
@@ -39,14 +40,15 @@ public final class NeighborhoodLookupViewModel: ObservableObject {
     } else {
       let dto = response.value!
       if let feature = dto.features.first {
-        neighborhood = feature.properties.context.neighborhood.name
+        address = feature.properties.context.address?.name ?? ""
+        neighborhood = feature.properties.context.neighborhood?.name ?? ""
       }
       state = .finished
     }
   }
 }
 
-public extension NeighborhoodLookupViewModel {
+public extension PlaceReverseViewModel {
   enum State {
     case idle
     case loading

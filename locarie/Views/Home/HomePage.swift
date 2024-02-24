@@ -10,10 +10,11 @@ import SwiftUI
 
 struct HomePage: View {
   @StateObject private var postVM = PostListNearbyViewModel()
-  @StateObject private var neighborVM = NeighborhoodLookupViewModel()
+  @StateObject private var neighborVM = PlaceReverseViewModel()
 
   @State private var selectedPost = PostDto()
-  @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
+  @State private var viewport: Viewport =
+    .camera(center: .london, zoom: GlobalConstants.mapZoom)
 
   var body: some View {
     ZStack {

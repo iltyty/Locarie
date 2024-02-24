@@ -11,51 +11,148 @@ import CoreLocation
 import SwiftUI
 
 struct BusinessAddressPage<U: UserLocation>: View {
-  @Environment(\.dismiss) var dismiss
-
-  @StateObject private var retrieveViewModel = PlaceRetrieveViewModel()
-  @StateObject private var suggestionViewModel = PlaceSuggestionsViewModel()
-
   @Binding var dto: U
 
+  @State private var needUpdating = true
   @State private var viewport: Viewport = .followPuck(zoom: Constants.mapZoom)
 
-  private var locationCoordinate: CLLocationCoordinate2D? {
-    guard let location = dto.location else {
-      return nil
-    }
-    return CLLocationCoordinate2D(
-      latitude: location.latitude,
-      longitude: location.longitude
-    )
-  }
+  @StateObject private var suggestVM = PlaceSuggestionsViewModel()
+  @StateObject private var retrieveVM = PlaceRetrieveViewModel()
+  @StateObject private var reverseVM = PlaceReverseViewModel()
+
+  @Environment(\.dismiss) var dismiss
 
   var body: some View {
-    VStack {
-      navigationBar
-      VStack {
-        middle
-        bottom
-      }
-      .padding(.top)
+    ZStack {
+      mapView.ignoresSafeArea()
+      contentView
     }
-    .onReceive(suggestionViewModel.$state) { state in
+    .onReceive(suggestVM.$state) { state in
       handleSuggestionChoice(state: state)
     }
-    .onReceive(retrieveViewModel.$state) { state in
+    .onReceive(retrieveVM.$state) { state in
       handleRetrieveResult(state: state)
     }
-    .onAppear {
-      guard let coordinate = locationCoordinate else {
-        return
+    .onReceive(reverseVM.$address) { address in
+      dto.address = address
+    }
+  }
+}
+
+private extension BusinessAddressPage {
+  var mapView: some View {
+    MapReader { proxy in
+      Map(viewport: $viewport) {
+        Puck2D()
+
+        if let location = dto.location {
+          MapViewAnnotation(
+            coordinate: .init(
+              latitude: location.latitude,
+              longitude: location.longitude
+            )
+          ) {
+            Image("map")
+          }
+        }
       }
-      viewport = .camera(center: coordinate, zoom: Constants.mapZoom)
+      .onCameraChanged { state in
+        onCameraChanged(state)
+      }
+      .onMapTapGesture { context in
+        withAnimation(.spring) {
+          let coordinate = context.coordinate
+          dto.location = .init(
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude
+          )
+          reverseVM.lookup(forLocation: coordinate)
+        }
+      }
+      .gesture(dragGesture)
+      .gesture(magnifyGesture)
+      .onAppear {
+        updateNeighborhood(proxy.location?.latestLocation?.coordinate)
+      }
     }
   }
 
+  func onCameraChanged(_ state: CameraChanged) {
+    if needUpdating {
+      updateNeighborhood(state.cameraState.center)
+    }
+  }
+
+  func updateNeighborhood(_ location: CLLocationCoordinate2D?) {
+    guard let location else { return }
+    DispatchQueue.main.async {
+      reverseVM.lookup(forLocation: location)
+      needUpdating = false
+    }
+  }
+
+  var dragGesture: some Gesture {
+    DragGesture(minimumDistance: 20, coordinateSpace: .global)
+      .onEnded { _ in needUpdating = true }
+  }
+
+  var magnifyGesture: some Gesture {
+    MagnifyGesture(minimumScaleDelta: 0.1)
+      .onEnded { _ in needUpdating = true }
+  }
+}
+
+private extension BusinessAddressPage {
+  var contentView: some View {
+    VStack {
+      topBar
+      PlaceSearcher(viewModel: suggestVM)
+      Spacer()
+      confirmButton
+    }
+  }
+
+  var topBar: some View {
+    ZStack {
+      HStack {
+        CircleButton(systemName: "chevron.left")
+        Spacer()
+      }
+      HStack {
+        Spacer()
+        CapsuleButton {
+          Label(reverseVM.neighborhood, image: "BlueMap")
+        }
+        Spacer()
+      }
+    }
+    .padding(.horizontal)
+  }
+
+  var confirmButton: some View {
+    Button {
+      dismiss()
+    } label: {
+      StrokeButtonFormItem(title: "Select")
+    }
+    .disabled(isButtonDisabled)
+    .opacity(buttonOpacity)
+    .padding([.horizontal, .bottom])
+  }
+
+  var isButtonDisabled: Bool {
+    dto.location == nil || dto.address.isEmpty
+  }
+
+  var buttonOpacity: CGFloat {
+    isButtonDisabled ? Constants.buttonDisabledOpacity : 1
+  }
+}
+
+private extension BusinessAddressPage {
   private func handleSuggestionChoice(state: PlaceSuggestionsViewModel.State) {
     if case let .chosen(dto) = state {
-      retrieveViewModel.retrieve(mapboxId: dto.mapboxId)
+      retrieveVM.retrieve(mapboxId: dto.mapboxId)
     }
   }
 
@@ -67,82 +164,54 @@ struct BusinessAddressPage<U: UserLocation>: View {
       else {
         return
       }
-      dto.address = result.properties.name
-      dto.neighborhood = result.properties.context.neighborhood.name
-      print(dto.neighborhood)
-      dto.location = BusinessLocation(
-        latitude: result.geometry.coordinates[1],
-        longitude: result.geometry.coordinates[0]
-      )
-      withViewportAnimation(.easeIn(duration: Constants
-          .viewportAnimationDuration))
-      {
-        viewport = .camera(center: locationCoordinate, zoom: Constants.mapZoom)
-      }
+      setAddress(result)
+      setLocation(result)
+      setNeighborhood(result)
+      setViewport()
+      updateNeighborhood(coordinate)
     default:
       break
     }
   }
-}
 
-private extension BusinessAddressPage {
-  var middle: some View {
-    ZStack(alignment: .top) {
-      map
-      placeSearcher
+  private func setAddress(_ result: PlaceRetrieveDto) {
+    dto.address = result.properties.name
+  }
+
+  private func setLocation(_ result: PlaceRetrieveDto) {
+    dto.location = BusinessLocation(
+      latitude: result.geometry.coordinates[1],
+      longitude: result.geometry.coordinates[0]
+    )
+  }
+
+  private func setNeighborhood(_ result: PlaceRetrieveDto) {
+    dto.neighborhood = result.properties.context.neighborhood?.name ?? ""
+  }
+
+  private func setViewport() {
+    withViewportAnimation(
+      .easeIn(duration: Constants.animationDuration)
+    ) {
+      viewport = .camera(center: coordinate, zoom: Constants.mapZoom)
     }
   }
 
-  var bottom: some View {
-    confirmButton
-  }
-
-  var navigationBar: some View {
-    NavigationBar("Business address")
-  }
-
-  var map: some View {
-    Map(viewport: $viewport) {
-      Puck2D(bearing: .heading)
-        .showsAccuracyRing(true)
-
-      if let coordinate = locationCoordinate {
-        MapViewAnnotation(coordinate: coordinate) {
-          Label(dto.address, systemImage: "mappin")
-        }
-      }
-    }
-    .mapStyle(.streets)
-  }
-
-  var placeSearcher: some View {
-    PlaceSearcher(viewModel: suggestionViewModel)
-      .padding(.bottom)
-      .background(.background)
-  }
-
-  var confirmButton: some View {
-    Button {
-      dismiss()
-    } label: {
-      StrokeButtonFormItem(title: "Select")
-    }
-    .disabled(isButtonDisabled)
-    .opacity(buttonOpacity)
-    .padding(.bottom)
-  }
-
-  var isButtonDisabled: Bool {
-    dto.location == nil
-  }
-
-  var buttonOpacity: CGFloat {
-    isButtonDisabled ? Constants.buttonDisabledOpacity : 1
+  private var coordinate: CLLocationCoordinate2D? {
+    guard let location = dto.location else { return nil }
+    return CLLocationCoordinate2D(
+      latitude: location.latitude,
+      longitude: location.longitude
+    )
   }
 }
 
 private enum Constants {
   static let mapZoom = 15.0
   static let buttonDisabledOpacity = 0.5
-  static let viewportAnimationDuration = 1.0
+  static let animationDuration = 1.0
+}
+
+#Preview {
+  BusinessAddressPage(dto: .constant(RegisterRequestDto()))
 }

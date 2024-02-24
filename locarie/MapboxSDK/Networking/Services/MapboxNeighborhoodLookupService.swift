@@ -52,7 +52,6 @@ private extension MapboxNeighborhoodLookupServiceImpl {
     [
       "longitude": location.longitude,
       "latitude": location.latitude,
-      "types": "neighborhood",
     ]
   }
 }

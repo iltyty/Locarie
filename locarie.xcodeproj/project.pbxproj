@@ -13,7 +13,7 @@
 		5000C6C92AF8C3440057EF2D /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5000C6C82AF8C3440057EF2D /* SearchPage.swift */; };
 		5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500477092B05DAAC0031AA94 /* AsyncImageView.swift */; };
 		500F66212B257D4D0074FE3C /* Dtos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F66202B257D4D0074FE3C /* Dtos.swift */; };
-		500F66242B25CE320074FE3C /* LocalCacheKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F66232B25CE320074FE3C /* LocalCacheKeys.swift */; };
+		500F66242B25CE320074FE3C /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F66232B25CE320074FE3C /* GlobalConstants.swift */; };
 		500F66262B2854A90074FE3C /* LocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F66252B2854A80074FE3C /* LocalCache.swift */; };
 		500FB22A2B882D4B00E14DEE /* LocarieColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB2292B882D4B00E14DEE /* LocarieColors.swift */; };
 		500FB22C2B88304200E14DEE /* ProfileEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB22B2B88304100E14DEE /* ProfileEditButton.swift */; };
@@ -28,7 +28,7 @@
 		500FB2452B8889FD00E14DEE /* MapboxNeighborhoodLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB2442B8889FD00E14DEE /* MapboxNeighborhoodLookupService.swift */; };
 		500FB2472B888A8500E14DEE /* PlaceReverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB2462B888A8500E14DEE /* PlaceReverse.swift */; };
 		500FB2492B888BAE00E14DEE /* PlaceProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB2482B888BAE00E14DEE /* PlaceProperty.swift */; };
-		500FB24B2B88902400E14DEE /* NeighborhoodLookupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB24A2B88902400E14DEE /* NeighborhoodLookupViewModel.swift */; };
+		500FB24B2B88902400E14DEE /* PlaceReverseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB24A2B88902400E14DEE /* PlaceReverseViewModel.swift */; };
 		500FB24D2B889CFD00E14DEE /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB24C2B889CFD00E14DEE /* NavigationButton.swift */; };
 		500FB24F2B88A1EF00E14DEE /* DynamicPostsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB24E2B88A1EF00E14DEE /* DynamicPostsMapView.swift */; };
 		500FB2582B88BCF500E14DEE /* PostsMapViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FB2572B88BCF500E14DEE /* PostsMapViewConstants.swift */; };
@@ -208,7 +208,7 @@
 		5000C6C82AF8C3440057EF2D /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
 		500477092B05DAAC0031AA94 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		500F66202B257D4D0074FE3C /* Dtos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dtos.swift; sourceTree = "<group>"; };
-		500F66232B25CE320074FE3C /* LocalCacheKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheKeys.swift; sourceTree = "<group>"; };
+		500F66232B25CE320074FE3C /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		500F66252B2854A80074FE3C /* LocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
 		500FB2292B882D4B00E14DEE /* LocarieColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieColors.swift; sourceTree = "<group>"; };
 		500FB22B2B88304100E14DEE /* ProfileEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditButton.swift; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 		500FB2442B8889FD00E14DEE /* MapboxNeighborhoodLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxNeighborhoodLookupService.swift; sourceTree = "<group>"; };
 		500FB2462B888A8500E14DEE /* PlaceReverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceReverse.swift; sourceTree = "<group>"; };
 		500FB2482B888BAE00E14DEE /* PlaceProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceProperty.swift; sourceTree = "<group>"; };
-		500FB24A2B88902400E14DEE /* NeighborhoodLookupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodLookupViewModel.swift; sourceTree = "<group>"; };
+		500FB24A2B88902400E14DEE /* PlaceReverseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceReverseViewModel.swift; sourceTree = "<group>"; };
 		500FB24C2B889CFD00E14DEE /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
 		500FB24E2B88A1EF00E14DEE /* DynamicPostsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicPostsMapView.swift; sourceTree = "<group>"; };
 		500FB2572B88BCF500E14DEE /* PostsMapViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsMapViewConstants.swift; sourceTree = "<group>"; };
@@ -1014,7 +1014,7 @@
 			children = (
 				50B5DED02B3B162500C0A641 /* PlaceSuggestionsViewModel.swift */,
 				50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */,
-				500FB24A2B88902400E14DEE /* NeighborhoodLookupViewModel.swift */,
+				500FB24A2B88902400E14DEE /* PlaceReverseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1024,7 +1024,7 @@
 			children = (
 				509AC0502B57832400A79CDB /* LocationManager.swift */,
 				50E60DE72AFF885F00CA088F /* Util.swift */,
-				500F66232B25CE320074FE3C /* LocalCacheKeys.swift */,
+				500F66232B25CE320074FE3C /* GlobalConstants.swift */,
 				50998B0F2B39161D002196B5 /* Regexes.swift */,
 				500FB2292B882D4B00E14DEE /* LocarieColors.swift */,
 			);
@@ -1335,7 +1335,7 @@
 				501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */,
 				50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */,
 				500FB23F2B88379500E14DEE /* BusinessFollowedAvatarRow.swift in Sources */,
-				500FB24B2B88902400E14DEE /* NeighborhoodLookupViewModel.swift in Sources */,
+				500FB24B2B88902400E14DEE /* PlaceReverseViewModel.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
 				50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
@@ -1442,7 +1442,7 @@
 				509AC0532B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift in Sources */,
 				50998B082B370B34002196B5 /* BusinessCategoryPage.swift in Sources */,
 				501BAF4E2B4655EF00D9D84F /* UserProfilePage.swift in Sources */,
-				500F66242B25CE320074FE3C /* LocalCacheKeys.swift in Sources */,
+				500F66242B25CE320074FE3C /* GlobalConstants.swift in Sources */,
 				50FDD89F2B53E988003015F9 /* Banner.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
 				501BAF352B4635A900D9D84F /* TermsOfUsePage.swift in Sources */,

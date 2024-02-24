@@ -11,12 +11,15 @@ import SwiftUI
 struct DynamicPostsMapView: View {
   @Binding var selectedPost: PostDto
 
-  var neighborVM: NeighborhoodLookupViewModel? = nil
+  var neighborVM: PlaceReverseViewModel? = nil
 
   @ObservedObject var postVM: PostListNearbyViewModel
 
   @State private var needUpdating = true
-  @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
+  @State private var viewport: Viewport = .camera(
+    center: .london,
+    zoom: GlobalConstants.mapZoom
+  )
 
   @StateObject private var locationManager = LocationManager()
 
@@ -31,7 +34,6 @@ struct DynamicPostsMapView: View {
             amplified: post.id == selectedPost.id
           )
           .onTapGesture {
-            print(post.imageUrls)
             selectedPost = post
           }
         }
