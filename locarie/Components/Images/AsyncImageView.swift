@@ -61,7 +61,20 @@ struct AsyncImageView<Content: View>: View {
     }
   }
 
+  @ViewBuilder
   var body: some View {
+    if width == 0, height == 0 {
+      content.frame(maxWidth: .infinity, maxHeight: .infinity)
+    } else if width != 0 {
+      content.frame(width: width)
+    } else if height != 0 {
+      content.frame(height: height)
+    } else {
+      content.frame(width: width, height: height)
+    }
+  }
+
+  private var content: some View {
     Group {
       switch phase {
       case .empty:
@@ -73,7 +86,6 @@ struct AsyncImageView<Content: View>: View {
         Image("DefaultImage")
       }
     }
-    .frame(width: width, height: height)
   }
 
   func load() async {

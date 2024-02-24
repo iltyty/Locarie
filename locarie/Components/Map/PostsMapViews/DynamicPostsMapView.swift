@@ -31,6 +31,7 @@ struct DynamicPostsMapView: View {
             amplified: post.id == selectedPost.id
           )
           .onTapGesture {
+            print(post.imageUrls)
             selectedPost = post
           }
         }
