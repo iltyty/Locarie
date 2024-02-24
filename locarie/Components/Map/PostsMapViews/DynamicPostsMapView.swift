@@ -15,7 +15,7 @@ struct DynamicPostsMapView: View {
 
   @ObservedObject var postVM: PostListNearbyViewModel
 
-  @State private var cameraChanged = true
+  @State private var needUpdating = true
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
 
   @StateObject private var locationManager = LocationManager()
@@ -40,10 +40,8 @@ struct DynamicPostsMapView: View {
       onCameraChanged(state)
     }
     .onReceive(locationManager.$location) { location in
-      updatePostsIfNeeded(location)
-    }
-    .onAppear {
-      updateNeighborhoodIfNeeded(locationManager.location)
+      updatePosts(location)
+      updateNeighborhood(location)
     }
     .ignoresSafeArea()
     .gesture(dragGesture)
@@ -53,15 +51,17 @@ struct DynamicPostsMapView: View {
 
 private extension DynamicPostsMapView {
   func onCameraChanged(_ state: CameraChanged) {
-    DispatchQueue.main.async {
-      updateNeighborhoodIfNeeded(state.cameraState.center)
-      updatePostsIfNeeded(state.cameraState.center)
+    if needUpdating {
+      DispatchQueue.main.async {
+        updateNeighborhood(state.cameraState.center)
+        updatePosts(state.cameraState.center)
+      }
     }
   }
 
-  func updateNeighborhoodIfNeeded(_ location: CLLocation?) {
+  func updateNeighborhood(_ location: CLLocation?) {
     guard let location else { return }
-    updateNeighborhoodIfNeeded(
+    updateNeighborhood(
       CLLocationCoordinate2D(
         latitude: location.coordinate.latitude,
         longitude: location.coordinate.longitude
@@ -69,71 +69,36 @@ private extension DynamicPostsMapView {
     )
   }
 
-  func updateNeighborhoodIfNeeded(_ location: CLLocationCoordinate2D) {
+  func updateNeighborhood(_ location: CLLocationCoordinate2D) {
     guard let neighborVM else { return }
-    if needUpdatingNeighborhood(vm: neighborVM) {
-      updateNeighborhood(location, vm: neighborVM)
-    }
+    neighborVM.lookup(forLocation: location)
+    needUpdating = false
   }
 
-  func needUpdatingNeighborhood(vm: NeighborhoodLookupViewModel) -> Bool {
-    if !cameraChanged {
-      return false
-    }
-    switch vm.state {
-    case .loading: return false
-    default: return true
-    }
-  }
-
-  func updateNeighborhood(
-    _ center: CLLocationCoordinate2D,
-    vm: NeighborhoodLookupViewModel
-  ) {
-    vm.lookup(forLocation: center)
-    cameraChanged = false
-  }
-
-  func updatePostsIfNeeded(_ location: CLLocation?) {
+  func updatePosts(_ location: CLLocation?) {
     guard let location else { return }
-    updatePostsIfNeeded(
+    updatePosts(
       CLLocationCoordinate2D(
         latitude: location.coordinate.latitude,
         longitude: location.coordinate.longitude
       )
     )
-  }
-
-  func updatePostsIfNeeded(_ location: CLLocationCoordinate2D) {
-    if needUpdatePosts {
-      updatePosts(location)
-    }
-  }
-
-  var needUpdatePosts: Bool {
-    if !cameraChanged {
-      return false
-    }
-    switch postVM.state {
-    case .loading: return false
-    default: return true
-    }
   }
 
   func updatePosts(_ location: CLLocationCoordinate2D) {
     postVM.getNearbyPosts(withLocation: location)
-    cameraChanged = false
+    needUpdating = false
   }
 }
 
 private extension DynamicPostsMapView {
   var dragGesture: some Gesture {
     DragGesture(minimumDistance: 20, coordinateSpace: .global)
-      .onEnded { _ in cameraChanged = true }
+      .onEnded { _ in needUpdating = true }
   }
 
   var magnifyGesture: some Gesture {
     MagnifyGesture(minimumScaleDelta: 0.1)
-      .onEnded { _ in cameraChanged = true }
+      .onEnded { _ in needUpdating = true }
   }
 }
