@@ -8,17 +8,17 @@
 import Alamofire
 import Combine
 import CoreLocation
+import Foundation
 
 public protocol MapboxNeighborhoodLookupService {
   func lookup(forLocation coordinate: CLLocationCoordinate2D)
     -> AnyPublisher<PlaceReverseLookupResponse, Never>
 }
 
-public final class MapboxNeighborhoodLookupServiceImpl: MapboxBaseService,
-  MapboxNeighborhoodLookupService
+public final class MapboxNeighborhoodLookupServiceImpl:
+  MapboxBaseService, MapboxNeighborhoodLookupService
 {
-  static let shared: MapboxNeighborhoodLookupService =
-    MapboxNeighborhoodLookupServiceImpl()
+  static let shared = MapboxNeighborhoodLookupServiceImpl()
   override private init() { super.init() }
 
   public func lookup(forLocation location: CLLocationCoordinate2D)

@@ -53,8 +53,10 @@ struct DynamicPostsMapView: View {
 
 private extension DynamicPostsMapView {
   func onCameraChanged(_ state: CameraChanged) {
-    updateNeighborhoodIfNeeded(state.cameraState.center)
-    updatePostsIfNeeded(state.cameraState.center)
+    DispatchQueue.main.async {
+      updateNeighborhoodIfNeeded(state.cameraState.center)
+      updatePostsIfNeeded(state.cameraState.center)
+    }
   }
 
   func updateNeighborhoodIfNeeded(_ location: CLLocation?) {

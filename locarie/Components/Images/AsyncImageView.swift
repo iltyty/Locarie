@@ -34,8 +34,8 @@ struct AsyncImageView<Content: View>: View {
 
   init(
     url: String,
-    width: Double = .infinity,
-    height: Double = .infinity,
+    width: Double = 0,
+    height: Double = 0,
     session: URLSession = .imageSession,
     @ViewBuilder modifier: @escaping (Image) -> Content = { image in
       image.resizable()

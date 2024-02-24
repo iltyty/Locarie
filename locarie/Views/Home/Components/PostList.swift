@@ -22,6 +22,7 @@ struct PostList: View {
         postList
       }
     }
+    .scrollIndicators(.hidden)
   }
 
   private var title: some View {

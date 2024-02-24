@@ -10,8 +10,8 @@ import CoreLocation
 import Foundation
 
 final class PostListNearbyViewModel: BaseViewModel {
-  @Published var posts: [PostDto] = []
   @Published var state: State = .idle
+  @Published var posts: [PostDto] = []
 
   private let networking: PostListService
   private var subscriptions: Set<AnyCancellable> = []
@@ -35,6 +35,7 @@ final class PostListNearbyViewModel: BaseViewModel {
   }
 
   func getNearbyPosts(latitude: Double, longitude: Double) {
+    state = .loading
     networking.listNearbyPosts(
       latitude: latitude,
       longitude: longitude,
@@ -50,16 +51,17 @@ final class PostListNearbyViewModel: BaseViewModel {
   private func handleResponse(_ response: ListNearbyPostsResponse) {
     if let error = response.error {
       state = .failed(error)
-    } else {
-      let dto = response.value!
-      if dto.status != 0 {
-        state = .failed(newNetworkError(response: dto))
-      } else {
-        if let data = dto.data {
-          posts = data
-        }
-      }
+      return
     }
+    let dto = response.value!
+    if dto.status != 0 {
+      state = .failed(newNetworkError(response: dto))
+      return
+    }
+    if let data = dto.data {
+      posts = data
+    }
+    state = .finished
   }
 }
 
