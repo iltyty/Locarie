@@ -17,25 +17,24 @@ struct CapsuleButton<Content: View>: View {
   var body: some View {
     content()
       .padding(.horizontal)
+      .frame(height: Constants.height)
       .background(background)
   }
 
   private var background: some View {
     Capsule()
       .fill(.background)
-      .frame(height: Constants.height)
-      .shadow(radius: Constants.shadow)
+      .stroke(LocarieColors.lightGray)
   }
 }
 
 private enum Constants {
   static let height = 40.0
-  static let shadow = 2.0
 }
 
 #Preview {
   ZStack {
-    Color.red
+    Color.pink
     CapsuleButton {
       Label("London", systemImage: "map")
     }

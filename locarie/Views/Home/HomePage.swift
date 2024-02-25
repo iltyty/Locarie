@@ -12,9 +12,12 @@ struct HomePage: View {
   @StateObject private var postVM = PostListNearbyViewModel()
   @StateObject private var neighborVM = PlaceReverseViewModel()
 
+  @State private var searching = false
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport =
     .camera(center: .london, zoom: GlobalConstants.mapZoom)
+
+  @Namespace var namespace
 
   var body: some View {
     ZStack {
@@ -24,6 +27,11 @@ struct HomePage: View {
         postVM: postVM
       )
       contentView
+      VStack { // ensure zIndex of all views keep the same
+        if searching {
+          BusinessSearchView(searching: $searching)
+        }
+      }
     }
     .ignoresSafeArea(edges: .bottom)
     .onReceive(postVM.$posts) { posts in
@@ -35,7 +43,7 @@ struct HomePage: View {
 private extension HomePage {
   var contentView: some View {
     VStack(spacing: 0) {
-      topContent
+      buttons
       Spacer()
       BottomSheet(detents: [.minimum, .large]) {
         PostList(posts: postVM.posts, selectedPost: $selectedPost)
@@ -44,12 +52,12 @@ private extension HomePage {
     }
   }
 
-  var topContent: some View {
+  var buttons: some View {
     HStack {
-      CircleButton(systemName: "magnifyingglass")
+      searchIcon
       Spacer()
       CapsuleButton {
-        Label(neighborVM.neighborhood, image: "BlueMap")
+        Label(neighborVM.neighborhood, image: "BlueMapIcon")
       }
       Spacer()
       NavigationLink(value: Router.Destination.favorite) {
@@ -59,7 +67,16 @@ private extension HomePage {
       .buttonStyle(.plain)
     }
     .fontWeight(.semibold)
-    .padding([.horizontal, .bottom])
+    .padding([.bottom, .horizontal])
+  }
+
+  var searchIcon: some View {
+    CircleButton(systemName: "magnifyingglass")
+      .onTapGesture {
+        withAnimation {
+          searching.toggle()
+        }
+      }
   }
 }
 

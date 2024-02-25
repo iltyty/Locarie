@@ -18,7 +18,7 @@ struct ProfileAddress: View {
     Label {
       addressText
     } icon: {
-      Image("BlueMap")
+      Image("BlueMapIcon")
         .resizable()
         .scaledToFit()
         .frame(

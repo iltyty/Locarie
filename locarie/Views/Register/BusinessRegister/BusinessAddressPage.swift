@@ -121,7 +121,7 @@ private extension BusinessAddressPage {
       HStack {
         Spacer()
         CapsuleButton {
-          Label(reverseVM.neighborhood, image: "BlueMap")
+          Label(reverseVM.neighborhood, image: "BlueMapIcon")
         }
         Spacer()
       }
