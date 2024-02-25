@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct DynamicPostsMapView: View {
+  @Binding var viewport: Viewport
   @Binding var selectedPost: PostDto
 
   var neighborVM: PlaceReverseViewModel? = nil
@@ -16,10 +17,6 @@ struct DynamicPostsMapView: View {
   @ObservedObject var postVM: PostListNearbyViewModel
 
   @State private var needUpdating = true
-  @State private var viewport: Viewport = .camera(
-    center: .london,
-    zoom: GlobalConstants.mapZoom
-  )
 
   @StateObject private var locationManager = LocationManager()
 

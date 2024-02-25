@@ -8,21 +8,27 @@
 import SwiftUI
 import UIKit
 
-struct BottomSheet<Content: View>: View {
+struct BottomSheet<Content: View, TopContent: View>: View {
   let content: Content
+  let topContent: TopContent
+  let topPosition: TopPosition
   let detents: [BottomSheetDetent]
 
   @State var offsetY: CGFloat = 0
   @State var translation: CGSize = .zero
   @State var currentDetent: BottomSheetDetent = .minimum
-
+  @State var presentingTopContent = true
   @State var screenHeight: CGFloat = 0
 
   init(
-    detents: [BottomSheetDetent] = [.minimum, .medium],
-    @ViewBuilder content: () -> Content
+    topPosition: TopPosition = .left,
+    detents: [BottomSheetDetent],
+    @ViewBuilder content: () -> Content,
+    @ViewBuilder topContent: () -> TopContent = { EmptyView() }
   ) {
+    self.topPosition = topPosition
     self.content = content()
+    self.topContent = topContent()
     if detents.isEmpty {
       self.detents = [.minimum, .medium]
       currentDetent = .minimum
@@ -35,14 +41,11 @@ struct BottomSheet<Content: View>: View {
   var body: some View {
     GeometryReader { proxy in
       VStack {
-        handler
-        HStack {
-          Spacer()
-          content
-          Spacer()
+        if presentingTopContent {
+          topContentView
         }
+        contentView
       }
-      .background(background)
       .offset(y: translation.height + offsetY)
       .onAppear {
         screenHeight = proxy.frame(in: .global).size.height
@@ -54,8 +57,34 @@ struct BottomSheet<Content: View>: View {
       }
     }
   }
+}
 
-  private var background: some View {
+private extension BottomSheet {
+  var topContentView: some View {
+    HStack {
+      if case topPosition = .right {
+        Spacer()
+      }
+      topContent.padding(.horizontal)
+      if case topPosition = .left {
+        Spacer()
+      }
+    }
+  }
+
+  var contentView: some View {
+    VStack {
+      handler
+      HStack {
+        Spacer()
+        content
+        Spacer()
+      }
+    }
+    .background(background)
+  }
+
+  var background: some View {
     UnevenRoundedRectangle(
       topLeadingRadius: BottomSheetConstants.backgroundCornerRadius,
       topTrailingRadius: BottomSheetConstants.backgroundCornerRadius
@@ -68,10 +97,7 @@ private extension BottomSheet {
     VStack {
       Capsule()
         .fill(Color(hex: BottomSheetConstants.handlerColor))
-        .frame(
-          width: BottomSheetConstants.handlerWidth,
-          height: BottomSheetConstants.handlerHeight
-        )
+        .frame(width: BottomSheetConstants.handlerWidth, height: BottomSheetConstants.handlerHeight)
         .gesture(dragGesture)
     }
     .frame(height: BottomSheetConstants.handlerBgHeight)
@@ -80,30 +106,44 @@ private extension BottomSheet {
   var dragGesture: some Gesture {
     DragGesture(coordinateSpace: .global)
       .onChanged { value in
+        if translation.height + offsetY <= 0 {
+          withAnimation {
+            presentingTopContent = false
+          }
+        } else {
+          withAnimation {
+            presentingTopContent = true
+          }
+        }
         if offsetY != 0 || value.translation.height > 0 {
           translation = value.translation
         }
       }
       .onEnded { value in
-        withAnimation(
-          .interactiveSpring(response: 0.5, dampingFraction: 1)
-        ) {
-          if value.velocity
-            .height > .init(BottomSheetConstants.speedThreshold)
-          {
+        withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 1)) {
+          if value.velocity.height > .init(BottomSheetConstants.speedThreshold) {
             currentDetent = .minimum
             offsetY = currentDetent.getOffset(screenHeight: screenHeight)
-          } else if value.velocity
-            .height < .init(-BottomSheetConstants.speedThreshold)
-          {
+          } else if value.velocity.height < .init(-BottomSheetConstants.speedThreshold) {
             currentDetent = .large
             offsetY = currentDetent.getOffset(screenHeight: screenHeight)
           } else {
             (currentDetent, offsetY) = getDetentAndOffset()
           }
+          if translation.height + offsetY <= 0 {
+            withAnimation {
+              presentingTopContent = false
+            }
+          }
           translation = .zero
         }
       }
+  }
+}
+
+extension BottomSheet {
+  enum TopPosition {
+    case left, right
   }
 }
 
@@ -117,7 +157,7 @@ enum BottomSheetConstants {
 }
 
 #Preview {
-  BottomSheet(detents: [.minimum, .large]) {
+  BottomSheet(topPosition: .right, detents: [.minimum, .large]) {
     ScrollView {
       VStack {
         ForEach(1 ..< 100, id: \.self) { i in
@@ -125,6 +165,11 @@ enum BottomSheetConstants {
         }
       }
     }
+  } topContent: {
+    Image("NavigationIcon")
+      .resizable()
+      .scaledToFill()
+      .frame(width: 50, height: 50)
   }
   .background(.green)
 }

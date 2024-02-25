@@ -12,8 +12,8 @@ struct NavigationButton: View {
     Image("NavigationIcon")
       .resizable()
       .scaledToFill()
-      .frame(width: Constants.size, height: Constants.size)
       .shadow(radius: Constants.shadowRadius)
+      .frame(width: Constants.size, height: Constants.size)
   }
 }
 

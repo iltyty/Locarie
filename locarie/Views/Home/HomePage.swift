@@ -22,6 +22,7 @@ struct HomePage: View {
   var body: some View {
     ZStack {
       DynamicPostsMapView(
+        viewport: $viewport,
         selectedPost: $selectedPost,
         neighborVM: neighborVM,
         postVM: postVM
@@ -44,12 +45,24 @@ private extension HomePage {
   var contentView: some View {
     VStack(spacing: 0) {
       buttons
-      Spacer()
-      BottomSheet(detents: [.minimum, .large]) {
+      BottomSheet(topPosition: .right, detents: [.minimum, .large]) {
         PostList(posts: postVM.posts, selectedPost: $selectedPost)
+      } topContent: {
+        NavigationButton().onTapGesture {
+          withViewportAnimation(.fly) {
+            viewport = .followPuck(zoom: GlobalConstants.mapZoom)
+          }
+        }
       }
       BottomTabView().background(.background)
     }
+  }
+
+  var navigationUrl: URL {
+    let coordinate = selectedPost.businessLocationCoordinate
+    return URL(
+      string: "https://www.google.com/maps?saddr=&daddr=\(coordinate.latitude),\(coordinate.longitude)&directionsmode=walking"
+    )!
   }
 
   var buttons: some View {
@@ -67,7 +80,8 @@ private extension HomePage {
       .buttonStyle(.plain)
     }
     .fontWeight(.semibold)
-    .padding([.bottom, .horizontal])
+    .padding(.horizontal)
+    .padding(.bottom, Constants.topButtonsBottomPadding)
   }
 
   var searchIcon: some View {
@@ -78,6 +92,10 @@ private extension HomePage {
         }
       }
   }
+}
+
+private enum Constants {
+  static let topButtonsBottomPadding: CGFloat = 5
 }
 
 #Preview {
