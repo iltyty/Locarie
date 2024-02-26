@@ -9,36 +9,36 @@ import Foundation
 
 enum APIEndpoints {
   static let baseUrl = "http://localhost:8080/api/v1"
-  static let userUrl = baseUrl + "/users"
-  static let postUrl = baseUrl + "/posts"
+  static let usersUrl = baseUrl + "/users"
+  static let postsUrl = baseUrl + "/posts"
 
-  static let favoritePostUrl = postUrl + "/favorite"
-  static let unfavoritePostUrl = postUrl + "/unfavorite"
-  static let postIsFavoredByUrl = postUrl + "/is-favored-by"
-
-  static let favoriteBusinessUrl = userUrl + "/favorite"
-  static let unfavoriteBusinessUrl = userUrl + "/unfavorite"
-  static let businessIsFavoredByUrl = userUrl + "/is-favored-by"
-
-  static let userLoginUrl = URL(string: userUrl + "/login")!
-  static let userRegisterUrl = URL(string: userUrl + "/register")!
-  static let listBusinessesUrl = URL(string: userUrl + "/businesses")!
-
-  static func userProfileUrl(id: Int64) -> URL {
-    URL(string: userUrl + "/\(id)")!
+  static func userUrl(id: Int64) -> URL {
+    URL(string: usersUrl + "/\(id)")!
   }
 
+  static let userLoginUrl = URL(string: usersUrl + "/login")!
+  static let userRegisterUrl = URL(string: usersUrl + "/register")!
+  static let listBusinessesUrl = URL(string: usersUrl + "/businesses")!
+
+  static let favoritePostUrl = postsUrl + "/favorite"
+  static let unfavoritePostUrl = postsUrl + "/unfavorite"
+  static let postIsFavoredByUrl = postsUrl + "/is-favored-by"
+
+  static let favoriteBusinessUrl = usersUrl + "/favorite"
+  static let unfavoriteBusinessUrl = usersUrl + "/unfavorite"
+  static let businessIsFavoredByUrl = usersUrl + "/is-favored-by"
+
   static func userAvatarUrl(id: Int64) -> URL {
-    URL(string: userUrl + "/\(id)/avatar")!
+    URL(string: usersUrl + "/\(id)/avatar")!
   }
 
   static func userProfileImagesUrl(id: Int64) -> URL {
-    URL(string: userUrl + "/\(id)/profile-images")!
+    URL(string: usersUrl + "/\(id)/profile-images")!
   }
 
-  static let createPostUrl = URL(string: postUrl)!
-  static let listNearbyPosts = URL(string: postUrl + "/nearby")!
+  static let createPostUrl = URL(string: postsUrl)!
+  static let listNearbyPosts = URL(string: postsUrl + "/nearby")!
   static func listUserPosts(id: Int64) -> URL {
-    URL(string: postUrl + "/user/\(id)")!
+    URL(string: postsUrl + "/user/\(id)")!
   }
 }

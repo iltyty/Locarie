@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct MyAccountPage: View {
-  @StateObject private var profileViewModel = ProfileGetViewModel()
-  @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
+  @State private var presentingAlert = false
+
+  @ObservedObject private var router = Router.shared
+  @StateObject private var deleteVM = UserDeleteViewModel()
+  @StateObject private var profileVM = ProfileGetViewModel()
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     VStack {
@@ -29,8 +33,22 @@ struct MyAccountPage: View {
       }
       .padding([.top, .horizontal])
     }
+    .alert("Confirm", isPresented: $presentingAlert) {
+      Button("Delete", role: .destructive) {
+        deleteVM.delete(id: cacheVM.getUserId())
+      }
+      Button("Cancel", role: .cancel) {}
+    } message: {
+      Text("This will delete all your data")
+    }
     .onAppear {
-      profileViewModel.getProfile(userId: cacheViewModel.getUserId())
+      profileVM.getProfile(userId: cacheVM.getUserId())
+    }
+    .onReceive(deleteVM.$state) { state in
+      if case .finished = state {
+        cacheVM.clean()
+        router.navigateToRoot()
+      }
     }
   }
 }
@@ -41,17 +59,17 @@ private extension MyAccountPage {
   }
 
   var accountType: some View {
-    let accountType = profileViewModel.dto
+    let accountType = profileVM.dto
       .type == .regular ? "Visitor" : "Business"
     return TextSettingsItem(title: "Account type", value: accountType)
   }
 
   var businessName: some View {
     Group {
-      if profileViewModel.dto.type == .regular {
+      if profileVM.dto.type == .regular {
         EmptyView()
       } else {
-        let name = profileViewModel.dto.businessName
+        let name = profileVM.dto.businessName
         TextSettingsItem(title: "Business name", value: name)
       }
     }
@@ -59,10 +77,10 @@ private extension MyAccountPage {
 
   var businessCategories: some View {
     Group {
-      if profileViewModel.dto.type == .regular {
+      if profileVM.dto.type == .regular {
         EmptyView()
       } else {
-        let categories = profileViewModel.dto.categories
+        let categories = profileVM.dto.categories
         TextSettingsItem(
           title: "Business categories",
           value: categories.joined(separator: ", ")
@@ -72,22 +90,22 @@ private extension MyAccountPage {
   }
 
   var email: some View {
-    let email = profileViewModel.dto.email
+    let email = profileVM.dto.email
     return TextSettingsItem(title: "Email", value: email)
   }
 
   var username: some View {
-    let username = profileViewModel.dto.username
+    let username = profileVM.dto.username
     return TextSettingsItem(title: "@Username", value: username)
   }
 
   var firstName: some View {
-    let firstName = profileViewModel.dto.firstName
+    let firstName = profileVM.dto.firstName
     return TextSettingsItem(title: "First name", value: firstName)
   }
 
   var lastName: some View {
-    let lastName = profileViewModel.dto.lastName
+    let lastName = profileVM.dto.lastName
     return TextSettingsItem(title: "Last name", value: lastName)
   }
 
@@ -104,7 +122,7 @@ private extension MyAccountPage {
 
   var deleteAccount: some View {
     Button("Delete account") {
-      print("delete account button tapped")
+      presentingAlert = true
     }
     .foregroundStyle(.red)
   }

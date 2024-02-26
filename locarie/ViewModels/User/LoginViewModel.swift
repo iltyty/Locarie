@@ -34,6 +34,7 @@ final class LoginViewModel: BaseViewModel {
 
 extension LoginViewModel {
   func login() {
+    state = .loading
     networking.login(dto: dto)
       .sink { [weak self] response in
         guard let self else { return }
@@ -43,7 +44,6 @@ extension LoginViewModel {
   }
 
   private func handleLoginResponse(_ response: LoginResponse) {
-    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
     } else {

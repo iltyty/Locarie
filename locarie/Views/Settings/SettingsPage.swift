@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct SettingsPage: View {
-  @ObservedObject var cacheViewModel = LocalCacheViewModel.shared
+  @StateObject private var deleteVM = UserDeleteViewModel()
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
-  @Environment(\.dismiss) var dismiss
+  @Environment(\.dismiss) private var dismiss
 
   var body: some View {
     VStack {
@@ -45,9 +46,7 @@ private extension SettingsPage {
   }
 
   var myAccount: some View {
-    NavigationLink {
-      MyAccountPage()
-    } label: {
+    NavigationLink(value: Router.Destination.myAccount) {
       LinkSettingsItem(text: "My account")
     }
     .buttonStyle(.plain)
@@ -120,7 +119,7 @@ private extension SettingsPage {
 
   var logout: some View {
     Button("Log out") {
-      cacheViewModel.clean()
+      cacheVM.clean()
       dismiss()
     }
     .fontWeight(.semibold)

@@ -85,6 +85,8 @@
 		505568CC2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568CB2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift */; };
 		505568CF2B84BB7500FD21E4 /* StrokeButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568CE2B84BB7500FD21E4 /* StrokeButtonFormItem.swift */; };
 		505568D12B84BCA000FD21E4 /* LinkFormItemWithInlineTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505568D02B84BCA000FD21E4 /* LinkFormItemWithInlineTitle.swift */; };
+		506590CD2B8CA8C7009F8E5F /* UserDeleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590CC2B8CA8C7009F8E5F /* UserDeleteService.swift */; };
+		506590CF2B8CAD6F009F8E5F /* UserDeleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590CE2B8CAD6E009F8E5F /* UserDeleteViewModel.swift */; };
 		506801532B88CBFF00AFF000 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506801522B88CBFF00AFF000 /* FavoritePage.swift */; };
 		506801562B88CC3000AFF000 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506801552B88CC3000AFF000 /* PostList.swift */; };
 		5075FCB52B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */; };
@@ -282,6 +284,8 @@
 		505568CB2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormItemWithIconTitle.swift; sourceTree = "<group>"; };
 		505568CE2B84BB7500FD21E4 /* StrokeButtonFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButtonFormItem.swift; sourceTree = "<group>"; };
 		505568D02B84BCA000FD21E4 /* LinkFormItemWithInlineTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItemWithInlineTitle.swift; sourceTree = "<group>"; };
+		506590CC2B8CA8C7009F8E5F /* UserDeleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDeleteService.swift; sourceTree = "<group>"; };
+		506590CE2B8CAD6E009F8E5F /* UserDeleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDeleteViewModel.swift; sourceTree = "<group>"; };
 		506801522B88CBFF00AFF000 /* FavoritePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePage.swift; sourceTree = "<group>"; };
 		506801552B88CC3000AFF000 /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItemWithBlockTitle.swift; sourceTree = "<group>"; };
@@ -630,6 +634,7 @@
 				50FDD8982B523B95003015F9 /* AvatarUploadService.swift */,
 				50FDD89A2B53D632003015F9 /* ProfileImagesUploadService.swift */,
 				50D0CE862B8B20A90070B90F /* UserListService.swift */,
+				506590CC2B8CA8C7009F8E5F /* UserDeleteService.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -795,6 +800,7 @@
 				50FDD8962B523B32003015F9 /* AvatarUploadViewModel.swift */,
 				50FDD89C2B53D942003015F9 /* ProfileImagesViewModel.swift */,
 				50D0CE882B8B23330070B90F /* UserListViewModel.swift */,
+				506590CE2B8CAD6E009F8E5F /* UserDeleteViewModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1394,6 +1400,7 @@
 				50D0CE8B2B8B2A6D0070B90F /* BusinessNameAvatarUrlDto.swift in Sources */,
 				50277F742AF117700045AB12 /* HomePage.swift in Sources */,
 				5075FCCD2B86E8A0005E4A8B /* ProfileLink.swift in Sources */,
+				506590CD2B8CA8C7009F8E5F /* UserDeleteService.swift in Sources */,
 				506801532B88CBFF00AFF000 /* FavoritePage.swift in Sources */,
 				501BAF382B46364D00D9D84F /* FeedbackPage.swift in Sources */,
 				50F85B452B242EE200D04787 /* APIServices.swift in Sources */,
@@ -1414,6 +1421,7 @@
 				50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */,
 				5075FCD92B870A40005E4A8B /* ProfilePostsCount.swift in Sources */,
 				5075FCDE2B8717C2005E4A8B /* ProfileEditDialog.swift in Sources */,
+				506590CF2B8CAD6F009F8E5F /* UserDeleteViewModel.swift in Sources */,
 				5075FCDB2B870BBF005E4A8B /* ProfileOpenUntil.swift in Sources */,
 				50B11AD72AFA28E9002A7B91 /* BusinessHomePage.swift in Sources */,
 				50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */,
