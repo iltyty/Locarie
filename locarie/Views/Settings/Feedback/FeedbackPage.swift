@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct FeedbackPage: View {
-  @StateObject var feedbackEditViewModel =
-    TextEditViewModel(limit: Constants.wordCountLimit)
+  @State var alertText = ""
+  @State var loading = false
+  @State var presentingAlert = false
+
+  @StateObject var feedbackVM = FeedbackViewModel()
+  @StateObject var editVM = TextEditViewModel(limit: Constants.wordCountLimit)
 
   var body: some View {
     VStack {
@@ -21,6 +25,45 @@ struct FeedbackPage: View {
         shareButton
       }
       .padding([.top, .horizontal])
+    }
+    .overlay(loadingView)
+    .alert(alertText, isPresented: $presentingAlert) {
+      Button("OK") {}
+    }
+    .onReceive(feedbackVM.$state) { state in
+      handleFeedbackVMStateChange(state)
+    }
+  }
+
+  private func handleFeedbackVMStateChange(_ state: FeedbackViewModel.State) {
+    switch state {
+    case .loading:
+      loading = true
+    case .finished:
+      editVM.text = ""
+      alertText = "Feedback sent. Thank you for your precious advice!"
+      presentingAlert = true
+    case let .failed(error):
+      alertText = error.description()
+      presentingAlert = true
+    default: break
+    }
+  }
+}
+
+private extension FeedbackPage {
+  @ViewBuilder
+  var loadingView: some View {
+    if case .loading = feedbackVM.state {
+      Color.black
+        .opacity(GlobalConstants.loadingBgOpacity)
+        .ignoresSafeArea()
+        .overlay {
+          ProgressView()
+            .progressViewStyle(.circular)
+        }
+    } else {
+      EmptyView()
     }
   }
 }
@@ -49,7 +92,7 @@ private extension FeedbackPage {
     GeometryReader { proxy in
       VStack {
         TextEditorPlus(
-          viewModel: feedbackEditViewModel,
+          viewModel: editVM,
           hint: "Share your feedback...",
           border: true
         )
@@ -61,7 +104,7 @@ private extension FeedbackPage {
 
   var shareButton: some View {
     Button {
-      print("send")
+      feedbackVM.send(userId: LocalCacheViewModel.shared.getUserId(), content: editVM.text)
     } label: {
       HStack {
         Spacer()
@@ -69,6 +112,8 @@ private extension FeedbackPage {
         Spacer()
       }
     }
+    .disabled(editVM.text.isEmpty)
+    .opacity(editVM.text.isEmpty ? 0.5 : 1)
   }
 }
 

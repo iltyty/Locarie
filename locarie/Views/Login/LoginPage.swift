@@ -87,7 +87,7 @@ private extension LoginPage {
   var loadingView: some View {
     ProgressView()
       .progressViewStyle(.circular)
-      .background(.white.opacity(Constants.loadingBackgroundOpacity))
+      .background(.white.opacity(GlobalConstants.loadingBgOpacity))
   }
 
   var locarieIcon: some View {
@@ -164,7 +164,6 @@ private enum Constants {
   static let locarieIconSize = 64.0
   static let googleIconSize = 32.0
   static let formItemSpacing = 15.0
-  static let loadingBackgroundOpacity = 0.05
   static let buttonDisabledOpacity = 0.5
 }
 

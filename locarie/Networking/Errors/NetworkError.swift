@@ -18,6 +18,18 @@ struct BackendError: Error, Codable {
   let code: ResultCode
 }
 
+extension NetworkError {
+  func description() -> String {
+    if let initialError {
+      ErrorMessage.network.rawValue
+    } else if let backendError {
+      backendError.message
+    } else {
+      ""
+    }
+  }
+}
+
 enum ResultCode: Int, Codable {
   // parameters-related codes
   case invalieParameters = 101
