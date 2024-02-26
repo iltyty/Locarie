@@ -1,5 +1,5 @@
 //
-//  ResetPasswordPage.swift
+//  ForgotPasswordPage.swift
 //  locarie
 //
 //  Created by qiuty on 22/12/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ResetPasswordPage: View {
+struct ForgotPasswordPage: View {
   @State var email = ""
 
   var body: some View {
@@ -55,5 +55,5 @@ private enum Constants {
 }
 
 #Preview {
-  ResetPasswordPage()
+  ForgotPasswordPage()
 }

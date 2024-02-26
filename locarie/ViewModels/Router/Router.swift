@@ -56,7 +56,7 @@ extension Router {
       case .businessRegister:
         BusinessRegisterPage()
       case .resetPassword:
-        ResetPasswordPage()
+        ForgotPasswordPage()
 
       case .settings:
         SettingsPage()

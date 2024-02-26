@@ -93,6 +93,9 @@
 		506590D82B8CB4A7009F8E5F /* FeedbackEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590D72B8CB4A7009F8E5F /* FeedbackEndpoints.swift */; };
 		506590DB2B8CB4DB009F8E5F /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590DA2B8CB4DB009F8E5F /* FeedbackService.swift */; };
 		506590DE2B8CB5B6009F8E5F /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590DD2B8CB5B6009F8E5F /* FeedbackViewModel.swift */; };
+		506590E02B8CC098009F8E5F /* AuthEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590DF2B8CC098009F8E5F /* AuthEndpoints.swift */; };
+		506590E32B8CC19F009F8E5F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590E22B8CC19F009F8E5F /* AuthService.swift */; };
+		506590E62B8CC466009F8E5F /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590E52B8CC466009F8E5F /* AuthViewModel.swift */; };
 		506801532B88CBFF00AFF000 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506801522B88CBFF00AFF000 /* FavoritePage.swift */; };
 		506801562B88CC3000AFF000 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506801552B88CC3000AFF000 /* PostList.swift */; };
 		5075FCB52B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */; };
@@ -116,7 +119,7 @@
 		5075FCDE2B8717C2005E4A8B /* ProfileEditDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCDD2B8717C2005E4A8B /* ProfileEditDialog.swift */; };
 		50998AEC2B35B839002196B5 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEB2B35B839002196B5 /* LoginPage.swift */; };
 		50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */; };
-		50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ResetPasswordPage.swift */; };
+		50998AF22B35D195002196B5 /* ForgotPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF12B35D195002196B5 /* ForgotPasswordPage.swift */; };
 		50998AF42B35D376002196B5 /* RegularRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AF32B35D376002196B5 /* RegularRegisterPage.swift */; };
 		50998AFE2B366C29002196B5 /* WrappingHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998AFD2B366C29002196B5 /* WrappingHStack.swift */; };
 		50998B022B36842A002196B5 /* BusinessRegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B012B36842A002196B5 /* BusinessRegisterPage.swift */; };
@@ -297,6 +300,9 @@
 		506590D72B8CB4A7009F8E5F /* FeedbackEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackEndpoints.swift; sourceTree = "<group>"; };
 		506590DA2B8CB4DB009F8E5F /* FeedbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackService.swift; sourceTree = "<group>"; };
 		506590DD2B8CB5B6009F8E5F /* FeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
+		506590DF2B8CC098009F8E5F /* AuthEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndpoints.swift; sourceTree = "<group>"; };
+		506590E22B8CC19F009F8E5F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		506590E52B8CC466009F8E5F /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		506801522B88CBFF00AFF000 /* FavoritePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePage.swift; sourceTree = "<group>"; };
 		506801552B88CC3000AFF000 /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItemWithBlockTitle.swift; sourceTree = "<group>"; };
@@ -320,7 +326,7 @@
 		5075FCDD2B8717C2005E4A8B /* ProfileEditDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditDialog.swift; sourceTree = "<group>"; };
 		50998AEB2B35B839002196B5 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterPage.swift; sourceTree = "<group>"; };
-		50998AF12B35D195002196B5 /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
+		50998AF12B35D195002196B5 /* ForgotPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPage.swift; sourceTree = "<group>"; };
 		50998AF32B35D376002196B5 /* RegularRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularRegisterPage.swift; sourceTree = "<group>"; };
 		50998AFD2B366C29002196B5 /* WrappingHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingHStack.swift; sourceTree = "<group>"; };
 		50998B012B36842A002196B5 /* BusinessRegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessRegisterPage.swift; sourceTree = "<group>"; };
@@ -709,6 +715,7 @@
 		5054CDED2B288D1500645F5C /* APIServices */ = {
 			isa = PBXGroup;
 			children = (
+				506590E12B8CC191009F8E5F /* Auth */,
 				50530B942B877D66009C1F92 /* Favorite */,
 				506590D92B8CB4CC009F8E5F /* Feedback */,
 				502A4FF32B32D44E00C0833A /* Post */,
@@ -758,6 +765,7 @@
 				506590D12B8CB411009F8E5F /* UserEndpoints.swift */,
 				506590D52B8CB477009F8E5F /* FavoriteEndpoints.swift */,
 				506590D72B8CB4A7009F8E5F /* FeedbackEndpoints.swift */,
+				506590DF2B8CC098009F8E5F /* AuthEndpoints.swift */,
 			);
 			path = APIEndpoints;
 			sourceTree = "<group>";
@@ -776,6 +784,22 @@
 				506590DD2B8CB5B6009F8E5F /* FeedbackViewModel.swift */,
 			);
 			path = Feedback;
+			sourceTree = "<group>";
+		};
+		506590E12B8CC191009F8E5F /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				506590E22B8CC19F009F8E5F /* AuthService.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		506590E42B8CC44B009F8E5F /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				506590E52B8CC466009F8E5F /* AuthViewModel.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		506801542B88CC2000AFF000 /* Components */ = {
@@ -875,7 +899,7 @@
 			children = (
 				50998AEB2B35B839002196B5 /* LoginPage.swift */,
 				50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */,
-				50998AF12B35D195002196B5 /* ResetPasswordPage.swift */,
+				50998AF12B35D195002196B5 /* ForgotPasswordPage.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1001,9 +1025,10 @@
 		50B11AE92AFB878A002A7B91 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				506590DC2B8CB5AD009F8E5F /* Feedback */,
+				506590E42B8CC44B009F8E5F /* Auth */,
 				509D5BC72B457F6400833021 /* Cache */,
 				50530B992B878AA8009C1F92 /* Favorite */,
+				506590DC2B8CB5AD009F8E5F /* Feedback */,
 				50F549EE2B44657900D06F20 /* Photo */,
 				50369A6E2B30417A005D6B43 /* Post */,
 				50FDD8862B4AFC0B003015F9 /* Router */,
@@ -1426,6 +1451,7 @@
 				50530B8F2B87514D009C1F92 /* RegularUserProfileEditPage.swift in Sources */,
 				50FDD89B2B53D633003015F9 /* ProfileImagesUploadService.swift in Sources */,
 				500FB2422B885C7400E14DEE /* BusinessMapAvatar.swift in Sources */,
+				506590E02B8CC098009F8E5F /* AuthEndpoints.swift in Sources */,
 				509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */,
 				502A4FF62B32D48400C0833A /* PostListService.swift in Sources */,
 				5075FCCF2B86E8DB005E4A8B /* ProfilePhone.swift in Sources */,
@@ -1458,9 +1484,10 @@
 				5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */,
 				5075FCC72B86E757005E4A8B /* ProfileAddress.swift in Sources */,
 				5075FCC02B861C66005E4A8B /* BusinessProfileCover.swift in Sources */,
+				506590E62B8CC466009F8E5F /* AuthViewModel.swift in Sources */,
 				506590D62B8CB477009F8E5F /* FavoriteEndpoints.swift in Sources */,
 				501BAF312B46345500D9D84F /* PrivacyPolicyPage.swift in Sources */,
-				50998AF22B35D195002196B5 /* ResetPasswordPage.swift in Sources */,
+				50998AF22B35D195002196B5 /* ForgotPasswordPage.swift in Sources */,
 				50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */,
 				5075FCD92B870A40005E4A8B /* ProfilePostsCount.swift in Sources */,
 				506590DB2B8CB4DB009F8E5F /* FeedbackService.swift in Sources */,
@@ -1508,6 +1535,7 @@
 				500F66242B25CE320074FE3C /* GlobalConstants.swift in Sources */,
 				50FDD89F2B53E988003015F9 /* Banner.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
+				506590E32B8CC19F009F8E5F /* AuthService.swift in Sources */,
 				501BAF352B4635A900D9D84F /* TermsOfUsePage.swift in Sources */,
 				501BAF3A2B463D6900D9D84F /* TextEditorPlus.swift in Sources */,
 				50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */,
