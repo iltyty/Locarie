@@ -20,6 +20,7 @@ final class AuthViewModel: BaseViewModel {
   }
 
   func forgotPassword(email: String) {
+    state = .loading
     networking.forgotPassword(email: email)
       .sink { [weak self] response in
         guard let self else { return }
@@ -29,6 +30,7 @@ final class AuthViewModel: BaseViewModel {
   }
 
   func validateForgotPassword(email: String, code: String) {
+    state = .loading
     networking.validateForgotPassword(email: email, code: code)
       .sink { [weak self] response in
         guard let self else { return }
@@ -38,6 +40,7 @@ final class AuthViewModel: BaseViewModel {
   }
 
   func resetPassword(email: String, password: String) {
+    state = .loading
     networking.resetPassword(email: email, password: password)
       .sink { [weak self] response in
         guard let self else { return }
@@ -49,6 +52,7 @@ final class AuthViewModel: BaseViewModel {
   private func handleResponse(
     _ response: DataResponse<ResponseDto<some Decodable>, NetworkError>, finishedState: State
   ) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
       return

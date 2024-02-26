@@ -20,7 +20,7 @@ struct BackendError: Error, Codable {
 
 extension NetworkError {
   func description() -> String {
-    if let initialError {
+    if initialError != nil {
       ErrorMessage.network.rawValue
     } else if let backendError {
       backendError.message
@@ -37,6 +37,9 @@ enum ResultCode: Int, Codable {
   // authentication-related codes
   case emailAlreadyInUse = 201
   case incorrectCredentials = 202
+
+  // user-related codes
+  case userNotFound = 301
 
   case unknown
 }

@@ -1,14 +1,16 @@
 //
-//  ForgotPasswordPage.swift
+//  CodeValidationPage.swift
 //  locarie
 //
-//  Created by qiuty on 22/12/2023.
+//  Created by qiuty on 26/02/2024.
 //
 
 import SwiftUI
 
-struct ForgotPasswordPage: View {
-  @State private var email = ""
+struct CodeValidationPage: View {
+  let email: String
+
+  @State private var code = ""
   @State private var loading = false
   @State private var alertTitle = ""
   @State private var presentingAlert = false
@@ -28,63 +30,65 @@ struct ForgotPasswordPage: View {
     .onReceive(authVM.$state) { state in
       switch state {
       case .loading: loading = true
-      case .forgotPasswordFinished:
+      case .validateForgotPasswordFinished:
         loading = false
-        router.navigation(to: Router.StringDestination.codeValidation(email))
+        router.navigation(to: Router.StringDestination.resetPassword(email))
       case let .failed(error):
         loading = false
         if error.initialError != nil {
           alertTitle = ErrorMessage.network.rawValue
-        } else if let backendError = error.backendError, backendError.code == .userNotFound {
-          alertTitle = "Email not exist"
+        } else if let backendError = error.backendError {
+          alertTitle = backendError.message
         } else {
-          alertTitle = ErrorMessage.unknown.rawValue
+          alertTitle = "Code incorrect"
         }
         presentingAlert = true
       default: loading = false
       }
     }
   }
+}
 
-  private var content: some View {
-    VStack(spacing: Constants.spacing) {
+private extension CodeValidationPage {
+  var content: some View {
+    VStack(spacing: Constants.vSpacing) {
       hint
-      emailInput
+      codeInput
       nextButton
       Spacer()
     }
   }
 
-  private var navigationBar: some View {
+  var navigationBar: some View {
     NavigationBar("Reset Password", divider: true, padding: true)
   }
 
   private var hint: some View {
-    Text("Type in your email to receive a validation code to reset your password. ")
+    Text("Type in the validation code sent to your email")
       .fontWeight(.semibold)
       .padding(.horizontal)
   }
 
-  private var emailInput: some View {
-    TextEditFormItemWithNoTitle(hint: "Email", text: $email)
+  private var codeInput: some View {
+    TextEditFormItemWithNoTitle(hint: "Code", text: $code)
       .padding(.horizontal)
   }
 
   private var nextButton: some View {
     Button {
-      authVM.forgotPassword(email: email)
+      authVM.validateForgotPassword(email: email, code: code)
     } label: {
       BackgroundButtonFormItem(title: "Next", isFullWidth: false)
     }
-    .disabled(email.isEmpty)
-    .opacity(email.isEmpty ? 0.5 : 1)
+    .disabled(code.isEmpty)
+    .opacity(code.isEmpty ? 0.5 : 1)
   }
 }
 
 private enum Constants {
-  static let spacing = 15.0
+  static let vSpacing = 15.0
 }
 
 #Preview {
-  ForgotPasswordPage()
+  CodeValidationPage(email: "")
 }

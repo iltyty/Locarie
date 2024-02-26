@@ -96,6 +96,10 @@
 		506590E02B8CC098009F8E5F /* AuthEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590DF2B8CC098009F8E5F /* AuthEndpoints.swift */; };
 		506590E32B8CC19F009F8E5F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590E22B8CC19F009F8E5F /* AuthService.swift */; };
 		506590E62B8CC466009F8E5F /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590E52B8CC466009F8E5F /* AuthViewModel.swift */; };
+		506590E82B8CE435009F8E5F /* CodeValidationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590E72B8CE435009F8E5F /* CodeValidationPage.swift */; };
+		506590EA2B8CE448009F8E5F /* ResetPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590E92B8CE448009F8E5F /* ResetPasswordPage.swift */; };
+		506590EC2B8CE65D009F8E5F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590EB2B8CE65D009F8E5F /* LoadingView.swift */; };
+		506590EE2B8CEBFF009F8E5F /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590ED2B8CEBFF009F8E5F /* NewPasswordViewModel.swift */; };
 		506801532B88CBFF00AFF000 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506801522B88CBFF00AFF000 /* FavoritePage.swift */; };
 		506801562B88CC3000AFF000 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506801552B88CC3000AFF000 /* PostList.swift */; };
 		5075FCB52B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */; };
@@ -303,6 +307,10 @@
 		506590DF2B8CC098009F8E5F /* AuthEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndpoints.swift; sourceTree = "<group>"; };
 		506590E22B8CC19F009F8E5F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		506590E52B8CC466009F8E5F /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		506590E72B8CE435009F8E5F /* CodeValidationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeValidationPage.swift; sourceTree = "<group>"; };
+		506590E92B8CE448009F8E5F /* ResetPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPage.swift; sourceTree = "<group>"; };
+		506590EB2B8CE65D009F8E5F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		506590ED2B8CEBFF009F8E5F /* NewPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModel.swift; sourceTree = "<group>"; };
 		506801522B88CBFF00AFF000 /* FavoritePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePage.swift; sourceTree = "<group>"; };
 		506801552B88CC3000AFF000 /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkFormItemWithBlockTitle.swift; sourceTree = "<group>"; };
@@ -616,6 +624,7 @@
 				50998B092B370ED5002196B5 /* TagView.swift */,
 				501BAF392B463D6900D9D84F /* TextEditorPlus.swift */,
 				50530B922B8775FD009C1F92 /* BusinessBottomBar.swift */,
+				506590EB2B8CE65D009F8E5F /* LoadingView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -798,6 +807,7 @@
 			isa = PBXGroup;
 			children = (
 				506590E52B8CC466009F8E5F /* AuthViewModel.swift */,
+				506590ED2B8CEBFF009F8E5F /* NewPasswordViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -900,6 +910,8 @@
 				50998AEB2B35B839002196B5 /* LoginPage.swift */,
 				50998AEF2B35D00D002196B5 /* LoginOrRegisterPage.swift */,
 				50998AF12B35D195002196B5 /* ForgotPasswordPage.swift */,
+				506590E72B8CE435009F8E5F /* CodeValidationPage.swift */,
+				506590E92B8CE448009F8E5F /* ResetPasswordPage.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1391,6 +1403,7 @@
 				50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */,
 				5000C6C52AF8B9EF0057EF2D /* BottomTabViewRouter.swift in Sources */,
 				5075FCC52B86E6F8005E4A8B /* ProfileFavoredByCount.swift in Sources */,
+				506590EE2B8CEBFF009F8E5F /* NewPasswordViewModel.swift in Sources */,
 				5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */,
 				504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
@@ -1432,6 +1445,7 @@
 				509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */,
 				501BAF2C2B46319700D9D84F /* MyAccountPage.swift in Sources */,
 				500FB2472B888A8500E14DEE /* PlaceReverse.swift in Sources */,
+				506590EC2B8CE65D009F8E5F /* LoadingView.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
 				501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */,
 				50530B9B2B878B07009C1F92 /* FavoritePostViewModel.swift in Sources */,
@@ -1527,6 +1541,7 @@
 				50B5DED72B3B270C00C0A641 /* PlaceSearcher.swift in Sources */,
 				5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */,
 				505568CC2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift in Sources */,
+				506590E82B8CE435009F8E5F /* CodeValidationPage.swift in Sources */,
 				500FB24D2B889CFD00E14DEE /* NavigationButton.swift in Sources */,
 				509AC0532B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift in Sources */,
 				50D0CE872B8B20A90070B90F /* UserListService.swift in Sources */,
@@ -1536,6 +1551,7 @@
 				50FDD89F2B53E988003015F9 /* Banner.swift in Sources */,
 				50B11AD32AFA063B002A7B91 /* PhotoViewModel.swift in Sources */,
 				506590E32B8CC19F009F8E5F /* AuthService.swift in Sources */,
+				506590EA2B8CE448009F8E5F /* ResetPasswordPage.swift in Sources */,
 				501BAF352B4635A900D9D84F /* TermsOfUsePage.swift in Sources */,
 				501BAF3A2B463D6900D9D84F /* TextEditorPlus.swift in Sources */,
 				50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */,

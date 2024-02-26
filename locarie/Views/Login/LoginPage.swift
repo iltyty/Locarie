@@ -118,7 +118,7 @@ private extension LoginPage {
   }
 
   var forgotPassword: some View {
-    NavigationLink(value: Router.Destination.resetPassword) {
+    NavigationLink(value: Router.Destination.forgotPassword) {
       HStack {
         Spacer()
         Text("Forgotten password")

@@ -26,6 +26,9 @@ struct LocarieView: View {
       .navigationDestination(for: Router.Destination.self) { destination in
         router.getDestinationPage(with: destination)
       }
+      .navigationDestination(for: Router.StringDestination.self) { destination in
+        router.getStringDestinationPage(with: destination)
+      }
     }
   }
 }

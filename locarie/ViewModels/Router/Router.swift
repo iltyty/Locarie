@@ -14,7 +14,7 @@ final class Router: ObservableObject {
 
   private init() {}
 
-  func navigation(to destination: Destination) {
+  func navigation(to destination: any Hashable) {
     path.append(destination)
   }
 
@@ -32,58 +32,71 @@ extension Router {
     case favorite
 
     case loginOrRegister, login, regularRegister, businessRegister,
-         resetPassword
+         forgotPassword
 
     case settings, myAccount, changePassword, newPassword,
          feedback, privacyPolicy, termsOfUse, termsOfService
 
     case userProfile, regularUserProfile, businessUserProfile, userProfileEdit
   }
+
+  enum StringDestination: Hashable {
+    case codeValidation(String), resetPassword(String)
+  }
 }
 
 extension Router {
+  @ViewBuilder
   func getDestinationPage(with destination: Destination) -> some View {
-    Group {
-      switch destination {
-      case .favorite:
-        FavoritePage()
-      case .loginOrRegister:
-        LoginOrRegisterPage()
-      case .login:
-        LoginPage()
-      case .regularRegister:
-        RegularRegisterPage()
-      case .businessRegister:
-        BusinessRegisterPage()
-      case .resetPassword:
-        ForgotPasswordPage()
+    switch destination {
+    case .favorite:
+      FavoritePage()
+    case .loginOrRegister:
+      LoginOrRegisterPage()
+    case .login:
+      LoginPage()
+    case .regularRegister:
+      RegularRegisterPage()
+    case .businessRegister:
+      BusinessRegisterPage()
+    case .forgotPassword:
+      ForgotPasswordPage()
 
-      case .settings:
-        SettingsPage()
-      case .myAccount:
-        MyAccountPage()
-      case .changePassword:
-        ChangePasswordPage()
-      case .newPassword:
-        NewPasswordPage()
-      case .feedback:
-        FeedbackPage()
-      case .privacyPolicy:
-        PrivacyPolicyPage()
-      case .termsOfUse:
-        TermsOfUsePage()
-      case .termsOfService:
-        TermsOfServicePage()
+    case .settings:
+      SettingsPage()
+    case .myAccount:
+      MyAccountPage()
+    case .changePassword:
+      ChangePasswordPage()
+    case .newPassword:
+      NewPasswordPage()
+    case .feedback:
+      FeedbackPage()
+    case .privacyPolicy:
+      PrivacyPolicyPage()
+    case .termsOfUse:
+      TermsOfUsePage()
+    case .termsOfService:
+      TermsOfServicePage()
 
-      case .userProfile:
-        UserProfilePage()
-      case .regularUserProfile:
-        RegularUserProfilePage()
-      case .businessUserProfile:
-        BusinessUserProfilePage()
-      case .userProfileEdit:
-        UserProfileEditPage()
-      }
+    case .userProfile:
+      UserProfilePage()
+    case .regularUserProfile:
+      RegularUserProfilePage()
+    case .businessUserProfile:
+      BusinessUserProfilePage()
+    case .userProfileEdit:
+      UserProfileEditPage()
+    }
+  }
+
+  @ViewBuilder
+  func getStringDestinationPage(with destination: StringDestination) -> some View {
+    switch destination {
+    case let .codeValidation(email):
+      CodeValidationPage(email: email)
+    case let .resetPassword(email):
+      ResetPasswordPage(email: email)
     }
   }
 }
