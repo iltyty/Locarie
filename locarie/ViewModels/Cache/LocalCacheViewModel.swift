@@ -14,7 +14,8 @@ class LocalCacheViewModel: ObservableObject {
   @Published var cache = LocalCache.shared
 
   func clean() {
-    UserDefaults.standard.reset()
+//    UserDefaults.standard.reset()
+    cache.reset()
   }
 
   func isLoggedIn() -> Bool {

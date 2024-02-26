@@ -42,6 +42,14 @@ struct LocalCache {
   mutating func setAvatarUrl(_ url: String) {
     avatarUrl = url
   }
+
+  mutating func reset() {
+    userId = 0
+    userType = ""
+    username = ""
+    jwtToken = ""
+    avatarUrl = ""
+  }
 }
 
 enum LocalCacheKeys: String, CaseIterable {
