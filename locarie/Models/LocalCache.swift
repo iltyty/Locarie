@@ -13,15 +13,18 @@ struct LocalCache {
   private init() {}
 
   @AppStorage(LocalCacheKeys.userIdKey.rawValue)
-  var userId = 0.0
+  private(set) var userId = 0.0
   @AppStorage(LocalCacheKeys.userTypeKey.rawValue)
-  var userType = ""
+  private(set) var userType = ""
   @AppStorage(LocalCacheKeys.usernameKey.rawValue)
-  var username = ""
+  private(set) var username = ""
   @AppStorage(LocalCacheKeys.jwtTokenKey.rawValue)
-  var jwtToken = ""
+  private(set) var jwtToken = ""
   @AppStorage(LocalCacheKeys.avatarUrlKey.rawValue)
-  var avatarUrl = ""
+  private(set) var avatarUrl = ""
+
+  @AppStorage(LocalCacheKeys.firstLoggedInKey.rawValue)
+  private(set) var firstLoggedIn = true
 
   mutating func setUserInfo(_ info: UserInfo) {
     userId = Double(info.id)
@@ -43,12 +46,17 @@ struct LocalCache {
     avatarUrl = url
   }
 
+  mutating func setFirstLoggedIn(_ first: Bool) {
+    firstLoggedIn = first
+  }
+
   mutating func reset() {
     userId = 0
     userType = ""
     username = ""
     jwtToken = ""
     avatarUrl = ""
+    firstLoggedIn = true
   }
 }
 
@@ -58,4 +66,6 @@ enum LocalCacheKeys: String, CaseIterable {
   case usernameKey = "username"
   case avatarUrlKey = "avatarUrl"
   case jwtTokenKey = "jwtToken"
+
+  case firstLoggedInKey = "firstLoggedIn"
 }

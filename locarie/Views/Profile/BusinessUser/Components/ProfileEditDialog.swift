@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileEditDialog: View {
   @Binding var isPresenting: Bool
 
+  @ObservedObject var cacheVM = LocalCacheViewModel.shared
+
   var body: some View {
     ZStack(alignment: .top) {
       dialogBackground
@@ -17,6 +19,9 @@ struct ProfileEditDialog: View {
     }
     .frame(height: Constants.height)
     .ignoresSafeArea(edges: .all)
+    .onDisappear {
+      cacheVM.setFirstLoggedIn(false)
+    }
   }
 }
 

@@ -52,11 +52,14 @@ struct BusinessUserProfilePage: View {
         }
       }
       .onAppear {
-        withAnimation(.spring) {
-          presentingDialog = true
+        if cacheVM.isFirstLoggedIn() {
+          withAnimation(.spring) {
+            presentingDialog = true
+          }
         }
         screenSize = proxy.size
         profileVM.getProfile(userId: userId)
+
         postsVM.getUserPosts(id: userId)
       }
       .onDisappear(perform: {

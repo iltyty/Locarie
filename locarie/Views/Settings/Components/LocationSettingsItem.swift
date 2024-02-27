@@ -59,7 +59,7 @@ private extension LocationSettingsItem {
       HStack {
         Text("Location").fontWeight(.semibold)
         Spacer()
-        Text(location.address).foregroundStyle(.secondary)
+        Text(location.address)
         Image(systemName: "chevron.right")
       }
       .padding()

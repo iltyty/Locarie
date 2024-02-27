@@ -11,10 +11,9 @@ class LocalCacheViewModel: ObservableObject {
   static let shared = LocalCacheViewModel()
   private init() {}
 
-  @Published var cache = LocalCache.shared
+  @Published private(set) var cache = LocalCache.shared
 
   func clean() {
-//    UserDefaults.standard.reset()
     cache.reset()
   }
 
@@ -47,7 +46,7 @@ class LocalCacheViewModel: ObservableObject {
   }
 
   func setAvatarUrl(_ url: String) {
-    cache.avatarUrl = url
+    cache.setAvatarUrl(url)
   }
 
   func setUserInfo(_ info: UserInfo) {
@@ -56,5 +55,13 @@ class LocalCacheViewModel: ObservableObject {
 
   func setUserCache(_ userCache: UserCache) {
     cache.setUserCache(userCache)
+  }
+
+  func isFirstLoggedIn() -> Bool {
+    cache.firstLoggedIn
+  }
+
+  func setFirstLoggedIn(_ first: Bool) {
+    cache.setFirstLoggedIn(first)
   }
 }
