@@ -44,12 +44,7 @@ private extension BusinessStatus {
   }
 
   var distanceStatus: some View {
-    Text(formatDistance(distance: distance))
-  }
-
-  var distance: Double {
-    guard let location = locationManager.location else { return 0 }
-    return location.distance(from: user.clLocation)
+    Text(user.distance(to: locationManager.location))
   }
 
   @ViewBuilder

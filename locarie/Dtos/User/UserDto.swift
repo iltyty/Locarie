@@ -65,6 +65,15 @@ extension UserDto {
 }
 
 extension UserDto {
+  func distance(to location: CLLocation?) -> String {
+    guard let location else { return "0 m" }
+    let dist = location.distance(from: clLocation)
+    return switch dist {
+    case 0 ..< 1000: String(format: "%.f m", dist)
+    default: String(format: "%.1f km", dist / 1000)
+    }
+  }
+
   var clLocation: CLLocation {
     .init(
       latitude: location?.latitude ?? .nan,

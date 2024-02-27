@@ -86,6 +86,7 @@ extension NewPostPage {
         }
       }
     }
+    .scrollIndicators(.hidden)
     .padding()
   }
 }

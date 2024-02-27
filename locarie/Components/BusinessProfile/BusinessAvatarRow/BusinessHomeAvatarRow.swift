@@ -9,12 +9,13 @@ import SwiftUI
 
 struct BusinessHomeAvatarRow: View {
   let user: UserDto
+  let hasUpdates: Bool
 
   @Binding var isPresentingDetail: Bool
 
   var body: some View {
     HStack {
-      BusinessHomeAvatar(url: user.avatarUrl)
+      BusinessHomeAvatar(url: user.avatarUrl, hasUpdates: hasUpdates)
       BusinessStatus(user)
       Spacer()
       BusinessProfileDetailButton(presenting: $isPresentingDetail)

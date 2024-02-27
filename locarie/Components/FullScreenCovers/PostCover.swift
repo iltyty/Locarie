@@ -82,20 +82,10 @@ private extension PostCover {
 
   var postStatus: some View {
     HStack {
-      Text(getTimeDifferenceString(from: post.time)).foregroundStyle(.green)
+      Text(post.publishedTime).foregroundStyle(.green)
       Text("·")
-      Text(formatDistance(distance: distance)).foregroundStyle(.secondary)
+      Text(post.user.distance(to: locationManager.location)).foregroundStyle(.secondary)
     }
-  }
-
-  var distance: Double {
-    guard let location = locationManager.location else { return 0 }
-    return location.distance(
-      from: CLLocation(
-        latitude: post.user.location?.latitude ?? 0,
-        longitude: post.user.location?.longitude ?? 0
-      )
-    )
   }
 
   var favoriteButton: some View {

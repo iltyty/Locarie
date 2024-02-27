@@ -101,6 +101,7 @@ private extension BusinessHomePage {
       VStack(alignment: .leading) {
         BusinessHomeAvatarRow(
           user: user,
+          hasUpdates: updatedIn24Hours,
           isPresentingDetail: $showingDetailedProfile
         )
         ScrollView {
@@ -121,6 +122,11 @@ private extension BusinessHomePage {
         }
       }
     }
+  }
+
+  var updatedIn24Hours: Bool {
+    !listUserPostsVM.posts.isEmpty &&
+      Date().timeIntervalSince(listUserPostsVM.posts[0].time) < 86400
   }
 
   var bottomBar: some View {

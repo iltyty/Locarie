@@ -55,11 +55,38 @@ extension PostDto {
 
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    let timeString = try container.decode(String.self, forKey: .time)
     id = try container.decode(Int64.self, forKey: .id)
-    time = ISO8601DateFormatter().date(from: timeString) ?? Date()
+    let timestamp = try container.decode(Int64.self, forKey: .time)
+    time = timestamp == 0 ? Date() : Date(timeIntervalSince1970: Double(timestamp) / 1000)
     content = try container.decode(String.self, forKey: .content)
     user = try container.decode(UserDto.self, forKey: .user)
     imageUrls = try container.decode([String].self, forKey: .imageUrls)
+  }
+}
+
+extension PostDto {
+  var publishedTime: String {
+    let calendar = Calendar.current
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    let components = calendar.dateComponents(
+      [.second, .minute, .hour, .day, .month, .year], from: time, to: Date.now
+    )
+
+    return if let years = components.year, years > 0 {
+      formatter.string(from: time)
+    } else if let months = components.month, months > 0 {
+      "\(months) months ago"
+    } else if let days = components.day, days > 0 {
+      "\(days) days ago"
+    } else if let hours = components.hour, hours > 0 {
+      "\(hours) hours ago"
+    } else if let minutes = components.minute, minutes > 0 {
+      "\(minutes) mins ago"
+    } else if let seconds = components.second {
+      "\(seconds) seconds ago"
+    } else {
+      "just now"
+    }
   }
 }

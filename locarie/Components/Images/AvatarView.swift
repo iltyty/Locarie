@@ -40,6 +40,7 @@ struct AvatarView: View {
         .frame(width: size, height: size)
         .clipShape(Circle())
     }
+    .frame(width: size, height: size)
   }
 
   var customImage: some View {

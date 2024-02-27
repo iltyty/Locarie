@@ -36,9 +36,9 @@ private extension PostCardView {
     HStack {
       userAvatar
       Text(post.businessName)
-      Text(getTimeDifferenceString(from: post.time)).foregroundStyle(LocarieColor.green)
+      Text(post.publishedTime).foregroundStyle(LocarieColor.green)
       Text("·")
-      Text(formatDistance(distance: distance)).foregroundStyle(.secondary)
+      Text(post.user.distance(to: locationManager.location)).foregroundStyle(.secondary)
     }
   }
 

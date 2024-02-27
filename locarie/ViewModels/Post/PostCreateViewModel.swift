@@ -35,6 +35,7 @@ import Foundation
 
   func reset() {
     post.content = ""
+    photoVM = PhotoViewModel()
   }
 
   func create() {
