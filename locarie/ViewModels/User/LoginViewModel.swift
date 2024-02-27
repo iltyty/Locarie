@@ -27,6 +27,10 @@ final class LoginViewModel: BaseViewModel {
       .store(in: &subscriptions)
   }
 
+  func setDto(email: String, password: String) {
+    dto = LoginRequestDto(email: email, password: password)
+  }
+
   func setDto(from request: RegisterRequestDto) {
     dto = LoginRequestDto(email: request.email, password: request.password)
   }

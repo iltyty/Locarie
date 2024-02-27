@@ -15,8 +15,10 @@ struct ResetPasswordPage: View {
   @State private var presentingAlert = false
 
   @StateObject private var authVM = AuthViewModel()
+  @StateObject private var loginVM = LoginViewModel()
   @StateObject private var newPasswordVM = NewPasswordViewModel()
   @ObservedObject private var router = Router.shared
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     VStack {
@@ -27,24 +29,48 @@ struct ResetPasswordPage: View {
       Button("OK") {}
     }
     .overlay(LoadingView($loading))
-    .onReceive(authVM.$state) { state in
-      switch state {
-      case .loading: loading = true
-      case .resetPasswordFinished:
-        loading = false
-        router.navigateToRoot()
-      case let .failed(error):
-        loading = false
-        if error.initialError != nil {
-          alertTitle = ErrorMessage.network.rawValue
-        } else if let backendError = error.backendError {
-          alertTitle = backendError.message
-        } else {
-          alertTitle = ErrorMessage.unknown.rawValue
-        }
-        presentingAlert = true
-      default: loading = false
+    .onReceive(authVM.$state) { state in handleAuthStateChange(state) }
+    .onReceive(loginVM.$state) { state in handleLoginStateChange(state) }
+  }
+
+  private func handleAuthStateChange(_ state: AuthViewModel.State) {
+    switch state {
+    case .loading: loading = true
+    case .resetPasswordFinished:
+      loginVM.setDto(email: email, password: newPasswordVM.password)
+      loginVM.login()
+    case let .failed(error):
+      loading = false
+      if error.initialError != nil {
+        alertTitle = ErrorMessage.network.rawValue
+      } else if let backendError = error.backendError {
+        alertTitle = backendError.message
+      } else {
+        alertTitle = ErrorMessage.unknown.rawValue
       }
+      presentingAlert = true
+    default: loading = false
+    }
+  }
+
+  private func handleLoginStateChange(_ state: LoginViewModel.State) {
+    switch state {
+    case .loading: loading = true
+    case let .finished(cache):
+      if let cache {
+        cacheVM.setUserCache(cache)
+      }
+      router.navigateToRoot()
+    case let .failed(error):
+      if error.initialError != nil {
+        alertTitle = ErrorMessage.network.rawValue
+      } else if let backendError = error.backendError {
+        alertTitle = backendError.message
+      } else {
+        alertTitle = ErrorMessage.unknown.rawValue
+      }
+      presentingAlert = true
+    default: loading = false
     }
   }
 }

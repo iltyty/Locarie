@@ -21,6 +21,7 @@ struct LoadingView: View {
         .overlay {
           ProgressView()
         }
+        .ignoresSafeArea()
     } else {
       EmptyView()
     }
