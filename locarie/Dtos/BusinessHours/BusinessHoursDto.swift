@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BusinessHoursDto: Codable {
+struct BusinessHoursDto: Codable, Identifiable {
   var id = 0
   var dayOfWeek: DayOfWeek
   var closed: Bool
@@ -74,6 +74,12 @@ extension BusinessHoursDto {
 
     static func < (lhs: DayOfWeek, rhs: DayOfWeek) -> Bool {
       lhs.sortOrder < rhs.sortOrder
+    }
+  }
+
+  static var all: [BusinessHoursDto] {
+    DayOfWeek.allCases.sorted().map { dayOfWeek in
+      BusinessHoursDto(dayOfWeek: dayOfWeek)
     }
   }
 }

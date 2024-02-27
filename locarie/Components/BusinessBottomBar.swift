@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct BusinessBottomBar: View {
-  var businessId: Int64
+  let businessId: Int64
+  let location: BusinessLocation?
 
   @State private var alreadyFollowed = false
 
@@ -49,8 +50,10 @@ struct BusinessBottomBar: View {
     .frame(height: Constants.height)
     .ignoresSafeArea(edges: .bottom)
   }
+}
 
-  private var favoriteButton: some View {
+private extension BusinessBottomBar {
+  var favoriteButton: some View {
     Image(systemName: favoriteButtonSystemName)
       .resizable()
       .scaledToFit()
@@ -61,7 +64,7 @@ struct BusinessBottomBar: View {
       .onTapGesture { favoriteButtonTapped() }
   }
 
-  private var favoriteButtonSystemName: String {
+  var favoriteButtonSystemName: String {
     if alreadyFollowed {
       "bookmark.fill"
     } else {
@@ -69,16 +72,28 @@ struct BusinessBottomBar: View {
     }
   }
 
-  private var directionButton: some View {
-    Label("Direction", systemImage: "map")
-      .padding(.horizontal, Constants.directionButtonHPadding)
-      .frame(height: Constants.directionButtonHeight)
-      .background(
-        Capsule().stroke(.secondary)
-      )
+  var directionButton: some View {
+    Link(destination: navigationUrl) {
+      Label("Direction", systemImage: "map")
+        .padding(.horizontal, Constants.directionButtonHPadding)
+        .frame(height: Constants.directionButtonHeight)
+        .background(
+          Capsule().stroke(.secondary)
+        )
+    }
+    .tint(.primary)
+    .buttonStyle(.plain)
+    .disabled(location == nil)
   }
 
-  private var background: some View {
+  var navigationUrl: URL {
+    URL(
+      string: "https://www.google.com/maps?saddr=&daddr=\(location?.latitude ?? 0)," +
+        "\(location?.longitude ?? 0)&directionsmode=walking"
+    )!
+  }
+
+  var background: some View {
     UnevenRoundedRectangle(
       topLeadingRadius: Constants.cornerRadius,
       topTrailingRadius: Constants.cornerRadius
@@ -87,7 +102,7 @@ struct BusinessBottomBar: View {
     .shadow(radius: Constants.shadowRadius)
   }
 
-  private func favoriteButtonTapped() {
+  func favoriteButtonTapped() {
     if alreadyFollowed {
       favoriteBusinessVM.unfavorite(
         userId: cacheVM.getUserId(), businessId: businessId
@@ -109,8 +124,4 @@ private enum Constants {
   static let shadowRadius: CGFloat = 2
   static let directionButtonHPadding: CGFloat = 40
   static let directionButtonHeight: CGFloat = 44
-}
-
-#Preview {
-  BusinessBottomBar(businessId: 1)
 }

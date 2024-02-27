@@ -39,7 +39,7 @@ struct BusinessMapAvatar: View {
         .frame(width: avatarSize, height: avatarSize)
     } placeholder: {
       Circle()
-        .fill(LocarieColors.mapAvatarBg)
+        .fill(LocarieColor.mapAvatarBg)
         .frame(width: avatarSize, height: avatarSize)
     }
   }

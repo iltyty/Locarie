@@ -41,7 +41,7 @@ struct PostList: View {
     } else {
       ForEach(posts) { post in
         NavigationLink {
-          PostDetailPage(uid: post.user.id)
+          BusinessHomePage(uid: post.user.id)
         } label: {
           PostCardView(post)
         }

@@ -12,7 +12,7 @@ struct OpeningHoursEditPage: View {
 
   @State var currentDayIndex = 0
   @State var isSheetPresented = false
-  @State var allBusinessHours = allBusinessHoursDtos()
+  @State var allBusinessHours = BusinessHoursDto.all
 
   @Environment(\.dismiss) var dismiss
 
@@ -55,7 +55,7 @@ private extension OpeningHoursEditPage {
   var days: some View {
     VStack(spacing: Constants.vSpacing) {
       ForEach(allBusinessHours.indices, id: \.self) { index in
-        BusinessHoursItem(allBusinessHours[index])
+        ProfileOpeningHoursItem(allBusinessHours[index], editable: true)
           .onTapGesture {
             currentDayIndex = index
             isSheetPresented = true
@@ -94,30 +94,6 @@ private extension OpeningHoursEditPage {
     for hours in allBusinessHours {
       businessHoursDtos.append(hours)
     }
-  }
-}
-
-struct BusinessHoursItem: View {
-  let businessHours: BusinessHoursDto
-
-  init(_ businessHours: BusinessHoursDto) {
-    self.businessHours = businessHours
-  }
-
-  var body: some View {
-    HStack {
-      Text(businessHours.dayOfWeek.rawValue)
-      Spacer()
-      Text(businessHours.formattedTime).foregroundStyle(.secondary)
-      Image(systemName: "square.and.pencil")
-        .foregroundStyle(.secondary)
-    }
-  }
-}
-
-private func allBusinessHoursDtos() -> [BusinessHoursDto] {
-  BusinessHoursDto.DayOfWeek.allCases.sorted().map { dayOfWeek in
-    BusinessHoursDto(dayOfWeek: dayOfWeek)
   }
 }
 

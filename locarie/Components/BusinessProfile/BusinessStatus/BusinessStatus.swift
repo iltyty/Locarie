@@ -57,7 +57,7 @@ private extension BusinessStatus {
     if user.isNowClosed {
       Text("Closed")
     } else {
-      Text("Open").foregroundStyle(LocarieColors.green)
+      Text("Open").foregroundStyle(LocarieColor.green)
     }
   }
 }

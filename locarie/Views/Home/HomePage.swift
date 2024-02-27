@@ -58,13 +58,6 @@ private extension HomePage {
     }
   }
 
-  var navigationUrl: URL {
-    let coordinate = selectedPost.businessLocationCoordinate
-    return URL(
-      string: "https://www.google.com/maps?saddr=&daddr=\(coordinate.latitude),\(coordinate.longitude)&directionsmode=walking"
-    )!
-  }
-
   var buttons: some View {
     HStack {
       searchIcon

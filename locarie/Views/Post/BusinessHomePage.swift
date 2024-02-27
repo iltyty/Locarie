@@ -1,5 +1,5 @@
 //
-//  PostDetailPage.swift
+//  BusinessHomePage.swift
 //  locarie
 //
 //  Created by qiuty on 2023/11/8.
@@ -8,34 +8,31 @@
 import SwiftUI
 @_spi(Experimental) import MapboxMaps
 
-struct PostDetailPage: View {
-  @Environment(\.dismiss) var dismiss
+struct BusinessHomePage: View {
+  let uid: Int64
+  let locationManager = LocationManager()
 
-  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
-
-  @StateObject private var profileVM = ProfileGetViewModel()
-  @StateObject private var listNearbyPostsVM = PostListNearbyViewModel()
-  @StateObject private var listUserPostsVM = ListUserPostsViewModel()
-  @StateObject private var favoritePostVM = FavoritePostViewModel()
-
-  @State private var screenSize: CGSize = .zero
   @State private var viewport: Viewport = .camera(
     center: .london,
     zoom: Constants.mapZoom
   )
 
-  @State private var user = UserDto()
   @State private var post = PostDto()
 
   @State private var showingDetailedProfile = false
   @State private var showingPostCover = false
   @State private var showingBusinessProfileCover = false
 
-  let uid: Int64
-  let locationManager = LocationManager()
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+  @StateObject private var profileVM = ProfileGetViewModel()
+  @StateObject private var listNearbyPostsVM = PostListNearbyViewModel()
+  @StateObject private var listUserPostsVM = ListUserPostsViewModel()
+  @StateObject private var favoritePostVM = FavoritePostViewModel()
+
+  @Environment(\.dismiss) var dismiss
 
   var body: some View {
-    GeometryReader { proxy in
+    GeometryReader { _ in
       ZStack(alignment: .top) {
         mapView
         content
@@ -46,26 +43,22 @@ struct PostDetailPage: View {
           businessProfileCover
         }
       }
-      .onAppear {
-        screenSize = proxy.size
-      }
     }
     .ignoresSafeArea(edges: .bottom)
     .onAppear {
       profileVM.getProfile(userId: uid)
       listUserPostsVM.getUserPosts(id: uid)
     }
-    .onReceive(profileVM.$state) { state in
-      if case .finished = state {
-        user = profileVM.dto
-      }
-    }
+  }
+
+  private var user: UserDto {
+    profileVM.dto
   }
 }
 
-private extension PostDetailPage {
+private extension BusinessHomePage {
   var content: some View {
-    VStack {
+    VStack(spacing: 0) {
       topContent
       Spacer()
       bottomContent
@@ -100,6 +93,7 @@ private extension PostDetailPage {
       moreButton
     }
     .padding(.horizontal)
+    .padding(.bottom, Constants.topButtonsBottomPadding)
   }
 
   var bottomContent: some View {
@@ -130,11 +124,11 @@ private extension PostDetailPage {
   }
 
   var bottomBar: some View {
-    BusinessBottomBar(businessId: uid)
+    BusinessBottomBar(businessId: uid, location: user.location).background(.background)
   }
 }
 
-private extension PostDetailPage {
+private extension BusinessHomePage {
   var backButton: some View {
     CircleButton(systemName: "chevron.backward")
       .onTapGesture {
@@ -151,7 +145,7 @@ private extension PostDetailPage {
   }
 }
 
-private extension PostDetailPage {
+private extension BusinessHomePage {
   var postCover: some View {
     PostCover(post: post, isPresenting: $showingPostCover)
   }
@@ -177,8 +171,9 @@ private enum Constants {
   static let avatarSize: CGFloat = 72
   static let vSpacing: CGFloat = 15
   static let mapZoom: CGFloat = 12
+  static let topButtonsBottomPadding: CGFloat = 5
 }
 
 #Preview {
-  PostDetailPage(uid: 1)
+  BusinessHomePage(uid: 1)
 }

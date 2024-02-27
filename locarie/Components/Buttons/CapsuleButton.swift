@@ -24,7 +24,7 @@ struct CapsuleButton<Content: View>: View {
   private var background: some View {
     Capsule()
       .fill(.background)
-      .stroke(LocarieColors.lightGray)
+      .stroke(LocarieColor.lightGray)
   }
 }
 

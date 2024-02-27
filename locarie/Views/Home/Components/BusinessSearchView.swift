@@ -101,7 +101,7 @@ private struct BusinessRowItem: View {
   }
 
   var body: some View {
-    NavigationLink(destination: PostDetailPage(uid: user.id)) {
+    NavigationLink(destination: BusinessHomePage(uid: user.id)) {
       HStack {
         AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
         Text(user.businessName).fontWeight(.semibold)
