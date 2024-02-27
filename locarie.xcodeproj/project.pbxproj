@@ -173,6 +173,7 @@
 		50D0CE8B2B8B2A6D0070B90F /* BusinessNameAvatarUrlDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D0CE8A2B8B2A6D0070B90F /* BusinessNameAvatarUrlDto.swift */; };
 		50F220D22B8D872F00B547AB /* ProfileOpeningHoursItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F220D12B8D872F00B547AB /* ProfileOpeningHoursItem.swift */; };
 		50F220D52B8DB18D00B547AB /* LocationSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F220D42B8DB18D00B547AB /* LocationSettingsItem.swift */; };
+		50F220D72B8DFA2E00B547AB /* PostListWithinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F220D62B8DFA2E00B547AB /* PostListWithinViewModel.swift */; };
 		50F549D92B3C85C500D06F20 /* UserRegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549D82B3C85C500D06F20 /* UserRegisterRequest.swift */; };
 		50F549DB2B3CFCBA00D06F20 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */; };
 		50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F549DC2B3D079200D06F20 /* LoginViewModel.swift */; };
@@ -386,6 +387,7 @@
 		50E60DED2B01F4F900CA088F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50F220D12B8D872F00B547AB /* ProfileOpeningHoursItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOpeningHoursItem.swift; sourceTree = "<group>"; };
 		50F220D42B8DB18D00B547AB /* LocationSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSettingsItem.swift; sourceTree = "<group>"; };
+		50F220D62B8DFA2E00B547AB /* PostListWithinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListWithinViewModel.swift; sourceTree = "<group>"; };
 		50F549D82B3C85C500D06F20 /* UserRegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterRequest.swift; sourceTree = "<group>"; };
 		50F549DA2B3CFCBA00D06F20 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		50F549DC2B3D079200D06F20 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = locarie/ViewModels/User/LoginViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -698,6 +700,7 @@
 				50369A6F2B304195005D6B43 /* PostCreateViewModel.swift */,
 				503905792B341418005B574F /* PostListNearbyViewModel.swift */,
 				504794A62B70D2A20038D31F /* ListUserPostsViewModel.swift */,
+				50F220D62B8DFA2E00B547AB /* PostListWithinViewModel.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1499,6 +1502,7 @@
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
 				506590D42B8CB454009F8E5F /* PostEndpoints.swift in Sources */,
 				506590D82B8CB4A7009F8E5F /* FeedbackEndpoints.swift in Sources */,
+				50F220D72B8DFA2E00B547AB /* PostListWithinViewModel.swift in Sources */,
 				5054CDF32B28954E00645F5C /* UserInfo.swift in Sources */,
 				5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */,
 				5075FCC72B86E757005E4A8B /* ProfileAddress.swift in Sources */,

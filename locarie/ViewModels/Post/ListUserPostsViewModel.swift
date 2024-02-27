@@ -28,7 +28,7 @@ final class ListUserPostsViewModel: BaseViewModel {
       .store(in: &subscriptions)
   }
 
-  private func handleResponse(_ response: ListUserPostsResponse) {
+  private func handleResponse(_ response: PostListResponse) {
     if let error = response.error {
       state = .failed(error)
     } else {

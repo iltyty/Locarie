@@ -31,7 +31,7 @@ final class PostCreateServiceImpl: BaseAPIService, PostCreateService {
     let data = prepareMultipartFormData(
       dto, images: images, filenames: filenames, mimeTypes: mimeTypes
     )
-    return AF.upload(multipartFormData: data, to: APIEndpoints.createPostUrl)
+    return AF.upload(multipartFormData: data, to: APIEndpoints.createPost)
       .validate()
       .publishDecodable(type: ResponseDto<PostCreateResponseDto>.self)
       .map { self.mapResponse($0) }

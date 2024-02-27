@@ -36,7 +36,7 @@ final class PostListNearbyViewModel: BaseViewModel {
 
   func getNearbyPosts(latitude: Double, longitude: Double) {
     state = .loading
-    networking.listNearbyPosts(
+    networking.listPostsNearby(
       latitude: latitude,
       longitude: longitude,
       distance: GlobalConstants.postsNearbyDistance
@@ -48,7 +48,7 @@ final class PostListNearbyViewModel: BaseViewModel {
     .store(in: &subscriptions)
   }
 
-  private func handleResponse(_ response: ListNearbyPostsResponse) {
+  private func handleResponse(_ response: PostListResponse) {
     if let error = response.error {
       state = .failed(error)
       return

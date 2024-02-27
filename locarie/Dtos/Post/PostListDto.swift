@@ -12,3 +12,10 @@ struct PostListRequestDto: Codable {
   let longitude: Double
   let distance: Double
 }
+
+struct PostListWithinRequestDto: Codable {
+  let minLatitude: Double
+  let maxLatitude: Double
+  let minLongitude: Double
+  let maxLongitude: Double
+}

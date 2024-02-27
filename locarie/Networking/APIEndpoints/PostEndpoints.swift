@@ -9,8 +9,9 @@ import Foundation
 
 extension APIEndpoints {
   static let postsUrl = baseUrl + "/posts"
-  static let createPostUrl = URL(string: postsUrl)!
-  static let listNearbyPosts = URL(string: postsUrl + "/nearby")!
+  static let createPost = URL(string: postsUrl)!
+  static let listPostsWithin = URL(string: postsUrl + "/within")!
+  static let listPostsNearby = URL(string: postsUrl + "/nearby")!
   static func listUserPosts(id: Int64) -> URL {
     URL(string: postsUrl + "/user/\(id)")!
   }

@@ -14,30 +14,36 @@ struct DynamicPostsMapView: View {
 
   var neighborVM: PlaceReverseViewModel? = nil
 
-  @ObservedObject var postVM: PostListNearbyViewModel
-
+  @State private var map: MapboxMap!
   @State private var needUpdating = true
+  @State private var bounds: CoordinateBounds?
 
+  @ObservedObject var postVM: PostListWithinViewModel
   @StateObject private var locationManager = LocationManager()
 
   var body: some View {
-    Map(viewport: $viewport) {
-      Puck2D()
+    MapReader { proxy in
+      Map(viewport: $viewport) {
+        Puck2D()
 
-      ForEvery(postVM.posts) { post in
-        MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
-          BusinessMapAvatar(
-            url: post.user.avatarUrl,
-            amplified: post.id == selectedPost.id
-          )
-          .onTapGesture {
-            selectedPost = post
+        ForEvery(postVM.posts) { post in
+          MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
+            BusinessMapAvatar(
+              url: post.user.avatarUrl,
+              amplified: post.id == selectedPost.id
+            )
+            .onTapGesture {
+              selectedPost = post
+            }
           }
         }
       }
-    }
-    .onCameraChanged { state in
-      onCameraChanged(state)
+      .onCameraChanged { state in
+        onCameraChanged(state)
+      }
+      .onAppear {
+        map = proxy.map!
+      }
     }
     .onReceive(locationManager.$location) { location in
       updatePosts(location)
@@ -53,6 +59,7 @@ private extension DynamicPostsMapView {
   func onCameraChanged(_ state: CameraChanged) {
     if needUpdating {
       DispatchQueue.main.async {
+        bounds = map.coordinateBounds(for: .init(cameraState: state.cameraState))
         updateNeighborhood(state.cameraState.center)
         updatePosts(state.cameraState.center)
       }
@@ -85,9 +92,16 @@ private extension DynamicPostsMapView {
     )
   }
 
-  func updatePosts(_ location: CLLocationCoordinate2D) {
-    postVM.getNearbyPosts(withLocation: location)
+  func updatePosts(_: CLLocationCoordinate2D) {
+    guard let bounds else { return }
     needUpdating = false
+    print(bounds.northwest)
+    print(bounds.southeast)
+    let minLatitude = bounds.southeast.latitude
+    let maxLatitude = bounds.northwest.latitude
+    let minLongitude = bounds.northwest.longitude
+    let maxLongitude = bounds.southeast.longitude
+    postVM.list(minLatitude, maxLatitude, minLongitude, maxLongitude)
   }
 }
 

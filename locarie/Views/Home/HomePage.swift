@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HomePage: View {
-  @StateObject private var postVM = PostListNearbyViewModel()
+  @StateObject private var postVM = PostListWithinViewModel()
   @StateObject private var neighborVM = PlaceReverseViewModel()
 
   @State private var searching = false
