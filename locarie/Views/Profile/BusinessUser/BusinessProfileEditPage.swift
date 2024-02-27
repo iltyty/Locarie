@@ -6,20 +6,22 @@
 //
 
 import Alamofire
+import CoreLocation
+@_spi(Experimental) import MapboxMaps
 import PhotosUI
 import SwiftUI
 
 struct BusinessProfileEditPage: View {
-  @ObservedObject private var cacheViewModel = LocalCacheViewModel.shared
-
-  @StateObject private var avatarViewModel = AvatarUploadViewModel()
-  @StateObject private var profileGetViewModel = ProfileGetViewModel()
-  @StateObject private var profileUpdateViewModel = ProfileUpdateViewModel()
-  @StateObject private var profileImagesViewModel = ProfileImagesViewModel()
-
   @State var birthday = Date()
   @State var birthdayFormatted = ""
   @State var isSheetPresented = false
+  @State var viewport: Viewport = .followPuck(zoom: GlobalConstants.mapZoom)
+
+  @StateObject private var avatarVM = AvatarUploadViewModel()
+  @StateObject private var profileGetVM = ProfileGetViewModel()
+  @StateObject private var profileImagesVM = ProfileImagesViewModel()
+  @StateObject private var profileUpdateVM = ProfileUpdateViewModel()
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   @Environment(\.dismiss) var dismiss
 
@@ -32,19 +34,25 @@ struct BusinessProfileEditPage: View {
     }
     .sheet(isPresented: $isSheetPresented) { birthdaySheet }
     .onAppear {
-      profileGetViewModel.getProfile(userId: cacheViewModel.getUserId())
+      profileGetVM.getProfile(userId: cacheVM.getUserId())
     }
-    .onReceive(avatarViewModel.$state) { state in
+    .onReceive(avatarVM.$state) { state in
       handleAvatarUpdateStateChange(state)
     }
-    .onReceive(profileImagesViewModel.$state) { state in
+    .onReceive(profileImagesVM.$state) { state in
       handleProfileImagesUpdateStateChange(state)
     }
-    .onReceive(profileGetViewModel.$state) { state in
+    .onReceive(profileGetVM.$state) { state in
       handleProfileGetViewModelStateChange(state)
     }
-    .onReceive(profileUpdateViewModel.$state) { state in
-      handleProfileUpdateViewModelStateChange(state)
+    .onReceive(profileUpdateVM.$state) { state in handleProfileUpdateViewModelStateChange(state)
+    }
+    .onReceive(profileUpdateVM.$dto) { dto in
+      if let location = dto.location {
+        viewport = .camera(center: CLLocationCoordinate2D(
+          latitude: location.latitude, longitude: location.longitude
+        ), zoom: GlobalConstants.mapZoom, pitch: 0)
+      }
     }
   }
 
@@ -98,7 +106,7 @@ private extension BusinessProfileEditPage {
 
   @ViewBuilder
   var profileImages: some View {
-    let urls = profileGetViewModel.dto.profileImageUrls
+    let urls = profileGetVM.dto.profileImageUrls
     HStack {
       ForEach(urls.indices, id: \.self) { i in
         AsyncImageView(url: urls[i]) { image in
@@ -112,7 +120,7 @@ private extension BusinessProfileEditPage {
         }
         .frame(width: Constants.profileImageWidth)
       }
-      ForEach(profileImagesViewModel.photoViewModel.attachments) { attachment in
+      ForEach(profileImagesVM.photoViewModel.attachments) { attachment in
         ImageAttachmentView(
           width: Constants.profileImageWidth,
           aspectRatio: Constants.profileImageAspectRatio,
@@ -124,7 +132,7 @@ private extension BusinessProfileEditPage {
 
   var profileImagePicker: some View {
     PhotosPicker(
-      selection: $profileImagesViewModel.photoViewModel.selection,
+      selection: $profileImagesVM.photoViewModel.selection,
       maxSelectionCount: maxSelectionCount,
       matching: .images,
       photoLibrary: .shared()
@@ -136,7 +144,7 @@ private extension BusinessProfileEditPage {
 
   var maxSelectionCount: Int {
     max(0, Constants.profileImageMaxCount -
-      profileGetViewModel.dto.profileImageUrls.count)
+      profileGetVM.dto.profileImageUrls.count)
   }
 
   func profileImagePickerContent(width: CGFloat) -> some View {
@@ -161,7 +169,7 @@ private extension BusinessProfileEditPage {
   var avatarEditor: some View {
     HStack {
       Spacer()
-      AvatarEditor(photoViewModel: avatarViewModel.photoViewModel)
+      AvatarEditor(photoViewModel: avatarVM.photoViewModel)
       Spacer()
     }
   }
@@ -172,7 +180,7 @@ private extension BusinessProfileEditPage {
     TextEditFormItemWithInlineTitle(
       title: text,
       hint: text,
-      text: $profileUpdateViewModel.dto.businessName
+      text: $profileUpdateVM.dto.businessName
     )
   }
 
@@ -180,18 +188,18 @@ private extension BusinessProfileEditPage {
     TextEditFormItemWithInlineTitle(
       title: "@Username",
       hint: "Username",
-      text: $profileUpdateViewModel.dto.username
+      text: $profileUpdateVM.dto.username
     )
   }
 
   var categoryInput: some View {
     NavigationLink {
-      BusinessCategoryPage(categories: $profileUpdateViewModel.dto.categories)
+      BusinessCategoryPage(categories: $profileUpdateVM.dto.categories)
     } label: {
       LinkFormItemWithInlineTitle(
         title: "Categories",
         hint: "Categories",
-        textArray: $profileUpdateViewModel.dto.categories
+        textArray: $profileUpdateVM.dto.categories
       )
     }
     .buttonStyle(.plain)
@@ -199,12 +207,12 @@ private extension BusinessProfileEditPage {
 
   var bioInput: some View {
     NavigationLink {
-      BioEditPage(bio: $profileUpdateViewModel.dto.introduction)
+      BioEditPage(bio: $profileUpdateVM.dto.introduction)
     } label: {
       LinkFormItemWithInlineTitle(
         title: "Bio",
         hint: "Bio",
-        text: $profileUpdateViewModel.dto.introduction
+        text: $profileUpdateVM.dto.introduction
       )
     }
     .buttonStyle(.plain)
@@ -212,28 +220,18 @@ private extension BusinessProfileEditPage {
 
   @ViewBuilder
   var locationInput: some View {
-    let text = "Location"
-    NavigationLink {
-      BusinessAddressPage(dto: $profileUpdateViewModel.dto)
-    } label: {
-      LinkFormItemWithInlineTitle(
-        title: text,
-        hint: text,
-        text: $profileUpdateViewModel.dto.address
-      )
-    }
-    .buttonStyle(.plain)
+    LocationSettingsItem(location: $profileUpdateVM.dto, viewport: $viewport)
   }
 
   var openingHoursInput: some View {
     NavigationLink {
-      OpeningHoursEditPage(businessHoursDtos: $profileUpdateViewModel.dto
+      OpeningHoursEditPage(businessHoursDtos: $profileUpdateVM.dto
         .businessHours)
     } label: {
       LinkFormItemWithInlineTitle(
         title: "Opening hours",
         hint: "Edit opening hours",
-        text: $profileUpdateViewModel.dto.formattedBusinessHours
+        text: $profileUpdateVM.dto.formattedBusinessHours
       )
     }
     .buttonStyle(.plain)
@@ -243,7 +241,7 @@ private extension BusinessProfileEditPage {
     TextEditFormItemWithInlineTitle(
       title: "Add link",
       hint: "Add link (optional)",
-      text: $profileUpdateViewModel.dto.homepageUrl
+      text: $profileUpdateVM.dto.homepageUrl
     )
   }
 
@@ -251,7 +249,7 @@ private extension BusinessProfileEditPage {
     TextEditFormItemWithInlineTitle(
       title: "Phone",
       hint: "Phone (optional)",
-      text: $profileUpdateViewModel.dto.phone
+      text: $profileUpdateVM.dto.phone
     )
   }
 
@@ -266,7 +264,7 @@ private extension BusinessProfileEditPage {
     TextEditFormItemWithInlineTitle(
       title: text,
       hint: text,
-      text: $profileUpdateViewModel.dto.firstName
+      text: $profileUpdateVM.dto.firstName
     )
   }
 
@@ -276,7 +274,7 @@ private extension BusinessProfileEditPage {
     TextEditFormItemWithInlineTitle(
       title: text,
       hint: text,
-      text: $profileUpdateViewModel.dto.lastName
+      text: $profileUpdateVM.dto.lastName
     )
   }
 
@@ -318,8 +316,8 @@ private extension BusinessProfileEditPage {
 
   var birthdaySheetDoneButton: some View {
     Button("Done") {
-      profileUpdateViewModel.dto.birthday = birthday
-      birthdayFormatted = profileUpdateViewModel.dto.formattedBirthday
+      profileUpdateVM.dto.birthday = birthday
+      birthdayFormatted = profileUpdateVM.dto.formattedBirthday
       isSheetPresented = false
     }
     .foregroundStyle(Color.locariePrimary)
@@ -340,22 +338,22 @@ private extension BusinessProfileEditPage {
 
 private extension BusinessProfileEditPage {
   func updateProfile() {
-    let userId = cacheViewModel.getUserId()
-    profileImagesViewModel.upload(userId: userId)
-    avatarViewModel.upload(userId: userId)
-    profileUpdateViewModel.updateProfile(userId: userId)
+    let userId = cacheVM.getUserId()
+    profileImagesVM.upload(userId: userId)
+    avatarVM.upload(userId: userId)
+    profileUpdateVM.updateProfile(userId: userId)
   }
 
   func handleProfileGetViewModelStateChange(
     _ state: ProfileGetViewModel.State
   ) {
     if case .finished = state {
-      let dto = profileGetViewModel.dto
+      let dto = profileGetVM.dto
       if let birthday = dto.birthday {
         self.birthday = birthday
       }
       birthdayFormatted = dto.formattedBirthday
-      profileUpdateViewModel.dto = dto
+      profileUpdateVM.dto = dto
     }
   }
 
@@ -364,7 +362,7 @@ private extension BusinessProfileEditPage {
   ) {
     if case let .finished(avatarUrl) = state {
       guard let avatarUrl else { return }
-      cacheViewModel.setAvatarUrl(avatarUrl)
+      cacheVM.setAvatarUrl(avatarUrl)
     }
   }
 
@@ -390,7 +388,7 @@ private extension BusinessProfileEditPage {
 
   func handleProfileUpdateFinished(_ dto: UserDto?) {
     if let dto {
-      cacheViewModel.setUserInfo(dto)
+      cacheVM.setUserInfo(dto)
     }
     dismiss()
   }
