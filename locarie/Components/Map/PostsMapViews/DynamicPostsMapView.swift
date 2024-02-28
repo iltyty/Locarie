@@ -95,8 +95,6 @@ private extension DynamicPostsMapView {
   func updatePosts(_: CLLocationCoordinate2D) {
     guard let bounds else { return }
     needUpdating = false
-    print(bounds.northwest)
-    print(bounds.southeast)
     let minLatitude = bounds.southeast.latitude
     let maxLatitude = bounds.northwest.latitude
     let minLongitude = bounds.northwest.longitude
