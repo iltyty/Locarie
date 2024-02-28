@@ -45,12 +45,9 @@ struct NavigationBar<L: View, R: View>: View {
 }
 
 private extension NavigationBar {
-  func titleButtons(left: some View, right: some View) -> some View {
+  func titleButtons(left: L, right: R) -> some View {
     HStack {
-      left
-        .onTapGesture {
-          dismiss()
-        }
+      left.onTapGesture { dismiss() }
       Spacer()
       right
     }
@@ -64,12 +61,13 @@ private extension NavigationBar {
   }
 }
 
-private func defaultTitleLeft() -> some View {
+private func defaultTitleLeft() -> AnyView {
   Image(systemName: "chevron.left")
     .resizable()
     .scaledToFit()
     .fontWeight(.semibold)
     .frame(width: Constants.leftIconSize, height: Constants.leftIconSize)
+    as! AnyView
 }
 
 private func defaultTitleRight() -> EmptyView {

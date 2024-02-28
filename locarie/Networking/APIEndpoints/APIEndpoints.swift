@@ -8,5 +8,8 @@
 import Foundation
 
 enum APIEndpoints {
-  static let baseUrl = "http://localhost:8080/api/v1"
+//  static let host = "http://localhost"
+  static let host = "http://ec2-3-10-234-239.eu-west-2.compute.amazonaws.com"
+  static let port = 8080
+  static let baseUrl = "\(host):\(port)/api/v1"
 }

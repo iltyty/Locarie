@@ -116,9 +116,9 @@ private extension PostCover {
 
   var favoriteIconSystemName: String {
     if alreadySaved {
-      "star.fill"
+      "heart.fill"
     } else {
-      "star"
+      "heart"
     }
   }
 

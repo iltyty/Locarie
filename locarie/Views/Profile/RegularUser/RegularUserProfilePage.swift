@@ -134,7 +134,7 @@ private extension RegularUserProfilePage {
   var savedTab: some View {
     Label {
       HStack {
-        Text("Saved")
+        Text("Liked")
         Text("\(favoritePostsVM.posts.count)")
           .foregroundStyle(Color.locariePrimary)
       }
@@ -205,7 +205,7 @@ private extension RegularUserProfilePage {
 
   var emptySavedPosts: some View {
     VStack {
-      Text("No saved post.")
+      Text("No liked post.")
         .foregroundStyle(.secondary)
         .padding(.top, Constants.emptyTabContentTopPadding)
       Spacer()
