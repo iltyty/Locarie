@@ -62,12 +62,11 @@ private extension NavigationBar {
 }
 
 private func defaultTitleLeft() -> AnyView {
-  Image(systemName: "chevron.left")
+  AnyView(Image(systemName: "chevron.left")
     .resizable()
     .scaledToFit()
     .fontWeight(.semibold)
-    .frame(width: Constants.leftIconSize, height: Constants.leftIconSize)
-    as! AnyView
+    .frame(width: Constants.leftIconSize, height: Constants.leftIconSize))
 }
 
 private func defaultTitleRight() -> EmptyView {
@@ -77,8 +76,4 @@ private func defaultTitleRight() -> EmptyView {
 private enum Constants {
   static let leftIconSize: CGFloat = 18
   static let bottomPadding: CGFloat = 100
-}
-
-#Preview {
-  NavigationBar("Navigation Title", divider: true)
 }

@@ -18,13 +18,19 @@ struct LoginPage: View {
   @State private var alertTitle = ""
 
   var body: some View {
-    content
-      .disabled(isLoading)
-      .overlay(loadingOverlayView)
-      .alert(alertTitle, isPresented: $isAlertShowing) {}
-      .onReceive(loginViewModel.$state) { state in
-        handleLoginStateChange(state)
+    GeometryReader { _ in
+      VStack(spacing: 0) {
+        navigationBar
+        content.ignoresSafeArea(.keyboard)
       }
+      .ignoresSafeArea(.keyboard)
+    }
+    .disabled(isLoading)
+    .overlay(loadingOverlayView)
+    .alert(alertTitle, isPresented: $isAlertShowing) {}
+    .onReceive(loginViewModel.$state) { state in
+      handleLoginStateChange(state)
+    }
   }
 
   private func handleLoginStateChange(_ state: LoginViewModel.State) {
@@ -62,7 +68,6 @@ struct LoginPage: View {
 private extension LoginPage {
   var content: some View {
     VStack(spacing: Constants.formItemSpacing) {
-      navigationBar
       Spacer()
       locarieIcon
       Spacer()

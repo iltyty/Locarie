@@ -13,4 +13,5 @@ enum GlobalConstants {
   static let mapCenter = CLLocationCoordinate2D.london
   static let postsNearbyDistance = 99999.0
   static let loadingBgOpacity = 0.05
+  static let navigationBarBottomPadding = 100.0
 }

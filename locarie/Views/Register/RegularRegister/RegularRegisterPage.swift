@@ -22,10 +22,13 @@ struct RegularRegisterPage: View {
   @State private var isAlertShowing = false
 
   var body: some View {
-    VStack(spacing: Constants.spacing) {
-      navigationBar
-      content
+    GeometryReader { _ in
+      VStack {
+        navigationBar
+        content
+      }
     }
+    .ignoresSafeArea(.keyboard)
     .disabled(isLoading)
     .overlay { isLoading ? ProgressView() : nil }
     .alert(alertTitle, isPresented: $isAlertShowing) {}
@@ -36,62 +39,14 @@ struct RegularRegisterPage: View {
       handleLoginStateChange(state)
     }
   }
-
-  private func handleRegisterStateChange(_ state: RegisterViewModel.State) {
-    switch state {
-    case .finished:
-      handleRegisterFinished()
-    case let .failed(error):
-      isLoading = false
-      handleNetworkError(error)
-    default:
-      return
-    }
-  }
-
-  private func handleLoginStateChange(_ state: LoginViewModel.State) {
-    switch state {
-    case let .finished(cache):
-      isLoading = false
-      handleLoginFinished(cache: cache)
-    case let .failed(error):
-      isLoading = false
-      handleNetworkError(error)
-    default:
-      return
-    }
-  }
-
-  private func handleRegisterFinished() {
-    loginViewModel.setDto(from: registerViewModel.dto)
-    loginViewModel.login()
-  }
-
-  private func handleLoginFinished(cache: UserCache?) {
-    guard let cache else { return }
-    cacheViewModel.setUserCache(cache)
-    router.navigateToRoot()
-  }
-
-  private func handleNetworkError(_ error: NetworkError) {
-    isLoading = false
-    if let backendError = error.backendError {
-      alertTitle = backendError.message
-    } else if let initialError = error.initialError {
-      alertTitle = initialError.localizedDescription
-    } else {
-      alertTitle = "Something went wrong, please try again later"
-    }
-    isAlertShowing = true
-  }
 }
 
-extension RegularRegisterPage {
+private extension RegularRegisterPage {
   var content: some View {
-    VStack(spacing: Constants.spacing) {
+    VStack {
       emailInput
-      firstNameInput
-      lastNameInput
+//      firstNameInput
+//      lastNameInput
       usernameInput
       passwordInput
       bottomText
@@ -235,6 +190,56 @@ private extension RegularRegisterPage {
       .onTapGesture {
         isFilled.wrappedValue.toggle()
       }
+  }
+}
+
+private extension RegularRegisterPage {
+  func handleRegisterStateChange(_ state: RegisterViewModel.State) {
+    switch state {
+    case .finished:
+      handleRegisterFinished()
+    case let .failed(error):
+      isLoading = false
+      handleNetworkError(error)
+    default:
+      return
+    }
+  }
+
+  func handleLoginStateChange(_ state: LoginViewModel.State) {
+    switch state {
+    case let .finished(cache):
+      isLoading = false
+      handleLoginFinished(cache: cache)
+    case let .failed(error):
+      isLoading = false
+      handleNetworkError(error)
+    default:
+      return
+    }
+  }
+
+  func handleRegisterFinished() {
+    loginViewModel.setDto(from: registerViewModel.dto)
+    loginViewModel.login()
+  }
+
+  func handleLoginFinished(cache: UserCache?) {
+    guard let cache else { return }
+    cacheViewModel.setUserCache(cache)
+    router.navigateToRoot()
+  }
+
+  func handleNetworkError(_ error: NetworkError) {
+    isLoading = false
+    if let backendError = error.backendError {
+      alertTitle = backendError.message
+    } else if let initialError = error.initialError {
+      alertTitle = initialError.localizedDescription
+    } else {
+      alertTitle = "Something went wrong, please try again later"
+    }
+    isAlertShowing = true
   }
 }
 

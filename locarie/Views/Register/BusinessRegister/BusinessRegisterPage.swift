@@ -11,14 +11,18 @@ struct BusinessRegisterPage: View {
   @StateObject var viewModel = RegisterViewModel(type: .business)
 
   var body: some View {
-    VStack(spacing: Constants.vSpacing) {
-      navigationTitle
-      content
+    GeometryReader { _ in
+      VStack(spacing: 0) {
+        navigationBar
+        content.ignoresSafeArea(.keyboard)
+      }
+      .ignoresSafeArea(.keyboard)
     }
   }
 
   private var content: some View {
     VStack(spacing: Constants.vSpacing) {
+      Spacer()
       businessNameInput
       businessCategoryInput
       businessAddressInput
@@ -28,8 +32,8 @@ struct BusinessRegisterPage: View {
     .padding(.horizontal)
   }
 
-  private var navigationTitle: some View {
-    NavigationBar("Create a business account", padding: true)
+  private var navigationBar: some View {
+    NavigationBar("Create a business account")
   }
 
   @ViewBuilder private var businessNameInput: some View {
