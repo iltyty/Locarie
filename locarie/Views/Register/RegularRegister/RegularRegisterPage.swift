@@ -45,8 +45,8 @@ private extension RegularRegisterPage {
   var content: some View {
     VStack {
       emailInput
-//      firstNameInput
-//      lastNameInput
+      firstNameInput
+      lastNameInput
       usernameInput
       passwordInput
       bottomText

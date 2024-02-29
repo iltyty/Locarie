@@ -80,6 +80,7 @@ final class RegisterViewModel: BaseViewModel {
 
 extension RegisterViewModel {
   func register() {
+    state = .loading
     networking.register(user: dto)
       .sink { [weak self] response in
         guard let self else { return }
@@ -89,6 +90,7 @@ extension RegisterViewModel {
   }
 
   private func handleRegisterResponse(_ response: RegisterResponse) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
     } else {
