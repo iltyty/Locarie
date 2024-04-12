@@ -34,6 +34,7 @@ import Foundation
       item.supportedContentTypes.first?
         .preferredMIMEType ?? defaultImageMimeType
     }
+    state = .loading
     networking.upload(
       id: id,
       data: data,
@@ -48,6 +49,7 @@ import Foundation
   }
 
   private func handleResponse(_ response: ProfileImagesUploadResponse) {
+    debugPrint("image get reponse: ", response)
     if let error = response.error {
       state = .failed(error)
     } else {

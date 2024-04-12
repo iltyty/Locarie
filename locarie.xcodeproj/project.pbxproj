@@ -52,6 +52,7 @@
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */; };
 		50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F812AF1512E0045AB12 /* PostCardView.swift */; };
+		5028E0DD2BC83D1E00404D5A /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 5028E0DC2BC83D1E00404D5A /* Shimmer */; };
 		502A4FF02B32D34B00C0833A /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FEF2B32D34B00C0833A /* Color+Hex.swift */; };
 		502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+London.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */; };
 		502A4FF62B32D48400C0833A /* PostListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF52B32D48400C0833A /* PostListService.swift */; };
@@ -139,6 +140,8 @@
 		509D5BC52B45611E00833021 /* OpeningHoursEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC42B45611E00833021 /* OpeningHoursEditPage.swift */; };
 		509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC92B457F9800833021 /* TextEditViewModel.swift */; };
 		509D5BCC2B459CC900833021 /* OpeningHourSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */; };
+		50A06DE72BC7B05900C1E158 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A06DE62BC7B05900C1E158 /* LoadingIndicator.swift */; };
+		50A06DE92BC7D01F00C1E158 /* View+LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A06DE82BC7D01E00C1E158 /* View+LoadingIndicator.swift */; };
 		50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */; };
 		50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */; };
 		50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */; };
@@ -350,6 +353,8 @@
 		509D5BC42B45611E00833021 /* OpeningHoursEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHoursEditPage.swift; sourceTree = "<group>"; };
 		509D5BC92B457F9800833021 /* TextEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditViewModel.swift; sourceTree = "<group>"; };
 		509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourSheet.swift; sourceTree = "<group>"; };
+		50A06DE62BC7B05900C1E158 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		50A06DE82BC7D01E00C1E158 /* View+LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+LoadingIndicator.swift"; sourceTree = "<group>"; };
 		50AAB1792AEFA2E9003FEDF1 /* locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieApp.swift; sourceTree = "<group>"; };
 		50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieView.swift; sourceTree = "<group>"; };
@@ -420,6 +425,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5028E0DD2BC83D1E00404D5A /* Shimmer in Frameworks */,
 				50B5DEBF2B3ADE1800C0A641 /* MapboxMaps in Frameworks */,
 				503905782B340A4E005B574F /* Alamofire in Frameworks */,
 			);
@@ -611,6 +617,7 @@
 		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				50A06DE52BC7B04B00C1E158 /* LoadingIndicator */,
 				500FB2402B885C5900E14DEE /* Map */,
 				5075FCC12B865815005E4A8B /* BusinessProfile */,
 				5075FCB82B860547005E4A8B /* FullScreenCovers */,
@@ -637,6 +644,7 @@
 				502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */,
 				50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */,
 				509AC0522B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift */,
+				50A06DE82BC7D01E00C1E158 /* View+LoadingIndicator.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -931,6 +939,14 @@
 				509D5BC92B457F9800833021 /* TextEditViewModel.swift */,
 			);
 			path = TextEdit;
+			sourceTree = "<group>";
+		};
+		50A06DE52BC7B04B00C1E158 /* LoadingIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				50A06DE62BC7B05900C1E158 /* LoadingIndicator.swift */,
+			);
+			path = LoadingIndicator;
 			sourceTree = "<group>";
 		};
 		50AAB1702AEFA2E9003FEDF1 = {
@@ -1288,6 +1304,7 @@
 			packageProductDependencies = (
 				503905772B340A4E005B574F /* Alamofire */,
 				50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */,
+				5028E0DC2BC83D1E00404D5A /* Shimmer */,
 			);
 			productName = locarie;
 			productReference = 50AAB1792AEFA2E9003FEDF1 /* locarie.app */;
@@ -1364,6 +1381,7 @@
 			packageReferences = (
 				503905762B340A4E005B574F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				50B5DEBD2B3ADE1800C0A641 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
+				5028E0DB2BC83D1E00404D5A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			productRefGroup = 50AAB17A2AEFA2E9003FEDF1 /* Products */;
 			projectDirPath = "";
@@ -1436,6 +1454,7 @@
 				500FB23F2B88379500E14DEE /* BusinessFollowedAvatarRow.swift in Sources */,
 				500FB24B2B88902400E14DEE /* PlaceReverseViewModel.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
+				50A06DE72BC7B05900C1E158 /* LoadingIndicator.swift in Sources */,
 				50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */,
@@ -1514,6 +1533,7 @@
 				50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */,
 				5075FCD92B870A40005E4A8B /* ProfilePostsCount.swift in Sources */,
 				506590DB2B8CB4DB009F8E5F /* FeedbackService.swift in Sources */,
+				50A06DE92BC7D01F00C1E158 /* View+LoadingIndicator.swift in Sources */,
 				5075FCDE2B8717C2005E4A8B /* ProfileEditDialog.swift in Sources */,
 				506590CF2B8CAD6F009F8E5F /* UserDeleteViewModel.swift in Sources */,
 				5075FCDB2B870BBF005E4A8B /* ProfileOpenUntil.swift in Sources */,
@@ -1934,6 +1954,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5028E0DB2BC83D1E00404D5A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.2;
+			};
+		};
 		503905762B340A4E005B574F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1953,6 +1981,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5028E0DC2BC83D1E00404D5A /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5028E0DB2BC83D1E00404D5A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
+		};
 		503905772B340A4E005B574F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 503905762B340A4E005B574F /* XCRemoteSwiftPackageReference "Alamofire" */;

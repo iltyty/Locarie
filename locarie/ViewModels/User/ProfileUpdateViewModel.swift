@@ -20,6 +20,7 @@ final class ProfileUpdateViewModel: BaseViewModel {
   }
 
   func updateProfile(userId id: Int64) {
+    state = .loading
     networking.updateProfile(id: id, data: dto)
       .sink { [weak self] response in
         guard let self else { return }

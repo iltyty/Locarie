@@ -23,6 +23,7 @@ final class ProfileGetViewModel: BaseViewModel {
     if case .finished = state {
       return
     }
+    state = .loading
     networking.getUserProfile(id: id)
       .sink { [weak self] response in
         guard let self else { return }

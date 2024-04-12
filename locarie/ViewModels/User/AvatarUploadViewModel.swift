@@ -25,7 +25,8 @@ import Foundation
     let mimeType = getMimeType()
     let filename = getFilename()
     let data = photoViewModel.attachments[0].data
-    return networking.upload(
+    state = .loading
+    networking.upload(
       userId: id,
       data: data,
       filename: filename,
@@ -64,6 +65,7 @@ import Foundation
   }
 
   private func handleResponse(_ response: AvatarUploadResponse) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
     } else {

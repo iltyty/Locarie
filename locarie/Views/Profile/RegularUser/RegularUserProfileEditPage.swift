@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegularUserProfileEditPage: View {
-  @Environment(\.dismiss) var dismiss
+  @State private var loading = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
@@ -28,6 +28,7 @@ struct RegularUserProfileEditPage: View {
       .padding(.horizontal)
       Spacer()
     }
+    .loadingIndicator(loading: $loading)
     .onAppear {
       profileGetVM.getProfile(userId: cacheVM.getUserId())
     }
@@ -105,9 +106,16 @@ private extension RegularUserProfileEditPage {
   func handleAvatarUpdateStateChange(
     _ state: AvatarUploadViewModel.State
   ) {
-    if case let .finished(avatarUrl) = state {
+    switch state {
+    case .loading:
+      print("loading")
+      loading = true
+    case let .finished(avatarUrl):
+      loading = false
       guard let avatarUrl else { return }
       cacheVM.setAvatarUrl(avatarUrl)
+    default:
+      loading = false
     }
   }
 
@@ -115,22 +123,26 @@ private extension RegularUserProfileEditPage {
     _ state: ProfileUpdateViewModel.State
   ) {
     switch state {
+    case .loading:
+      loading = true
     case let .finished(dto):
       handleProfileUpdateFinished(dto)
     case let .failed(error):
       handleProfileUpdateError(error)
-    default: return
+    default:
+      loading = false
     }
   }
 
   func handleProfileUpdateFinished(_ dto: UserDto?) {
+    loading = false
     if let dto {
       cacheVM.setUserInfo(dto)
     }
-    dismiss()
   }
 
   func handleProfileUpdateError(_ error: NetworkError) {
+    loading = false
     print(error)
   }
 }
