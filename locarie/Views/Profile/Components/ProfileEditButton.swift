@@ -17,13 +17,14 @@ struct ProfileEditButton: View {
           .frame(width: Constants.iconSize, height: Constants.iconSize)
         Text("Edit profile")
       }
-      .padding(Constants.textHPadding)
-      .background(background)
+      .padding(.horizontal)
+      .padding(.vertical, Constants.textHPadding)
+      .overlay(overlay)
     }
     .buttonStyle(.plain)
   }
 
-  private var background: some View {
+  private var overlay: some View {
     Capsule()
       .fill(.background)
       .shadow(radius: Constants.shadowRadius)

@@ -30,12 +30,9 @@ struct BottomTabView: View {
   }
 
   private var background: some View {
-    UnevenRoundedRectangle(
-      topLeadingRadius: Constants.cornerRadius,
-      topTrailingRadius: Constants.cornerRadius
-    )
-    .fill(.background)
-    .shadow(radius: Constants.shadowRadius)
+    Rectangle()
+      .fill(.background)
+      .shadow(radius: Constants.shadowRadius)
   }
 }
 
@@ -73,10 +70,10 @@ private extension BottomTabView {
 }
 
 private enum Constants {
-  static let height: CGFloat = 90
+  static let height: CGFloat = 78
   static let offset: CGFloat = -10
   static let cornerRadius: CGFloat = 20
-  static let shadowRadius: CGFloat = 2
+  static let shadowRadius: CGFloat = 1
 }
 
 #Preview {

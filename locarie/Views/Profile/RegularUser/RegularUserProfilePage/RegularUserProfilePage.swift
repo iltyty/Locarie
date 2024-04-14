@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct RegularUserProfilePage: View {
-  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+  @ObservedObject var cacheVM = LocalCacheViewModel.shared
 
-  @StateObject private var favoritePostsVM = FavoritePostViewModel()
-  @StateObject private var favoriteBusinessVM = FavoriteBusinessViewModel()
+  @StateObject var favoritePostsVM = FavoritePostViewModel()
+  @StateObject var favoriteBusinessVM = FavoriteBusinessViewModel()
 
-  @State private var screenHeight: CGFloat = 0
-  @State private var currentTab: Tab = .followed
+  @State var screenHeight: CGFloat = 0
+  @State var currentTab: Tab = .followed
 
-  @State private var isPresentingCover = false
+  @State var isPresentingCover = false
 
   var body: some View {
     GeometryReader { proxy in
@@ -37,7 +37,7 @@ struct RegularUserProfilePage: View {
     .ignoresSafeArea(edges: .bottom)
   }
 
-  private var content: some View {
+  var content: some View {
     VStack {
       settingsButton
       Spacer()
@@ -50,17 +50,23 @@ struct RegularUserProfilePage: View {
   }
 }
 
-private extension RegularUserProfilePage {
+extension RegularUserProfilePage {
   var settingsButton: some View {
     HStack {
       Spacer()
       NavigationLink(value: Router.Destination.settings) {
         Image(systemName: "gearshape")
           .font(.system(size: Constants.settingsButtonSize))
-          .padding(.trailing)
+          .frame(width: Constants.settingsButtonBgSize, height: Constants.settingsButtonBgSize)
+          .overlay {
+            Circle()
+              .fill(.background)
+              .shadow(radius: Constants.settingsButtonShadowRadius)
+          }
       }
       .buttonStyle(.plain)
     }
+    .padding(.horizontal)
   }
 
   var avatarRow: some View {
@@ -88,7 +94,7 @@ private extension RegularUserProfilePage {
   }
 }
 
-private extension RegularUserProfilePage {
+extension RegularUserProfilePage {
   var sheetContent: some View {
     VStack(spacing: Constants.vSpacing) {
       tabs
@@ -97,30 +103,27 @@ private extension RegularUserProfilePage {
   }
 
   var tabs: some View {
-    ScrollView(.horizontal) {
-      HStack(spacing: Constants.tabHPadding) {
-        followedTab
-        savedTab
-      }
+    HStack(spacing: Constants.tabHPadding) {
+      Spacer()
+      followedTab
+      Spacer()
+      likedTab
+      Spacer()
     }
   }
 
   var followedTab: some View {
     Label {
-      HStack {
-        Text("Followed")
-        Text("\(favoriteBusinessVM.users.count)")
-          .foregroundStyle(Color.locariePrimary)
-      }
+      Text("Followed")
     } icon: {
       Image(systemName: "bookmark")
     }
     .fontWeight(isFollowedTabSelected ? .semibold : .regular)
     .padding(.horizontal, Constants.tabTextHPadding)
-    .frame(height: Constants.tabHeight)
-    .background(
+    .frame(width: Constants.tabWidth, height: Constants.tabHeight)
+    .overlay(
       Capsule()
-        .stroke(isFollowedTabSelected ? .primary : Constants.tabStrokeColor)
+        .strokeBorder(isFollowedTabSelected ? .black : Constants.tabStrokeColor)
     )
     .onTapGesture {
       currentTab = .followed
@@ -131,22 +134,18 @@ private extension RegularUserProfilePage {
     currentTab == .followed
   }
 
-  var savedTab: some View {
+  var likedTab: some View {
     Label {
-      HStack {
-        Text("Liked")
-        Text("\(favoritePostsVM.posts.count)")
-          .foregroundStyle(Color.locariePrimary)
-      }
+      Text("Likes")
     } icon: {
-      Image(systemName: "star")
+      Image(systemName: "heart")
     }
     .fontWeight(!isFollowedTabSelected ? .semibold : .regular)
     .padding(.horizontal, Constants.tabTextHPadding)
-    .frame(height: Constants.tabHeight)
+    .frame(width: Constants.tabWidth, height: Constants.tabHeight)
     .background(
       Capsule()
-        .stroke(!isFollowedTabSelected ? .primary : Constants.tabStrokeColor)
+        .strokeBorder(!isFollowedTabSelected ? .primary : Constants.tabStrokeColor)
     )
     .onTapGesture {
       currentTab = .saved
@@ -163,7 +162,9 @@ private extension RegularUserProfilePage {
 
   @ViewBuilder
   var followedBusinesses: some View {
-    if favoriteBusinessVM.users.isEmpty {
+    if case .loading = favoriteBusinessVM.state {
+      skeleton
+    } else if favoriteBusinessVM.users.isEmpty {
       emptyFollowedBusinesses
     } else {
       ScrollView {
@@ -181,7 +182,9 @@ private extension RegularUserProfilePage {
 
   @ViewBuilder
   var savedPosts: some View {
-    if favoritePostsVM.posts.isEmpty {
+    if case .loading = favoritePostsVM.state {
+      skeleton
+    } else if favoritePostsVM.posts.isEmpty {
       emptySavedPosts
     } else {
       ScrollView {
@@ -213,7 +216,7 @@ private extension RegularUserProfilePage {
   }
 }
 
-private enum Tab {
+enum Tab {
   case followed, saved
 }
 
@@ -222,8 +225,11 @@ private enum Constants {
   static let avatarSize: CGFloat = 72
   static let avatarRowTopPaddingFraction: CGFloat = 0.1
 
-  static let settingsButtonSize: CGFloat = 25
+  static let settingsButtonSize: CGFloat = 18
+  static let settingsButtonBgSize: CGFloat = 40
+  static let settingsButtonShadowRadius: CGFloat = 2
 
+  static let tabWidth: CGFloat = 140
   static let tabHeight: CGFloat = 40
   static let tabHPadding: CGFloat = 10
   static let tabTextHPadding: CGFloat = 10
