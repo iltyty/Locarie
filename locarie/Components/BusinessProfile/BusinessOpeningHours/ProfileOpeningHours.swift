@@ -37,13 +37,15 @@ private extension ProfileOpeningHours {
       openingHoursText
     } icon: {
       Image(systemName: "clock")
+        .font(.system(size: ProfileConstants.iconSize))
+        .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
     }
   }
 
   @ViewBuilder
   var openingHoursText: some View {
     if user.businessHours.isEmpty {
-      Text("Opening hours").foregroundStyle(.secondary)
+      Text("Go edit").foregroundStyle(.secondary)
     } else if user.isNowClosed {
       Text("Closed").foregroundStyle(.secondary)
     } else {

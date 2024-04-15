@@ -19,6 +19,8 @@ struct ProfilePhone: View {
       phoneText
     } icon: {
       Image(systemName: "phone")
+        .font(.system(size: ProfileConstants.iconSize))
+        .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
     }
   }
 
@@ -26,7 +28,7 @@ struct ProfilePhone: View {
   var phoneText: some View {
     let text = user.phone
     text.isEmpty
-      ? Text("Phone number").foregroundStyle(.secondary)
+      ? Text("Go edit").foregroundStyle(.secondary)
       : Text(text)
   }
 }

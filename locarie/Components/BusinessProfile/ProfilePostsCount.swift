@@ -17,18 +17,10 @@ struct ProfilePostsCount: View {
   @ViewBuilder
   var body: some View {
     Group {
-      if posts.isEmpty {
-        HStack(spacing: 0) {
-          Text("No ").foregroundStyle(Color.locariePrimary)
-          Text("post yet")
-        }
-      } else {
-        HStack(spacing: 0) {
-          Text("\(posts.count) ").foregroundStyle(Color.locariePrimary)
-          Text("posts")
-        }
+      HStack(spacing: 0) {
+        Text("\(posts.count) ")
+        Text("posts")
       }
     }
-    .fontWeight(.semibold)
   }
 }

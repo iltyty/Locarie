@@ -74,7 +74,12 @@ private extension BottomSheet {
 
   var contentView: some View {
     VStack {
-      handler
+      HStack {
+        Spacer()
+        handler
+        Spacer()
+      }
+      .gesture(dragGesture)
       HStack {
         Spacer()
         content
@@ -98,7 +103,6 @@ private extension BottomSheet {
       Capsule()
         .fill(Color(hex: BottomSheetConstants.handlerColor))
         .frame(width: BottomSheetConstants.handlerWidth, height: BottomSheetConstants.handlerHeight)
-        .gesture(dragGesture)
     }
     .frame(height: BottomSheetConstants.handlerBgHeight)
   }

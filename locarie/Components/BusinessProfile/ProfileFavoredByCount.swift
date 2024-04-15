@@ -15,6 +15,12 @@ struct ProfileFavoredByCount: View {
   }
 
   var body: some View {
-    Label("\(user.favoredByCount)", systemImage: "bookmark")
+    Label {
+      Text("\(user.favoredByCount)")
+    } icon: {
+      Image(systemName: "bookmark")
+        .font(.system(size: ProfileConstants.iconSize))
+        .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
+    }
   }
 }

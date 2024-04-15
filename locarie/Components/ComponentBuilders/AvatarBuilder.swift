@@ -9,11 +9,8 @@ import Foundation
 import SwiftUI
 
 func defaultAvatar(size: CGFloat) -> some View {
-  Circle()
-    .fill(LinearGradient(
-      colors: [.locariePrimary, .locariePrimary.opacity(0.5)],
-      startPoint: .topLeading,
-      endPoint: .bottomTrailing
-    ))
+  Image("DefaultBusinessAvatar")
+    .resizable()
+    .scaledToFit()
     .frame(width: size, height: size)
 }

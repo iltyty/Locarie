@@ -32,7 +32,7 @@ struct SkeletonView: View {
 
 private enum Constants {
   static let cornerRadius: CGFloat = 10
-  static let fillColor: Color = LocarieColor.lightGray
+  static let fillColor: Color = LocarieColor.greyMedium
 }
 
 #Preview {

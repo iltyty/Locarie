@@ -19,6 +19,8 @@ struct ProfileLink: View {
       linkText
     } icon: {
       Image(systemName: "link")
+        .font(.system(size: ProfileConstants.iconSize))
+        .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
     }
   }
 
@@ -26,7 +28,7 @@ struct ProfileLink: View {
   var linkText: some View {
     let text = user.homepageUrl
     text.isEmpty
-      ? Text("Link").foregroundStyle(.secondary)
+      ? Text("Go edit").foregroundStyle(.secondary)
       : Text(text)
   }
 }

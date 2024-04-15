@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct BusinessUserProfilePage: View {
-  @State private var screenSize: CGSize = .zero
+  @State var screenSize: CGSize = .zero
   @State private var viewport: Viewport = .camera(
     center: .london, zoom: Constants.mapZoom
   )
@@ -18,6 +18,7 @@ struct BusinessUserProfilePage: View {
   @State private var presentingProfileDetail = false
   @State private var presentingProfileCover = false
   @State private var presentingPostCover = false
+  @State private var presentingMyCover = false
   @State private var presentingDialog = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
@@ -50,6 +51,22 @@ struct BusinessUserProfilePage: View {
               .transition(.move(edge: .bottom))
           }
         }
+      }
+      .sheet(isPresented: $presentingMyCover) {
+        VStack {
+          Capsule().fill(LocarieColor.greyMedium)
+            .frame(width: 48, height: 6)
+          Label {
+            Text("My Page")
+          } icon: {
+            Image("Person")
+          }
+          .padding(.top, 12)
+          .padding(.bottom, 24)
+          FollowAndLikeView()
+        }
+        .padding(.top, 8)
+        .presentationDetents([.fraction(0.95)])
       }
       .onAppear {
         if cacheVM.isFirstLoggedIn() {
@@ -95,7 +112,7 @@ private extension BusinessUserProfilePage {
   var mapView: some View {
     Map(viewport: $viewport) {
       MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
-        Image("map")
+        Image("DefaultBusinessMapMarker")
           .onTapGesture {
             viewport = .camera(
               center: user.coordinate,
@@ -113,58 +130,99 @@ private extension BusinessUserProfilePage {
     VStack {
       buttons
       Spacer()
-      BottomSheet(detents: [.medium, .fraction(0.67)]) {
-        VStack(alignment: .leading) {
-          BusinessProfileAvatarRow(
-            user: user,
-            isPresentingCover: $presentingProfileCover,
-            isPresentingDetail: $presentingProfileDetail
-          )
-          ScrollView {
-            VStack(alignment: .leading, spacing: Constants.vSpacing) {
-              ProfileCategories(user)
-              ProfileBio(user)
-              if presentingProfileDetail {
-                ProfileDetail(user)
+      BottomSheet(topPosition: .right, detents: [.medium, .fraction(0.67)]) {
+        if case .loading = profileVM.state {
+          skeleton
+        } else {
+          sheetContent
+        }
+      } topContent: {
+        firstProfileImage
+      }
+    }
+  }
+
+  var sheetContent: some View {
+    VStack(alignment: .leading, spacing: Constants.vSpacing) {
+      BusinessProfileAvatarRow(
+        user: user,
+        isPresentingCover: $presentingProfileCover,
+        isPresentingDetail: $presentingProfileDetail
+      )
+      ProfileCategories(user)
+      ScrollView {
+        VStack(alignment: .leading, spacing: Constants.vSpacing) {
+          ProfileBio(user)
+          if presentingProfileDetail {
+            ProfileDetail(user)
+          }
+          ProfilePostsCount(postsVM.posts)
+          ForEach(postsVM.posts) { p in
+            PostCardView(p)
+              .onTapGesture {
+                post = p
+                presentingPostCover = true
               }
-              ProfilePostsCount(postsVM.posts)
-              ForEach(postsVM.posts) { p in
-                PostCardView(p)
-                  .onTapGesture {
-                    post = p
-                    presentingPostCover = true
-                  }
-              }
-            }
           }
         }
       }
     }
   }
 
-  var buttons: some View {
-    ZStack {
-      HStack {
-        Spacer()
-        ProfileEditButton()
-        Spacer()
+  @ViewBuilder
+  var firstProfileImage: some View {
+    if user.profileImageUrls.isEmpty {
+      Image("DefaultImage")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 28, height: 28)
+        .frame(width: 72, height: 72)
+        .background(RoundedRectangle(cornerRadius: 16).fill(LocarieColor.greyMedium).shadow(radius: 2))
+    } else {
+      AsyncImage(url: URL(string: user.profileImageUrls[0])) { image in
+        image.resizable()
+          .scaledToFit()
+          .frame(width: 72, height: 72)
+      } placeholder: {
+        RoundedRectangle(cornerRadius: 16).fill(LocarieColor.greyMedium).shadow(radius: 2)
       }
+    }
+  }
+
+  var buttons: some View {
+    HStack {
+      mineButton
+      Spacer()
+      ProfileEditButton()
+      Spacer()
       settingsButton
+    }
+    .padding(.horizontal)
+  }
+
+  var mineButton: some View {
+    ZStack {
+      Circle()
+        .fill(.background)
+        .frame(width: Constants.topButtonSize, height: Constants.topButtonSize)
+      Image("Person")
+        .resizable()
+        .scaledToFit()
+        .frame(width: Constants.topButtonIconSize, height: Constants.topButtonIconSize)
+    }
+    .onTapGesture {
+      presentingMyCover = true
     }
   }
 
   var settingsButton: some View {
-    HStack {
-      Spacer()
-      NavigationLink(value: Router.Destination.settings) {
-        Image(systemName: "gearshape")
-          .font(.system(size: Constants.settingsButtonIconSize))
-          .padding(Constants.settingsButtonIconPadding)
-          .background(Circle().fill(.white))
-          .padding(.trailing)
-      }
-      .buttonStyle(.plain)
+    NavigationLink(value: Router.Destination.settings) {
+      Image(systemName: "gearshape")
+        .font(.system(size: Constants.topButtonIconSize))
+        .frame(width: Constants.topButtonSize, height: Constants.topButtonSize)
+        .background(Circle().fill(.background))
     }
+    .buttonStyle(.plain)
   }
 }
 
@@ -190,9 +248,8 @@ private enum Constants {
   static let mapZoom: CGFloat = 12
   static let buttonShadowRadius: CGFloat = 2.0
 
-  static let settingsButtonIconPadding: CGFloat = 10
-  static let settingsButtonIconSize: CGFloat = 24
-  static let settingsButtonTextPadding: CGFloat = 10
+  static let topButtonSize: CGFloat = 40
+  static let topButtonIconSize: CGFloat = 18
 }
 
 #Preview {

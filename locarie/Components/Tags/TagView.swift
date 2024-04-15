@@ -14,9 +14,7 @@ struct TagView: View {
 
   var body: some View {
     Text(tag)
-      .foregroundStyle(isSelected ? Color.locariePrimary : .secondary)
-      .padding(.horizontal, Constants.hPadding)
-      .padding(.vertical, Constants.vPadding)
+      .padding(Constants.textPadding)
       .frame(height: height)
       .background(background)
   }
@@ -25,10 +23,23 @@ struct TagView: View {
     large ? Constants.largeHeight : Constants.smallHeight
   }
 
+  @ViewBuilder
   private var background: some View {
+    if isSelected {
+      selectedBackground
+    } else {
+      normalBackground
+    }
+  }
+
+  private var normalBackground: some View {
     RoundedRectangle(cornerRadius: Constants.cornerRadius)
-      .fill(.background)
-      .stroke(isSelected ? Color.locariePrimary : .secondary)
+      .stroke(LocarieColor.lightGray)
+  }
+
+  private var selectedBackground: some View {
+    RoundedRectangle(cornerRadius: Constants.cornerRadius)
+      .fill(LocarieColor.lightGray)
   }
 }
 
@@ -36,8 +47,7 @@ private enum Constants {
   static let smallHeight: CGFloat = 24
   static let largeHeight: CGFloat = 40
   static let cornerRadius: CGFloat = 20
-  static let hPadding: CGFloat = 10
-  static let vPadding: CGFloat = 5
+  static let textPadding: CGFloat = 15
 }
 
 #Preview {

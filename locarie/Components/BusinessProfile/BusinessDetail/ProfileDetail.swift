@@ -27,5 +27,5 @@ struct ProfileDetail: View {
 }
 
 private enum Constants {
-  static let vSpacing: CGFloat = 20
+  static let vSpacing: CGFloat = 16
 }

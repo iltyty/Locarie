@@ -12,9 +12,7 @@ struct BusinessProfileDetailButton: View {
 
   var body: some View {
     Button {
-      withAnimation(.spring) {
-        presenting.toggle()
-      }
+      presenting.toggle()
     } label: {
       Image(systemName: presenting ? "chevron.up" : "chevron.down")
     }

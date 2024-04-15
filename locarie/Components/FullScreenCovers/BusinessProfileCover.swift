@@ -18,8 +18,8 @@ struct BusinessProfileCover: View {
       coverTop
       blank
       profileImages
-      coverBottom
       blank
+      coverBottom
     }
     .padding(.horizontal)
     .background(.thickMaterial.opacity(CoverCommonConstants.backgroundOpacity))
@@ -53,26 +53,29 @@ private extension BusinessProfileCover {
 
   var coverBottom: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      ProfileCategories(user)
-      ProfileAddress(user)
-      ProfileOpenUntil(user)
       if cacheVM.getUserId() == user.id {
         editButtonView
       }
+      ProfileAddress(user)
+      ProfileOpenUntil(user)
     }
+    .padding(.bottom, Constants.bottomPadding)
   }
 
   var editButtonView: some View {
     HStack {
       Spacer()
-      editButton
+      NavigationLink(value: Router.Destination.userProfileEdit) {
+        editButton
+      }
+      .buttonStyle(.plain)
       Spacer()
     }
   }
 
   var editButton: some View {
     Label {
-      Text("Edit images")
+      Text("Edit profile")
     } icon: {
       Image("EditIcon")
         .resizable()
@@ -102,4 +105,5 @@ private enum Constants {
   static let editButtonHeight: CGFloat = 40
   static let editButtonIconSize: CGFloat = 18
   static let editButtonShadowRadius: CGFloat = 2
+  static let bottomPadding: CGFloat = 48
 }

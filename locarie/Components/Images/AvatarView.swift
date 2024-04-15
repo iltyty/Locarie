@@ -56,6 +56,5 @@ struct AvatarView: View {
   VStack {
     AvatarView(size: 128)
     AvatarView(imageUrl: "https://picsum.photos/200", size: 128)
-    AvatarView(name: "LoginBackground", size: 128)
   }
 }

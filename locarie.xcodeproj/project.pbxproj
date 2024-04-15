@@ -134,6 +134,10 @@
 		50998B102B39161D002196B5 /* Regexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50998B0F2B39161D002196B5 /* Regexes.swift */; };
 		509A101D2BC8DF9200FB55C7 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A101C2BC8DF9200FB55C7 /* SkeletonView.swift */; };
 		509A10202BC90ADA00FB55C7 /* RegularUserProfilePage+SkeletonPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A101F2BC90ADA00FB55C7 /* RegularUserProfilePage+SkeletonPage.swift */; };
+		509A10232BCBD11D00FB55C7 /* ProfileBusinessCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A10222BCBD11D00FB55C7 /* ProfileBusinessCategoryView.swift */; };
+		509A10292BCCBE0D00FB55C7 /* BusinessUserProfilePage+SkeletonPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A10282BCCBE0D00FB55C7 /* BusinessUserProfilePage+SkeletonPage.swift */; };
+		509A102B2BCCDD2F00FB55C7 /* FollowAndLikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A102A2BCCDD2F00FB55C7 /* FollowAndLikeView.swift */; };
+		509A102D2BCD03D300FB55C7 /* MyFollowAndLikePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A102C2BCD03D300FB55C7 /* MyFollowAndLikePage.swift */; };
 		509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC04C2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift */; };
 		509AC04F2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC04E2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift */; };
 		509AC0512B57832400A79CDB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC0502B57832400A79CDB /* LocationManager.swift */; };
@@ -349,6 +353,10 @@
 		50998B0F2B39161D002196B5 /* Regexes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regexes.swift; sourceTree = "<group>"; };
 		509A101C2BC8DF9200FB55C7 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		509A101F2BC90ADA00FB55C7 /* RegularUserProfilePage+SkeletonPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegularUserProfilePage+SkeletonPage.swift"; sourceTree = "<group>"; };
+		509A10222BCBD11D00FB55C7 /* ProfileBusinessCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBusinessCategoryView.swift; sourceTree = "<group>"; };
+		509A10282BCCBE0D00FB55C7 /* BusinessUserProfilePage+SkeletonPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessUserProfilePage+SkeletonPage.swift"; sourceTree = "<group>"; };
+		509A102A2BCCDD2F00FB55C7 /* FollowAndLikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowAndLikeView.swift; sourceTree = "<group>"; };
+		509A102C2BCD03D300FB55C7 /* MyFollowAndLikePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFollowAndLikePage.swift; sourceTree = "<group>"; };
 		509AC04C2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheet+BottomSheetDetent.swift"; sourceTree = "<group>"; };
 		509AC04E2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheet+GetOffsetY.swift"; sourceTree = "<group>"; };
 		509AC0502B57832400A79CDB /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -621,6 +629,7 @@
 		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				509A10212BCBC50000FB55C7 /* Tags */,
 				509A101B2BC8DF7300FB55C7 /* Skeleton */,
 				50A06DE52BC7B04B00C1E158 /* LoadingIndicator */,
 				500FB2402B885C5900E14DEE /* Map */,
@@ -634,7 +643,6 @@
 				50FDD8A22B550927003015F9 /* Images */,
 				50F54A012B45283000D06F20 /* Navigation */,
 				50277F812AF1512E0045AB12 /* PostCardView.swift */,
-				50998B092B370ED5002196B5 /* TagView.swift */,
 				501BAF392B463D6900D9D84F /* TextEditorPlus.swift */,
 				50530B922B8775FD009C1F92 /* BusinessBottomBar.swift */,
 				506590EB2B8CE65D009F8E5F /* LoadingView.swift */,
@@ -850,6 +858,7 @@
 		5075FCC12B865815005E4A8B /* BusinessProfile */ = {
 			isa = PBXGroup;
 			children = (
+				509A10262BCBDBDD00FB55C7 /* BusinessDetail */,
 				50F220D02B8D86FA00B547AB /* BusinessOpeningHours */,
 				500FB2312B88339300E14DEE /* BusinessAvatar */,
 				500FB2342B88354900E14DEE /* BusinessAvatarRow */,
@@ -859,7 +868,6 @@
 				5075FCC82B86E7A5005E4A8B /* ProfileConstants.swift */,
 				5075FCCC2B86E8A0005E4A8B /* ProfileLink.swift */,
 				5075FCCE2B86E8DB005E4A8B /* ProfilePhone.swift */,
-				5075FCD02B86E932005E4A8B /* ProfileDetail.swift */,
 				5075FCD42B870968005E4A8B /* ProfileCategories.swift */,
 				5075FCD62B870A05005E4A8B /* ProfileBio.swift */,
 				5075FCD82B870A40005E4A8B /* ProfilePostsCount.swift */,
@@ -915,6 +923,32 @@
 				509A101F2BC90ADA00FB55C7 /* RegularUserProfilePage+SkeletonPage.swift */,
 			);
 			path = RegularUserProfilePage;
+			sourceTree = "<group>";
+		};
+		509A10212BCBC50000FB55C7 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				50998B092B370ED5002196B5 /* TagView.swift */,
+				509A10222BCBD11D00FB55C7 /* ProfileBusinessCategoryView.swift */,
+			);
+			path = Tags;
+			sourceTree = "<group>";
+		};
+		509A10262BCBDBDD00FB55C7 /* BusinessDetail */ = {
+			isa = PBXGroup;
+			children = (
+				5075FCD02B86E932005E4A8B /* ProfileDetail.swift */,
+			);
+			path = BusinessDetail;
+			sourceTree = "<group>";
+		};
+		509A10272BCCBDF400FB55C7 /* BusinessUserProfilePage */ = {
+			isa = PBXGroup;
+			children = (
+				50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */,
+				509A10282BCCBE0D00FB55C7 /* BusinessUserProfilePage+SkeletonPage.swift */,
+			);
+			path = BusinessUserProfilePage;
 			sourceTree = "<group>";
 		};
 		509AC04A2B56806F00A79CDB /* BottomSheet */ = {
@@ -1217,11 +1251,12 @@
 		50F549EB2B44273900D06F20 /* BusinessUser */ = {
 			isa = PBXGroup;
 			children = (
+				509A10272BCCBDF400FB55C7 /* BusinessUserProfilePage */,
 				5075FCDC2B8717A5005E4A8B /* Components */,
 				509D5BC22B45610F00833021 /* BioEditPage.swift */,
-				50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */,
 				509D5BC42B45611E00833021 /* OpeningHoursEditPage.swift */,
 				50F54A1C2B454E0800D06F20 /* BusinessProfileEditPage.swift */,
+				509A102C2BCD03D300FB55C7 /* MyFollowAndLikePage.swift */,
 			);
 			path = BusinessUser;
 			sourceTree = "<group>";
@@ -1265,6 +1300,7 @@
 			children = (
 				50F54A1F2B45503800D06F20 /* AvatarEditor.swift */,
 				500FB22B2B88304100E14DEE /* ProfileEditButton.swift */,
+				509A102A2BCCDD2F00FB55C7 /* FollowAndLikeView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1476,6 +1512,7 @@
 				50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */,
 				500FB23F2B88379500E14DEE /* BusinessFollowedAvatarRow.swift in Sources */,
 				500FB24B2B88902400E14DEE /* PlaceReverseViewModel.swift in Sources */,
+				509A10232BCBD11D00FB55C7 /* ProfileBusinessCategoryView.swift in Sources */,
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
 				50A06DE72BC7B05900C1E158 /* LoadingIndicator.swift in Sources */,
 				50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */,
@@ -1542,6 +1579,7 @@
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
 				50F54A1D2B454E0800D06F20 /* BusinessProfileEditPage.swift in Sources */,
 				50B5DED42B3B19AA00C0A641 /* MapboxError.swift in Sources */,
+				509A102D2BCD03D300FB55C7 /* MyFollowAndLikePage.swift in Sources */,
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
 				506590D42B8CB454009F8E5F /* PostEndpoints.swift in Sources */,
 				506590D82B8CB4A7009F8E5F /* FeedbackEndpoints.swift in Sources */,
@@ -1568,6 +1606,7 @@
 				501BAF232B462C4F00D9D84F /* LinkSettingsItem.swift in Sources */,
 				50B11ADC2AFB51F5002A7B91 /* AvatarView.swift in Sources */,
 				509AC0512B57832400A79CDB /* LocationManager.swift in Sources */,
+				509A10292BCCBE0D00FB55C7 /* BusinessUserProfilePage+SkeletonPage.swift in Sources */,
 				505568CF2B84BB7500FD21E4 /* StrokeButtonFormItem.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
@@ -1597,6 +1636,7 @@
 				50F220D52B8DB18D00B547AB /* LocationSettingsItem.swift in Sources */,
 				509AC0532B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift in Sources */,
 				50D0CE872B8B20A90070B90F /* UserListService.swift in Sources */,
+				509A102B2BCCDD2F00FB55C7 /* FollowAndLikeView.swift in Sources */,
 				50998B082B370B34002196B5 /* BusinessCategoryPage.swift in Sources */,
 				501BAF4E2B4655EF00D9D84F /* UserProfilePage.swift in Sources */,
 				500F66242B25CE320074FE3C /* GlobalConstants.swift in Sources */,

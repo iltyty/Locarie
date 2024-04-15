@@ -34,7 +34,7 @@ struct BusinessProfileAvatar: View {
   private var buttonBackground: some View {
     Circle()
       .fill(.background)
-      .stroke(.secondary)
+      .shadow(radius: Constants.buttonShadowRadius)
       .frame(
         width: Constants.buttonBackgroundSize,
         height: Constants.buttonBackgroundSize
@@ -55,4 +55,5 @@ struct BusinessProfileAvatar: View {
 private enum Constants {
   static let buttonIconSize: CGFloat = 12
   static let buttonBackgroundSize: CGFloat = 24
+  static let buttonShadowRadius: CGFloat = 1
 }

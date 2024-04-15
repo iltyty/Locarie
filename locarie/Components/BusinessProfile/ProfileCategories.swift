@@ -18,7 +18,7 @@ struct ProfileCategories: View {
     ScrollView(.horizontal) {
       HStack {
         ForEach(user.categories, id: \.self) { category in
-          TagView(tag: category, isSelected: false)
+          ProfileBusinessCategoryView(category)
         }
       }
     }
