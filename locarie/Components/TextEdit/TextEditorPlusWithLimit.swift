@@ -1,5 +1,5 @@
 //
-//  TextEditorPlus.swift
+//  TextEditorPlusWithLimit.swift
 //  locarie
 //
 //  Created by qiuty on 04/01/2024.
@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-struct TextEditorPlus: View {
+struct TextEditorPlusWithLimit: View {
   @ObservedObject var viewModel: TextEditViewModel
-
   @State var hint: String
-
   let showBorder: Bool
 
   init(
@@ -26,7 +24,7 @@ struct TextEditorPlus: View {
 
   var body: some View {
     VStack {
-      textEditor
+      TextEditorPlus(hint: hint, text: $viewModel.text)
       remainingWordCount
     }
     .background(background)
@@ -44,28 +42,7 @@ struct TextEditorPlus: View {
   }
 }
 
-private extension TextEditorPlus {
-  var textEditor: some View {
-    ZStack(alignment: .topLeading) {
-      if viewModel.text.isEmpty {
-        hintPurposeTextEditor
-      }
-      editPurposeTextEditor
-    }
-    .padding()
-  }
-
-  var hintPurposeTextEditor: some View {
-    TextEditor(text: $hint)
-      .foregroundStyle(.secondary)
-      .disabled(true)
-  }
-
-  var editPurposeTextEditor: some View {
-    TextEditor(text: $viewModel.text)
-      .opacity(viewModel.text.isEmpty ? 0.25 : 1)
-  }
-
+private extension TextEditorPlusWithLimit {
   var remainingWordCount: some View {
     HStack {
       Spacer()
@@ -81,7 +58,7 @@ private enum Constants {
 }
 
 #Preview {
-  TextEditorPlus(
+  TextEditorPlusWithLimit(
     viewModel: TextEditViewModel(limit: 500), hint: "Share your feedback..."
   )
 }

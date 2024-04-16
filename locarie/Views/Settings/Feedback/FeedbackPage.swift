@@ -91,7 +91,7 @@ private extension FeedbackPage {
   var feedbackEditor: some View {
     GeometryReader { proxy in
       VStack {
-        TextEditorPlus(
+        TextEditorPlusWithLimit(
           viewModel: editVM,
           hint: "Share your feedback...",
           border: true

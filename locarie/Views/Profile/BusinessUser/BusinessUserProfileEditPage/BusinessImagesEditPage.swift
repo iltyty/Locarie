@@ -77,20 +77,6 @@ struct BusinessImagesEditPage: View {
 }
 
 private extension BusinessImagesEditPage {
-  var deleteButton: some View {
-    ZStack {
-      Circle()
-        .fill(.background)
-        .frame(width: Constants.deleteButtonSize, height: Constants.deleteButtonSize)
-        .shadow(radius: Constants.deleteButtonShadowRadius)
-      Image(systemName: "xmark")
-        .font(.system(size: Constants.deleteButtonIconSize))
-        .foregroundStyle(.black)
-        .frame(width: Constants.deleteButtonIconSize, height: Constants.deleteButtonIconSize)
-    }
-    .offset(x: Constants.deleteButtonOffset, y: -Constants.deleteButtonOffset)
-  }
-
   @ViewBuilder
   var existedImages: some View {
     ForEach(imageVM.existedImageUrls, id: \.self) { url in
@@ -100,7 +86,7 @@ private extension BusinessImagesEditPage {
           size: Constants.imageSize,
           bordered: url == imageVM.existedImageUrls[0]
         )
-        deleteButton.onTapGesture {
+        ImageDeleteButton().onTapGesture {
           imageVM.existedImageUrls.removeAll { $0 == url }
         }
       }
@@ -124,7 +110,7 @@ private extension BusinessImagesEditPage {
             EmptyView()
           }
         }
-        deleteButton.onTapGesture {
+        ImageDeleteButton().onTapGesture {
           let index = attachments.firstIndex { $0.id == attachment.id }!
           imageVM.photoVM.selection.remove(at: index)
           imageVM.objectWillChange.send()
@@ -172,11 +158,6 @@ private enum Constants {
   static let imageSize: CGFloat = 114
   static let imageCornerRadius: CGFloat = 16
   static let defaultImageIconSize: CGFloat = 28
-
-  static let deleteButtonOffset: CGFloat = 5
-  static let deleteButtonShadowRadius: CGFloat = 2
-  static let deleteButtonSize: CGFloat = 24
-  static let deleteButtonIconSize: CGFloat = 12
 }
 
 #Preview {

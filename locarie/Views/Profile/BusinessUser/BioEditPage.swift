@@ -43,7 +43,7 @@ private extension BioEditPage {
   }
 
   var bioEditor: some View {
-    TextEditorPlus(viewModel: bioEditViewModel, hint: "Bio...")
+    TextEditorPlusWithLimit(viewModel: bioEditViewModel, hint: "Bio...")
   }
 }
 
