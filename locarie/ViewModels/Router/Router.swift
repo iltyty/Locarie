@@ -37,7 +37,8 @@ extension Router {
     case settings, myAccount, changePassword, newPassword,
          feedback, privacyPolicy, termsOfUse, termsOfService
 
-    case userProfile, regularUserProfile, businessUserProfile, userProfileEdit
+    case userProfile, regularUserProfile, businessUserProfile, businessImagesEdit,
+         userProfileEdit
   }
 
   enum StringDestination: Hashable {
@@ -85,6 +86,8 @@ extension Router {
       RegularUserProfilePage()
     case .businessUserProfile:
       BusinessUserProfilePage()
+    case .businessImagesEdit:
+      BusinessImagesEditPage()
     case .userProfileEdit:
       UserProfileEditPage()
     }

@@ -42,8 +42,7 @@ import SwiftUI
 
     var data: Data // Image data
 
-    private let pickerItem: PhotosPickerItem // A reference to a selected photo
-    // in the picker
+    private let pickerItem: PhotosPickerItem // A reference to a selected photo in the picker
 
     @Published var status: Status? // A load status for the photo
 
@@ -66,9 +65,8 @@ import SwiftUI
       }
       status = .loading
       do {
-        if let data = try await pickerItem
-          .loadTransferable(type: Data.self),
-          let uiImage = UIImage(data: data)
+        if let data = try await pickerItem.loadTransferable(type: Data.self),
+           let uiImage = UIImage(data: data)
         {
           self.data = data
           status = .finished(Image(uiImage: uiImage))
@@ -101,10 +99,9 @@ import SwiftUI
       }
       // Update the saved attachments array for any new attachment loaded in
       // scope
-      let newAttachmentByIdentifier = newAttachments
-        .reduce(into: [:]) { partialResult, attachment in
-          partialResult[attachment.id] = attachment
-        }
+      let newAttachmentByIdentifier = newAttachments.reduce(into: [:]) { partialResult, attachment in
+        partialResult[attachment.id] = attachment
+      }
       // To support asynchronous access, assign new arrays to the instance
       // properties rather than updating the existing arrays.
       attachments = newAttachments

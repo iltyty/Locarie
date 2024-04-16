@@ -172,20 +172,9 @@ private extension BusinessUserProfilePage {
   @ViewBuilder
   var firstProfileImage: some View {
     if user.profileImageUrls.isEmpty {
-      Image("DefaultImage")
-        .resizable()
-        .scaledToFit()
-        .frame(width: 28, height: 28)
-        .frame(width: 72, height: 72)
-        .background(RoundedRectangle(cornerRadius: 16).fill(LocarieColor.greyMedium).shadow(radius: 2))
+      DefaultBusinessImageView()
     } else {
-      AsyncImage(url: URL(string: user.profileImageUrls[0])) { image in
-        image.resizable()
-          .scaledToFit()
-          .frame(width: 72, height: 72)
-      } placeholder: {
-        RoundedRectangle(cornerRadius: 16).fill(LocarieColor.greyMedium).shadow(radius: 2)
-      }
+      BusinessImageView(url: URL(string: user.profileImageUrls[0]))
     }
   }
 

@@ -49,7 +49,7 @@ struct ImageAttachmentView: View {
   }
 
   var body: some View {
-    HStack {
+    Group {
       switch imageAttachment.status {
       case let .finished(image):
         finishedImage(image)
@@ -89,13 +89,4 @@ struct ImageAttachmentView: View {
 
 private enum Constants {
   static let cornerRadius: CGFloat = 18
-}
-
-#Preview {
-  ImageAttachmentView(
-    size: 50,
-    attachment: PhotoViewModel.ImageAttachment(
-      PhotosPickerItem(itemIdentifier: "123")
-    )
-  )
 }

@@ -19,7 +19,6 @@ struct BusinessProfileEditPage: View {
 
   @StateObject private var avatarVM = AvatarUploadViewModel()
   @StateObject private var profileGetVM = ProfileGetViewModel()
-  @StateObject private var profileImagesVM = ProfileImagesViewModel()
   @StateObject private var profileUpdateVM = ProfileUpdateViewModel()
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
@@ -38,9 +37,6 @@ struct BusinessProfileEditPage: View {
     }
     .onReceive(avatarVM.$state) { state in
       handleAvatarUpdateStateChange(state)
-    }
-    .onReceive(profileImagesVM.$state) { state in
-      handleProfileImagesUpdateStateChange(state)
     }
     .onReceive(profileGetVM.$state) { state in
       handleProfileGetViewModelStateChange(state)
@@ -92,78 +88,52 @@ private extension BusinessProfileEditPage {
 
   var profileImagesEditor: some View {
     VStack(alignment: .leading) {
-      Text("Edit profile images")
+      Text("Edit business images")
         .fontWeight(.semibold)
       ScrollView(.horizontal) {
-        HStack {
-          profileImages
-          profileImagePicker
+        NavigationLink(value: Router.Destination.businessImagesEdit) {
+          HStack {
+            if profileGetVM.dto.profileImageUrls.isEmpty {
+              defaultImages
+            } else {
+              profileImages
+            }
+          }
         }
+        .buttonStyle(.plain)
       }
       .scrollIndicators(.hidden)
+    }
+  }
+
+  var defaultImages: some View {
+    ForEach(0 ..< Constants.defaultProfileImagesCount, id: \.self) { i in
+      ZStack {
+        RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
+          .fill(LocarieColor.greyMedium)
+          .strokeBorder(
+            i == 0 ? LocarieColor.primary : LocarieColor.greyMedium,
+            style: .init(lineWidth: i == 0 ? Constants.firstProfileImageStrokeWidth : 0)
+          )
+          .frame(width: Constants.profileImageSize, height: Constants.profileImageSize)
+        Image("DefaultImage")
+          .resizable()
+          .scaledToFit()
+          .frame(width: Constants.defaultIconSize, height: Constants.defaultIconSize)
+      }
     }
   }
 
   @ViewBuilder
   var profileImages: some View {
     let urls = profileGetVM.dto.profileImageUrls
-    HStack {
-      ForEach(urls.indices, id: \.self) { i in
-        AsyncImageView(url: urls[i]) { image in
-          image.resizable()
-            .aspectRatio(Constants.profileImageAspectRatio, contentMode: .fill)
-            .frame(width: Constants.profileImageWidth, alignment: .center)
-            .clipShape(
-              RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
-            )
-            .clipped()
-        }
-        .frame(width: Constants.profileImageWidth)
-      }
-      ForEach(profileImagesVM.photoViewModel.attachments) { attachment in
-        ImageAttachmentView(
-          width: Constants.profileImageWidth,
-          aspectRatio: Constants.profileImageAspectRatio,
-          attachment: attachment
-        )
-      }
+    ForEach(urls.indices, id: \.self) { i in
+      BusinessImageView(
+        url: URL(string: urls[i]),
+        size: Constants.profileImageSize,
+        bordered: i == 0
+      )
     }
-  }
-
-  var profileImagePicker: some View {
-    PhotosPicker(
-      selection: $profileImagesVM.photoViewModel.selection,
-      maxSelectionCount: maxSelectionCount,
-      matching: .images,
-      photoLibrary: .shared()
-    ) {
-      profileImagePickerContent(width: Constants.profileImageWidth)
-    }
-    .disabled(maxSelectionCount == 0)
-  }
-
-  var maxSelectionCount: Int {
-    max(0, Constants.profileImageMaxCount -
-      profileGetVM.dto.profileImageUrls.count)
-  }
-
-  func profileImagePickerContent(width: CGFloat) -> some View {
-    ZStack {
-      profileImagePickerBackground(width: width)
-      cameraIcon
-    }
-  }
-
-  func profileImagePickerBackground(width: CGFloat) -> some View {
-    RoundedRectangle(cornerRadius: Constants.profileImagePickerCornerRadius)
-      .fill(.ultraThickMaterial)
-      .frame(width: width, height: width / Constants.profileImageAspectRatio)
-  }
-
-  var cameraIcon: some View {
-    Image(systemName: "camera")
-      .font(.system(size: Constants.cameraIconSize))
-      .foregroundStyle(.gray)
   }
 
   var avatarEditor: some View {
@@ -254,7 +224,7 @@ private extension BusinessProfileEditPage {
   }
 
   var personalDetailTitle: some View {
-    Text("Personal details")
+    Text("Personal info")
       .fontWeight(.semibold)
   }
 
@@ -339,7 +309,6 @@ private extension BusinessProfileEditPage {
 private extension BusinessProfileEditPage {
   func updateProfile() {
     let userId = cacheVM.getUserId()
-    profileImagesVM.upload(userId: userId)
     avatarVM.upload(userId: userId)
     profileUpdateVM.updateProfile(userId: userId)
   }
@@ -367,9 +336,9 @@ private extension BusinessProfileEditPage {
   }
 
   func handleProfileImagesUpdateStateChange(
-    _ state: ProfileImagesViewModel.State
+    _ state: BusinessImagesViewModel.State
   ) {
-    if case .finished = state {
+    if case .uploadFinished = state {
       URLCache.imageCache.removeAllCachedResponses()
     }
   }
@@ -400,11 +369,13 @@ private extension BusinessProfileEditPage {
 
 private enum Constants {
   static let vSpacing: CGFloat = 16
-  static let cameraIconSize: CGFloat = 48
-  static let profileImageWidth: CGFloat = 200
-  static let profileImageHeight: CGFloat = 150
+  static let defaultIconSize: CGFloat = 28
+  static let defaultProfileImagesCount = 5
+
+  static let firstProfileImageStrokeWidth: CGFloat = 3
+  static let profileImageSize: CGFloat = 114
   static let profileImageMaxCount = 5
-  static let profileImageCornerRadius: CGFloat = 5
+  static let profileImageCornerRadius: CGFloat = 16
   static let profileImageAspectRatio: CGFloat = 4 / 3
   static let profileImagePickerCornerRadius: CGFloat = 10
   static let birthdaySheetHeightFraction: CGFloat = 0.4

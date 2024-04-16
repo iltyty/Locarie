@@ -2,14 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to display nearby posts for you</string>
-	<key>MBXAccessToken</key>
-	<string>pk.eyJ1IjoibHVsdS1xIiwiYSI6ImNscWxwc3RsNDJ2YjcyanFmdnFmNGo5NHQifQ.KDGJ7IrR1Mosjs61rNVnXQ</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict/>
 	</array>
+	<key>MBXAccessToken</key>
+	<string>pk.eyJ1IjoibHVsdS1xIiwiYSI6ImNscWxwc3RsNDJ2YjcyanFmdnFmNGo5NHQifQ.KDGJ7IrR1Mosjs61rNVnXQ</string>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIImageName</key>
+		<string>LaunchScreen</string>
+	</dict>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict/>
