@@ -80,10 +80,13 @@ private extension FollowAndLikeView {
 
   @ViewBuilder
   var tabContent: some View {
-    switch currentTab {
-    case .followed: followedBusinesses
-    case .saved: savedPosts
+    Group {
+      switch currentTab {
+      case .followed: followedBusinesses
+      case .saved: savedPosts
+      }
     }
+    .padding(.horizontal)
   }
 
   @ViewBuilder

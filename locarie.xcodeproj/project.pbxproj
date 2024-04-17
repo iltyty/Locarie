@@ -58,6 +58,8 @@
 		502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF72B32D4CD00C0833A /* PostListDto.swift */; };
 		502A4FFA2B32D68B00C0833A /* PostDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF92B32D68B00C0833A /* PostDto.swift */; };
 		502A4FFC2B32D71500C0833A /* UserDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FFB2B32D71500C0833A /* UserDto.swift */; };
+		5032A2002BCFFC8000B0199B /* PostGetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5032A1FF2BCFFC8000B0199B /* PostGetService.swift */; };
+		5032A2022BCFFDDA00B0199B /* PostGetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5032A2012BCFFDDA00B0199B /* PostGetViewModel.swift */; };
 		50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50369A672B2DBCD9005D6B43 /* UserLoginDto.swift */; };
 		50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50369A6A2B2DBD67005D6B43 /* PostCreateDto.swift */; };
 		50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50369A6C2B300908005D6B43 /* PostCreateService.swift */; };
@@ -287,6 +289,8 @@
 		502A4FF72B32D4CD00C0833A /* PostListDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListDto.swift; sourceTree = "<group>"; };
 		502A4FF92B32D68B00C0833A /* PostDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDto.swift; sourceTree = "<group>"; };
 		502A4FFB2B32D71500C0833A /* UserDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDto.swift; sourceTree = "<group>"; };
+		5032A1FF2BCFFC8000B0199B /* PostGetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGetService.swift; sourceTree = "<group>"; };
+		5032A2012BCFFDDA00B0199B /* PostGetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGetViewModel.swift; sourceTree = "<group>"; };
 		50369A672B2DBCD9005D6B43 /* UserLoginDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginDto.swift; sourceTree = "<group>"; };
 		50369A6A2B2DBD67005D6B43 /* PostCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateDto.swift; sourceTree = "<group>"; };
 		50369A6C2B300908005D6B43 /* PostCreateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateService.swift; sourceTree = "<group>"; };
@@ -685,6 +689,7 @@
 			children = (
 				50369A6C2B300908005D6B43 /* PostCreateService.swift */,
 				502A4FF52B32D48400C0833A /* PostListService.swift */,
+				5032A1FF2BCFFC8000B0199B /* PostGetService.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -740,6 +745,7 @@
 				503905792B341418005B574F /* PostListNearbyViewModel.swift */,
 				504794A62B70D2A20038D31F /* ListUserPostsViewModel.swift */,
 				50F220D62B8DFA2E00B547AB /* PostListWithinViewModel.swift */,
+				5032A2012BCFFDDA00B0199B /* PostGetViewModel.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1476,7 +1482,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					50AAB1782AEFA2E9003FEDF1 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -1581,6 +1587,7 @@
 				5054CDF12B288D6C00645F5C /* UserRegisterService.swift in Sources */,
 				50A06DE72BC7B05900C1E158 /* LoadingIndicator.swift in Sources */,
 				50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */,
+				5032A2002BCFFC8000B0199B /* PostGetService.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */,
 				501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */,
@@ -1696,6 +1703,7 @@
 				5075FCD52B870968005E4A8B /* ProfileCategories.swift in Sources */,
 				50FDD88A2B4B8B0D003015F9 /* ProfileGetService.swift in Sources */,
 				50F54A202B45503900D06F20 /* AvatarEditor.swift in Sources */,
+				5032A2022BCFFDDA00B0199B /* PostGetViewModel.swift in Sources */,
 				50998AFE2B366C29002196B5 /* WrappingHStack.swift in Sources */,
 				50B5DED72B3B270C00C0A641 /* PlaceSearcher.swift in Sources */,
 				5004770A2B05DAAC0031AA94 /* AsyncImageView.swift in Sources */,
@@ -1901,7 +1909,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;

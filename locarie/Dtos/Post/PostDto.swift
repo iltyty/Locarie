@@ -12,6 +12,7 @@ struct PostDto: Codable, Identifiable {
   var id: Int64 = 0
   var time = Date()
   var content = ""
+  var favoredByCount = 0
   var user = UserDto()
   var imageUrls: [String] = []
 }
@@ -50,7 +51,7 @@ extension PostDto {
 
 extension PostDto {
   enum CodingKeys: String, CodingKey {
-    case id, time, content, user, imageUrls
+    case id, time, content, favoredByCount, user, imageUrls
   }
 
   init(from decoder: Decoder) throws {
@@ -59,6 +60,7 @@ extension PostDto {
     let timestamp = try container.decode(Int64.self, forKey: .time)
     time = timestamp == 0 ? Date() : Date(timeIntervalSince1970: Double(timestamp) / 1000)
     content = try container.decode(String.self, forKey: .content)
+    favoredByCount = try container.decode(Int.self, forKey: .favoredByCount)
     user = try container.decode(UserDto.self, forKey: .user)
     imageUrls = try container.decode([String].self, forKey: .imageUrls)
   }

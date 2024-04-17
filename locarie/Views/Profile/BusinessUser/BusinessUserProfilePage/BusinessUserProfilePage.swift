@@ -29,7 +29,10 @@ struct BusinessUserProfilePage: View {
     GeometryReader { proxy in
       ZStack(alignment: .bottom) {
         VStack {
-          content
+          ZStack {
+            mapView
+            contentView
+          }
           BottomTabView()
         }
         if presentingProfileCover {
@@ -39,7 +42,7 @@ struct BusinessUserProfilePage: View {
           )
         }
         if presentingPostCover {
-          PostCover(post: post, isPresenting: $presentingPostCover)
+          PostCover(post: post, tags: user.categories, isPresenting: $presentingPostCover)
         }
         if presentingDialog {
           dialogBackground
@@ -92,13 +95,6 @@ struct BusinessUserProfilePage: View {
     .ignoresSafeArea(edges: .bottom)
   }
 
-  private var content: some View {
-    ZStack {
-      mapView
-      contentView
-    }
-  }
-
   private var user: UserDto {
     profileVM.dto
   }
@@ -149,7 +145,7 @@ private extension BusinessUserProfilePage {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
       BusinessProfileAvatarRow(
         user: user,
-        isPresentingCover: $presentingProfileCover,
+        isPresentingCover: .constant(false),
         isPresentingDetail: $presentingProfileDetail
       )
       ProfileCategories(user)
@@ -174,10 +170,15 @@ private extension BusinessUserProfilePage {
 
   @ViewBuilder
   var firstProfileImage: some View {
-    if user.profileImageUrls.isEmpty {
-      DefaultBusinessImageView()
-    } else {
-      BusinessImageView(url: URL(string: user.profileImageUrls[0]))
+    Group {
+      if user.profileImageUrls.isEmpty {
+        DefaultBusinessImageView()
+      } else {
+        BusinessImageView(url: URL(string: user.profileImageUrls[0]))
+      }
+    }
+    .onTapGesture {
+      presentingProfileCover = true
     }
   }
 

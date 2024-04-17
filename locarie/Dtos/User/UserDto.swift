@@ -100,7 +100,7 @@ extension UserDto {
     if isNowClosed {
       return "Closed"
     }
-    return "util \(todayBusinessHours.formattedClosingTime)"
+    return "until \(todayBusinessHours.formattedClosingTime)"
   }
 
   private var todayBusinessHours: BusinessHoursDto? {

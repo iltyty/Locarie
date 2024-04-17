@@ -37,10 +37,10 @@ struct BusinessHomePage: View {
         mapView
         content
         if showingPostCover {
-          postCover
+          PostCover(post: post, tags: user.categories, isPresenting: $showingPostCover)
         }
         if showingBusinessProfileCover {
-          businessProfileCover
+          BusinessProfileCover(user: user, isPresenting: $showingBusinessProfileCover)
         }
       }
     }
@@ -97,7 +97,7 @@ private extension BusinessHomePage {
   }
 
   var bottomContent: some View {
-    BottomSheet(detents: [.medium, .large]) {
+    BottomSheet(topPosition: .right, detents: [.medium, .large]) {
       VStack(alignment: .leading) {
         if case .loading = profileVM.state {
           skeleton
@@ -134,6 +134,22 @@ private extension BusinessHomePage {
         }
         .scrollIndicators(.hidden)
       }
+    } topContent: {
+      firstProfileImage
+    }
+  }
+
+  @ViewBuilder
+  var firstProfileImage: some View {
+    Group {
+      if user.profileImageUrls.isEmpty {
+        DefaultBusinessImageView()
+      } else {
+        BusinessImageView(url: URL(string: user.profileImageUrls[0]))
+      }
+    }
+    .onTapGesture {
+      showingBusinessProfileCover = true
     }
   }
 
@@ -165,14 +181,6 @@ private extension BusinessHomePage {
 }
 
 private extension BusinessHomePage {
-  var postCover: some View {
-    PostCover(post: post, isPresenting: $showingPostCover)
-  }
-
-  var businessProfileCover: some View {
-    BusinessProfileCover(user: user, isPresenting: $showingBusinessProfileCover)
-  }
-
   func toggleShowingBusinessProfileCover() {
     withAnimation(.spring) {
       showingBusinessProfileCover.toggle()
@@ -195,10 +203,12 @@ private extension BusinessHomePage {
           SkeletonView(84, 14)
           SkeletonView(146, 10)
         }
+        Spacer()
       }
       HStack {
         SkeletonView(68, 10)
         SkeletonView(68, 10)
+        Spacer()
       }
       SkeletonView(48, 10)
     }

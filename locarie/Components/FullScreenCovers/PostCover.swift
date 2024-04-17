@@ -9,28 +9,39 @@ import SwiftUI
 
 struct PostCover: View {
   let post: PostDto
+  let tags: [String]
   @Binding var isPresenting: Bool
 
   private let cacheVM = LocalCacheViewModel.shared
   private let locationManager = LocationManager()
   @State private var alreadySaved = false
+
+  @StateObject private var postGetVM = PostGetViewModel()
   @StateObject private var favoritePostVM = FavoritePostViewModel()
 
   var body: some View {
     VStack(alignment: .leading) {
       coverTop
       blank
-      content
-      postImages
       postStatus
+      postImages
+      content
+      categories
       blank
-      favoriteButton
+      HStack {
+        Spacer()
+        ZStack(alignment: .bottomLeading) {
+          favoriteButton
+          favoredByCount
+        }
+      }
       blank
     }
     .padding(.horizontal)
     .background(.thickMaterial.opacity(CoverCommonConstants.backgroundOpacity))
     .contentShape(Rectangle())
     .onAppear {
+      postGetVM.getFavoredByCount(id: post.id)
       favoritePostVM.checkFavoredBy(userId: userId, postId: post.id)
     }
     .onReceive(favoritePostVM.$alreadySaved) { saved in
@@ -39,8 +50,10 @@ struct PostCover: View {
     .onReceive(favoritePostVM.$state, perform: { state in
       switch state {
       case .favoriteFinished:
+        postGetVM.favoredByCount += 1
         alreadySaved = true
       case .unfavoriteFinished:
+        postGetVM.favoredByCount -= 1
         alreadySaved = false
       default: break
       }
@@ -63,6 +76,14 @@ private extension PostCover {
 
   var content: some View {
     Text(post.content).font(.headline)
+  }
+
+  var categories: some View {
+    WrappingHStack {
+      ForEach(tags, id: \.self) { tag in
+        ProfileBusinessCategoryView(tag)
+      }
+    }
   }
 
   var blank: some View {
@@ -89,18 +110,22 @@ private extension PostCover {
   }
 
   var favoriteButton: some View {
-    HStack {
-      Spacer()
-      favoriteButtonBackground
-        .overlay { favoriteIcon }
-        .onTapGesture {
-          if alreadySaved {
-            favoritePostVM.unfavorite(userId: userId, postId: post.id)
-          } else {
-            favoritePostVM.favorite(userId: userId, postId: post.id)
-          }
+    favoriteButtonBackground
+      .overlay { favoriteIcon }
+      .onTapGesture {
+        if alreadySaved {
+          favoritePostVM.unfavorite(userId: userId, postId: post.id)
+        } else {
+          favoritePostVM.favorite(userId: userId, postId: post.id)
         }
-    }
+      }
+  }
+
+  var favoredByCount: some View {
+    Text("\(postGetVM.favoredByCount)")
+      .padding(.horizontal)
+      .background(Capsule().fill(.background).shadow(radius: Constants.favoriteButtonShadowRadius))
+      .offset(x: -Constants.favoriteButtonBackgroundSize / 2)
   }
 
   var favoriteIcon: some View {
