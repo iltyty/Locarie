@@ -49,7 +49,7 @@ struct LoginOrRegisterPage: View {
       StrokeButtonFormItem(
         title: "Sign up for a business account",
         isFixedWidth: true,
-        color: Constants.businessButtonColor
+        color: LocarieColor.blue
       )
     }
   }

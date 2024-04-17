@@ -10,17 +10,23 @@ import SwiftUI
 struct TextSettingsItem: View {
   let title: String
   let value: String
+  var divider: Bool = true
 
   var body: some View {
-    VStack {
+    ZStack(alignment: .bottom) {
       HStack {
         Text(title).fontWeight(.semibold)
         Spacer()
         Text(value).foregroundStyle(.secondary)
       }
       .lineLimit(1)
-      Divider()
+      .frame(height: SettingsConstants.rowHeight, alignment: .center)
+      if divider {
+        Divider()
+      }
     }
+    .padding(.horizontal)
+    .background(.white)
   }
 }
 

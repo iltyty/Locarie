@@ -112,7 +112,7 @@ private extension BusinessUserProfilePage {
   var mapView: some View {
     Map(viewport: $viewport) {
       MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
-        Image("DefaultBusinessMapMarker")
+        BusinessMapAvatar(url: profileVM.dto.avatarUrl)
           .onTapGesture {
             viewport = .camera(
               center: user.coordinate,
@@ -130,7 +130,10 @@ private extension BusinessUserProfilePage {
     VStack {
       buttons
       Spacer()
-      BottomSheet(topPosition: .right, detents: [.medium, .fraction(0.67)]) {
+      BottomSheet(
+        topPosition: .right,
+        detents: [.absoluteBottom(150), .absoluteTop(150)]
+      ) {
         if case .loading = profileVM.state {
           skeleton
         } else {

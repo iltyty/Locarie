@@ -72,7 +72,7 @@ private extension BusinessHomePage {
 
       ForEvery(listNearbyPostsVM.posts) { post in
         MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
-          Image("map").foregroundStyle(Color.locariePrimary)
+          BusinessMapAvatar(url: profileVM.dto.avatarUrl)
             .onTapGesture {
               viewport = .camera(
                 center: post.businessLocationCoordinate,

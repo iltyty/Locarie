@@ -15,6 +15,7 @@ struct BusinessAddressPage<U: UserLocation>: View {
 
   @State private var needUpdating = true
   @State private var viewport: Viewport = .followPuck(zoom: Constants.mapZoom)
+  @State private var presentingSheet = false
 
   @StateObject private var suggestVM = PlaceSuggestionsViewModel()
   @StateObject private var retrieveVM = PlaceRetrieveViewModel()
@@ -27,6 +28,9 @@ struct BusinessAddressPage<U: UserLocation>: View {
       mapView.ignoresSafeArea()
       contentView
     }
+    .sheet(isPresented: $presentingSheet, content: {
+      sheetContent.presentationDetents([.fraction(0.9)])
+    })
     .onReceive(suggestVM.$state) { state in
       handleSuggestionChoice(state: state)
     }
@@ -52,7 +56,7 @@ private extension BusinessAddressPage {
               longitude: location.longitude
             )
           ) {
-            Image("map")
+            Image("Pin")
           }
         }
       }
@@ -106,9 +110,42 @@ private extension BusinessAddressPage {
   var contentView: some View {
     VStack {
       topBar
-      PlaceSearcher(viewModel: suggestVM)
       Spacer()
-      confirmButton
+      VStack(spacing: Constants.bottomVSpacing) {
+        searchTitle
+        searchBar
+        confirmButton
+      }
+      .padding(.bottom, Constants.bottomVPadding)
+      .background(
+        UnevenRoundedRectangle(topLeadingRadius: Constants.cornerRadius, topTrailingRadius: Constants.cornerRadius)
+          .fill(.background)
+      )
+    }
+    .ignoresSafeArea(edges: [.bottom])
+  }
+
+  var searchTitle: some View {
+    Text("Your business address").padding(.top)
+  }
+
+  var searchBar: some View {
+    HStack {
+      Image(systemName: "magnifyingglass")
+      TextField("Type in your address", text: $dto.address)
+        .disabled(true)
+    }
+    .padding(.horizontal)
+    .background(
+      Capsule()
+        .fill(.background)
+        .frame(height: 48)
+        .frame(maxWidth: .infinity)
+        .shadow(radius: 2)
+    )
+    .padding(.horizontal)
+    .onTapGesture {
+      presentingSheet = true
     }
   }
 
@@ -133,7 +170,7 @@ private extension BusinessAddressPage {
     Button {
       dismiss()
     } label: {
-      StrokeButtonFormItem(title: "Select")
+      StrokeButtonFormItem(title: "Next step")
     }
     .disabled(isButtonDisabled)
     .opacity(buttonOpacity)
@@ -150,18 +187,27 @@ private extension BusinessAddressPage {
 }
 
 private extension BusinessAddressPage {
+  var sheetContent: some View {
+    VStack {
+      searchTitle
+      PlaceSearcher(vm: suggestVM)
+      Spacer()
+    }
+  }
+}
+
+private extension BusinessAddressPage {
   private func handleSuggestionChoice(state: PlaceSuggestionsViewModel.State) {
     if case let .chosen(dto) = state {
       retrieveVM.retrieve(mapboxId: dto.mapboxId)
+      presentingSheet = false
     }
   }
 
   private func handleRetrieveResult(state: PlaceRetrieveViewModel.State) {
     switch state {
     case let .loaded(placeRetrieveDto):
-      guard let result = placeRetrieveDto,
-            result.geometry.coordinates.count == 2
-      else {
+      guard let result = placeRetrieveDto, result.geometry.coordinates.count == 2 else {
         return
       }
       setAddress(result)
@@ -190,9 +236,7 @@ private extension BusinessAddressPage {
   }
 
   private func setViewport() {
-    withViewportAnimation(
-      .easeIn(duration: Constants.animationDuration)
-    ) {
+    withViewportAnimation(.easeIn(duration: Constants.animationDuration)) {
       viewport = .camera(center: coordinate, zoom: Constants.mapZoom)
     }
   }
@@ -210,6 +254,9 @@ private enum Constants {
   static let mapZoom = 15.0
   static let buttonDisabledOpacity = 0.5
   static let animationDuration = 1.0
+  static let cornerRadius: CGFloat = 24
+  static let bottomVSpacing: CGFloat = 36
+  static let bottomVPadding: CGFloat = 40
 }
 
 #Preview {

@@ -10,7 +10,8 @@ import SwiftUI
 struct ProfileOpeningHours: View {
   let user: UserDto
 
-  @State var isPresented = false
+  @State private var isPresented = false
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   init(_ user: UserDto) {
     self.user = user
@@ -45,7 +46,7 @@ private extension ProfileOpeningHours {
   @ViewBuilder
   var openingHoursText: some View {
     if user.businessHours.isEmpty {
-      Text("Go edit").foregroundStyle(.secondary)
+      Text(cacheVM.getUserId() == user.id ? "Go edit" : "Opening hours").foregroundStyle(.secondary)
     } else if user.isNowClosed {
       Text("Closed").foregroundStyle(.secondary)
     } else {

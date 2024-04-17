@@ -45,7 +45,10 @@ private extension HomePage {
   var contentView: some View {
     VStack(spacing: 0) {
       buttons
-      BottomSheet(topPosition: .right, detents: [.absoluteBottom(45), .absoluteBottom(150), .absoluteTop(150)]) {
+      BottomSheet(
+        topPosition: .right,
+        detents: [.absoluteBottom(45), .absoluteBottom(150), .absoluteTop(150)]
+      ) {
         VStack {
           Text("Discover this area")
             .fontWeight(.semibold)

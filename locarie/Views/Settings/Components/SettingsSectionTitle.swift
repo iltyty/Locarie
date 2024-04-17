@@ -13,9 +13,9 @@ struct SettingsSectionTitle: View {
   var body: some View {
     VStack(alignment: .leading) {
       Text(text).fontWeight(.semibold)
-      Divider()
     }
     .padding(.horizontal)
+    .frame(height: SettingsConstants.rowHeight)
   }
 }
 

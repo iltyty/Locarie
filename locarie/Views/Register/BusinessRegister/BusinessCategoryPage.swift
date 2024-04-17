@@ -43,13 +43,15 @@ struct BusinessCategoryPage: View {
   }
 
   private var text: some View {
-    Text("Please select the categories that match your business.")
+    Text("Please select all tags that match your business.")
+      .font(.callout)
+      .fontWeight(.semibold)
       .padding(.horizontal)
       .padding(.bottom, Constants.textBottomPadding)
   }
 
   var tags: some View {
-    VStack(alignment: .leading, spacing: Constants.tagVSpacing) {
+    WrappingHStack {
       ForEach(allCategories.indices, id: \.self) { i in
         let tag = allCategories[i]
         TagView(tag: tag, isSelected: isSelected[i], large: true)
@@ -68,7 +70,7 @@ struct BusinessCategoryPage: View {
       }.map(\.element)
       dismiss()
     } label: {
-      StrokeButtonFormItem(title: "Select")
+      StrokeButtonFormItem(title: "Next Step")
     }
     .padding(.horizontal)
     .padding(.bottom)

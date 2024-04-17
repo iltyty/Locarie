@@ -9,24 +9,24 @@ import SwiftUI
 
 struct LinkSettingsItem: View {
   let text: String
-  let highlighted: Bool
-
-  init(text: String, highlighted: Bool = false) {
-    self.text = text
-    self.highlighted = highlighted
-  }
+  var color: Color = .primary
+  var divider: Bool = true
 
   var body: some View {
-    VStack(alignment: .leading) {
+    ZStack(alignment: .bottom) {
       HStack {
         Text(text)
-          .foregroundStyle(highlighted ? .blue : .primary)
+          .foregroundStyle(color)
         Spacer()
         Image(systemName: "chevron.right")
       }
-      Divider()
+      .frame(height: SettingsConstants.rowHeight)
+      if divider {
+        Divider()
+      }
     }
     .padding(.horizontal)
+    .background(.white)
   }
 }
 

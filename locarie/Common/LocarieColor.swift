@@ -9,9 +9,8 @@ import SwiftUI
 
 enum LocarieColor {
   static let primary = Color(hex: 0xFF6800)
-
   static let blue = Color(hex: 0x0097FF)
-
+  static let red = Color(hex: 0xFF3030)
   static let green = Color(hex: 0x228B22)
 
   static let greyDark = Color(hex: 0x707070)

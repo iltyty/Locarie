@@ -107,7 +107,7 @@ private extension ResetPasswordPage {
     Button {
       authVM.resetPassword(email: email, password: newPasswordVM.password)
     } label: {
-      BackgroundButtonFormItem(title: "Confirm", isFullWidth: false)
+      BackgroundButtonFormItem(title: "Done", isFullWidth: false)
     }
     .disabled(isButtonDisabled)
     .opacity(isButtonDisabled ? 0.5 : 1)

@@ -8,5 +8,6 @@
 import Foundation
 
 enum SettingsConstants {
-  static let vSpacing = 20.0
+  static let vSpacing: CGFloat = 20
+  static let rowHeight: CGFloat = 50
 }

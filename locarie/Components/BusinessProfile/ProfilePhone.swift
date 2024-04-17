@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfilePhone: View {
   let user: UserDto
 
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+
   init(_ user: UserDto) {
     self.user = user
   }
@@ -28,7 +30,7 @@ struct ProfilePhone: View {
   var phoneText: some View {
     let text = user.phone
     text.isEmpty
-      ? Text("Go edit").foregroundStyle(.secondary)
+      ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Phone").foregroundStyle(.secondary)
       : Text(text)
   }
 }

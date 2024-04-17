@@ -16,9 +16,9 @@ struct MyAccountPage: View {
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
-    VStack {
+    VStack(spacing: 0) {
       navigationBar
-      VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
+      VStack(alignment: .leading, spacing: 1) {
         accountType
         businessName
         businessCategories
@@ -31,7 +31,8 @@ struct MyAccountPage: View {
         deleteAccount
         Spacer()
       }
-      .padding([.top, .horizontal])
+      .padding([.top])
+      .background(LocarieColor.greyLight)
     }
     .alert("Confirm", isPresented: $presentingAlert) {
       Button("Delete", role: .destructive) {
@@ -82,7 +83,7 @@ private extension MyAccountPage {
       } else {
         let categories = profileVM.dto.categories
         TextSettingsItem(
-          title: "Business categories",
+          title: "Business category",
           value: categories.joined(separator: ", ")
         )
       }
@@ -110,21 +111,25 @@ private extension MyAccountPage {
   }
 
   var version: some View {
-    TextSettingsItem(title: "Version", value: "V0.0.1")
+    TextSettingsItem(title: "Version", value: "V0.0.1", divider: false)
   }
 
   var editProfile: some View {
     NavigationLink("Edit profile") {
       UserProfileEditPage()
     }
-    .padding(.vertical)
+    .padding(.horizontal)
+    .padding(.top, 36)
+    .foregroundStyle(LocarieColor.blue)
   }
 
   var deleteAccount: some View {
     Button("Delete account") {
       presentingAlert = true
     }
-    .foregroundStyle(.red)
+    .padding(.horizontal)
+    .padding(.top, 36)
+    .foregroundStyle(LocarieColor.red)
   }
 }
 

@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileLink: View {
   let user: UserDto
 
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+
   init(_ user: UserDto) {
     self.user = user
   }
@@ -28,7 +30,7 @@ struct ProfileLink: View {
   var linkText: some View {
     let text = user.homepageUrl
     text.isEmpty
-      ? Text("Go edit").foregroundStyle(.secondary)
+      ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Link").foregroundStyle(.secondary)
       : Text(text)
   }
 }

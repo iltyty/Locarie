@@ -14,12 +14,13 @@ struct SettingsPage: View {
   @Environment(\.dismiss) private var dismiss
 
   var body: some View {
-    VStack {
+    VStack(spacing: 0) {
       navigationBar
-      VStack(alignment: .leading, spacing: SettingsConstants.vSpacing) {
+      VStack(alignment: .leading, spacing: 0) {
         accountSectionTitle
         myAccount
         changePassword
+        notifications
         locarieForBusinessSectionTitle
         signUpForBusiness
         supportSectionTitle
@@ -31,8 +32,9 @@ struct SettingsPage: View {
         logout
         Spacer()
       }
-      .padding(.top)
+      .background(LocarieColor.greyLight)
     }
+    .padding(.top)
   }
 }
 
@@ -61,14 +63,22 @@ private extension SettingsPage {
     .buttonStyle(.plain)
   }
 
+  var notifications: some View {
+    NavigationLink {
+      NotificationsPage()
+    } label: {
+      LinkSettingsItem(text: "Notifications", divider: false)
+    }
+    .buttonStyle(.plain)
+  }
+
   var locarieForBusinessSectionTitle: some View {
     SettingsSectionTitle(text: "Locarie for business")
   }
 
   var signUpForBusiness: some View {
     NavigationLink(value: Router.Destination.businessRegister) {
-      LinkSettingsItem(text: "Sign up for business account", highlighted: true)
-        .fontWeight(.semibold)
+      LinkSettingsItem(text: "Sign up for business account", color: LocarieColor.blue, divider: false)
     }
     .buttonStyle(.plain)
   }
@@ -81,7 +91,7 @@ private extension SettingsPage {
     NavigationLink {
       FeedbackPage()
     } label: {
-      LinkSettingsItem(text: "Feedback")
+      LinkSettingsItem(text: "Feedback", color: LocarieColor.primary, divider: false)
     }
     .buttonStyle(.plain)
   }
@@ -112,7 +122,7 @@ private extension SettingsPage {
     NavigationLink {
       TermsOfUsePage()
     } label: {
-      LinkSettingsItem(text: "Terms of use")
+      LinkSettingsItem(text: "Terms of use", divider: false)
     }
     .buttonStyle(.plain)
   }
@@ -122,8 +132,10 @@ private extension SettingsPage {
       cacheVM.clean()
       dismiss()
     }
+    .foregroundStyle(LocarieColor.blue)
     .fontWeight(.semibold)
-    .padding(.leading)
+    .padding()
+    .buttonStyle(.plain)
   }
 }
 

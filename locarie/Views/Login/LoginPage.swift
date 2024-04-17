@@ -127,6 +127,7 @@ private extension LoginPage {
       HStack {
         Spacer()
         Text("Forgotten password")
+          .foregroundStyle(LocarieColor.blue)
           .padding(.horizontal)
       }
     }
@@ -151,7 +152,9 @@ private extension LoginPage {
       Text("Don't have an account?")
         .foregroundStyle(.secondary)
       NavigationLink(value: Router.Destination.regularRegister) {
-        Text("Sign up").fontWeight(.semibold)
+        Text("Sign up")
+          .fontWeight(.semibold)
+          .foregroundStyle(LocarieColor.blue)
       }
     }
   }
