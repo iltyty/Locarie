@@ -15,7 +15,7 @@ struct TextSettingsItem: View {
   var body: some View {
     ZStack(alignment: .bottom) {
       HStack {
-        Text(title).fontWeight(.semibold)
+        Text(title)
         Spacer()
         Text(value).foregroundStyle(.secondary)
       }

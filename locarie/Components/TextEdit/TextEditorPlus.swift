@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct TextEditorPlus: View {
-  @State var hint: String
   @Binding var text: String
+  @State var hint: String
+  @State var border = false
 
   var body: some View {
     ZStack(alignment: .topLeading) {
@@ -20,14 +21,33 @@ struct TextEditorPlus: View {
     }
   }
 
-  var hintPurposeTextEditor: some View {
+  private var hintPurposeTextEditor: some View {
     TextEditor(text: $hint)
       .foregroundStyle(.secondary)
       .disabled(true)
   }
 
-  var editPurposeTextEditor: some View {
+  private var editPurposeTextEditor: some View {
     TextEditor(text: $text)
       .opacity(text.isEmpty ? 0.25 : 1)
+      .background(background)
   }
+
+  @ViewBuilder
+  private var background: some View {
+    if border {
+      RoundedRectangle(cornerRadius: Constants.cornerRadius).strokeBorder(LocarieColor.greyMedium)
+    } else {
+      Color.clear
+    }
+  }
+}
+
+private enum Constants {
+  static let cornerRadius: CGFloat = 25
+}
+
+#Preview {
+  TextEditorPlus(text: .constant(""), hint: "Hint", border: true)
+    .padding()
 }

@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct ToggleSettingsItem: View {
+  let title: String
+  var divider = true
+
   @State var isOn = false
 
-  let title: String
-
   var body: some View {
-    VStack {
+    ZStack(alignment: .bottom) {
       HStack {
         Toggle(title, isOn: $isOn).tint(.locariePrimary)
       }
-      Divider()
+      if divider {
+        Divider()
+      }
     }
     .padding(.horizontal)
+    .frame(height: SettingsConstants.rowHeight)
   }
 }
 

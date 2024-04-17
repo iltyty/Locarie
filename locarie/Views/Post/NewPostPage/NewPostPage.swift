@@ -150,7 +150,7 @@ private extension NewPostPage {
 private extension NewPostPage {
   var paragraphInput: some View {
     VStack {
-      TextEditorPlus(hint: "Paragraph...", text: $postVM.post.content)
+      TextEditorPlus(text: $postVM.post.content, hint: "Paragraph...")
         .padding([.horizontal])
         .frame(height: Constants.inputHeight, alignment: .top)
       Divider().padding(.horizontal)

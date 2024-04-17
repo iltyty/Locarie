@@ -26,10 +26,11 @@ struct FeedbackPage: View {
       }
       .padding([.top, .horizontal])
     }
-    .overlay(loadingView)
+    .loadingIndicator(loading: $loading)
     .alert(alertText, isPresented: $presentingAlert) {
       Button("OK") {}
     }
+    .ignoresSafeArea(.keyboard)
     .onReceive(feedbackVM.$state) { state in
       handleFeedbackVMStateChange(state)
     }
@@ -96,8 +97,7 @@ private extension FeedbackPage {
           hint: "Share your feedback...",
           border: true
         )
-        Color.clear
-          .frame(height: proxy.size.height * 0.3)
+        Color.clear.frame(height: proxy.size.height * 0.3)
       }
     }
   }

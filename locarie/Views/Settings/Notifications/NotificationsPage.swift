@@ -28,7 +28,7 @@ private extension NotificationsPage {
   }
 
   var messaging: some View {
-    ToggleSettingsItem(title: "Messaging")
+    ToggleSettingsItem(title: "Messaging", divider: false)
   }
 }
 
