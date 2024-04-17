@@ -45,8 +45,17 @@ private extension HomePage {
   var contentView: some View {
     VStack(spacing: 0) {
       buttons
-      BottomSheet(topPosition: .right, detents: [.minimum, .large]) {
-        PostList(posts: postVM.posts, selectedPost: $selectedPost)
+      BottomSheet(topPosition: .right, detents: [.absoluteBottom(45), .absoluteBottom(150), .absoluteTop(150)]) {
+        VStack {
+          Text("Discover this area")
+            .fontWeight(.semibold)
+            .padding(.bottom)
+          if case .loading = postVM.state {
+            PostCardView.skeleton
+          } else {
+            PostList(posts: postVM.posts, selectedPost: $selectedPost, showTitle: false)
+          }
+        }
       } topContent: {
         NavigationButton().onTapGesture {
           withViewportAnimation(.fly) {
@@ -67,9 +76,9 @@ private extension HomePage {
       }
       Spacer()
       NavigationLink(value: Router.Destination.favorite) {
-        CircleButton(systemName: "bookmark")
+        CircleButton(systemName: "bookmark.fill")
+          .foregroundStyle(LocarieColor.primary)
       }
-      .tint(.primary)
       .buttonStyle(.plain)
     }
     .fontWeight(.semibold)
@@ -88,7 +97,7 @@ private extension HomePage {
 }
 
 private enum Constants {
-  static let topButtonsBottomPadding: CGFloat = 5
+  static let topButtonsBottomPadding: CGFloat = 3
 }
 
 #Preview {

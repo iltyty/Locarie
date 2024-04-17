@@ -37,7 +37,7 @@ private extension PostCardView {
       userAvatar
       Text(post.businessName)
       Text(post.publishedTime).foregroundStyle(LocarieColor.green)
-      Text("·")
+      DotView()
       Text(post.user.distance(to: locationManager.location)).foregroundStyle(.secondary)
     }
   }
@@ -65,6 +65,33 @@ private extension PostCardView {
   var distance: Double {
     guard let location = locationManager.location else { return 0 }
     return location.distance(from: post.businessLocation)
+  }
+}
+
+extension PostCardView {
+  static var skeleton: some View {
+    GeometryReader { _ in
+      VStack(alignment: .leading) {
+        HStack {
+          SkeletonView(24, 24, true)
+          SkeletonView(60, 10)
+          SkeletonView(146, 10)
+        }
+        defaultCover
+        SkeletonView(280, 10)
+        HStack {
+          SkeletonView(68, 10)
+          SkeletonView(68, 10)
+        }
+      }
+    }
+  }
+
+  static var defaultCover: some View {
+    RoundedRectangle(cornerRadius: 18)
+      .fill(LocarieColor.greyMedium)
+      .frame(height: 267)
+      .frame(maxWidth: .infinity)
   }
 }
 

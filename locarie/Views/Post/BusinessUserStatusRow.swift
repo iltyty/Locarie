@@ -31,9 +31,8 @@ struct BusinessUserStatusRow: View {
     HStack(spacing: Constants.hSpacing) {
       avatar
       Text(user.businessName)
-      Circle().fill(LocarieColor.greyDark).frame(width: 3, height: 3)
       Text(user.distance(to: locationManager.location)).foregroundStyle(.secondary)
-      Circle().fill(LocarieColor.greyDark).frame(width: 3, height: 3)
+      DotView()
       Text(user.neighborhood)
       Spacer()
     }

@@ -144,6 +144,7 @@
 		509A10392BCE4F7800FB55C7 /* ImageDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A10382BCE4F7800FB55C7 /* ImageDeleteButton.swift */; };
 		509A103C2BCE55F400FB55C7 /* TextEditorPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A103B2BCE55F400FB55C7 /* TextEditorPlus.swift */; };
 		509A103F2BCE604E00FB55C7 /* SelectedPhotoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A103E2BCE604E00FB55C7 /* SelectedPhotoPage.swift */; };
+		509A10412BCE747A00FB55C7 /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A10402BCE747A00FB55C7 /* DotView.swift */; };
 		509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC04C2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift */; };
 		509AC04F2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC04E2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift */; };
 		509AC0512B57832400A79CDB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC0502B57832400A79CDB /* LocationManager.swift */; };
@@ -370,6 +371,7 @@
 		509A10382BCE4F7800FB55C7 /* ImageDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDeleteButton.swift; sourceTree = "<group>"; };
 		509A103B2BCE55F400FB55C7 /* TextEditorPlus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorPlus.swift; sourceTree = "<group>"; };
 		509A103E2BCE604E00FB55C7 /* SelectedPhotoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotoPage.swift; sourceTree = "<group>"; };
+		509A10402BCE747A00FB55C7 /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
 		509AC04C2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheet+BottomSheetDetent.swift"; sourceTree = "<group>"; };
 		509AC04E2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheet+GetOffsetY.swift"; sourceTree = "<group>"; };
 		509AC0502B57832400A79CDB /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 				50F54A012B45283000D06F20 /* Navigation */,
 				50530B922B8775FD009C1F92 /* BusinessBottomBar.swift */,
 				506590EB2B8CE65D009F8E5F /* LoadingView.swift */,
+				509A10402BCE747A00FB55C7 /* DotView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1630,6 +1633,7 @@
 				50FDD8902B4B9375003015F9 /* BaseViewModel.swift in Sources */,
 				50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */,
 				50F54A1D2B454E0800D06F20 /* BusinessProfileEditPage.swift in Sources */,
+				509A10412BCE747A00FB55C7 /* DotView.swift in Sources */,
 				50B5DED42B3B19AA00C0A641 /* MapboxError.swift in Sources */,
 				509A102D2BCD03D300FB55C7 /* MyFollowAndLikePage.swift in Sources */,
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
@@ -2084,8 +2088,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.0.0;
+				kind = exactVersion;
+				version = 11.3.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

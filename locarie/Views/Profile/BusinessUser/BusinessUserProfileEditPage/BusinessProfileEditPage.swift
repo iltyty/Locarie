@@ -14,15 +14,14 @@ import SwiftUI
 struct BusinessProfileEditPage: View {
   @State var birthday = Date()
   @State var birthdayFormatted = ""
-  @State var isSheetPresented = false
+  @State var presentingAlert = false
+  @State var presentingSheet = false
   @State var viewport: Viewport = .followPuck(zoom: GlobalConstants.mapZoom)
 
   @StateObject private var avatarVM = AvatarUploadViewModel()
   @StateObject private var profileGetVM = ProfileGetViewModel()
   @StateObject private var profileUpdateVM = ProfileUpdateViewModel()
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
-
-  @Environment(\.dismiss) var dismiss
 
   var body: some View {
     VStack(spacing: 0) {
@@ -31,7 +30,10 @@ struct BusinessProfileEditPage: View {
         content
       }
     }
-    .sheet(isPresented: $isSheetPresented) { birthdaySheet }
+    .alert("Profile saved", isPresented: $presentingAlert) {
+      Button("OK") {}
+    }
+    .sheet(isPresented: $presentingSheet) { birthdaySheet }
     .onAppear {
       profileGetVM.getProfile(userId: cacheVM.getUserId())
     }
@@ -41,7 +43,8 @@ struct BusinessProfileEditPage: View {
     .onReceive(profileGetVM.$state) { state in
       handleProfileGetViewModelStateChange(state)
     }
-    .onReceive(profileUpdateVM.$state) { state in handleProfileUpdateViewModelStateChange(state)
+    .onReceive(profileUpdateVM.$state) { state in
+      handleProfileUpdateViewModelStateChange(state)
     }
     .onReceive(profileUpdateVM.$dto) { dto in
       if let location = dto.location {
@@ -254,7 +257,7 @@ private extension BusinessProfileEditPage {
       title: "Birthday", hint: "Birthday", text: $birthdayFormatted
     )
     .onTapGesture {
-      isSheetPresented = true
+      presentingSheet = true
     }
   }
 }
@@ -279,7 +282,7 @@ private extension BusinessProfileEditPage {
 
   var birthdaySheetCancelButton: some View {
     Button("Cancel") {
-      isSheetPresented = false
+      presentingSheet = false
     }
     .foregroundStyle(.secondary)
   }
@@ -288,7 +291,7 @@ private extension BusinessProfileEditPage {
     Button("Done") {
       profileUpdateVM.dto.birthday = birthday
       birthdayFormatted = profileUpdateVM.dto.formattedBirthday
-      isSheetPresented = false
+      presentingSheet = false
     }
     .foregroundStyle(Color.locariePrimary)
   }
@@ -359,7 +362,7 @@ private extension BusinessProfileEditPage {
     if let dto {
       cacheVM.setUserInfo(dto)
     }
-    dismiss()
+    presentingAlert = true
   }
 
   func handleProfileUpdateError(_ error: NetworkError) {
@@ -374,10 +377,7 @@ private enum Constants {
 
   static let firstProfileImageStrokeWidth: CGFloat = 3
   static let profileImageSize: CGFloat = 114
-  static let profileImageMaxCount = 5
   static let profileImageCornerRadius: CGFloat = 16
-  static let profileImageAspectRatio: CGFloat = 4 / 3
-  static let profileImagePickerCornerRadius: CGFloat = 10
   static let birthdaySheetHeightFraction: CGFloat = 0.4
 }
 

@@ -28,7 +28,7 @@ private extension BusinessStatus {
   var businessName: some View {
     Text(user.businessName)
       .font(.title3)
-      .fontWeight(.bold)
+      .fontWeight(.semibold)
   }
 
   var statusRow: some View {

@@ -21,9 +21,12 @@ struct BusinessBottomBar: View {
     ZStack(alignment: .top) {
       background
       HStack {
+        Spacer()
         favoriteButton
         Spacer()
+        Spacer()
         directionButton
+        Spacer()
       }
       .padding(.top, Constants.topPadding)
       .padding(.horizontal, Constants.hPadding)
@@ -74,12 +77,7 @@ private extension BusinessBottomBar {
 
   var directionButton: some View {
     Link(destination: navigationUrl) {
-      Label("Direction", systemImage: "map")
-        .padding(.horizontal, Constants.directionButtonHPadding)
-        .frame(height: Constants.directionButtonHeight)
-        .background(
-          Capsule().stroke(.secondary)
-        )
+      Text("Direction")
     }
     .tint(.primary)
     .buttonStyle(.plain)
@@ -94,12 +92,9 @@ private extension BusinessBottomBar {
   }
 
   var background: some View {
-    UnevenRoundedRectangle(
-      topLeadingRadius: Constants.cornerRadius,
-      topTrailingRadius: Constants.cornerRadius
-    )
-    .fill(.background)
-    .shadow(radius: Constants.shadowRadius)
+    Rectangle()
+      .fill(.background)
+      .shadow(radius: Constants.shadowRadius)
   }
 
   func favoriteButtonTapped() {
@@ -116,12 +111,9 @@ private extension BusinessBottomBar {
 }
 
 private enum Constants {
-  static let height: CGFloat = 90
+  static let height: CGFloat = 85
   static let topPadding: CGFloat = 15
   static let hPadding: CGFloat = 40
   static let iconSize: CGFloat = 28
-  static let cornerRadius: CGFloat = 20
-  static let shadowRadius: CGFloat = 2
-  static let directionButtonHPadding: CGFloat = 40
-  static let directionButtonHeight: CGFloat = 44
+  static let shadowRadius: CGFloat = 1
 }

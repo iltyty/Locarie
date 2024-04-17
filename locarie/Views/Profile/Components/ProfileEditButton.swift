@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ProfileEditButton: View {
   var body: some View {
-    NavigationLink(value: Router.Destination.userProfileEdit) {
+    NavigationLink {
+      UserProfileEditPage()
+    } label: {
       HStack {
         Image("EditIcon")
           .resizable()

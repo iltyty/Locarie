@@ -22,5 +22,6 @@ struct ProfileCategories: View {
         }
       }
     }
+    .scrollBounceBehavior(.basedOnSize)
   }
 }

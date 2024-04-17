@@ -97,29 +97,42 @@ private extension BusinessHomePage {
   }
 
   var bottomContent: some View {
-    BottomSheet(detents: [.minimum, .large]) {
+    BottomSheet(detents: [.medium, .large]) {
       VStack(alignment: .leading) {
-        BusinessHomeAvatarRow(
-          user: user,
-          hasUpdates: updatedIn24Hours,
-          isPresentingDetail: $showingDetailedProfile
-        )
+        if case .loading = profileVM.state {
+          skeleton
+        } else {
+          BusinessHomeAvatarRow(
+            user: user,
+            hasUpdates: updatedIn24Hours,
+            isPresentingDetail: $showingDetailedProfile
+          )
+          ProfileCategories(user)
+        }
         ScrollView {
           VStack(alignment: .leading, spacing: Constants.vSpacing) {
-            ProfileCategories(user)
-            ProfileBio(user)
-            if showingDetailedProfile {
-              ProfileDetail(user)
+            if case .loading = profileVM.state {
+              EmptyView()
+            } else {
+              ProfileBio(user)
+              if showingDetailedProfile {
+                ProfileDetail(user)
+              }
             }
-            ProfilePostsCount(listUserPostsVM.posts)
-            ForEach(listUserPostsVM.posts) { p in
-              PostCardView(p).onTapGesture {
-                post = p
-                showingPostCover = true
+            if case .loading = listUserPostsVM.state {
+              PostCardView.skeleton
+            } else {
+              ProfilePostsCount(listUserPostsVM.posts)
+              ForEach(listUserPostsVM.posts) { p in
+                PostCardView(p).onTapGesture {
+                  post = p
+                  showingPostCover = true
+                }
               }
             }
           }
         }
+        .scrollIndicators(.hidden)
       }
     }
   }
@@ -173,11 +186,30 @@ private extension BusinessHomePage {
   }
 }
 
+private extension BusinessHomePage {
+  var skeleton: some View {
+    VStack(alignment: .leading) {
+      HStack {
+        SkeletonView(74, 74, true)
+        VStack(alignment: .leading) {
+          SkeletonView(84, 14)
+          SkeletonView(146, 10)
+        }
+      }
+      HStack {
+        SkeletonView(68, 10)
+        SkeletonView(68, 10)
+      }
+      SkeletonView(48, 10)
+    }
+  }
+}
+
 private enum Constants {
   static let avatarSize: CGFloat = 72
   static let vSpacing: CGFloat = 15
   static let mapZoom: CGFloat = 12
-  static let topButtonsBottomPadding: CGFloat = 5
+  static let topButtonsBottomPadding: CGFloat = 3
 }
 
 #Preview {

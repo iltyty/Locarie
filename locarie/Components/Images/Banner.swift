@@ -46,7 +46,7 @@ struct Banner: View {
 
   private var defaultImage: some View {
     ZStack {
-      LocarieColor.greyMedium.shadow(radius: Constants.defaultImageShadowRadius)
+      LocarieColor.greyMedium
 
       Image("DefaultImage")
         .resizable()
@@ -57,11 +57,15 @@ struct Banner: View {
 
   private var images: some View {
     ForEach(urls.indices, id: \.self) { i in
-      AsyncImageView(url: urls[i]) { image in
+      AsyncImage(url: URL(string: urls[i])) { image in
         image
           .resizable()
+          .scaledToFill()
           .aspectRatio(aspectRatio, contentMode: .fill)
           .clipped()
+          .frame(alignment: .center)
+      } placeholder: {
+        defaultImage
       }
       .tag(i)
     }
@@ -76,11 +80,10 @@ struct BannerTestView: View {
 }
 
 private enum Constants {
-  static let cornerRadius: CGFloat = 16
+  static let cornerRadius: CGFloat = 18
   static let portraitAspectRatio: CGFloat = 3 / 4
   static let landscapeAspectRatio: CGFloat = 4 / 3
   static let defaultImageSize: CGFloat = 28
-  static let defaultImageShadowRadius: CGFloat = 2
 }
 
 #Preview {

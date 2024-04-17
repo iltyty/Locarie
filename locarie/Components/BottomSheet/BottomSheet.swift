@@ -110,7 +110,7 @@ private extension BottomSheet {
   var dragGesture: some Gesture {
     DragGesture(coordinateSpace: .global)
       .onChanged { value in
-        if translation.height + offsetY <= 0 {
+        if translation.height + offsetY <= 100 {
           withAnimation {
             presentingTopContent = false
           }
@@ -123,17 +123,9 @@ private extension BottomSheet {
           translation = value.translation
         }
       }
-      .onEnded { value in
+      .onEnded { _ in
         withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 1)) {
-          if value.velocity.height > .init(BottomSheetConstants.speedThreshold) {
-            currentDetent = .minimum
-            offsetY = currentDetent.getOffset(screenHeight: screenHeight)
-          } else if value.velocity.height < .init(-BottomSheetConstants.speedThreshold) {
-            currentDetent = .large
-            offsetY = currentDetent.getOffset(screenHeight: screenHeight)
-          } else {
-            (currentDetent, offsetY) = getDetentAndOffset()
-          }
+          (currentDetent, offsetY) = getDetentAndOffset()
           if translation.height + offsetY <= 0 {
             withAnimation {
               presentingTopContent = false

@@ -26,7 +26,7 @@ struct ProfileOpeningHours: View {
     }
     .lineLimit(1)
     .sheet(isPresented: $isPresented) {
-      sheet
+      sheet.presentationDetents([.fraction(Constants.sheetHeightFraction)])
     }
   }
 }
@@ -78,14 +78,27 @@ private extension ProfileOpeningHours {
   }
 
   var sheetTitle: some View {
-    Label("Opening hours", systemImage: "clock")
-      .font(.headline)
-      .fontWeight(.semibold)
-      .padding(.top, Constants.vSpacing)
+    ZStack {
+      Label("Opening hours", systemImage: "clock")
+        .font(.headline)
+        .fontWeight(.semibold)
+      HStack {
+        Image(systemName: "xmark")
+          .frame(width: Constants.xmarkSize, height: Constants.xmarkSize)
+          .onTapGesture {
+            isPresented = false
+          }
+          .padding(.leading)
+        Spacer()
+      }
+    }
+    .padding(.top, Constants.vSpacing)
   }
 }
 
 private enum Constants {
-  static let vSpacing: CGFloat = 25
+  static let vSpacing: CGFloat = 32
   static let cornerRadius: CGFloat = 25
+  static let xmarkSize: CGFloat = 18
+  static let sheetHeightFraction: CGFloat = 0.95
 }

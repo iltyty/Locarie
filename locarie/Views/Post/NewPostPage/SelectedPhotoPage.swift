@@ -39,20 +39,6 @@ struct SelectedPhotoPage: View {
             )
         }
       }
-
-//      HStack {
-//        Spacer()
-//        Image("Trash")
-//          .resizable()
-//          .scaledToFit()
-//          .frame(width: Constants.trashIconSize, height: Constants.trashIconSize)
-//          .onTapGesture {
-//            vm.selection.remove(at: curIndex)
-//            vm.objectWillChange.send()
-//          }
-//        Spacer()
-//      }
-//      .padding(.vertical)
     }
   }
 }

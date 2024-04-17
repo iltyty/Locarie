@@ -35,18 +35,19 @@ struct PostList: View {
 
   @ViewBuilder
   var postList: some View {
-    if posts.isEmpty {
-      Text(emptyHint)
-        .foregroundStyle(.secondary)
-    } else {
-      ForEach(posts) { post in
-        NavigationLink {
-          BusinessHomePage(uid: post.user.id)
-        } label: {
-          PostCardView(post)
+    Group {
+      if posts.isEmpty {
+        Text(emptyHint).foregroundStyle(.secondary)
+      } else {
+        ForEach(posts) { post in
+          NavigationLink {
+            BusinessHomePage(uid: post.user.id)
+          } label: {
+            PostCardView(post)
+          }
+          .tint(.primary)
+          .buttonStyle(.plain)
         }
-        .tint(.primary)
-        .buttonStyle(.plain)
       }
     }
   }
