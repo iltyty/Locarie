@@ -12,8 +12,6 @@ struct DynamicPostsMapView: View {
   @Binding var viewport: Viewport
   @Binding var selectedPost: PostDto
 
-  var neighborVM: PlaceReverseViewModel? = nil
-
   @State private var map: MapboxMap!
   @State private var needUpdating = true
   @State private var bounds: CoordinateBounds?
@@ -47,7 +45,6 @@ struct DynamicPostsMapView: View {
     }
     .onReceive(locationManager.$location) { location in
       updatePosts(location)
-      updateNeighborhood(location)
     }
     .ignoresSafeArea()
     .gesture(dragGesture)
@@ -60,26 +57,9 @@ private extension DynamicPostsMapView {
     if needUpdating {
       DispatchQueue.main.async {
         bounds = map.coordinateBounds(for: .init(cameraState: state.cameraState))
-        updateNeighborhood(state.cameraState.center)
         updatePosts(state.cameraState.center)
       }
     }
-  }
-
-  func updateNeighborhood(_ location: CLLocation?) {
-    guard let location else { return }
-    updateNeighborhood(
-      CLLocationCoordinate2D(
-        latitude: location.coordinate.latitude,
-        longitude: location.coordinate.longitude
-      )
-    )
-  }
-
-  func updateNeighborhood(_ location: CLLocationCoordinate2D) {
-    guard let neighborVM else { return }
-    neighborVM.lookup(forLocation: location)
-    needUpdating = false
   }
 
   func updatePosts(_ location: CLLocation?) {

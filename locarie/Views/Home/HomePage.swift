@@ -10,7 +10,6 @@ import SwiftUI
 
 struct HomePage: View {
   @StateObject private var postVM = PostListWithinViewModel()
-  @StateObject private var neighborVM = PlaceReverseViewModel()
 
   @State private var searching = false
   @State private var selectedPost = PostDto()
@@ -24,7 +23,6 @@ struct HomePage: View {
       DynamicPostsMapView(
         viewport: $viewport,
         selectedPost: $selectedPost,
-        neighborVM: neighborVM,
         postVM: postVM
       )
       contentView
@@ -73,10 +71,6 @@ private extension HomePage {
   var buttons: some View {
     HStack {
       searchIcon
-      Spacer()
-      CapsuleButton {
-        Label(neighborVM.neighborhood, image: "BlueMapIcon")
-      }
       Spacer()
       NavigationLink(value: Router.Destination.favorite) {
         CircleButton(systemName: "bookmark.fill")

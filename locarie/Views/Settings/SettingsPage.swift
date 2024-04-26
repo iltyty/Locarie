@@ -78,7 +78,7 @@ private extension SettingsPage {
 
   var signUpForBusiness: some View {
     NavigationLink(value: Router.Destination.businessRegister) {
-      LinkSettingsItem(text: "Sign up for business account", color: LocarieColor.blue, divider: false)
+      LinkSettingsItem(text: "Sign up for a business account", color: LocarieColor.blue, divider: false)
     }
     .buttonStyle(.plain)
   }

@@ -79,7 +79,6 @@ private extension BottomSheet {
         handler
         Spacer()
       }
-      .gesture(dragGesture)
       HStack {
         Spacer()
         content
@@ -87,6 +86,7 @@ private extension BottomSheet {
       }
     }
     .background(background)
+    .gesture(dragGesture)
   }
 
   var background: some View {
