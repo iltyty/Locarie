@@ -81,6 +81,7 @@ final class RegisterViewModel: BaseViewModel {
 extension RegisterViewModel {
   func register() {
     state = .loading
+    dataPreprocessing()
     networking.register(user: dto)
       .sink { [weak self] response in
         guard let self else { return }
@@ -89,8 +90,11 @@ extension RegisterViewModel {
       .store(in: &subscriptions)
   }
 
+  private func dataPreprocessing() {
+    dto.trimStringFields()
+  }
+
   private func handleRegisterResponse(_ response: RegisterResponse) {
-    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
     } else {

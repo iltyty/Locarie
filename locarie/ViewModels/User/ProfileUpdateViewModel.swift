@@ -21,12 +21,17 @@ final class ProfileUpdateViewModel: BaseViewModel {
 
   func updateProfile(userId id: Int64) {
     state = .loading
+    dataPreprocessing()
     networking.updateProfile(id: id, data: dto)
       .sink { [weak self] response in
         guard let self else { return }
         handleProfileUpdateResponse(response)
       }
       .store(in: &subscriptions)
+  }
+
+  private func dataPreprocessing() {
+    dto.trimStringFields()
   }
 
   private func handleProfileUpdateResponse(_ response: ProfileUpdateResponse) {

@@ -43,14 +43,17 @@ import Foundation
     let data = getImagesData()
     let filenames = getImageFilenames()
     let mimeTypes = getImageMimeTypes()
-    networking.create(
-      post, images: data, filenames: filenames, mimeTypes: mimeTypes
-    )
-    .sink { [weak self] response in
-      guard let self else { return }
-      handleResponse(response)
-    }
-    .store(in: &subscriptions)
+    dataPreprocessing()
+    networking.create(post, images: data, filenames: filenames, mimeTypes: mimeTypes)
+      .sink { [weak self] response in
+        guard let self else { return }
+        handleResponse(response)
+      }
+      .store(in: &subscriptions)
+  }
+
+  private func dataPreprocessing() {
+    post.content = post.content.trimmingCharacters(in: .whitespacesAndNewlines)
   }
 
   private func getImagesData() -> [Data] {

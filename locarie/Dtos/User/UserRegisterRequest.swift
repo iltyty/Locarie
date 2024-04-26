@@ -26,4 +26,15 @@ struct RegisterRequestDto: UserLocation {
   var address = ""
   var neighborhood = ""
   var location: BusinessLocation?
+
+  mutating func trimStringFields() {
+    email = email.trimmingCharacters(in: .whitespacesAndNewlines)
+    firstName = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+    lastName = lastName.trimmingCharacters(in: .whitespacesAndNewlines)
+    username = username.trimmingCharacters(in: .whitespacesAndNewlines)
+    password = password.trimmingCharacters(in: .whitespacesAndNewlines)
+    businessName = businessName.trimmingCharacters(in: .whitespacesAndNewlines)
+    address = address.trimmingCharacters(in: .whitespacesAndNewlines)
+    neighborhood = neighborhood.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
 }

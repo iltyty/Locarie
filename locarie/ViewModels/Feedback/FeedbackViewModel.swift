@@ -23,7 +23,7 @@ final class FeedbackViewModel: BaseViewModel {
       return
     }
     state = .loading
-    networking.send(userId: userId, content: content)
+    networking.send(userId: userId, content: content.trimmingCharacters(in: .whitespacesAndNewlines))
       .sink { [weak self] response in
         guard let self else { return }
         handleSendResponse(response)

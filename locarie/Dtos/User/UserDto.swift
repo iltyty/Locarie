@@ -34,6 +34,19 @@ struct UserDto: Codable, Identifiable, UserInfo, UserLocation {
   var favoredByCount: Int = 0
   var favoritePostsCount: Int = 0
   var favoriteBusinessesCount: Int = 0
+
+  mutating func trimStringFields() {
+    email = email.trimmingCharacters(in: .whitespacesAndNewlines)
+    firstName = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+    lastName = lastName.trimmingCharacters(in: .whitespacesAndNewlines)
+    username = username.trimmingCharacters(in: .whitespacesAndNewlines)
+    businessName = businessName.trimmingCharacters(in: .whitespacesAndNewlines)
+    homepageUrl = homepageUrl.trimmingCharacters(in: .whitespacesAndNewlines)
+    introduction = introduction.trimmingCharacters(in: .whitespacesAndNewlines)
+    phone = phone.trimmingCharacters(in: .whitespacesAndNewlines)
+    address = address.trimmingCharacters(in: .whitespacesAndNewlines)
+    neighborhood = neighborhood.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
 }
 
 enum UserType: String, Codable {
