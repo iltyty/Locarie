@@ -36,6 +36,7 @@ struct DynamicPostsMapView: View {
           }
         }
       }
+      .ornamentOptions(noScaleBarAndCompass())
       .onCameraChanged { state in
         onCameraChanged(state)
       }

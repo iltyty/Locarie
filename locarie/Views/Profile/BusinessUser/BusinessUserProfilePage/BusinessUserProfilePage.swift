@@ -117,6 +117,7 @@ private extension BusinessUserProfilePage {
           }
       }
     }
+    .ornamentOptions(noScaleBarAndCompass())
     .ignoresSafeArea(edges: .all)
   }
 }

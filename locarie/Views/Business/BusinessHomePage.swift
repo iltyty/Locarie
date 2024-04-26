@@ -82,6 +82,7 @@ private extension BusinessHomePage {
         }
       }
     }
+    .ornamentOptions(noScaleBarAndCompass())
     .ignoresSafeArea(edges: .all)
   }
 
