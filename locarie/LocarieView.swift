@@ -7,8 +7,8 @@
 import SwiftUI
 
 struct LocarieView: View {
-  @ObservedObject var router = Router.shared
-  @ObservedObject var viewRouter = BottomTabViewRouter.shared
+  @ObservedObject private var router = Router.shared
+  @ObservedObject private var viewRouter = BottomTabViewRouter.shared
 
   var body: some View {
     NavigationStack(path: $router.path) {

@@ -40,6 +40,7 @@ import Foundation
 
   func create() {
     guard !photoVM.attachments.isEmpty else { return }
+    state = .loading
     let data = getImagesData()
     let filenames = getImageFilenames()
     let mimeTypes = getImageMimeTypes()

@@ -9,13 +9,17 @@ import PhotosUI
 import SwiftUI
 
 struct NewPostPage: View {
-  @State private var isLoading = false
+  @State private var loading = false
   @State private var isAlertShowing = false
   @State private var alertMessage = ""
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+  @ObservedObject private var viewRouter = BottomTabViewRouter.shared
+
   @StateObject private var profileVM = ProfileGetViewModel()
   @StateObject private var postVM = PostCreateViewModel()
+
+  @Environment(\.dismiss) private var dismiss
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
@@ -32,8 +36,7 @@ struct NewPostPage: View {
       .scrollBounceBehavior(.basedOnSize)
       postButton
     }
-    .disabled(isLoading)
-    .overlay { overlayView }
+    .loadingIndicator(loading: $loading)
     .alert(
       alertMessage,
       isPresented: $isAlertShowing
@@ -49,12 +52,14 @@ struct NewPostPage: View {
     .onReceive(postVM.$state) { state in
       switch state {
       case .loading:
-        isLoading = true
+        loading = true
       case .finished:
-        alertMessage = "Post success"
-        isAlertShowing = true
+        loading = false
+        viewRouter.currentPage = .profile
+        dismiss()
         postVM.reset()
       case let .failed(error):
+        loading = false
         // - TODO: alert message
         alertMessage = error.backendError?.message ??
           "Something went wrong, please try again later"
@@ -62,14 +67,6 @@ struct NewPostPage: View {
       default: break
       }
     }
-  }
-
-  var overlayView: some View {
-    isLoading ? loadingView : nil
-  }
-
-  var loadingView: some View {
-    ProgressView().progressViewStyle(.circular)
   }
 }
 

@@ -10,7 +10,7 @@ import SwiftUI
 extension View {
   func loadingIndicator(loading: Binding<Bool>) -> some View {
     ZStack {
-      self
+      self.disabled(loading.wrappedValue)
       if loading.wrappedValue {
         LoadingIndicator()
       }
