@@ -32,10 +32,6 @@ struct BottomTabViewItem: View {
 
   var body: some View {
     icon
-      .onTapGesture {
-        viewRouter.currentPage = page
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-      }
   }
 
   @ViewBuilder
@@ -58,19 +54,4 @@ struct BottomTabViewItem: View {
 
 private enum Constants {
   static let size: CGFloat = 28
-}
-
-#Preview {
-  HStack {
-    BottomTabViewItem(page: .profile, iconName: "ProfileIcon")
-    BottomTabViewItem(
-      page: .home,
-      iconName: "HomeIcon",
-      selectedIconName: "SelectedHomeIcon"
-    )
-    BottomTabViewItem(
-      page: .profile,
-      iconUrl: LocalCacheViewModel.shared.getAvatarUrl()
-    )
-  }
 }

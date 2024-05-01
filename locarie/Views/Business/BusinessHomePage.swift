@@ -108,13 +108,13 @@ private extension BusinessHomePage {
             hasUpdates: updatedIn24Hours,
             isPresentingDetail: $showingDetailedProfile
           )
-          ProfileCategories(user)
         }
         ScrollView {
           VStack(alignment: .leading, spacing: Constants.vSpacing) {
             if case .loading = profileVM.state {
               EmptyView()
             } else {
+              ProfileCategories(user)
               ProfileBio(user)
               if showingDetailedProfile {
                 ProfileDetail(user)

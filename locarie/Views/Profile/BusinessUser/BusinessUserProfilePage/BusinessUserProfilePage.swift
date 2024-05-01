@@ -149,9 +149,9 @@ private extension BusinessUserProfilePage {
         isPresentingCover: .constant(false),
         isPresentingDetail: $presentingProfileDetail
       )
-      ProfileCategories(user)
       ScrollView {
         VStack(alignment: .leading, spacing: Constants.vSpacing) {
+          ProfileCategories(user)
           ProfileBio(user)
           if presentingProfileDetail {
             ProfileDetail(user)

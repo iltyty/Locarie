@@ -16,6 +16,6 @@ class BottomTabViewRouter: ObservableObject {
 
 enum Page {
   case home
-  case new
   case profile
+  case none
 }

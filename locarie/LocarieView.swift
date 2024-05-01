@@ -16,10 +16,10 @@ struct LocarieView: View {
         switch viewRouter.currentPage {
         case .home:
           HomePage()
-        case .new:
-          NewPostPage()
         case .profile:
           UserProfilePage()
+        case .none:
+          EmptyView()
         }
       }
       .ignoresSafeArea(edges: .bottom)

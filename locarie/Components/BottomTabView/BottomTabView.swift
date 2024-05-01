@@ -42,30 +42,45 @@ private extension BottomTabView {
       page: .home,
       iconName: "HomeIcon",
       selectedIconName: "SelectedHomeIcon"
-    )
+    ).onTapGesture {
+      setPage(.home)
+    }
   }
 
   var newPostPage: some View {
-    BottomTabViewItem(
-      page: .new,
-      iconName: "PlusIcon"
-    )
+    NavigationLink {
+      NewPostPage()
+    } label: {
+      BottomTabViewItem(
+        page: .none,
+        iconName: "PlusIcon"
+      )
+    }
   }
 
   @ViewBuilder
   var profilePage: some View {
     let avatarUrl = cacheVM.getAvatarUrl()
-    if avatarUrl.isEmpty {
-      BottomTabViewItem(
-        page: .profile,
-        iconName: "ProfileIcon"
-      )
-    } else {
-      BottomTabViewItem(
-        page: .profile,
-        iconUrl: avatarUrl
-      )
+    Group {
+      if avatarUrl.isEmpty {
+        BottomTabViewItem(
+          page: .profile,
+          iconName: "ProfileIcon"
+        )
+      } else {
+        BottomTabViewItem(
+          page: .profile,
+          iconUrl: avatarUrl
+        )
+      }
+    }.onTapGesture {
+      setPage(.profile)
     }
+  }
+
+  func setPage(_ page: Page) {
+    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    viewRouter.currentPage = page
   }
 }
 

@@ -31,7 +31,6 @@ struct NewPostPage: View {
       }
       .scrollBounceBehavior(.basedOnSize)
       postButton
-      BottomTabView()
     }
     .disabled(isLoading)
     .overlay { overlayView }
@@ -76,7 +75,7 @@ struct NewPostPage: View {
 
 private extension NewPostPage {
   var navigationBar: some View {
-    NavigationBar("Post", left: EmptyView())
+    NavigationBar("Post")
   }
 
   var photosPicker: some View {
