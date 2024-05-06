@@ -9,11 +9,12 @@ import SwiftUI
 
 struct BusinessSearchView: View {
   @Binding var searching: Bool
-  var namespace: Namespace.ID = Namespace().wrappedValue
 
   @State var businessName = ""
 
-  @StateObject var userListVM = UserListViewModel()
+  @StateObject private var userListVM = UserListViewModel()
+  @StateObject private var favoriteVM = FavoriteBusinessViewModel()
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
@@ -25,6 +26,7 @@ struct BusinessSearchView: View {
     .padding(.horizontal)
     .background(.background)
     .onAppear {
+      favoriteVM.list(userId: cacheVM.getUserId())
       userListVM.listBusinesses()
     }
   }
@@ -66,7 +68,7 @@ private extension BusinessSearchView {
       HStack {
         ForEach(LondonAreas.allCases, id: \.self) { area in
           CapsuleButton {
-            Label(area.rawValue, image: "BlueMapIcon")
+            Label(area.rawValue, image: "Map")
           }
         }
       }
@@ -74,7 +76,7 @@ private extension BusinessSearchView {
     .scrollIndicators(.hidden)
   }
 
-  var businesses: [BusinessNameAvatarUrlDto] {
+  var businesses: [UserDto] {
     userListVM.businesses.filter {
       businessName.isEmpty || $0.businessName.range(
         of: businessName,
@@ -84,30 +86,19 @@ private extension BusinessSearchView {
   }
 
   var businessesView: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      Text("Businesses").foregroundStyle(Constants.businessesTitleColor)
-      ForEach(businesses) { user in
-        BusinessRowItem(user)
+    ScrollView {
+      VStack(alignment: .leading, spacing: Constants.vSpacing) {
+        Text("Businesses").foregroundStyle(Constants.businessesTitleColor)
+        ForEach(businesses) { user in
+          BusinessFollowedAvatarRow(user: user, followed: isFollowed(user.id), isPresentingCover: .constant(false))
+        }
       }
     }
-  }
-}
-
-private struct BusinessRowItem: View {
-  let user: BusinessNameAvatarUrlDto
-
-  init(_ user: BusinessNameAvatarUrlDto) {
-    self.user = user
+    .scrollIndicators(.hidden)
   }
 
-  var body: some View {
-    NavigationLink(destination: BusinessHomePage(uid: user.id)) {
-      HStack {
-        AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
-        Text(user.businessName).fontWeight(.semibold)
-      }
-    }
-    .tint(.primary)
+  func isFollowed(_ id: Int64) -> Bool {
+    favoriteVM.users.contains { $0.id == id }
   }
 }
 

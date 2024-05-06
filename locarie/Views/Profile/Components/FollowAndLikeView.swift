@@ -147,18 +147,17 @@ private extension FollowAndLikeView {
 
 private extension FollowAndLikeView {
   var skeleton: some View {
-    VStack(alignment: .leading) {
+    VStack {
       HStack {
-        SkeletonView(72, 72, true)
+        RoundedAvatarSkeletonView(size: 114)
         VStack(alignment: .leading) {
           SkeletonView(84, 14)
           SkeletonView(146, 10)
+          HStack {
+            SkeletonView(68, 11)
+            SkeletonView(68, 11)
+          }
         }
-        Spacer()
-      }
-      HStack {
-        SkeletonView(68, 11)
-        SkeletonView(68, 11)
         Spacer()
       }
       Spacer()

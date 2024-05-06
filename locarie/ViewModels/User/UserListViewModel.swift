@@ -10,7 +10,7 @@ import Foundation
 
 final class UserListViewModel: BaseViewModel {
   @Published var state: State = .idle
-  @Published var businesses: [BusinessNameAvatarUrlDto] = []
+  @Published var businesses: [UserDto] = []
 
   private let networking: UserListService
   private var subscriptions: Set<AnyCancellable> = []

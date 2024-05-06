@@ -20,7 +20,7 @@ final class UserListServiceImpl: BaseAPIService, UserListService {
   func listBusinesses() -> AnyPublisher<ListBusinessesResponse, Never> {
     AF.request(APIEndpoints.listBusinessesUrl, method: .get)
       .validate()
-      .publishDecodable(type: ResponseDto<[BusinessNameAvatarUrlDto]>.self)
+      .publishDecodable(type: ResponseDto<[UserDto]>.self)
       .map { self.mapResponse($0) }
       .receive(on: RunLoop.main)
       .eraseToAnyPublisher()
@@ -28,6 +28,6 @@ final class UserListServiceImpl: BaseAPIService, UserListService {
 }
 
 typealias ListBusinessesResponse = DataResponse<
-  ResponseDto<[BusinessNameAvatarUrlDto]>,
+  ResponseDto<[UserDto]>,
   NetworkError
 >

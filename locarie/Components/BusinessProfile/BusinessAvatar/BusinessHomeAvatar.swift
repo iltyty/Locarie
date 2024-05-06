@@ -11,15 +11,13 @@ struct BusinessHomeAvatar: View {
   let url: String
 
   var body: some View {
-    ZStack(alignment: .bottomTrailing) {
-      AsyncImage(url: URL(string: url)) { image in
-        image.resizable()
-          .scaledToFill()
-          .frame(width: Constants.size, height: Constants.size)
-          .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
-      } placeholder: {
-        RoundedAvatarSkeletonView()
-      }
+    AsyncImage(url: URL(string: url)) { image in
+      image.resizable()
+        .scaledToFill()
+        .frame(width: Constants.size, height: Constants.size)
+        .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+    } placeholder: {
+      RoundedAvatarSkeletonView()
     }
   }
 }
