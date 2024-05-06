@@ -135,8 +135,6 @@ private extension BusinessHomePage {
         }
         .scrollIndicators(.hidden)
       }
-    } topContent: {
-      firstProfileImage
     }
   }
 
@@ -199,7 +197,7 @@ private extension BusinessHomePage {
   var skeleton: some View {
     VStack(alignment: .leading) {
       HStack {
-        SkeletonView(74, 74, true)
+        RoundedAvatarSkeletonView()
         VStack(alignment: .leading) {
           SkeletonView(84, 14)
           SkeletonView(146, 10)

@@ -9,33 +9,26 @@ import SwiftUI
 
 struct BusinessHomeAvatar: View {
   let url: String
-  var hasUpdates = false
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      AvatarView(
-        imageUrl: url,
-        size: BusinessAvatarConstants.size
-      )
-      if hasUpdates {
-        updateStatus
+      AsyncImage(url: URL(string: url)) { image in
+        image.resizable()
+          .scaledToFill()
+          .frame(width: Constants.size, height: Constants.size)
+          .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+      } placeholder: {
+        RoundedAvatarSkeletonView()
       }
     }
-  }
-
-  private var updateStatus: some View {
-    Circle()
-      .fill(LocarieColor.green)
-      .frame(width: Constants.iconSize, height: Constants.iconSize)
-      .offset(x: Constants.iconOffset, y: Constants.iconOffset)
   }
 }
 
 private enum Constants {
-  static let iconSize: CGFloat = 12
-  static let iconOffset: CGFloat = -3
+  static let size: CGFloat = 72.0
+  static let cornerRadius: CGFloat = 18
 }
 
 #Preview {
-  BusinessHomeAvatar(url: "https://picsum.photos/200", hasUpdates: true)
+  BusinessHomeAvatar(url: "")
 }

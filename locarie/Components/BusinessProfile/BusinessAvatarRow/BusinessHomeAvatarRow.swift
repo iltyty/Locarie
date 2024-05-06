@@ -15,7 +15,7 @@ struct BusinessHomeAvatarRow: View {
 
   var body: some View {
     HStack {
-      BusinessHomeAvatar(url: user.avatarUrl, hasUpdates: hasUpdates)
+      BusinessHomeAvatar(url: user.profileImageUrls.first ?? "")
       BusinessStatus(user)
       Spacer()
       BusinessProfileDetailButton(presenting: $isPresentingDetail)

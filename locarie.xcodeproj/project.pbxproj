@@ -182,6 +182,7 @@
 		50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEDD2B3BE89900C0A641 /* PlaceRetrieve.swift */; };
 		50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */; };
 		50B5DEE22B3C163600C0A641 /* PlaceRetrieveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */; };
+		50C69A652BE8AA4B00B51B0C /* RoundedAvatarSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C69A642BE8AA4B00B51B0C /* RoundedAvatarSkeletonView.swift */; };
 		50C7AA482BDB816700928DBE /* MapboxOrnamentsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C7AA472BDB816700928DBE /* MapboxOrnamentsOptions.swift */; };
 		50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9832B6F41260025A0D9 /* CircleButton.swift */; };
 		50CBC9862B6F42FD0025A0D9 /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */; };
@@ -415,6 +416,7 @@
 		50B5DEDD2B3BE89900C0A641 /* PlaceRetrieve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRetrieve.swift; sourceTree = "<group>"; };
 		50B5DEDF2B3C107000C0A641 /* MapboxBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxBaseService.swift; sourceTree = "<group>"; };
 		50B5DEE12B3C163600C0A641 /* PlaceRetrieveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRetrieveViewModel.swift; sourceTree = "<group>"; };
+		50C69A642BE8AA4B00B51B0C /* RoundedAvatarSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedAvatarSkeletonView.swift; sourceTree = "<group>"; };
 		50C7AA472BDB816700928DBE /* MapboxOrnamentsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxOrnamentsOptions.swift; sourceTree = "<group>"; };
 		50CBC9832B6F41260025A0D9 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
@@ -938,6 +940,7 @@
 			isa = PBXGroup;
 			children = (
 				509A101C2BC8DF9200FB55C7 /* SkeletonView.swift */,
+				50C69A642BE8AA4B00B51B0C /* RoundedAvatarSkeletonView.swift */,
 			);
 			path = Skeleton;
 			sourceTree = "<group>";
@@ -1613,6 +1616,7 @@
 				506590EC2B8CE65D009F8E5F /* LoadingView.swift in Sources */,
 				5054CDEF2B288D3300645F5C /* UserLoginService.swift in Sources */,
 				501BAF272B462DE000D9D84F /* TextSettingsItem.swift in Sources */,
+				50C69A652BE8AA4B00B51B0C /* RoundedAvatarSkeletonView.swift in Sources */,
 				50530B9B2B878B07009C1F92 /* FavoritePostViewModel.swift in Sources */,
 				500FB22C2B88304200E14DEE /* ProfileEditButton.swift in Sources */,
 				509A10322BCE194900FB55C7 /* DefaultBusinessImageView.swift in Sources */,

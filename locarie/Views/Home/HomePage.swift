@@ -14,7 +14,7 @@ struct HomePage: View {
   @State private var searching = false
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport =
-    .camera(center: .london, zoom: GlobalConstants.mapZoom)
+    .followPuck(zoom: GlobalConstants.mapZoom)
 
   @Namespace var namespace
 
@@ -70,8 +70,9 @@ private extension HomePage {
 
   var buttons: some View {
     HStack {
-      searchIcon
+      locarieIcon
       Spacer()
+      searchIcon
       NavigationLink(value: Router.Destination.favorite) {
         CircleButton(systemName: "bookmark.fill")
           .foregroundStyle(LocarieColor.primary)
@@ -81,6 +82,13 @@ private extension HomePage {
     .fontWeight(.semibold)
     .padding(.horizontal)
     .padding(.bottom, Constants.topButtonsBottomPadding)
+  }
+
+  var locarieIcon: some View {
+    Image("LocarieIcon")
+      .resizable()
+      .scaledToFit()
+      .frame(width: 40, height: 40)
   }
 
   var searchIcon: some View {
