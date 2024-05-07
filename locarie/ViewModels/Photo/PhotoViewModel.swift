@@ -12,12 +12,15 @@ import SwiftUI
 // A view model that integrates a photos picker
 @MainActor final class PhotoViewModel: ObservableObject {
   // A class that manages an image selected in the photos picker
-  @MainActor final class ImageAttachment: ObservableObject, Identifiable {
+  @MainActor final class ImageAttachment: ObservableObject, Identifiable, Equatable {
+    nonisolated static func == (lhs: PhotoViewModel.ImageAttachment, rhs: PhotoViewModel.ImageAttachment) -> Bool {
+      lhs.id == rhs.id
+    }
+
     // Statuses that indicate the app's progress in loading a selected photo
     enum Status {
       case loading // A status indicating that the app has requested a photo
-      case finished(Image) // A status indicating that the app has loaded a
-      // photo
+      case finished(UIImage) // A status indicating that the app has loaded a photo
       case failed(Error) // A status indicating that the app failed to load a
       // photo
       var isFailed: Bool {
@@ -69,7 +72,7 @@ import SwiftUI
            let uiImage = UIImage(data: data)
         {
           self.data = data
-          status = .finished(Image(uiImage: uiImage))
+          status = .finished(uiImage)
         } else {
           throw LoadingError.contentTypeNotSupported
         }

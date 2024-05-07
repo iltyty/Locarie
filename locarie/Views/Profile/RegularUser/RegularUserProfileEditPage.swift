@@ -58,7 +58,7 @@ private extension RegularUserProfileEditPage {
   }
 
   var avatarEditor: some View {
-    AvatarEditor(photoViewModel: avatarVM.photoViewModel)
+    AvatarEditor(photoVM: avatarVM.photoViewModel)
       .padding(.vertical, Constants.avatarVPadding)
   }
 

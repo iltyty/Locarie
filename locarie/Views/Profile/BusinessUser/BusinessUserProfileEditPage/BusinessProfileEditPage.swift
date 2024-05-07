@@ -142,7 +142,7 @@ private extension BusinessProfileEditPage {
   var avatarEditor: some View {
     HStack {
       Spacer()
-      AvatarEditor(photoViewModel: avatarVM.photoViewModel)
+      AvatarEditor(photoVM: avatarVM.photoViewModel)
       Spacer()
     }
   }
@@ -374,6 +374,8 @@ private enum Constants {
   static let vSpacing: CGFloat = 16
   static let defaultIconSize: CGFloat = 28
   static let defaultProfileImagesCount = 5
+
+  static let imageCropSize: CGFloat = 250
 
   static let firstProfileImageStrokeWidth: CGFloat = 3
   static let profileImageSize: CGFloat = 114

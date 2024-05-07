@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ImageCropView: View {
   var crop: ImageCrop
-  var image: UIImage?
+  var image: Binding<UIImage?>
   var onCrop: (UIImage?, Bool) -> Void
 
   @Environment(\.dismiss) var dismiss
@@ -26,7 +26,7 @@ struct ImageCropView: View {
       VStack {
         navigationBar.foregroundStyle(.white)
         imageView()
-          .background(.white)
+          .background(Color.white.clipShape(clipShape()))
           .frame(maxWidth: .infinity, maxHeight: .infinity)
       }
     }
@@ -68,13 +68,11 @@ struct ImageCropView: View {
     let cropSize = crop.size()
     GeometryReader {
       let size = $0.size
-      if let image {
+      if let image = image.wrappedValue {
         Image(uiImage: image)
           .resizable()
           .scaledToFill()
-          .clipShape(clipShape())
           .frame(width: cropSize.width, height: cropSize.height)
-          .clipped()
           .overlay {
             GeometryReader { proxy in
               let rect = proxy.frame(in: .named(Constants.coordinateSpaceName))
@@ -112,6 +110,7 @@ struct ImageCropView: View {
     .gesture(magnifyGesture)
     .coordinateSpace(name: Constants.coordinateSpaceName)
     .frame(width: cropSize.width, height: cropSize.height)
+    .clipShape(clipShape())
     .clipped()
   }
 
@@ -194,9 +193,7 @@ private struct ImageCropTestView: View {
       }
     }
     .fullScreenCover(isPresented: $isCropping) {
-//      image = nil
-    } content: {
-      ImageCropView(crop: .square(250), image: UIImage(named: "LocarieIcon")) { image, status in
+      ImageCropView(crop: .circle(250), image: .constant(UIImage(named: "LocarieIcon"))) { image, status in
         if status {
           self.image = image
         }

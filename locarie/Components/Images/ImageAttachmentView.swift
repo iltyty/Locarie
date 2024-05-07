@@ -51,8 +51,8 @@ struct ImageAttachmentView: View {
   var body: some View {
     Group {
       switch imageAttachment.status {
-      case let .finished(image):
-        finishedImage(image)
+      case let .finished(uiImage):
+        finishedImage(Image(uiImage: uiImage))
       case .failed:
         failedImage
       default:
