@@ -10,6 +10,8 @@ import SwiftUI
 struct PostList: View {
   let posts: [PostDto]
   @Binding var selectedPost: PostDto
+  @State var scrollId: Int64?
+
   var showTitle = true
   var emptyHint = "No post in this area"
 
@@ -17,12 +19,17 @@ struct PostList: View {
     ScrollView {
       VStack {
         if showTitle {
-          title
+          title.id(0)
         }
         postList
       }
+      .scrollTargetLayout()
     }
+    .scrollPosition(id: $scrollId)
     .scrollIndicators(.hidden)
+    .onChange(of: selectedPost) { _, newValue in
+      scrollId = newValue.id
+    }
   }
 
   private var title: some View {
@@ -45,6 +52,7 @@ struct PostList: View {
           } label: {
             PostCardView(post)
           }
+          .id(post.id)
           .tint(.primary)
           .buttonStyle(.plain)
         }

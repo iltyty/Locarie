@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Banner: View {
   let urls: [String]
+  var fullToggle = false
   var indicator = true
   var rounded = true
   var isPortrait = true
@@ -17,12 +18,20 @@ struct Banner: View {
 
   var body: some View {
     GeometryReader { proxy in
-      TabView {
-        if urls.isEmpty {
-          defaultImage
-        } else {
-          images
+      ZStack(alignment: .topTrailing) {
+        TabView {
+          if urls.isEmpty {
+            defaultImage
+          } else {
+            images
+          }
         }
+        Image(systemName: "arrow.down.left.and.arrow.up.right")
+          .resizable()
+          .scaledToFit()
+          .foregroundStyle(.white)
+          .frame(width: Constants.fullIconSize, height: Constants.fullIconSize)
+          .padding([.top, .trailing])
       }
       .onAppear {
         screenSize = proxy.size
@@ -72,14 +81,8 @@ struct Banner: View {
   }
 }
 
-struct BannerTestView: View {
-  var body: some View {
-    Banner(urls: [], isPortrait: false)
-      .padding(.horizontal)
-  }
-}
-
 private enum Constants {
+  static let fullIconSize: CGFloat = 16
   static let cornerRadius: CGFloat = 18
   static let portraitAspectRatio: CGFloat = 3 / 4
   static let landscapeAspectRatio: CGFloat = 4 / 3
@@ -87,5 +90,6 @@ private enum Constants {
 }
 
 #Preview {
-  BannerTestView()
+  Banner(urls: ["https://picsum.photos/600/400"], isPortrait: false)
+    .padding(.horizontal)
 }

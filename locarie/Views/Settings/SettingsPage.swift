@@ -34,7 +34,6 @@ struct SettingsPage: View {
       }
       .background(LocarieColor.greyLight)
     }
-    .padding(.top)
   }
 }
 

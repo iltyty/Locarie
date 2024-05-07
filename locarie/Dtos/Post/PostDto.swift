@@ -8,13 +8,17 @@
 import CoreLocation
 import Foundation
 
-struct PostDto: Codable, Identifiable {
+struct PostDto: Codable, Identifiable, Equatable {
   var id: Int64 = 0
   var time = Date()
   var content = ""
   var favoredByCount = 0
   var user = UserDto()
   var imageUrls: [String] = []
+
+  static func == (lhs: PostDto, rhs: PostDto) -> Bool {
+    lhs.id == rhs.id
+  }
 }
 
 extension PostDto {
