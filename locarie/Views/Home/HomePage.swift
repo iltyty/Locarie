@@ -45,7 +45,7 @@ private extension HomePage {
       buttons
       BottomSheet(
         topPosition: .right,
-        detents: [.absoluteBottom(45), .absoluteBottom(150), .absoluteTop(150)]
+        detents: [.absoluteBottom(180), .absoluteBottom(45), .absoluteTop(150)]
       ) {
         VStack {
           Text("Discover this area")

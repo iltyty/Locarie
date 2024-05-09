@@ -185,6 +185,8 @@
 		50C69A652BE8AA4B00B51B0C /* RoundedAvatarSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C69A642BE8AA4B00B51B0C /* RoundedAvatarSkeletonView.swift */; };
 		50C69A672BE9264F00B51B0C /* ImageCrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C69A662BE9264F00B51B0C /* ImageCrop.swift */; };
 		50C69A692BE9CF4B00B51B0C /* ImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C69A682BE9CF4B00B51B0C /* ImageCropView.swift */; };
+		50C69A6C2BEC736C00B51B0C /* HelveticaNeue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50C69A6B2BEC734600B51B0C /* HelveticaNeue.ttf */; };
+		50C69A6E2BEC74EB00B51B0C /* HelveticaNeueItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50C69A6D2BEC74EB00B51B0C /* HelveticaNeueItalic.ttf */; };
 		50C7AA482BDB816700928DBE /* MapboxOrnamentsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C7AA472BDB816700928DBE /* MapboxOrnamentsOptions.swift */; };
 		50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9832B6F41260025A0D9 /* CircleButton.swift */; };
 		50CBC9862B6F42FD0025A0D9 /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */; };
@@ -420,6 +422,8 @@
 		50C69A642BE8AA4B00B51B0C /* RoundedAvatarSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedAvatarSkeletonView.swift; sourceTree = "<group>"; };
 		50C69A662BE9264F00B51B0C /* ImageCrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCrop.swift; sourceTree = "<group>"; };
 		50C69A682BE9CF4B00B51B0C /* ImageCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropView.swift; sourceTree = "<group>"; };
+		50C69A6B2BEC734600B51B0C /* HelveticaNeue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.ttf; sourceTree = "<group>"; };
+		50C69A6D2BEC74EB00B51B0C /* HelveticaNeueItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = HelveticaNeueItalic.ttf; path = locarie/Fonts/HelveticaNeueItalic.ttf; sourceTree = SOURCE_ROOT; };
 		50C7AA472BDB816700928DBE /* MapboxOrnamentsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapboxOrnamentsOptions.swift; sourceTree = "<group>"; };
 		50CBC9832B6F41260025A0D9 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		50CBC9852B6F42FD0025A0D9 /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
@@ -1095,6 +1099,7 @@
 		50AAB17B2AEFA2E9003FEDF1 /* locarie */ = {
 			isa = PBXGroup;
 			children = (
+				50C69A6A2BEC72EA00B51B0C /* Fonts */,
 				50B5DEC02B3B07B300C0A641 /* MapboxSDK */,
 				50E60DE62AFF885200CA088F /* Common */,
 				50277F7E2AF12A640045AB12 /* Components */,
@@ -1247,6 +1252,15 @@
 				500FB24A2B88902400E14DEE /* PlaceReverseViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		50C69A6A2BEC72EA00B51B0C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				50C69A6B2BEC734600B51B0C /* HelveticaNeue.ttf */,
+				50C69A6D2BEC74EB00B51B0C /* HelveticaNeueItalic.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		50C7AA492BDB83FD00928DBE /* Business */ = {
@@ -1535,8 +1549,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50C69A6C2BEC736C00B51B0C /* HelveticaNeue.ttf in Resources */,
 				50AAB1842AEFA2EC003FEDF1 /* Preview Assets.xcassets in Resources */,
 				50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */,
+				50C69A6E2BEC74EB00B51B0C /* HelveticaNeueItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

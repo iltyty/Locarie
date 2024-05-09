@@ -46,6 +46,7 @@ struct BottomSheet<Content: View, TopContent: View>: View {
         }
         contentView
       }
+      .frame(minHeight: 1.5 * proxy.size.height)
       .offset(y: translation.height + offsetY)
       .onAppear {
         screenHeight = proxy.frame(in: .global).size.height

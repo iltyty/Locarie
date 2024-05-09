@@ -12,6 +12,7 @@ struct locarieApp: App {
   var body: some Scene {
     WindowGroup {
       LocarieView()
+        .environment(\.font, Font.custom("HelveticaNeue", size: 18, relativeTo: .body))
     }
   }
 }
