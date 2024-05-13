@@ -14,15 +14,14 @@ struct BottomSheet<Content: View, TopContent: View>: View {
   let topPosition: TopPosition
   let detents: [BottomSheetDetent]
 
-  @State var offsetY: CGFloat = 0
-  @State var translation: CGSize = .zero
-  @State var currentDetent: BottomSheetDetent = .minimum
-  @State var presentingTopContent = true
-  @State var screenHeight: CGFloat = 0
+  @Binding var currentDetent: BottomSheetDetent
+
+  @State private var screenHeight: CGFloat = 0
 
   init(
     topPosition: TopPosition = .left,
     detents: [BottomSheetDetent],
+    currentDetent: Binding<BottomSheetDetent> = .constant(.minimum),
     @ViewBuilder content: () -> Content,
     @ViewBuilder topContent: () -> TopContent = { EmptyView() }
   ) {
@@ -31,30 +30,42 @@ struct BottomSheet<Content: View, TopContent: View>: View {
     self.topContent = topContent()
     if detents.isEmpty {
       self.detents = [.minimum, .medium]
-      currentDetent = .minimum
     } else {
-      self.detents = detents
-      currentDetent = detents[0]
+      self.detents = detents.sorted { d1, d2 in
+        d1.getOffset(screenHeight: 1000) < d2.getOffset(screenHeight: 1000)
+      }
     }
+    _currentDetent = currentDetent
   }
 
   var body: some View {
     GeometryReader { proxy in
       VStack {
-        if presentingTopContent {
+        if currentDetent != .large {
           topContentView
         }
         contentView
       }
-      .frame(minHeight: 1.5 * proxy.size.height)
-      .offset(y: translation.height + offsetY)
+      .scrollDisabled(currentDetent != .large)
+      .gesture(
+        DragGesture(minimumDistance: 10).onEnded { value in
+          var index = detents.firstIndex { $0 == currentDetent } ?? 0
+          if value.translation.height > 0 {
+            index = min(index + 1, detents.count - 1)
+          } else {
+            index = max(index - 1, 0)
+          }
+          withAnimation(.spring) {
+            currentDetent = detents[index]
+          }
+        }
+      )
+      .offset(y: currentDetent.getOffset(screenHeight: screenHeight))
       .onAppear {
         screenHeight = proxy.frame(in: .global).size.height
-        offsetY = detents.first!.getOffset(screenHeight: screenHeight)
       }
       .onChange(of: proxy.size) { _, newSize in
         screenHeight = newSize.height
-        offsetY = detents.first!.getOffset(screenHeight: screenHeight)
       }
     }
   }
@@ -74,20 +85,24 @@ private extension BottomSheet {
   }
 
   var contentView: some View {
-    VStack {
+    VStack(spacing: 2) {
       HStack {
         Spacer()
         handler
         Spacer()
       }
-      HStack {
-        Spacer()
-        content
-        Spacer()
+      content
+        .padding(.horizontal, 8)
+        .padding(.bottom)
+        .frame(maxWidth: .infinity)
+    }
+    .contentShape(Rectangle())
+    .onTapGesture {
+      withAnimation(.spring) {
+        currentDetent = .large
       }
     }
     .background(background)
-    .gesture(dragGesture)
   }
 
   var background: some View {
@@ -107,35 +122,6 @@ private extension BottomSheet {
     }
     .frame(height: BottomSheetConstants.handlerBgHeight)
   }
-
-  var dragGesture: some Gesture {
-    DragGesture(coordinateSpace: .global)
-      .onChanged { value in
-        if translation.height + offsetY <= 100 {
-          withAnimation {
-            presentingTopContent = false
-          }
-        } else {
-          withAnimation {
-            presentingTopContent = true
-          }
-        }
-        if offsetY != 0 || value.translation.height > 0 {
-          translation = value.translation
-        }
-      }
-      .onEnded { _ in
-        withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 1)) {
-          (currentDetent, offsetY) = getDetentAndOffset()
-          if translation.height + offsetY <= 0 {
-            withAnimation {
-              presentingTopContent = false
-            }
-          }
-          translation = .zero
-        }
-      }
-  }
 }
 
 extension BottomSheet {
@@ -153,20 +139,28 @@ enum BottomSheetConstants {
   static let speedThreshold = 1000.0
 }
 
-#Preview {
-  BottomSheet(topPosition: .right, detents: [.minimum, .large]) {
-    ScrollView {
-      VStack {
-        ForEach(1 ..< 100, id: \.self) { i in
-          Text("This is text \(i)")
+private struct BottomSheetTestView: View {
+  @State var currentDetent: BottomSheetDetent = .medium
+
+  var body: some View {
+    BottomSheet(topPosition: .right, detents: [.minimum, .medium, .large], currentDetent: $currentDetent) {
+      ScrollView {
+        VStack {
+          ForEach(1 ..< 100, id: \.self) { i in
+            Text("This is text \(i)")
+          }
         }
       }
+    } topContent: {
+      Image("NavigationIcon")
+        .resizable()
+        .scaledToFill()
+        .frame(width: 50, height: 50)
     }
-  } topContent: {
-    Image("NavigationIcon")
-      .resizable()
-      .scaledToFill()
-      .frame(width: 50, height: 50)
+    .background(.green)
   }
-  .background(.green)
+}
+
+#Preview {
+  BottomSheetTestView()
 }

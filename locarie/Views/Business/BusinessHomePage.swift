@@ -18,6 +18,7 @@ struct BusinessHomePage: View {
   )
 
   @State private var post = PostDto()
+  @State private var currentDetent: BottomSheetDetent = .medium
 
   @State private var showingDetailedProfile = false
   @State private var showingPostCover = false
@@ -98,7 +99,11 @@ private extension BusinessHomePage {
   }
 
   var bottomContent: some View {
-    BottomSheet(topPosition: .right, detents: [.medium, .large]) {
+    BottomSheet(
+      topPosition: .right,
+      detents: [Constants.bottomDetent, .medium, .large],
+      currentDetent: $currentDetent
+    ) {
       VStack(alignment: .leading) {
         if case .loading = profileVM.state {
           skeleton
@@ -215,6 +220,7 @@ private extension BusinessHomePage {
 }
 
 private enum Constants {
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(100)
   static let avatarSize: CGFloat = 72
   static let vSpacing: CGFloat = 15
   static let mapZoom: CGFloat = 12

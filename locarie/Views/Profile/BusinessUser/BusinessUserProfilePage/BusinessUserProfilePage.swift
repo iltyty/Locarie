@@ -14,6 +14,7 @@ struct BusinessUserProfilePage: View {
     center: .london, zoom: Constants.mapZoom
   )
   @State private var post = PostDto()
+  @State private var currentDetent: BottomSheetDetent = .medium
 
   @State private var presentingProfileDetail = false
   @State private var presentingProfileCover = false
@@ -28,7 +29,7 @@ struct BusinessUserProfilePage: View {
   var body: some View {
     GeometryReader { proxy in
       ZStack(alignment: .bottom) {
-        VStack {
+        VStack(spacing: 0) {
           ZStack {
             mapView
             contentView
@@ -124,12 +125,13 @@ private extension BusinessUserProfilePage {
 
 private extension BusinessUserProfilePage {
   var contentView: some View {
-    VStack {
+    VStack(spacing: 0) {
       buttons
       Spacer()
       BottomSheet(
         topPosition: .right,
-        detents: [.absoluteBottom(150), .absoluteTop(150)]
+        detents: [Constants.bottomDetent, .medium, .large],
+        currentDetent: $currentDetent
       ) {
         if case .loading = profileVM.state {
           skeleton
@@ -235,6 +237,8 @@ private extension BusinessUserProfilePage {
 
 private enum Constants {
   static let vSpacing: CGFloat = 16
+
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(100)
 
   static let dialogBgOpacity: CGFloat = 0.2
   static let dialogAnimationDuration: CGFloat = 1

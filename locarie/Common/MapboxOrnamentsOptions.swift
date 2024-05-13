@@ -12,6 +12,6 @@ func noScaleBarAndCompass() -> OrnamentOptions {
     scaleBar: .init(visibility: .hidden),
     compass: .init(visibility: .hidden),
     logo: .init(position: .bottomLeading, margins: .init(x: 0, y: 150)),
-    attributionButton: .init(position: .bottomTrailing, margins: .init(x: 0, y: 150))
+    attributionButton: .init(position: .bottomLeading, margins: .init(x: 80, y: 149))
   )
 }

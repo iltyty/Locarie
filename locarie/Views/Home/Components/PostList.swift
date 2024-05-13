@@ -44,7 +44,7 @@ struct PostList: View {
   var postList: some View {
     Group {
       if posts.isEmpty {
-        Text(emptyHint).foregroundStyle(.secondary)
+        Text(emptyHint).foregroundStyle(.secondary).padding(.top)
       } else {
         ForEach(posts) { post in
           NavigationLink {

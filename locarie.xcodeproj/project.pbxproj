@@ -149,7 +149,6 @@
 		509A10412BCE747A00FB55C7 /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A10402BCE747A00FB55C7 /* DotView.swift */; };
 		509A10492BCF767D00FB55C7 /* NotificationsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A10482BCF767D00FB55C7 /* NotificationsPage.swift */; };
 		509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC04C2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift */; };
-		509AC04F2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC04E2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift */; };
 		509AC0512B57832400A79CDB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC0502B57832400A79CDB /* LocationManager.swift */; };
 		509AC0532B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509AC0522B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift */; };
 		509D5BC32B45610F00833021 /* BioEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BC22B45610F00833021 /* BioEditPage.swift */; };
@@ -384,7 +383,6 @@
 		509A10402BCE747A00FB55C7 /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
 		509A10482BCF767D00FB55C7 /* NotificationsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsPage.swift; sourceTree = "<group>"; };
 		509AC04C2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheet+BottomSheetDetent.swift"; sourceTree = "<group>"; };
-		509AC04E2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheet+GetOffsetY.swift"; sourceTree = "<group>"; };
 		509AC0502B57832400A79CDB /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		509AC0522B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+NavigationBarHidden.swift"; sourceTree = "<group>"; };
 		509D5BC22B45610F00833021 /* BioEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioEditPage.swift; sourceTree = "<group>"; };
@@ -1032,7 +1030,6 @@
 			isa = PBXGroup;
 			children = (
 				509AC04C2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift */,
-				509AC04E2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1757,7 +1754,6 @@
 				509A10302BCD206400FB55C7 /* BusinessImagesEditPage.swift in Sources */,
 				50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */,
 				50B5DEC62B3B092F00C0A641 /* MapboxSuggestionService.swift in Sources */,
-				509AC04F2B569BDA00A79CDB /* BottomSheet+GetOffsetY.swift in Sources */,
 				50530B912B875185009C1F92 /* UserProfileEditPage.swift in Sources */,
 				50B11ADA2AFB3661002A7B91 /* BusinessHomePage.swift in Sources */,
 				50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */,

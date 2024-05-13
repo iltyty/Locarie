@@ -14,8 +14,14 @@ struct BusinessProfileAvatar: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      BusinessHomeAvatar(url: url)
-      editButton
+      AsyncImage(url: URL(string: url)) { image in
+        image.resizable()
+          .scaledToFill()
+          .frame(width: Constants.size, height: Constants.size)
+          .clipShape(Circle())
+      } placeholder: {
+        SkeletonView(Constants.size, Constants.size, true)
+      }
     }
   }
 
@@ -53,6 +59,7 @@ struct BusinessProfileAvatar: View {
 }
 
 private enum Constants {
+  static let size: CGFloat = 72.0
   static let buttonIconSize: CGFloat = 12
   static let buttonBackgroundSize: CGFloat = 24
   static let buttonShadowRadius: CGFloat = 1

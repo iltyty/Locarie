@@ -11,6 +11,7 @@ import SwiftUI
 struct HomePage: View {
   @StateObject private var postVM = PostListWithinViewModel()
 
+  @State private var currentDetent: BottomSheetDetent = .medium
   @State private var searching = false
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport =
@@ -36,6 +37,16 @@ struct HomePage: View {
     .onReceive(postVM.$posts) { posts in
       selectedPost = posts.first ?? PostDto()
     }
+    .onChange(of: viewport) { _, _ in
+      withAnimation(.spring) {
+        currentDetent = Constants.bottomDetent
+      }
+    }
+    .onChange(of: currentDetent) { _, _ in
+      if !postVM.posts.isEmpty {
+        selectedPost = postVM.posts[0]
+      }
+    }
   }
 }
 
@@ -45,12 +56,12 @@ private extension HomePage {
       buttons
       BottomSheet(
         topPosition: .right,
-        detents: [.absoluteBottom(180), .absoluteBottom(45), .absoluteTop(150)]
+        detents: [.medium, Constants.bottomDetent, .large],
+        currentDetent: $currentDetent
       ) {
-        VStack {
+        VStack(spacing: 5) {
           Text("Discover this area")
             .fontWeight(.semibold)
-            .padding(.bottom)
           if case .loading = postVM.state {
             PostCardView.skeleton
           } else {
@@ -103,6 +114,7 @@ private extension HomePage {
 
 private enum Constants {
   static let topButtonsBottomPadding: CGFloat = 3
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(23)
 }
 
 #Preview {
