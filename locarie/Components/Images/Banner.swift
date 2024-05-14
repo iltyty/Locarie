@@ -14,12 +14,14 @@ struct Banner: View {
   var rounded = true
   var isPortrait = true
 
-  @State var screenSize: CGSize = .zero
+  @State private var index = 0
+  @State private var presentingFullScreen = false
+  @State private var screenSize: CGSize = .zero
 
   var body: some View {
     GeometryReader { proxy in
       ZStack(alignment: .topTrailing) {
-        TabView {
+        TabView(selection: $index) {
           if urls.isEmpty {
             defaultImage
           } else {
@@ -31,7 +33,14 @@ struct Banner: View {
           .scaledToFit()
           .foregroundStyle(.white)
           .frame(width: Constants.fullIconSize, height: Constants.fullIconSize)
-          .padding([.top, .trailing])
+          .padding()
+          .overlay {
+            Color.clear
+              .contentShape(Rectangle())
+              .simultaneousGesture(TapGesture().onEnded { _ in
+                presentingFullScreen = true
+              })
+          }
       }
       .onAppear {
         screenSize = proxy.size
@@ -43,6 +52,9 @@ struct Banner: View {
       .frame(width: proxy.size.width, height: proxy.size.width / aspectRatio)
     }
     .frame(height: height)
+    .fullScreenCover(isPresented: $presentingFullScreen) {
+      ImageFullScreenView(urls[index])
+    }
   }
 
   private var height: CGFloat {
@@ -90,6 +102,12 @@ private enum Constants {
 }
 
 #Preview {
-  Banner(urls: ["https://picsum.photos/600/400"], isPortrait: false)
-    .padding(.horizontal)
+  Banner(
+    urls: [
+      "https://picsum.photos/300/200",
+      "https://picsum.photos/300/200",
+    ],
+    isPortrait: false
+  )
+  .padding(.horizontal)
 }
