@@ -48,7 +48,6 @@ private extension PostCardView {
 
   var content: some View {
     Text(post.content)
-      .font(.title2)
       .lineLimit(Constants.contentLineLimit)
       .listRowSeparator(.hidden)
   }

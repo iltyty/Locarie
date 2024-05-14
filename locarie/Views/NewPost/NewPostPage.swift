@@ -24,7 +24,6 @@ struct NewPostPage: View {
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
       navigationBar
-      scrollView
       if #available(iOS 16.4, *) {
         scrollView.scrollBounceBehavior(.basedOnSize)
       } else {

@@ -40,6 +40,7 @@ struct NavigationBar<L: View, R: View>: View {
         Divider()
       }
     }
+    .padding(.top, Constants.topPadding)
     .padding(.bottom, padding ? Constants.bottomPadding : 0)
   }
 }
@@ -75,5 +76,6 @@ private func defaultTitleRight() -> EmptyView {
 
 private enum Constants {
   static let leftIconSize: CGFloat = 18
+  static let topPadding: CGFloat = 3
   static let bottomPadding: CGFloat = 100
 }

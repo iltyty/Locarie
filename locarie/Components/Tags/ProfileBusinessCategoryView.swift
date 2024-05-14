@@ -16,11 +16,10 @@ struct ProfileBusinessCategoryView: View {
 
   var body: some View {
     Text(category)
+      .font(.custom(GlobalConstants.fontName, size: 14))
       .padding()
       .frame(height: Constants.height)
-      .background(
-        Capsule().fill(LocarieColor.greyMedium)
-      )
+      .background(Capsule().fill(LocarieColor.greyMedium))
   }
 }
 
