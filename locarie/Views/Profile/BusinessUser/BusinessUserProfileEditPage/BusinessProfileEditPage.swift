@@ -94,7 +94,9 @@ private extension BusinessProfileEditPage {
       Text("Edit business images")
         .fontWeight(.semibold)
       ScrollView(.horizontal) {
-        NavigationLink(value: Router.Destination.businessImagesEdit) {
+        NavigationLink {
+          BusinessImagesEditPage()
+        } label: {
           HStack {
             if profileGetVM.dto.profileImageUrls.isEmpty {
               defaultImages

@@ -49,6 +49,7 @@ private extension PostCardView {
   var content: some View {
     Text(post.content)
       .font(.title2)
+      .lineLimit(Constants.contentLineLimit)
       .listRowSeparator(.hidden)
   }
 
@@ -100,4 +101,5 @@ private enum Constants {
   static let avatarSize: CGFloat = 28
   static let coverAspectRatio: CGFloat = 4 / 3
   static let coverBorderRadius: CGFloat = 10.0
+  static let contentLineLimit = 2
 }

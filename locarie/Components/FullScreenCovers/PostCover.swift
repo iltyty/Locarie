@@ -20,22 +20,27 @@ struct PostCover: View {
   @StateObject private var favoritePostVM = FavoritePostViewModel()
 
   var body: some View {
-    VStack(alignment: .leading) {
-      coverTop
-      blank
-      postStatus
-      postImages
-      content
-      categories
-      blank
-      HStack {
-        Spacer()
-        ZStack(alignment: .bottomLeading) {
-          favoriteButton
-          favoredByCount
+    ZStack(alignment: .bottomTrailing) {
+      VStack(alignment: .leading) {
+        coverTop
+        ScrollView {
+          VStack(alignment: .leading) {
+            blank
+            postStatus
+            postImages
+            content
+            categories
+            blank
+          }
         }
+        .padding(.bottom, 100)
       }
-      blank
+      ZStack(alignment: .bottomLeading) {
+        favoriteButton
+        favoredByCount
+      }
+      .padding(.horizontal)
+      .padding(.bottom, 30)
     }
     .padding(.horizontal)
     .background(.thickMaterial.opacity(CoverCommonConstants.backgroundOpacity))
