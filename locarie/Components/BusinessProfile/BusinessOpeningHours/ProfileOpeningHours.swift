@@ -64,7 +64,16 @@ private extension ProfileOpeningHours {
       }
   }
 
+  @ViewBuilder
   var sheet: some View {
+    if #available(iOS 16.4, *) {
+      sheetForOlderIoS.presentationCornerRadius(Constants.cornerRadius)
+    } else {
+      sheetForOlderIoS
+    }
+  }
+
+  var sheetForOlderIoS: some View {
     VStack(spacing: Constants.vSpacing) {
       sheetTitle
       ForEach(user.businessHours) { hours in
@@ -75,7 +84,6 @@ private extension ProfileOpeningHours {
     }
     .presentationDetents([.medium])
     .presentationDragIndicator(.visible)
-    .presentationCornerRadius(Constants.cornerRadius)
   }
 
   var sheetTitle: some View {

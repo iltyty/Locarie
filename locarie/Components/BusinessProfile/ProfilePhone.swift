@@ -29,8 +29,14 @@ struct ProfilePhone: View {
   @ViewBuilder
   var phoneText: some View {
     let text = user.phone
-    text.isEmpty
-      ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Phone").foregroundStyle(.secondary)
-      : Text(text)
+    if #available(iOS 17.0, *) {
+      text.isEmpty
+        ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Phone").foregroundStyle(LocarieColor.greyDark)
+        : Text(text)
+    } else {
+      text.isEmpty
+        ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Phone").foregroundColor(LocarieColor.greyDark)
+        : Text(text)
+    }
   }
 }

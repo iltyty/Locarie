@@ -31,8 +31,14 @@ struct ProfileAddress: View {
   @ViewBuilder
   var addressText: some View {
     let text = user.address
-    text.isEmpty
-      ? Text("Address").foregroundStyle(.secondary)
-      : Text(text)
+    if #available(iOS 17.0, *) {
+      text.isEmpty
+        ? Text("Address").foregroundStyle(LocarieColor.greyDark)
+        : Text(text)
+    } else {
+      text.isEmpty
+        ? Text("Address").foregroundColor(LocarieColor.greyDark)
+        : Text(text)
+    }
   }
 }

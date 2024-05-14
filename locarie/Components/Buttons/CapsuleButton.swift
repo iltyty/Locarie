@@ -21,10 +21,17 @@ struct CapsuleButton<Content: View>: View {
       .background(background)
   }
 
+  @ViewBuilder
   private var background: some View {
-    Capsule()
-      .fill(.background)
-      .stroke(LocarieColor.lightGray)
+    if #available(iOS 17.0, *) {
+      Capsule()
+        .fill(.background)
+        .stroke(LocarieColor.lightGray)
+    } else {
+      Capsule()
+        .stroke(LocarieColor.lightGray)
+        .background(Capsule().fill(.background))
+    }
   }
 }
 

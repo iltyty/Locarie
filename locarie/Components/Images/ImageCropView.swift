@@ -77,7 +77,7 @@ struct ImageCropView: View {
             GeometryReader { proxy in
               let rect = proxy.frame(in: .named(Constants.coordinateSpaceName))
               Color.clear
-                .onChange(of: interacting) { _, newValue in
+                .onChange(of: interacting) { newValue in
                   withAnimation(.easeInOut(duration: 0.2)) {
                     if rect.minX > 0 {
                       offset.width -= rect.minX

@@ -29,8 +29,14 @@ struct ProfileLink: View {
   @ViewBuilder
   var linkText: some View {
     let text = user.homepageUrl
-    text.isEmpty
-      ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Link").foregroundStyle(.secondary)
-      : Text(text)
+    if #available(iOS 17.0, *) {
+      text.isEmpty
+        ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Link").foregroundStyle(LocarieColor.greyDark)
+        : Text(text)
+    } else {
+      text.isEmpty
+        ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Link").foregroundColor(LocarieColor.greyDark)
+        : Text(text)
+    }
   }
 }

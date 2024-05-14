@@ -16,19 +16,33 @@ struct PostList: View {
   var emptyHint = "No post in this area"
 
   var body: some View {
-    ScrollView {
-      VStack {
-        if showTitle {
-          title.id(0)
-        }
-        postList
-      }
-      .scrollTargetLayout()
+    if #available(iOS 17.0, *) {
+      scroll.scrollPosition(id: $scrollId)
+    } else {
+      scroll
     }
-    .scrollPosition(id: $scrollId)
+  }
+
+  private var scroll: some View {
+    ScrollView {
+      if #available(iOS 17.0, *) {
+        scrollView.scrollTargetLayout()
+      } else {
+        scrollView
+      }
+    }
     .scrollIndicators(.hidden)
-    .onChange(of: selectedPost) { _, newValue in
+    .onChange(of: selectedPost) { newValue in
       scrollId = newValue.id
+    }
+  }
+
+  private var scrollView: some View {
+    VStack {
+      if showTitle {
+        title.id(0)
+      }
+      postList
     }
   }
 

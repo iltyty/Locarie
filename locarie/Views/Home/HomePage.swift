@@ -37,12 +37,12 @@ struct HomePage: View {
     .onReceive(postVM.$posts) { posts in
       selectedPost = posts.first ?? PostDto()
     }
-    .onChange(of: viewport) { _, _ in
+    .onChange(of: viewport) { _ in
       withAnimation(.spring) {
         currentDetent = Constants.bottomDetent
       }
     }
-    .onChange(of: currentDetent) { _, _ in
+    .onChange(of: currentDetent) { _ in
       if !postVM.posts.isEmpty {
         selectedPost = postVM.posts[0]
       }
@@ -114,7 +114,7 @@ private extension HomePage {
 
 private enum Constants {
   static let topButtonsBottomPadding: CGFloat = 3
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(23)
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(22)
 }
 
 #Preview {

@@ -91,7 +91,7 @@ private extension DynamicPostsMapView {
   }
 
   var magnifyGesture: some Gesture {
-    MagnifyGesture(minimumScaleDelta: 0.1)
+    MagnificationGesture(minimumScaleDelta: 0.1)
       .onEnded { _ in needUpdating = true }
   }
 }

@@ -64,7 +64,7 @@ struct BottomSheet<Content: View, TopContent: View>: View {
       .onAppear {
         screenHeight = proxy.frame(in: .global).size.height
       }
-      .onChange(of: proxy.size) { _, newSize in
+      .onChange(of: proxy.size) { newSize in
         screenHeight = newSize.height
       }
     }

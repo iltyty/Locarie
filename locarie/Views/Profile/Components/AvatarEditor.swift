@@ -34,7 +34,7 @@ struct AvatarEditor: View {
         }
       }
     }
-    .onChange(of: photoVM.attachments) { _, _ in
+    .onChange(of: photoVM.attachments) { _ in
       guard photoVM.attachments.count == 1 else {
         return
       }

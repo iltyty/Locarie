@@ -24,16 +24,12 @@ struct NewPostPage: View {
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
       navigationBar
-      ScrollView(.vertical) {
-        VStack(alignment: .leading, spacing: Constants.vSpacing) {
-          BusinessUserStatusRow(vm: profileVM).padding(.horizontal)
-          photosPicker
-          photoCount
-          paragraphInput
-          categories
-        }
+      scrollView
+      if #available(iOS 16.4, *) {
+        scrollView.scrollBounceBehavior(.basedOnSize)
+      } else {
+        scrollView
       }
-      .scrollBounceBehavior(.basedOnSize)
       postButton
     }
     .loadingIndicator(loading: $loading)
@@ -45,9 +41,6 @@ struct NewPostPage: View {
     }
     .onAppear {
       profileVM.getProfile(userId: cacheVM.getUserId())
-    }
-    .onChange(of: postVM.photoVM.selection) { _, _ in
-      postVM.objectWillChange.send()
     }
     .onReceive(postVM.$state) { state in
       switch state {
@@ -65,6 +58,21 @@ struct NewPostPage: View {
           "Something went wrong, please try again later"
         isAlertShowing = true
       default: break
+      }
+    }
+    .onChange(of: postVM.photoVM.selection) { _ in
+      postVM.objectWillChange.send()
+    }
+  }
+
+  private var scrollView: some View {
+    ScrollView(.vertical) {
+      VStack(alignment: .leading, spacing: Constants.vSpacing) {
+        BusinessUserStatusRow(vm: profileVM).padding(.horizontal)
+        photosPicker
+        photoCount
+        paragraphInput
+        categories
       }
     }
   }

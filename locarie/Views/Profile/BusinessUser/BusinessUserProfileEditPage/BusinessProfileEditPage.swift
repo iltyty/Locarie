@@ -114,13 +114,26 @@ private extension BusinessProfileEditPage {
   var defaultImages: some View {
     ForEach(0 ..< Constants.defaultProfileImagesCount, id: \.self) { i in
       ZStack {
-        RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
-          .fill(LocarieColor.greyMedium)
-          .strokeBorder(
-            i == 0 ? LocarieColor.primary : LocarieColor.greyMedium,
-            style: .init(lineWidth: i == 0 ? Constants.firstProfileImageStrokeWidth : 0)
-          )
-          .frame(width: Constants.profileImageSize, height: Constants.profileImageSize)
+        if #available(iOS 17.0, *) {
+          RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
+            .fill(LocarieColor.greyMedium)
+            .strokeBorder(
+              i == 0 ? LocarieColor.primary : LocarieColor.greyMedium,
+              style: .init(lineWidth: i == 0 ? Constants.firstProfileImageStrokeWidth : 0)
+            )
+            .frame(width: Constants.profileImageSize, height: Constants.profileImageSize)
+        } else {
+          RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
+            .strokeBorder(
+              i == 0 ? LocarieColor.primary : LocarieColor.greyMedium,
+              style: .init(lineWidth: i == 0 ? Constants.firstProfileImageStrokeWidth : 0)
+            )
+            .background(
+              RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
+                .fill(LocarieColor.greyMedium)
+            )
+            .frame(width: Constants.profileImageSize, height: Constants.profileImageSize)
+        }
         Image("DefaultImage")
           .resizable()
           .scaledToFit()
