@@ -82,7 +82,7 @@ private extension AvatarEditor {
 
 private enum Constants {
   static let avatarSize: CGFloat = 64
-  static let imageCropSize: CGFloat = 250
+  static let imageCropSize: CGFloat = 350
   static let textColor: Color = .init(hex: 0x326AFB)
 }
 

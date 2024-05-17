@@ -13,6 +13,8 @@ struct NewPostPage: View {
   @State private var isAlertShowing = false
   @State private var alertMessage = ""
 
+  @FocusState private var isEditing
+
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @ObservedObject private var viewRouter = BottomTabViewRouter.shared
 
@@ -22,15 +24,22 @@ struct NewPostPage: View {
   @Environment(\.dismiss) private var dismiss
 
   var body: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      navigationBar
-      if #available(iOS 16.4, *) {
-        scrollView.scrollBounceBehavior(.basedOnSize)
-      } else {
-        scrollView
+    GeometryReader { _ in
+      VStack(alignment: .leading, spacing: Constants.vSpacing) {
+        navigationBar.ignoresSafeArea(.keyboard)
+        content
+        Spacer()
+        postButton
       }
-      postButton
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .background(
+        Color.clear.contentShape(Rectangle())
+          .onTapGesture {
+            isEditing = false
+          }
+      )
     }
+    .ignoresSafeArea(.keyboard)
     .loadingIndicator(loading: $loading)
     .alert(
       alertMessage,
@@ -64,15 +73,13 @@ struct NewPostPage: View {
     }
   }
 
-  private var scrollView: some View {
-    ScrollView(.vertical) {
-      VStack(alignment: .leading, spacing: Constants.vSpacing) {
-        BusinessUserStatusRow(vm: profileVM).padding(.horizontal)
-        photosPicker
-        photoCount
-        paragraphInput
-        categories
-      }
+  private var content: some View {
+    VStack(alignment: .leading, spacing: Constants.vSpacing) {
+      BusinessUserStatusRow(vm: profileVM).padding(.horizontal)
+      photosPicker
+      photoCount
+      paragraphInput.padding(.top, -Constants.vSpacing)
+      categories
     }
   }
 }
@@ -154,6 +161,7 @@ private extension NewPostPage {
   var paragraphInput: some View {
     VStack {
       TextEditorPlus(text: $postVM.post.content, hint: "Paragraph...")
+        .focused($isEditing)
         .padding([.horizontal])
         .frame(height: Constants.inputHeight, alignment: .top)
       Divider().padding(.horizontal)

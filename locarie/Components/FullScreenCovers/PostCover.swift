@@ -37,7 +37,9 @@ struct PostCover: View {
       }
       ZStack(alignment: .bottomLeading) {
         favoriteButton
-        favoredByCount
+        if postGetVM.favoredByCount != 0 {
+          favoredByCount
+        }
       }
       .padding(.horizontal)
       .padding(.bottom, 30)
@@ -103,7 +105,7 @@ private extension PostCover {
   }
 
   var postImages: some View {
-    Banner(urls: post.imageUrls).padding(.bottom)
+    Banner(urls: post.imageUrls, fullToggle: false).padding(.bottom)
   }
 
   var postStatus: some View {

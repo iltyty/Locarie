@@ -15,7 +15,7 @@ struct HomePage: View {
   @State private var searching = false
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport =
-    .followPuck(zoom: GlobalConstants.mapZoom)
+    .followPuck(zoom: 11)
 
   @Namespace var namespace
 
@@ -100,6 +100,11 @@ private extension HomePage {
       .resizable()
       .scaledToFit()
       .frame(width: 40, height: 40)
+      .onTapGesture {
+        withAnimation(.spring) {
+          currentDetent = .medium
+        }
+      }
   }
 
   var searchIcon: some View {
@@ -114,7 +119,7 @@ private extension HomePage {
 
 private enum Constants {
   static let topButtonsBottomPadding: CGFloat = 3
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(22)
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(0)
 }
 
 #Preview {

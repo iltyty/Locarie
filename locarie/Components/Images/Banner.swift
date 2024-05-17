@@ -28,19 +28,21 @@ struct Banner: View {
             images
           }
         }
-        Image(systemName: "arrow.down.left.and.arrow.up.right")
-          .resizable()
-          .scaledToFit()
-          .foregroundStyle(.white)
-          .frame(width: Constants.fullIconSize, height: Constants.fullIconSize)
-          .padding()
-          .overlay {
-            Color.clear
-              .contentShape(Rectangle())
-              .simultaneousGesture(TapGesture().onEnded { _ in
-                presentingFullScreen = true
-              })
-          }
+        if fullToggle {
+          Image(systemName: "arrow.down.left.and.arrow.up.right")
+            .resizable()
+            .scaledToFit()
+            .foregroundStyle(.white)
+            .frame(width: Constants.fullIconSize, height: Constants.fullIconSize)
+            .padding()
+            .overlay {
+              Color.clear
+                .contentShape(Rectangle())
+                .simultaneousGesture(TapGesture().onEnded { _ in
+                  presentingFullScreen = true
+                })
+            }
+        }
       }
       .onAppear {
         screenSize = proxy.size

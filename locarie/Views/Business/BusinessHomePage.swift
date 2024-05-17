@@ -120,7 +120,6 @@ private extension BusinessHomePage {
               EmptyView()
             } else {
               ProfileCategories(user)
-              ProfileBio(user)
               if showingDetailedProfile {
                 ProfileDetail(user)
               }

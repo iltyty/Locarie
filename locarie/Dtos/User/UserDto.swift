@@ -54,7 +54,7 @@ enum UserType: String, Codable {
   case business = "BUSINESS"
 }
 
-struct BusinessLocation: Codable {
+struct BusinessLocation: Codable, Equatable {
   var latitude: Double = .nan
   var longitude: Double = .nan
 

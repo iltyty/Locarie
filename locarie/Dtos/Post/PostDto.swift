@@ -71,6 +71,10 @@ extension PostDto {
 }
 
 extension PostDto {
+  var publishedOneDayAgo: Bool {
+    Date().timeIntervalSince(time) / 3600 > 24
+  }
+
   var publishedTime: String {
     let calendar = Calendar.current
     let formatter = DateFormatter()

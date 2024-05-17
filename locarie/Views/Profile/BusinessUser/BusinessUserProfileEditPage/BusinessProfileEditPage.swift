@@ -57,22 +57,24 @@ struct BusinessProfileEditPage: View {
 
   private var content: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      profileImagesEditor
-      avatarEditor
-      businessNameInput
-      usernameInput
-      categoryInput
-      bioInput
-      locationInput
-      openingHoursInput
-      linkInput
-      phoneInput
-      personalDetailTitle
-      firstNameInput
-      lastNameInput
-      birthdayInput
+      profileImagesEditor.padding(.top)
+      VStack(alignment: .leading, spacing: Constants.vSpacing) {
+        avatarEditor
+        businessNameInput
+        usernameInput
+        categoryInput
+        bioInput
+        locationInput
+        openingHoursInput
+        linkInput
+        phoneInput
+        personalDetailTitle
+        firstNameInput
+        lastNameInput
+        birthdayInput
+      }
+      .padding([.top, .horizontal])
     }
-    .padding([.top, .horizontal])
   }
 }
 
@@ -93,6 +95,7 @@ private extension BusinessProfileEditPage {
     VStack(alignment: .leading) {
       Text("Edit business images")
         .fontWeight(.semibold)
+        .padding(.leading)
       ScrollView(.horizontal) {
         NavigationLink {
           BusinessImagesEditPage()
@@ -104,6 +107,7 @@ private extension BusinessProfileEditPage {
               profileImages
             }
           }
+          .padding(.leading)
         }
         .buttonStyle(.plain)
       }

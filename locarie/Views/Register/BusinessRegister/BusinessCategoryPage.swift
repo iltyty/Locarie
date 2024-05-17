@@ -56,11 +56,17 @@ struct BusinessCategoryPage: View {
         let tag = allCategories[i]
         TagView(tag: tag, isSelected: isSelected[i], large: true)
           .onTapGesture {
-            isSelected[i].toggle()
+            if isSelected[i] || selected.count < Constants.maxTagCount {
+              isSelected[i].toggle()
+            }
           }
       }
     }
     .padding(.horizontal)
+  }
+
+  var selected: [Bool] {
+    isSelected.filter { $0 }
   }
 
   var confirmButton: some View {
@@ -74,20 +80,21 @@ struct BusinessCategoryPage: View {
     }
     .padding(.horizontal)
     .padding(.bottom)
-    .disabled(isButtonDisabled)
+    .disabled(!tagCountValid)
     .opacity(buttonOpacity)
   }
 
-  var isButtonDisabled: Bool {
-    isSelected.filter { $0 }.isEmpty
+  var tagCountValid: Bool {
+    !selected.isEmpty && selected.count <= Constants.maxTagCount
   }
 
   var buttonOpacity: CGFloat {
-    isButtonDisabled ? Constants.buttonDisabledOpacity : 1
+    !tagCountValid ? Constants.buttonDisabledOpacity : 1
   }
 }
 
 private enum Constants {
+  static let maxTagCount = 3
   static let titleBottomPadding: CGFloat = 80
   static let textBottomPadding: CGFloat = 50
   static let tagVSpacing: CGFloat = 30

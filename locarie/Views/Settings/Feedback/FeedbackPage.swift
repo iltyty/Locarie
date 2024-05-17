@@ -12,20 +12,36 @@ struct FeedbackPage: View {
   @State var loading = false
   @State var presentingAlert = false
 
-  @StateObject var feedbackVM = FeedbackViewModel()
-  @StateObject var editVM = TextEditViewModel(limit: Constants.wordCountLimit)
+  @FocusState private var isEditing
+
+  @StateObject private var feedbackVM = FeedbackViewModel()
+  @StateObject private var editVM = TextEditViewModel(limit: Constants.wordCountLimit)
 
   var body: some View {
     VStack {
-      navigationBar
+      navigationBar.onTapGesture {
+        isEditing = false
+      }
       VStack(alignment: .leading) {
-        title
-        paragraph
+        title.onTapGesture {
+          isEditing = false
+        }
+        paragraph.onTapGesture {
+          isEditing = false
+        }
         feedbackEditor
-        shareButton
+        shareButton.onTapGesture {
+          isEditing = false
+        }
       }
       .padding([.top, .horizontal])
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(
+      Color.clear.contentShape(Rectangle()).onTapGesture {
+        isEditing = false
+      }
+    )
     .loadingIndicator(loading: $loading)
     .alert(alertText, isPresented: $presentingAlert) {
       Button("OK") {}
@@ -44,10 +60,12 @@ struct FeedbackPage: View {
       editVM.text = ""
       alertText = "Feedback sent. Thank you for your precious advice!"
       presentingAlert = true
+      loading = false
     case let .failed(error):
       alertText = error.description()
       presentingAlert = true
-    default: break
+      loading = false
+    default: loading = false
     }
   }
 }
@@ -97,6 +115,7 @@ private extension FeedbackPage {
           hint: "Share your feedback...",
           border: true
         )
+        .focused($isEditing)
         Color.clear.frame(height: proxy.size.height * 0.3)
       }
     }

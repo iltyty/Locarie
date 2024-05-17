@@ -25,16 +25,17 @@ struct TextEditorPlusWithLimit: View {
   var body: some View {
     VStack {
       TextEditorPlus(text: $viewModel.text, hint: hint)
-      remainingWordCount
+      remainingWordCount.padding(Constants.textPadding)
     }
-    .padding()
-    .overlay(background)
+    .padding(Constants.textPadding)
+    .overlay(overlay)
   }
 
-  var background: some View {
+  var overlay: some View {
     Group {
       if showBorder {
-        RoundedRectangle(cornerRadius: Constants.borderCornerRadius).strokeBorder(LocarieColor.greyMedium)
+        RoundedRectangle(cornerRadius: Constants.borderCornerRadius)
+          .strokeBorder(LocarieColor.greyMedium)
       } else {
         Color.clear
       }
@@ -48,13 +49,13 @@ private extension TextEditorPlusWithLimit {
       Spacer()
       Text("\(viewModel.text.count)/\(viewModel.limit)")
         .foregroundStyle(LocarieColor.greyDark)
-        .padding()
     }
   }
 }
 
 private enum Constants {
-  static let borderCornerRadius = 25.0
+  static let borderCornerRadius: CGFloat = 25
+  static let textPadding: CGFloat = 5
 }
 
 #Preview {

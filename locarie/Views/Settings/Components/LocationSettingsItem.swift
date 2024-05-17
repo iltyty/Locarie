@@ -36,6 +36,7 @@ private extension LocationSettingsItem {
         }
       }
     }
+    .gestureOptions(disabledAllGesturesOptions())
     .ornamentOptions(.init(
       scaleBar: .init(visibility: .hidden),
       compass: .init(visibility: .hidden)

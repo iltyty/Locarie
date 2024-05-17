@@ -23,7 +23,7 @@ struct TextEditorPlus: View {
 
   private var hintPurposeTextEditor: some View {
     TextEditor(text: $hint)
-      .foregroundStyle(.secondary)
+      .foregroundStyle(LocarieColor.greyDark)
       .disabled(true)
   }
 
