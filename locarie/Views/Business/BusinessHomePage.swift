@@ -18,15 +18,14 @@ struct BusinessHomePage: View {
   )
 
   @State private var post = PostDto()
-  @State private var currentDetent: BottomSheetDetent = .medium
+  @State private var currentDetent: BottomSheetDetent = Constants.mediumDetent
 
-  @State private var showingDetailedProfile = false
-  @State private var showingPostCover = false
-  @State private var showingBusinessProfileCover = false
+  @State private var presentingProfileDetail = false
+  @State private var presentingPostCover = false
+  @State private var presentingProfileCover = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var profileVM = ProfileGetViewModel()
-  @StateObject private var listNearbyPostsVM = PostListNearbyViewModel()
   @StateObject private var listUserPostsVM = ListUserPostsViewModel()
   @StateObject private var favoritePostVM = FavoritePostViewModel()
 
@@ -37,11 +36,11 @@ struct BusinessHomePage: View {
       ZStack(alignment: .top) {
         mapView
         content
-        if showingPostCover {
-          PostCover(post: post, tags: user.categories, isPresenting: $showingPostCover)
+        if presentingPostCover {
+          PostCover(post: post, tags: user.categories, isPresenting: $presentingPostCover)
         }
-        if showingBusinessProfileCover {
-          BusinessProfileCover(user: user, isPresenting: $showingBusinessProfileCover)
+        if presentingProfileCover {
+          BusinessProfileCover(user: user, isPresenting: $presentingProfileCover)
         }
       }
     }
@@ -49,6 +48,9 @@ struct BusinessHomePage: View {
     .onAppear {
       profileVM.getProfile(userId: uid)
       listUserPostsVM.getUserPosts(id: uid)
+    }
+    .onReceive(profileVM.$dto) { dto in
+      viewport = .camera(center: dto.coordinate, zoom: Constants.mapZoom)
     }
   }
 
@@ -69,18 +71,14 @@ private extension BusinessHomePage {
 
   var mapView: some View {
     Map(viewport: $viewport) {
-      Puck2D()
-
-      ForEvery(listNearbyPostsVM.posts) { post in
-        MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
-          BusinessMapAvatar(url: profileVM.dto.avatarUrl)
-            .onTapGesture {
-              viewport = .camera(
-                center: post.businessLocationCoordinate,
-                zoom: Constants.mapZoom
-              )
-            }
-        }
+      MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
+        BusinessMapAvatar(url: profileVM.dto.avatarUrl)
+          .onTapGesture {
+            viewport = .camera(
+              center: user.coordinate,
+              zoom: Constants.mapZoom
+            )
+          }
       }
     }
     .ornamentOptions(noScaleBarAndCompass())
@@ -101,7 +99,7 @@ private extension BusinessHomePage {
   var bottomContent: some View {
     BottomSheet(
       topPosition: .right,
-      detents: [Constants.bottomDetent, .medium, .large],
+      detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
       currentDetent: $currentDetent
     ) {
       VStack(alignment: .leading) {
@@ -111,28 +109,34 @@ private extension BusinessHomePage {
           BusinessHomeAvatarRow(
             user: user,
             hasUpdates: updatedIn24Hours,
-            isPresentingDetail: $showingDetailedProfile
+            presentingCover: $presentingProfileCover,
+            presentingDetail: $presentingProfileDetail
           )
         }
-        ScrollView {
-          VStack(alignment: .leading, spacing: Constants.vSpacing) {
-            if case .loading = profileVM.state {
-              EmptyView()
-            } else {
-              ProfileCategories(user)
-              if showingDetailedProfile {
-                ProfileDetail(user)
+        ScrollViewReader { proxy in
+          ScrollView {
+            VStack(alignment: .leading, spacing: Constants.vSpacing) {
+              if case .loading = profileVM.state {
+                EmptyView()
+              } else {
+                ProfileCategories(user).id(0)
+                if presentingProfileDetail {
+                  ProfileDetail(user)
+                }
+              }
+              if case .loading = listUserPostsVM.state {
+                PostCardView.skeleton
+              } else {
+                ProfilePostsCount(listUserPostsVM.posts)
+                postList
               }
             }
-            if case .loading = listUserPostsVM.state {
-              PostCardView.skeleton
-            } else {
-              ProfilePostsCount(listUserPostsVM.posts)
-              ForEach(listUserPostsVM.posts) { p in
-                PostCardView(p).onTapGesture {
-                  post = p
-                  showingPostCover = true
-                }
+            .onChange(of: currentDetent) { _ in
+              proxy.scrollTo(0)
+            }
+            .onChange(of: presentingProfileDetail) { presenting in
+              if presenting {
+                proxy.scrollTo(0)
               }
             }
           }
@@ -143,16 +147,27 @@ private extension BusinessHomePage {
   }
 
   @ViewBuilder
-  var firstProfileImage: some View {
-    Group {
-      if user.profileImageUrls.isEmpty {
-        DefaultBusinessImageView()
-      } else {
-        BusinessImageView(url: URL(string: user.profileImageUrls[0]))
+  var postList: some View {
+    if listUserPostsVM.posts.isEmpty {
+      HStack {
+        Spacer()
+        VStack {
+          Image("NoPost").padding(.top, 40)
+          Text("No post yet")
+            .font(.custom(GlobalConstants.fontName, size: 14))
+            .fontWeight(.bold)
+        }
+        Spacer()
       }
-    }
-    .onTapGesture {
-      showingBusinessProfileCover = true
+    } else {
+      ForEach(listUserPostsVM.posts) { p in
+        PostCardView(p)
+          .onTapGesture {
+            post = p
+            presentingPostCover = true
+          }
+      }
+      .padding(.bottom)
     }
   }
 
@@ -186,13 +201,13 @@ private extension BusinessHomePage {
 private extension BusinessHomePage {
   func toggleShowingBusinessProfileCover() {
     withAnimation(.spring) {
-      showingBusinessProfileCover.toggle()
+      presentingProfileCover.toggle()
     }
   }
 
   func toggleShowingPostContentCover() {
     withAnimation(.spring) {
-      showingPostCover.toggle()
+      presentingPostCover.toggle()
     }
   }
 }
@@ -219,7 +234,8 @@ private extension BusinessHomePage {
 }
 
 private enum Constants {
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(100)
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(31)
+  static let mediumDetent: BottomSheetDetent = .absoluteBottom(455)
   static let avatarSize: CGFloat = 72
   static let vSpacing: CGFloat = 15
   static let mapZoom: CGFloat = 12

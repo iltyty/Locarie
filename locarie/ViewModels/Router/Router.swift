@@ -31,8 +31,8 @@ extension Router {
   enum Destination: Hashable {
     case favorite
 
-    case loginOrRegister, login, regularRegister, businessRegister,
-         forgotPassword
+    case loginOrRegister, login, regularRegister, businessDescription,
+         businessRegister, forgotPassword
 
     case settings, myAccount, changePassword, newPassword,
          feedback, privacyPolicy, termsOfUse, termsOfService
@@ -58,6 +58,8 @@ extension Router {
       LoginPage()
     case .regularRegister:
       RegularRegisterPage()
+    case .businessDescription:
+      BusinessDescriptionPage()
     case .businessRegister:
       BusinessRegisterPage()
     case .forgotPassword:

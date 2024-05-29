@@ -10,6 +10,7 @@ import SwiftUI
 struct Banner: View {
   let urls: [String]
   var fullToggle = false
+  var bottomIndicator = false
   var indicator = true
   var rounded = true
   var isPortrait = true
@@ -20,43 +21,60 @@ struct Banner: View {
 
   var body: some View {
     GeometryReader { proxy in
-      ZStack(alignment: .topTrailing) {
-        TabView(selection: $index) {
-          if urls.isEmpty {
-            defaultImage
-          } else {
-            images
+      VStack {
+        imageView
+          .frame(width: proxy.size.width, height: proxy.size.width / aspectRatio)
+          .onAppear {
+            screenSize = proxy.size
           }
-        }
-        if fullToggle {
-          Image(systemName: "arrow.down.left.and.arrow.up.right")
-            .resizable()
-            .scaledToFit()
-            .foregroundStyle(.white)
-            .frame(width: Constants.fullIconSize, height: Constants.fullIconSize)
-            .padding()
-            .overlay {
-              Color.clear
-                .contentShape(Rectangle())
-                .simultaneousGesture(TapGesture().onEnded { _ in
-                  presentingFullScreen = true
-                })
+        if bottomIndicator {
+          HStack {
+            ForEach(urls.indices, id: \.self) { i in
+              Image(systemName: "circle.fill")
+                .font(.system(size: Constants.indicatorSize))
+                .foregroundStyle(
+                  index == i ? LocarieColor.primary : LocarieColor.primary.opacity(Constants.indicatorOpacity)
+                )
             }
+          }
+          .padding(.top, Constants.indicatorTopPadding)
         }
       }
-      .onAppear {
-        screenSize = proxy.size
-      }
-      .clipShape(
-        RoundedRectangle(cornerRadius: rounded ? Constants.cornerRadius : 0)
-      )
-      .tabViewStyle(.page(indexDisplayMode: indicator && !urls.isEmpty ? .always : .never))
-      .frame(width: proxy.size.width, height: proxy.size.width / aspectRatio)
     }
-    .frame(height: height)
+    .frame(height: height + (bottomIndicator ? (Constants.indicatorTopPadding + Constants.indicatorSize) : 0))
     .fullScreenCover(isPresented: $presentingFullScreen) {
       ImageFullScreenView(urls[index])
     }
+  }
+
+  private var imageView: some View {
+    ZStack(alignment: .topTrailing) {
+      TabView(selection: $index) {
+        if urls.isEmpty {
+          defaultImage
+        } else {
+          images
+        }
+      }
+      .tabViewStyle(.page(indexDisplayMode: bottomIndicator ? .never : .always))
+      if fullToggle {
+        Image(systemName: "arrow.down.left.and.arrow.up.right")
+          .resizable()
+          .scaledToFit()
+          .foregroundStyle(.white)
+          .frame(width: Constants.fullIconSize, height: Constants.fullIconSize)
+          .padding()
+          .overlay {
+            Color.clear
+              .contentShape(Rectangle())
+              .simultaneousGesture(TapGesture().onEnded { _ in
+                presentingFullScreen = true
+              })
+          }
+      }
+    }
+    .clipShape(RoundedRectangle(cornerRadius: rounded ? Constants.cornerRadius : 0))
+    .tabViewStyle(.page(indexDisplayMode: indicator && !urls.isEmpty ? .always : .never))
   }
 
   private var height: CGFloat {
@@ -101,6 +119,9 @@ private enum Constants {
   static let portraitAspectRatio: CGFloat = 3 / 4
   static let landscapeAspectRatio: CGFloat = 4 / 3
   static let defaultImageSize: CGFloat = 28
+  static let indicatorSize: CGFloat = 8
+  static let indicatorOpacity: CGFloat = 0.2
+  static let indicatorTopPadding: CGFloat = 10
 }
 
 #Preview {

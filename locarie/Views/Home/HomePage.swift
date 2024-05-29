@@ -11,7 +11,9 @@ import SwiftUI
 struct HomePage: View {
   @StateObject private var postVM = PostListWithinViewModel()
 
-  @State private var currentDetent: BottomSheetDetent = .medium
+  @State private var currentDetent: BottomSheetDetent = Constants.mediumDetent
+  @State private var mapTouched = false
+  @State private var scrollId: Int64? = nil
   @State private var searching = false
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport =
@@ -23,7 +25,7 @@ struct HomePage: View {
     ZStack {
       DynamicPostsMapView(
         viewport: $viewport,
-        selectedPost: $selectedPost,
+        mapTouched: $mapTouched,
         postVM: postVM
       )
       contentView
@@ -37,15 +39,17 @@ struct HomePage: View {
     .onReceive(postVM.$posts) { posts in
       selectedPost = posts.first ?? PostDto()
     }
-    .onChange(of: viewport) { _ in
-      withAnimation(.spring) {
-        currentDetent = Constants.bottomDetent
-      }
+    .onChange(of: mapTouched) { _ in
+      moveBottomSheet(to: Constants.bottomDetent)
     }
     .onChange(of: currentDetent) { _ in
-      if !postVM.posts.isEmpty {
-        selectedPost = postVM.posts[0]
-      }
+      scrollId = 0
+    }
+  }
+
+  private func moveBottomSheet(to detent: BottomSheetDetent) {
+    withAnimation(.spring) {
+      currentDetent = detent
     }
   }
 }
@@ -56,16 +60,17 @@ private extension HomePage {
       buttons
       BottomSheet(
         topPosition: .right,
-        detents: [.medium, Constants.bottomDetent, .large],
+        detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
         currentDetent: $currentDetent
       ) {
         VStack(spacing: 5) {
-          Text("Discover this area")
-            .fontWeight(.semibold)
+          Text("Explore")
+            .font(.custom(GlobalConstants.fontName, size: 18))
+            .fontWeight(.bold)
           if case .loading = postVM.state {
             PostCardView.skeleton
           } else {
-            PostList(posts: postVM.posts, selectedPost: $selectedPost, showTitle: false)
+            PostList(posts: postVM.posts, scrollId: $scrollId, showTitle: false)
           }
         }
       } topContent: {
@@ -75,7 +80,7 @@ private extension HomePage {
           }
         }
       }
-      BottomTabView().background(.background)
+      BottomTabView()
     }
   }
 
@@ -101,9 +106,7 @@ private extension HomePage {
       .scaledToFit()
       .frame(width: 40, height: 40)
       .onTapGesture {
-        withAnimation(.spring) {
-          currentDetent = .medium
-        }
+        moveBottomSheet(to: .medium)
       }
   }
 
@@ -120,6 +123,7 @@ private extension HomePage {
 private enum Constants {
   static let topButtonsBottomPadding: CGFloat = 3
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(0)
+  static let mediumDetent: BottomSheetDetent = .absoluteBottom(220)
 }
 
 #Preview {

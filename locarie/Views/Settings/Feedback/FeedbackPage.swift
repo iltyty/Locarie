@@ -37,11 +37,7 @@ struct FeedbackPage: View {
       .padding([.top, .horizontal])
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(
-      Color.clear.contentShape(Rectangle()).onTapGesture {
-        isEditing = false
-      }
-    )
+    .keyboardDismissable(focus: $isEditing)
     .loadingIndicator(loading: $loading)
     .alert(alertText, isPresented: $presentingAlert) {
       Button("OK") {}

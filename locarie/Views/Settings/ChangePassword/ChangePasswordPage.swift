@@ -14,6 +14,7 @@ struct ChangePasswordPage: View {
     VStack(spacing: ChangePasswordConstants.vSpacing) {
       navigationBar
       passwordInput
+      forgotPassword
       nextButton
       Spacer()
     }
@@ -34,6 +35,19 @@ private extension ChangePasswordPage {
       text: $password
     )
     .padding(.horizontal)
+  }
+
+  var forgotPassword: some View {
+    HStack {
+      Spacer()
+      NavigationLink {
+        ForgotPasswordPage()
+      } label: {
+        Text("Forgotten password")
+          .foregroundStyle(LocarieColor.blue)
+          .padding(.horizontal)
+      }
+    }
   }
 
   var nextButton: some View {

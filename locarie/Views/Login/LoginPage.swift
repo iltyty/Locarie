@@ -17,6 +17,8 @@ struct LoginPage: View {
   @State private var isAlertShowing = false
   @State private var alertTitle = ""
 
+  @FocusState private var focusField: Field?
+
   var body: some View {
     GeometryReader { _ in
       VStack(spacing: 0) {
@@ -26,6 +28,7 @@ struct LoginPage: View {
       .ignoresSafeArea(.keyboard)
     }
     .disabled(isLoading)
+    .keyboardDismissable(focus: $focusField)
     .overlay(loadingOverlayView)
     .alert(alertTitle, isPresented: $isAlertShowing) {}
     .onReceive(loginViewModel.$state) { state in
@@ -110,6 +113,8 @@ private extension LoginPage {
 
   var emailInput: some View {
     TextEditFormItemWithNoTitle(hint: "Email", text: $loginViewModel.dto.email)
+      .focused($focusField, equals: .email)
+      .textContentType(.emailAddress)
       .padding(.horizontal)
   }
 
@@ -119,6 +124,8 @@ private extension LoginPage {
       isSecure: true,
       text: $loginViewModel.dto.password
     )
+    .focused($focusField, equals: .password)
+    .textContentType(.password)
     .padding(.horizontal)
   }
 
@@ -166,6 +173,10 @@ private extension LoginPage {
   var loginButtonOpacity: CGFloat {
     isLoginButtonDisabled ? Constants.buttonDisabledOpacity : 1
   }
+}
+
+private enum Field {
+  case email, password
 }
 
 private enum Constants {

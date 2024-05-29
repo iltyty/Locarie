@@ -93,7 +93,6 @@ private extension BottomSheet {
       }
       content
         .padding(.horizontal, 8)
-        .padding(.bottom)
         .frame(maxWidth: .infinity)
     }
     .contentShape(Rectangle())

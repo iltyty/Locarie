@@ -45,7 +45,7 @@ struct LoginOrRegisterPage: View {
   }
 
   var signupBusinessButton: some View {
-    NavigationLink(value: Router.Destination.businessRegister) {
+    NavigationLink(value: Router.Destination.businessDescription) {
       StrokeButtonFormItem(
         title: "Sign up for a business account",
         isFixedWidth: true,

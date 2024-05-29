@@ -28,6 +28,7 @@ struct ImageCropView: View {
         imageView()
           .background(Color.white.clipShape(clipShape()))
           .frame(maxWidth: .infinity, maxHeight: .infinity)
+          .contentShape(Rectangle())
       }
     }
   }

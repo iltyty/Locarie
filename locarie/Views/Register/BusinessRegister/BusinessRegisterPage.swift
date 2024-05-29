@@ -10,6 +10,8 @@ import SwiftUI
 struct BusinessRegisterPage: View {
   @StateObject var viewModel = RegisterViewModel(type: .business)
 
+  @FocusState private var focused: Bool
+
   var body: some View {
     GeometryReader { _ in
       VStack(spacing: 0) {
@@ -18,6 +20,7 @@ struct BusinessRegisterPage: View {
       }
       .ignoresSafeArea(.keyboard)
     }
+    .keyboardDismissable(focus: $focused)
   }
 
   private var content: some View {
@@ -43,6 +46,7 @@ struct BusinessRegisterPage: View {
       hint: text,
       text: $viewModel.dto.businessName
     )
+    .focused($focused)
   }
 
   private var businessCategoryInput: some View {

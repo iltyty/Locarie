@@ -105,13 +105,13 @@ private extension PostCover {
   }
 
   var postImages: some View {
-    Banner(urls: post.imageUrls, fullToggle: false).padding(.bottom)
+    Banner(urls: post.imageUrls, fullToggle: false, bottomIndicator: true).padding(.bottom)
   }
 
   var postStatus: some View {
     HStack {
       Text(post.publishedTime).foregroundStyle(.green)
-      Text("·")
+      DotView()
       Text(post.user.distance(to: locationManager.location)).foregroundStyle(.secondary)
     }
   }

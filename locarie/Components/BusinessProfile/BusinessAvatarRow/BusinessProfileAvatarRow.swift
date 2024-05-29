@@ -10,18 +10,17 @@ import SwiftUI
 struct BusinessProfileAvatarRow: View {
   let user: UserDto
 
-  @Binding var isPresentingCover: Bool
-  @Binding var isPresentingDetail: Bool
+  @Binding var presentingCover: Bool
+  @Binding var presentingDetail: Bool
 
   var body: some View {
     HStack {
-      BusinessProfileAvatar(
-        url: user.avatarUrl,
-        isPresentingCover: $isPresentingCover
-      )
+      BusinessHomeAvatar(url: user.profileImageUrls.first ?? "").onTapGesture {
+        presentingCover = true
+      }
       BusinessStatus(user)
       Spacer()
-      BusinessProfileDetailButton(presenting: $isPresentingDetail)
+      BusinessProfileDetailButton(presenting: $presentingDetail)
     }
   }
 }

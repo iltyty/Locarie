@@ -48,7 +48,7 @@ private extension BusinessProfileCover {
   }
 
   var profileImages: some View {
-    Banner(urls: user.profileImageUrls, isPortrait: false).padding(.bottom)
+    Banner(urls: user.profileImageUrls, bottomIndicator: true, isPortrait: false).padding(.bottom)
   }
 
   var coverBottom: some View {
@@ -65,7 +65,9 @@ private extension BusinessProfileCover {
   var editButtonView: some View {
     HStack {
       Spacer()
-      NavigationLink(value: Router.Destination.userProfileEdit) {
+      NavigationLink {
+        UserProfileEditPage()
+      } label: {
         editButton
       }
       .buttonStyle(.plain)

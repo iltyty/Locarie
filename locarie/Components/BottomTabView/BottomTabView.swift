@@ -60,19 +60,12 @@ private extension BottomTabView {
 
   @ViewBuilder
   var profilePage: some View {
-    let avatarUrl = cacheVM.getAvatarUrl()
     Group {
-      if avatarUrl.isEmpty {
-        BottomTabViewItem(
-          page: .profile,
-          iconName: "ProfileIcon"
-        )
-      } else {
-        BottomTabViewItem(
-          page: .profile,
-          iconUrl: avatarUrl
-        )
-      }
+      BottomTabViewItem(
+        page: .profile,
+        iconName: "MyIcon",
+        selectedIconName: "SelectedMyIcon"
+      )
     }.onTapGesture {
       setPage(.profile)
     }

@@ -14,7 +14,7 @@ struct BusinessUserProfilePage: View {
     center: .london, zoom: Constants.mapZoom
   )
   @State private var post = PostDto()
-  @State private var currentDetent: BottomSheetDetent = .medium
+  @State private var currentDetent: BottomSheetDetent = Constants.mediumDetent
 
   @State private var presentingProfileDetail = false
   @State private var presentingProfileCover = false
@@ -87,10 +87,7 @@ struct BusinessUserProfilePage: View {
         presentingDialog = false
       })
       .onReceive(profileVM.$dto) { dto in
-        viewport = .camera(
-          center: dto.coordinate,
-          zoom: Constants.mapZoom
-        )
+        viewport = .camera(center: dto.coordinate, zoom: Constants.mapZoom)
       }
     }
     .ignoresSafeArea(edges: .bottom)
@@ -118,8 +115,14 @@ private extension BusinessUserProfilePage {
           }
       }
     }
+    .gestureOptions(disabledAllGesturesOptions())
     .ornamentOptions(noScaleBarAndCompass())
     .ignoresSafeArea(edges: .all)
+    .onTapGesture {
+      withAnimation(.spring) {
+        currentDetent = Constants.bottomDetent
+      }
+    }
   }
 }
 
@@ -130,7 +133,7 @@ private extension BusinessUserProfilePage {
       Spacer()
       BottomSheet(
         topPosition: .right,
-        detents: [Constants.bottomDetent, .medium, .large],
+        detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
         currentDetent: $currentDetent
       ) {
         if case .loading = profileVM.state {
@@ -138,8 +141,6 @@ private extension BusinessUserProfilePage {
         } else {
           sheetContent
         }
-      } topContent: {
-        firstProfileImage
       }
     }
   }
@@ -148,26 +149,54 @@ private extension BusinessUserProfilePage {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
       BusinessProfileAvatarRow(
         user: user,
-        isPresentingCover: .constant(false),
-        isPresentingDetail: $presentingProfileDetail
+        presentingCover: $presentingProfileCover,
+        presentingDetail: $presentingProfileDetail
       )
-      ScrollView {
-        VStack(alignment: .leading, spacing: Constants.vSpacing) {
-          ProfileCategories(user)
-          ProfileBio(user)
-          if presentingProfileDetail {
-            ProfileDetail(user)
+      ScrollViewReader { proxy in
+        ScrollView {
+          VStack(alignment: .leading, spacing: Constants.vSpacing) {
+            ProfileCategories(user).id(0)
+            if presentingProfileDetail {
+              ProfileDetail(user)
+            }
+            ProfilePostsCount(postsVM.posts)
+            postList
           }
-          ProfilePostsCount(postsVM.posts)
-          ForEach(postsVM.posts) { p in
-            PostCardView(p)
-              .onTapGesture {
-                post = p
-                presentingPostCover = true
-              }
+          .onChange(of: currentDetent) { _ in
+            proxy.scrollTo(0)
+          }
+          .onChange(of: presentingProfileDetail) { presenting in
+            if presenting {
+              proxy.scrollTo(0)
+            }
           }
         }
       }
+    }
+  }
+
+  @ViewBuilder
+  var postList: some View {
+    if postsVM.posts.isEmpty {
+      HStack {
+        Spacer()
+        VStack {
+          Image("NoPost").padding(.top, 40)
+          Text("No post yet")
+            .font(.custom(GlobalConstants.fontName, size: 14))
+            .fontWeight(.bold)
+        }
+        Spacer()
+      }
+    } else {
+      ForEach(postsVM.posts) { p in
+        PostCardView(p)
+          .onTapGesture {
+            post = p
+            presentingPostCover = true
+          }
+      }
+      .padding(.bottom)
     }
   }
 
@@ -238,7 +267,8 @@ private extension BusinessUserProfilePage {
 private enum Constants {
   static let vSpacing: CGFloat = 16
 
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(100)
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(35)
+  static let mediumDetent: BottomSheetDetent = .absoluteBottom(462)
 
   static let dialogBgOpacity: CGFloat = 0.2
   static let dialogAnimationDuration: CGFloat = 1

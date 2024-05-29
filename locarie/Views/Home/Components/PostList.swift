@@ -9,68 +9,68 @@ import SwiftUI
 
 struct PostList: View {
   let posts: [PostDto]
-  @Binding var selectedPost: PostDto
-  @State var scrollId: Int64?
+  @Binding var scrollId: Int64?
 
   var showTitle = true
-  var emptyHint = "No post in this area"
+  var emptyHint = "No business yet"
 
   var body: some View {
-    if #available(iOS 17.0, *) {
-      scroll.scrollPosition(id: $scrollId)
-    } else {
-      scroll
-    }
-  }
-
-  private var scroll: some View {
-    ScrollView {
-      if #available(iOS 17.0, *) {
-        scrollView.scrollTargetLayout()
-      } else {
-        scrollView
+    ScrollViewReader { proxy in
+      ScrollView {
+        scrollView.onChange(of: scrollId) { _ in
+          proxy.scrollTo(0)
+          scrollId = 1
+        }
       }
     }
     .scrollIndicators(.hidden)
-    .onChange(of: selectedPost) { newValue in
-      scrollId = newValue.id
-    }
   }
 
   private var scrollView: some View {
     VStack {
       if showTitle {
-        title.id(0)
+        title.id(-1)
       }
-      postList
+      postList.padding(.bottom)
     }
   }
 
   private var title: some View {
-    ZStack {
-      Text("Discover this area")
-        .fontWeight(.semibold)
-        .padding(.bottom)
-    }
+    Text("Explore")
+      .fontWeight(.semibold)
+      .padding(.bottom)
   }
 
   @ViewBuilder
-  var postList: some View {
-    Group {
-      if posts.isEmpty {
-        Text(emptyHint).foregroundStyle(.secondary).padding(.top)
-      } else {
-        ForEach(posts) { post in
-          NavigationLink {
-            BusinessHomePage(uid: post.user.id)
-          } label: {
-            PostCardView(post)
-          }
-          .id(post.id)
-          .tint(.primary)
-          .buttonStyle(.plain)
+  private var postList: some View {
+    if posts.isEmpty {
+      emptyList
+    } else {
+      ForEach(posts.indices, id: \.self) { i in
+        NavigationLink {
+          BusinessHomePage(uid: posts[i].user.id)
+        } label: {
+          PostCardView(posts[i])
         }
+        .id(i)
+        .tint(.primary)
+        .buttonStyle(.plain)
       }
     }
   }
+
+  private var emptyList: some View {
+    VStack {
+      Image("NoBusiness")
+      Text(emptyHint)
+        .font(.custom(GlobalConstants.fontName, size: 14))
+        .fontWeight(.bold)
+        .foregroundStyle(LocarieColor.greyDark)
+    }
+    .padding(.top, Constants.paddingTop)
+  }
+}
+
+private enum Constants {
+  static let paddingTop: CGFloat = 50
 }

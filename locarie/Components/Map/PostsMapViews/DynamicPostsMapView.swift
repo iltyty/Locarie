@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DynamicPostsMapView: View {
   @Binding var viewport: Viewport
-  @Binding var selectedPost: PostDto
+  @Binding var mapTouched: Bool
 
   @State private var map: MapboxMap!
   @State private var needUpdating = true
@@ -26,12 +26,10 @@ struct DynamicPostsMapView: View {
 
         ForEvery(postVM.posts) { post in
           MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
-            BusinessMapAvatar(
-              url: post.user.avatarUrl,
-              amplified: post.id == selectedPost.id
-            )
-            .onTapGesture {
-              selectedPost = post
+            NavigationLink {
+              BusinessHomePage(uid: post.user.id)
+            } label: {
+              BusinessMapAvatar(url: post.user.avatarUrl)
             }
           }
         }
@@ -40,16 +38,18 @@ struct DynamicPostsMapView: View {
       .onCameraChanged { state in
         onCameraChanged(state)
       }
+      .simultaneousGesture(TapGesture().onEnded { mapTouched.toggle() })
       .onAppear {
         map = proxy.map!
+        bounds = map.coordinateBounds(for: .init(cameraState: map.cameraState))
       }
     }
     .onReceive(locationManager.$location) { location in
       updatePosts(location)
     }
     .ignoresSafeArea()
-    .gesture(dragGesture)
-    .gesture(magnifyGesture)
+    .simultaneousGesture(dragGesture)
+    .simultaneousGesture(magnifyGesture)
   }
 }
 
@@ -86,12 +86,14 @@ private extension DynamicPostsMapView {
 
 private extension DynamicPostsMapView {
   var dragGesture: some Gesture {
-    DragGesture(minimumDistance: 20, coordinateSpace: .global)
+    DragGesture()
+      .onChanged { _ in mapTouched.toggle() }
       .onEnded { _ in needUpdating = true }
   }
 
   var magnifyGesture: some Gesture {
     MagnificationGesture(minimumScaleDelta: 0.1)
+      .onChanged { _ in mapTouched.toggle() }
       .onEnded { _ in needUpdating = true }
   }
 }

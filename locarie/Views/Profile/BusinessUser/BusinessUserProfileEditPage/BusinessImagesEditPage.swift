@@ -15,11 +15,12 @@ struct BusinessImagesEditPage: View {
   @State private var presentingAlert = false
 
   var body: some View {
-    VStack {
+    VStack(alignment: .leading) {
       NavigationBar("Edit business photos", right: saveButton, divider: true)
       Spacer()
+      Text("\(firstImageText) \(recommendText)").padding(.horizontal)
       businessImages
-      Text("Select up to 9 images that best showcase your business.")
+      Text("Select up to 9 images.").fontWeight(.bold).padding(.horizontal)
       Spacer()
     }
     .alert("Upload success", isPresented: $presentingAlert) {
@@ -39,6 +40,22 @@ struct BusinessImagesEditPage: View {
       default:
         loading = false
       }
+    }
+  }
+
+  private var firstImageText: Text {
+    Text("First Image: ")
+      .fontWeight(.bold)
+      .foregroundColor(LocarieColor.primary)
+  }
+
+  private var recommendText: Text {
+    if #available(iOS 17.0, *) {
+      Text("We recommend using a storefront image or one that best capture your business!")
+        .foregroundStyle(LocarieColor.greyDark)
+    } else {
+      Text("We recommend using a storefront image or one that best capture your business!")
+        .foregroundColor(LocarieColor.greyDark)
     }
   }
 

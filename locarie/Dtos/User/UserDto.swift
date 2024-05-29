@@ -29,6 +29,8 @@ struct UserDto: Codable, Identifiable, UserInfo, UserLocation {
   var neighborhood: String = ""
   var location: BusinessLocation?
 
+  var lastUpdate: Date = .init()
+
   var businessHours = [BusinessHoursDto]()
 
   var favoredByCount: Int = 0
@@ -107,6 +109,8 @@ extension UserDto {
 }
 
 extension UserDto {
+  var lastUpdateTime: String { lastUpdate.timeAgoString() }
+
   var openUtil: String {
     guard businessHours.count == 7 else { return "Closed" }
     guard let todayBusinessHours else { return "Closed" }
@@ -145,7 +149,7 @@ extension UserDto {
     case id, type, email, firstName, lastName, username, avatarUrl, birthday
     case businessName, categories, profileImageUrls, homepageUrl, introduction,
          phone
-    case address, neighborhood, location, businessHours
+    case address, neighborhood, location, businessHours, lastUpdate
     case favoredByCount, favoritePostsCount, favoriteBusinessesCount
   }
 
@@ -200,6 +204,12 @@ extension UserDto {
       businessHours = try container.decode(
         [BusinessHoursDto].self, forKey: .businessHours
       )
+    }
+    if try container.decodeNil(forKey: .lastUpdate) {
+      lastUpdate = Date()
+    } else {
+      let lastUpdateTimestamp = try container.decode(Int64.self, forKey: .lastUpdate)
+      lastUpdate = .init(timeIntervalSince1970: Double(lastUpdateTimestamp) / 1000)
     }
 
     favoredByCount = try container.decode(Int.self, forKey: .favoredByCount)

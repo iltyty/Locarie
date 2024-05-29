@@ -26,8 +26,7 @@ struct PostCardView: View {
   }
 
   private var background: some View {
-    RoundedRectangle(cornerRadius: Constants.coverBorderRadius)
-      .fill(.background)
+    RoundedRectangle(cornerRadius: Constants.coverBorderRadius).fill(.background)
   }
 }
 

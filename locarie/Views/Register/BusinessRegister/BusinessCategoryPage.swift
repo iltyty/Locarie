@@ -27,6 +27,7 @@ struct BusinessCategoryPage: View {
       text
       tags
       Spacer()
+      selectedCount
       confirmButton
     }
     .onAppear {
@@ -43,11 +44,14 @@ struct BusinessCategoryPage: View {
   }
 
   private var text: some View {
-    Text("Please select all tags that match your business.")
-      .font(.callout)
-      .fontWeight(.semibold)
-      .padding(.horizontal)
-      .padding(.bottom, Constants.textBottomPadding)
+    HStack(spacing: 0) {
+      Text("Select up to ")
+      Text("3 tags ").foregroundStyle(LocarieColor.primary)
+      Text("that match your business.")
+    }
+    .fontWeight(.semibold)
+    .padding(.horizontal)
+    .padding(.bottom, Constants.textBottomPadding)
   }
 
   var tags: some View {
@@ -67,6 +71,13 @@ struct BusinessCategoryPage: View {
 
   var selected: [Bool] {
     isSelected.filter { $0 }
+  }
+
+  var selectedCount: some View {
+    HStack {
+      Spacer()
+      Text("\(selected.count) selected")
+    }
   }
 
   var confirmButton: some View {

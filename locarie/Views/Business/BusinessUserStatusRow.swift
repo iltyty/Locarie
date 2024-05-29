@@ -32,6 +32,7 @@ struct BusinessUserStatusRow: View {
       avatar
       Text(user.businessName)
       Text(user.distance(to: locationManager.location)).foregroundStyle(.secondary)
+      Text(user.lastUpdateTime).foregroundStyle(LocarieColor.green)
       DotView()
       Text(user.neighborhood)
       Spacer()

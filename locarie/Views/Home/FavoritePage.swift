@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct FavoritePage: View {
+  @State private var scrollId: Int64? = nil
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
 
@@ -39,7 +40,7 @@ private extension FavoritePage {
       BottomSheet(detents: [.minimum, .large]) {
         PostList(
           posts: vm.posts,
-          selectedPost: $selectedPost,
+          scrollId: $scrollId,
           showTitle: false,
           emptyHint: "No followed post."
         )

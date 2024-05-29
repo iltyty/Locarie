@@ -11,14 +11,17 @@ struct BusinessHomeAvatarRow: View {
   let user: UserDto
   let hasUpdates: Bool
 
-  @Binding var isPresentingDetail: Bool
+  @Binding var presentingCover: Bool
+  @Binding var presentingDetail: Bool
 
   var body: some View {
     HStack {
-      BusinessHomeAvatar(url: user.profileImageUrls.first ?? "")
+      BusinessHomeAvatar(url: user.profileImageUrls.first ?? "").onTapGesture {
+        presentingCover = true
+      }
       BusinessStatus(user)
       Spacer()
-      BusinessProfileDetailButton(presenting: $isPresentingDetail)
+      BusinessProfileDetailButton(presenting: $presentingDetail)
     }
   }
 }

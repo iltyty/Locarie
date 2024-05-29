@@ -21,6 +21,8 @@ struct RegularRegisterPage: View {
   @State private var alertTitle = ""
   @State private var isAlertShowing = false
 
+  @FocusState private var focusField: Field?
+
   var body: some View {
     GeometryReader { _ in
       VStack {
@@ -30,6 +32,7 @@ struct RegularRegisterPage: View {
     }
     .ignoresSafeArea(.keyboard)
     .disabled(isLoading)
+    .keyboardDismissable(focus: $focusField)
     .overlay { isLoading ? ProgressView() : nil }
     .alert(alertTitle, isPresented: $isAlertShowing) {}
     .onReceive(registerViewModel.$state) { state in
@@ -66,6 +69,8 @@ private extension RegularRegisterPage {
       hint: "Email",
       text: $registerViewModel.dto.email
     )
+    .focused($focusField, equals: .email)
+    .textContentType(.emailAddress)
   }
 
   var firstNameInput: some View {
@@ -74,6 +79,8 @@ private extension RegularRegisterPage {
       hint: "First name",
       text: $registerViewModel.dto.firstName
     )
+    .focused($focusField, equals: .firstName)
+    .textContentType(.givenName)
   }
 
   var lastNameInput: some View {
@@ -82,6 +89,8 @@ private extension RegularRegisterPage {
       hint: "Last name",
       text: $registerViewModel.dto.lastName
     )
+    .focused($focusField, equals: .lastName)
+    .textContentType(.familyName)
   }
 
   var usernameInput: some View {
@@ -90,6 +99,8 @@ private extension RegularRegisterPage {
       hint: "Username",
       text: $registerViewModel.dto.username
     )
+    .focused($focusField, equals: .username)
+    .textContentType(.username)
   }
 
   var passwordInput: some View {
@@ -100,6 +111,8 @@ private extension RegularRegisterPage {
         isSecure: true,
         text: $registerViewModel.dto.password
       )
+      .focused($focusField, equals: .password)
+      .textContentType(.password)
       Text("Minimum 8 characters or numbers.")
         .font(.footnote)
         .foregroundStyle(.secondary)
@@ -241,6 +254,10 @@ private extension RegularRegisterPage {
     }
     isAlertShowing = true
   }
+}
+
+private enum Field {
+  case email, firstName, lastName, username, password
 }
 
 private enum Constants {

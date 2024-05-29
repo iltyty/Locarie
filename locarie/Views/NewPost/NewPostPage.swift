@@ -13,7 +13,7 @@ struct NewPostPage: View {
   @State private var isAlertShowing = false
   @State private var alertMessage = ""
 
-  @FocusState private var isEditing
+  @FocusState private var isEditing: Bool
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @ObservedObject private var viewRouter = BottomTabViewRouter.shared
@@ -32,13 +32,8 @@ struct NewPostPage: View {
         postButton
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .background(
-        Color.clear.contentShape(Rectangle())
-          .onTapGesture {
-            isEditing = false
-          }
-      )
     }
+    .keyboardDismissable(focus: $isEditing)
     .ignoresSafeArea(.keyboard)
     .loadingIndicator(loading: $loading)
     .alert(
