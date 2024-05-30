@@ -15,12 +15,12 @@ struct ProfileFavoredByCount: View {
   }
 
   var body: some View {
-    Label {
+    HStack(spacing: 10) {
+      Image("Bookmark")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 16, height: 16)
       Text("\(user.favoredByCount)")
-    } icon: {
-      Image(systemName: "bookmark")
-        .font(.system(size: ProfileConstants.iconSize))
-        .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
     }
   }
 }

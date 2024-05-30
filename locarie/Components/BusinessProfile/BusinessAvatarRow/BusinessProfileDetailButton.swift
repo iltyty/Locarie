@@ -15,6 +15,7 @@ struct BusinessProfileDetailButton: View {
       presenting.toggle()
     } label: {
       Image(systemName: presenting ? "chevron.up" : "chevron.down")
+        .frame(width: 18, height: 18)
     }
     .buttonStyle(.plain)
   }

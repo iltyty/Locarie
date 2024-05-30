@@ -17,22 +17,17 @@ enum BottomSheetDetent: Equatable {
 
   func getOffset(contentHeight height: CGFloat) -> CGFloat {
     switch self {
-    case .minimum:
-      height
-    case .medium:
-      height / 2
-    case .large:
-      0
+    case .minimum: height
+    case .medium: height / 2
+    case .large: 0
     case let .fraction(value):
       if value > 0, value <= 1 {
         height * value
       } else {
         0
       }
-    case let .absoluteTop(value):
-      min(max(0, value), height)
-    case let .absoluteBottom(value):
-      max(0, min(height, height - value))
+    case let .absoluteTop(value): min(max(0, value), height)
+    case let .absoluteBottom(value): max(0, min(height, height - value))
     }
   }
 }

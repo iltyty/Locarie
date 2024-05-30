@@ -17,7 +17,7 @@ struct BusinessStatus: View {
   }
 
   var body: some View {
-    VStack(alignment: .leading) {
+    VStack(alignment: .leading, spacing: 10) {
       businessName
       statusRow
     }
@@ -27,30 +27,26 @@ struct BusinessStatus: View {
 private extension BusinessStatus {
   var businessName: some View {
     Text(user.businessName)
-      .font(.title3)
-      .fontWeight(.semibold)
+      .font(.custom(GlobalConstants.fontName, size: 20))
+      .fontWeight(.bold)
   }
 
   var statusRow: some View {
-    HStack(spacing: 0) {
-      Text(user.neighborhood)
-      Text("·")
-      distanceStatus
-      Text("·")
+    HStack(spacing: 5) {
+      Text(user.neighborhood).foregroundStyle(LocarieColor.greyDark)
+      DotView()
+      Text(user.distance(to: locationManager.location)).foregroundStyle(LocarieColor.greyDark)
+      DotView()
       openStatus
     }
-    .font(.callout)
-    .foregroundStyle(.secondary)
-  }
-
-  var distanceStatus: some View {
-    Text(user.distance(to: locationManager.location))
+    .font(.custom(GlobalConstants.fontName, size: 14))
+    .lineLimit(1)
   }
 
   @ViewBuilder
   var openStatus: some View {
     if user.isNowClosed {
-      Text("Closed")
+      Text("Closed").foregroundStyle(LocarieColor.greyDark)
     } else {
       Text("Open").foregroundStyle(LocarieColor.green)
     }

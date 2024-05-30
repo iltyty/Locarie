@@ -15,17 +15,13 @@ struct ProfileDetail: View {
   }
 
   var body: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
+    VStack(alignment: .leading, spacing: 16) {
       ProfileFavoredByCount(user)
       ProfileAddress(user)
       ProfileOpeningHours(user)
       ProfileLink(user)
       ProfilePhone(user)
-      Divider()
+      Divider().foregroundStyle(LocarieColor.greyMedium)
     }
   }
-}
-
-private enum Constants {
-  static let vSpacing: CGFloat = 16
 }

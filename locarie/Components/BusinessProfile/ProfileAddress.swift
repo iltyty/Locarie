@@ -21,10 +21,7 @@ struct ProfileAddress: View {
       Image("Map")
         .resizable()
         .scaledToFit()
-        .frame(
-          width: ProfileConstants.iconSize,
-          height: ProfileConstants.iconSize
-        )
+        .frame(width: 16, height: 16)
     }
   }
 

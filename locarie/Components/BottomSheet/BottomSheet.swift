@@ -60,9 +60,13 @@ struct BottomSheet<Content: View, TopContent: View>: View {
       }
     )
     .background(GeometryReader { reader in
-      Color.clear.onChange(of: reader.size.height) { height in
-        contentHeight = height
-      }
+      Color.clear
+        .onAppear {
+          contentHeight = reader.size.height
+        }
+        .onChange(of: reader.size.height) { height in
+          contentHeight = height
+        }
     })
     .offset(y: currentDetent.getOffset(contentHeight: contentHeight))
   }
@@ -113,7 +117,7 @@ private extension BottomSheet {
       .fill(LocarieColor.greyMedium)
       .frame(width: BottomSheetConstants.handlerWidth, height: BottomSheetConstants.handlerHeight)
       .padding(.top, 8)
-      .padding(.bottom, 18)
+      .padding(.bottom, 10)
   }
 }
 

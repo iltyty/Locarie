@@ -14,13 +14,13 @@ struct BusinessProfileAvatarRow: View {
   @Binding var presentingDetail: Bool
 
   var body: some View {
-    HStack {
+    HStack(spacing: 10) {
       BusinessHomeAvatar(url: user.profileImageUrls.first ?? "").onTapGesture {
         presentingCover = true
       }
       BusinessStatus(user)
       Spacer()
-      BusinessProfileDetailButton(presenting: $presentingDetail)
+      BusinessProfileDetailButton(presenting: $presentingDetail).padding(.trailing, 16)
     }
   }
 }

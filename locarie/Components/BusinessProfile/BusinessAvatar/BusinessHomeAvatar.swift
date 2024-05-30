@@ -23,6 +23,6 @@ struct BusinessHomeAvatar: View {
 }
 
 private enum Constants {
-  static let size: CGFloat = 72.0
+  static let size: CGFloat = 72
   static let cornerRadius: CGFloat = 18
 }

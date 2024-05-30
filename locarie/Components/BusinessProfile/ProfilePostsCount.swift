@@ -16,11 +16,8 @@ struct ProfilePostsCount: View {
 
   @ViewBuilder
   var body: some View {
-    Group {
-      HStack(spacing: 0) {
-        Text("\(posts.count) ")
-        Text("posts")
-      }
-    }
+    Text("\(posts.count) posts")
+      .font(.custom(GlobalConstants.fontName, size: 14))
+      .fontWeight(.bold)
   }
 }

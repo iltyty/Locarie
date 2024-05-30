@@ -62,7 +62,6 @@ struct PostList: View {
             if i != posts.count - 1 {
               Divider()
                 .foregroundStyle(LocarieColor.greyMedium)
-                .frame(height: 1)
                 .padding(.bottom, 16)
             }
           }

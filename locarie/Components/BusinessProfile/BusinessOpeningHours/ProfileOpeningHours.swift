@@ -37,8 +37,9 @@ private extension ProfileOpeningHours {
     Label {
       openingHoursText
     } icon: {
-      Image(systemName: "clock")
-        .font(.system(size: ProfileConstants.iconSize))
+      Image("Clock")
+        .resizable()
+        .scaledToFit()
         .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
     }
   }
@@ -46,7 +47,8 @@ private extension ProfileOpeningHours {
   @ViewBuilder
   var openingHoursText: some View {
     if user.businessHours.isEmpty {
-      Text(cacheVM.getUserId() == user.id ? "Go edit" : "Opening hours").foregroundStyle(.secondary)
+      Text(cacheVM.getUserId() == user.id ? "Edit" : "Opening hours")
+        .foregroundStyle(LocarieColor.greyDark)
     } else if user.isNowClosed {
       Text("Closed").foregroundStyle(.secondary)
     } else {

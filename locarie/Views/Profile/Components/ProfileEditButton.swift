@@ -13,7 +13,7 @@ struct ProfileEditButton: View {
       UserProfileEditPage()
     } label: {
       HStack {
-        Image("EditIcon")
+        Image("Pencil.Black")
           .resizable()
           .scaledToFit()
           .frame(width: Constants.iconSize, height: Constants.iconSize)

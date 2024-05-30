@@ -136,17 +136,20 @@ private extension BusinessUserProfilePage {
         detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
         currentDetent: $currentDetent
       ) {
-        if case .loading = profileVM.state {
-          skeleton
-        } else {
-          sheetContent
+        Group {
+          if case .loading = profileVM.state {
+            skeleton
+          } else {
+            sheetContent
+          }
         }
+        .padding(.horizontal, 16)
       }
     }
   }
 
   var sheetContent: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
+    VStack(alignment: .leading, spacing: 16) {
       BusinessProfileAvatarRow(
         user: user,
         presentingCover: $presentingProfileCover,
@@ -154,7 +157,7 @@ private extension BusinessUserProfilePage {
       )
       ScrollViewReader { proxy in
         ScrollView {
-          VStack(alignment: .leading, spacing: Constants.vSpacing) {
+          VStack(alignment: .leading, spacing: 16) {
             ProfileCategories(user).id(0)
             if presentingProfileDetail {
               ProfileDetail(user)
@@ -171,6 +174,7 @@ private extension BusinessUserProfilePage {
             }
           }
         }
+        .scrollIndicators(.hidden)
       }
     }
   }
@@ -189,14 +193,26 @@ private extension BusinessUserProfilePage {
         Spacer()
       }
     } else {
-      ForEach(postsVM.posts) { p in
-        PostCardView(p)
-          .onTapGesture {
-            post = p
-            presentingPostCover = true
+      VStack(spacing: 0) {
+        ForEach(postsVM.posts.indices, id: \.self) { i in
+          let p = postsVM.posts[i]
+          VStack(spacing: 0) {
+            PostCardView(p)
+              .buttonStyle(.plain)
+              .padding(.bottom, 16)
+              .onTapGesture {
+                post = p
+                presentingPostCover = true
+              }
+
+            if i != postsVM.posts.count - 1 {
+              Divider()
+                .foregroundStyle(LocarieColor.greyMedium)
+                .padding(.bottom, 16)
+            }
           }
+        }
       }
-      .padding(.bottom)
     }
   }
 
@@ -222,7 +238,7 @@ private extension BusinessUserProfilePage {
       Spacer()
       settingsButton
     }
-    .padding(.horizontal)
+    .padding(.horizontal, 16)
   }
 
   var mineButton: some View {
@@ -242,8 +258,7 @@ private extension BusinessUserProfilePage {
 
   var settingsButton: some View {
     NavigationLink(value: Router.Destination.settings) {
-      Image(systemName: "gearshape")
-        .font(.system(size: Constants.topButtonIconSize))
+      Image("GearShape")
         .frame(width: Constants.topButtonSize, height: Constants.topButtonSize)
         .background(Circle().fill(.background))
     }
@@ -265,10 +280,8 @@ private extension BusinessUserProfilePage {
 }
 
 private enum Constants {
-  static let vSpacing: CGFloat = 16
-
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(35)
-  static let mediumDetent: BottomSheetDetent = .absoluteBottom(462)
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(116)
+  static let mediumDetent: BottomSheetDetent = .absoluteBottom(535)
 
   static let dialogBgOpacity: CGFloat = 0.2
   static let dialogAnimationDuration: CGFloat = 1

@@ -20,8 +20,9 @@ struct ProfileLink: View {
     Label {
       linkText
     } icon: {
-      Image(systemName: "link")
-        .font(.system(size: ProfileConstants.iconSize))
+      Image("Link")
+        .resizable()
+        .scaledToFit()
         .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
     }
   }
@@ -31,11 +32,11 @@ struct ProfileLink: View {
     let text = user.homepageUrl
     if #available(iOS 17.0, *) {
       text.isEmpty
-        ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Link").foregroundStyle(LocarieColor.greyDark)
+        ? Text(cacheVM.getUserId() == user.id ? "Edit" : "Link").foregroundStyle(LocarieColor.greyDark)
         : Text(text)
     } else {
       text.isEmpty
-        ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Link").foregroundColor(LocarieColor.greyDark)
+        ? Text(cacheVM.getUserId() == user.id ? "Edit" : "Link").foregroundColor(LocarieColor.greyDark)
         : Text(text)
     }
   }

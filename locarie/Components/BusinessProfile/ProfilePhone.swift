@@ -20,7 +20,7 @@ struct ProfilePhone: View {
     Label {
       phoneText
     } icon: {
-      Image(systemName: "phone")
+      Image("Phone")
         .font(.system(size: ProfileConstants.iconSize))
         .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
     }
@@ -31,11 +31,11 @@ struct ProfilePhone: View {
     let text = user.phone
     if #available(iOS 17.0, *) {
       text.isEmpty
-        ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Phone").foregroundStyle(LocarieColor.greyDark)
+        ? Text(cacheVM.getUserId() == user.id ? "Edit" : "Phone").foregroundStyle(LocarieColor.greyDark)
         : Text(text)
     } else {
       text.isEmpty
-        ? Text(cacheVM.getUserId() == user.id ? "Go edit" : "Phone").foregroundColor(LocarieColor.greyDark)
+        ? Text(cacheVM.getUserId() == user.id ? "Edit" : "Phone").foregroundColor(LocarieColor.greyDark)
         : Text(text)
     }
   }
