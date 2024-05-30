@@ -29,14 +29,14 @@ struct BackgroundButtonFormItem: View {
   private var content: some View {
     Text(title)
       .padding(.horizontal, Constants.textHPadding)
-      .fontWeight(.semibold)
+      .font(.custom(GlobalConstants.fontName, size: 18))
+      .fontWeight(.bold)
       .foregroundStyle(.white)
       .frame(height: FormItemCommonConstants.height)
   }
 
   private var background: some View {
-    RoundedRectangle(cornerRadius: FormItemCommonConstants.cornerRadius)
-      .fill(color)
+    RoundedRectangle(cornerRadius: FormItemCommonConstants.cornerRadius).fill(color)
   }
 }
 

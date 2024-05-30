@@ -20,7 +20,6 @@ struct BusinessUserStatusRow: View {
         content
       }
     }
-    .lineLimit(1)
   }
 
   private var user: UserDto {
@@ -28,20 +27,23 @@ struct BusinessUserStatusRow: View {
   }
 
   private var content: some View {
-    HStack(spacing: Constants.hSpacing) {
+    HStack(spacing: 10) {
       avatar
       Text(user.businessName)
-      Text(user.distance(to: locationManager.location)).foregroundStyle(.secondary)
-      Text(user.lastUpdateTime).foregroundStyle(LocarieColor.green)
-      DotView()
-      Text(user.neighborhood)
-      Spacer()
+        .fontWeight(.bold)
+      HStack(spacing: 5) {
+        Text(user.lastUpdateTime).foregroundStyle(user.hasUpdateIn24Hours ? LocarieColor.green : LocarieColor.greyDark)
+        DotView()
+        Text(user.neighborhood).foregroundStyle(LocarieColor.greyDark)
+        Spacer()
+      }
     }
+    .font(.custom(GlobalConstants.fontName, size: 14))
   }
 
   private var skeleton: some View {
     HStack {
-      SkeletonView(Constants.avatarSize, Constants.avatarSize, true)
+      SkeletonView(24, 24, true)
       SkeletonView(60, 10)
       SkeletonView(146, 10)
       Spacer()
@@ -49,16 +51,11 @@ struct BusinessUserStatusRow: View {
   }
 
   private var avatar: some View {
-    AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
+    AvatarView(imageUrl: user.avatarUrl, size: 24)
   }
 
   private var distance: Double {
     guard let location = locationManager.location else { return 0 }
     return location.distance(from: user.clLocation)
   }
-}
-
-private enum Constants {
-  static let hSpacing: CGFloat = 10
-  static let avatarSize: CGFloat = 24
 }

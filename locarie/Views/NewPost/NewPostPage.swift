@@ -25,8 +25,8 @@ struct NewPostPage: View {
 
   var body: some View {
     GeometryReader { _ in
-      VStack(alignment: .leading, spacing: Constants.vSpacing) {
-        navigationBar.ignoresSafeArea(.keyboard)
+      VStack(alignment: .leading, spacing: 0) {
+        NavigationBar("Post").ignoresSafeArea(.keyboard)
         content
         Spacer()
         postButton
@@ -69,21 +69,18 @@ struct NewPostPage: View {
   }
 
   private var content: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      BusinessUserStatusRow(vm: profileVM).padding(.horizontal)
-      photosPicker
-      photoCount
-      paragraphInput.padding(.top, -Constants.vSpacing)
+    VStack(alignment: .leading, spacing: 0) {
+      BusinessUserStatusRow(vm: profileVM).padding(.vertical, 16)
+      photosPicker.padding(.bottom, 24)
+      photoCount.padding(.bottom, 5)
+      paragraphInput
       categories
     }
+    .padding(.horizontal, 16)
   }
 }
 
 private extension NewPostPage {
-  var navigationBar: some View {
-    NavigationBar("Post")
-  }
-
   var photosPicker: some View {
     LazyVGrid(columns: gridColumns) {
       photos
@@ -106,7 +103,6 @@ private extension NewPostPage {
         }
       }
     }
-    .padding(.horizontal)
   }
 
   @ViewBuilder
@@ -136,11 +132,12 @@ private extension NewPostPage {
     HStack {
       Spacer()
       Text("\(postVM.photoVM.attachments.count)/\(Constants.maxImageCount)")
-        .padding(.horizontal)
+        .font(.custom(GlobalConstants.fontName, size: 14))
+        .padding(.vertical, 5)
+        .padding(.horizontal, 12)
         .foregroundStyle(LocarieColor.greyDark)
         .background(Capsule().fill(LocarieColor.greyMedium))
     }
-    .padding(.horizontal)
   }
 
   var gridColumns: [GridItem] {
@@ -154,25 +151,25 @@ private extension NewPostPage {
 
 private extension NewPostPage {
   var paragraphInput: some View {
-    VStack {
+    VStack(spacing: 24) {
       TextEditorPlus(text: $postVM.post.content, hint: "Paragraph...")
         .focused($isEditing)
-        .padding([.horizontal])
         .frame(height: Constants.inputHeight, alignment: .top)
-      Divider().padding(.horizontal)
+      Divider().foregroundStyle(LocarieColor.greyMedium)
     }
   }
 
   var categories: some View {
     VStack(alignment: .leading) {
-      Text("Categories").foregroundStyle(LocarieColor.greyDark)
-      WrappingHStack {
+      Text("Categories")
+        .padding(.vertical, 16)
+        .foregroundStyle(LocarieColor.greyDark)
+      HStack(spacing: 5) {
         ForEach(profileVM.dto.categories, id: \.self) { category in
           ProfileBusinessCategoryView(category)
         }
       }
     }
-    .padding(.horizontal)
   }
 }
 
@@ -181,10 +178,9 @@ extension NewPostPage {
     Button {
       postVM.create()
     } label: {
-      BackgroundButtonFormItem(title: "Post")
-        .padding(.horizontal)
-        .opacity(buttonOpacity)
+      BackgroundButtonFormItem(title: "Post").opacity(buttonOpacity)
     }
+    .padding(.horizontal, 16)
     .disabled(isButtonDisabled)
   }
 
@@ -199,7 +195,6 @@ extension NewPostPage {
 
 private enum Constants {
   static let maxImageCount = 5
-  static let vSpacing: CGFloat = 16
   static let photoSize: CGFloat = 114
   static let photoIconSize: CGFloat = 28
   static let photoCornerRadius: CGFloat = 16

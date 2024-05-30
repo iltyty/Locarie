@@ -116,7 +116,7 @@ private extension BusinessUserProfilePage {
       }
     }
     .gestureOptions(disabledAllGesturesOptions())
-    .ornamentOptions(noScaleBarAndCompass())
+    .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 540))
     .ignoresSafeArea(edges: .all)
     .onTapGesture {
       withAnimation(.spring) {

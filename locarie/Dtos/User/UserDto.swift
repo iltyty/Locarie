@@ -111,6 +111,14 @@ extension UserDto {
 extension UserDto {
   var lastUpdateTime: String { lastUpdate.timeAgoString() }
 
+  var hasUpdateIn24Hours: Bool {
+    let components = Calendar.current.dateComponents([.hour], from: lastUpdate, to: Date())
+    if let hours = components.hour {
+      return abs(hours) < 24
+    }
+    return false
+  }
+
   var openUtil: String {
     guard businessHours.count == 7 else { return "Closed" }
     guard let todayBusinessHours else { return "Closed" }

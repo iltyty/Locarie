@@ -14,16 +14,15 @@ struct ToggleSettingsItem: View {
   @State var isOn = false
 
   var body: some View {
-    ZStack(alignment: .bottom) {
-      HStack {
-        Toggle(title, isOn: $isOn).tint(.locariePrimary)
-      }
+    VStack(spacing: 0) {
+      Toggle(title, isOn: $isOn).tint(LocarieColor.blue)
       if divider {
-        Divider()
+        Divider().foregroundStyle(LocarieColor.greyMedium)
       }
     }
-    .padding(.horizontal)
-    .frame(height: SettingsConstants.rowHeight)
+    .padding(.vertical, 20)
+    .padding(.horizontal, 16)
+    .background(.white)
   }
 }
 

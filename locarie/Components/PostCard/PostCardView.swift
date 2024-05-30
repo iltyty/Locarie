@@ -40,9 +40,6 @@ private extension PostCardView {
         Text(post.publishedTime)
           .foregroundStyle(post.publishedOneDayAgo ? LocarieColor.greyDark : LocarieColor.green)
         DotView()
-        Text(post.user.distance(to: locationManager.location)).foregroundStyle(LocarieColor.greyDark)
-          .foregroundStyle(LocarieColor.greyDark)
-        DotView()
         Text(post.user.neighborhood)
           .foregroundStyle(LocarieColor.greyDark)
       }
