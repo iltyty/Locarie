@@ -10,25 +10,23 @@ import SwiftUI
 struct TermsOfServicePage: View {
   var body: some View {
     VStack {
-      navigationBar
+      NavigationBar("Terms of service", divider: true)
       VStack(alignment: .leading) {
         termsOfServiceTitle
+          .padding(.top, 24)
+          .padding(.bottom, 16)
         termsOfServiceContent
       }
-      .padding([.top, .horizontal])
+      .padding(.horizontal, 16)
       Spacer()
     }
   }
 }
 
 private extension TermsOfServicePage {
-  var navigationBar: some View {
-    NavigationBar("Terms of service", divider: true)
-  }
-
   var termsOfServiceTitle: some View {
     Text("Terms of service")
-      .font(.headline)
+      .font(.custom(GlobalConstants.fontName, size: 18))
       .foregroundStyle(Color.locariePrimary)
   }
 

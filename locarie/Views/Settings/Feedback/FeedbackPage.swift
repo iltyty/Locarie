@@ -19,20 +19,25 @@ struct FeedbackPage: View {
 
   var body: some View {
     VStack {
-      navigationBar
+      NavigationBar("Feedback", divider: true)
       VStack(alignment: .leading) {
-        title.onTapGesture {
-          isEditing = false
-        }
-        paragraph.onTapGesture {
-          isEditing = false
-        }
+        title
+          .padding(.top, 24)
+          .padding(.bottom, 16)
+          .onTapGesture {
+            isEditing = false
+          }
+        paragraph
+          .padding(.bottom, 24)
+          .onTapGesture {
+            isEditing = false
+          }
         feedbackEditor
         shareButton.onTapGesture {
           isEditing = false
         }
       }
-      .padding([.top, .horizontal])
+      .padding(.horizontal, 16)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .keyboardDismissable(focus: $isEditing)
@@ -82,13 +87,9 @@ private extension FeedbackPage {
 }
 
 private extension FeedbackPage {
-  var navigationBar: some View {
-    NavigationBar("Feedback", divider: true)
-  }
-
   var title: some View {
     Text("Share your feedback with us.")
-      .font(.headline)
+      .font(.custom(GlobalConstants.fontName, size: 20))
       .foregroundStyle(Color.locariePrimary)
   }
 

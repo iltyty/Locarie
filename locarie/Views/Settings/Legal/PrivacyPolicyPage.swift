@@ -10,25 +10,23 @@ import SwiftUI
 struct PrivacyPolicyPage: View {
   var body: some View {
     VStack {
-      navigationBar
+      NavigationBar("Privacy policy", divider: true)
       VStack(alignment: .leading) {
         privacyPolicyTitle
+          .padding(.top, 24)
+          .padding(.bottom, 16)
         privacyPolicyContent
       }
-      .padding([.top, .horizontal])
+      .padding(.horizontal, 16)
       Spacer()
     }
   }
 }
 
 private extension PrivacyPolicyPage {
-  var navigationBar: some View {
-    NavigationBar("Privacy policy", divider: true)
-  }
-
   var privacyPolicyTitle: some View {
     Text("Privacy policy")
-      .font(.headline)
+      .font(.custom(GlobalConstants.fontName, size: 18))
       .foregroundStyle(Color.locariePrimary)
   }
 

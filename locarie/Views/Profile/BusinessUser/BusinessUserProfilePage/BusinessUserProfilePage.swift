@@ -281,7 +281,7 @@ private extension BusinessUserProfilePage {
 
 private enum Constants {
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(116)
-  static let mediumDetent: BottomSheetDetent = .absoluteBottom(540)
+  static let mediumDetent: BottomSheetDetent = .absoluteBottom(545)
 
   static let dialogBgOpacity: CGFloat = 0.2
   static let dialogAnimationDuration: CGFloat = 1

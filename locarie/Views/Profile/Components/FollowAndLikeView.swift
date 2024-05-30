@@ -41,7 +41,7 @@ private extension FollowAndLikeView {
 
   var followedTab: some View {
     Label {
-      Text("Followed")
+      Text("Following")
     } icon: {
       Image(systemName: "bookmark")
     }

@@ -56,7 +56,7 @@ private extension FavoritePage {
     ZStack {
       HStack {
         Spacer()
-        CapsuleButton { Label("Followed", systemImage: "bookmark") }
+        CapsuleButton { Label("Following", systemImage: "bookmark") }
         Spacer()
       }
       HStack {
