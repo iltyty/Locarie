@@ -48,16 +48,17 @@ struct NavigationBar<L: View, R: View>: View {
 private extension NavigationBar {
   func titleButtons(left: L, right: R) -> some View {
     HStack {
-      left.onTapGesture { dismiss() }
+      left
+        .contentShape(Rectangle())
+        .onTapGesture { dismiss() }
       Spacer()
       right
     }
-    .padding(.horizontal)
+    .padding(.horizontal, 18)
   }
 
   func titleText(_ text: String) -> some View {
     Text(text)
-      .font(.headline)
       .fontWeight(.bold)
   }
 }

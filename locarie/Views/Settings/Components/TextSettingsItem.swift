@@ -13,19 +13,19 @@ struct TextSettingsItem: View {
   var divider: Bool = true
 
   var body: some View {
-    ZStack(alignment: .bottom) {
+    VStack(spacing: 0) {
       HStack {
         Text(title)
         Spacer()
-        Text(value).foregroundStyle(.secondary)
+        Text(value).foregroundStyle(LocarieColor.greyDark)
       }
       .lineLimit(1)
-      .frame(height: SettingsConstants.rowHeight, alignment: .center)
+      .padding(.vertical, 20)
       if divider {
-        Divider()
+        Divider().foregroundStyle(LocarieColor.greyMedium)
       }
     }
-    .padding(.horizontal)
+    .padding(.horizontal, 16)
     .background(.white)
   }
 }

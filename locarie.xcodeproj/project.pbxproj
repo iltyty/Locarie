@@ -90,6 +90,8 @@
 		505C25FF2C036FFE00862AC4 /* Date+TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505C25FE2C036FFE00862AC4 /* Date+TimeAgo.swift */; };
 		505C26012C05D47400862AC4 /* BusinessDescriptionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505C26002C05D47400862AC4 /* BusinessDescriptionPage.swift */; };
 		505C26032C0728A200862AC4 /* View+KeyboardDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505C26022C0728A200862AC4 /* View+KeyboardDismissable.swift */; };
+		505C26052C0891ED00862AC4 /* BusinessMyAccountPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505C26042C0891ED00862AC4 /* BusinessMyAccountPage.swift */; };
+		505C26072C0891FB00862AC4 /* RegularMyAccountPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505C26062C0891FB00862AC4 /* RegularMyAccountPage.swift */; };
 		506590CD2B8CA8C7009F8E5F /* UserDeleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590CC2B8CA8C7009F8E5F /* UserDeleteService.swift */; };
 		506590CF2B8CAD6F009F8E5F /* UserDeleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590CE2B8CAD6E009F8E5F /* UserDeleteViewModel.swift */; };
 		506590D22B8CB411009F8E5F /* UserEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590D12B8CB411009F8E5F /* UserEndpoints.swift */; };
@@ -328,6 +330,8 @@
 		505C25FE2C036FFE00862AC4 /* Date+TimeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TimeAgo.swift"; sourceTree = "<group>"; };
 		505C26002C05D47400862AC4 /* BusinessDescriptionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDescriptionPage.swift; sourceTree = "<group>"; };
 		505C26022C0728A200862AC4 /* View+KeyboardDismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyboardDismissable.swift"; sourceTree = "<group>"; };
+		505C26042C0891ED00862AC4 /* BusinessMyAccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessMyAccountPage.swift; sourceTree = "<group>"; };
+		505C26062C0891FB00862AC4 /* RegularMyAccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularMyAccountPage.swift; sourceTree = "<group>"; };
 		506590CC2B8CA8C7009F8E5F /* UserDeleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDeleteService.swift; sourceTree = "<group>"; };
 		506590CE2B8CAD6E009F8E5F /* UserDeleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDeleteViewModel.swift; sourceTree = "<group>"; };
 		506590D12B8CB411009F8E5F /* UserEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndpoints.swift; sourceTree = "<group>"; };
@@ -627,6 +631,8 @@
 			isa = PBXGroup;
 			children = (
 				501BAF2B2B46319700D9D84F /* MyAccountPage.swift */,
+				505C26042C0891ED00862AC4 /* BusinessMyAccountPage.swift */,
+				505C26062C0891FB00862AC4 /* RegularMyAccountPage.swift */,
 			);
 			path = MyAccount;
 			sourceTree = "<group>";
@@ -1624,6 +1630,7 @@
 				50A06DE72BC7B05900C1E158 /* LoadingIndicator.swift in Sources */,
 				50CBC9842B6F41260025A0D9 /* CircleButton.swift in Sources */,
 				5032A2002BCFFC8000B0199B /* PostGetService.swift in Sources */,
+				505C26052C0891ED00862AC4 /* BusinessMyAccountPage.swift in Sources */,
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */,
 				501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */,
@@ -1736,6 +1743,7 @@
 				509D5BC52B45611E00833021 /* OpeningHoursEditPage.swift in Sources */,
 				500FB24F2B88A1EF00E14DEE /* DynamicPostsMapView.swift in Sources */,
 				50998AF02B35D00D002196B5 /* LoginOrRegisterPage.swift in Sources */,
+				505C26072C0891FB00862AC4 /* RegularMyAccountPage.swift in Sources */,
 				506590DE2B8CB5B6009F8E5F /* FeedbackViewModel.swift in Sources */,
 				5075FCBA2B8605BD005E4A8B /* CoverTopView.swift in Sources */,
 				50530B9D2B878E18009C1F92 /* FavoriteBusinessViewModel.swift in Sources */,

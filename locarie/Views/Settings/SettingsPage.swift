@@ -15,25 +15,30 @@ struct SettingsPage: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      navigationBar
-      VStack(alignment: .leading, spacing: 0) {
-        accountSectionTitle
-        myAccount
-        changePassword
-        notifications
-        locarieForBusinessSectionTitle
-        signUpForBusiness
-        supportSectionTitle
-        feedback
-        legalSectionTitle
-        privacyPolicy
-        termsOfService
-        termsOfUse
-        logout
-        Spacer()
+      navigationBar.background(.white)
+      ScrollView {
+        VStack(alignment: .leading, spacing: 0) {
+          accountSectionTitle.padding(.top, 24).padding(.bottom, 15)
+          myAccount
+          changePassword
+          notifications
+          locarieForBusinessSectionTitle.padding(.top, 24).padding(.bottom, 15)
+          signUpForBusiness
+          supportSectionTitle.padding(.top, 24).padding(.bottom, 15)
+          feedback
+          legalSectionTitle.padding(.top, 24).padding(.bottom, 15)
+          privacyPolicy
+          termsOfService
+          termsOfUse
+          logout.padding(.top, 48)
+          Spacer()
+        }
+        .ignoresSafeArea(edges: .bottom)
+        .background(LocarieColor.greyLight)
       }
-      .background(LocarieColor.greyLight)
+      .scrollIndicators(.hidden)
     }
+    .background(LocarieColor.greyLight)
   }
 }
 
@@ -131,8 +136,8 @@ private extension SettingsPage {
       cacheVM.clean()
       dismiss()
     }
+    .padding(.horizontal, 16)
     .foregroundStyle(LocarieColor.blue)
-    .padding()
     .buttonStyle(.plain)
   }
 }

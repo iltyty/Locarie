@@ -13,19 +13,21 @@ struct LinkSettingsItem: View {
   var divider: Bool = true
 
   var body: some View {
-    ZStack(alignment: .bottom) {
+    VStack(spacing: 0) {
       HStack {
         Text(text)
           .foregroundStyle(color)
+          .padding(.vertical, 20)
         Spacer()
         Image(systemName: "chevron.right")
+          .foregroundStyle(LocarieColor.greyDark)
+          .frame(width: 16, height: 16)
       }
-      .frame(height: SettingsConstants.rowHeight)
       if divider {
-        Divider()
+        Divider().foregroundStyle(LocarieColor.greyMedium)
       }
     }
-    .padding(.horizontal)
+    .padding(.horizontal, 16)
     .background(.white)
   }
 }

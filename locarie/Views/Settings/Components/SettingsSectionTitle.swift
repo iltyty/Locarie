@@ -12,10 +12,9 @@ struct SettingsSectionTitle: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      Text(text).fontWeight(.semibold)
+      Text(text).fontWeight(.bold)
     }
-    .padding(.horizontal)
-    .frame(height: SettingsConstants.rowHeight)
+    .padding(.horizontal, 16)
   }
 }
 

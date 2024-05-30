@@ -19,9 +19,7 @@ struct FeedbackPage: View {
 
   var body: some View {
     VStack {
-      navigationBar.onTapGesture {
-        isEditing = false
-      }
+      navigationBar
       VStack(alignment: .leading) {
         title.onTapGesture {
           isEditing = false
