@@ -17,10 +17,10 @@ struct PostCardView: View {
   }
 
   var body: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      status
-      cover
-      content
+    VStack(alignment: .leading, spacing: 0) {
+      status.padding(.bottom, 9)
+      cover.padding(.bottom, 16)
+      content.padding(.bottom, 10)
       categories
     }
   }
@@ -32,14 +32,23 @@ struct PostCardView: View {
 
 private extension PostCardView {
   var status: some View {
-    HStack {
+    HStack(spacing: 10) {
       userAvatar
       Text(post.businessName)
-      Text(post.publishedTime)
-        .foregroundStyle(post.publishedOneDayAgo ? LocarieColor.greyDark : LocarieColor.green)
-      DotView()
-      Text(post.user.distance(to: locationManager.location)).foregroundStyle(LocarieColor.greyDark)
+        .fontWeight(.bold)
+      HStack(spacing: 5) {
+        Text(post.publishedTime)
+          .foregroundStyle(post.publishedOneDayAgo ? LocarieColor.greyDark : LocarieColor.green)
+        DotView()
+        Text(post.user.distance(to: locationManager.location)).foregroundStyle(LocarieColor.greyDark)
+          .foregroundStyle(LocarieColor.greyDark)
+        DotView()
+        Text(post.user.neighborhood)
+          .foregroundStyle(LocarieColor.greyDark)
+      }
     }
+    .font(.custom(GlobalConstants.fontName, size: 14))
+    .lineLimit(1)
   }
 
   var cover: some View {
@@ -96,8 +105,7 @@ extension PostCardView {
 }
 
 private enum Constants {
-  static let vSpacing = 5.0
-  static let avatarSize: CGFloat = 28
+  static let avatarSize: CGFloat = 24
   static let coverAspectRatio: CGFloat = 4 / 3
   static let coverBorderRadius: CGFloat = 10.0
   static let contentLineLimit = 2

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NavigationButton: View {
   var body: some View {
-    Image("NavigationIcon")
+    Image("Navigation")
       .resizable()
       .scaledToFill()
       .shadow(radius: Constants.shadowRadius)

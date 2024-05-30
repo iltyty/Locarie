@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "google.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Navigation.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

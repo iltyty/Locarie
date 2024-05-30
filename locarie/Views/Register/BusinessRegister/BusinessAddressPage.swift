@@ -27,6 +27,7 @@ struct BusinessAddressPage<U: UserLocation>: View {
     ZStack {
       mapView.ignoresSafeArea()
       contentView
+      Image("Pin")
     }
     .sheet(isPresented: $presentingSheet, content: {
       sheetContent.presentationDetents([.fraction(0.9)])
@@ -46,38 +47,15 @@ struct BusinessAddressPage<U: UserLocation>: View {
 private extension BusinessAddressPage {
   var mapView: some View {
     MapReader { proxy in
-      Map(viewport: $viewport) {
-        Puck2D()
-
-        if let location = dto.location {
-          MapViewAnnotation(
-            coordinate: .init(
-              latitude: location.latitude,
-              longitude: location.longitude
-            )
-          ) {
-            Image("Pin")
-          }
+      Map(viewport: $viewport) {}
+        .onCameraChanged { state in
+          onCameraChanged(state)
         }
-      }
-      .onCameraChanged { state in
-        onCameraChanged(state)
-      }
-      .onMapTapGesture { context in
-        withAnimation(.spring) {
-          let coordinate = context.coordinate
-          dto.location = .init(
-            latitude: coordinate.latitude,
-            longitude: coordinate.longitude
-          )
-          reverseVM.lookup(forLocation: coordinate)
+        .gesture(dragGesture)
+        .gesture(magnifyGesture)
+        .onAppear {
+          updateNeighborhood(proxy.location?.latestLocation?.coordinate)
         }
-      }
-      .gesture(dragGesture)
-      .gesture(magnifyGesture)
-      .onAppear {
-        updateNeighborhood(proxy.location?.latestLocation?.coordinate)
-      }
     }
   }
 
@@ -89,10 +67,8 @@ private extension BusinessAddressPage {
 
   func updateNeighborhood(_ location: CLLocationCoordinate2D?) {
     guard let location else { return }
-    DispatchQueue.main.async {
-      reverseVM.lookup(forLocation: location)
-      needUpdating = false
-    }
+    reverseVM.lookup(forLocation: location)
+    needUpdating = false
   }
 
   var dragGesture: some Gesture {
@@ -152,7 +128,9 @@ private extension BusinessAddressPage {
   var topBar: some View {
     ZStack {
       HStack {
-        CircleButton(systemName: "chevron.left")
+        CircleButton(systemName: "chevron.left").onTapGesture {
+          dismiss()
+        }
         Spacer()
       }
       HStack {

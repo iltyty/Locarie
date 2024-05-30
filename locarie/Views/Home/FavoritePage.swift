@@ -12,6 +12,7 @@ struct FavoritePage: View {
   @State private var scrollId: Int64? = nil
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
+  @State private var currentDetent: BottomSheetDetent = Constants.mediumDetent
 
   @StateObject private var vm = FavoritePostViewModel()
 
@@ -37,7 +38,10 @@ private extension FavoritePage {
     VStack(spacing: 0) {
       topContent
       Spacer()
-      BottomSheet(detents: [.minimum, .large]) {
+      BottomSheet(
+        detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
+        currentDetent: $currentDetent
+      ) {
         PostList(
           posts: vm.posts,
           scrollId: $scrollId,
@@ -63,6 +67,11 @@ private extension FavoritePage {
     .fontWeight(.semibold)
     .padding([.horizontal, .bottom])
   }
+}
+
+private enum Constants {
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(0)
+  static let mediumDetent: BottomSheetDetent = .absoluteBottom(220)
 }
 
 #Preview {

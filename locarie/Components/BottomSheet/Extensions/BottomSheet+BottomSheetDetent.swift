@@ -15,29 +15,24 @@ enum BottomSheetDetent: Equatable {
   case absoluteTop(CGFloat)
   case absoluteBottom(CGFloat)
 
-  func getOffset(screenHeight height: CGFloat) -> CGFloat {
+  func getOffset(contentHeight height: CGFloat) -> CGFloat {
     switch self {
     case .minimum:
-      return maxOffset(screenHeight: height)
+      height
     case .medium:
-      return height / 2
+      height / 2
     case .large:
-      return 4
+      0
     case let .fraction(value):
       if value > 0, value <= 1 {
-        return height * value
+        height * value
       } else {
-        return 0
+        0
       }
     case let .absoluteTop(value):
-      return min(max(0, value), maxOffset(screenHeight: height))
+      min(max(0, value), height)
     case let .absoluteBottom(value):
-      let maxOffset = maxOffset(screenHeight: height)
-      return max(0, min(maxOffset, maxOffset - value))
+      max(0, min(height, height - value))
     }
-  }
-
-  private func maxOffset(screenHeight height: CGFloat) -> CGFloat {
-    height - BottomSheetConstants.handlerBgHeight - 60
   }
 }

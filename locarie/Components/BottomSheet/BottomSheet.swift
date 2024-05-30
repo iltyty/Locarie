@@ -16,7 +16,7 @@ struct BottomSheet<Content: View, TopContent: View>: View {
 
   @Binding var currentDetent: BottomSheetDetent
 
-  @State private var screenHeight: CGFloat = 0
+  @State private var contentHeight: CGFloat = 0
 
   init(
     topPosition: TopPosition = .left,
@@ -32,42 +32,39 @@ struct BottomSheet<Content: View, TopContent: View>: View {
       self.detents = [.minimum, .medium]
     } else {
       self.detents = detents.sorted { d1, d2 in
-        d1.getOffset(screenHeight: 1000) < d2.getOffset(screenHeight: 1000)
+        d1.getOffset(contentHeight: 1000) < d2.getOffset(contentHeight: 1000)
       }
     }
     _currentDetent = currentDetent
   }
 
   var body: some View {
-    GeometryReader { proxy in
-      VStack {
-        if currentDetent != .large {
-          topContentView
-        }
-        contentView
+    VStack(spacing: 8) {
+      if currentDetent != .large {
+        topContentView
       }
-      .scrollDisabled(currentDetent != .large)
-      .gesture(
-        DragGesture(minimumDistance: 10).onEnded { value in
-          var index = detents.firstIndex { $0 == currentDetent } ?? 0
-          if value.translation.height > 0 {
-            index = min(index + 1, detents.count - 1)
-          } else {
-            index = max(index - 1, 0)
-          }
-          withAnimation(.spring) {
-            currentDetent = detents[index]
-          }
-        }
-      )
-      .offset(y: currentDetent.getOffset(screenHeight: screenHeight))
-      .onAppear {
-        screenHeight = proxy.frame(in: .global).size.height
-      }
-      .onChange(of: proxy.size) { newSize in
-        screenHeight = newSize.height
-      }
+      contentView
     }
+    .scrollDisabled(currentDetent != .large)
+    .gesture(
+      DragGesture(minimumDistance: 10).onEnded { value in
+        var index = detents.firstIndex { $0 == currentDetent } ?? 0
+        if value.translation.height > 0 {
+          index = min(index + 1, detents.count - 1)
+        } else {
+          index = max(index - 1, 0)
+        }
+        withAnimation(.spring) {
+          currentDetent = detents[index]
+        }
+      }
+    )
+    .background(GeometryReader { reader in
+      Color.clear.onChange(of: reader.size.height) { height in
+        contentHeight = height
+      }
+    })
+    .offset(y: currentDetent.getOffset(contentHeight: contentHeight))
   }
 }
 
@@ -77,7 +74,7 @@ private extension BottomSheet {
       if case topPosition = .right {
         Spacer()
       }
-      topContent.padding(.horizontal)
+      topContent
       if case topPosition = .left {
         Spacer()
       }
@@ -85,15 +82,13 @@ private extension BottomSheet {
   }
 
   var contentView: some View {
-    VStack(spacing: 2) {
+    VStack(spacing: 0) {
       HStack {
         Spacer()
         handler
         Spacer()
       }
-      content
-        .padding(.horizontal, 8)
-        .frame(maxWidth: .infinity)
+      content.frame(maxWidth: .infinity)
     }
     .contentShape(Rectangle())
     .onTapGesture {
@@ -114,12 +109,11 @@ private extension BottomSheet {
 
 private extension BottomSheet {
   var handler: some View {
-    VStack {
-      Capsule()
-        .fill(Color(hex: BottomSheetConstants.handlerColor))
-        .frame(width: BottomSheetConstants.handlerWidth, height: BottomSheetConstants.handlerHeight)
-    }
-    .frame(height: BottomSheetConstants.handlerBgHeight)
+    Capsule()
+      .fill(LocarieColor.greyMedium)
+      .frame(width: BottomSheetConstants.handlerWidth, height: BottomSheetConstants.handlerHeight)
+      .padding(.top, 8)
+      .padding(.bottom, 18)
   }
 }
 

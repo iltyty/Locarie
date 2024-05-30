@@ -27,18 +27,18 @@ struct PostList: View {
   }
 
   private var scrollView: some View {
-    VStack {
+    VStack(spacing: 24) {
       if showTitle {
         title.id(-1)
       }
-      postList.padding(.bottom)
+      postList
     }
   }
 
   private var title: some View {
     Text("Explore")
-      .fontWeight(.semibold)
-      .padding(.bottom)
+      .fontWeight(.bold)
+      .font(.custom(GlobalConstants.fontName, size: 18))
   }
 
   @ViewBuilder
@@ -46,15 +46,27 @@ struct PostList: View {
     if posts.isEmpty {
       emptyList
     } else {
-      ForEach(posts.indices, id: \.self) { i in
-        NavigationLink {
-          BusinessHomePage(uid: posts[i].user.id)
-        } label: {
-          PostCardView(posts[i])
+      VStack(spacing: 0) {
+        ForEach(posts.indices, id: \.self) { i in
+          VStack(spacing: 0) {
+            NavigationLink {
+              BusinessHomePage(uid: posts[i].user.id)
+            } label: {
+              PostCardView(posts[i])
+            }
+            .id(i)
+            .tint(.primary)
+            .buttonStyle(.plain)
+            .padding(.bottom, 16)
+
+            if i != posts.count - 1 {
+              Divider()
+                .foregroundStyle(LocarieColor.greyMedium)
+                .frame(height: 1)
+                .padding(.bottom, 16)
+            }
+          }
         }
-        .id(i)
-        .tint(.primary)
-        .buttonStyle(.plain)
       }
     }
   }
