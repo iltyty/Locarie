@@ -21,7 +21,8 @@ struct TextEditFormItemWithIconTitle: View {
     }
     .padding(.horizontal)
     .frame(maxWidth: .infinity)
-    .frame(height: FormItemCommonConstants.height)
+    .padding(.vertical, FormItemCommonConstants.vPadding)
+    .padding(.horizontal, FormItemCommonConstants.hPadding)
     .background(background)
   }
 
@@ -33,7 +34,8 @@ struct TextEditFormItemWithIconTitle: View {
   }
 
   private var textEditView: some View {
-    TextField(hint, text: $text).textInputAutocapitalization(.never)
+    TextField(hint, text: $text, prompt: Text(hint).foregroundColor(LocarieColor.greyDark))
+      .textInputAutocapitalization(.never)
   }
 
   private var background: some View {

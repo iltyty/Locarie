@@ -7,7 +7,8 @@
 import SwiftUI
 
 enum FormItemCommonConstants {
-  static let height: CGFloat = 48
+  static let hPadding: CGFloat = 16
+  static let vPadding: CGFloat = 16
   static let cornerRadius: CGFloat = 25
-  static let strokeColor: Color = .init(hex: 0xD9D9D9)
+  static let strokeColor: Color = LocarieColor.greyMedium
 }

@@ -20,22 +20,21 @@ struct TextEditFormItemWithInlineTitle: View {
       Spacer()
       iconView
     }
-    .padding(.horizontal)
+    .padding(.vertical, FormItemCommonConstants.vPadding)
+    .padding(.horizontal, FormItemCommonConstants.hPadding)
     .frame(maxWidth: .infinity)
-    .frame(height: FormItemCommonConstants.height)
     .background(background)
   }
 
   private var titleView: some View {
-    HStack {
-      Text(title)
-    }
-    .fontWeight(.semibold)
-    .frame(width: Constants.titleWidth, alignment: .leading)
+    Text(title)
+      .frame(width: Constants.titleWidth, alignment: .leading)
   }
 
   private var textEditView: some View {
-    TextField(hint, text: $text).textInputAutocapitalization(.never)
+    TextField(hint, text: $text, prompt: Text(hint).foregroundColor(LocarieColor.greyDark))
+      .textInputAutocapitalization(.never)
+      .foregroundStyle(LocarieColor.greyDark)
   }
 
   private var iconView: some View {

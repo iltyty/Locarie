@@ -15,13 +15,17 @@ struct BusinessImagesEditPage: View {
   @State private var presentingAlert = false
 
   var body: some View {
-    VStack(alignment: .leading) {
+    VStack {
       NavigationBar("Edit business photos", right: saveButton, divider: true)
-      Spacer()
-      Text("\(firstImageText) \(recommendText)").padding(.horizontal)
-      businessImages
-      Text("Select up to 9 images.").fontWeight(.bold).padding(.horizontal)
-      Spacer()
+      VStack(alignment: .leading) {
+        Spacer()
+        Text("\(firstImageText) \(recommendText)")
+          .padding(.bottom, 24)
+        businessImages.padding(.bottom, 16)
+        Text("Select up to 9 images.").fontWeight(.bold)
+        Spacer()
+      }
+      .padding(.horizontal, 16)
     }
     .alert("Upload success", isPresented: $presentingAlert) {
       Button("OK") {}

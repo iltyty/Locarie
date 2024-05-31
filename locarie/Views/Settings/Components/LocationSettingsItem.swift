@@ -58,12 +58,13 @@ private extension LocationSettingsItem {
       BusinessAddressPage(dto: $location)
     } label: {
       HStack {
-        Text("Location").fontWeight(.semibold)
+        Text("Location")
         Spacer()
-        Text(location.address)
-        Image(systemName: "chevron.right")
+        Text(location.address).foregroundStyle(LocarieColor.greyDark)
+        Image(systemName: "chevron.right").foregroundStyle(LocarieColor.greyDark)
       }
-      .padding()
+      .padding(16)
+      .lineLimit(1)
     }
     .buttonStyle(.plain)
   }

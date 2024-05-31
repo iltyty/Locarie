@@ -25,10 +25,32 @@ struct BusinessProfileEditPage: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      navigationBar
+      NavigationBar("Edit profile", right: saveButton, divider: true)
       ScrollView {
-        content
+        VStack(alignment: .leading, spacing: 24) {
+          profileImagesEditor.padding(.top, 24)
+          avatarEditor.padding(.horizontal, 16)
+          VStack(alignment: .leading, spacing: 16) {
+            businessNameInput
+            usernameInput
+            categoryInput
+            bioInput
+            locationInput
+            openingHoursInput
+            linkInput
+            phoneInput
+          }
+          .padding(.horizontal, 16)
+          VStack(alignment: .leading, spacing: 16) {
+            personalDetailTitle
+            firstNameInput
+            lastNameInput
+            birthdayInput
+          }
+          .padding(.horizontal, 16)
+        }
       }
+      .scrollIndicators(.hidden)
     }
     .alert("Profile saved", isPresented: $presentingAlert) {
       Button("OK") {}
@@ -54,35 +76,9 @@ struct BusinessProfileEditPage: View {
       }
     }
   }
-
-  private var content: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      profileImagesEditor.padding(.top)
-      VStack(alignment: .leading, spacing: Constants.vSpacing) {
-        avatarEditor
-        businessNameInput
-        usernameInput
-        categoryInput
-        bioInput
-        locationInput
-        openingHoursInput
-        linkInput
-        phoneInput
-        personalDetailTitle
-        firstNameInput
-        lastNameInput
-        birthdayInput
-      }
-      .padding([.top, .horizontal])
-    }
-  }
 }
 
 private extension BusinessProfileEditPage {
-  var navigationBar: some View {
-    NavigationBar("Edit profile", right: saveButton, divider: true)
-  }
-
   var saveButton: some View {
     Button("Save") {
       updateProfile()
@@ -92,10 +88,10 @@ private extension BusinessProfileEditPage {
   }
 
   var profileImagesEditor: some View {
-    VStack(alignment: .leading) {
+    VStack(alignment: .leading, spacing: 16) {
       Text("Edit business images")
-        .fontWeight(.semibold)
-        .padding(.leading)
+        .fontWeight(.bold)
+        .padding(.horizontal, 32)
       ScrollView(.horizontal) {
         NavigationLink {
           BusinessImagesEditPage()
@@ -107,7 +103,7 @@ private extension BusinessProfileEditPage {
               profileImages
             }
           }
-          .padding(.leading)
+          .padding(.horizontal, 16)
         }
         .buttonStyle(.plain)
       }
@@ -246,8 +242,7 @@ private extension BusinessProfileEditPage {
   }
 
   var personalDetailTitle: some View {
-    Text("Personal info")
-      .fontWeight(.semibold)
+    Text("Personal info").fontWeight(.bold).padding(.horizontal, 16)
   }
 
   @ViewBuilder

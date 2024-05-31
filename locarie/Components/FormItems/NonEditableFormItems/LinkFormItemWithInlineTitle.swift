@@ -46,9 +46,9 @@ struct LinkFormItemWithInlineTitle: View {
       Spacer()
       iconView
     }
-    .padding(.horizontal)
+    .padding(.vertical, FormItemCommonConstants.vPadding)
+    .padding(.horizontal, FormItemCommonConstants.hPadding)
     .frame(maxWidth: .infinity)
-    .frame(height: FormItemCommonConstants.height)
     .background(background)
   }
 
@@ -69,17 +69,13 @@ struct LinkFormItemWithInlineTitle: View {
   }
 
   private var titleView: some View {
-    HStack {
-      Text(title).fontWeight(.semibold)
-    }
-    .frame(width: Constants.titleWidth, alignment: .leading)
+    Text(title).frame(width: Constants.titleWidth, alignment: .leading)
   }
 
   private var textView: some View {
     Text(textContent)
       .lineLimit(1)
-      .foregroundStyle(isShowingHint ? .secondary : .primary)
-      .frame(height: FormItemCommonConstants.height)
+      .foregroundStyle(LocarieColor.greyDark)
   }
 
   private var iconView: some View {

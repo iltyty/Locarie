@@ -32,7 +32,8 @@ struct BackgroundButtonFormItem: View {
       .font(.custom(GlobalConstants.fontName, size: 18))
       .fontWeight(.bold)
       .foregroundStyle(.white)
-      .frame(height: FormItemCommonConstants.height)
+      .padding(.vertical, FormItemCommonConstants.vPadding)
+      .padding(.horizontal, FormItemCommonConstants.hPadding)
   }
 
   private var background: some View {

@@ -15,7 +15,7 @@ struct SettingsPage: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      navigationBar.background(.white)
+      NavigationBar("Account", divider: true).background(.white)
       ScrollView {
         VStack(alignment: .leading, spacing: 0) {
           accountSectionTitle.padding(.top, 24).padding(.bottom, 15)
@@ -43,10 +43,6 @@ struct SettingsPage: View {
 }
 
 private extension SettingsPage {
-  var navigationBar: some View {
-    NavigationBar("Account", divider: true)
-  }
-
   var accountSectionTitle: some View {
     SettingsSectionTitle(text: "Account")
   }

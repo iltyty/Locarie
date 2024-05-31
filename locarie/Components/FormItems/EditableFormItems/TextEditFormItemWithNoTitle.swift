@@ -16,14 +16,14 @@ struct TextEditFormItemWithNoTitle: View {
   var body: some View {
     HStack {
       if isSecure {
-        SecureField(hint, text: $text)
+        SecureField(hint, text: $text, prompt: Text(hint).foregroundColor(LocarieColor.greyDark))
       } else {
-        TextField(hint, text: $text)
+        TextField(hint, text: $text, prompt: Text(hint).foregroundColor(LocarieColor.greyDark))
       }
     }
     .textInputAutocapitalization(.never)
-    .padding(.horizontal)
-    .frame(height: FormItemCommonConstants.height)
+    .padding(.vertical, FormItemCommonConstants.vPadding)
+    .padding(.horizontal, FormItemCommonConstants.hPadding)
     .frame(maxWidth: .infinity)
     .background(background)
   }

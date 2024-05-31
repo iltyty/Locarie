@@ -17,7 +17,7 @@ struct AvatarEditor: View {
   @State private var isCropping = false
 
   var body: some View {
-    VStack {
+    VStack(spacing: 10) {
       avatar
       PhotosPicker(
         selection: $photoVM.selection,
@@ -75,15 +75,14 @@ private extension AvatarEditor {
 
   var text: some View {
     Text("Edit profile image")
-      .foregroundStyle(Constants.textColor)
-      .font(.footnote)
+      .font(.custom(GlobalConstants.fontName, size: 14))
+      .foregroundStyle(LocarieColor.blue)
   }
 }
 
 private enum Constants {
   static let avatarSize: CGFloat = 64
   static let imageCropSize: CGFloat = 350
-  static let textColor: Color = .init(hex: 0x326AFB)
 }
 
 #Preview {

@@ -116,7 +116,7 @@ private extension BusinessUserProfilePage {
       }
     }
     .gestureOptions(disabledAllGesturesOptions())
-    .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 540))
+    .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 548))
     .ignoresSafeArea(edges: .all)
     .onTapGesture {
       withAnimation(.spring) {
@@ -281,7 +281,7 @@ private extension BusinessUserProfilePage {
 
 private enum Constants {
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(116)
-  static let mediumDetent: BottomSheetDetent = .absoluteBottom(545)
+  static let mediumDetent: BottomSheetDetent = .absoluteBottom(548)
 
   static let dialogBgOpacity: CGFloat = 0.2
   static let dialogAnimationDuration: CGFloat = 1

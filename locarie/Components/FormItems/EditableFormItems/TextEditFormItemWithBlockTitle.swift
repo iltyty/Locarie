@@ -16,29 +16,23 @@ struct TextEditFormItemWithBlockTitle: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      titleView
+      Text(title).padding(.leading, 16)
       textEditView
     }
-  }
-
-  private var titleView: some View {
-    Text(title)
-      .padding(.leading)
-      .fontWeight(.semibold)
   }
 
   @ViewBuilder
   private var textEditView: some View {
     Group {
       if isSecure {
-        SecureField(hint, text: $text)
+        SecureField(hint, text: $text, prompt: Text(hint).foregroundColor(LocarieColor.greyDark))
       } else {
-        TextField(hint, text: $text)
+        TextField(hint, text: $text, prompt: Text(hint).foregroundColor(LocarieColor.greyDark))
       }
     }
     .textInputAutocapitalization(.never)
-    .padding(.horizontal)
-    .frame(height: FormItemCommonConstants.height)
+    .padding(.vertical, FormItemCommonConstants.vPadding)
+    .padding(.horizontal, FormItemCommonConstants.hPadding)
     .background(background)
   }
 
