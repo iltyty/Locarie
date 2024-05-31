@@ -15,27 +15,24 @@ struct BusinessProfileCover: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      coverTop
-      blank
-      profileImages
-      blank
+      CoverTopView(
+        user: user,
+        sharePreviewText: user.businessName,
+        isPresenting: $isPresenting
+      )
+      .padding(.bottom, 24)
+      .padding(.horizontal, 8)
+      Spacer()
+      Banner(urls: user.profileImageUrls, indicator: .bottom, isPortrait: false).padding(.bottom)
+      Spacer()
       coverBottom
     }
-    .padding(.horizontal)
-    .background(.thickMaterial.opacity(CoverCommonConstants.backgroundOpacity))
-    .contentShape(Rectangle())
+    .padding(.horizontal, 16)
+    .background(.ultraThinMaterial.opacity(0.95))
   }
 }
 
 private extension BusinessProfileCover {
-  var coverTop: some View {
-    CoverTopView(
-      user: user,
-      sharePreviewText: user.businessName,
-      isPresenting: $isPresenting
-    )
-  }
-
   var blank: some View {
     Color
       .clear
@@ -47,19 +44,15 @@ private extension BusinessProfileCover {
       }
   }
 
-  var profileImages: some View {
-    Banner(urls: user.profileImageUrls, bottomIndicator: true, isPortrait: false).padding(.bottom)
-  }
-
   var coverBottom: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
       if cacheVM.getUserId() == user.id {
-        editButtonView
+        editButtonView.padding(.bottom, 14)
       }
       ProfileAddress(user)
       ProfileOpenUntil(user)
     }
-    .padding(.bottom, Constants.bottomPadding)
+    .padding(.bottom, 48)
   }
 
   var editButtonView: some View {
@@ -107,5 +100,4 @@ private enum Constants {
   static let editButtonHeight: CGFloat = 40
   static let editButtonIconSize: CGFloat = 18
   static let editButtonShadowRadius: CGFloat = 2
-  static let bottomPadding: CGFloat = 48
 }

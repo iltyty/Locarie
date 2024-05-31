@@ -14,9 +14,9 @@ struct CoverTopView: View {
   @Binding var isPresenting: Bool
 
   var body: some View {
-    HStack {
-      dismissButton
-      avatar
+    HStack(spacing: 0) {
+      dismissButton.padding(.trailing, 24)
+      avatar.padding(.trailing, 10)
       businessName
       Spacer()
       shareButton
@@ -34,11 +34,15 @@ struct CoverTopView: View {
 
   var avatar: some View {
     AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
-      .padding(.leading, Constants.avatarLeadingPadding)
+      .onTapGesture {
+        withAnimation(.spring) {
+          isPresenting = false
+        }
+      }
   }
 
   var businessName: some View {
-    Text(user.businessName).fontWeight(.semibold)
+    Text(user.businessName).fontWeight(.bold)
   }
 
   @ViewBuilder
@@ -66,6 +70,5 @@ struct CoverTopView: View {
 
 private enum Constants {
   static let avatarSize: CGFloat = 40
-  static let avatarLeadingPadding: CGFloat = 16
   static let buttonSize: CGFloat = 18
 }

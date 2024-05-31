@@ -94,7 +94,7 @@ private extension HomePage {
       Spacer()
       searchIcon
       NavigationLink(value: Router.Destination.favorite) {
-        CircleButton(name: "BookmarkFill")
+        CircleButton(name: "Bookmark.Fill")
       }
       .buttonStyle(.plain)
     }

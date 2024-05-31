@@ -19,7 +19,10 @@ struct ProfileOpenUntil: View {
     Label {
       openUntil
     } icon: {
-      Image(systemName: "clock")
+      Image("Clock")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 16, height: 16)
     }
   }
 

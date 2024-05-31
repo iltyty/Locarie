@@ -49,7 +49,6 @@ struct BusinessBottomBar: View {
       default: break
       }
     })
-    .fontWeight(.semibold)
     .frame(height: Constants.height)
     .ignoresSafeArea(edges: .bottom)
   }
@@ -57,7 +56,7 @@ struct BusinessBottomBar: View {
 
 private extension BusinessBottomBar {
   var favoriteButton: some View {
-    Image(systemName: favoriteButtonSystemName)
+    Image(favoriteButtonName)
       .resizable()
       .scaledToFit()
       .frame(height: Constants.iconSize)
@@ -67,11 +66,11 @@ private extension BusinessBottomBar {
       .onTapGesture { favoriteButtonTapped() }
   }
 
-  var favoriteButtonSystemName: String {
+  var favoriteButtonName: String {
     if alreadyFollowed {
-      "bookmark.fill"
+      "Bookmark.Fill"
     } else {
-      "bookmark"
+      "Bookmark"
     }
   }
 
@@ -79,6 +78,7 @@ private extension BusinessBottomBar {
     Link(destination: navigationUrl) {
       Text("Direction")
     }
+    .fontWeight(.bold)
     .tint(.primary)
     .buttonStyle(.plain)
     .disabled(location == nil)

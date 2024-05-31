@@ -10,8 +10,7 @@ import SwiftUI
 struct Banner: View {
   let urls: [String]
   var fullToggle = false
-  var bottomIndicator = false
-  var indicator = true
+  var indicator: IndicatorPosition = .inner
   var rounded = true
   var isPortrait = true
 
@@ -21,27 +20,23 @@ struct Banner: View {
 
   var body: some View {
     GeometryReader { proxy in
-      VStack {
-        imageView
-          .frame(width: proxy.size.width, height: proxy.size.width / aspectRatio)
-          .onAppear {
-            screenSize = proxy.size
-          }
-        if bottomIndicator {
-          HStack {
-            ForEach(urls.indices, id: \.self) { i in
-              Image(systemName: "circle.fill")
-                .font(.system(size: Constants.indicatorSize))
-                .foregroundStyle(
-                  index == i ? LocarieColor.primary : LocarieColor.primary.opacity(Constants.indicatorOpacity)
-                )
+      VStack(spacing: 10) {
+        ZStack(alignment: .bottom) {
+          imageView
+            .frame(width: proxy.size.width, height: proxy.size.width / aspectRatio)
+            .onAppear {
+              screenSize = proxy.size
             }
+          if indicator == .inner {
+            indicators.padding(.bottom, 5)
           }
-          .padding(.top, Constants.indicatorTopPadding)
+        }
+        if indicator == .bottom {
+          indicators
         }
       }
     }
-    .frame(height: height + (bottomIndicator ? (Constants.indicatorTopPadding + Constants.indicatorSize) : 0))
+    .frame(height: height + (indicator == .bottom ? 16 : 0))
     .fullScreenCover(isPresented: $presentingFullScreen) {
       ImageFullScreenView(urls[index])
     }
@@ -56,7 +51,6 @@ struct Banner: View {
           images
         }
       }
-      .tabViewStyle(.page(indexDisplayMode: bottomIndicator ? .never : .always))
       if fullToggle {
         Image(systemName: "arrow.down.left.and.arrow.up.right")
           .resizable()
@@ -74,7 +68,19 @@ struct Banner: View {
       }
     }
     .clipShape(RoundedRectangle(cornerRadius: rounded ? Constants.cornerRadius : 0))
-    .tabViewStyle(.page(indexDisplayMode: indicator && !urls.isEmpty ? .always : .never))
+    .tabViewStyle(.page(indexDisplayMode: .never))
+  }
+
+  private var indicators: some View {
+    HStack(spacing: 5) {
+      ForEach(urls.indices, id: \.self) { i in
+        Image(systemName: "circle.fill")
+          .resizable()
+          .scaledToFit()
+          .frame(width: 6, height: 6)
+          .foregroundStyle(index == i ? LocarieColor.primary : LocarieColor.greyMedium)
+      }
+    }
   }
 
   private var height: CGFloat {
@@ -113,15 +119,18 @@ struct Banner: View {
   }
 }
 
+extension Banner {
+  enum IndicatorPosition: Equatable {
+    case none, inner, bottom
+  }
+}
+
 private enum Constants {
   static let fullIconSize: CGFloat = 16
   static let cornerRadius: CGFloat = 18
   static let portraitAspectRatio: CGFloat = 3 / 4
   static let landscapeAspectRatio: CGFloat = 4 / 3
   static let defaultImageSize: CGFloat = 28
-  static let indicatorSize: CGFloat = 8
-  static let indicatorOpacity: CGFloat = 0.2
-  static let indicatorTopPadding: CGFloat = 10
 }
 
 #Preview {

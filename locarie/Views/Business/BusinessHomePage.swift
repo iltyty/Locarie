@@ -35,7 +35,14 @@ struct BusinessHomePage: View {
     GeometryReader { _ in
       ZStack(alignment: .top) {
         mapView
-        content
+        VStack(spacing: 0) {
+          topContent
+            .padding(.bottom, 8)
+            .padding(.horizontal, 16)
+          Spacer()
+          bottomContent
+          BusinessBottomBar(businessId: uid, location: user.location).background(.background)
+        }
         if presentingPostCover {
           PostCover(post: post, tags: user.categories, isPresenting: $presentingPostCover)
         }
@@ -60,15 +67,6 @@ struct BusinessHomePage: View {
 }
 
 private extension BusinessHomePage {
-  var content: some View {
-    VStack(spacing: 0) {
-      topContent
-      Spacer()
-      bottomContent
-      bottomBar
-    }
-  }
-
   var mapView: some View {
     Map(viewport: $viewport) {
       MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
@@ -81,19 +79,19 @@ private extension BusinessHomePage {
           }
       }
     }
-    .ornamentOptions(noScaleBarAndCompass())
+    .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 590))
     .ignoresSafeArea(edges: .all)
   }
 
   var topContent: some View {
-    HStack {
-      backButton
+    HStack(spacing: 10) {
+      CircleButton(systemName: "chevron.backward").onTapGesture {
+        dismiss()
+      }
       Spacer()
-      shareButton
-      moreButton
+      CircleButton(name: "ShareIcon")
+      CircleButton(systemName: "ellipsis")
     }
-    .padding(.horizontal)
-    .padding(.bottom, Constants.topButtonsBottomPadding)
   }
 
   var bottomContent: some View {
@@ -143,6 +141,7 @@ private extension BusinessHomePage {
         }
         .scrollIndicators(.hidden)
       }
+      .padding(.horizontal, 16)
     }
   }
 
@@ -160,41 +159,32 @@ private extension BusinessHomePage {
         Spacer()
       }
     } else {
-      ForEach(listUserPostsVM.posts) { p in
-        PostCardView(p)
-          .onTapGesture {
-            post = p
-            presentingPostCover = true
+      VStack(spacing: 0) {
+        ForEach(listUserPostsVM.posts.indices, id: \.self) { i in
+          let p = listUserPostsVM.posts[i]
+          VStack {
+            PostCardView(p)
+              .buttonStyle(.plain)
+              .padding(.bottom, 16)
+              .onTapGesture {
+                post = p
+                presentingPostCover = true
+              }
+
+            if i != listUserPostsVM.posts.count - 1 {
+              Divider()
+                .foregroundStyle(LocarieColor.greyMedium)
+                .padding(.bottom, 16)
+            }
           }
+        }
       }
-      .padding(.bottom)
     }
   }
 
   var updatedIn24Hours: Bool {
     !listUserPostsVM.posts.isEmpty &&
       Date().timeIntervalSince(listUserPostsVM.posts[0].time) < 86400
-  }
-
-  var bottomBar: some View {
-    BusinessBottomBar(businessId: uid, location: user.location).background(.background)
-  }
-}
-
-private extension BusinessHomePage {
-  var backButton: some View {
-    CircleButton(systemName: "chevron.backward")
-      .onTapGesture {
-        dismiss()
-      }
-  }
-
-  var shareButton: some View {
-    CircleButton(name: "ShareIcon")
-  }
-
-  var moreButton: some View {
-    CircleButton(systemName: "ellipsis")
   }
 }
 
@@ -234,14 +224,12 @@ private extension BusinessHomePage {
 }
 
 private enum Constants {
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(31)
-  static let mediumDetent: BottomSheetDetent = .absoluteBottom(455)
-  static let avatarSize: CGFloat = 72
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(112)
+  static let mediumDetent: BottomSheetDetent = .absoluteBottom(540)
   static let vSpacing: CGFloat = 15
   static let mapZoom: CGFloat = 12
-  static let topButtonsBottomPadding: CGFloat = 3
 }
 
 #Preview {
-  BusinessHomePage(uid: 1)
+  BusinessHomePage(uid: 2)
 }

@@ -16,6 +16,10 @@ struct BusinessHomeAvatar: View {
         .scaledToFill()
         .frame(width: Constants.size, height: Constants.size)
         .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+        .overlay {
+          RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 3))
+        }
     } placeholder: {
       RoundedAvatarSkeletonView()
     }

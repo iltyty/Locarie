@@ -21,19 +21,29 @@ struct PostCover: View {
 
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
-      VStack(alignment: .leading) {
-        coverTop
+      VStack(alignment: .leading, spacing: 0) {
+        CoverTopView(
+          user: post.user,
+          sharePreviewText: post.content,
+          isPresenting: $isPresenting
+        )
+        .padding(.bottom, 24)
+        .padding(.horizontal, 8)
         ScrollView {
-          VStack(alignment: .leading) {
-            blank
+          VStack(alignment: .leading, spacing: 16) {
             postStatus
-            postImages
-            content
-            categories
-            blank
+            VStack(alignment: .leading, spacing: 10) {
+              Banner(urls: post.imageUrls, fullToggle: false, indicator: .bottom).padding(.bottom)
+              Text(post.content).font(.headline)
+            }
+            HStack(spacing: 5) {
+              ForEach(tags, id: \.self) { tag in
+                ProfileBusinessCategoryView(tag)
+              }
+            }
           }
         }
-        .padding(.bottom, 100)
+        Spacer()
       }
       ZStack(alignment: .bottomLeading) {
         favoriteButton
@@ -41,12 +51,11 @@ struct PostCover: View {
           favoredByCount
         }
       }
-      .padding(.horizontal)
-      .padding(.bottom, 30)
+      .padding(.horizontal, 8)
+      .padding(.bottom, 36)
     }
-    .padding(.horizontal)
-    .background(.thickMaterial.opacity(CoverCommonConstants.backgroundOpacity))
-    .contentShape(Rectangle())
+    .padding(.horizontal, 16)
+    .background(.ultraThinMaterial.opacity(0.95))
     .onAppear {
       postGetVM.getFavoredByCount(id: post.id)
       favoritePostVM.checkFavoredBy(userId: userId, postId: post.id)
@@ -73,26 +82,6 @@ struct PostCover: View {
 }
 
 private extension PostCover {
-  var coverTop: some View {
-    CoverTopView(
-      user: post.user,
-      sharePreviewText: post.content,
-      isPresenting: $isPresenting
-    )
-  }
-
-  var content: some View {
-    Text(post.content).font(.headline)
-  }
-
-  var categories: some View {
-    WrappingHStack {
-      ForEach(tags, id: \.self) { tag in
-        ProfileBusinessCategoryView(tag)
-      }
-    }
-  }
-
   var blank: some View {
     Color
       .clear
@@ -104,15 +93,15 @@ private extension PostCover {
       }
   }
 
-  var postImages: some View {
-    Banner(urls: post.imageUrls, fullToggle: false, bottomIndicator: true).padding(.bottom)
-  }
-
   var postStatus: some View {
-    HStack {
-      Text(post.publishedTime).foregroundStyle(.green)
+    HStack(spacing: 5) {
+      Text(post.publishedTime)
+        .foregroundStyle(post.publishedOneDayAgo ? LocarieColor.greyDark : LocarieColor.green)
       DotView()
-      Text(post.user.distance(to: locationManager.location)).foregroundStyle(.secondary)
+      Text(post.user.distance(to: locationManager.location))
+        .foregroundStyle(LocarieColor.greyDark)
+      DotView()
+      Text(post.user.neighborhood).foregroundStyle(LocarieColor.greyDark)
     }
   }
 
@@ -130,13 +119,14 @@ private extension PostCover {
 
   var favoredByCount: some View {
     Text("\(postGetVM.favoredByCount)")
-      .padding(.horizontal)
-      .background(Capsule().fill(.background).shadow(radius: Constants.favoriteButtonShadowRadius))
+      .padding(.vertical, 2)
+      .padding(.horizontal, 16)
+      .background(Capsule().fill(.white).shadow(radius: Constants.favoriteButtonShadowRadius))
       .offset(x: -Constants.favoriteButtonBackgroundSize / 2)
   }
 
   var favoriteIcon: some View {
-    Image(systemName: favoriteIconSystemName)
+    Image(favoriteIconName)
       .resizable()
       .scaledToFit()
       .foregroundStyle(alreadySaved ? Color.locariePrimary : .primary)
@@ -146,11 +136,11 @@ private extension PostCover {
       )
   }
 
-  var favoriteIconSystemName: String {
+  var favoriteIconName: String {
     if alreadySaved {
-      "heart.fill"
+      "Heart.Fill"
     } else {
-      "heart"
+      "Heart"
     }
   }
 

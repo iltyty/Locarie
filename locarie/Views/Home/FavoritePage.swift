@@ -21,7 +21,37 @@ struct FavoritePage: View {
   var body: some View {
     ZStack {
       StaticPostsMapView(posts: vm.posts, selectedPost: $selectedPost)
-      contentView
+      VStack(spacing: 0) {
+        topContent
+        Spacer()
+        BottomSheet(
+          topPosition: .right,
+          detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
+          currentDetent: $currentDetent
+        ) {
+          VStack {
+            Text("Following")
+              .font(.custom(GlobalConstants.fontName, size: 18))
+              .fontWeight(.bold)
+              .padding(.bottom, 24)
+            PostList(
+              posts: vm.posts,
+              scrollId: $scrollId,
+              showTitle: false,
+              emptyHint: "No followed post."
+            )
+          }
+          .padding(.horizontal, 16)
+        } topContent: {
+          CircleButton(name: "Navigation")
+            .padding(.trailing, 16)
+            .onTapGesture {
+              withViewportAnimation(.fly) {
+                viewport = .followPuck(zoom: GlobalConstants.mapZoom)
+              }
+            }
+        }
+      }
     }
     .ignoresSafeArea(edges: .bottom)
     .onAppear {
@@ -34,44 +64,19 @@ struct FavoritePage: View {
 }
 
 private extension FavoritePage {
-  var contentView: some View {
-    VStack(spacing: 0) {
-      topContent
-      Spacer()
-      BottomSheet(
-        detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
-        currentDetent: $currentDetent
-      ) {
-        PostList(
-          posts: vm.posts,
-          scrollId: $scrollId,
-          showTitle: false,
-          emptyHint: "No followed post."
-        )
-      }
-    }
-  }
-
   var topContent: some View {
-    ZStack {
-      HStack {
-        Spacer()
-        CapsuleButton { Label("Following", systemImage: "bookmark") }
-        Spacer()
-      }
-      HStack {
-        CircleButton(systemName: "chevron.left").onTapGesture { dismiss() }
-        Spacer()
-      }
+    HStack {
+      CircleButton(systemName: "chevron.left").onTapGesture { dismiss() }
+      Spacer()
     }
-    .fontWeight(.semibold)
-    .padding([.horizontal, .bottom])
+    .padding(.bottom, 8)
+    .padding(.horizontal, 16)
   }
 }
 
 private enum Constants {
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(0)
-  static let mediumDetent: BottomSheetDetent = .absoluteBottom(220)
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(117)
+  static let mediumDetent: BottomSheetDetent = .absoluteBottom(378)
 }
 
 #Preview {
