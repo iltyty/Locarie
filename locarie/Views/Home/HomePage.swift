@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HomePage: View {
-  @StateObject private var postVM = PostListWithinViewModel()
+  @StateObject private var postVM = PostListNearbyAllViewModel()
 
   @State private var currentDetent: BottomSheetDetent = Constants.mediumDetent
   @State private var mapTouched = false

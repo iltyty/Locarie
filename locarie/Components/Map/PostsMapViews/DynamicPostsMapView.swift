@@ -14,9 +14,8 @@ struct DynamicPostsMapView: View {
 
   @State private var map: MapboxMap!
   @State private var needUpdating = true
-  @State private var bounds: CoordinateBounds?
 
-  @ObservedObject var postVM: PostListWithinViewModel
+  @ObservedObject var postVM: PostListNearbyAllViewModel
   @StateObject private var locationManager = LocationManager()
 
   var body: some View {
@@ -35,13 +34,9 @@ struct DynamicPostsMapView: View {
         }
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 385))
-      .onCameraChanged { state in
-        onCameraChanged(state)
-      }
       .simultaneousGesture(TapGesture().onEnded { mapTouched.toggle() })
       .onAppear {
         map = proxy.map!
-        bounds = map.coordinateBounds(for: .init(cameraState: map.cameraState))
       }
     }
     .onReceive(locationManager.$location) { location in
@@ -54,33 +49,19 @@ struct DynamicPostsMapView: View {
 }
 
 private extension DynamicPostsMapView {
-  func onCameraChanged(_ state: CameraChanged) {
-    if needUpdating {
-      DispatchQueue.main.async {
-        bounds = map.coordinateBounds(for: .init(cameraState: state.cameraState))
-        updatePosts(state.cameraState.center)
-      }
-    }
-  }
-
   func updatePosts(_ location: CLLocation?) {
     guard let location else { return }
     updatePosts(
-      CLLocationCoordinate2D(
+      with: CLLocationCoordinate2D(
         latitude: location.coordinate.latitude,
         longitude: location.coordinate.longitude
       )
     )
   }
 
-  func updatePosts(_: CLLocationCoordinate2D) {
-    guard let bounds else { return }
+  func updatePosts(with coordinate: CLLocationCoordinate2D) {
     needUpdating = false
-    let minLatitude = bounds.southeast.latitude
-    let maxLatitude = bounds.northwest.latitude
-    let minLongitude = bounds.northwest.longitude
-    let maxLongitude = bounds.southeast.longitude
-    postVM.list(minLatitude, maxLatitude, minLongitude, maxLongitude)
+    postVM.getNearbyAllPosts(with: coordinate)
   }
 }
 

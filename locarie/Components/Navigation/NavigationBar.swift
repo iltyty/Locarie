@@ -34,7 +34,7 @@ struct NavigationBar<L: View, R: View>: View {
     VStack {
       ZStack(alignment: .top) {
         titleButtons(left: left, right: right)
-        titleText(title)
+        Text(title).fontWeight(.bold)
       }
       if showDivider {
         Divider()
@@ -56,18 +56,12 @@ private extension NavigationBar {
     }
     .padding(.horizontal, 18)
   }
-
-  func titleText(_ text: String) -> some View {
-    Text(text)
-      .fontWeight(.bold)
-  }
 }
 
 private func defaultTitleLeft() -> AnyView {
   AnyView(Image(systemName: "chevron.left")
     .resizable()
     .scaledToFit()
-    .fontWeight(.semibold)
     .frame(width: Constants.leftIconSize, height: Constants.leftIconSize))
 }
 

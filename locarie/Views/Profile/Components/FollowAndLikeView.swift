@@ -45,8 +45,6 @@ private extension FollowAndLikeView {
     } icon: {
       Image(systemName: "bookmark")
     }
-    .fontWeight(isFollowedTabSelected ? .semibold : .regular)
-    .padding(.horizontal)
     .frame(width: Constants.tabWidth, height: Constants.tabHeight)
     .overlay(
       Capsule()
@@ -67,7 +65,6 @@ private extension FollowAndLikeView {
     } icon: {
       Image(systemName: "heart")
     }
-    .fontWeight(!isFollowedTabSelected ? .semibold : .regular)
     .frame(width: Constants.tabWidth, height: Constants.tabHeight)
     .background(
       Capsule()
@@ -86,7 +83,6 @@ private extension FollowAndLikeView {
       case .saved: savedPosts
       }
     }
-    .padding(.horizontal)
   }
 
   @ViewBuilder
@@ -162,6 +158,7 @@ private extension FollowAndLikeView {
       }
       Spacer()
     }
+    .padding(.horizontal, 16)
   }
 }
 

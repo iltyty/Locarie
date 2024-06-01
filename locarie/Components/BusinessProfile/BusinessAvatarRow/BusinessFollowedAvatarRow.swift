@@ -23,7 +23,7 @@ struct BusinessFollowedAvatarRow: View {
       } placeholder: {
         RoundedAvatarSkeletonView(size: Constants.size)
       }
-      VStack(alignment: .leading) {
+      VStack(alignment: .leading, spacing: 10) {
         HStack(alignment: .top) {
           BusinessStatus(user)
           Spacer()
@@ -35,9 +35,15 @@ struct BusinessFollowedAvatarRow: View {
               .foregroundStyle(LocarieColor.primary)
           }
         }
-        ProfileCategories(user).font(.caption)
+        .padding(.trailing, 16)
+        ScrollView(.horizontal) {
+          ProfileCategories(user).font(.custom(GlobalConstants.fontName, size: 14))
+        }
+        .scrollIndicators(.hidden)
       }
+      .padding(.leading, 16)
     }
+    .padding(.leading, 16)
   }
 }
 

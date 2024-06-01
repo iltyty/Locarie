@@ -57,19 +57,19 @@ struct BusinessUserProfilePage: View {
         }
       }
       .sheet(isPresented: $presentingMyCover) {
-        VStack {
+        VStack(spacing: 0) {
           Capsule().fill(LocarieColor.greyMedium)
             .frame(width: 48, height: 6)
+            .padding(.top, 8)
+            .padding(.bottom, 16)
           Label {
             Text("My Page")
           } icon: {
             Image("Person")
           }
-          .padding(.top, 12)
-          .padding(.bottom, 24)
+          .padding(.bottom, 40)
           FollowAndLikeView()
         }
-        .padding(.top, 8)
         .presentationDetents([.fraction(0.95)])
       }
       .onAppear {
