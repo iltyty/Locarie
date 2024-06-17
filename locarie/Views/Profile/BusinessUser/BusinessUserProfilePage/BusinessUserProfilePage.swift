@@ -16,7 +16,7 @@ struct BusinessUserProfilePage: View {
   @State private var post = PostDto()
   @State private var currentDetent: BottomSheetDetent = Constants.mediumDetent
 
-  @State private var presentingProfileDetail = false
+  @State private var presentingProfileDetail = true
   @State private var presentingProfileCover = false
   @State private var presentingPostCover = false
   @State private var presentingMyCover = false
@@ -115,8 +115,8 @@ private extension BusinessUserProfilePage {
           }
       }
     }
-    .gestureOptions(disabledAllGesturesOptions())
-    .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 548))
+//    .gestureOptions(disabledAllGesturesOptions())
+    .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 116))
     .ignoresSafeArea(edges: .all)
     .onTapGesture {
       withAnimation(.spring) {
@@ -286,7 +286,7 @@ private enum Constants {
   static let dialogBgOpacity: CGFloat = 0.2
   static let dialogAnimationDuration: CGFloat = 1
 
-  static let mapZoom: CGFloat = 12
+  static let mapZoom: CGFloat = 16
   static let buttonShadowRadius: CGFloat = 2.0
 
   static let topButtonSize: CGFloat = 40

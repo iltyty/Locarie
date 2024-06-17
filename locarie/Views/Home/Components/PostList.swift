@@ -37,8 +37,8 @@ struct PostList: View {
 
   private var title: some View {
     Text("Explore")
-      .fontWeight(.bold)
       .font(.custom(GlobalConstants.fontName, size: 18))
+      .fontWeight(.bold)
   }
 
   @ViewBuilder

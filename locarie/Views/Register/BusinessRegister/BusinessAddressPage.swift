@@ -48,6 +48,7 @@ private extension BusinessAddressPage {
   var mapView: some View {
     MapReader { proxy in
       Map(viewport: $viewport) {}
+        .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 215))
         .onCameraChanged { state in
           onCameraChanged(state)
         }
@@ -126,22 +127,13 @@ private extension BusinessAddressPage {
   }
 
   var topBar: some View {
-    ZStack {
-      HStack {
-        CircleButton(systemName: "chevron.left").onTapGesture {
-          dismiss()
-        }
-        Spacer()
+    HStack {
+      CircleButton(systemName: "chevron.left").onTapGesture {
+        dismiss()
       }
-      HStack {
-        Spacer()
-        CapsuleButton {
-          Label(reverseVM.neighborhood, image: "BlueMapIcon")
-        }
-        Spacer()
-      }
+      Spacer()
     }
-    .padding(.horizontal)
+    .padding(.horizontal, 16)
   }
 
   var confirmButton: some View {
@@ -177,6 +169,7 @@ private extension BusinessAddressPage {
 private extension BusinessAddressPage {
   private func handleSuggestionChoice(state: PlaceSuggestionsViewModel.State) {
     if case let .chosen(dto) = state {
+      debugPrint(dto)
       retrieveVM.retrieve(mapboxId: dto.mapboxId)
       presentingSheet = false
     }
@@ -185,6 +178,7 @@ private extension BusinessAddressPage {
   private func handleRetrieveResult(state: PlaceRetrieveViewModel.State) {
     switch state {
     case let .loaded(placeRetrieveDto):
+      debugPrint(placeRetrieveDto)
       guard let result = placeRetrieveDto, result.geometry.coordinates.count == 2 else {
         return
       }

@@ -43,6 +43,9 @@ public final class PlaceReverseViewModel: ObservableObject {
       if let feature = dto.features.first {
         address = feature.properties.context.address?.name ?? ""
         neighborhood = feature.properties.context.neighborhood?.name ?? ""
+        if neighborhood.isEmpty {
+          neighborhood = feature.properties.context.locality?.name ?? ""
+        }
       }
       state = .finished
     }

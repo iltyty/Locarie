@@ -25,9 +25,21 @@ struct RegularRegisterPage: View {
 
   var body: some View {
     GeometryReader { _ in
-      VStack {
-        navigationBar
-        content
+      VStack(spacing: 32) {
+        NavigationBar("Create an account")
+        ScrollView {
+          VStack(spacing: 16) {
+            emailInput
+            firstNameInput
+            lastNameInput
+            usernameInput
+            passwordInput
+            bottomText
+            createButton
+            Spacer()
+          }
+          .padding(.horizontal, 16)
+        }
       }
     }
     .ignoresSafeArea(.keyboard)
@@ -45,24 +57,6 @@ struct RegularRegisterPage: View {
 }
 
 private extension RegularRegisterPage {
-  var content: some View {
-    VStack {
-      emailInput
-      firstNameInput
-      lastNameInput
-      usernameInput
-      passwordInput
-      bottomText
-      createButton
-      Spacer()
-    }
-    .padding([.top, .horizontal])
-  }
-
-  var navigationBar: some View {
-    NavigationBar("Create an account")
-  }
-
   var emailInput: some View {
     TextEditFormItemWithBlockTitle(
       title: "Email",
@@ -104,7 +98,7 @@ private extension RegularRegisterPage {
   }
 
   var passwordInput: some View {
-    VStack(alignment: .leading) {
+    VStack(alignment: .leading, spacing: 10) {
       TextEditFormItemWithBlockTitle(
         title: "Password",
         hint: "Password",
@@ -114,57 +108,51 @@ private extension RegularRegisterPage {
       .focused($focusField, equals: .password)
       .textContentType(.password)
       Text("Minimum 8 characters or numbers.")
-        .font(.footnote)
-        .foregroundStyle(.secondary)
-        .padding(.leading)
+        .font(.custom(GlobalConstants.fontName, size: 14))
+        .foregroundStyle(LocarieColor.greyDark)
+        .padding(.leading, 16)
     }
   }
 
   var bottomText: some View {
-    VStack(alignment: .leading, spacing: Constants.bottomVSpacing) {
+    VStack(alignment: .leading, spacing: 20) {
       notificationPicker
       servicePicker
       noteText
     }
-    .padding(.horizontal)
+    .font(.custom(GlobalConstants.fontName, size: 14))
+    .padding(.leading, 16)
   }
 
   var notificationPicker: some View {
     let systemName = isNotificationReceived ? "circle.fill" : "circle"
-    return HStack(alignment: .top, spacing: Constants.pickerLineImageSpacing) {
+    return HStack(alignment: .top, spacing: 10) {
       pickerLineImage(systemName: systemName, isFilled: $isNotificationReceived)
       Text("I do not wish to receive notifications with updates and news.")
       Spacer()
     }
-    .font(.footnote)
   }
 
   var servicePicker: some View {
     let systemName = isServiceAgreed ? "circle.fill" : "circle"
-    return HStack(alignment: .top, spacing: Constants.pickerLineImageSpacing) {
+    return HStack(alignment: .top, spacing: 10) {
       pickerLineImage(systemName: systemName, isFilled: $isServiceAgreed)
-      WrappingHStack(hSpacing: 0) {
-        Text("I agree to the ")
-        textWithPrimaryColor("Privacy Policy")
-        Text(", ")
-        textWithPrimaryColor("Terms of use")
-        Text(", ")
-        textWithPrimaryColor("Community Guidelines")
-        Text(", and ")
-        textWithPrimaryColor("Terms of Service")
-        Text(".")
-        Spacer()
-      }
+      Text("""
+      I agree to the \(Text("Privacy Policy").foregroundColor(LocarieColor.primary)), \
+      \(Text("Terms of use").foregroundColor(LocarieColor.primary)), \
+      \(Text("Community Guidelines").foregroundColor(LocarieColor.primary)), and \
+      \(Text("Terms of Service").foregroundColor(LocarieColor.primary)).
+      """)
+      Spacer()
     }
-    .font(.footnote)
   }
 
   var noteText: some View {
     Text(
       "Note: If the user shares false information or any action violates our safety regulations, necessary actions will be taken."
     )
-    .font(.footnote)
-    .foregroundStyle(.secondary)
+    .foregroundStyle(LocarieColor.greyDark)
+    .padding(.leading, 28)
   }
 
   var createButton: some View {
@@ -199,7 +187,9 @@ private extension RegularRegisterPage {
     isFilled: Binding<Bool>
   ) -> some View {
     Image(systemName: systemName)
+      .frame(width: 18, height: 18)
       .foregroundStyle(Color.locariePrimary)
+      .contentShape(Rectangle())
       .onTapGesture {
         isFilled.wrappedValue.toggle()
       }
@@ -261,9 +251,6 @@ private enum Field {
 }
 
 private enum Constants {
-  static let spacing = 10.0
-  static let bottomVSpacing = 12.0
-  static let pickerLineImageSpacing = 10.0
   static let buttonDisabledOpacity = 0.5
 }
 

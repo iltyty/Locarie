@@ -82,7 +82,7 @@ struct NewPostPage: View {
 
 private extension NewPostPage {
   var photosPicker: some View {
-    LazyVGrid(columns: gridColumns) {
+    LazyVGrid(columns: gridColumns, spacing: 8) {
       photos
       if postVM.photoVM.attachments.count < Constants.maxImageCount {
         PhotosPicker(
@@ -142,9 +142,9 @@ private extension NewPostPage {
 
   var gridColumns: [GridItem] {
     [
-      GridItem(.fixed(Constants.photoSize), alignment: .bottomTrailing),
-      GridItem(.fixed(Constants.photoSize), alignment: .bottomTrailing),
-      GridItem(.fixed(Constants.photoSize), alignment: .bottomTrailing),
+      GridItem(.flexible(minimum: Constants.photoSize, maximum: 3 * Constants.photoSize), alignment: .leading),
+      GridItem(.flexible(minimum: Constants.photoSize, maximum: 3 * Constants.photoSize), alignment: .center),
+      GridItem(.flexible(minimum: Constants.photoSize, maximum: 3 * Constants.photoSize), alignment: .trailing),
     ]
   }
 }

@@ -79,7 +79,7 @@ private extension BusinessHomePage {
           }
       }
     }
-    .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 590))
+    .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 162))
     .ignoresSafeArea(edges: .all)
   }
 
@@ -227,7 +227,7 @@ private enum Constants {
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(112)
   static let mediumDetent: BottomSheetDetent = .absoluteBottom(540)
   static let vSpacing: CGFloat = 15
-  static let mapZoom: CGFloat = 12
+  static let mapZoom: CGFloat = 16
 }
 
 #Preview {

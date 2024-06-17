@@ -33,7 +33,7 @@ struct DynamicPostsMapView: View {
           }
         }
       }
-      .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 385))
+      .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 124))
       .simultaneousGesture(TapGesture().onEnded { mapTouched.toggle() })
       .onAppear {
         map = proxy.map!

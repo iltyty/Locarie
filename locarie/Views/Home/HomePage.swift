@@ -63,15 +63,11 @@ private extension HomePage {
         detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
         currentDetent: $currentDetent
       ) {
-        VStack(spacing: 0) {
-          Text("Explore")
-            .font(.custom(GlobalConstants.fontName, size: 18))
-            .fontWeight(.bold)
-            .padding(.bottom, 24)
+        Group {
           if case .loading = postVM.state {
             PostCardView.skeleton
           } else {
-            PostList(posts: postVM.posts, scrollId: $scrollId, showTitle: false)
+            PostList(posts: postVM.posts, scrollId: $scrollId)
           }
         }
         .padding(.horizontal, 16)

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct BackgroundButtonFormItem: View {
   let title: String
-  var isFullWidth: Bool = true
-  var isFixedWidth: Bool = false
+  var isFullWidth = true
+  var isFixedWidth = false
   let color: Color = .locariePrimary
 
   var body: some View {
@@ -23,6 +23,8 @@ struct BackgroundButtonFormItem: View {
         content
       }
     }
+    .padding(.vertical, FormItemCommonConstants.vPadding)
+    .padding(.horizontal, FormItemCommonConstants.hPadding)
     .background(background)
   }
 
@@ -32,8 +34,6 @@ struct BackgroundButtonFormItem: View {
       .font(.custom(GlobalConstants.fontName, size: 18))
       .fontWeight(.bold)
       .foregroundStyle(.white)
-      .padding(.vertical, FormItemCommonConstants.vPadding)
-      .padding(.horizontal, FormItemCommonConstants.hPadding)
   }
 
   private var background: some View {
