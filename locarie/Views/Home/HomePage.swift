@@ -11,7 +11,7 @@ import SwiftUI
 struct HomePage: View {
   @StateObject private var postVM = PostListNearbyAllViewModel()
 
-  @State private var currentDetent: BottomSheetDetent = Constants.mediumDetent
+  @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
   @State private var mapTouched = false
   @State private var scrollId: Int64? = nil
   @State private var searching = false
@@ -60,7 +60,7 @@ private extension HomePage {
       buttons
       BottomSheet(
         topPosition: .right,
-        detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
+        detents: [Constants.bottomDetent, .large],
         currentDetent: $currentDetent
       ) {
         Group {
@@ -68,6 +68,7 @@ private extension HomePage {
             PostCardView.skeleton
           } else {
             PostList(posts: postVM.posts, scrollId: $scrollId)
+              .disabled(currentDetent == Constants.bottomDetent)
           }
         }
         .padding(.horizontal, 16)
@@ -121,8 +122,7 @@ private extension HomePage {
 }
 
 private enum Constants {
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(117)
-  static let mediumDetent: BottomSheetDetent = .absoluteBottom(378)
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(205)
 }
 
 #Preview {

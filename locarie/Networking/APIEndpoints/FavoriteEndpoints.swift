@@ -13,6 +13,7 @@ extension APIEndpoints {
   static let postIsFavoredByUrl = postsUrl + "/is-favored-by"
 
   static let favoriteBusinessUrl = usersUrl + "/favorite"
+  static let listFavoriteBusinessPostsUrl = favoriteBusinessUrl + "/posts"
   static let unfavoriteBusinessUrl = usersUrl + "/unfavorite"
   static let businessIsFavoredByUrl = usersUrl + "/is-favored-by"
 }

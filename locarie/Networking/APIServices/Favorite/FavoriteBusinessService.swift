@@ -18,6 +18,8 @@ protocol FavoriteBusinessService {
     -> AnyPublisher<ListFavoriteBusinessesResponse, Never>
   func isFavoredBy(userId: Int64, businessId: Int64)
     -> AnyPublisher<BusinessIsFavoredByResponse, Never>
+  func listFavoriteBusinessPosts(userId: Int64)
+    -> AnyPublisher<ListFavoriteBusinessPostsResponse, Never>
 }
 
 final class FavoriteBusinessServiceImpl:
@@ -87,6 +89,18 @@ final class FavoriteBusinessServiceImpl:
       .receive(on: RunLoop.main)
       .eraseToAnyPublisher()
   }
+
+  func listFavoriteBusinessPosts(userId: Int64)
+    -> AnyPublisher<ListFavoriteBusinessPostsResponse, Never>
+  {
+    let params = prepareUserIdParam(userId: userId)
+    return AF.request(APIEndpoints.listFavoriteBusinessPostsUrl, method: .get, parameters: params)
+      .validate()
+      .publishDecodable(type: ResponseDto<[PostDto]>.self)
+      .map { self.mapResponse($0) }
+      .receive(on: RunLoop.main)
+      .eraseToAnyPublisher()
+  }
 }
 
 typealias FavoriteBusinessResponse = DataResponse<
@@ -100,4 +114,7 @@ typealias ListFavoriteBusinessesResponse = DataResponse<
 >
 typealias BusinessIsFavoredByResponse = DataResponse<
   ResponseDto<Bool>, NetworkError
+>
+typealias ListFavoriteBusinessPostsResponse = DataResponse<
+  ResponseDto<[PostDto]>, NetworkError
 >

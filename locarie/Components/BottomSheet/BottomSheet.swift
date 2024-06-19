@@ -68,7 +68,11 @@ struct BottomSheet<Content: View, TopContent: View>: View {
           contentHeight = height
         }
     })
-    .offset(y: currentDetent.getOffset(contentHeight: contentHeight))
+    .offset(y: offsetY)
+  }
+
+  private var offsetY: CGFloat {
+    currentDetent.getOffset(contentHeight: contentHeight)
   }
 }
 
@@ -86,13 +90,16 @@ private extension BottomSheet {
   }
 
   var contentView: some View {
-    VStack(spacing: 0) {
-      HStack {
-        Spacer()
-        handler
-        Spacer()
+    GeometryReader { proxy in
+      VStack(spacing: 0) {
+        HStack {
+          Spacer()
+          handler
+          Spacer()
+        }
+        content.frame(maxWidth: .infinity)
       }
-      content.frame(maxWidth: .infinity)
+      .preference(key: BottomSheetY.self, value: proxy.frame(in: .global).minY)
     }
     .contentShape(Rectangle())
     .onTapGesture {
@@ -107,7 +114,8 @@ private extension BottomSheet {
     UnevenRoundedRectangle(
       topLeadingRadius: BottomSheetConstants.backgroundCornerRadius,
       topTrailingRadius: BottomSheetConstants.backgroundCornerRadius
-    ).fill(.background)
+    )
+    .fill(.white)
   }
 }
 
@@ -117,7 +125,7 @@ private extension BottomSheet {
       .fill(LocarieColor.greyMedium)
       .frame(width: BottomSheetConstants.handlerWidth, height: BottomSheetConstants.handlerHeight)
       .padding(.top, 8)
-      .padding(.bottom, 10)
+      .padding(.bottom, 18)
   }
 }
 

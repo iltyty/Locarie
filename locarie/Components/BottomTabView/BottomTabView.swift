@@ -73,6 +73,7 @@ private extension BottomTabView {
 
   func setPage(_ page: Page) {
     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    Router.shared.navigateToRoot()
     viewRouter.currentPage = page
   }
 }

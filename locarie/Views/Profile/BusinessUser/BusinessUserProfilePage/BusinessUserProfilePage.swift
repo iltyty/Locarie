@@ -10,12 +10,15 @@ import SwiftUI
 
 struct BusinessUserProfilePage: View {
   @State var screenSize: CGSize = .zero
-  @State private var viewport: Viewport = .camera(
-    center: .london, zoom: Constants.mapZoom
-  )
+  @State private var viewport: Viewport = .camera(center: .london, zoom: Constants.mapZoom)
   @State private var post = PostDto()
-  @State private var currentDetent: BottomSheetDetent = Constants.mediumDetent
+  @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
 
+  @State private var deltaLongitudeDegrees: CGFloat = 0
+  @State private var mapUpperBoundY: CGFloat = 0
+  @State private var mapBottomBoundY: CGFloat = 0
+
+  @State private var presentingDeletePostDialog = false
   @State private var presentingProfileDetail = true
   @State private var presentingProfileCover = false
   @State private var presentingPostCover = false
@@ -25,6 +28,7 @@ struct BusinessUserProfilePage: View {
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var profileVM = ProfileGetViewModel()
   @StateObject private var postsVM = ListUserPostsViewModel()
+  @StateObject private var postDeleteVM = PostDeleteViewModel()
 
   var body: some View {
     GeometryReader { proxy in
@@ -43,7 +47,7 @@ struct BusinessUserProfilePage: View {
           )
         }
         if presentingPostCover {
-          PostCover(post: post, tags: user.categories, isPresenting: $presentingPostCover)
+          PostCover(post: post, tags: profileVM.dto.categories, isPresenting: $presentingPostCover)
         }
         if presentingDialog {
           dialogBackground
@@ -79,48 +83,74 @@ struct BusinessUserProfilePage: View {
           }
         }
         screenSize = proxy.size
-        profileVM.getProfile(userId: userId)
+        mapBottomBoundY = screenSize.height - Constants.bottomY
 
+        profileVM.getProfile(userId: userId)
         postsVM.getUserPosts(id: userId)
       }
-      .onDisappear(perform: {
+      .onDisappear {
         presentingDialog = false
-      })
-      .onReceive(profileVM.$dto) { dto in
-        viewport = .camera(center: dto.coordinate, zoom: Constants.mapZoom)
+      }
+    }
+    .alert("Confirm deletion", isPresented: $presentingDeletePostDialog) {
+      Button("Delete", role: .destructive) {
+        postDeleteVM.delete(id: post.id)
+      }
+    }
+    .onReceive(profileVM.$dto) { dto in
+      updateMapCenter(user: dto)
+    }
+    .onReceive(postDeleteVM.$state) { state in
+      switch state {
+      case .finished:
+        postsVM.posts.removeAll { $0.id == post.id }
+      default: return
       }
     }
     .ignoresSafeArea(edges: .bottom)
   }
 
-  private var user: UserDto {
-    profileVM.dto
-  }
-
   private var userId: Int64 {
     cacheVM.getUserId()
+  }
+
+  private func updateMapCenter(user: UserDto) {
+    guard user.coordinate.latitude.isNormal, user.coordinate.longitude.isNormal else { return }
+    let latitude = user.coordinate.latitude - deltaLongitudeDegrees *
+      (screenSize.height - mapUpperBoundY - mapBottomBoundY) /
+      (2 * screenSize.height)
+
+    withViewportAnimation(.easeInOut(duration: 0.5)) {
+      viewport = .camera(
+        center: .init(latitude: latitude, longitude: user.coordinate.longitude),
+        zoom: Constants.mapZoom
+      )
+    }
   }
 }
 
 private extension BusinessUserProfilePage {
   var mapView: some View {
-    Map(viewport: $viewport) {
-      MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
-        BusinessMapAvatar(url: profileVM.dto.avatarUrl)
-          .onTapGesture {
-            viewport = .camera(
-              center: user.coordinate,
-              zoom: Constants.mapZoom
-            )
-          }
+    MapReader { proxy in
+      Map(viewport: $viewport) {
+        MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
+          BusinessMapAvatar(url: profileVM.dto.avatarUrl)
+            .onTapGesture {
+              updateMapCenter(user: profileVM.dto)
+            }
+        }
       }
-    }
-//    .gestureOptions(disabledAllGesturesOptions())
-    .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 116))
-    .ignoresSafeArea(edges: .all)
-    .onTapGesture {
-      withAnimation(.spring) {
-        currentDetent = Constants.bottomDetent
+      .gestureOptions(disabledAllGesturesOptions())
+      .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: Constants.bottomY))
+      .ignoresSafeArea(edges: .all)
+      .onAppear {
+        let bounds = proxy.map!.coordinateBounds(for: .init(cameraState: proxy.map!.cameraState))
+        deltaLongitudeDegrees = bounds.north - bounds.south
+      }
+      .onTapGesture {
+        withAnimation(.spring) {
+          currentDetent = Constants.bottomDetent
+        }
       }
     }
   }
@@ -133,7 +163,7 @@ private extension BusinessUserProfilePage {
       Spacer()
       BottomSheet(
         topPosition: .right,
-        detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
+        detents: [Constants.bottomDetent, .large],
         currentDetent: $currentDetent
       ) {
         Group {
@@ -151,16 +181,17 @@ private extension BusinessUserProfilePage {
   var sheetContent: some View {
     VStack(alignment: .leading, spacing: 16) {
       BusinessProfileAvatarRow(
-        user: user,
+        user: profileVM.dto,
         presentingCover: $presentingProfileCover,
         presentingDetail: $presentingProfileDetail
       )
       ScrollViewReader { proxy in
         ScrollView {
           VStack(alignment: .leading, spacing: 16) {
-            ProfileCategories(user).id(0)
+            ProfileCategories(profileVM.dto).id(0)
+            ProfileBio(profileVM.dto)
             if presentingProfileDetail {
-              ProfileDetail(user)
+              ProfileDetail(profileVM.dto)
             }
             ProfilePostsCount(postsVM.posts)
             postList
@@ -197,13 +228,18 @@ private extension BusinessUserProfilePage {
         ForEach(postsVM.posts.indices, id: \.self) { i in
           let p = postsVM.posts[i]
           VStack(spacing: 0) {
-            PostCardView(p)
-              .buttonStyle(.plain)
-              .padding(.bottom, 16)
-              .onTapGesture {
-                post = p
-                presentingPostCover = true
-              }
+            PostCardView(
+              p,
+              deletable: true,
+              presentingDeleteDialog: $presentingDeletePostDialog,
+              deleteTargetPost: $post
+            )
+            .buttonStyle(.plain)
+            .padding(.bottom, 16)
+            .onTapGesture {
+              post = p
+              presentingPostCover = true
+            }
 
             if i != postsVM.posts.count - 1 {
               Divider()
@@ -219,10 +255,10 @@ private extension BusinessUserProfilePage {
   @ViewBuilder
   var firstProfileImage: some View {
     Group {
-      if user.profileImageUrls.isEmpty {
+      if profileVM.dto.profileImageUrls.isEmpty {
         DefaultBusinessImageView()
       } else {
-        BusinessImageView(url: URL(string: user.profileImageUrls[0]))
+        BusinessImageView(url: URL(string: profileVM.dto.profileImageUrls[0]))
       }
     }
     .onTapGesture {
@@ -239,17 +275,26 @@ private extension BusinessUserProfilePage {
       settingsButton
     }
     .padding(.horizontal, 16)
+    .background {
+      GeometryReader { proxy in
+        Color.clear.onAppear {
+          mapUpperBoundY = proxy.frame(in: .global).maxY
+        }
+      }
+    }
   }
 
   var mineButton: some View {
     ZStack {
       Circle()
-        .fill(.background)
+        .fill(Color(hex: 0xF0F0F0))
         .frame(width: Constants.topButtonSize, height: Constants.topButtonSize)
-      Image("Person")
-        .resizable()
-        .scaledToFit()
-        .frame(width: Constants.topButtonIconSize, height: Constants.topButtonIconSize)
+        .shadow(radius: 2)
+      if cacheVM.getAvatarUrl().isEmpty {
+        defaultAvatar(size: Constants.topButtonSize - 4)
+      } else {
+        AvatarView(imageUrl: cacheVM.getAvatarUrl(), size: Constants.topButtonSize - 4)
+      }
     }
     .onTapGesture {
       presentingMyCover = true
@@ -280,8 +325,8 @@ private extension BusinessUserProfilePage {
 }
 
 private enum Constants {
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(116)
-  static let mediumDetent: BottomSheetDetent = .absoluteBottom(548)
+  static let bottomY: CGFloat = 184
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(bottomY)
 
   static let dialogBgOpacity: CGFloat = 0.2
   static let dialogAnimationDuration: CGFloat = 1

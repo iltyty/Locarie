@@ -10,37 +10,40 @@ import SwiftUI
 
 struct FavoritePage: View {
   @State private var scrollId: Int64? = nil
-  @State private var selectedPost = PostDto()
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
-  @State private var currentDetent: BottomSheetDetent = Constants.mediumDetent
+  @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
 
-  @StateObject private var vm = FavoritePostViewModel()
+  @StateObject private var vm = FavoriteBusinessViewModel()
 
   @Environment(\.dismiss) var dismiss
 
   var body: some View {
     ZStack {
-      StaticPostsMapView(posts: vm.posts, selectedPost: $selectedPost)
+      Map(viewport: $viewport) {
+        Puck2D()
+
+        ForEvery(vm.posts) { post in
+          MapViewAnnotation(coordinate: post.user.coordinate) {
+            BusinessMapAvatar(url: post.user.avatarUrl)
+          }
+        }
+      }
+      .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 205))
+      .ignoresSafeArea()
       VStack(spacing: 0) {
         topContent
         Spacer()
         BottomSheet(
           topPosition: .right,
-          detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
+          detents: [Constants.bottomDetent, .large],
           currentDetent: $currentDetent
         ) {
-          VStack {
-            Text("Following")
-              .font(.custom(GlobalConstants.fontName, size: 18))
-              .fontWeight(.bold)
-              .padding(.bottom, 24)
-            PostList(
-              posts: vm.posts,
-              scrollId: $scrollId,
-              showTitle: false,
-              emptyHint: "No followed post."
-            )
-          }
+          PostList(
+            posts: vm.posts,
+            scrollId: $scrollId,
+            title: "Following",
+            emptyHint: "No followed post."
+          )
           .padding(.horizontal, 16)
         } topContent: {
           CircleButton(name: "Navigation")
@@ -51,14 +54,12 @@ struct FavoritePage: View {
               }
             }
         }
+        BottomTabView()
       }
     }
     .ignoresSafeArea(edges: .bottom)
     .onAppear {
-      vm.list(userId: LocalCacheViewModel.shared.getUserId())
-    }
-    .onReceive(vm.$posts) { posts in
-      selectedPost = posts.first ?? PostDto()
+      vm.listFavoriteBusinessPosts(userId: LocalCacheViewModel.shared.getUserId())
     }
   }
 }
@@ -75,8 +76,8 @@ private extension FavoritePage {
 }
 
 private enum Constants {
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(117)
-  static let mediumDetent: BottomSheetDetent = .absoluteBottom(378)
+  static let bottomY: CGFloat = 205
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(bottomY)
 }
 
 #Preview {

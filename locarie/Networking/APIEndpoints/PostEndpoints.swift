@@ -17,4 +17,8 @@ extension APIEndpoints {
   static func listUserPosts(id: Int64) -> URL {
     URL(string: postsUrl + "/user/\(id)")!
   }
+
+  static func deletePost(id: Int64) -> URL {
+    URL(string: postsUrl + "/\(id)")!
+  }
 }

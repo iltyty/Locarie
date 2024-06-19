@@ -178,7 +178,6 @@ private extension BusinessAddressPage {
   private func handleRetrieveResult(state: PlaceRetrieveViewModel.State) {
     switch state {
     case let .loaded(placeRetrieveDto):
-      debugPrint(placeRetrieveDto)
       guard let result = placeRetrieveDto, result.geometry.coordinates.count == 2 else {
         return
       }

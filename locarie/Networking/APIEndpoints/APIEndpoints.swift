@@ -8,6 +8,6 @@
 import Foundation
 
 enum APIEndpoints {
-//  static let host = "http://localhost"
   static let baseUrl = "https://api.locarie.com/api/v1"
+//  static let baseUrl = "http://localhost:8080/api/v1"
 }

@@ -11,6 +11,7 @@ struct PostList: View {
   let posts: [PostDto]
   @Binding var scrollId: Int64?
 
+  var title = "Explore"
   var showTitle = true
   var emptyHint = "No business yet"
 
@@ -27,16 +28,16 @@ struct PostList: View {
   }
 
   private var scrollView: some View {
-    VStack(spacing: 24) {
+    VStack(spacing: 20) {
       if showTitle {
-        title.id(-1)
+        titleView.id(-1)
       }
       postList
     }
   }
 
-  private var title: some View {
-    Text("Explore")
+  private var titleView: some View {
+    Text(title)
       .font(.custom(GlobalConstants.fontName, size: 18))
       .fontWeight(.bold)
   }

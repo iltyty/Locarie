@@ -19,6 +19,6 @@ struct ProfileBio: View {
     if bio.isEmpty {
       bio = "Go set up the profile!"
     }
-    return Text(bio).foregroundStyle(.secondary).lineLimit(2)
+    return Text(bio).lineLimit(2)
   }
 }

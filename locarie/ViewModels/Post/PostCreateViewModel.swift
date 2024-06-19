@@ -77,6 +77,7 @@ import Foundation
   }
 
   private func handleResponse(_ response: PostCreateResponse) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
       return

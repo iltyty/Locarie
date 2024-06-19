@@ -19,15 +19,15 @@ extension Date {
     return if let years = components.year, years > 0 {
       formatter.string(from: self)
     } else if let months = components.month, months > 0 {
-      "\(months) months ago"
+      "\(months) month\(months == 1 ? "" : "s") ago"
     } else if let days = components.day, days > 0 {
-      "\(days) days ago"
+      "\(days) day\(days == 1 ? "" : "s") ago"
     } else if let hours = components.hour, hours > 0 {
-      "\(hours) hours ago"
+      "\(hours) hour\(hours == 1 ? "" : "s") ago"
     } else if let minutes = components.minute, minutes > 0 {
-      "\(minutes) mins ago"
+      "\(minutes) min\(minutes == 1 ? "" : "s") ago"
     } else if let seconds = components.second, seconds > 0 {
-      "\(seconds) seconds ago"
+      "\(seconds) second\(seconds == 1 ? "" : "s") ago"
     } else {
       "just now"
     }

@@ -11,6 +11,7 @@ final class FavoriteBusinessViewModel: BaseViewModel {
   @Published var alreadyFollowed = false
   @Published var users: [UserDto] = []
   @Published var state: State = .idle
+  @Published var posts: [PostDto] = []
 
   let networking: FavoriteBusinessService
 
@@ -118,21 +119,48 @@ extension FavoriteBusinessViewModel {
       .store(in: &subscriptions)
   }
 
-  private func handleCheckResponse(
-    _ response: BusinessIsFavoredByResponse
-  ) {
+  private func handleCheckResponse(_ response: BusinessIsFavoredByResponse) {
     if let error = response.error {
       state = .checkFailed(error)
-    } else {
-      let dto = response.value!
-      if dto.status == 0 {
-        if let data = dto.data {
-          alreadyFollowed = data
-        }
-        state = .checkFinished
-      } else {
-        state = .checkFailed(newNetworkError(response: dto))
+      return
+    }
+    let dto = response.value!
+    if dto.status == 0 {
+      if let data = dto.data {
+        alreadyFollowed = data
       }
+      state = .checkFinished
+    } else {
+      state = .checkFailed(newNetworkError(response: dto))
+    }
+  }
+}
+
+extension FavoriteBusinessViewModel {
+  func listFavoriteBusinessPosts(userId: Int64) {
+    state = .loading
+    networking.listFavoriteBusinessPosts(userId: userId)
+      .sink { [weak self] response in
+        guard let self else { return }
+        handleListPostsResponse(response)
+      }
+      .store(in: &subscriptions)
+  }
+
+  private func handleListPostsResponse(_ response: ListFavoriteBusinessPostsResponse) {
+    debugPrint(response)
+    if let error = response.error {
+      state = .listPostsFailed(error)
+      return
+    }
+    let dto = response.value!
+    if dto.status == 0 {
+      if let data = dto.data {
+        posts = data
+      }
+      state = .listPostsFinished
+    } else {
+      state = .listPostsFailed(newNetworkError(response: dto))
     }
   }
 }
@@ -144,10 +172,12 @@ extension FavoriteBusinessViewModel {
     case favoriteFinished
     case unfavoriteFinished
     case listFinished
+    case listPostsFinished
     case checkFinished
     case favoriteFailed(NetworkError)
     case unfavoriteFailed(NetworkError)
     case listFailed(NetworkError)
+    case listPostsFailed(NetworkError)
     case checkFailed(NetworkError)
   }
 }
