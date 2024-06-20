@@ -17,6 +17,7 @@ struct BusinessHomePage: View {
     zoom: Constants.mapZoom
   )
 
+  @State private var user = UserDto()
   @State private var post = PostDto()
   @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
 
@@ -30,6 +31,7 @@ struct BusinessHomePage: View {
   @State private var presentingProfileCover = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+  @StateObject private var userListVM = UserListViewModel()
   @StateObject private var profileVM = ProfileGetViewModel()
   @StateObject private var listUserPostsVM = ListUserPostsViewModel()
   @StateObject private var favoritePostVM = FavoritePostViewModel()
@@ -46,7 +48,7 @@ struct BusinessHomePage: View {
             .padding(.horizontal, 16)
           Spacer()
           bottomContent
-          BusinessBottomBar(businessId: uid, location: user.location).background(.background)
+          BusinessBottomBar(businessId: user.id, location: user.location).background(.white)
         }
         if presentingPostCover {
           PostCover(
@@ -75,17 +77,17 @@ struct BusinessHomePage: View {
     }
     .ignoresSafeArea(edges: .bottom)
     .onAppear {
-      print("uid: \(uid)")
       profileVM.getProfile(userId: uid)
       listUserPostsVM.getUserPosts(id: uid)
+      userListVM.listBusinesses()
     }
     .onReceive(profileVM.$dto) { dto in
+      user = dto
       updateMapCenter(user: dto)
     }
-  }
-
-  private var user: UserDto {
-    profileVM.dto
+    .onChange(of: user) { newUser in
+      listUserPostsVM.getUserPosts(id: newUser.id)
+    }
   }
 
   private func updateMapCenter(user: UserDto) {
@@ -107,14 +109,13 @@ private extension BusinessHomePage {
   var mapView: some View {
     MapReader { proxy in
       Map(viewport: $viewport) {
-        MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
-          BusinessMapAvatar(url: profileVM.dto.avatarUrl)
-            .onTapGesture {
-              viewport = .camera(
-                center: user.coordinate,
-                zoom: Constants.mapZoom
-              )
-            }
+        ForEvery(userListVM.businesses) { u in
+          MapViewAnnotation(coordinate: u.coordinate) {
+            BusinessMapAvatar(url: u.avatarUrl, amplified: u.id == user.id)
+              .onTapGesture {
+                user = u
+              }
+          }
         }
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: Constants.bottomY + 50))

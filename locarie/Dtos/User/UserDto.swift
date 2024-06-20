@@ -8,7 +8,11 @@
 import CoreLocation
 import Foundation
 
-struct UserDto: Codable, Identifiable, UserInfo, UserLocation {
+struct UserDto: Codable, Equatable, Identifiable, UserInfo, UserLocation {
+  static func == (lhs: UserDto, rhs: UserDto) -> Bool {
+    lhs.id == rhs.id
+  }
+
   var id: Int64 = 0
   var type: UserType = .regular
   var email: String = ""
