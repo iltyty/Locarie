@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BusinessBottomBar: View {
-  let businessId: Int64
+  @Binding var business: UserDto
   let location: BusinessLocation?
 
   @State private var alreadyFollowed = false
@@ -31,10 +31,10 @@ struct BusinessBottomBar: View {
       .padding(.top, Constants.topPadding)
       .padding(.horizontal, Constants.hPadding)
     }
-    .onAppear {
+    .onChange(of: business) { newBusiness in
       favoriteBusinessVM.checkFavoredBy(
         userId: cacheVM.getUserId(),
-        businessId: businessId
+        businessId: newBusiness.id
       )
     }
     .onReceive(favoriteBusinessVM.$alreadyFollowed) { followed in
@@ -100,11 +100,11 @@ private extension BusinessBottomBar {
   func favoriteButtonTapped() {
     if alreadyFollowed {
       favoriteBusinessVM.unfavorite(
-        userId: cacheVM.getUserId(), businessId: businessId
+        userId: cacheVM.getUserId(), businessId: business.id
       )
     } else {
       favoriteBusinessVM.favorite(
-        userId: cacheVM.getUserId(), businessId: businessId
+        userId: cacheVM.getUserId(), businessId: business.id
       )
     }
   }

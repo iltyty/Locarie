@@ -48,7 +48,7 @@ struct BusinessHomePage: View {
             .padding(.horizontal, 16)
           Spacer()
           bottomContent
-          BusinessBottomBar(businessId: user.id, location: user.location).background(.white)
+          BusinessBottomBar(business: $user, location: user.location).background(.white)
         }
         if presentingPostCover {
           PostCover(
