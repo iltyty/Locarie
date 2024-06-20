@@ -15,10 +15,24 @@ struct RegularUserProfilePage: View {
   var body: some View {
     GeometryReader { proxy in
       ZStack {
-        Color.black.opacity(0.05).ignoresSafeArea(edges: .all)
         VStack {
-          content
-          BottomTabView()
+          LinearGradient(colors: [LocarieColor.primary, Color.white], startPoint: .top, endPoint: .bottom)
+            .frame(height: 320)
+          Spacer()
+        }
+        .ignoresSafeArea(edges: .top)
+        VStack(spacing: 72) {
+          HStack(spacing: 16) {
+            Spacer()
+            ProfileEditButton()
+            settingsButton
+          }
+          .padding(.trailing, 16)
+          avatarRow
+          VStack(spacing: 0) {
+            FollowAndLikeView()
+            BottomTabView()
+          }
         }
       }
       .onAppear {
@@ -27,78 +41,30 @@ struct RegularUserProfilePage: View {
     }
     .ignoresSafeArea(edges: .bottom)
   }
-
-  var content: some View {
-    VStack {
-      settingsButton
-      Spacer()
-      avatarRow
-      Spacer()
-      BottomSheet(detents: [.medium]) {
-        FollowAndLikeView()
-      }
-    }
-  }
 }
 
 extension RegularUserProfilePage {
   var settingsButton: some View {
-    HStack {
-      Spacer()
-      NavigationLink(value: Router.Destination.settings) {
-        Image(systemName: "gearshape")
-          .font(.system(size: Constants.settingsButtonSize))
-          .frame(width: Constants.settingsButtonBgSize, height: Constants.settingsButtonBgSize)
-          .background {
-            Circle()
-              .fill(.background)
-              .shadow(radius: Constants.settingsButtonShadowRadius)
-          }
-      }
-      .buttonStyle(.plain)
+    NavigationLink(value: Router.Destination.settings) {
+      Image(systemName: "gearshape")
+        .frame(width: 18, height: 18)
+        .frame(width: 40, height: 40)
+        .background(Circle().fill(.white))
     }
-    .padding(.horizontal)
+    .buttonStyle(.plain)
   }
 
   var avatarRow: some View {
-    HStack {
-      avatar
-      username
+    HStack(spacing: 10) {
+      AvatarView(imageUrl: cacheVM.getAvatarUrl(), size: 92, isBusiness: false)
+      Text(cacheVM.getUsername())
+        .font(.custom(GlobalConstants.fontName, size: 20))
       Spacer()
-      ProfileEditButton()
     }
-    .padding(.horizontal)
-    .padding(.top, screenHeight * Constants.avatarRowTopPaddingFraction)
+    .padding(.horizontal, 16)
   }
-
-  var avatar: some View {
-    AvatarView(
-      imageUrl: cacheVM.getAvatarUrl(),
-      size: Constants.avatarSize
-    )
-  }
-
-  var username: some View {
-    Text(cacheVM.getUsername())
-      .font(.title3)
-      .fontWeight(.semibold)
-  }
-}
-
-private enum Constants {
-  static let vSpacing: CGFloat = 25
-  static let avatarSize: CGFloat = 72
-  static let avatarRowTopPaddingFraction: CGFloat = 0.1
-
-  static let settingsButtonSize: CGFloat = 18
-  static let settingsButtonBgSize: CGFloat = 40
-  static let settingsButtonShadowRadius: CGFloat = 1
-
-  static let editButtonHeight: CGFloat = 40
-  static let editButtonShadowRadius: CGFloat = 1
 }
 
 #Preview {
   RegularUserProfilePage()
-    .environmentObject(Router.shared)
 }

@@ -116,6 +116,8 @@ private extension BusinessHomePage {
                 user = u
               }
           }
+          .selected(u.id == user.id)
+          .variableAnchors([.init(anchor: .bottom)])
         }
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: Constants.bottomY + 50))
@@ -212,31 +214,24 @@ private extension BusinessHomePage {
       }
     } else {
       VStack(spacing: 0) {
-        ForEach(listUserPostsVM.posts.indices, id: \.self) { i in
-          let p = listUserPostsVM.posts[i]
-          VStack {
-            PostCardView(
-              p,
-              onFullscreenTapped: {
-                post = p
-                presentingPostCover = true
-              },
-              onThumbnailTapped: {
-                presentingProfileCover = true
-              }
-            )
-            .buttonStyle(.plain)
-            .padding(.bottom, 16)
-            .onTapGesture {
+        let posts = listUserPostsVM.posts
+        ForEach(posts.indices, id: \.self) { i in
+          let p = posts[i]
+          PostCardView(
+            p,
+            divider: i != posts.count - 1,
+            onFullscreenTapped: {
               post = p
               presentingPostCover = true
+            },
+            onThumbnailTapped: {
+              presentingProfileCover = true
             }
-
-            if i != listUserPostsVM.posts.count - 1 {
-              Divider()
-                .foregroundStyle(LocarieColor.greyMedium)
-                .padding(.bottom, 16)
-            }
+          )
+          .buttonStyle(.plain)
+          .onTapGesture {
+            post = p
+            presentingPostCover = true
           }
         }
       }
@@ -265,16 +260,16 @@ private extension BusinessHomePage {
 
 private extension BusinessHomePage {
   var skeleton: some View {
-    VStack(alignment: .leading) {
-      HStack {
+    VStack(alignment: .leading, spacing: 16) {
+      HStack(spacing: 10) {
         RoundedAvatarSkeletonView()
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
           SkeletonView(84, 14)
           SkeletonView(146, 10)
         }
         Spacer()
       }
-      HStack {
+      HStack(spacing: 5) {
         SkeletonView(68, 10)
         SkeletonView(68, 10)
         Spacer()

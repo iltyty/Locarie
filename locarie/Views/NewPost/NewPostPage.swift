@@ -10,6 +10,7 @@ import SwiftUI
 
 struct NewPostPage: View {
   @State private var loading = false
+  @State private var loadingProfile = false
   @State private var isAlertShowing = false
   @State private var alertMessage = ""
 
@@ -45,6 +46,12 @@ struct NewPostPage: View {
     .onAppear {
       profileVM.getProfile(userId: cacheVM.getUserId())
     }
+    .onReceive(profileVM.$state) { state in
+      switch state {
+      case .loading: loadingProfile = true
+      default: loadingProfile = false
+      }
+    }
     .onReceive(postVM.$state) { state in
       switch state {
       case .loading:
@@ -70,7 +77,7 @@ struct NewPostPage: View {
 
   private var content: some View {
     VStack(alignment: .leading, spacing: 0) {
-      BusinessUserStatusRow(vm: profileVM).padding(.vertical, 16)
+      status.padding(.vertical, 16)
       photosPicker.padding(.bottom, 24)
       photoCount.padding(.bottom, 5)
       paragraphInput
@@ -81,6 +88,34 @@ struct NewPostPage: View {
 }
 
 private extension NewPostPage {
+  @ViewBuilder
+  var status: some View {
+    if loadingProfile {
+      HStack(spacing: 10) {
+        SkeletonView(40, 40, true)
+        VStack(alignment: .leading, spacing: 10) {
+          SkeletonView(60, 10)
+          SkeletonView(146, 10)
+        }
+      }
+    } else {
+      HStack(spacing: 10) {
+        AvatarView(imageUrl: profileVM.dto.avatarUrl, size: 40)
+        VStack(alignment: .leading, spacing: 0) {
+          Text(profileVM.dto.businessName)
+          HStack(spacing: 5) {
+            Text(profileVM.dto.lastUpdateTime)
+              .foregroundStyle(profileVM.dto.hasUpdateIn24Hours ? LocarieColor.greyDark : LocarieColor.green)
+            DotView()
+            Text(profileVM.dto.neighborhood)
+              .foregroundStyle(LocarieColor.greyDark)
+          }
+          .font(.custom(GlobalConstants.fontName, size: 14))
+        }
+      }
+    }
+  }
+
   var photosPicker: some View {
     LazyVGrid(columns: gridColumns, spacing: 8) {
       photos

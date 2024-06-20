@@ -14,16 +14,16 @@ struct BusinessFollowedAvatarRow: View {
   @Binding var isPresentingCover: Bool
 
   var body: some View {
-    HStack {
-      AsyncImage(url: URL(string: user.profileImageUrls.first ?? "")) { image in
-        image.resizable()
-          .scaledToFill()
-          .frame(width: Constants.size, height: Constants.size)
-          .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
-      } placeholder: {
-        RoundedAvatarSkeletonView(size: Constants.size)
-      }
-      VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: 16) {
+      HStack {
+        AsyncImage(url: URL(string: user.profileImageUrls.first ?? "")) { image in
+          image.resizable()
+            .scaledToFill()
+            .frame(width: Constants.size, height: Constants.size)
+            .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+        } placeholder: {
+          RoundedAvatarSkeletonView(size: Constants.size)
+        }
         HStack(alignment: .top) {
           BusinessStatus(user)
           Spacer()
@@ -36,19 +36,14 @@ struct BusinessFollowedAvatarRow: View {
           }
         }
         .padding(.trailing, 16)
-        ScrollView(.horizontal) {
-          ProfileCategories(user).font(.custom(GlobalConstants.fontName, size: 14))
-        }
-        .scrollIndicators(.hidden)
       }
-      .padding(.leading, 16)
+      ProfileCategories(user).font(.custom(GlobalConstants.fontName, size: 14))
     }
-    .padding(.leading, 16)
   }
 }
 
 private enum Constants {
-  static let size: CGFloat = 114
+  static let size: CGFloat = 72
   static let cornerRadius: CGFloat = 16
   static let followedIconWidth: CGFloat = 12
   static let followedIconHeight: CGFloat = 18

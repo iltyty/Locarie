@@ -24,8 +24,8 @@ struct BusinessSearchView: View {
       businessesView
       Spacer()
     }
-    .padding(.horizontal)
-    .background(.background)
+    .padding(.horizontal, 16)
+    .background(.white)
     .loadingIndicator(loading: $loading)
     .onReceive(userListVM.$state) { state in
       switch state {
@@ -42,41 +42,50 @@ struct BusinessSearchView: View {
 
 private extension BusinessSearchView {
   var searchBar: some View {
-    searchBarBackground.overlay {
-      HStack {
-        Image(systemName: "magnifyingglass")
-          .padding(.leading)
-        TextField("Search businesses", text: $businessName)
-          .autocorrectionDisabled()
-          .textInputAutocapitalization(.never)
-        Image(systemName: "xmark")
-          .padding(.trailing)
-          .onTapGesture {
-            if !businessName.isEmpty {
-              businessName = ""
-            } else {
-              withAnimation(.spring) {
-                searching = false
-              }
+    HStack {
+      Image(systemName: "chevron.left")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 18, height: 18)
+      TextField("Search businesses", text: $businessName)
+        .autocorrectionDisabled()
+        .textInputAutocapitalization(.never)
+      Image(systemName: "xmark")
+        .frame(width: 18, height: 18)
+        .onTapGesture {
+          if !businessName.isEmpty {
+            businessName = ""
+          } else {
+            withAnimation(.spring) {
+              searching = false
             }
           }
-      }
+        }
     }
-  }
-
-  var searchBarBackground: some View {
-    RoundedRectangle(cornerRadius: Constants.searchBarCornerRadius)
-      .fill(.background)
-      .frame(height: Constants.searchBarHeight)
-      .shadow(color: .gray, radius: 2)
+    .padding(.horizontal, 16)
+    .frame(height: 48)
+    .background {
+      RoundedRectangle(cornerRadius: 25)
+        .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
+    }
   }
 
   var areas: some View {
     ScrollView(.horizontal) {
       HStack {
         ForEach(LondonAreas.allCases, id: \.self) { area in
-          CapsuleButton {
-            Label(area.rawValue, image: "Map")
+          HStack(spacing: 10) {
+            Image("Map")
+              .resizable()
+              .scaledToFill()
+              .frame(width: 18, height: 18)
+            Text(area.rawValue)
+          }
+          .padding(.horizontal, 12)
+          .frame(height: 40)
+          .background {
+            RoundedRectangle(cornerRadius: 30)
+              .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
           }
         }
       }
@@ -96,7 +105,7 @@ private extension BusinessSearchView {
   var businessesView: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: Constants.vSpacing) {
-        Text("Businesses").foregroundStyle(Constants.businessesTitleColor)
+        Text("Businesses").foregroundStyle(LocarieColor.greyDark)
         ForEach(businesses) { user in
           NavigationLink(value: Router.Int64Destination.businessHome(user.id)) {
             BusinessFollowedAvatarRow(user: user, followed: isFollowed(user.id), isPresentingCover: .constant(false))
@@ -118,7 +127,6 @@ private enum Constants {
   static let searchBarHeight: CGFloat = 40
   static let searchBarCornerRadius: CGFloat = 25
   static let avatarSize: CGFloat = 40
-  static let businessesTitleColor: Color = .init(hex: 0x707579)
 }
 
 #Preview {

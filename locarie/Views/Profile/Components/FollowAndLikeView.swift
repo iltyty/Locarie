@@ -16,8 +16,12 @@ struct FollowAndLikeView: View {
   @State private var currentTab: Tab = .followed
 
   var body: some View {
-    VStack(spacing: Constants.vSpacing) {
-      tabs
+    VStack(spacing: 24) {
+      HStack(spacing: 16) {
+        followedTab
+        likedTab
+      }
+      .padding(.horizontal, 16)
       tabContent
     }
     .onAppear {
@@ -29,26 +33,19 @@ struct FollowAndLikeView: View {
 }
 
 private extension FollowAndLikeView {
-  var tabs: some View {
-    HStack {
-      Spacer()
-      followedTab
-      Spacer()
-      likedTab
-      Spacer()
-    }
-  }
-
   var followedTab: some View {
-    Label {
+    HStack(spacing: 10) {
+      Image("Bookmark")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 16, height: 16)
       Text("Following")
-    } icon: {
-      Image(systemName: "bookmark")
     }
-    .frame(width: Constants.tabWidth, height: Constants.tabHeight)
-    .overlay(
+    .frame(height: Constants.tabHeight)
+    .frame(maxWidth: .infinity)
+    .background(
       Capsule()
-        .strokeBorder(isFollowedTabSelected ? .black : LocarieColor.greyMedium)
+        .strokeBorder(isFollowedTabSelected ? .black : LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
     )
     .onTapGesture {
       currentTab = .followed
@@ -60,15 +57,18 @@ private extension FollowAndLikeView {
   }
 
   var likedTab: some View {
-    Label {
+    HStack(spacing: 10) {
+      Image("Heart")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 16, height: 16)
       Text("Likes")
-    } icon: {
-      Image(systemName: "heart")
     }
-    .frame(width: Constants.tabWidth, height: Constants.tabHeight)
+    .frame(height: Constants.tabHeight)
+    .frame(maxWidth: .infinity)
     .background(
       Capsule()
-        .strokeBorder(!isFollowedTabSelected ? .primary : LocarieColor.greyMedium)
+        .strokeBorder(!isFollowedTabSelected ? .black : LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
     )
     .onTapGesture {
       currentTab = .saved
@@ -83,17 +83,18 @@ private extension FollowAndLikeView {
       case .saved: savedPosts
       }
     }
+    .padding(.horizontal, 16)
   }
 
   @ViewBuilder
   var followedBusinesses: some View {
     if case .loading = favoriteBusinessVM.state {
-      skeleton
+      followingSkeleton.frame(maxHeight: .infinity, alignment: .top)
     } else if favoriteBusinessVM.users.isEmpty {
       emptyFollowedBusinesses
     } else {
       ScrollView {
-        VStack(alignment: .leading, spacing: Constants.vSpacing) {
+        VStack(alignment: .leading, spacing: 24) {
           ForEach(favoriteBusinessVM.users) { user in
             BusinessFollowedAvatarRow(
               user: user,
@@ -102,63 +103,70 @@ private extension FollowAndLikeView {
           }
         }
       }
+      .scrollIndicators(.hidden)
     }
   }
 
   @ViewBuilder
   var savedPosts: some View {
     if case .loading = favoritePostsVM.state {
-      skeleton
+      PostCardView.skeleton.frame(maxHeight: .infinity, alignment: .top)
     } else if favoritePostsVM.posts.isEmpty {
       emptySavedPosts
     } else {
+      let posts = favoritePostsVM.posts
       ScrollView {
-        VStack(spacing: Constants.vSpacing) {
-          ForEach(favoritePostsVM.posts) { post in
-            PostCardView(post)
+        VStack(spacing: 0) {
+          ForEach(posts.indices, id: \.self) { i in
+            PostCardView(posts[i], divider: i != posts.count - 1)
           }
         }
       }
+      .scrollIndicators(.hidden)
     }
   }
 
   var emptyFollowedBusinesses: some View {
-    VStack {
-      Text("No followed business.")
-        .foregroundStyle(.secondary)
-        .padding(.top, Constants.emptyTabContentTopPadding)
+    VStack(spacing: 16) {
+      Image("Bookmark.Grey")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 40, height: 40)
+      Text("No followed yet").font(.custom(GlobalConstants.fontName, size: 14))
       Spacer()
     }
+    .padding(.top, 108)
   }
 
   var emptySavedPosts: some View {
-    VStack {
-      Text("No liked post.")
-        .foregroundStyle(.secondary)
-        .padding(.top, Constants.emptyTabContentTopPadding)
+    VStack(spacing: 16) {
+      Image("Heart.Grey")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 40, height: 40)
+      Text("No likes yet").font(.custom(GlobalConstants.fontName, size: 14))
       Spacer()
     }
+    .padding(.top, 108)
   }
 }
 
 private extension FollowAndLikeView {
-  var skeleton: some View {
-    VStack {
-      HStack {
-        RoundedAvatarSkeletonView(size: 114)
-        VStack(alignment: .leading) {
+  var followingSkeleton: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      HStack(spacing: 10) {
+        RoundedAvatarSkeletonView(size: 72)
+        VStack(alignment: .leading, spacing: 10) {
           SkeletonView(84, 14)
           SkeletonView(146, 10)
-          HStack {
-            SkeletonView(68, 11)
-            SkeletonView(68, 11)
-          }
         }
         Spacer()
       }
-      Spacer()
+      HStack(spacing: 5) {
+        SkeletonView(68, 10)
+        SkeletonView(68, 10)
+      }
     }
-    .padding(.horizontal, 16)
   }
 }
 
@@ -169,9 +177,7 @@ private extension FollowAndLikeView {
 }
 
 private enum Constants {
-  static let vSpacing: CGFloat = 25
-
-  static let tabWidth: CGFloat = 140
+  static let tabWidth: CGFloat = 170
   static let tabHeight: CGFloat = 40
   static let emptyTabContentTopPadding: CGFloat = 50
 }

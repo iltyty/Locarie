@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PostCardView: View {
   let post: PostDto
+  let divider: Bool
   let deletable: Bool
   let onFullscreenTapped: () -> Void
   let onThumbnailTapped: () -> Void
@@ -20,8 +21,14 @@ struct PostCardView: View {
   @State private var presentingCover = false
   @StateObject private var locationManager = LocationManager()
 
-  init(_ post: PostDto, onFullscreenTapped: @escaping () -> Void = {}, onThumbnailTapped: @escaping () -> Void = {}) {
+  init(
+    _ post: PostDto,
+    divider: Bool = false,
+    onFullscreenTapped: @escaping () -> Void = {},
+    onThumbnailTapped: @escaping () -> Void = {}
+  ) {
     self.post = post
+    self.divider = divider
     deletable = false
     self.onFullscreenTapped = onFullscreenTapped
     self.onThumbnailTapped = onThumbnailTapped
@@ -31,6 +38,7 @@ struct PostCardView: View {
 
   init(
     _ post: PostDto,
+    divider: Bool = false,
     deletable: Bool = false,
     onFullscreenTapped: @escaping () -> Void = {},
     onThumbnailTapped: @escaping () -> Void = {},
@@ -38,6 +46,7 @@ struct PostCardView: View {
     deleteTargetPost: Binding<PostDto>
   ) {
     self.post = post
+    self.divider = divider
     self.deletable = deletable
     self.onFullscreenTapped = onFullscreenTapped
     self.onThumbnailTapped = onThumbnailTapped
@@ -51,6 +60,11 @@ struct PostCardView: View {
       cover.padding(.bottom, 16)
       content.padding(.bottom, 10)
       categories
+      if divider {
+        Divider()
+          .foregroundStyle(LocarieColor.greyMedium)
+          .padding(.vertical, 16)
+      }
     }
   }
 
@@ -62,7 +76,7 @@ struct PostCardView: View {
 private extension PostCardView {
   var status: some View {
     HStack(spacing: 10) {
-      userAvatar
+      AvatarView(imageUrl: post.businessAvatarUrl, size: Constants.avatarSize)
       VStack(alignment: .leading, spacing: 0) {
         Text(post.businessName)
         HStack(spacing: 5) {
@@ -191,10 +205,6 @@ private extension PostCardView {
 }
 
 private extension PostCardView {
-  var userAvatar: some View {
-    AvatarView(imageUrl: post.businessAvatarUrl, size: Constants.avatarSize)
-  }
-
   var distance: Double {
     guard let location = locationManager.location else { return 0 }
     return location.distance(from: post.businessLocation)
@@ -203,20 +213,23 @@ private extension PostCardView {
 
 extension PostCardView {
   static var skeleton: some View {
-    GeometryReader { _ in
-      VStack(alignment: .leading) {
-        HStack {
-          SkeletonView(24, 24, true)
+    VStack(alignment: .leading, spacing: 0) {
+      HStack(spacing: 10) {
+        SkeletonView(40, 40, true)
+        VStack(alignment: .leading, spacing: 10) {
           SkeletonView(60, 10)
           SkeletonView(146, 10)
         }
-        defaultCover
-        SkeletonView(280, 10)
-        HStack {
-          SkeletonView(68, 10)
-          SkeletonView(68, 10)
-        }
       }
+      .padding(.bottom, 10)
+      defaultCover.padding(.bottom, 16)
+      SkeletonView(280, 10).padding(.bottom, 10)
+      HStack(spacing: 5) {
+        SkeletonView(68, 10)
+        SkeletonView(68, 10)
+      }
+      .padding(.bottom, 16)
+      Divider().foregroundStyle(LocarieColor.greyMedium)
     }
   }
 

@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-func defaultAvatar(size: CGFloat) -> some View {
-  Image("DefaultBusinessAvatar")
+func defaultAvatar(size: CGFloat, isBusiness: Bool = true) -> some View {
+  Image(isBusiness ? "DefaultBusinessAvatar" : "DefaultRegularAvatar")
     .resizable()
     .scaledToFit()
     .frame(width: size, height: size)

@@ -8,18 +8,23 @@
 import SwiftUI
 
 struct AvatarView: View {
-  var name = ""
-  var imageUrl = ""
-  var size: CGFloat
+  let name: String
+  let imageUrl: String
+  let size: CGFloat
+  let isBusiness: Bool
 
-  init(imageUrl: String? = "", size: CGFloat) {
-    self.size = size
+  init(imageUrl: String? = "", size: CGFloat, isBusiness: Bool = true) {
+    name = ""
     self.imageUrl = imageUrl ?? ""
+    self.size = size
+    self.isBusiness = isBusiness
   }
 
-  init(name: String, size: CGFloat) {
-    self.size = size
+  init(name: String, size: CGFloat, isBusiness: Bool = true) {
     self.name = name
+    imageUrl = ""
+    self.size = size
+    self.isBusiness = isBusiness
   }
 
   var body: some View {
@@ -28,7 +33,7 @@ struct AvatarView: View {
     } else if !name.isEmpty {
       customImage
     } else {
-      defaultAvatar(size: size)
+      defaultAvatar(size: size, isBusiness: isBusiness)
     }
   }
 

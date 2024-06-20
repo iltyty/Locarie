@@ -109,33 +109,26 @@ struct FavoritePage: View {
           } else {
             VStack(spacing: 0) {
               ForEach(vm.posts.indices, id: \.self) { i in
-                VStack(spacing: 0) {
-                  NavigationLink(value: Router.Int64Destination.businessHome(vm.posts[i].user.id)) {
-                    PostCardView(
-                      vm.posts[i],
-                      onFullscreenTapped: {
-                        post = vm.posts[i]
-                        user = post.user
-                        presentingPostCover = true
-                      },
-                      onThumbnailTapped: {
-                        post = vm.posts[i]
-                        user = post.user
-                        presentingProfileCover = true
-                      }
-                    )
-                  }
-                  .id(i)
-                  .tint(.primary)
-                  .buttonStyle(.plain)
-                  .padding(.bottom, 16)
-
-                  if i != vm.posts.count - 1 {
-                    Divider()
-                      .foregroundStyle(LocarieColor.greyMedium)
-                      .padding(.bottom, 16)
-                  }
+                NavigationLink(value: Router.Int64Destination.businessHome(vm.posts[i].user.id)) {
+                  PostCardView(
+                    vm.posts[i],
+                    divider: i != vm.posts.count - 1,
+                    onFullscreenTapped: {
+                      post = vm.posts[i]
+                      user = post.user
+                      presentingPostCover = true
+                    },
+                    onThumbnailTapped: {
+                      post = vm.posts[i]
+                      user = post.user
+                      presentingProfileCover = true
+                    }
+                  )
                 }
+                .id(i)
+                .tint(.primary)
+                .buttonStyle(.plain)
+                .padding(.bottom, 16)
               }
             }
           }

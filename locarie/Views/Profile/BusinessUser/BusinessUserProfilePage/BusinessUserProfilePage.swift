@@ -237,32 +237,24 @@ private extension BusinessUserProfilePage {
       VStack(spacing: 0) {
         ForEach(postsVM.posts.indices, id: \.self) { i in
           let p = postsVM.posts[i]
-          VStack(spacing: 0) {
-            PostCardView(
-              p,
-              deletable: true,
-              onFullscreenTapped: {
-                post = p
-                presentingPostCover = true
-              },
-              onThumbnailTapped: {
-                presentingProfileCover = true
-              },
-              presentingDeleteDialog: $presentingDeletePostDialog,
-              deleteTargetPost: $post
-            )
-            .buttonStyle(.plain)
-            .padding(.bottom, 16)
-            .onTapGesture {
+          PostCardView(
+            p,
+            divider: i != postsVM.posts.count - 1,
+            deletable: true,
+            onFullscreenTapped: {
               post = p
               presentingPostCover = true
-            }
-
-            if i != postsVM.posts.count - 1 {
-              Divider()
-                .foregroundStyle(LocarieColor.greyMedium)
-                .padding(.bottom, 16)
-            }
+            },
+            onThumbnailTapped: {
+              presentingProfileCover = true
+            },
+            presentingDeleteDialog: $presentingDeletePostDialog,
+            deleteTargetPost: $post
+          )
+          .buttonStyle(.plain)
+          .onTapGesture {
+            post = p
+            presentingPostCover = true
           }
         }
       }

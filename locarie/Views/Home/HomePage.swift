@@ -129,33 +129,25 @@ private extension HomePage {
           } else {
             VStack(spacing: 0) {
               ForEach(postVM.posts.indices, id: \.self) { i in
-                VStack(spacing: 0) {
-                  NavigationLink(value: Router.Int64Destination.businessHome(postVM.posts[i].user.id)) {
-                    PostCardView(
-                      postVM.posts[i],
-                      onFullscreenTapped: {
-                        post = postVM.posts[i]
-                        user = post.user
-                        presentingPostCover = true
-                      },
-                      onThumbnailTapped: {
-                        post = postVM.posts[i]
-                        user = post.user
-                        presentingProfileCover = true
-                      }
-                    )
-                  }
-                  .id(i)
-                  .tint(.primary)
-                  .buttonStyle(.plain)
-                  .padding(.bottom, 16)
-
-                  if i != postVM.posts.count - 1 {
-                    Divider()
-                      .foregroundStyle(LocarieColor.greyMedium)
-                      .padding(.bottom, 16)
-                  }
+                NavigationLink(value: Router.Int64Destination.businessHome(postVM.posts[i].user.id)) {
+                  PostCardView(
+                    postVM.posts[i],
+                    divider: i != postVM.posts.count - 1,
+                    onFullscreenTapped: {
+                      post = postVM.posts[i]
+                      user = post.user
+                      presentingPostCover = true
+                    },
+                    onThumbnailTapped: {
+                      post = postVM.posts[i]
+                      user = post.user
+                      presentingProfileCover = true
+                    }
+                  )
                 }
+                .id(i)
+                .tint(.primary)
+                .buttonStyle(.plain)
               }
             }
           }

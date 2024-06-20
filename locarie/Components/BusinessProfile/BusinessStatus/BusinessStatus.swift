@@ -35,6 +35,8 @@ private extension BusinessStatus {
     HStack(spacing: 5) {
       Text(user.neighborhood).foregroundStyle(LocarieColor.greyDark)
       DotView()
+      Text(user.distance(to: locationManager.location)).foregroundStyle(LocarieColor.greyDark)
+      DotView()
       openStatus
     }
     .font(.custom(GlobalConstants.fontName, size: 14))

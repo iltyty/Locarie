@@ -9,18 +9,26 @@ import SwiftUI
 
 struct LoginOrRegisterPage: View {
   var body: some View {
-    VStack(spacing: Constants.spacing) {
-      Spacer()
-      locarieIcon
-      Spacer()
-      loginButton
-      signupButton
-      orText.padding(.vertical, 8)
-      signupBusinessButton
-      Spacer()
-      BottomTabView()
+    ZStack {
+      VStack {
+        LinearGradient(colors: [LocarieColor.primary, Color.white], startPoint: .top, endPoint: .bottom)
+          .frame(height: 400)
+          .ignoresSafeArea(edges: .top)
+        Spacer()
+      }
+      VStack(spacing: Constants.spacing) {
+        Spacer()
+        locarieIcon
+        Spacer()
+        loginButton
+        signupButton
+        orText.padding(.vertical, 8)
+        signupBusinessButton
+        Spacer()
+        BottomTabView()
+      }
+      .ignoresSafeArea(edges: .bottom)
     }
-    .ignoresSafeArea(edges: .bottom)
   }
 
   var locarieIcon: some View {
