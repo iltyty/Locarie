@@ -35,6 +35,9 @@ struct FavoritePage: View {
           }
         }
       }
+      .onMapTapGesture { _ in
+        moveBottomSheet(to: Constants.bottomDetent)
+      }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 205))
       .ignoresSafeArea()
       VStack(spacing: 0) {
@@ -67,6 +70,23 @@ struct FavoritePage: View {
             }
         }
         BottomTabView()
+      }
+      if currentDetent == .large {
+        VStack {
+          Spacer()
+          Image(systemName: "map")
+            .resizable()
+            .foregroundStyle(.white)
+            .frame(width: 18, height: 18)
+            .frame(width: 82, height: 40)
+            .background {
+              Capsule().fill(.black)
+            }
+            .padding(.bottom, 102)
+            .onTapGesture {
+              moveBottomSheet(to: Constants.bottomDetent)
+            }
+        }
       }
       if presentingPostCover {
         PostCover(
@@ -151,6 +171,12 @@ struct FavoritePage: View {
         .foregroundStyle(LocarieColor.greyDark)
     }
     .padding(.top, 45)
+  }
+
+  private func moveBottomSheet(to detent: BottomSheetDetent) {
+    withAnimation(.spring) {
+      currentDetent = detent
+    }
   }
 }
 

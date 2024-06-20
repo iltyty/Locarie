@@ -18,6 +18,7 @@ struct HomePage: View {
   @State private var presentingProfileCover = false
   @State private var presentingPostCover = false
 
+  @State private var bottomTabMinY: CGFloat = 0
   @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
   @State private var mapTouched = false
   @State private var scrollId: Int64? = nil
@@ -36,6 +37,23 @@ struct HomePage: View {
         postVM: postVM
       )
       contentView
+      if currentDetent == .large {
+        VStack {
+          Spacer()
+          Image(systemName: "map")
+            .resizable()
+            .foregroundStyle(.white)
+            .frame(width: 18, height: 18)
+            .frame(width: 82, height: 40)
+            .background {
+              Capsule().fill(.black)
+            }
+            .padding(.bottom, 102)
+            .onTapGesture {
+              moveBottomSheet(to: Constants.bottomDetent)
+            }
+        }
+      }
       VStack { // ensure zIndex of all views keep the same
         if searching {
           BusinessSearchView(searching: $searching)
@@ -112,7 +130,13 @@ private extension HomePage {
             }
           }
       }
-      BottomTabView()
+      BottomTabView().background {
+        GeometryReader { proxy in
+          Color.clear.task(id: proxy.frame(in: .global).minY) {
+            bottomTabMinY = proxy.frame(in: .global).minY
+          }
+        }
+      }
     }
   }
 

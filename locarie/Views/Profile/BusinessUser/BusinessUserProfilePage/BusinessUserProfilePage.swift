@@ -276,11 +276,10 @@ private extension BusinessUserProfilePage {
   }
 
   var buttons: some View {
-    HStack {
+    HStack(spacing: 16) {
       mineButton
       Spacer()
       ProfileEditButton()
-      Spacer()
       settingsButton
     }
     .padding(.horizontal, 16)

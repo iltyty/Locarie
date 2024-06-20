@@ -25,16 +25,16 @@ struct DynamicPostsMapView: View {
 
         ForEvery(postVM.posts) { post in
           MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
-            NavigationLink {
-              BusinessHomePage(uid: post.user.id)
-            } label: {
+            NavigationLink(value: Router.Int64Destination.businessHome(post.user.id)) {
               BusinessMapAvatar(url: post.user.avatarUrl)
             }
           }
         }
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 205))
-      .simultaneousGesture(TapGesture().onEnded { mapTouched.toggle() })
+      .onMapTapGesture { _ in
+        mapTouched.toggle()
+      }
       .onAppear {
         map = proxy.map!
       }

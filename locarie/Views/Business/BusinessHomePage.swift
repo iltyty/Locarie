@@ -50,6 +50,23 @@ struct BusinessHomePage: View {
           bottomContent
           BusinessBottomBar(business: $user, location: user.location).background(.white)
         }
+        if currentDetent == .large {
+          VStack {
+            Spacer()
+            Image(systemName: "map")
+              .resizable()
+              .foregroundStyle(.white)
+              .frame(width: 18, height: 18)
+              .frame(width: 82, height: 40)
+              .background {
+                Capsule().fill(.black)
+              }
+              .padding(.bottom, 102)
+              .onTapGesture {
+                moveBottomSheet(to: Constants.bottomDetent)
+              }
+          }
+        }
         if presentingPostCover {
           PostCover(
             post: post,
@@ -90,6 +107,12 @@ struct BusinessHomePage: View {
     }
   }
 
+  private func moveBottomSheet(to detent: BottomSheetDetent) {
+    withAnimation(.spring) {
+      currentDetent = detent
+    }
+  }
+
   private func updateMapCenter(user: UserDto) {
     guard user.coordinate.latitude.isNormal, user.coordinate.longitude.isNormal else { return }
     let latitude = user.coordinate.latitude - deltaLatitudeDegrees *
@@ -119,6 +142,9 @@ private extension BusinessHomePage {
           .selected(u.id == user.id)
           .variableAnchors([.init(anchor: .bottom)])
         }
+      }
+      .onMapTapGesture { _ in
+        moveBottomSheet(to: Constants.bottomDetent)
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: Constants.bottomY + 50))
       .onAppear {
