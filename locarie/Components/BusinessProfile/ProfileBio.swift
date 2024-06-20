@@ -9,16 +9,19 @@ import SwiftUI
 
 struct ProfileBio: View {
   let user: UserDto
+  @Binding var presentingDetail: Bool
 
-  init(_ user: UserDto) {
+  init(_ user: UserDto, presentingDetail: Binding<Bool>) {
     self.user = user
+    _presentingDetail = presentingDetail
   }
 
   var body: some View {
-    var bio = user.introduction
-    if bio.isEmpty {
-      bio = "Go set up the profile!"
+    let bio = user.introduction.isEmpty ? "Go set up the profile!" : user.introduction
+    if presentingDetail {
+      Text(bio)
+    } else {
+      Text(bio).lineLimit(2)
     }
-    return Text(bio).lineLimit(2)
   }
 }

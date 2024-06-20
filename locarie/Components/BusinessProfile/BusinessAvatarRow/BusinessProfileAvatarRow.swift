@@ -20,7 +20,8 @@ struct BusinessProfileAvatarRow: View {
       }
       BusinessStatus(user)
       Spacer()
-      BusinessProfileDetailButton(presenting: $presentingDetail).padding(.trailing, 16)
+      BusinessProfileDetailButton(presenting: $presentingDetail)
+        .padding(.trailing, 16)
     }
   }
 }

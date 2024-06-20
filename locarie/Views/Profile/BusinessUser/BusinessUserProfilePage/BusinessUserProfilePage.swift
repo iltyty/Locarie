@@ -23,7 +23,7 @@ struct BusinessUserProfilePage: View {
   @State private var presentingProfileCover = false
   @State private var presentingPostCover = false
   @State private var presentingMyCover = false
-  @State private var presentingDialog = true
+  @State private var presentingDialog = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var profileVM = ProfileGetViewModel()
@@ -192,7 +192,7 @@ private extension BusinessUserProfilePage {
         ScrollView {
           VStack(alignment: .leading, spacing: 16) {
             ProfileCategories(profileVM.dto).id(0)
-            ProfileBio(profileVM.dto)
+            ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
             if presentingProfileDetail {
               ProfileDetail(profileVM.dto)
             }

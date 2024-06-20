@@ -12,9 +12,14 @@ struct BusinessProfileDetailButton: View {
 
   var body: some View {
     Button {
-      presenting.toggle()
+      withAnimation(.spring) {
+        presenting.toggle()
+      }
     } label: {
-      Image(systemName: presenting ? "chevron.up" : "chevron.down")
+      Image(systemName: "chevron.down")
+        .resizable()
+        .scaledToFit()
+        .rotationEffect(presenting ? .degrees(-180) : .zero)
         .frame(width: 18, height: 18)
     }
     .buttonStyle(.plain)

@@ -198,6 +198,7 @@ private extension BusinessHomePage {
                 EmptyView()
               } else {
                 ProfileCategories(user).id(0)
+                ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
                 if presentingProfileDetail {
                   ProfileDetail(user)
                 }

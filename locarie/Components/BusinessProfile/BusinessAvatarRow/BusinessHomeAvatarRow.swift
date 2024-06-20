@@ -15,7 +15,7 @@ struct BusinessHomeAvatarRow: View {
   @Binding var presentingDetail: Bool
 
   var body: some View {
-    HStack {
+    HStack(spacing: 10) {
       BusinessHomeAvatar(url: user.profileImageUrls.first ?? "").onTapGesture {
         presentingCover = true
       }
