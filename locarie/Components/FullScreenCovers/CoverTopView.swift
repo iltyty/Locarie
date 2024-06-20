@@ -11,6 +11,7 @@ struct CoverTopView: View {
   let user: UserDto
   let sharePreviewText: String
   var onAvatarTapped: () -> Void = {}
+  var onMoreButtonTapped: () -> Void = {}
 
   @Binding var isPresenting: Bool
 
@@ -18,9 +19,10 @@ struct CoverTopView: View {
     HStack(spacing: 0) {
       dismissButton.padding(.trailing, 24)
       avatar.padding(.trailing, 10)
-      businessName
+      Text(user.businessName).fontWeight(.bold)
       Spacer()
-      shareButton
+      shareButton.padding(.trailing, 24)
+      moreButton
     }
   }
 
@@ -38,10 +40,6 @@ struct CoverTopView: View {
       }
   }
 
-  var businessName: some View {
-    Text(user.businessName).fontWeight(.bold)
-  }
-
   @ViewBuilder
   var shareButton: some View {
     let link = URL(string: "https://www.hackingwithswift.com")!
@@ -54,7 +52,9 @@ struct CoverTopView: View {
   }
 
   var moreButton: some View {
-    buttonBuilder(Image(systemName: "ellipsis"))
+    buttonBuilder(Image(systemName: "ellipsis")).onTapGesture {
+      onMoreButtonTapped()
+    }
   }
 
   func buttonBuilder(_ image: Image) -> some View {
@@ -62,6 +62,7 @@ struct CoverTopView: View {
       .resizable()
       .scaledToFit()
       .frame(width: Constants.buttonSize, height: Constants.buttonSize)
+      .contentShape(Rectangle())
   }
 }
 

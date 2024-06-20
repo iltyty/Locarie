@@ -14,12 +14,12 @@ struct ProfileEditDialog: View {
 
   var body: some View {
     VStack(spacing: 5) {
-      sheetButtonBuilder("Edit profile") {
+      bottomDialogButtonBuilder("Edit profile") {
         isPresenting = false
         Router.shared.navigate(to: Router.Destination.userProfileEdit)
       }
       .foregroundStyle(LocarieColor.blue)
-      sheetButtonBuilder("Do it later") {
+      bottomDialogButtonBuilder("Do it later") {
         isPresenting = false
       }
     }
@@ -28,24 +28,12 @@ struct ProfileEditDialog: View {
       cacheVM.setFirstLoggedIn(false)
     }
   }
-
-  private func sheetButtonBuilder(_ title: String, action: @escaping () -> Void) -> some View {
-    Text(title)
-      .fontWeight(.bold)
-      .frame(height: 48)
-      .frame(maxWidth: .infinity)
-      .background {
-        RoundedRectangle(cornerRadius: 30).fill(.white).frame(maxWidth: .infinity)
-      }
-      .onTapGesture {
-        action()
-      }
-  }
 }
 
 #Preview {
   ZStack {
-    Color.pink
-    ProfileEditDialog(isPresenting: .constant(true))
+    Color.pink.bottomDialog(isPresented: .constant(true)) {
+      ProfileEditDialog(isPresenting: .constant(true))
+    }
   }
 }

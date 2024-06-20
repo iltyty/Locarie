@@ -27,7 +27,7 @@ struct BusinessUserProfilePage: View {
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var profileVM = ProfileGetViewModel()
-  @StateObject private var postsVM = ListUserPostsViewModel()
+  @StateObject private var postVM = ListUserPostsViewModel()
   @StateObject private var postDeleteVM = PostDeleteViewModel()
 
   var body: some View {
@@ -56,6 +56,9 @@ struct BusinessUserProfilePage: View {
             onAvatarTapped: {
               presentingPostCover = false
             },
+            onPostDeleted: { id in
+              postVM.posts.removeAll { $0.id == id }
+            },
             isPresenting: $presentingPostCover
           )
         }
@@ -65,10 +68,11 @@ struct BusinessUserProfilePage: View {
       }
       .sheet(isPresented: $presentingMyCover) {
         VStack(spacing: 0) {
-          Capsule().fill(LocarieColor.greyMedium)
+          Capsule()
+            .fill(LocarieColor.greyMedium)
             .frame(width: 48, height: 6)
             .padding(.top, 8)
-            .padding(.bottom, 16)
+            .padding(.bottom, 18)
           Label {
             Text("My Page")
           } icon: {
@@ -89,7 +93,7 @@ struct BusinessUserProfilePage: View {
         mapBottomBoundY = screenSize.height - Constants.bottomY
 
         profileVM.getProfile(userId: userId)
-        postsVM.getUserPosts(id: userId)
+        postVM.getUserPosts(id: userId)
       }
       .onDisappear {
         presentingDialog = false
@@ -106,7 +110,7 @@ struct BusinessUserProfilePage: View {
     .onReceive(postDeleteVM.$state) { state in
       switch state {
       case .finished:
-        postsVM.posts.removeAll { $0.id == post.id }
+        postVM.posts.removeAll { $0.id == post.id }
       default: return
       }
     }
@@ -171,7 +175,7 @@ private extension BusinessUserProfilePage {
       ) {
         Group {
           if case .loading = profileVM.state {
-            skeleton
+            BusinessUserProfilePage.skeleton
           } else {
             sheetContent
           }
@@ -196,7 +200,7 @@ private extension BusinessUserProfilePage {
             if presentingProfileDetail {
               ProfileDetail(profileVM.dto)
             }
-            ProfilePostsCount(postsVM.posts)
+            ProfilePostsCount(postVM.posts)
             postList
           }
           .onChange(of: currentDetent) { _ in
@@ -215,7 +219,7 @@ private extension BusinessUserProfilePage {
 
   @ViewBuilder
   var postList: some View {
-    if postsVM.posts.isEmpty {
+    if postVM.posts.isEmpty {
       HStack {
         Spacer()
         VStack {
@@ -228,11 +232,11 @@ private extension BusinessUserProfilePage {
       }
     } else {
       VStack(spacing: 0) {
-        ForEach(postsVM.posts.indices, id: \.self) { i in
-          let p = postsVM.posts[i]
+        ForEach(postVM.posts.indices, id: \.self) { i in
+          let p = postVM.posts[i]
           PostCardView(
             p,
-            divider: i != postsVM.posts.count - 1,
+            divider: i != postVM.posts.count - 1,
             deletable: true,
             onFullscreenTapped: {
               post = p

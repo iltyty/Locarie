@@ -8,33 +8,23 @@
 import SwiftUI
 
 extension BusinessUserProfilePage {
-  var skeleton: some View {
-    VStack(alignment: .leading) {
-      HStack {
+  static var skeleton: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      HStack(spacing: 10) {
         RoundedAvatarSkeletonView()
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
           SkeletonView(84, 14)
           SkeletonView(146, 10)
         }
         Spacer()
       }
-      HStack {
+      HStack(spacing: 5) {
         SkeletonView(68, 10)
         SkeletonView(68, 10)
         Spacer()
       }
       SkeletonView(48, 10)
-      HStack {
-        SkeletonView(24, 24, true)
-        SkeletonView(60, 10)
-        SkeletonView(146, 10)
-        Spacer()
-      }
-      SkeletonView(screenSize.width * 0.9, screenSize.width * 0.9 / Constants.imagAspectRatio)
-      HStack {
-        SkeletonView(280, 10)
-        SkeletonView(68, 10)
-      }
+      PostCardView.skeleton
       Spacer()
     }
   }
@@ -45,5 +35,5 @@ private enum Constants {
 }
 
 #Preview {
-  BusinessUserProfilePage().skeleton
+  BusinessUserProfilePage.skeleton
 }

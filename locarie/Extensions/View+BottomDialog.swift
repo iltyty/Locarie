@@ -25,51 +25,37 @@ extension View {
 }
 
 private func sheetContent(content: some View) -> some View {
-  ZStack {
+  ZStack(alignment: .top) {
     LocarieColor.greyMedium
-    VStack(spacing: 16) {
+    VStack(spacing: 18) {
       Capsule()
         .frame(width: 48, height: 6)
         .foregroundStyle(Color(hex: 0xD9D9D9))
-        .padding(.top, 6)
+        .padding(.top, 8)
       content
       Spacer()
     }
   }
   .ignoresSafeArea(edges: .bottom)
   .presentationDragIndicator(.hidden)
-  .presentationDetents([.height(150)])
+  .presentationDetents([.height(180)])
 }
 
 struct BottomDialogTestView: View {
   @State private var presenting = true
 
   var body: some View {
-    Text("hello")
-      .bottomDialog(isPresented: $presenting) {
-        VStack(spacing: 5) {
-          sheetButtonBuilder("OK") {
-            print("OK")
-          }
-          sheetButtonBuilder("Cancel") {
-            print("Cancel")
-          }
+    Text("hello").bottomDialog(isPresented: $presenting) {
+      VStack(spacing: 5) {
+        bottomDialogButtonBuilder("OK") {
+          print("OK")
         }
-        .padding(.horizontal, 16)
+        bottomDialogButtonBuilder("Cancel") {
+          print("Cancel")
+        }
       }
-  }
-
-  private func sheetButtonBuilder(_ title: String, action: @escaping () -> Void) -> some View {
-    Text(title)
-      .fontWeight(.bold)
-      .frame(height: 48)
-      .frame(maxWidth: .infinity)
-      .background {
-        RoundedRectangle(cornerRadius: 30).fill(.white).frame(maxWidth: .infinity)
-      }
-      .onTapGesture {
-        action()
-      }
+      .padding(.horizontal, 16)
+    }
   }
 }
 

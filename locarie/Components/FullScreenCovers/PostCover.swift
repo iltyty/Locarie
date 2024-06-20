@@ -11,13 +11,19 @@ struct PostCover: View {
   let post: PostDto
   let tags: [String]
   var onAvatarTapped: () -> Void = {}
+  var onPostDeleted: (Int64) -> Void = { _ in }
   @Binding var isPresenting: Bool
 
   private let cacheVM = LocalCacheViewModel.shared
   private let locationManager = LocationManager()
+
   @State private var alreadySaved = false
+  @State private var deleteTapped = false
+  @State private var presentingDeleteAlert = false
+  @State private var presentingDeleteSheet = false
 
   @StateObject private var postGetVM = PostGetViewModel()
+  @StateObject private var postDeleteVM = PostDeleteViewModel()
   @StateObject private var favoritePostVM = FavoritePostViewModel()
 
   var body: some View {
@@ -27,6 +33,11 @@ struct PostCover: View {
           user: post.user,
           sharePreviewText: post.content,
           onAvatarTapped: onAvatarTapped,
+          onMoreButtonTapped: {
+            if post.user.id == cacheVM.getUserId() {
+              presentingDeleteSheet = true
+            }
+          },
           isPresenting: $isPresenting
         )
         .padding(.bottom, 24)
@@ -58,12 +69,44 @@ struct PostCover: View {
     }
     .padding(.horizontal, 16)
     .background(.ultraThinMaterial.opacity(0.95))
+    .alert("Confirm deletion", isPresented: $presentingDeleteAlert) {
+      Button("Delete", role: .destructive) {
+        postDeleteVM.delete(id: post.id)
+      }
+    }
+    .bottomDialog(isPresented: $presentingDeleteSheet) {
+      if deleteTapped {
+        presentingDeleteAlert = true
+      }
+    } content: {
+      VStack(spacing: 5) {
+        bottomDialogButtonBuilder("Delete post") {
+          deleteTapped = true
+          presentingDeleteSheet = false
+        }
+        .foregroundStyle(.red)
+        bottomDialogButtonBuilder("Back") {
+          presentingDeleteSheet = false
+        }
+        Spacer()
+      }
+      .padding(.horizontal, 16)
+    }
     .onAppear {
       postGetVM.getFavoredByCount(id: post.id)
       favoritePostVM.checkFavoredBy(userId: userId, postId: post.id)
     }
     .onReceive(favoritePostVM.$alreadySaved) { saved in
       alreadySaved = saved
+    }
+    .onReceive(postDeleteVM.$state) { state in
+      switch state {
+      case .finished:
+        isPresenting = false
+        onPostDeleted(post.id)
+      default:
+        return
+      }
     }
     .onReceive(favoritePostVM.$state, perform: { state in
       switch state {

@@ -203,6 +203,7 @@
 		50D0CE852B8B19760070B90F /* BusinessSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D0CE842B8B19760070B90F /* BusinessSearchView.swift */; };
 		50D0CE872B8B20A90070B90F /* UserListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D0CE862B8B20A90070B90F /* UserListService.swift */; };
 		50D0CE892B8B23330070B90F /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D0CE882B8B23330070B90F /* UserListViewModel.swift */; };
+		50E651D52C241A5F0022AEE0 /* BottomDialogButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E651D42C241A5F0022AEE0 /* BottomDialogButtonBuilder.swift */; };
 		50F220D22B8D872F00B547AB /* ProfileOpeningHoursItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F220D12B8D872F00B547AB /* ProfileOpeningHoursItem.swift */; };
 		50F220D52B8DB18D00B547AB /* LocationSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F220D42B8DB18D00B547AB /* LocationSettingsItem.swift */; };
 		50F220D72B8DFA2E00B547AB /* PostListWithinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F220D62B8DFA2E00B547AB /* PostListWithinViewModel.swift */; };
@@ -449,6 +450,7 @@
 		50D0CE862B8B20A90070B90F /* UserListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListService.swift; sourceTree = "<group>"; };
 		50D0CE882B8B23330070B90F /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		50E60DED2B01F4F900CA088F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50E651D42C241A5F0022AEE0 /* BottomDialogButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDialogButtonBuilder.swift; sourceTree = "<group>"; };
 		50F220D12B8D872F00B547AB /* ProfileOpeningHoursItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOpeningHoursItem.swift; sourceTree = "<group>"; };
 		50F220D42B8DB18D00B547AB /* LocationSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSettingsItem.swift; sourceTree = "<group>"; };
 		50F220D62B8DFA2E00B547AB /* PostListWithinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListWithinViewModel.swift; sourceTree = "<group>"; };
@@ -1388,6 +1390,7 @@
 			children = (
 				50F549F42B44F64A00D06F20 /* AvatarBuilder.swift */,
 				50F549FA2B44F71300D06F20 /* Constants.swift */,
+				50E651D42C241A5F0022AEE0 /* BottomDialogButtonBuilder.swift */,
 			);
 			path = ComponentBuilders;
 			sourceTree = "<group>";
@@ -1747,6 +1750,7 @@
 				5075FCCB2B86E7FE005E4A8B /* ProfileOpeningHours.swift in Sources */,
 				50FDD8882B4AFC17003015F9 /* Router.swift in Sources */,
 				50B11ACF2AF9DE77002A7B91 /* NewPostPage.swift in Sources */,
+				50E651D52C241A5F0022AEE0 /* BottomDialogButtonBuilder.swift in Sources */,
 				500F66262B2854A90074FE3C /* LocalCache.swift in Sources */,
 				50998B0E2B3723C2002196B5 /* BusinessAddressPage.swift in Sources */,
 				50301EEC2C0AC36C0011C91F /* PostListNearbyAllViewModel.swift in Sources */,

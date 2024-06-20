@@ -74,6 +74,9 @@ struct BusinessHomePage: View {
             onAvatarTapped: {
               presentingPostCover = false
             },
+            onPostDeleted: { id in
+              listUserPostsVM.posts.removeAll { $0.id == id }
+            },
             isPresenting: $presentingPostCover
           )
         }
@@ -180,49 +183,47 @@ private extension BusinessHomePage {
       detents: [Constants.bottomDetent, .large],
       currentDetent: $currentDetent
     ) {
-      VStack(alignment: .leading) {
+      Group {
         if case .loading = profileVM.state {
-          skeleton
+          BusinessUserProfilePage.skeleton
         } else {
-          BusinessHomeAvatarRow(
-            user: user,
-            hasUpdates: updatedIn24Hours,
-            presentingCover: $presentingProfileCover,
-            presentingDetail: $presentingProfileDetail
-          )
+          sheetContent
         }
-        ScrollViewReader { proxy in
-          ScrollView {
-            VStack(alignment: .leading, spacing: Constants.vSpacing) {
-              if case .loading = profileVM.state {
-                EmptyView()
-              } else {
-                ProfileCategories(user).id(0)
-                ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
-                if presentingProfileDetail {
-                  ProfileDetail(user)
-                }
-              }
-              if case .loading = listUserPostsVM.state {
-                PostCardView.skeleton
-              } else {
-                ProfilePostsCount(listUserPostsVM.posts)
-                postList
-              }
+      }
+      .padding(.horizontal, 16)
+    }
+  }
+
+  var sheetContent: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      BusinessHomeAvatarRow(
+        user: user,
+        hasUpdates: updatedIn24Hours,
+        presentingCover: $presentingProfileCover,
+        presentingDetail: $presentingProfileDetail
+      )
+      ScrollViewReader { proxy in
+        ScrollView {
+          VStack(alignment: .leading, spacing: 16) {
+            ProfileCategories(user).id(0)
+            ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
+            if presentingProfileDetail {
+              ProfileDetail(user)
             }
-            .onChange(of: currentDetent) { _ in
+            ProfilePostsCount(listUserPostsVM.posts)
+            postList
+          }
+          .onChange(of: currentDetent) { _ in
+            proxy.scrollTo(0)
+          }
+          .onChange(of: presentingProfileDetail) { presenting in
+            if presenting {
               proxy.scrollTo(0)
-            }
-            .onChange(of: presentingProfileDetail) { presenting in
-              if presenting {
-                proxy.scrollTo(0)
-              }
             }
           }
         }
-        .scrollIndicators(.hidden)
       }
-      .padding(.horizontal, 16)
+      .scrollIndicators(.hidden)
     }
   }
 

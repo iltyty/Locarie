@@ -101,12 +101,12 @@ private extension PostCardView {
             }
           } content: {
             VStack(spacing: 5) {
-              sheetButtonBuilder("Delete post") {
+              bottomDialogButtonBuilder("Delete post") {
                 deleteTapped = true
                 presentingSheet = false
               }
               .foregroundStyle(.red)
-              sheetButtonBuilder("Back") {
+              bottomDialogButtonBuilder("Back") {
                 presentingSheet = false
               }
               Spacer()
@@ -119,19 +119,6 @@ private extension PostCardView {
           }
       }
     }
-  }
-
-  func sheetButtonBuilder(_ title: String, action: @escaping () -> Void) -> some View {
-    Text(title)
-      .fontWeight(.bold)
-      .frame(height: 48)
-      .frame(maxWidth: .infinity)
-      .background {
-        RoundedRectangle(cornerRadius: 30).fill(.white).frame(maxWidth: .infinity)
-      }
-      .onTapGesture {
-        action()
-      }
   }
 
   var cover: some View {
