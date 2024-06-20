@@ -14,7 +14,7 @@ final class Router: ObservableObject {
 
   private init() {}
 
-  func navigation(to destination: any Hashable) {
+  func navigate(to destination: any Hashable) {
     path.append(destination)
   }
 
@@ -43,6 +43,10 @@ extension Router {
 
   enum StringDestination: Hashable {
     case codeValidation(String), resetPassword(String)
+  }
+
+  enum Int64Destination: Hashable {
+    case businessHome(Int64)
   }
 }
 
@@ -102,6 +106,14 @@ extension Router {
       CodeValidationPage(email: email)
     case let .resetPassword(email):
       ResetPasswordPage(email: email)
+    }
+  }
+
+  @ViewBuilder
+  func getInt64DestinationPage(with destination: Int64Destination) -> some View {
+    switch destination {
+    case let .businessHome(uid):
+      BusinessHomePage(uid: uid)
     }
   }
 }

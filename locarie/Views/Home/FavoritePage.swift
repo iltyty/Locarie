@@ -9,9 +9,16 @@
 import SwiftUI
 
 struct FavoritePage: View {
+  private let router = Router.shared
+
   @State private var scrollId: Int64? = nil
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
   @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
+
+  @State private var post = PostDto()
+  @State private var user = UserDto()
+  @State private var presentingPostCover = false
+  @State private var presentingProfileCover = false
 
   @StateObject private var vm = FavoriteBusinessViewModel()
 
@@ -38,12 +45,17 @@ struct FavoritePage: View {
           detents: [Constants.bottomDetent, .large],
           currentDetent: $currentDetent
         ) {
-          PostList(
-            posts: vm.posts,
-            scrollId: $scrollId,
-            title: "Following",
-            emptyHint: "No followed post."
-          )
+          Group {
+            if case .loading = vm.state {
+              VStack {
+                PostCardView.skeleton
+                PostCardView.skeleton
+              }
+            } else {
+              postList
+            }
+          }
+          .allowsHitTesting(currentDetent != Constants.bottomDetent)
           .padding(.horizontal, 16)
         } topContent: {
           CircleButton(name: "Navigation")
@@ -56,11 +68,96 @@ struct FavoritePage: View {
         }
         BottomTabView()
       }
+      if presentingPostCover {
+        PostCover(
+          post: post,
+          tags: post.user.categories,
+          onAvatarTapped: {
+            presentingPostCover = false
+            router.navigate(to: Router.Int64Destination.businessHome(user.id))
+          },
+          isPresenting: $presentingPostCover
+        )
+      }
+      if presentingProfileCover {
+        BusinessProfileCover(
+          user: user,
+          onAvatarTapped: {
+            presentingProfileCover = false
+            router.navigate(to: Router.Int64Destination.businessHome(user.id))
+          },
+          isPresenting: $presentingProfileCover
+        )
+      }
     }
     .ignoresSafeArea(edges: .bottom)
     .onAppear {
       vm.listFavoriteBusinessPosts(userId: LocalCacheViewModel.shared.getUserId())
     }
+  }
+
+  private var postList: some View {
+    ScrollViewReader { proxy in
+      ScrollView {
+        VStack(spacing: 20) {
+          Text("Explore")
+            .id(-1)
+            .font(.custom(GlobalConstants.fontName, size: 18))
+            .fontWeight(.bold)
+          if vm.posts.isEmpty {
+            emptyList
+          } else {
+            VStack(spacing: 0) {
+              ForEach(vm.posts.indices, id: \.self) { i in
+                VStack(spacing: 0) {
+                  NavigationLink(value: Router.Int64Destination.businessHome(vm.posts[i].user.id)) {
+                    PostCardView(
+                      vm.posts[i],
+                      onFullscreenTapped: {
+                        post = vm.posts[i]
+                        user = post.user
+                        presentingPostCover = true
+                      },
+                      onThumbnailTapped: {
+                        post = vm.posts[i]
+                        user = post.user
+                        presentingProfileCover = true
+                      }
+                    )
+                  }
+                  .id(i)
+                  .tint(.primary)
+                  .buttonStyle(.plain)
+                  .padding(.bottom, 16)
+
+                  if i != vm.posts.count - 1 {
+                    Divider()
+                      .foregroundStyle(LocarieColor.greyMedium)
+                      .padding(.bottom, 16)
+                  }
+                }
+              }
+            }
+          }
+        }
+        .onChange(of: scrollId) { _ in
+          proxy.scrollTo(0)
+          scrollId = 1
+        }
+      }
+    }
+    .scrollIndicators(.hidden)
+  }
+
+  private var emptyList: some View {
+    VStack {
+      Image("NoBusiness")
+      Text("No business yet")
+        .font(.custom(GlobalConstants.fontName, size: 14))
+        .fontWeight(.bold)
+        .foregroundStyle(LocarieColor.greyDark)
+    }
+    .padding(.top, 45)
   }
 }
 

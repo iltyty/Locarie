@@ -10,16 +10,21 @@ import SwiftUI
 struct PostCardView: View {
   let post: PostDto
   let deletable: Bool
+  let onFullscreenTapped: () -> Void
+  let onThumbnailTapped: () -> Void
   @Binding var presentingDeleteDialog: Bool
   @Binding var deleteTargetPost: PostDto
 
   @State private var deleteTapped = false
   @State private var presentingSheet = false
+  @State private var presentingCover = false
   @StateObject private var locationManager = LocationManager()
 
-  init(_ post: PostDto, deletable: Bool = false) {
+  init(_ post: PostDto, onFullscreenTapped: @escaping () -> Void = {}, onThumbnailTapped: @escaping () -> Void = {}) {
     self.post = post
-    self.deletable = deletable
+    deletable = false
+    self.onFullscreenTapped = onFullscreenTapped
+    self.onThumbnailTapped = onThumbnailTapped
     _presentingDeleteDialog = .constant(false)
     _deleteTargetPost = .constant(PostDto())
   }
@@ -27,11 +32,15 @@ struct PostCardView: View {
   init(
     _ post: PostDto,
     deletable: Bool = false,
+    onFullscreenTapped: @escaping () -> Void = {},
+    onThumbnailTapped: @escaping () -> Void = {},
     presentingDeleteDialog: Binding<Bool>,
     deleteTargetPost: Binding<PostDto>
   ) {
     self.post = post
     self.deletable = deletable
+    self.onFullscreenTapped = onFullscreenTapped
+    self.onThumbnailTapped = onThumbnailTapped
     _presentingDeleteDialog = presentingDeleteDialog
     _deleteTargetPost = deleteTargetPost
   }
@@ -131,7 +140,43 @@ private extension PostCardView {
   }
 
   var cover: some View {
-    Banner(urls: post.imageUrls, isPortrait: false)
+    ZStack(alignment: .trailing) {
+      Banner(urls: post.imageUrls, isPortrait: false)
+      VStack(alignment: .trailing, spacing: 0) {
+        Image("Fullscreen")
+          .resizable()
+          .scaledToFit()
+          .frame(width: 30, height: 30)
+          .padding(8)
+          .contentShape(Rectangle())
+          .onTapGesture {
+            onFullscreenTapped()
+          }
+        Spacer()
+        if post.user.profileImageUrls.isEmpty {
+          DefaultBusinessImageView(size: 48)
+        } else {
+          AsyncImage(url: URL(string: post.user.profileImageUrls[0])) { image in
+            image
+              .resizable()
+              .scaledToFill()
+              .frame(width: 48, height: 48)
+              .clipShape(RoundedRectangle(cornerRadius: 16))
+          } placeholder: {
+            DefaultBusinessImageView(size: 48)
+          }
+          .padding(2)
+          .background {
+            RoundedRectangle(cornerRadius: 16)
+              .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 2))
+          }
+          .padding(5)
+          .onTapGesture {
+            onThumbnailTapped()
+          }
+        }
+      }
+    }
   }
 
   var content: some View {

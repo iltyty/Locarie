@@ -120,10 +120,12 @@ private extension NewPostPage {
           )
         }
         .buttonStyle(.plain)
-        ImageDeleteButton().onTapGesture {
-          postVM.photoVM.selection.remove(at: i)
-          postVM.objectWillChange.send()
-        }
+        ImageDeleteButton()
+          .contentShape(Rectangle())
+          .onTapGesture {
+            postVM.photoVM.selection.remove(at: i)
+            postVM.objectWillChange.send()
+          }
       }
     }
   }

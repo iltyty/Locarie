@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BusinessProfileCover: View {
   let user: UserDto
+  var onAvatarTapped: () -> Void = {}
   @Binding var isPresenting: Bool
 
   @ObservedObject var cacheVM = LocalCacheViewModel.shared
@@ -18,6 +19,7 @@ struct BusinessProfileCover: View {
       CoverTopView(
         user: user,
         sharePreviewText: user.businessName,
+        onAvatarTapped: onAvatarTapped,
         isPresenting: $isPresenting
       )
       .padding(.bottom, 24)

@@ -921,6 +921,7 @@
 				500FB2312B88339300E14DEE /* BusinessAvatar */,
 				500FB2342B88354900E14DEE /* BusinessAvatarRow */,
 				500FB2352B88358C00E14DEE /* BusinessStatus */,
+				509A10312BCE194900FB55C7 /* DefaultBusinessImageView.swift */,
 				5075FCC42B86E6F8005E4A8B /* ProfileFavoredByCount.swift */,
 				5075FCC62B86E757005E4A8B /* ProfileAddress.swift */,
 				5075FCC82B86E7A5005E4A8B /* ProfileConstants.swift */,
@@ -1417,7 +1418,6 @@
 				50F54A1F2B45503800D06F20 /* AvatarEditor.swift */,
 				500FB22B2B88304100E14DEE /* ProfileEditButton.swift */,
 				509A102A2BCCDD2F00FB55C7 /* FollowAndLikeView.swift */,
-				509A10312BCE194900FB55C7 /* DefaultBusinessImageView.swift */,
 				509A10332BCE19CF00FB55C7 /* BusinessImageView.swift */,
 			);
 			path = Components;

@@ -16,6 +16,8 @@ struct BusinessMapAvatar: View {
       avatarView
       triangle
     }
+    // https://stackoverflow.com/questions/53370175/how-to-place-bottom-of-a-custom-annotation-on-a-specific-coordinate-in-mapbox-io
+    .padding(.bottom, Constants.regularSize) // anchor bottom
   }
 
   private var avatarView: some View {

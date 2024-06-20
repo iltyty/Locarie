@@ -11,6 +11,7 @@ struct BusinessSearchView: View {
   @Binding var searching: Bool
 
   @State var businessName = ""
+  @State private var loading = false
 
   @StateObject private var userListVM = UserListViewModel()
   @StateObject private var favoriteVM = FavoriteBusinessViewModel()
@@ -25,6 +26,13 @@ struct BusinessSearchView: View {
     }
     .padding(.horizontal)
     .background(.background)
+    .loadingIndicator(loading: $loading)
+    .onReceive(userListVM.$state) { state in
+      switch state {
+      case .loading: loading = true
+      default: loading = false
+      }
+    }
     .onAppear {
       favoriteVM.list(userId: cacheVM.getUserId())
       userListVM.listBusinesses()
@@ -90,7 +98,10 @@ private extension BusinessSearchView {
       VStack(alignment: .leading, spacing: Constants.vSpacing) {
         Text("Businesses").foregroundStyle(Constants.businessesTitleColor)
         ForEach(businesses) { user in
-          BusinessFollowedAvatarRow(user: user, followed: isFollowed(user.id), isPresentingCover: .constant(false))
+          NavigationLink(value: Router.Int64Destination.businessHome(user.id)) {
+            BusinessFollowedAvatarRow(user: user, followed: isFollowed(user.id), isPresentingCover: .constant(false))
+          }
+          .buttonStyle(.plain)
         }
       }
     }

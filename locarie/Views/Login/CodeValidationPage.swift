@@ -32,7 +32,7 @@ struct CodeValidationPage: View {
       case .loading: loading = true
       case .validateForgotPasswordFinished:
         loading = false
-        router.navigation(to: Router.StringDestination.resetPassword(email))
+        router.navigate(to: Router.StringDestination.resetPassword(email))
       case let .failed(error):
         loading = false
         if error.initialError != nil {

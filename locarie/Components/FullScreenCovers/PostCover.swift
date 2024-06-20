@@ -10,6 +10,7 @@ import SwiftUI
 struct PostCover: View {
   let post: PostDto
   let tags: [String]
+  var onAvatarTapped: () -> Void = {}
   @Binding var isPresenting: Bool
 
   private let cacheVM = LocalCacheViewModel.shared
@@ -25,6 +26,7 @@ struct PostCover: View {
         CoverTopView(
           user: post.user,
           sharePreviewText: post.content,
+          onAvatarTapped: onAvatarTapped,
           isPresenting: $isPresenting
         )
         .padding(.bottom, 24)

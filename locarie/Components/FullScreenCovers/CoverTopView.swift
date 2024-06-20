@@ -10,6 +10,7 @@ import SwiftUI
 struct CoverTopView: View {
   let user: UserDto
   let sharePreviewText: String
+  var onAvatarTapped: () -> Void = {}
 
   @Binding var isPresenting: Bool
 
@@ -26,18 +27,14 @@ struct CoverTopView: View {
   var dismissButton: some View {
     buttonBuilder(Image(systemName: "multiply"))
       .onTapGesture {
-        withAnimation(.spring) {
-          isPresenting = false
-        }
+        isPresenting = false
       }
   }
 
   var avatar: some View {
     AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
       .onTapGesture {
-        withAnimation(.spring) {
-          isPresenting = false
-        }
+        onAvatarTapped()
       }
   }
 

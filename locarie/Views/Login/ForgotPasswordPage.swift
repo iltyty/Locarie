@@ -30,7 +30,7 @@ struct ForgotPasswordPage: View {
       case .loading: loading = true
       case .forgotPasswordFinished:
         loading = false
-        router.navigation(to: Router.StringDestination.codeValidation(email))
+        router.navigate(to: Router.StringDestination.codeValidation(email))
       case let .failed(error):
         loading = false
         if error.initialError != nil {

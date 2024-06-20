@@ -14,7 +14,7 @@ struct BusinessUserProfilePage: View {
   @State private var post = PostDto()
   @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
 
-  @State private var deltaLongitudeDegrees: CGFloat = 0
+  @State private var deltaLatitudeDegrees: CGFloat = 0
   @State private var mapUpperBoundY: CGFloat = 0
   @State private var mapBottomBoundY: CGFloat = 0
 
@@ -43,11 +43,21 @@ struct BusinessUserProfilePage: View {
         if presentingProfileCover {
           BusinessProfileCover(
             user: profileVM.dto,
+            onAvatarTapped: {
+              presentingProfileCover = false
+            },
             isPresenting: $presentingProfileCover
           )
         }
         if presentingPostCover {
-          PostCover(post: post, tags: profileVM.dto.categories, isPresenting: $presentingPostCover)
+          PostCover(
+            post: post,
+            tags: profileVM.dto.categories,
+            onAvatarTapped: {
+              presentingPostCover = false
+            },
+            isPresenting: $presentingPostCover
+          )
         }
         if presentingDialog {
           dialogBackground
@@ -116,7 +126,7 @@ struct BusinessUserProfilePage: View {
 
   private func updateMapCenter(user: UserDto) {
     guard user.coordinate.latitude.isNormal, user.coordinate.longitude.isNormal else { return }
-    let latitude = user.coordinate.latitude - deltaLongitudeDegrees *
+    let latitude = user.coordinate.latitude - deltaLatitudeDegrees *
       (screenSize.height - mapUpperBoundY - mapBottomBoundY) /
       (2 * screenSize.height)
 
@@ -145,7 +155,7 @@ private extension BusinessUserProfilePage {
       .ignoresSafeArea(edges: .all)
       .onAppear {
         let bounds = proxy.map!.coordinateBounds(for: .init(cameraState: proxy.map!.cameraState))
-        deltaLongitudeDegrees = bounds.north - bounds.south
+        deltaLatitudeDegrees = bounds.north - bounds.south
       }
       .onTapGesture {
         withAnimation(.spring) {
@@ -231,6 +241,13 @@ private extension BusinessUserProfilePage {
             PostCardView(
               p,
               deletable: true,
+              onFullscreenTapped: {
+                post = p
+                presentingPostCover = true
+              },
+              onThumbnailTapped: {
+                presentingProfileCover = true
+              },
               presentingDeleteDialog: $presentingDeletePostDialog,
               deleteTargetPost: $post
             )

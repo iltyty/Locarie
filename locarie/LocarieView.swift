@@ -23,11 +23,14 @@ struct LocarieView: View {
         }
       }
       .ignoresSafeArea(edges: .bottom)
-      .navigationDestination(for: Router.Destination.self) { destination in
-        router.getDestinationPage(with: destination)
+      .navigationDestination(for: Router.Destination.self) { dest in
+        router.getDestinationPage(with: dest)
       }
-      .navigationDestination(for: Router.StringDestination.self) { destination in
-        router.getStringDestinationPage(with: destination)
+      .navigationDestination(for: Router.StringDestination.self) { dest in
+        router.getStringDestinationPage(with: dest)
+      }
+      .navigationDestination(for: Router.Int64Destination.self) { dest in
+        router.getInt64DestinationPage(with: dest)
       }
     }
   }

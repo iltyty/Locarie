@@ -18,7 +18,12 @@ struct BusinessHomePage: View {
   )
 
   @State private var post = PostDto()
-  @State private var currentDetent: BottomSheetDetent = Constants.mediumDetent
+  @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
+
+  @State private var screenHeight: CGFloat = 0
+  @State private var deltaLatitudeDegrees: CGFloat = 0
+  @State private var mapUpperBoundY: CGFloat = 0
+  @State private var mapBottomBoundY: CGFloat = 0
 
   @State private var presentingProfileDetail = false
   @State private var presentingPostCover = false
@@ -32,7 +37,7 @@ struct BusinessHomePage: View {
   @Environment(\.dismiss) var dismiss
 
   var body: some View {
-    GeometryReader { _ in
+    GeometryReader { proxy in
       ZStack(alignment: .top) {
         mapView
         VStack(spacing: 0) {
@@ -44,43 +49,81 @@ struct BusinessHomePage: View {
           BusinessBottomBar(businessId: uid, location: user.location).background(.background)
         }
         if presentingPostCover {
-          PostCover(post: post, tags: user.categories, isPresenting: $presentingPostCover)
+          PostCover(
+            post: post,
+            tags: user.categories,
+            onAvatarTapped: {
+              presentingPostCover = false
+            },
+            isPresenting: $presentingPostCover
+          )
         }
         if presentingProfileCover {
-          BusinessProfileCover(user: user, isPresenting: $presentingProfileCover)
+          BusinessProfileCover(
+            user: user,
+            onAvatarTapped: {
+              presentingProfileCover = false
+            },
+            isPresenting: $presentingProfileCover
+          )
         }
+      }
+      .onAppear {
+        screenHeight = proxy.size.height
+        mapBottomBoundY = screenHeight - Constants.bottomY
       }
     }
     .ignoresSafeArea(edges: .bottom)
     .onAppear {
+      print("uid: \(uid)")
       profileVM.getProfile(userId: uid)
       listUserPostsVM.getUserPosts(id: uid)
     }
     .onReceive(profileVM.$dto) { dto in
-      viewport = .camera(center: dto.coordinate, zoom: Constants.mapZoom)
+      updateMapCenter(user: dto)
     }
   }
 
   private var user: UserDto {
     profileVM.dto
   }
+
+  private func updateMapCenter(user: UserDto) {
+    guard user.coordinate.latitude.isNormal, user.coordinate.longitude.isNormal else { return }
+    let latitude = user.coordinate.latitude - deltaLatitudeDegrees *
+      (screenHeight - mapUpperBoundY - mapBottomBoundY) /
+      (2 * screenHeight)
+
+    withViewportAnimation(.easeInOut(duration: 0.5)) {
+      viewport = .camera(
+        center: .init(latitude: latitude, longitude: user.coordinate.longitude),
+        zoom: Constants.mapZoom
+      )
+    }
+  }
 }
 
 private extension BusinessHomePage {
   var mapView: some View {
-    Map(viewport: $viewport) {
-      MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
-        BusinessMapAvatar(url: profileVM.dto.avatarUrl)
-          .onTapGesture {
-            viewport = .camera(
-              center: user.coordinate,
-              zoom: Constants.mapZoom
-            )
-          }
+    MapReader { proxy in
+      Map(viewport: $viewport) {
+        MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
+          BusinessMapAvatar(url: profileVM.dto.avatarUrl)
+            .onTapGesture {
+              viewport = .camera(
+                center: user.coordinate,
+                zoom: Constants.mapZoom
+              )
+            }
+        }
       }
+      .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: Constants.bottomY + 50))
+      .onAppear {
+        let bounds = proxy.map!.coordinateBounds(for: .init(cameraState: proxy.map!.cameraState))
+        deltaLatitudeDegrees = bounds.north - bounds.south
+      }
+      .ignoresSafeArea(edges: .all)
     }
-    .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 162))
-    .ignoresSafeArea(edges: .all)
   }
 
   var topContent: some View {
@@ -92,12 +135,20 @@ private extension BusinessHomePage {
       CircleButton(name: "ShareIcon")
       CircleButton(systemName: "ellipsis")
     }
+    .background {
+      GeometryReader { proxy in
+        Color.clear
+          .task(id: proxy.frame(in: .global).maxY) {
+            mapUpperBoundY = proxy.frame(in: .global).maxY
+          }
+      }
+    }
   }
 
   var bottomContent: some View {
     BottomSheet(
       topPosition: .right,
-      detents: [Constants.bottomDetent, Constants.mediumDetent, .large],
+      detents: [Constants.bottomDetent, .large],
       currentDetent: $currentDetent
     ) {
       VStack(alignment: .leading) {
@@ -163,13 +214,22 @@ private extension BusinessHomePage {
         ForEach(listUserPostsVM.posts.indices, id: \.self) { i in
           let p = listUserPostsVM.posts[i]
           VStack {
-            PostCardView(p)
-              .buttonStyle(.plain)
-              .padding(.bottom, 16)
-              .onTapGesture {
+            PostCardView(
+              p,
+              onFullscreenTapped: {
                 post = p
                 presentingPostCover = true
+              },
+              onThumbnailTapped: {
+                presentingProfileCover = true
               }
+            )
+            .buttonStyle(.plain)
+            .padding(.bottom, 16)
+            .onTapGesture {
+              post = p
+              presentingPostCover = true
+            }
 
             if i != listUserPostsVM.posts.count - 1 {
               Divider()
@@ -224,8 +284,8 @@ private extension BusinessHomePage {
 }
 
 private enum Constants {
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(112)
-  static let mediumDetent: BottomSheetDetent = .absoluteBottom(540)
+  static let bottomY: CGFloat = 112
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(bottomY)
   static let vSpacing: CGFloat = 15
   static let mapZoom: CGFloat = 16
 }

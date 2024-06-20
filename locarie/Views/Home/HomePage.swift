@@ -9,7 +9,14 @@
 import SwiftUI
 
 struct HomePage: View {
+  private let router = Router.shared
+
   @StateObject private var postVM = PostListNearbyAllViewModel()
+
+  @State private var user = UserDto()
+  @State private var post = PostDto()
+  @State private var presentingProfileCover = false
+  @State private var presentingPostCover = false
 
   @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
   @State private var mapTouched = false
@@ -33,6 +40,27 @@ struct HomePage: View {
         if searching {
           BusinessSearchView(searching: $searching)
         }
+      }
+      if presentingPostCover {
+        PostCover(
+          post: post,
+          tags: user.categories,
+          onAvatarTapped: {
+            presentingPostCover = false
+            router.navigate(to: Router.Int64Destination.businessHome(user.id))
+          },
+          isPresenting: $presentingPostCover
+        )
+      }
+      if presentingProfileCover {
+        BusinessProfileCover(
+          user: user,
+          onAvatarTapped: {
+            presentingProfileCover = false
+            router.navigate(to: Router.Int64Destination.businessHome(user.id))
+          },
+          isPresenting: $presentingProfileCover
+        )
       }
     }
     .ignoresSafeArea(edges: .bottom)
@@ -65,12 +93,15 @@ private extension HomePage {
       ) {
         Group {
           if case .loading = postVM.state {
-            PostCardView.skeleton
+            VStack {
+              PostCardView.skeleton
+              PostCardView.skeleton
+            }
           } else {
-            PostList(posts: postVM.posts, scrollId: $scrollId)
-              .disabled(currentDetent == Constants.bottomDetent)
+            postList
           }
         }
+        .allowsHitTesting(currentDetent != Constants.bottomDetent)
         .padding(.horizontal, 16)
       } topContent: {
         CircleButton(name: "Navigation")
@@ -83,6 +114,70 @@ private extension HomePage {
       }
       BottomTabView()
     }
+  }
+
+  var postList: some View {
+    ScrollViewReader { proxy in
+      ScrollView {
+        VStack(spacing: 20) {
+          Text("Explore")
+            .id(-1)
+            .font(.custom(GlobalConstants.fontName, size: 18))
+            .fontWeight(.bold)
+          if postVM.posts.isEmpty {
+            emptyList
+          } else {
+            VStack(spacing: 0) {
+              ForEach(postVM.posts.indices, id: \.self) { i in
+                VStack(spacing: 0) {
+                  NavigationLink(value: Router.Int64Destination.businessHome(postVM.posts[i].user.id)) {
+                    PostCardView(
+                      postVM.posts[i],
+                      onFullscreenTapped: {
+                        post = postVM.posts[i]
+                        user = post.user
+                        presentingPostCover = true
+                      },
+                      onThumbnailTapped: {
+                        post = postVM.posts[i]
+                        user = post.user
+                        presentingProfileCover = true
+                      }
+                    )
+                  }
+                  .id(i)
+                  .tint(.primary)
+                  .buttonStyle(.plain)
+                  .padding(.bottom, 16)
+
+                  if i != postVM.posts.count - 1 {
+                    Divider()
+                      .foregroundStyle(LocarieColor.greyMedium)
+                      .padding(.bottom, 16)
+                  }
+                }
+              }
+            }
+          }
+        }
+        .onChange(of: scrollId) { _ in
+          proxy.scrollTo(0)
+          scrollId = 1
+        }
+      }
+    }
+    .scrollIndicators(.hidden)
+  }
+
+  var emptyList: some View {
+    VStack {
+      Image("NoBusiness")
+      Text("No business yet")
+        .font(.custom(GlobalConstants.fontName, size: 14))
+        .fontWeight(.bold)
+        .foregroundStyle(LocarieColor.greyDark)
+    }
+    .padding(.top, 45)
   }
 
   var buttons: some View {

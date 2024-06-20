@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PostList: View {
   let posts: [PostDto]
+  var onFullscreenTapped: (_ i: Int) -> Void = { _ in }
+  var onThumbnailTapped: (_ i: Int) -> Void = { _ in }
   @Binding var scrollId: Int64?
 
   var title = "Explore"
