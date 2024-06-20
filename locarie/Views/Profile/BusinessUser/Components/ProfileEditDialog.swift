@@ -13,78 +13,39 @@ struct ProfileEditDialog: View {
   @ObservedObject var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
-    ZStack(alignment: .top) {
-      dialogBackground
-      buttons
+    VStack(spacing: 5) {
+      sheetButtonBuilder("Edit profile") {
+        isPresenting = false
+        Router.shared.navigate(to: Router.Destination.userProfileEdit)
+      }
+      .foregroundStyle(LocarieColor.blue)
+      sheetButtonBuilder("Do it later") {
+        isPresenting = false
+      }
     }
-    .frame(height: Constants.height)
-    .ignoresSafeArea(edges: .all)
+    .padding(.horizontal, 16)
     .onDisappear {
       cacheVM.setFirstLoggedIn(false)
     }
   }
-}
 
-private extension ProfileEditDialog {
-  var dialogBackground: some View {
-    UnevenRoundedRectangle(
-      topLeadingRadius: Constants.cornerRadius,
-      topTrailingRadius: Constants.cornerRadius
-    )
-    .fill(Constants.bgColor)
-  }
-
-  var buttons: some View {
-    VStack {
-      editButton
-      laterButton
-    }
-    .padding(.top, Constants.buttonsTopPadding)
-  }
-
-  var editButton: some View {
-    NavigationLink(value: Router.Destination.userProfileEdit) {
-      buttonBuilder("Edit profile")
-    }
-  }
-
-  var laterButton: some View {
-    buttonBuilder("Do it later")
-      .tint(.primary)
+  private func sheetButtonBuilder(_ title: String, action: @escaping () -> Void) -> some View {
+    Text(title)
+      .fontWeight(.bold)
+      .frame(height: 48)
+      .frame(maxWidth: .infinity)
+      .background {
+        RoundedRectangle(cornerRadius: 30).fill(.white).frame(maxWidth: .infinity)
+      }
       .onTapGesture {
-        withAnimation(.spring) {
-          isPresenting = false
-        }
+        action()
       }
   }
 }
 
-private extension ProfileEditDialog {
-  func buttonBuilder(_ text: String) -> some View {
-    ZStack {
-      buttonBackground
-      Text(text).fontWeight(.semibold)
-    }
-  }
-
-  var buttonBackground: some View {
-    RoundedRectangle(cornerRadius: Constants.cornerRadius)
-      .fill(.white)
-      .frame(height: Constants.buttonHeight)
-      .frame(maxWidth: .infinity)
-      .padding(.horizontal)
-  }
-}
-
-private enum Constants {
-  static let height: CGFloat = 180
-  static let bgColor: Color = .init(hex: 0xF0F0F0)
-  static let bgOpacity: CGFloat = 0.2
-  static let cornerRadius: CGFloat = 30
-  static let buttonsTopPadding: CGFloat = 25
-  static let buttonHeight: CGFloat = 48
-}
-
 #Preview {
-  ProfileEditDialog(isPresenting: .constant(true))
+  ZStack {
+    Color.pink
+    ProfileEditDialog(isPresenting: .constant(true))
+  }
 }

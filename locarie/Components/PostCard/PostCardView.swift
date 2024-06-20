@@ -94,17 +94,24 @@ private extension PostCardView {
           .resizable()
           .scaledToFit()
           .frame(width: 16, height: 16)
-          .sheet(isPresented: $presentingSheet) {
+          .bottomDialog(isPresented: $presentingSheet) {
             if deleteTapped {
               deleteTargetPost = post
               presentingDeleteDialog = true
             }
           } content: {
-            if #available(iOS 16.4, *) {
-              sheetContent.presentationCornerRadius(24)
-            } else {
-              sheetContent
+            VStack(spacing: 5) {
+              sheetButtonBuilder("Delete post") {
+                deleteTapped = true
+                presentingSheet = false
+              }
+              .foregroundStyle(.red)
+              sheetButtonBuilder("Back") {
+                presentingSheet = false
+              }
+              Spacer()
             }
+            .padding(.horizontal, 16)
           }
           .contentShape(Rectangle())
           .onTapGesture {
@@ -112,32 +119,6 @@ private extension PostCardView {
           }
       }
     }
-  }
-
-  var sheetContent: some View {
-    ZStack {
-      LocarieColor.greyMedium
-      VStack(spacing: 5) {
-        Capsule()
-          .fill(Color(hex: 0xD9D9D9))
-          .frame(width: 48, height: 6)
-          .padding(.top, 6)
-          .padding(.bottom, 11)
-        sheetButtonBuilder("Delete post") {
-          deleteTapped = true
-          presentingSheet = false
-        }
-        .foregroundStyle(.red)
-        sheetButtonBuilder("Back") {
-          presentingSheet = false
-        }
-        Spacer()
-      }
-      .padding(.horizontal, 16)
-    }
-    .ignoresSafeArea(edges: .bottom)
-    .presentationDetents([.height(150)])
-    .presentationDragIndicator(.hidden)
   }
 
   func sheetButtonBuilder(_ title: String, action: @escaping () -> Void) -> some View {

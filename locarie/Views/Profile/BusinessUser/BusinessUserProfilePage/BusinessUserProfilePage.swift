@@ -23,7 +23,7 @@ struct BusinessUserProfilePage: View {
   @State private var presentingProfileCover = false
   @State private var presentingPostCover = false
   @State private var presentingMyCover = false
-  @State private var presentingDialog = false
+  @State private var presentingDialog = true
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var profileVM = ProfileGetViewModel()
@@ -59,16 +59,9 @@ struct BusinessUserProfilePage: View {
             isPresenting: $presentingPostCover
           )
         }
-        if presentingDialog {
-          dialogBackground
-            .ignoresSafeArea(edges: .top)
-        }
-        VStack {
-          if presentingDialog {
-            ProfileEditDialog(isPresenting: $presentingDialog)
-              .transition(.move(edge: .bottom))
-          }
-        }
+      }
+      .bottomDialog(isPresented: $presentingDialog) {
+        ProfileEditDialog(isPresenting: $presentingDialog)
       }
       .sheet(isPresented: $presentingMyCover) {
         VStack(spacing: 0) {
@@ -316,19 +309,6 @@ private extension BusinessUserProfilePage {
         .background(Circle().fill(.background))
     }
     .buttonStyle(.plain)
-  }
-}
-
-private extension BusinessUserProfilePage {
-  var dialogBackground: some View {
-    Color
-      .black
-      .opacity(Constants.dialogBgOpacity)
-      .onTapGesture {
-        withAnimation(.spring) {
-          presentingDialog = false
-        }
-      }
   }
 }
 
