@@ -46,7 +46,7 @@ struct StrokeButtonFormItem: View {
 
   private var background: some View {
     RoundedRectangle(cornerRadius: FormItemCommonConstants.cornerRadius)
-      .stroke(color)
+      .strokeBorder(color, style: .init(lineWidth: 1.5))
   }
 }
 

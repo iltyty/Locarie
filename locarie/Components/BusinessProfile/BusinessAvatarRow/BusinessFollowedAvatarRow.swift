@@ -22,7 +22,8 @@ struct BusinessFollowedAvatarRow: View {
             .frame(width: Constants.size, height: Constants.size)
             .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
         } placeholder: {
-          RoundedAvatarSkeletonView(size: Constants.size)
+          defaultAvatar(size: Constants.size)
+//          RoundedAvatarSkeletonView(size: Constants.size)
         }
         HStack(alignment: .top) {
           BusinessStatus(user)

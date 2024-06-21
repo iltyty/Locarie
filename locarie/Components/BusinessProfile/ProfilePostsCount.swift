@@ -16,8 +16,9 @@ struct ProfilePostsCount: View {
 
   @ViewBuilder
   var body: some View {
-    Text("\(posts.count) posts")
+    Text("\(posts.count) post\(posts.count != 1 ? "s" : "")...")
       .font(.custom(GlobalConstants.fontName, size: 14))
       .fontWeight(.bold)
+      .foregroundStyle(LocarieColor.greyDark)
   }
 }

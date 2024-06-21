@@ -93,7 +93,7 @@ struct LinkFormItemWithBlockTitle: View {
 
   private var background: some View {
     RoundedRectangle(cornerRadius: FormItemCommonConstants.cornerRadius)
-      .stroke(FormItemCommonConstants.strokeColor)
+      .strokeBorder(FormItemCommonConstants.strokeColor, style: .init(lineWidth: 1.5))
   }
 }
 

@@ -17,16 +17,13 @@ struct ProfileBusinessCategoryView: View {
   var body: some View {
     Text(category)
       .font(.custom(GlobalConstants.fontName, size: 14))
-      .padding()
-      .frame(height: Constants.height)
+      .foregroundStyle(LocarieColor.greyDark)
+      .padding(.horizontal, 10)
+      .padding(.vertical, 4)
       .background(Capsule().fill(LocarieColor.greyMedium))
   }
 }
 
-private enum Constants {
-  static let height: CGFloat = 24
-}
-
 #Preview {
-  ProfileBusinessCategoryView("Food")
+  ProfileBusinessCategoryView("Coffee")
 }

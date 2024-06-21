@@ -40,22 +40,24 @@ struct PostCover: View {
           },
           isPresenting: $isPresenting
         )
-        .padding(.bottom, 24)
+        .padding(.bottom, 4)
         .padding(.horizontal, 8)
         ScrollView {
           VStack(alignment: .leading, spacing: 16) {
-            postStatus
-            VStack(alignment: .leading, spacing: 10) {
-              Banner(urls: post.imageUrls, fullToggle: false, indicator: .bottom).padding(.bottom)
-              Text(post.content).font(.headline)
+            postStatus.padding(.top, 20)
+            VStack(alignment: .leading, spacing: 0) {
+              Banner(urls: post.imageUrls, fullToggle: false, indicator: .bottom).padding(.bottom, 7)
+              Text(post.content)
             }
             HStack(spacing: 5) {
               ForEach(tags, id: \.self) { tag in
                 ProfileBusinessCategoryView(tag)
               }
             }
+            .padding(.bottom, 150)
           }
         }
+        .scrollIndicators(.hidden)
         Spacer()
       }
       ZStack(alignment: .bottomLeading) {

@@ -34,7 +34,7 @@ private extension ChangePasswordPage {
       hint: "Password",
       text: $password
     )
-    .padding(.horizontal)
+    .padding(.horizontal, 16)
   }
 
   var forgotPassword: some View {
@@ -45,7 +45,7 @@ private extension ChangePasswordPage {
       } label: {
         Text("Forgotten password")
           .foregroundStyle(LocarieColor.blue)
-          .padding(.horizontal)
+          .padding(.horizontal, 16)
       }
     }
   }

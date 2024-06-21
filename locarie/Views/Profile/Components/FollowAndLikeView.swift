@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct FollowAndLikeView: View {
+  @Binding var post: PostDto
+  @Binding var user: UserDto
+  @Binding var isPostCoverPresented: Bool
+  @Binding var isProfileCoverPresented: Bool
+
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var favoritePostsVM = FavoritePostViewModel()
   @StateObject private var favoriteBusinessVM = FavoriteBusinessViewModel()
@@ -93,17 +98,18 @@ private extension FollowAndLikeView {
     } else if favoriteBusinessVM.users.isEmpty {
       emptyFollowedBusinesses
     } else {
-      ScrollView {
-        VStack(alignment: .leading, spacing: 24) {
-          ForEach(favoriteBusinessVM.users) { user in
+      VStack(alignment: .leading, spacing: 24) {
+        ForEach(favoriteBusinessVM.users) { user in
+          NavigationLink(value: Router.Int64Destination.businessHome(user.id)) {
             BusinessFollowedAvatarRow(
               user: user,
               isPresentingCover: $isPresentingCover
             )
           }
+          .buttonStyle(.plain)
+          .tint(.primary)
         }
       }
-      .scrollIndicators(.hidden)
     }
   }
 
@@ -118,7 +124,20 @@ private extension FollowAndLikeView {
       ScrollView {
         VStack(spacing: 0) {
           ForEach(posts.indices, id: \.self) { i in
-            PostCardView(posts[i], divider: i != posts.count - 1)
+            PostCardView(
+              posts[i],
+              divider: i != posts.count - 1,
+              onFullscreenTapped: {
+                post = posts[i]
+                user = posts[i].user
+                isPostCoverPresented = true
+              },
+              onThumbnailTapped: {
+                post = posts[i]
+                user = posts[i].user
+                isProfileCoverPresented = true
+              }
+            )
           }
         }
       }
@@ -180,8 +199,4 @@ private enum Constants {
   static let tabWidth: CGFloat = 170
   static let tabHeight: CGFloat = 40
   static let emptyTabContentTopPadding: CGFloat = 50
-}
-
-#Preview {
-  FollowAndLikeView()
 }

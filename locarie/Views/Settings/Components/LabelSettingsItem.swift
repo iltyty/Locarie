@@ -18,7 +18,7 @@ struct LabelSettingsItem<L: View>: View {
         Spacer()
         Text(value)
       }
-      Divider()
+      LocarieDivider()
     }
     .padding(.horizontal)
   }

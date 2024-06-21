@@ -10,7 +10,14 @@ import SwiftUI
 struct RegularUserProfilePage: View {
   @ObservedObject var cacheVM = LocalCacheViewModel.shared
 
-  @State var screenHeight: CGFloat = 0
+  @Environment(\.dismiss) private var dismiss
+
+  @State private var screenHeight: CGFloat = 0
+
+  @State private var user = UserDto()
+  @State private var post = PostDto()
+  @State private var isPostCoverPresented = false
+  @State private var isProfileCoverPresented = false
 
   var body: some View {
     GeometryReader { proxy in
@@ -21,18 +28,58 @@ struct RegularUserProfilePage: View {
           Spacer()
         }
         .ignoresSafeArea(edges: .top)
-        VStack(spacing: 72) {
-          HStack(spacing: 16) {
-            Spacer()
-            ProfileEditButton()
-            settingsButton
+        VStack(spacing: 0) {
+          ZStack(alignment: .top) {
+            ScrollView {
+              VStack(spacing: 72) {
+                HStack(spacing: 16) {
+                  Spacer()
+                  ProfileEditButton()
+                  settingsButton
+                }
+                .padding(.horizontal, 16)
+                avatarRow
+                VStack(spacing: 0) {
+                  FollowAndLikeView(
+                    post: $post,
+                    user: $user,
+                    isPostCoverPresented: $isPostCoverPresented,
+                    isProfileCoverPresented: $isProfileCoverPresented
+                  )
+                }
+              }
+            }
+            .scrollIndicators(.hidden)
+            if cacheVM.isBusinessUser() {
+              HStack {
+                backButton
+                Spacer()
+              }
+              .padding(.horizontal, 16)
+            }
           }
-          .padding(.trailing, 16)
-          avatarRow
-          VStack(spacing: 0) {
-            FollowAndLikeView()
-            BottomTabView()
-          }
+          BottomTabView()
+        }
+        if isProfileCoverPresented {
+          BusinessProfileCover(
+            user: user,
+            onAvatarTapped: {
+              isProfileCoverPresented = false
+              Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id))
+            },
+            isPresenting: $isProfileCoverPresented
+          )
+        }
+        if isPostCoverPresented {
+          PostCover(
+            post: post,
+            tags: user.categories,
+            onAvatarTapped: {
+              isPostCoverPresented = false
+              Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id))
+            },
+            isPresenting: $isPostCoverPresented
+          )
         }
       }
       .onAppear {
@@ -44,12 +91,27 @@ struct RegularUserProfilePage: View {
 }
 
 extension RegularUserProfilePage {
+  var backButton: some View {
+    Image(systemName: "chevron.left")
+      .resizable()
+      .scaledToFit()
+      .frame(width: 18, height: 18)
+      .frame(width: 40, height: 40)
+      .background(Circle().fill(.white).shadow(radius: 2))
+      .buttonStyle(.plain)
+      .onTapGesture {
+        dismiss()
+      }
+  }
+
   var settingsButton: some View {
     NavigationLink(value: Router.Destination.settings) {
       Image(systemName: "gearshape")
+        .resizable()
+        .scaledToFit()
         .frame(width: 18, height: 18)
         .frame(width: 40, height: 40)
-        .background(Circle().fill(.white))
+        .background(Circle().fill(.white).shadow(radius: 2))
     }
     .buttonStyle(.plain)
   }

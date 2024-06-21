@@ -103,7 +103,7 @@ struct HomePage: View {
 private extension HomePage {
   var contentView: some View {
     VStack(spacing: 0) {
-      buttons
+      buttons.padding(.vertical, 8)
       BottomSheet(
         topPosition: .right,
         detents: [Constants.bottomDetent, .large],
@@ -208,7 +208,6 @@ private extension HomePage {
     }
     .fontWeight(.semibold)
     .padding(.horizontal, 16)
-    .padding(.bottom, 8)
   }
 
   var locarieIcon: some View {
@@ -217,6 +216,7 @@ private extension HomePage {
       .scaledToFit()
       .frame(width: 40, height: 40)
       .clipShape(RoundedRectangle(cornerRadius: 4))
+      .shadow(radius: 2)
       .onTapGesture {
         moveBottomSheet(to: .medium)
       }

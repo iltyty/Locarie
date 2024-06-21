@@ -24,7 +24,7 @@ struct LinkSettingsItem: View {
           .frame(width: 16, height: 16)
       }
       if divider {
-        Divider().foregroundStyle(LocarieColor.greyMedium)
+        LocarieDivider()
       }
     }
     .padding(.horizontal, 16)

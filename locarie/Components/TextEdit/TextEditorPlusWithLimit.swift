@@ -35,7 +35,7 @@ struct TextEditorPlusWithLimit: View {
     Group {
       if showBorder {
         RoundedRectangle(cornerRadius: Constants.borderCornerRadius)
-          .strokeBorder(LocarieColor.greyMedium)
+          .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
       } else {
         Color.clear
       }

@@ -12,7 +12,7 @@
 	<key>CFBundleIdentifier</key>
 	<string></string>
 	<key>MBXAccessToken</key>
-	<string>pk.eyJ1IjoibHVsdS1xIiwiYSI6ImNscWxwc3RsNDJ2YjcyanFmdnFmNGo5NHQifQ.KDGJ7IrR1Mosjs61rNVnXQ</string>
+	<string>sk.eyJ1IjoidG9tbXl5ZW50eSIsImEiOiJjbHF1dzN4Zmc1Yjk3MmtycXhsaHI5NjFxIn0.CyS0WkbzbZKrrIEzDzskDw</string>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIImageName</key>

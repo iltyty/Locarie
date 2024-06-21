@@ -21,7 +21,7 @@ struct ProfileDetail: View {
       ProfileOpeningHours(user)
       ProfileLink(user)
       ProfilePhone(user)
-      Divider().foregroundStyle(LocarieColor.greyMedium)
+      LocarieDivider()
     }
   }
 }

@@ -41,7 +41,7 @@ struct FavoritePage: View {
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 205))
       .ignoresSafeArea()
       VStack(spacing: 0) {
-        topContent
+        topContent.padding(.vertical, 8)
         Spacer()
         BottomSheet(
           topPosition: .right,
@@ -120,7 +120,7 @@ struct FavoritePage: View {
     ScrollViewReader { proxy in
       ScrollView {
         VStack(spacing: 20) {
-          Text("Explore")
+          Text("Following")
             .id(-1)
             .font(.custom(GlobalConstants.fontName, size: 18))
             .fontWeight(.bold)
@@ -148,7 +148,6 @@ struct FavoritePage: View {
                 .id(i)
                 .tint(.primary)
                 .buttonStyle(.plain)
-                .padding(.bottom, 16)
               }
             }
           }
@@ -186,7 +185,6 @@ private extension FavoritePage {
       CircleButton(systemName: "chevron.left").onTapGesture { dismiss() }
       Spacer()
     }
-    .padding(.bottom, 8)
     .padding(.horizontal, 16)
   }
 }

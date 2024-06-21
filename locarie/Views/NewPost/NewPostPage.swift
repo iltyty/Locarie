@@ -25,17 +25,29 @@ struct NewPostPage: View {
   @Environment(\.dismiss) private var dismiss
 
   var body: some View {
-    GeometryReader { _ in
+    GeometryReader { _ in // necessary for ignoring keyboard safe area!! (No idea why however)
       VStack(alignment: .leading, spacing: 0) {
         NavigationBar("Post").ignoresSafeArea(.keyboard)
-        content
+        VStack(alignment: .leading, spacing: 0) {
+          status.padding(.vertical, 16)
+          ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+              photosPicker.padding(.bottom, 24)
+              photoCount.padding(.bottom, 5)
+              paragraphInput.padding(.bottom, 24)
+            }
+          }
+          .scrollIndicators(.hidden)
+          LocarieDivider()
+          categories
+        }
+        .padding(.horizontal, 16)
         Spacer()
-        postButton
+        postButton.ignoresSafeArea(.keyboard)
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     .keyboardDismissable(focus: $isEditing)
-    .ignoresSafeArea(.keyboard)
     .loadingIndicator(loading: $loading)
     .alert(
       alertMessage,
@@ -73,17 +85,6 @@ struct NewPostPage: View {
     .onChange(of: postVM.photoVM.selection) { _ in
       postVM.objectWillChange.send()
     }
-  }
-
-  private var content: some View {
-    VStack(alignment: .leading, spacing: 0) {
-      status.padding(.vertical, 16)
-      photosPicker.padding(.bottom, 24)
-      photoCount.padding(.bottom, 5)
-      paragraphInput
-      categories
-    }
-    .padding(.horizontal, 16)
   }
 }
 
@@ -188,12 +189,10 @@ private extension NewPostPage {
 
 private extension NewPostPage {
   var paragraphInput: some View {
-    VStack(spacing: 24) {
-      TextEditorPlus(text: $postVM.post.content, hint: "Paragraph...")
-        .focused($isEditing)
-        .frame(height: Constants.inputHeight, alignment: .top)
-      Divider().foregroundStyle(LocarieColor.greyMedium)
-    }
+    TextEditorPlus(text: $postVM.post.content, hint: "Paragraph...")
+      .focused($isEditing)
+      .frame(height: Constants.inputHeight, alignment: .top)
+      .keyboardAdaptive()
   }
 
   var categories: some View {

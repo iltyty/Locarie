@@ -12,19 +12,26 @@ struct ForgotPasswordPage: View {
   @State private var loading = false
   @State private var alertTitle = ""
   @State private var presentingAlert = false
+  @FocusState private var inputting
 
   @StateObject private var authVM = AuthViewModel()
   @ObservedObject private var router = Router.shared
 
   var body: some View {
     VStack {
-      navigationBar
-      content
+      NavigationBar("Reset Password", divider: true, padding: true)
+      VStack(spacing: Constants.spacing) {
+        hint
+        emailInput
+        nextButton
+        Spacer()
+      }
     }
     .alert(alertTitle, isPresented: $presentingAlert, actions: {
       Button("OK") {}
     })
     .overlay(LoadingView($loading))
+    .keyboardDismissable(focus: $inputting)
     .onReceive(authVM.$state) { state in
       switch state {
       case .loading: loading = true
@@ -46,28 +53,16 @@ struct ForgotPasswordPage: View {
     }
   }
 
-  private var content: some View {
-    VStack(spacing: Constants.spacing) {
-      hint
-      emailInput
-      nextButton
-      Spacer()
-    }
-  }
-
-  private var navigationBar: some View {
-    NavigationBar("Reset Password", divider: true, padding: true)
-  }
-
   private var hint: some View {
     Text("Type in your email to receive a validation code to reset your password. ")
       .fontWeight(.semibold)
-      .padding(.horizontal)
+      .padding(.horizontal, 16)
+      .focused($inputting)
   }
 
   private var emailInput: some View {
     TextEditFormItemWithNoTitle(hint: "Email", text: $email)
-      .padding(.horizontal)
+      .padding(.horizontal, 16)
   }
 
   private var nextButton: some View {

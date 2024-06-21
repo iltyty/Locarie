@@ -32,7 +32,7 @@ extension Router {
     case favorite
 
     case loginOrRegister, login, regularRegister, businessDescription,
-         businessRegister, forgotPassword
+         businessRegister, forgotPassword, notifications
 
     case settings, myAccount, changePassword, newPassword,
          feedback, privacyPolicy, termsOfUse, termsOfService
@@ -68,6 +68,8 @@ extension Router {
       BusinessRegisterPage()
     case .forgotPassword:
       ForgotPasswordPage()
+    case .notifications:
+      NotificationsPage()
 
     case .settings:
       SettingsPage()

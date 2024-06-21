@@ -51,6 +51,10 @@
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */; };
 		50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F812AF1512E0045AB12 /* PostCardView.swift */; };
+		5029426A2C2535D9000E5C64 /* LocarieDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502942692C2535D9000E5C64 /* LocarieDivider.swift */; };
+		5029426D2C255360000E5C64 /* View+KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5029426C2C255360000E5C64 /* View+KeyboardAdaptive.swift */; };
+		5029426F2C2553B7000E5C64 /* Publishers+KeyboardHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5029426E2C2553B7000E5C64 /* Publishers+KeyboardHeight.swift */; };
+		502942712C2553E2000E5C64 /* Notification+KeyboardHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502942702C2553E2000E5C64 /* Notification+KeyboardHeight.swift */; };
 		502A4FF02B32D34B00C0833A /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FEF2B32D34B00C0833A /* Color+Hex.swift */; };
 		502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+London.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */; };
 		502A4FF62B32D48400C0833A /* PostListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF52B32D48400C0833A /* PostListService.swift */; };
@@ -146,7 +150,6 @@
 		509A10232BCBD11D00FB55C7 /* ProfileBusinessCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A10222BCBD11D00FB55C7 /* ProfileBusinessCategoryView.swift */; };
 		509A10292BCCBE0D00FB55C7 /* BusinessUserProfilePage+SkeletonPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A10282BCCBE0D00FB55C7 /* BusinessUserProfilePage+SkeletonPage.swift */; };
 		509A102B2BCCDD2F00FB55C7 /* FollowAndLikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A102A2BCCDD2F00FB55C7 /* FollowAndLikeView.swift */; };
-		509A102D2BCD03D300FB55C7 /* MyFollowAndLikePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A102C2BCD03D300FB55C7 /* MyFollowAndLikePage.swift */; };
 		509A10302BCD206400FB55C7 /* BusinessImagesEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A102F2BCD206400FB55C7 /* BusinessImagesEditPage.swift */; };
 		509A10322BCE194900FB55C7 /* DefaultBusinessImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A10312BCE194900FB55C7 /* DefaultBusinessImageView.swift */; };
 		509A10342BCE19CF00FB55C7 /* BusinessImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A10332BCE19CF00FB55C7 /* BusinessImageView.swift */; };
@@ -296,6 +299,10 @@
 		50277F732AF117700045AB12 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserProfilePage.swift; sourceTree = "<group>"; };
 		50277F812AF1512E0045AB12 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
+		502942692C2535D9000E5C64 /* LocarieDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieDivider.swift; sourceTree = "<group>"; };
+		5029426C2C255360000E5C64 /* View+KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyboardAdaptive.swift"; sourceTree = "<group>"; };
+		5029426E2C2553B7000E5C64 /* Publishers+KeyboardHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publishers+KeyboardHeight.swift"; sourceTree = "<group>"; };
+		502942702C2553E2000E5C64 /* Notification+KeyboardHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+KeyboardHeight.swift"; sourceTree = "<group>"; };
 		502A4FEF2B32D34B00C0833A /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+London.swift"; sourceTree = "<group>"; };
 		502A4FF52B32D48400C0833A /* PostListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListService.swift; sourceTree = "<group>"; };
@@ -390,7 +397,6 @@
 		509A10222BCBD11D00FB55C7 /* ProfileBusinessCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBusinessCategoryView.swift; sourceTree = "<group>"; };
 		509A10282BCCBE0D00FB55C7 /* BusinessUserProfilePage+SkeletonPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessUserProfilePage+SkeletonPage.swift"; sourceTree = "<group>"; };
 		509A102A2BCCDD2F00FB55C7 /* FollowAndLikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowAndLikeView.swift; sourceTree = "<group>"; };
-		509A102C2BCD03D300FB55C7 /* MyFollowAndLikePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFollowAndLikePage.swift; sourceTree = "<group>"; };
 		509A102F2BCD206400FB55C7 /* BusinessImagesEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessImagesEditPage.swift; sourceTree = "<group>"; };
 		509A10312BCE194900FB55C7 /* DefaultBusinessImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBusinessImageView.swift; sourceTree = "<group>"; };
 		509A10332BCE19CF00FB55C7 /* BusinessImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessImageView.swift; sourceTree = "<group>"; };
@@ -693,25 +699,37 @@
 				50F549EF2B44F44C00D06F20 /* ComponentBuilders */,
 				505568B92B8499CB00FD21E4 /* FormItems */,
 				50FDD8A22B550927003015F9 /* Images */,
-				50F54A012B45283000D06F20 /* Navigation */,
+				50F54A012B45283000D06F20 /* NavigationBar */,
 				50530B922B8775FD009C1F92 /* BusinessBottomBar.swift */,
 				506590EB2B8CE65D009F8E5F /* LoadingView.swift */,
 				509A10402BCE747A00FB55C7 /* DotView.swift */,
+				502942692C2535D9000E5C64 /* LocarieDivider.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		5029426B2C255346000E5C64 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				505BCE742C213CB600498E65 /* View+BottomDialog.swift */,
+				505C26022C0728A200862AC4 /* View+KeyboardDismissable.swift */,
+				5029426C2C255360000E5C64 /* View+KeyboardAdaptive.swift */,
+				50A06DE82BC7D01E00C1E158 /* View+LoadingIndicator.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		502A4FEE2B32D32D00C0833A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5029426B2C255346000E5C64 /* Views */,
 				502A4FEF2B32D34B00C0833A /* Color+Hex.swift */,
 				502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */,
 				50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */,
 				509AC0522B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift */,
-				50A06DE82BC7D01E00C1E158 /* View+LoadingIndicator.swift */,
 				505C25FE2C036FFE00862AC4 /* Date+TimeAgo.swift */,
-				505C26022C0728A200862AC4 /* View+KeyboardDismissable.swift */,
-				505BCE742C213CB600498E65 /* View+BottomDialog.swift */,
+				5029426E2C2553B7000E5C64 /* Publishers+KeyboardHeight.swift */,
+				502942702C2553E2000E5C64 /* Notification+KeyboardHeight.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1372,7 +1390,6 @@
 				5075FCDC2B8717A5005E4A8B /* Components */,
 				509D5BC22B45610F00833021 /* BioEditPage.swift */,
 				509D5BC42B45611E00833021 /* OpeningHoursEditPage.swift */,
-				509A102C2BCD03D300FB55C7 /* MyFollowAndLikePage.swift */,
 			);
 			path = BusinessUser;
 			sourceTree = "<group>";
@@ -1395,12 +1412,12 @@
 			path = ComponentBuilders;
 			sourceTree = "<group>";
 		};
-		50F54A012B45283000D06F20 /* Navigation */ = {
+		50F54A012B45283000D06F20 /* NavigationBar */ = {
 			isa = PBXGroup;
 			children = (
 				50F54A022B45283C00D06F20 /* NavigationBar.swift */,
 			);
-			path = Navigation;
+			path = NavigationBar;
 			sourceTree = "<group>";
 		};
 		50F54A082B452EA300D06F20 /* Buttons */ = {
@@ -1614,6 +1631,7 @@
 				505C26012C05D47400862AC4 /* BusinessDescriptionPage.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
 				50C69A702BF33D6A00B51B0C /* ImageFullScreenView.swift in Sources */,
+				502942712C2553E2000E5C64 /* Notification+KeyboardHeight.swift in Sources */,
 				505568D12B84BCA000FD21E4 /* LinkFormItemWithInlineTitle.swift in Sources */,
 				50530B932B8775FD009C1F92 /* BusinessBottomBar.swift in Sources */,
 				50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */,
@@ -1649,6 +1667,7 @@
 				501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */,
 				5075FCD32B86F225005E4A8B /* BusinessProfileAvatarRow.swift in Sources */,
 				505568C22B8499CC00FD21E4 /* BackgroundButtonFormItem.swift in Sources */,
+				5029426A2C2535D9000E5C64 /* LocarieDivider.swift in Sources */,
 				503794AC2AF1F44A00DA64F4 /* BottomSheet.swift in Sources */,
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
 				50530B982B878087009C1F92 /* FavoritePostService.swift in Sources */,
@@ -1689,6 +1708,7 @@
 				509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */,
 				502A4FF62B32D48400C0833A /* PostListService.swift in Sources */,
 				5075FCCF2B86E8DB005E4A8B /* ProfilePhone.swift in Sources */,
+				5029426F2C2553B7000E5C64 /* Publishers+KeyboardHeight.swift in Sources */,
 				506590D22B8CB411009F8E5F /* UserEndpoints.swift in Sources */,
 				5075FCD72B870A05005E4A8B /* ProfileBio.swift in Sources */,
 				50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */,
@@ -1700,6 +1720,7 @@
 				50277F742AF117700045AB12 /* HomePage.swift in Sources */,
 				5075FCCD2B86E8A0005E4A8B /* ProfileLink.swift in Sources */,
 				506590CD2B8CA8C7009F8E5F /* UserDeleteService.swift in Sources */,
+				5029426D2C255360000E5C64 /* View+KeyboardAdaptive.swift in Sources */,
 				505C25FF2C036FFE00862AC4 /* Date+TimeAgo.swift in Sources */,
 				506801532B88CBFF00AFF000 /* FavoritePage.swift in Sources */,
 				501BAF382B46364D00D9D84F /* FeedbackPage.swift in Sources */,
@@ -1713,7 +1734,6 @@
 				50F54A1D2B454E0800D06F20 /* BusinessProfileEditPage.swift in Sources */,
 				509A10412BCE747A00FB55C7 /* DotView.swift in Sources */,
 				50B5DED42B3B19AA00C0A641 /* MapboxError.swift in Sources */,
-				509A102D2BCD03D300FB55C7 /* MyFollowAndLikePage.swift in Sources */,
 				50998B0C2B371086002196B5 /* BusinessCategory.swift in Sources */,
 				505BCE752C213CB600498E65 /* View+BottomDialog.swift in Sources */,
 				506590D42B8CB454009F8E5F /* PostEndpoints.swift in Sources */,

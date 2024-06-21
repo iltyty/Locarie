@@ -46,7 +46,6 @@ struct BusinessHomePage: View {
           topContent
             .padding(.bottom, 8)
             .padding(.horizontal, 16)
-          Spacer()
           bottomContent
           BusinessBottomBar(business: $user, location: user.location).background(.white)
         }

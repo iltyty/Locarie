@@ -19,17 +19,18 @@ struct BusinessStatus: View {
   }
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: 6) {
       Text(user.businessName).font(.custom(GlobalConstants.fontName, size: 20))
       HStack(spacing: 5) {
-        Text(user.neighborhood).foregroundStyle(LocarieColor.greyDark)
+        Text(user.neighborhood)
+          .foregroundStyle(LocarieColor.greyDark)
         DotView()
-        Text(distance).foregroundStyle(LocarieColor.greyDark)
-        DotView()
-        if user.isNowClosed {
-          Text("Closed").foregroundStyle(LocarieColor.greyDark)
-        } else {
-          Text("Open").foregroundStyle(LocarieColor.green)
+        Group {
+          if user.isNowClosed {
+            Text("Closed").foregroundStyle(LocarieColor.greyDark)
+          } else {
+            Text("Open").foregroundStyle(LocarieColor.green)
+          }
         }
       }
       .font(.custom(GlobalConstants.fontName, size: 14))

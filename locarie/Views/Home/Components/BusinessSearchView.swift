@@ -19,7 +19,7 @@ struct BusinessSearchView: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      searchBar
+      searchBar.padding(.top, 8)
       areas
       businessesView
       Spacer()
@@ -47,18 +47,21 @@ private extension BusinessSearchView {
         .resizable()
         .scaledToFit()
         .frame(width: 18, height: 18)
+        .contentShape(Rectangle())
+        .onTapGesture {
+          searching = false
+        }
       TextField("Search businesses", text: $businessName)
         .autocorrectionDisabled()
         .textInputAutocapitalization(.never)
       Image(systemName: "xmark")
+        .resizable()
+        .scaledToFit()
         .frame(width: 18, height: 18)
+        .foregroundStyle(LocarieColor.greyDark)
         .onTapGesture {
           if !businessName.isEmpty {
             businessName = ""
-          } else {
-            withAnimation(.spring) {
-              searching = false
-            }
           }
         }
     }

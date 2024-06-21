@@ -56,14 +56,12 @@ struct PostCardView: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
-      status.padding(.bottom, 9)
-      cover.padding(.bottom, 16)
-      content.padding(.bottom, 10)
-      categories
+      status.padding(.bottom, 10)
+      cover.padding(.bottom, 12)
+      content.padding(.bottom, 12)
+      categories.padding(.bottom, 16)
       if divider {
-        Divider()
-          .foregroundStyle(LocarieColor.greyMedium)
-          .padding(.vertical, 16)
+        LocarieDivider().padding(.bottom, 16)
       }
     }
   }
@@ -77,7 +75,7 @@ private extension PostCardView {
   var status: some View {
     HStack(spacing: 10) {
       AvatarView(imageUrl: post.businessAvatarUrl, size: Constants.avatarSize)
-      VStack(alignment: .leading, spacing: 0) {
+      VStack(alignment: .leading, spacing: 2) {
         Text(post.businessName)
         HStack(spacing: 5) {
           Text(post.publishedTime)
@@ -147,10 +145,10 @@ private extension PostCardView {
           } placeholder: {
             DefaultBusinessImageView(size: 48)
           }
-          .padding(2)
+          .padding(1.5)
           .background {
             RoundedRectangle(cornerRadius: 16)
-              .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 2))
+              .fill(LocarieColor.greyMedium)
           }
           .padding(5)
           .onTapGesture {
@@ -197,7 +195,7 @@ extension PostCardView {
         SkeletonView(68, 10)
       }
       .padding(.bottom, 16)
-      Divider().foregroundStyle(LocarieColor.greyMedium)
+      LocarieDivider()
     }
   }
 

@@ -87,7 +87,7 @@ private extension OpeningHourSheet {
 private extension OpeningHourSheet {
   var timePicker: some View {
     VStack {
-      Divider()
+      LocarieDivider()
       HStack {
         Spacer()
         startTimePicker
@@ -95,7 +95,7 @@ private extension OpeningHourSheet {
         endTimePicker
         Spacer()
       }
-      Divider()
+      LocarieDivider()
     }
     .labelsHidden()
     .datePickerStyle(.compact)

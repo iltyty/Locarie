@@ -36,7 +36,8 @@ struct TextEditorPlus: View {
   @ViewBuilder
   private var background: some View {
     if border {
-      RoundedRectangle(cornerRadius: Constants.cornerRadius).strokeBorder(LocarieColor.greyMedium)
+      RoundedRectangle(cornerRadius: Constants.cornerRadius)
+        .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
     } else {
       Color.clear
     }

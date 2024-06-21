@@ -22,7 +22,7 @@ struct TextSettingsItem: View {
       .lineLimit(1)
       .padding(.vertical, 20)
       if divider {
-        Divider().foregroundStyle(LocarieColor.greyMedium)
+        LocarieDivider()
       }
     }
     .padding(.horizontal, 16)

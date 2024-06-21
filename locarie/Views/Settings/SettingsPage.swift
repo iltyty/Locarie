@@ -30,7 +30,9 @@ struct SettingsPage: View {
           privacyPolicy
           termsOfService
           termsOfUse
-          logout.padding(.top, 48)
+          logout
+            .padding(.top, 48)
+            .padding(.bottom, 100)
           Spacer()
         }
         .ignoresSafeArea(edges: .bottom)
@@ -55,18 +57,14 @@ private extension SettingsPage {
   }
 
   var changePassword: some View {
-    NavigationLink {
-      ChangePasswordPage()
-    } label: {
+    NavigationLink(value: Router.Destination.changePassword) {
       LinkSettingsItem(text: "Change password")
     }
     .buttonStyle(.plain)
   }
 
   var notifications: some View {
-    NavigationLink {
-      NotificationsPage()
-    } label: {
+    NavigationLink(value: Router.Destination.notifications) {
       LinkSettingsItem(text: "Notifications", divider: false)
     }
     .buttonStyle(.plain)
@@ -78,7 +76,11 @@ private extension SettingsPage {
 
   var signUpForBusiness: some View {
     NavigationLink(value: Router.Destination.businessDescription) {
-      LinkSettingsItem(text: "Sign up for a business account", color: LocarieColor.blue, divider: false)
+      LinkSettingsItem(
+        text: "Sign up for a business account",
+        color: LocarieColor.blue,
+        divider: false
+      )
     }
     .buttonStyle(.plain)
   }
@@ -88,9 +90,7 @@ private extension SettingsPage {
   }
 
   var feedback: some View {
-    NavigationLink {
-      FeedbackPage()
-    } label: {
+    NavigationLink(value: Router.Destination.feedback) {
       LinkSettingsItem(text: "Feedback", color: LocarieColor.primary, divider: false)
     }
     .buttonStyle(.plain)
@@ -101,27 +101,21 @@ private extension SettingsPage {
   }
 
   var privacyPolicy: some View {
-    NavigationLink {
-      PrivacyPolicyPage()
-    } label: {
+    NavigationLink(value: Router.Destination.privacyPolicy) {
       LinkSettingsItem(text: "Privacy policy")
     }
     .buttonStyle(.plain)
   }
 
   var termsOfService: some View {
-    NavigationLink {
-      TermsOfServicePage()
-    } label: {
+    NavigationLink(value: Router.Destination.termsOfService) {
       LinkSettingsItem(text: "Terms of services")
     }
     .buttonStyle(.plain)
   }
 
   var termsOfUse: some View {
-    NavigationLink {
-      TermsOfUsePage()
-    } label: {
+    NavigationLink(value: Router.Destination.termsOfUse) {
       LinkSettingsItem(text: "Terms of use", divider: false)
     }
     .buttonStyle(.plain)

@@ -22,13 +22,16 @@ struct BusinessCategoryPage: View {
   }
 
   var body: some View {
-    VStack(alignment: .leading) {
-      navigationBar
-      text
-      tags
-      Spacer()
-      selectedCount
-      confirmButton
+    VStack(alignment: .leading, spacing: 0) {
+      NavigationBar("Business category", padding: true)
+      VStack(alignment: .leading, spacing: 0) {
+        text.padding(.bottom, Constants.textBottomPadding)
+        tags
+        Spacer()
+        selectedCount.padding(.bottom, 24)
+        confirmButton
+      }
+      .padding(.horizontal, 16)
     }
     .onAppear {
       for i in 0 ..< allCategories.count {
@@ -39,26 +42,20 @@ struct BusinessCategoryPage: View {
     }
   }
 
-  private var navigationBar: some View {
-    NavigationBar("Business category", padding: true)
-  }
-
   private var text: some View {
     HStack(spacing: 0) {
       Text("Select up to ")
       Text("3 tags ").foregroundStyle(LocarieColor.primary)
       Text("that match your business.")
     }
-    .fontWeight(.semibold)
-    .padding(.horizontal)
-    .padding(.bottom, Constants.textBottomPadding)
+    .fontWeight(.bold)
   }
 
   var tags: some View {
     WrappingHStack {
       ForEach(allCategories.indices, id: \.self) { i in
         let tag = allCategories[i]
-        TagView(tag: tag, isSelected: isSelected[i], large: true)
+        TagView(tag: tag, isSelected: isSelected[i])
           .onTapGesture {
             if isSelected[i] || selected.count < Constants.maxTagCount {
               isSelected[i].toggle()
@@ -66,7 +63,6 @@ struct BusinessCategoryPage: View {
           }
       }
     }
-    .padding(.horizontal)
   }
 
   var selected: [Bool] {
@@ -77,6 +73,12 @@ struct BusinessCategoryPage: View {
     HStack {
       Spacer()
       Text("\(selected.count) selected")
+        .foregroundStyle(LocarieColor.greyDark)
+        .padding(.vertical, 5)
+        .padding(.horizontal, 16)
+        .background {
+          Capsule().fill(LocarieColor.greyMedium)
+        }
     }
   }
 
@@ -89,7 +91,6 @@ struct BusinessCategoryPage: View {
     } label: {
       StrokeButtonFormItem(title: "Next Step")
     }
-    .padding(.horizontal)
     .padding(.bottom)
     .disabled(!tagCountValid)
     .opacity(buttonOpacity)

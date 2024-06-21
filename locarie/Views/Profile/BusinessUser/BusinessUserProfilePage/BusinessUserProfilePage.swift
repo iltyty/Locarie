@@ -22,7 +22,6 @@ struct BusinessUserProfilePage: View {
   @State private var presentingProfileDetail = true
   @State private var presentingProfileCover = false
   @State private var presentingPostCover = false
-  @State private var presentingMyCover = false
   @State private var presentingDialog = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
@@ -65,23 +64,6 @@ struct BusinessUserProfilePage: View {
       }
       .bottomDialog(isPresented: $presentingDialog) {
         ProfileEditDialog(isPresenting: $presentingDialog)
-      }
-      .sheet(isPresented: $presentingMyCover) {
-        VStack(spacing: 0) {
-          Capsule()
-            .fill(LocarieColor.greyMedium)
-            .frame(width: 48, height: 6)
-            .padding(.top, 8)
-            .padding(.bottom, 18)
-          Label {
-            Text("My Page")
-          } icon: {
-            Image("Person")
-          }
-          .padding(.bottom, 40)
-          FollowAndLikeView()
-        }
-        .presentationDetents([.fraction(0.95)])
       }
       .onAppear {
         if cacheVM.isFirstLoggedIn() {
@@ -167,7 +149,7 @@ private extension BusinessUserProfilePage {
   var contentView: some View {
     VStack(spacing: 0) {
       buttons
-      Spacer()
+        .padding(.vertical, 8)
       BottomSheet(
         topPosition: .right,
         detents: [Constants.bottomDetent, .large],
@@ -290,19 +272,18 @@ private extension BusinessUserProfilePage {
   }
 
   var mineButton: some View {
-    ZStack {
-      Circle()
-        .fill(Color(hex: 0xF0F0F0))
-        .frame(width: Constants.topButtonSize, height: Constants.topButtonSize)
-        .shadow(radius: 2)
-      if cacheVM.getAvatarUrl().isEmpty {
-        defaultAvatar(size: Constants.topButtonSize - 4)
-      } else {
-        AvatarView(imageUrl: cacheVM.getAvatarUrl(), size: Constants.topButtonSize - 4)
+    NavigationLink(value: Router.Destination.regularUserProfile) {
+      ZStack {
+        Circle()
+          .fill(Color(hex: 0xF0F0F0))
+          .frame(width: Constants.topButtonSize, height: Constants.topButtonSize)
+          .shadow(radius: 2)
+        if cacheVM.getAvatarUrl().isEmpty {
+          defaultAvatar(size: Constants.topButtonSize - 4)
+        } else {
+          AvatarView(imageUrl: cacheVM.getAvatarUrl(), size: Constants.topButtonSize - 4)
+        }
       }
-    }
-    .onTapGesture {
-      presentingMyCover = true
     }
   }
 
@@ -310,7 +291,7 @@ private extension BusinessUserProfilePage {
     NavigationLink(value: Router.Destination.settings) {
       Image("GearShape")
         .frame(width: Constants.topButtonSize, height: Constants.topButtonSize)
-        .background(Circle().fill(.background))
+        .background(Circle().fill(.background).shadow(radius: 2))
     }
     .buttonStyle(.plain)
   }
