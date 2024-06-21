@@ -34,10 +34,18 @@ struct CoverTopView: View {
   }
 
   var avatar: some View {
-    AvatarView(imageUrl: user.avatarUrl, size: Constants.avatarSize)
-      .onTapGesture {
-        onAvatarTapped()
-      }
+    AsyncImage(url: URL(string: user.avatarUrl)) { image in
+      image
+        .resizable()
+        .scaledToFill()
+        .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+        .clipShape(Circle())
+    } placeholder: {
+      SkeletonView(Constants.avatarSize, Constants.avatarSize, true)
+    }
+    .onTapGesture {
+      onAvatarTapped()
+    }
   }
 
   @ViewBuilder

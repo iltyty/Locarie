@@ -14,7 +14,7 @@ extension Publishers {
       .map(\.keyboardHeight)
     let willHide = NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification)
       .map { _ in CGFloat(0) }
-    return MergeMany(willShow, willHide)
+    return Merge(willShow, willHide)
       .eraseToAnyPublisher()
   }
 }

@@ -70,7 +70,15 @@ private extension AvatarEditor {
   }
 
   func avatar(_ url: String) -> some View {
-    AvatarView(imageUrl: url, size: Constants.avatarSize)
+    AsyncImage(url: URL(string: url)) { image in
+      image
+        .resizable()
+        .scaledToFill()
+        .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+        .clipShape(Circle())
+    } placeholder: {
+      defaultAvatar(size: Constants.avatarSize, isBusiness: cacheVM.isBusinessUser())
+    }
   }
 
   var text: some View {

@@ -148,8 +148,7 @@ private extension BusinessUserProfilePage {
 private extension BusinessUserProfilePage {
   var contentView: some View {
     VStack(spacing: 0) {
-      buttons
-        .padding(.vertical, 8)
+      buttons.padding(.vertical, 8)
       BottomSheet(
         topPosition: .right,
         detents: [Constants.bottomDetent, .large],
@@ -281,7 +280,22 @@ private extension BusinessUserProfilePage {
         if cacheVM.getAvatarUrl().isEmpty {
           defaultAvatar(size: Constants.topButtonSize - 4)
         } else {
-          AvatarView(imageUrl: cacheVM.getAvatarUrl(), size: Constants.topButtonSize - 4)
+          AsyncImage(url: URL(string: cacheVM.getAvatarUrl())) { image in
+            image
+              .resizable()
+              .scaledToFill()
+              .frame(
+                width: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth,
+                height: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth
+              )
+              .clipShape(Circle())
+          } placeholder: {
+            SkeletonView(
+              Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth,
+              Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth,
+              true
+            )
+          }
         }
       }
     }
@@ -308,6 +322,7 @@ private enum Constants {
   static let buttonShadowRadius: CGFloat = 2.0
 
   static let topButtonSize: CGFloat = 40
+  static let topButtonStrokeWidth: CGFloat = 2
   static let topButtonIconSize: CGFloat = 18
 }
 

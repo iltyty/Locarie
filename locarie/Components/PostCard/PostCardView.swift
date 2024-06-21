@@ -74,7 +74,15 @@ struct PostCardView: View {
 private extension PostCardView {
   var status: some View {
     HStack(spacing: 10) {
-      AvatarView(imageUrl: post.businessAvatarUrl, size: Constants.avatarSize)
+      AsyncImage(url: URL(string: post.businessAvatarUrl)) { image in
+        image
+          .resizable()
+          .scaledToFill()
+          .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+          .clipShape(Circle())
+      } placeholder: {
+        SkeletonView(Constants.avatarSize, Constants.avatarSize, true)
+      }
       VStack(alignment: .leading, spacing: 2) {
         Text(post.businessName)
         HStack(spacing: 5) {
