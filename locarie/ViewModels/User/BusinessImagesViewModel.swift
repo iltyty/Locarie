@@ -10,6 +10,7 @@ import Foundation
 
 @MainActor final class BusinessImagesViewModel: BaseViewModel {
   @Published var state: State = .idle
+  @Published var imageUrls = [String]()
   @Published var existedImageUrls = [String]()
   @Published var existedImageData = [Data]()
   @Published var photoVM = PhotoViewModel()
@@ -41,6 +42,7 @@ import Foundation
     let dto = response.value!
     if dto.status == 0 {
       if let urls = dto.data {
+        imageUrls = urls
         existedImageUrls = urls
       }
       state = .getFinished
@@ -105,13 +107,15 @@ import Foundation
   }
 
   private func handleUploadResponse(_ response: BusinessImagesUploadResponse) {
-    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
       return
     }
     let dto = response.value!
     if dto.status == 0 {
+      if let urls = dto.data {
+        imageUrls = urls
+      }
       state = .uploadFinished
     } else {
       state = .failed(newNetworkError(response: dto))

@@ -5,11 +5,15 @@
 //  Created by qiuty on 07/01/2024.
 //
 
+import Kingfisher
 @_spi(Experimental) import MapboxMaps
 import SwiftUI
 
 struct BusinessUserProfilePage: View {
   @State var screenSize: CGSize = .zero
+
+  @State private var avatarId = ""
+
   @State private var viewport: Viewport = .camera(center: .london, zoom: Constants.mapZoom)
   @State private var post = PostDto()
   @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
@@ -96,6 +100,9 @@ struct BusinessUserProfilePage: View {
       default: return
       }
     }
+    .onReceive(cacheVM.$cache) { cache in
+      avatarId = cache.avatarId
+    }
     .ignoresSafeArea(edges: .bottom)
   }
 
@@ -124,6 +131,7 @@ private extension BusinessUserProfilePage {
       Map(viewport: $viewport) {
         MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
           BusinessMapAvatar(url: profileVM.dto.avatarUrl)
+            .id(avatarId)
             .onTapGesture {
               updateMapCenter(user: profileVM.dto)
             }
@@ -229,6 +237,7 @@ private extension BusinessUserProfilePage {
             presentingDeleteDialog: $presentingDeletePostDialog,
             deleteTargetPost: $post
           )
+          .id(avatarId)
           .buttonStyle(.plain)
           .onTapGesture {
             post = p
@@ -236,20 +245,6 @@ private extension BusinessUserProfilePage {
           }
         }
       }
-    }
-  }
-
-  @ViewBuilder
-  var firstProfileImage: some View {
-    Group {
-      if profileVM.dto.profileImageUrls.isEmpty {
-        DefaultBusinessImageView()
-      } else {
-        BusinessImageView(url: URL(string: profileVM.dto.profileImageUrls[0]))
-      }
-    }
-    .onTapGesture {
-      presentingProfileCover = true
     }
   }
 
@@ -280,25 +275,24 @@ private extension BusinessUserProfilePage {
         if cacheVM.getAvatarUrl().isEmpty {
           defaultAvatar(size: Constants.topButtonSize - 4)
         } else {
-          AsyncImage(url: URL(string: cacheVM.getAvatarUrl())) { image in
-            image
-              .resizable()
-              .scaledToFill()
-              .frame(
-                width: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth,
-                height: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth
+          KFImage(URL(string: cacheVM.getAvatarUrl()))
+            .placeholder {
+              SkeletonView(
+                Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth,
+                Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth,
+                true
               )
-              .clipShape(Circle())
-          } placeholder: {
-            SkeletonView(
-              Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth,
-              Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth,
-              true
+            }
+            .resizable()
+            .frame(
+              width: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth,
+              height: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth
             )
-          }
+            .clipShape(Circle())
         }
       }
     }
+    .id(avatarId)
   }
 
   var settingsButton: some View {

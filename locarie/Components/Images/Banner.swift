@@ -5,6 +5,7 @@
 //  Created by qiuty on 14/01/2024.
 //
 
+import Kingfisher
 import SwiftUI
 
 struct Banner: View {
@@ -104,17 +105,14 @@ struct Banner: View {
 
   private var images: some View {
     ForEach(urls.indices, id: \.self) { i in
-      AsyncImage(url: URL(string: urls[i])) { image in
-        image
-          .resizable()
-          .scaledToFill()
-          .aspectRatio(aspectRatio, contentMode: .fill)
-          .clipped()
-          .frame(alignment: .center)
-      } placeholder: {
-        defaultImage
-      }
-      .tag(i)
+      KFImage(URL(string: urls[i]))
+        .placeholder { defaultImage }
+        .resizable()
+        .scaledToFill()
+        .aspectRatio(aspectRatio, contentMode: .fill)
+        .clipped()
+        .frame(alignment: .center)
+        .tag(i)
     }
   }
 }

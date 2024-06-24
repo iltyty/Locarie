@@ -5,6 +5,7 @@
 //  Created by qiuty on 15/04/2024.
 //
 
+import Kingfisher
 import PhotosUI
 import SwiftUI
 
@@ -39,6 +40,9 @@ struct BusinessImagesEditPage: View {
       case .uploadFinished:
         loading = false
         presentingAlert = true
+        for url in imageVM.imageUrls {
+          ImageCache.default.removeImage(forKey: url)
+        }
       case .loading:
         loading = true
       default:

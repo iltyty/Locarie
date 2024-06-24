@@ -5,6 +5,7 @@
 //  Created by qiuty on 03/01/2024.
 //
 
+import Kingfisher
 import PhotosUI
 import SwiftUI
 
@@ -70,15 +71,13 @@ private extension AvatarEditor {
   }
 
   func avatar(_ url: String) -> some View {
-    AsyncImage(url: URL(string: url)) { image in
-      image
-        .resizable()
-        .scaledToFill()
-        .frame(width: Constants.avatarSize, height: Constants.avatarSize)
-        .clipShape(Circle())
-    } placeholder: {
-      defaultAvatar(size: Constants.avatarSize, isBusiness: cacheVM.isBusinessUser())
-    }
+    KFImage(URL(string: url))
+      .placeholder {
+        defaultAvatar(size: Constants.avatarSize, isBusiness: cacheVM.isBusinessUser())
+      }
+      .resizable()
+      .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+      .clipShape(Circle())
   }
 
   var text: some View {

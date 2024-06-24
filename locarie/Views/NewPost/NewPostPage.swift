@@ -5,6 +5,7 @@
 //  Created by qiuty on 2023/11/7.
 //
 
+import Kingfisher
 import PhotosUI
 import SwiftUI
 
@@ -101,7 +102,12 @@ private extension NewPostPage {
       }
     } else {
       HStack(spacing: 10) {
-        AvatarView(imageUrl: profileVM.dto.avatarUrl, size: 40)
+        KFImage(URL(string: profileVM.dto.avatarUrl))
+          .placeholder { SkeletonView(40, 40, true) }
+          .resizable()
+          .scaledToFill()
+          .frame(width: 40, height: 40)
+          .clipShape(Circle())
         VStack(alignment: .leading, spacing: 0) {
           Text(profileVM.dto.businessName)
           HStack(spacing: 5) {

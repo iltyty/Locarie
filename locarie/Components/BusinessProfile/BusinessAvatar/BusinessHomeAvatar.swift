@@ -5,24 +5,23 @@
 //  Created by qiuty on 23/02/2024.
 //
 
+import Kingfisher
 import SwiftUI
 
 struct BusinessHomeAvatar: View {
   let url: String
 
   var body: some View {
-    AsyncImage(url: URL(string: url)) { image in
-      image.resizable()
-        .scaledToFill()
-        .frame(width: Constants.size, height: Constants.size)
-        .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
-        .overlay {
-          RoundedRectangle(cornerRadius: Constants.cornerRadius)
-            .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 3))
-        }
-    } placeholder: {
-      RoundedAvatarSkeletonView()
-    }
+    KFImage(URL(string: url))
+      .placeholder { RoundedAvatarSkeletonView() }
+      .resizable()
+      .scaledToFill()
+      .frame(width: Constants.size, height: Constants.size)
+      .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+      .overlay {
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+          .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 3))
+      }
   }
 }
 

@@ -5,6 +5,7 @@
 //  Created by qiuty on 23/02/2024.
 //
 
+import Kingfisher
 import SwiftUI
 
 struct BusinessMapAvatar: View {
@@ -33,17 +34,15 @@ struct BusinessMapAvatar: View {
   }
 
   private var avatar: some View {
-    AsyncImage(url: URL(string: url)) { image in
-      image
-        .resizable()
-        .scaledToFill()
-        .clipShape(Circle())
-        .frame(width: avatarSize, height: avatarSize)
-    } placeholder: {
-      Circle()
-        .fill(LocarieColor.mapAvatarBg)
-        .frame(width: avatarSize, height: avatarSize)
-    }
+    KFImage(URL(string: url))
+      .placeholder {
+        Circle()
+          .fill(LocarieColor.mapAvatarBg)
+          .frame(width: avatarSize, height: avatarSize)
+      }
+      .resizable()
+      .frame(width: avatarSize, height: avatarSize)
+      .clipShape(Circle())
   }
 
   private var avatarSize: CGFloat {

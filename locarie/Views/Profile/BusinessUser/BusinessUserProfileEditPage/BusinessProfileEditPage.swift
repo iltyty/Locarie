@@ -7,16 +7,17 @@
 
 import Alamofire
 import CoreLocation
+import Kingfisher
 @_spi(Experimental) import MapboxMaps
 import PhotosUI
 import SwiftUI
 
 struct BusinessProfileEditPage: View {
-  @State var birthday = Date()
-  @State var birthdayFormatted = ""
-  @State var presentingAlert = false
-  @State var presentingSheet = false
-  @State var viewport: Viewport = .followPuck(zoom: GlobalConstants.mapZoom)
+  @State private var birthday = Date()
+  @State private var birthdayFormatted = ""
+  @State private var presentingAlert = false
+  @State private var presentingSheet = false
+  @State private var viewport: Viewport = .followPuck(zoom: GlobalConstants.mapZoom)
 
   @StateObject private var avatarVM = AvatarUploadViewModel()
   @StateObject private var profileGetVM = ProfileGetViewModel()
@@ -209,6 +210,7 @@ private extension BusinessProfileEditPage {
   @ViewBuilder
   var locationInput: some View {
     LocationSettingsItem(location: $profileUpdateVM.dto, viewport: $viewport)
+      .id(cacheVM.getUserId())
   }
 
   var openingHoursInput: some View {
@@ -291,7 +293,7 @@ private extension BusinessProfileEditPage {
       Spacer()
       birthdaySheetDoneButton
     }
-    .padding(.horizontal)
+    .padding(.horizontal, 16)
   }
 
   var birthdaySheetCancelButton: some View {
@@ -319,7 +321,7 @@ private extension BusinessProfileEditPage {
     )
     .labelsHidden()
     .datePickerStyle(.wheel)
-    .padding(.horizontal)
+    .padding(.horizontal, 16)
   }
 }
 
@@ -348,15 +350,8 @@ private extension BusinessProfileEditPage {
   ) {
     if case let .finished(avatarUrl) = state {
       guard let avatarUrl else { return }
+      ImageCache.default.removeImage(forKey: avatarUrl)
       cacheVM.setAvatarUrl(avatarUrl)
-    }
-  }
-
-  func handleProfileImagesUpdateStateChange(
-    _ state: BusinessImagesViewModel.State
-  ) {
-    if case .uploadFinished = state {
-      URLCache.imageCache.removeAllCachedResponses()
     }
   }
 

@@ -5,6 +5,7 @@
 //  Created by qiuty on 2023/10/31.
 //
 
+import Kingfisher
 import SwiftUI
 
 struct PostCardView: View {
@@ -74,23 +75,18 @@ struct PostCardView: View {
 private extension PostCardView {
   var status: some View {
     HStack(spacing: 10) {
-      AsyncImage(url: URL(string: post.businessAvatarUrl)) { image in
-        image
-          .resizable()
-          .scaledToFill()
-          .frame(width: Constants.avatarSize, height: Constants.avatarSize)
-          .clipShape(Circle())
-      } placeholder: {
-        SkeletonView(Constants.avatarSize, Constants.avatarSize, true)
-      }
+      KFImage(URL(string: post.businessAvatarUrl))
+        .placeholder { defaultAvatar(size: Constants.avatarSize) }
+        .resizable()
+        .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+        .clipShape(Circle())
       VStack(alignment: .leading, spacing: 2) {
         Text(post.businessName)
         HStack(spacing: 5) {
           Text(post.publishedTime)
             .foregroundStyle(post.publishedOneDayAgo ? LocarieColor.greyDark : LocarieColor.green)
           DotView()
-          Text(post.user.neighborhood)
-            .foregroundStyle(LocarieColor.greyDark)
+          Text(post.user.neighborhood).foregroundStyle(LocarieColor.greyDark)
         }
         .font(.custom(GlobalConstants.fontName, size: 14))
       }
@@ -137,31 +133,20 @@ private extension PostCardView {
           .frame(width: 30, height: 30)
           .padding(8)
           .contentShape(Rectangle())
-          .onTapGesture {
-            onFullscreenTapped()
-          }
+          .onTapGesture { onFullscreenTapped() }
         Spacer()
         if post.user.profileImageUrls.isEmpty {
           DefaultBusinessImageView(size: 48)
         } else {
-          AsyncImage(url: URL(string: post.user.profileImageUrls[0])) { image in
-            image
-              .resizable()
-              .scaledToFill()
-              .frame(width: 48, height: 48)
-              .clipShape(RoundedRectangle(cornerRadius: 16))
-          } placeholder: {
-            DefaultBusinessImageView(size: 48)
-          }
-          .padding(1.5)
-          .background {
-            RoundedRectangle(cornerRadius: 16)
-              .fill(LocarieColor.greyMedium)
-          }
-          .padding(5)
-          .onTapGesture {
-            onThumbnailTapped()
-          }
+          KFImage(URL(string: post.user.profileImageUrls[0]))
+            .placeholder { DefaultBusinessImageView(size: 48) }
+            .resizable()
+            .frame(width: 48, height: 48)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .padding(1.5)
+            .background { RoundedRectangle(cornerRadius: 16).fill(LocarieColor.greyMedium) }
+            .padding(5)
+            .onTapGesture { onThumbnailTapped() }
         }
       }
     }

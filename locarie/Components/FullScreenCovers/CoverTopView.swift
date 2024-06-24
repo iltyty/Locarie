@@ -5,6 +5,7 @@
 //  Created by qiuty on 21/02/2024.
 //
 
+import Kingfisher
 import SwiftUI
 
 struct CoverTopView: View {
@@ -34,18 +35,14 @@ struct CoverTopView: View {
   }
 
   var avatar: some View {
-    AsyncImage(url: URL(string: user.avatarUrl)) { image in
-      image
-        .resizable()
-        .scaledToFill()
-        .frame(width: Constants.avatarSize, height: Constants.avatarSize)
-        .clipShape(Circle())
-    } placeholder: {
-      SkeletonView(Constants.avatarSize, Constants.avatarSize, true)
-    }
-    .onTapGesture {
-      onAvatarTapped()
-    }
+    KFImage(URL(string: user.avatarUrl))
+      .placeholder { SkeletonView(Constants.avatarSize, Constants.avatarSize, true) }
+      .resizable()
+      .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+      .clipShape(Circle())
+      .onTapGesture {
+        onAvatarTapped()
+      }
   }
 
   @ViewBuilder

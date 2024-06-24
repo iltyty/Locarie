@@ -5,6 +5,7 @@
 //  Created by qiuty on 16/04/2024.
 //
 
+import Kingfisher
 import SwiftUI
 
 struct BusinessImageView: View {
@@ -14,17 +15,12 @@ struct BusinessImageView: View {
 
   var body: some View {
     Group {
-      AsyncImage(url: url) { image in
-        image
-          .resizable()
-          .scaledToFill()
-          .frame(width: size, height: size)
-          .clipShape(
-            RoundedRectangle(cornerRadius: Constants.cornerRadius)
-          )
-      } placeholder: {
-        DefaultBusinessImageView(size: size)
-      }
+      KFImage(url)
+        .placeholder { DefaultBusinessImageView(size: size) }
+        .resizable()
+        .scaledToFill()
+        .frame(width: size, height: size)
+        .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
     }
     .overlay {
       RoundedRectangle(cornerRadius: Constants.cornerRadius)

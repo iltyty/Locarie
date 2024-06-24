@@ -116,6 +116,7 @@
 		506590EC2B8CE65D009F8E5F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590EB2B8CE65D009F8E5F /* LoadingView.swift */; };
 		506590EE2B8CEBFF009F8E5F /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506590ED2B8CEBFF009F8E5F /* NewPasswordViewModel.swift */; };
 		506801532B88CBFF00AFF000 /* FavoritePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506801522B88CBFF00AFF000 /* FavoritePage.swift */; };
+		506E172D2C27CC7000282A8E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 506E172C2C27CC7000282A8E /* Kingfisher */; };
 		5075FCB52B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCB42B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift */; };
 		5075FCBA2B8605BD005E4A8B /* CoverTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCB92B8605BD005E4A8B /* CoverTopView.swift */; };
 		5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCBB2B86190B005E4A8B /* PostCover.swift */; };
@@ -492,6 +493,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				506E172D2C27CC7000282A8E /* Kingfisher in Frameworks */,
 				50B5DEBF2B3ADE1800C0A641 /* MapboxMaps in Frameworks */,
 				503905782B340A4E005B574F /* Alamofire in Frameworks */,
 			);
@@ -1500,6 +1502,7 @@
 			packageProductDependencies = (
 				503905772B340A4E005B574F /* Alamofire */,
 				50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */,
+				506E172C2C27CC7000282A8E /* Kingfisher */,
 			);
 			productName = locarie;
 			productReference = 50AAB1792AEFA2E9003FEDF1 /* locarie.app */;
@@ -1576,6 +1579,7 @@
 			packageReferences = (
 				503905762B340A4E005B574F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				50B5DEBD2B3ADE1800C0A641 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
+				506E172B2C27CC7000282A8E /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 50AAB17A2AEFA2E9003FEDF1 /* Products */;
 			projectDirPath = "";
@@ -2196,6 +2200,14 @@
 				minimumVersion = 5.8.1;
 			};
 		};
+		506E172B2C27CC7000282A8E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 		50B5DEBD2B3ADE1800C0A641 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios";
@@ -2211,6 +2223,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 503905762B340A4E005B574F /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		506E172C2C27CC7000282A8E /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 506E172B2C27CC7000282A8E /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */ = {
 			isa = XCSwiftPackageProductDependency;
