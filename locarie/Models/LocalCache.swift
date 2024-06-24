@@ -29,6 +29,9 @@ struct LocalCache {
   @AppStorage(LocalCacheKeys.avatarId.rawValue)
   private(set) var avatarId = ""
 
+  @AppStorage(LocalCacheKeys.profileComplete.rawValue)
+  private(set) var profileComplete = false
+
   mutating func setUserInfo(_ info: UserInfo) {
     userId = Double(info.id)
     userType = info.type.rawValue
@@ -55,6 +58,10 @@ struct LocalCache {
     firstLoggedIn = first
   }
 
+  mutating func setProfileComplete(_ complete: Bool) {
+    profileComplete = complete
+  }
+
   mutating func reset() {
     userId = 0
     userType = ""
@@ -63,6 +70,7 @@ struct LocalCache {
     avatarUrl = ""
     firstLoggedIn = true
     avatarId = ""
+    profileComplete = false
   }
 }
 
@@ -76,4 +84,6 @@ enum LocalCacheKeys: String, CaseIterable {
   case firstLoggedInKey = "firstLoggedIn"
 
   case avatarId
+
+  case profileComplete
 }

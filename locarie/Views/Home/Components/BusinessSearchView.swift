@@ -18,9 +18,8 @@ struct BusinessSearchView: View {
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
-      searchBar.padding(.top, 8)
-      areas
+    VStack(alignment: .leading, spacing: 0) {
+      searchBar.padding(.vertical, 8)
       businessesView
       Spacer()
     }
@@ -73,44 +72,24 @@ private extension BusinessSearchView {
     }
   }
 
-  var areas: some View {
-    ScrollView(.horizontal) {
-      HStack {
-        ForEach(LondonAreas.allCases, id: \.self) { area in
-          HStack(spacing: 10) {
-            Image("Map")
-              .resizable()
-              .scaledToFill()
-              .frame(width: 18, height: 18)
-            Text(area.rawValue)
-          }
-          .padding(.horizontal, 12)
-          .frame(height: 40)
-          .background {
-            RoundedRectangle(cornerRadius: 30)
-              .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
-          }
-        }
-      }
-    }
-    .scrollIndicators(.hidden)
-  }
-
   var businesses: [UserDto] {
-    userListVM.businesses.filter {
-      businessName.isEmpty || $0.businessName.range(
-        of: businessName,
-        options: .caseInsensitive
-      ) != nil
-    }
+    userListVM.businesses
+      .filter {
+        businessName.isEmpty || $0.businessName.range(
+          of: businessName,
+          options: .caseInsensitive
+        ) != nil
+      }
+      .filter(\.isProfileComplete)
   }
 
   var businessesView: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: Constants.vSpacing) {
+        areas.padding(.top, 16)
         Text("Businesses").foregroundStyle(LocarieColor.greyDark)
         ForEach(businesses) { user in
-          NavigationLink(value: Router.Int64Destination.businessHome(user.id)) {
+          NavigationLink(value: Router.Int64Destination.businessHome(user.id, true)) {
             BusinessFollowedAvatarRow(user: user, followed: isFollowed(user.id), isPresentingCover: .constant(false))
           }
           .buttonStyle(.plain)
@@ -118,6 +97,27 @@ private extension BusinessSearchView {
       }
     }
     .scrollIndicators(.hidden)
+  }
+
+  var areas: some View {
+    HStack {
+      ForEach(LondonAreas.allCases, id: \.self) { area in
+        HStack(spacing: 10) {
+          Image("Map")
+            .resizable()
+            .scaledToFill()
+            .frame(width: 18, height: 18)
+          Text(area.rawValue)
+        }
+        .padding(.horizontal, 12)
+        .frame(height: 40)
+        .background {
+          RoundedRectangle(cornerRadius: 30)
+            .strokeBorder(LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
+        }
+      }
+      Spacer()
+    }
   }
 
   func isFollowed(_ id: Int64) -> Bool {

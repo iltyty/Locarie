@@ -22,8 +22,7 @@ struct BusinessStatus: View {
     VStack(alignment: .leading, spacing: 6) {
       Text(user.businessName).font(.custom(GlobalConstants.fontName, size: 20))
       HStack(spacing: 5) {
-        Text(user.neighborhood)
-          .foregroundStyle(LocarieColor.greyDark)
+        Text(user.neighborhood).foregroundStyle(LocarieColor.greyDark)
         DotView()
         Group {
           if user.isNowClosed {

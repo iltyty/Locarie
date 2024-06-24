@@ -93,14 +93,7 @@ struct Banner: View {
   }
 
   private var defaultImage: some View {
-    ZStack {
-      LocarieColor.greyMedium
-
-      Image("DefaultImage")
-        .resizable()
-        .scaledToFit()
-        .frame(width: Constants.defaultImageSize, height: Constants.defaultImageSize)
-    }
+    LocarieColor.greyMedium
   }
 
   private var images: some View {

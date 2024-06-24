@@ -46,7 +46,7 @@ struct PostCover: View {
           VStack(alignment: .leading, spacing: 16) {
             postStatus.padding(.top, 20)
             VStack(alignment: .leading, spacing: 0) {
-              Banner(urls: post.imageUrls, fullToggle: false, indicator: .bottom).padding(.bottom, 7)
+              Banner(urls: post.imageUrls, fullToggle: false).padding(.bottom, 16)
               Text(post.content)
             }
             HStack(spacing: 5) {
@@ -60,13 +60,16 @@ struct PostCover: View {
         .scrollIndicators(.hidden)
         Spacer()
       }
-      ZStack(alignment: .bottomLeading) {
-        favoriteButton
-        if postGetVM.favoredByCount != 0 {
-          favoredByCount
+      HStack {
+        SeeProfileButton().onTapGesture { onAvatarTapped() }
+        Spacer()
+        ZStack(alignment: .bottomLeading) {
+          favoriteButton
+          if postGetVM.favoredByCount != 0 {
+            favoredByCount
+          }
         }
       }
-      .padding(.horizontal, 8)
       .padding(.bottom, 36)
     }
     .padding(.horizontal, 16)

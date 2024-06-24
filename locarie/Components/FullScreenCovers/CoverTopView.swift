@@ -34,15 +34,22 @@ struct CoverTopView: View {
       }
   }
 
+  @ViewBuilder
   var avatar: some View {
-    KFImage(URL(string: user.avatarUrl))
-      .placeholder { SkeletonView(Constants.avatarSize, Constants.avatarSize, true) }
-      .resizable()
-      .frame(width: Constants.avatarSize, height: Constants.avatarSize)
-      .clipShape(Circle())
-      .onTapGesture {
-        onAvatarTapped()
+    Group {
+      if user.avatarUrl.isEmpty {
+        defaultAvatar(size: Constants.avatarSize)
+      } else {
+        KFImage(URL(string: user.avatarUrl))
+          .placeholder { SkeletonView(Constants.avatarSize, Constants.avatarSize, true) }
+          .resizable()
+          .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+          .clipShape(Circle())
       }
+    }
+    .onTapGesture {
+      onAvatarTapped()
+    }
   }
 
   @ViewBuilder

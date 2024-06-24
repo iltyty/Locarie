@@ -64,4 +64,12 @@ class LocalCacheViewModel: ObservableObject {
   func setFirstLoggedIn(_ first: Bool) {
     cache.setFirstLoggedIn(first)
   }
+
+  func isProfileComplete() -> Bool {
+    cache.profileComplete
+  }
+
+  func setProfileComplete(_ complete: Bool) {
+    cache.setProfileComplete(complete)
+  }
 }

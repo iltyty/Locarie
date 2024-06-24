@@ -25,7 +25,7 @@ struct DynamicPostsMapView: View {
 
         ForEvery(postVM.posts) { post in
           MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
-            NavigationLink(value: Router.Int64Destination.businessHome(post.user.id)) {
+            NavigationLink(value: Router.Int64Destination.businessHome(post.user.id, false)) {
               BusinessMapAvatar(url: post.user.avatarUrl)
             }
           }

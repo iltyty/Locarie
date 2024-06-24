@@ -13,20 +13,10 @@ struct BusinessMapAvatar: View {
   var amplified = false
 
   var body: some View {
-    VStack {
-      avatarView
-      triangle
-    }
-    // https://stackoverflow.com/questions/53370175/how-to-place-bottom-of-a-custom-annotation-on-a-specific-coordinate-in-mapbox-io
-    .padding(.bottom, Constants.regularSize) // anchor bottom
-  }
-
-  private var avatarView: some View {
     Circle()
       .fill(.white)
       .frame(width: size, height: size)
       .overlay(avatar)
-      .zIndex(1)
   }
 
   private var size: CGFloat {
@@ -48,24 +38,12 @@ struct BusinessMapAvatar: View {
   private var avatarSize: CGFloat {
     size - Constants.avatarDeltaSize
   }
-
-  private var triangle: some View {
-    Image(systemName: "arrowtriangle.down.fill")
-      .foregroundStyle(.white)
-      .offset(y: triangleOffset)
-  }
-
-  private var triangleOffset: CGFloat {
-    amplified ? Constants.amplifiedOffset : Constants.regularOffset
-  }
 }
 
 private enum Constants {
   static let regularSize: CGFloat = 40
-  static let amplifiedSize: CGFloat = 50
-  static let avatarDeltaSize: CGFloat = 4
-  static let regularOffset: CGFloat = -8
-  static let amplifiedOffset: CGFloat = -5
+  static let amplifiedSize: CGFloat = 60
+  static let avatarDeltaSize: CGFloat = 3
 }
 
 #Preview {

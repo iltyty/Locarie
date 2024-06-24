@@ -16,17 +16,17 @@ struct BusinessUserProfilePage: View {
 
   @State private var viewport: Viewport = .camera(center: .london, zoom: Constants.mapZoom)
   @State private var post = PostDto()
-  @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
+  @State private var currentDetent: BottomSheetDetent = .large
 
   @State private var deltaLatitudeDegrees: CGFloat = 0
   @State private var mapUpperBoundY: CGFloat = 0
   @State private var mapBottomBoundY: CGFloat = 0
 
   @State private var presentingDeletePostDialog = false
+  @State private var presentingNotPublicSheet = false
   @State private var presentingProfileDetail = true
   @State private var presentingProfileCover = false
   @State private var presentingPostCover = false
-  @State private var presentingDialog = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var profileVM = ProfileGetViewModel()
@@ -42,6 +42,27 @@ struct BusinessUserProfilePage: View {
             contentView
           }
           BottomTabView()
+        }
+        VStack {
+          Spacer()
+          ZStack {
+            if currentDetent == .large {
+              BackToMapButton()
+                .onTapGesture {
+                  moveBottomSheet(to: Constants.bottomDetent)
+                }
+            }
+            if !cacheVM.cache.profileComplete {
+              HStack {
+                Spacer()
+                NotPublicButton().onTapGesture {
+                  presentingNotPublicSheet = true
+                }
+              }
+              .padding(.horizontal, 24)
+            }
+          }
+          .padding(.bottom, 102)
         }
         if presentingProfileCover {
           BusinessProfileCover(
@@ -66,14 +87,19 @@ struct BusinessUserProfilePage: View {
           )
         }
       }
-      .bottomDialog(isPresented: $presentingDialog) {
-        ProfileEditDialog(isPresenting: $presentingDialog)
+      .sheet(isPresented: $presentingNotPublicSheet) {
+        Group {
+          if #available(iOS 16.4, *) {
+            NotPublicSheetView(user: profileVM.dto).presentationCornerRadius(24)
+          } else {
+            NotPublicSheetView(user: profileVM.dto)
+          }
+        }
+        .presentationDetents([.height(450)])
       }
       .onAppear {
-        if cacheVM.isFirstLoggedIn() {
-          withAnimation(.spring) {
-            presentingDialog = true
-          }
+        if cacheVM.isFirstLoggedIn(), !cacheVM.cache.profileComplete {
+          presentingNotPublicSheet = true
         }
         screenSize = proxy.size
         mapBottomBoundY = screenSize.height - Constants.bottomY
@@ -82,7 +108,7 @@ struct BusinessUserProfilePage: View {
         postVM.getUserPosts(id: userId)
       }
       .onDisappear {
-        presentingDialog = false
+        presentingNotPublicSheet = false
       }
     }
     .alert("Confirm deletion", isPresented: $presentingDeletePostDialog) {
@@ -90,7 +116,15 @@ struct BusinessUserProfilePage: View {
         postDeleteVM.delete(id: post.id)
       }
     }
+    .onReceive(profileVM.$state) { state in
+      if case .finished = state {
+        cacheVM.setProfileComplete(profileVM.dto.isProfileComplete)
+      }
+    }
     .onReceive(profileVM.$dto) { dto in
+      if cacheVM.isFirstLoggedIn(), !cacheVM.isProfileComplete() {
+        presentingNotPublicSheet = true
+      }
       updateMapCenter(user: dto)
     }
     .onReceive(postDeleteVM.$state) { state in
@@ -108,6 +142,12 @@ struct BusinessUserProfilePage: View {
 
   private var userId: Int64 {
     cacheVM.getUserId()
+  }
+
+  private func moveBottomSheet(to detent: BottomSheetDetent) {
+    withAnimation(.spring) {
+      currentDetent = detent
+    }
   }
 
   private func updateMapCenter(user: UserDto) {
@@ -175,7 +215,7 @@ private extension BusinessUserProfilePage {
   }
 
   var sheetContent: some View {
-    VStack(alignment: .leading, spacing: 16) {
+    VStack(alignment: .leading, spacing: 8) {
       BusinessProfileAvatarRow(
         user: profileVM.dto,
         presentingCover: $presentingProfileCover,
@@ -185,13 +225,23 @@ private extension BusinessUserProfilePage {
         ScrollView {
           VStack(alignment: .leading, spacing: 16) {
             ProfileCategories(profileVM.dto).id(0)
-            ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
+            if cacheVM.cache.profileComplete {
+              ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
+            } else {
+              Text("""
+              Not Public Yet…
+              Your profile is only a few steps away from going public. \
+              Complete your profile to start connecting with customers
+              """)
+              .foregroundStyle(LocarieColor.greyDark)
+            }
             if presentingProfileDetail {
               ProfileDetail(profileVM.dto)
             }
             ProfilePostsCount(postVM.posts)
             postList
           }
+          .padding(.top, 8)
           .onChange(of: currentDetent) { _ in
             proxy.scrollTo(0)
           }
@@ -227,7 +277,7 @@ private extension BusinessUserProfilePage {
             p,
             divider: i != postVM.posts.count - 1,
             deletable: true,
-            onFullscreenTapped: {
+            onCoverTapped: {
               post = p
               presentingPostCover = true
             },
@@ -252,7 +302,14 @@ private extension BusinessUserProfilePage {
     HStack(spacing: 16) {
       mineButton
       Spacer()
-      ProfileEditButton()
+      ZStack(alignment: .topTrailing) {
+        ProfileEditButton()
+        if !cacheVM.cache.profileComplete {
+          Circle()
+            .fill(LocarieColor.primary)
+            .frame(width: 10, height: 10)
+        }
+      }
       settingsButton
     }
     .padding(.horizontal, 16)

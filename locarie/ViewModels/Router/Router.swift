@@ -46,7 +46,7 @@ extension Router {
   }
 
   enum Int64Destination: Hashable {
-    case businessHome(Int64)
+    case businessHome(Int64, Bool)
   }
 }
 
@@ -114,8 +114,8 @@ extension Router {
   @ViewBuilder
   func getInt64DestinationPage(with destination: Int64Destination) -> some View {
     switch destination {
-    case let .businessHome(uid):
-      BusinessHomePage(uid: uid)
+    case let .businessHome(uid, fullscreen):
+      BusinessHomePage(uid: uid, fullscreen: fullscreen)
     }
   }
 }

@@ -15,9 +15,11 @@ import SwiftUI
 struct BusinessProfileEditPage: View {
   @State private var birthday = Date()
   @State private var birthdayFormatted = ""
+  @State private var viewport: Viewport = .followPuck(zoom: GlobalConstants.mapZoom)
+
   @State private var presentingAlert = false
   @State private var presentingSheet = false
-  @State private var viewport: Viewport = .followPuck(zoom: GlobalConstants.mapZoom)
+  @State private var presentingNotPublicSheet = false
 
   @StateObject private var avatarVM = AvatarUploadViewModel()
   @StateObject private var profileGetVM = ProfileGetViewModel()
@@ -25,38 +27,58 @@ struct BusinessProfileEditPage: View {
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
-    VStack(spacing: 0) {
-      NavigationBar("Edit profile", right: saveButton, divider: true)
-      ScrollView {
-        VStack(alignment: .leading, spacing: 24) {
-          profileImagesEditor.padding(.top, 24)
-          avatarEditor.padding(.horizontal, 16)
-          VStack(alignment: .leading, spacing: 16) {
-            businessNameInput
-            usernameInput
-            categoryInput
-            bioInput
-            locationInput
-            openingHoursInput
-            linkInput
-            phoneInput
+    ZStack(alignment: .bottomTrailing) {
+      VStack(spacing: 0) {
+        NavigationBar("Edit profile", right: saveButton, divider: true)
+        ScrollView {
+          VStack(alignment: .leading, spacing: 24) {
+            profileImagesEditor.padding(.top, 24)
+            avatarEditor.padding(.horizontal, 16)
+            VStack(alignment: .leading, spacing: 16) {
+              businessNameInput
+              usernameInput
+              categoryInput
+              bioInput
+              locationInput
+              openingHoursInput
+              linkInput
+              phoneInput
+            }
+            .padding(.horizontal, 16)
+            VStack(alignment: .leading, spacing: 16) {
+              personalDetailTitle
+              firstNameInput
+              lastNameInput
+              birthdayInput
+            }
+            .padding(.horizontal, 16)
           }
-          .padding(.horizontal, 16)
-          VStack(alignment: .leading, spacing: 16) {
-            personalDetailTitle
-            firstNameInput
-            lastNameInput
-            birthdayInput
-          }
-          .padding(.horizontal, 16)
         }
+        .scrollIndicators(.hidden)
       }
-      .scrollIndicators(.hidden)
+      if !cacheVM.cache.profileComplete {
+        NotPublicButton()
+          .padding(.bottom, 102)
+          .padding(.trailing, 24)
+          .onTapGesture {
+            presentingNotPublicSheet = true
+          }
+      }
     }
     .alert("Profile saved", isPresented: $presentingAlert) {
       Button("OK") {}
     }
     .sheet(isPresented: $presentingSheet) { birthdaySheet }
+    .sheet(isPresented: $presentingNotPublicSheet) {
+      Group {
+        if #available(iOS 16.4, *) {
+          NotPublicSheetView(user: profileGetVM.dto).presentationCornerRadius(24)
+        } else {
+          NotPublicSheetView(user: profileGetVM.dto)
+        }
+      }
+      .presentationDetents([.height(450)])
+    }
     .onAppear {
       profileGetVM.getProfile(userId: cacheVM.getUserId())
     }
@@ -337,6 +359,7 @@ private extension BusinessProfileEditPage {
   ) {
     if case .finished = state {
       let dto = profileGetVM.dto
+      presentingNotPublicSheet = !dto.isProfileComplete
       if let birthday = dto.birthday {
         self.birthday = birthday
       }
@@ -370,6 +393,7 @@ private extension BusinessProfileEditPage {
   func handleProfileUpdateFinished(_ dto: UserDto?) {
     if let dto {
       cacheVM.setUserInfo(dto)
+      cacheVM.setProfileComplete(dto.isProfileComplete)
     }
     presentingAlert = true
   }

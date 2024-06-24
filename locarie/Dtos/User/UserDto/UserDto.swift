@@ -89,7 +89,7 @@ extension UserDto {
     let dist = location.distance(from: clLocation)
     return switch dist {
     case 0 ..< 1000: String(format: "%.f m", dist)
-    default: String(format: "%.1f km", dist / 1000)
+    default: String(format: "%.f km", dist / 1000)
     }
   }
 

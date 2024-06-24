@@ -12,26 +12,30 @@ struct PostCardView: View {
   let post: PostDto
   let divider: Bool
   let deletable: Bool
-  let onFullscreenTapped: () -> Void
+  let onAvatarTapped: () -> Void
+  let onCoverTapped: () -> Void
   let onThumbnailTapped: () -> Void
   @Binding var presentingDeleteDialog: Bool
   @Binding var deleteTargetPost: PostDto
 
+  @State private var distance = "0 km away"
   @State private var deleteTapped = false
   @State private var presentingSheet = false
   @State private var presentingCover = false
-  @StateObject private var locationManager = LocationManager()
+  @ObservedObject private var locationManager = LocationManager()
 
   init(
     _ post: PostDto,
     divider: Bool = false,
-    onFullscreenTapped: @escaping () -> Void = {},
+    onAvatarTapped: @escaping () -> Void = {},
+    onCoverTapped: @escaping () -> Void = {},
     onThumbnailTapped: @escaping () -> Void = {}
   ) {
     self.post = post
     self.divider = divider
     deletable = false
-    self.onFullscreenTapped = onFullscreenTapped
+    self.onAvatarTapped = onAvatarTapped
+    self.onCoverTapped = onCoverTapped
     self.onThumbnailTapped = onThumbnailTapped
     _presentingDeleteDialog = .constant(false)
     _deleteTargetPost = .constant(PostDto())
@@ -41,7 +45,8 @@ struct PostCardView: View {
     _ post: PostDto,
     divider: Bool = false,
     deletable: Bool = false,
-    onFullscreenTapped: @escaping () -> Void = {},
+    onAvatarTapped: @escaping () -> Void = {},
+    onCoverTapped: @escaping () -> Void = {},
     onThumbnailTapped: @escaping () -> Void = {},
     presentingDeleteDialog: Binding<Bool>,
     deleteTargetPost: Binding<PostDto>
@@ -49,7 +54,8 @@ struct PostCardView: View {
     self.post = post
     self.divider = divider
     self.deletable = deletable
-    self.onFullscreenTapped = onFullscreenTapped
+    self.onAvatarTapped = onAvatarTapped
+    self.onCoverTapped = onCoverTapped
     self.onThumbnailTapped = onThumbnailTapped
     _presentingDeleteDialog = presentingDeleteDialog
     _deleteTargetPost = deleteTargetPost
@@ -75,11 +81,18 @@ struct PostCardView: View {
 private extension PostCardView {
   var status: some View {
     HStack(spacing: 10) {
-      KFImage(URL(string: post.businessAvatarUrl))
-        .placeholder { defaultAvatar(size: Constants.avatarSize) }
-        .resizable()
-        .frame(width: Constants.avatarSize, height: Constants.avatarSize)
-        .clipShape(Circle())
+      Group {
+        if post.businessAvatarUrl.isEmpty {
+          defaultAvatar(size: Constants.avatarSize, isBusiness: true)
+        } else {
+          KFImage(URL(string: post.businessAvatarUrl))
+            .placeholder { SkeletonView(Constants.avatarSize, Constants.avatarSize, true) }
+            .resizable()
+            .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+            .clipShape(Circle())
+        }
+      }
+      .onTapGesture { onAvatarTapped() }
       VStack(alignment: .leading, spacing: 2) {
         Text(post.businessName)
         HStack(spacing: 5) {
@@ -125,22 +138,28 @@ private extension PostCardView {
 
   var cover: some View {
     ZStack(alignment: .trailing) {
-      Banner(urls: post.imageUrls, isPortrait: false)
+      Banner(urls: post.imageUrls, indicator: .inner, isPortrait: false)
       VStack(alignment: .trailing, spacing: 0) {
-        Image("Fullscreen")
-          .resizable()
-          .scaledToFit()
-          .frame(width: 30, height: 30)
-          .padding(8)
-          .contentShape(Rectangle())
-          .onTapGesture { onFullscreenTapped() }
+        Text(distance)
+          .font(.custom(GlobalConstants.fontName, size: 12))
+          .foregroundStyle(LocarieColor.greyDark)
+          .padding(.horizontal, 10)
+          .padding(.vertical, 5)
+          .background(Capsule().fill(.white))
+          .padding(5)
+          .onReceive(locationManager.$location) { location in
+            if let location {
+              distance = "\(post.user.distance(to: location)) away"
+            }
+          }
         Spacer()
         if post.user.profileImageUrls.isEmpty {
           DefaultBusinessImageView(size: 48)
         } else {
           KFImage(URL(string: post.user.profileImageUrls[0]))
-            .placeholder { DefaultBusinessImageView(size: 48) }
+            .placeholder { SkeletonView(48, 48) }
             .resizable()
+            .scaledToFill()
             .frame(width: 48, height: 48)
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .padding(1.5)
@@ -150,6 +169,7 @@ private extension PostCardView {
         }
       }
     }
+    .onTapGesture { onCoverTapped() }
   }
 
   var content: some View {
@@ -160,13 +180,6 @@ private extension PostCardView {
 
   var categories: some View {
     ProfileCategories(post.user)
-  }
-}
-
-private extension PostCardView {
-  var distance: Double {
-    guard let location = locationManager.location else { return 0 }
-    return location.distance(from: post.businessLocation)
   }
 }
 

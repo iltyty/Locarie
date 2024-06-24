@@ -10,6 +10,7 @@ import SwiftUI
 
 struct BusinessHomePage: View {
   let uid: Int64
+  var fullscreen = true
   let locationManager = LocationManager()
 
   @State private var viewport: Viewport = .camera(
@@ -52,14 +53,7 @@ struct BusinessHomePage: View {
         if currentDetent == .large {
           VStack {
             Spacer()
-            Image(systemName: "map")
-              .resizable()
-              .foregroundStyle(.white)
-              .frame(width: 18, height: 18)
-              .frame(width: 82, height: 40)
-              .background {
-                Capsule().fill(.black)
-              }
+            BackToMapButton()
               .padding(.bottom, 102)
               .onTapGesture {
                 moveBottomSheet(to: Constants.bottomDetent)
@@ -96,6 +90,9 @@ struct BusinessHomePage: View {
     }
     .ignoresSafeArea(edges: .bottom)
     .onAppear {
+      if fullscreen {
+        currentDetent = .large
+      }
       profileVM.getProfile(userId: uid)
       listUserPostsVM.getUserPosts(id: uid)
       userListVM.listBusinesses()
@@ -194,10 +191,9 @@ private extension BusinessHomePage {
   }
 
   var sheetContent: some View {
-    VStack(alignment: .leading, spacing: 16) {
-      BusinessHomeAvatarRow(
+    VStack(alignment: .leading, spacing: 8) {
+      BusinessProfileAvatarRow(
         user: user,
-        hasUpdates: updatedIn24Hours,
         presentingCover: $presentingProfileCover,
         presentingDetail: $presentingProfileDetail
       )
@@ -212,6 +208,7 @@ private extension BusinessHomePage {
             ProfilePostsCount(listUserPostsVM.posts)
             postList
           }
+          .padding(.top, 8)
           .onChange(of: currentDetent) { _ in
             proxy.scrollTo(0)
           }
@@ -247,7 +244,7 @@ private extension BusinessHomePage {
           PostCardView(
             p,
             divider: i != posts.count - 1,
-            onFullscreenTapped: {
+            onCoverTapped: {
               post = p
               presentingPostCover = true
             },

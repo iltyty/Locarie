@@ -100,7 +100,7 @@ private extension FollowAndLikeView {
     } else {
       VStack(alignment: .leading, spacing: 24) {
         ForEach(favoriteBusinessVM.users) { user in
-          NavigationLink(value: Router.Int64Destination.businessHome(user.id)) {
+          NavigationLink(value: Router.Int64Destination.businessHome(user.id, true)) {
             BusinessFollowedAvatarRow(
               user: user,
               isPresentingCover: $isPresentingCover
@@ -127,7 +127,10 @@ private extension FollowAndLikeView {
             PostCardView(
               posts[i],
               divider: i != posts.count - 1,
-              onFullscreenTapped: {
+              onAvatarTapped: {
+                Router.shared.navigate(to: Router.Int64Destination.businessHome(posts[i].user.id, true))
+              },
+              onCoverTapped: {
                 post = posts[i]
                 user = posts[i].user
                 isPostCoverPresented = true

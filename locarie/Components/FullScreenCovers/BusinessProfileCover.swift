@@ -15,7 +15,7 @@ struct BusinessProfileCover: View {
   @ObservedObject var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
-    VStack(alignment: .leading) {
+    VStack(alignment: .leading, spacing: 0) {
       CoverTopView(
         user: user,
         sharePreviewText: user.businessName,
@@ -25,7 +25,7 @@ struct BusinessProfileCover: View {
       .padding(.bottom, 24)
       .padding(.horizontal, 8)
       Spacer()
-      Banner(urls: user.profileImageUrls, indicator: .bottom, isPortrait: false).padding(.bottom)
+      Banner(urls: user.profileImageUrls, isPortrait: false)
       Spacer()
       coverBottom
     }
@@ -35,24 +35,14 @@ struct BusinessProfileCover: View {
 }
 
 private extension BusinessProfileCover {
-  var blank: some View {
-    Color
-      .clear
-      .contentShape(Rectangle())
-      .onTapGesture {
-        withAnimation(.spring) {
-          isPresenting = false
-        }
-      }
-  }
-
   var coverBottom: some View {
-    VStack(alignment: .leading, spacing: Constants.vSpacing) {
+    VStack(alignment: .leading, spacing: 16) {
       if cacheVM.getUserId() == user.id {
         editButtonView.padding(.bottom, 14)
       }
       ProfileAddress(user)
       ProfileOpenUntil(user)
+      SeeProfileButton().onTapGesture { onAvatarTapped() }
     }
     .padding(.bottom, 48)
   }

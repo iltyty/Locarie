@@ -15,15 +15,18 @@ struct BusinessFollowedAvatarRow: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
-      HStack {
-        AsyncImage(url: URL(string: user.profileImageUrls.first ?? "")) { image in
-          image.resizable()
-            .scaledToFill()
-            .frame(width: Constants.size, height: Constants.size)
-            .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
-        } placeholder: {
+      HStack(spacing: 10) {
+        if user.profileImageUrls.count == 0 {
           defaultAvatar(size: Constants.size)
-//          RoundedAvatarSkeletonView(size: Constants.size)
+        } else {
+          AsyncImage(url: URL(string: user.profileImageUrls.first ?? "")) { image in
+            image.resizable()
+              .scaledToFill()
+              .frame(width: Constants.size, height: Constants.size)
+              .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+          } placeholder: {
+            RoundedAvatarSkeletonView(size: Constants.size)
+          }
         }
         HStack(alignment: .top) {
           BusinessStatus(user)

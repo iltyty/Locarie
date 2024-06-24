@@ -13,6 +13,7 @@ struct NewPostPage: View {
   @State private var loading = false
   @State private var loadingProfile = false
   @State private var isAlertShowing = false
+  @State private var presentingNotPublicAlert = false
   @State private var alertMessage = ""
 
   @FocusState private var isEditing: Bool
@@ -50,6 +51,11 @@ struct NewPostPage: View {
     }
     .keyboardDismissable(focus: $isEditing)
     .loadingIndicator(loading: $loading)
+    .alert("Your business is not public yet.", isPresented: $presentingNotPublicAlert) {
+      Button("OK") {
+        dismiss()
+      }
+    }
     .alert(
       alertMessage,
       isPresented: $isAlertShowing
@@ -57,6 +63,9 @@ struct NewPostPage: View {
       Button("OK") {}
     }
     .onAppear {
+      if !cacheVM.cache.profileComplete {
+        presentingNotPublicAlert = true
+      }
       profileVM.getProfile(userId: cacheVM.getUserId())
     }
     .onReceive(profileVM.$state) { state in

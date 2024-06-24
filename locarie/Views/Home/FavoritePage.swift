@@ -74,14 +74,7 @@ struct FavoritePage: View {
       if currentDetent == .large {
         VStack {
           Spacer()
-          Image(systemName: "map")
-            .resizable()
-            .foregroundStyle(.white)
-            .frame(width: 18, height: 18)
-            .frame(width: 82, height: 40)
-            .background {
-              Capsule().fill(.black)
-            }
+          BackToMapButton()
             .padding(.bottom, 102)
             .onTapGesture {
               moveBottomSheet(to: Constants.bottomDetent)
@@ -94,7 +87,7 @@ struct FavoritePage: View {
           tags: post.user.categories,
           onAvatarTapped: {
             presentingPostCover = false
-            router.navigate(to: Router.Int64Destination.businessHome(user.id))
+            router.navigate(to: Router.Int64Destination.businessHome(user.id, true))
           },
           isPresenting: $presentingPostCover
         )
@@ -104,7 +97,7 @@ struct FavoritePage: View {
           user: user,
           onAvatarTapped: {
             presentingProfileCover = false
-            router.navigate(to: Router.Int64Destination.businessHome(user.id))
+            router.navigate(to: Router.Int64Destination.businessHome(user.id, true))
           },
           isPresenting: $presentingProfileCover
         )
@@ -129,22 +122,23 @@ struct FavoritePage: View {
           } else {
             VStack(spacing: 0) {
               ForEach(vm.posts.indices, id: \.self) { i in
-                NavigationLink(value: Router.Int64Destination.businessHome(vm.posts[i].user.id)) {
-                  PostCardView(
-                    vm.posts[i],
-                    divider: i != vm.posts.count - 1,
-                    onFullscreenTapped: {
-                      post = vm.posts[i]
-                      user = post.user
-                      presentingPostCover = true
-                    },
-                    onThumbnailTapped: {
-                      post = vm.posts[i]
-                      user = post.user
-                      presentingProfileCover = true
-                    }
-                  )
-                }
+                PostCardView(
+                  vm.posts[i],
+                  divider: i != vm.posts.count - 1,
+                  onAvatarTapped: {
+                    router.navigate(to: Router.Int64Destination.businessHome(vm.posts[i].user.id, true))
+                  },
+                  onCoverTapped: {
+                    post = vm.posts[i]
+                    user = post.user
+                    presentingPostCover = true
+                  },
+                  onThumbnailTapped: {
+                    post = vm.posts[i]
+                    user = post.user
+                    presentingProfileCover = true
+                  }
+                )
                 .id(i)
                 .tint(.primary)
                 .buttonStyle(.plain)

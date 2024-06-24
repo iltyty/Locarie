@@ -65,7 +65,7 @@ struct RegularUserProfilePage: View {
             user: user,
             onAvatarTapped: {
               isProfileCoverPresented = false
-              Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id))
+              Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id, true))
             },
             isPresenting: $isProfileCoverPresented
           )
@@ -76,7 +76,7 @@ struct RegularUserProfilePage: View {
             tags: user.categories,
             onAvatarTapped: {
               isPostCoverPresented = false
-              Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id))
+              Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id, true))
             },
             isPresenting: $isPostCoverPresented
           )
