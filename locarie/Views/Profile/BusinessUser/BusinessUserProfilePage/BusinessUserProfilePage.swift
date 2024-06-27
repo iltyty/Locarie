@@ -122,6 +122,11 @@ struct BusinessUserProfilePage: View {
       }
     }
     .onReceive(profileVM.$dto) { dto in
+      // for debug use, if all users have re-logged in, this line can be deleted
+      // because in previous version, the email is not cached, only new version
+      // users have their email cached after logged in. Thus, we should cache the
+      // email here for use of resetting password (see ChangePasswordPage)
+      cacheVM.setEmail(dto.email)
       if cacheVM.isFirstLoggedIn(), !cacheVM.isProfileComplete() {
         presentingNotPublicSheet = true
       }

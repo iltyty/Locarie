@@ -14,6 +14,8 @@ struct LocalCache {
 
   @AppStorage(LocalCacheKeys.userIdKey.rawValue)
   private(set) var userId = 0.0
+  @AppStorage(LocalCacheKeys.emailKey.rawValue)
+  private(set) var email = ""
   @AppStorage(LocalCacheKeys.userTypeKey.rawValue)
   private(set) var userType = ""
   @AppStorage(LocalCacheKeys.usernameKey.rawValue)
@@ -34,6 +36,7 @@ struct LocalCache {
 
   mutating func setUserInfo(_ info: UserInfo) {
     userId = Double(info.id)
+    email = info.email
     userType = info.type.rawValue
     username = info.username
     avatarUrl = info.avatarUrl
@@ -43,6 +46,10 @@ struct LocalCache {
   mutating func setUserCache(_ cache: UserCache) {
     setUserInfo(cache)
     jwtToken = cache.jwtToken
+  }
+
+  mutating func setEmail(_ email: String) {
+    self.email = email
   }
 
   func isBusinessUser() -> Bool {
@@ -64,6 +71,7 @@ struct LocalCache {
 
   mutating func reset() {
     userId = 0
+    email = ""
     userType = ""
     username = ""
     jwtToken = ""
@@ -76,6 +84,7 @@ struct LocalCache {
 
 enum LocalCacheKeys: String, CaseIterable {
   case userIdKey = "userId"
+  case emailKey = "email"
   case userTypeKey = "userType"
   case usernameKey = "username"
   case avatarUrlKey = "avatarUrl"

@@ -34,7 +34,7 @@ final class AuthViewModel: BaseViewModel {
     networking.validateForgotPassword(email: email, code: code)
       .sink { [weak self] response in
         guard let self else { return }
-        handleResponse(response, finishedState: .validateForgotPasswordFinished)
+        handleValidateResponse(response, finishedState: .validateForgotPasswordFinished(false))
       }
       .store(in: &subscriptions)
   }
@@ -49,9 +49,20 @@ final class AuthViewModel: BaseViewModel {
       .store(in: &subscriptions)
   }
 
+  func validatePassword(email: String, password: String) {
+    state = .loading
+    networking.validatePassword(email: email, password: password)
+      .sink { [weak self] response in
+        guard let self else { return }
+        handleValidateResponse(response, finishedState: .validatePasswordFinished(false))
+      }
+      .store(in: &subscriptions)
+  }
+
   private func handleResponse(
     _ response: DataResponse<ResponseDto<some Decodable>, NetworkError>, finishedState: State
   ) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
       return
@@ -62,6 +73,27 @@ final class AuthViewModel: BaseViewModel {
     }
     state = finishedState
   }
+
+  private func handleValidateResponse(
+    _ response: DataResponse<ResponseDto<Bool>, NetworkError>, finishedState: State
+  ) {
+    debugPrint(response)
+    if let error = response.error {
+      state = .failed(error)
+      return
+    }
+    if response.value!.status != 0 {
+      state = .failed(newNetworkError(response: response.value!))
+      return
+    }
+    switch finishedState {
+    case .validatePasswordFinished:
+      state = .validatePasswordFinished(response.value!.data ?? false)
+    case .validateForgotPasswordFinished:
+      state = .validateForgotPasswordFinished(response.value!.data ?? false)
+    default: state = finishedState
+    }
+  }
 }
 
 extension AuthViewModel {
@@ -70,7 +102,8 @@ extension AuthViewModel {
     case loading
     case failed(NetworkError)
     case forgotPasswordFinished
-    case validateForgotPasswordFinished
+    case validateForgotPasswordFinished(Bool)
     case resetPasswordFinished
+    case validatePasswordFinished(Bool)
   }
 }

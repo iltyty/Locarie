@@ -14,6 +14,7 @@ struct LoginRequestDto: Codable {
 
 struct LoginResponseDto: Codable, UserCache {
   let id: Int64
+  let email: String
   let type: UserType
   let username: String
   let avatarUrl: String
@@ -22,6 +23,7 @@ struct LoginResponseDto: Codable, UserCache {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     id = try container.decode(Int64.self, forKey: .id)
+    email = try container.decode(String.self, forKey: .email)
     type = try container.decode(UserType.self, forKey: .type)
     username = try container.decode(String.self, forKey: .username)
     avatarUrl = try container

@@ -7,6 +7,7 @@
 
 protocol UserInfo {
   var id: Int64 { get }
+  var email: String { get }
   var type: UserType { get }
   var username: String { get }
   var avatarUrl: String { get }

@@ -12,4 +12,5 @@ extension APIEndpoints {
   static let forgotPasswordUrl = authUrl + "/forgot-password"
   static let validateForgotPasswordUrl = forgotPasswordUrl + "/validate"
   static let resetPasswordUrl = authUrl + "/reset-password"
+  static let resetValidatePasswordUrl = resetPasswordUrl + "/validate"
 }

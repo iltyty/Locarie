@@ -25,6 +25,10 @@ class LocalCacheViewModel: ObservableObject {
     Int64(cache.userId)
   }
 
+  func getEmail() -> String {
+    cache.email
+  }
+
   func getUserType() -> String {
     cache.userType
   }
@@ -51,6 +55,10 @@ class LocalCacheViewModel: ObservableObject {
 
   func setUserInfo(_ info: UserInfo) {
     cache.setUserInfo(info)
+  }
+
+  func setEmail(_ email: String) {
+    cache.setEmail(email)
   }
 
   func setUserCache(_ userCache: UserCache) {

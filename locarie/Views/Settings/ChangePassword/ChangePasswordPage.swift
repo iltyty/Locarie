@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct ChangePasswordPage: View {
-  @State var password = ""
+  @State private var password = ""
+  @State private var loading = false
+  @State private var isAlertPresented = false
+
+  @StateObject private var authVM = AuthViewModel()
+
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     VStack(spacing: 16) {
@@ -17,6 +23,21 @@ struct ChangePasswordPage: View {
       forgotPassword
       nextButton
       Spacer()
+    }
+    .loadingIndicator(loading: $loading)
+    .alert("Incorrect password", isPresented: $isAlertPresented) { Button("OK") {} }
+    .onReceive(authVM.$state) { state in
+      switch state {
+      case .loading: loading = true
+      case let .validatePasswordFinished(succeed):
+        loading = false
+        if succeed {
+          Router.shared.navigate(to: Router.Destination.newPassword)
+        } else {
+          isAlertPresented = true
+        }
+      default: loading = false
+      }
     }
   }
 }
@@ -47,11 +68,10 @@ private extension ChangePasswordPage {
   }
 
   var nextButton: some View {
-    NavigationLink {
-      NewPasswordPage()
-    } label: {
-      StrokeButtonFormItem(title: "Next", isFullWidth: false)
-    }
+    StrokeButtonFormItem(title: "Next", isFullWidth: false)
+      .onTapGesture {
+        authVM.validatePassword(email: cacheVM.cache.email, password: password)
+      }
   }
 }
 

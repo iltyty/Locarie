@@ -8,18 +8,46 @@
 import SwiftUI
 
 struct NewPasswordPage: View {
-  @State var newPassword = ""
-  @State var newPasswordConfirm = ""
+  @State private var loading = false
+  @State private var alertTitle = ""
+  @State private var isAlertPresented = false
+
+  @StateObject private var authVM = AuthViewModel()
+  @StateObject private var newPasswordVM = NewPasswordViewModel()
+
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
       NavigationBar("Change password", divider: true, padding: true)
-      newPasswordInput
-      passwordNote
-      newPasswordConfirmInput
+      VStack(alignment: .leading, spacing: 16) {
+        newPasswordInput
+        passwordNote
+        newPasswordConfirmInput
+        Spacer()
+      }
+      .padding(.horizontal, 16)
       nextButton
-      Spacer()
     }
+    .loadingIndicator(loading: $loading)
+    .alert(alertTitle, isPresented: $isAlertPresented) { Button("OK") {} }
+    .onReceive(authVM.$state) { state in
+      switch state {
+      case .loading: loading = true
+      case .failed:
+        loading = false
+        displayAlert("Something went wrong, please try again later.")
+      case .resetPasswordFinished:
+        loading = false
+        displayAlert("Reset password succeed.")
+      default: loading = false
+      }
+    }
+  }
+
+  private func displayAlert(_ title: String) {
+    alertTitle = title
+    isAlertPresented = true
   }
 }
 
@@ -30,9 +58,8 @@ private extension NewPasswordPage {
     TextEditFormItemWithBlockTitle(
       title: title,
       hint: "Password",
-      text: $newPassword
+      text: $newPasswordVM.password
     )
-    .padding(.horizontal)
   }
 
   var passwordNote: some View {
@@ -40,7 +67,6 @@ private extension NewPasswordPage {
       .font(.footnote)
       .foregroundStyle(.secondary)
       .padding(.leading)
-      .padding(.horizontal)
   }
 
   @ViewBuilder
@@ -49,15 +75,19 @@ private extension NewPasswordPage {
     TextEditFormItemWithBlockTitle(
       title: title,
       hint: "Password",
-      text: $newPasswordConfirm
+      text: $newPasswordVM.confirmPassword
     )
-    .padding(.horizontal)
   }
 
   var nextButton: some View {
     HStack {
       Spacer()
       BackgroundButtonFormItem(title: "Done", isFullWidth: false)
+        .disabled(newPasswordVM.isFormValid)
+        .opacity(newPasswordVM.isFormValid ? 1 : 0.5)
+        .onTapGesture {
+          authVM.resetPassword(email: cacheVM.cache.email, password: newPasswordVM.password)
+        }
       Spacer()
     }
   }
