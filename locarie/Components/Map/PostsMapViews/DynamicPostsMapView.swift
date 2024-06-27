@@ -26,12 +26,12 @@ struct DynamicPostsMapView: View {
         ForEvery(postVM.posts) { post in
           MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
             NavigationLink(value: Router.Int64Destination.businessHome(post.user.id, false)) {
-              BusinessMapAvatar(url: post.user.avatarUrl)
+              BusinessMapAvatar(url: post.user.avatarUrl, newUpdate: post.user.hasUpdateIn24Hours)
             }
           }
         }
       }
-      .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 205))
+      .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 208))
       .onMapTapGesture { _ in
         mapTouched.toggle()
       }

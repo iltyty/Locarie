@@ -60,10 +60,11 @@ private extension ProfileOpeningHours {
   }
 
   var rightButton: some View {
-    Image(systemName: "chevron.right")
-      .onTapGesture {
-        isPresented = true
-      }
+    Image("Chevron.Right")
+      .resizable()
+      .scaledToFit()
+      .frame(width: 16, height: 16)
+      .onTapGesture { isPresented = true }
   }
 
   @ViewBuilder

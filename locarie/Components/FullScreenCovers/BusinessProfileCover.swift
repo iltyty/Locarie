@@ -18,6 +18,7 @@ struct BusinessProfileCover: View {
     VStack(alignment: .leading, spacing: 0) {
       CoverTopView(
         user: user,
+        showMoreButton: false,
         sharePreviewText: user.businessName,
         onAvatarTapped: onAvatarTapped,
         isPresenting: $isPresenting
@@ -30,7 +31,7 @@ struct BusinessProfileCover: View {
       coverBottom
     }
     .padding(.horizontal, 16)
-    .background(.ultraThinMaterial.opacity(0.95))
+    .background(.ultraThinMaterial.opacity(CoverCommonConstants.backgroundOpacity))
   }
 }
 

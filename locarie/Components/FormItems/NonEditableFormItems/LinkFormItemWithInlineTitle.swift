@@ -79,10 +79,9 @@ struct LinkFormItemWithInlineTitle: View {
   }
 
   private var iconView: some View {
-    Image(systemName: "chevron.right")
+    Image("Chevron.Right.Grey")
       .resizable()
       .scaledToFit()
-      .foregroundStyle(.secondary)
       .frame(width: Constants.iconSize, height: Constants.iconSize)
   }
 

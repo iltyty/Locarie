@@ -15,7 +15,7 @@ struct TextEditFormItemWithBlockTitle: View {
   @Binding var text: String
 
   var body: some View {
-    VStack(alignment: .leading) {
+    VStack(alignment: .leading, spacing: 16) {
       Text(title).padding(.leading, 16)
       textEditView
     }

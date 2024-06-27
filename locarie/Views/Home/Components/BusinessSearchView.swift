@@ -42,7 +42,7 @@ struct BusinessSearchView: View {
 private extension BusinessSearchView {
   var searchBar: some View {
     HStack {
-      Image(systemName: "chevron.left")
+      Image("Chevron.Left")
         .resizable()
         .scaledToFit()
         .frame(width: 18, height: 18)
@@ -53,13 +53,15 @@ private extension BusinessSearchView {
       TextField("Search businesses", text: $businessName)
         .autocorrectionDisabled()
         .textInputAutocapitalization(.never)
-      Image(systemName: "xmark")
+      Image("Xmark.Grey")
         .resizable()
         .scaledToFit()
         .frame(width: 18, height: 18)
         .foregroundStyle(LocarieColor.greyDark)
         .onTapGesture {
-          if !businessName.isEmpty {
+          if businessName.isEmpty {
+            searching = false
+          } else {
             businessName = ""
           }
         }
@@ -95,6 +97,7 @@ private extension BusinessSearchView {
           .buttonStyle(.plain)
         }
       }
+      .padding(.bottom, 48)
     }
     .scrollIndicators(.hidden)
   }

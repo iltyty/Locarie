@@ -15,6 +15,7 @@ struct NewPostPage: View {
   @State private var isAlertShowing = false
   @State private var presentingNotPublicAlert = false
   @State private var alertMessage = ""
+  @State private var screenWidth = 0.0
 
   @FocusState private var isEditing: Bool
 
@@ -27,41 +28,44 @@ struct NewPostPage: View {
   @Environment(\.dismiss) private var dismiss
 
   var body: some View {
-    GeometryReader { _ in // necessary for ignoring keyboard safe area!! (No idea why however)
+    GeometryReader { proxy in // necessary for ignoring keyboard safe area!! (No idea why though)
       VStack(alignment: .leading, spacing: 0) {
-        NavigationBar("Post").ignoresSafeArea(.keyboard)
+        NavigationBar("Post")
+          .padding(.bottom, 8)
+          .ignoresSafeArea(.keyboard)
         VStack(alignment: .leading, spacing: 0) {
-          status.padding(.vertical, 16)
+          status.padding(.vertical, 8)
           ScrollView {
             VStack(alignment: .leading, spacing: 0) {
               photosPicker.padding(.bottom, 24)
               photoCount.padding(.bottom, 5)
               paragraphInput.padding(.bottom, 24)
             }
+            .padding(.top, 8)
           }
           .scrollIndicators(.hidden)
+          .frame(maxHeight: 450)
           LocarieDivider()
           categories
         }
-        .padding(.horizontal, 16)
-        Spacer()
-        postButton.ignoresSafeArea(.keyboard)
+        .padding(.horizontal, Constants.hSpacing)
+        .keyboardDismissable(focus: $isEditing)
+        Spacer().contentShape(Rectangle())
+        postButton.keyboardDismissable(focus: $isEditing)
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .onAppear {
+        screenWidth = proxy.frame(in: .global).width
+      }
     }
-    .keyboardDismissable(focus: $isEditing)
     .loadingIndicator(loading: $loading)
     .alert("Your business is not public yet.", isPresented: $presentingNotPublicAlert) {
-      Button("OK") {
-        dismiss()
-      }
+      Button("OK") { dismiss() }
     }
     .alert(
       alertMessage,
       isPresented: $isAlertShowing
-    ) {
-      Button("OK") {}
-    }
+    ) { Button("OK") {} }
     .onAppear {
       if !cacheVM.cache.profileComplete {
         presentingNotPublicAlert = true
@@ -146,11 +150,13 @@ private extension NewPostPage {
             .resizable()
             .foregroundStyle(LocarieColor.greyDark)
             .frame(width: Constants.photoIconSize, height: Constants.photoIconSize)
-            .frame(width: Constants.photoSize, height: Constants.photoSize)
+            .frame(width: minPhotoWidth, height: minPhotoWidth)
             .background(
               RoundedRectangle(cornerRadius: Constants.photoCornerRadius)
-                .fill(.thickMaterial)
+                .fill(LocarieColor.greyMedium)
             )
+            .padding(.top, postVM.photoVM.attachments.isEmpty ? 0 : Constants.photoTopPadding)
+            .padding(.trailing, Constants.photoTrailingPadding)
         }
       }
     }
@@ -165,13 +171,16 @@ private extension NewPostPage {
           SelectedPhotoPage(vm: postVM.photoVM)
         } label: {
           ImageAttachmentView(
-            width: Constants.photoSize,
-            height: Constants.photoSize,
+            width: minPhotoWidth,
+            height: minPhotoWidth,
             attachment: attachments[i]
           )
         }
+        .padding(.top, Constants.photoTopPadding)
+        .padding(.trailing, Constants.photoTrailingPadding)
         .buttonStyle(.plain)
         ImageDeleteButton()
+          .offset(x: -2, y: 2)
           .contentShape(Rectangle())
           .onTapGesture {
             postVM.photoVM.selection.remove(at: i)
@@ -195,10 +204,25 @@ private extension NewPostPage {
 
   var gridColumns: [GridItem] {
     [
-      GridItem(.flexible(minimum: Constants.photoSize, maximum: 3 * Constants.photoSize), alignment: .leading),
-      GridItem(.flexible(minimum: Constants.photoSize, maximum: 3 * Constants.photoSize), alignment: .center),
-      GridItem(.flexible(minimum: Constants.photoSize, maximum: 3 * Constants.photoSize), alignment: .trailing),
+      GridItem(
+        .flexible(minimum: minPhotoWidth, maximum: 2 * minPhotoWidth),
+        alignment: .leading
+      ),
+      GridItem(
+        .flexible(minimum: minPhotoWidth, maximum: 2 * minPhotoWidth),
+        alignment: .center
+      ),
+      GridItem(
+        .flexible(minimum: minPhotoWidth, maximum: 2 * minPhotoWidth),
+        alignment: .trailing
+      ),
     ]
+  }
+
+  var minPhotoWidth: CGFloat {
+    screenWidth == 0 ?
+      Constants.photoSize :
+      (screenWidth - 2 * Constants.hSpacing - 2 * (Constants.photoTrailingPadding + 5)) / 3
   }
 }
 
@@ -245,10 +269,13 @@ extension NewPostPage {
 }
 
 private enum Constants {
+  static let hSpacing: CGFloat = 16
   static let maxImageCount = 5
   static let photoSize: CGFloat = 114
   static let photoIconSize: CGFloat = 28
   static let photoCornerRadius: CGFloat = 16
+  static let photoTopPadding: CGFloat = 10
+  static let photoTrailingPadding: CGFloat = 12
   static let inputHeight: CGFloat = 150
 }
 

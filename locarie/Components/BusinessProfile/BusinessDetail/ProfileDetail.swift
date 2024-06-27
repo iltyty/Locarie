@@ -18,9 +18,15 @@ struct ProfileDetail: View {
     VStack(alignment: .leading, spacing: 16) {
       ProfileFavoredByCount(user)
       ProfileAddress(user)
-      ProfileOpeningHours(user)
-      ProfileLink(user)
-      ProfilePhone(user)
+      if !user.businessHours.isEmpty {
+        ProfileOpeningHours(user)
+      }
+      if !user.homepageUrl.isEmpty {
+        ProfileLink(user)
+      }
+      if !user.phone.isEmpty {
+        ProfilePhone(user)
+      }
       LocarieDivider()
     }
   }

@@ -62,7 +62,7 @@ struct BusinessUserProfilePage: View {
               .padding(.horizontal, 24)
             }
           }
-          .padding(.bottom, 102)
+          .padding(.bottom, BottomTabConstants.height + 24)
         }
         if presentingProfileCover {
           BusinessProfileCover(
@@ -98,9 +98,6 @@ struct BusinessUserProfilePage: View {
         .presentationDetents([.height(450)])
       }
       .onAppear {
-        if cacheVM.isFirstLoggedIn(), !cacheVM.cache.profileComplete {
-          presentingNotPublicSheet = true
-        }
         screenSize = proxy.size
         mapBottomBoundY = screenSize.height - Constants.bottomY
 
@@ -119,6 +116,9 @@ struct BusinessUserProfilePage: View {
     .onReceive(profileVM.$state) { state in
       if case .finished = state {
         cacheVM.setProfileComplete(profileVM.dto.isProfileComplete)
+        if cacheVM.isFirstLoggedIn(), !cacheVM.isProfileComplete() {
+          presentingNotPublicSheet = true
+        }
       }
     }
     .onReceive(profileVM.$dto) { dto in
@@ -170,7 +170,7 @@ private extension BusinessUserProfilePage {
     MapReader { proxy in
       Map(viewport: $viewport) {
         MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
-          BusinessMapAvatar(url: profileVM.dto.avatarUrl)
+          BusinessMapAvatar(url: profileVM.dto.avatarUrl, newUpdate: profileVM.dto.hasUpdateIn24Hours)
             .id(avatarId)
             .onTapGesture {
               updateMapCenter(user: profileVM.dto)
@@ -202,44 +202,53 @@ private extension BusinessUserProfilePage {
         detents: [Constants.bottomDetent, .large],
         currentDetent: $currentDetent
       ) {
-        Group {
-          if case .loading = profileVM.state {
-            BusinessUserProfilePage.skeleton
-          } else {
-            sheetContent
-          }
-        }
-        .padding(.horizontal, 16)
+        sheetContent.padding(.horizontal, 16)
       }
     }
   }
 
   var sheetContent: some View {
     VStack(alignment: .leading, spacing: 8) {
-      BusinessProfileAvatarRow(
-        user: profileVM.dto,
-        presentingCover: $presentingProfileCover,
-        presentingDetail: $presentingProfileDetail
-      )
+      if case .loading = profileVM.state {
+        BusinessUserProfilePage.avatarRowSkeleton
+      } else {
+        BusinessProfileAvatarRow(
+          user: profileVM.dto,
+          presentingCover: $presentingProfileCover,
+          presentingDetail: $presentingProfileDetail
+        )
+      }
       ScrollViewReader { proxy in
         ScrollView {
           VStack(alignment: .leading, spacing: 16) {
-            ProfileCategories(profileVM.dto).id(0)
-            if cacheVM.cache.profileComplete {
-              ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
+            if case .loading = profileVM.state {
+              BusinessUserProfilePage.categoriesSkeleton
             } else {
-              Text("""
-              Not Public Yet…
-              Your profile is only a few steps away from going public. \
-              Complete your profile to start connecting with customers
-              """)
-              .foregroundStyle(LocarieColor.greyDark)
+              ProfileCategories(profileVM.dto).id(0)
             }
-            if presentingProfileDetail {
-              ProfileDetail(profileVM.dto)
+            if case .loading = profileVM.state {
+              BusinessUserProfilePage.bioSkeleton
+            } else {
+              if cacheVM.cache.profileComplete {
+                ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
+              } else {
+                Text("""
+                Not Public Yet…
+                Your profile is only a few steps away from going public. \
+                Complete your profile to start connecting with customers
+                """)
+                .foregroundStyle(LocarieColor.greyDark)
+              }
+              if presentingProfileDetail {
+                ProfileDetail(profileVM.dto)
+              }
             }
-            ProfilePostsCount(postVM.posts)
-            postList
+            if case .loading = postVM.state {
+              BusinessUserProfilePage.postsSkeleton
+            } else {
+              ProfilePostsCount(postVM.posts)
+              postList
+            }
           }
           .padding(.top, 8)
           .onChange(of: currentDetent) { _ in
@@ -330,7 +339,7 @@ private extension BusinessUserProfilePage {
           .frame(width: Constants.topButtonSize, height: Constants.topButtonSize)
           .shadow(radius: 2)
         if cacheVM.getAvatarUrl().isEmpty {
-          defaultAvatar(size: Constants.topButtonSize - 4)
+          defaultAvatar(size: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth)
         } else {
           KFImage(URL(string: cacheVM.getAvatarUrl()))
             .placeholder {
@@ -363,7 +372,7 @@ private extension BusinessUserProfilePage {
 }
 
 private enum Constants {
-  static let bottomY: CGFloat = 184
+  static let bottomY: CGFloat = 212
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(bottomY)
 
   static let dialogBgOpacity: CGFloat = 0.2
@@ -373,7 +382,7 @@ private enum Constants {
   static let buttonShadowRadius: CGFloat = 2.0
 
   static let topButtonSize: CGFloat = 40
-  static let topButtonStrokeWidth: CGFloat = 2
+  static let topButtonStrokeWidth: CGFloat = 3
   static let topButtonIconSize: CGFloat = 18
 }
 

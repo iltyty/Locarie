@@ -16,7 +16,7 @@ struct BusinessProfileDetailButton: View {
         presenting.toggle()
       }
     } label: {
-      Image(systemName: "chevron.down")
+      Image("Chevron.Down")
         .resizable()
         .scaledToFit()
         .rotationEffect(presenting ? .degrees(-180) : .zero)

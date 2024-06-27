@@ -50,7 +50,6 @@
 		501BAF422B46503600D9D84F /* LabelSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF412B46503600D9D84F /* LabelSettingsItem.swift */; };
 		501BAF482B46527000D9D84F /* ChangePasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF472B46527000D9D84F /* ChangePasswordPage.swift */; };
 		501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF492B46538300D9D84F /* NewPasswordPage.swift */; };
-		501BAF4C2B4653FF00D9D84F /* ChangePasswordConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF4B2B4653FF00D9D84F /* ChangePasswordConstants.swift */; };
 		501BAF4E2B4655EF00D9D84F /* UserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF4D2B4655EF00D9D84F /* UserProfilePage.swift */; };
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */; };
@@ -303,7 +302,6 @@
 		501BAF412B46503600D9D84F /* LabelSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSettingsItem.swift; sourceTree = "<group>"; };
 		501BAF472B46527000D9D84F /* ChangePasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPage.swift; sourceTree = "<group>"; };
 		501BAF492B46538300D9D84F /* NewPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordPage.swift; sourceTree = "<group>"; };
-		501BAF4B2B4653FF00D9D84F /* ChangePasswordConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordConstants.swift; sourceTree = "<group>"; };
 		501BAF4D2B4655EF00D9D84F /* UserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePage.swift; sourceTree = "<group>"; };
 		50277F732AF117700045AB12 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserProfilePage.swift; sourceTree = "<group>"; };
@@ -690,7 +688,6 @@
 			children = (
 				501BAF472B46527000D9D84F /* ChangePasswordPage.swift */,
 				501BAF492B46538300D9D84F /* NewPasswordPage.swift */,
-				501BAF4B2B4653FF00D9D84F /* ChangePasswordConstants.swift */,
 			);
 			path = ChangePassword;
 			sourceTree = "<group>";
@@ -1717,7 +1714,6 @@
 				502A4FF02B32D34B00C0833A /* Color+Hex.swift in Sources */,
 				50F54A032B45283C00D06F20 /* NavigationBar.swift in Sources */,
 				509A10202BC90ADA00FB55C7 /* RegularUserProfilePage+SkeletonPage.swift in Sources */,
-				501BAF4C2B4653FF00D9D84F /* ChangePasswordConstants.swift in Sources */,
 				50FDD8992B523B95003015F9 /* AvatarUploadService.swift in Sources */,
 				5018159F2C29A81300DED766 /* BackToMapButton.swift in Sources */,
 				509D5BCA2B457F9800833021 /* TextEditViewModel.swift in Sources */,
@@ -2125,6 +2121,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WF4SXSCLV9;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -2144,6 +2141,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WF4SXSCLV9;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;

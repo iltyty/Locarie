@@ -23,8 +23,8 @@ struct BottomTabView: View {
       profilePage
       Spacer()
     }
-    .frame(height: Constants.height)
-    .offset(y: Constants.offset)
+    .frame(height: BottomTabConstants.height)
+    .offset(y: BottomTabConstants.offset)
     .background(background)
     .ignoresSafeArea(edges: .bottom)
   }
@@ -32,7 +32,7 @@ struct BottomTabView: View {
   private var background: some View {
     Rectangle()
       .fill(.white)
-      .shadow(radius: Constants.shadowRadius)
+      .shadow(radius: BottomTabConstants.shadowRadius)
   }
 }
 
@@ -78,7 +78,7 @@ private extension BottomTabView {
   }
 }
 
-private enum Constants {
+enum BottomTabConstants {
   static let height: CGFloat = 78
   static let offset: CGFloat = -10
   static let shadowRadius: CGFloat = 1

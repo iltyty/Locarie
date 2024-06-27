@@ -73,7 +73,7 @@ struct PostCover: View {
       .padding(.bottom, 36)
     }
     .padding(.horizontal, 16)
-    .background(.ultraThinMaterial.opacity(0.95))
+    .background(.ultraThinMaterial.opacity(CoverCommonConstants.backgroundOpacity))
     .alert("Confirm deletion", isPresented: $presentingDeleteAlert) {
       Button("Delete", role: .destructive) {
         postDeleteVM.delete(id: post.id)

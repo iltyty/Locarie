@@ -5,6 +5,7 @@
 //  Created by qiuty on 23/02/2024.
 //
 
+import Kingfisher
 import SwiftUI
 
 struct BusinessFollowedAvatarRow: View {
@@ -19,20 +20,18 @@ struct BusinessFollowedAvatarRow: View {
         if user.profileImageUrls.count == 0 {
           defaultAvatar(size: Constants.size)
         } else {
-          AsyncImage(url: URL(string: user.profileImageUrls.first ?? "")) { image in
-            image.resizable()
-              .scaledToFill()
-              .frame(width: Constants.size, height: Constants.size)
-              .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
-          } placeholder: {
-            RoundedAvatarSkeletonView(size: Constants.size)
-          }
+          KFImage(URL(string: user.profileImageUrls.first ?? ""))
+            .placeholder { RoundedAvatarSkeletonView(size: Constants.size) }
+            .resizable()
+            .scaledToFill()
+            .frame(width: Constants.size, height: Constants.size)
+            .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
         }
         HStack(alignment: .top) {
           BusinessStatus(user)
           Spacer()
           if followed {
-            Image(systemName: "bookmark.fill")
+            Image("Bookmark.Fill")
               .resizable()
               .scaledToFill()
               .frame(width: Constants.followedIconWidth, height: Constants.followedIconHeight)

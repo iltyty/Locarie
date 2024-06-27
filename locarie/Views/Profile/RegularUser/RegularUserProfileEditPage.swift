@@ -5,6 +5,7 @@
 //  Created by qiuty on 22/02/2024.
 //
 
+import Kingfisher
 import SwiftUI
 
 struct RegularUserProfileEditPage: View {
@@ -18,8 +19,8 @@ struct RegularUserProfileEditPage: View {
 
   var body: some View {
     VStack {
-      navigationBar
-      avatarEditor
+      NavigationBar("Edit profile", right: saveButton, divider: true)
+      AvatarEditor(photoVM: avatarVM.photoViewModel).padding(.vertical, Constants.avatarVPadding)
       VStack(spacing: Constants.vSpacing) {
         firstNameInput
         lastNameInput
@@ -45,21 +46,10 @@ struct RegularUserProfileEditPage: View {
 }
 
 private extension RegularUserProfileEditPage {
-  var navigationBar: some View {
-    NavigationBar("Edit profile", right: saveButton, divider: true)
-  }
-
   var saveButton: some View {
-    Button("Save") {
-      updateProfile()
-    }
-    .fontWeight(.bold)
-    .foregroundStyle(Color.locariePrimary)
-  }
-
-  var avatarEditor: some View {
-    AvatarEditor(photoVM: avatarVM.photoViewModel)
-      .padding(.vertical, Constants.avatarVPadding)
+    Button("Save") { updateProfile() }
+      .fontWeight(.bold)
+      .foregroundStyle(Color.locariePrimary)
   }
 
   var firstNameInput: some View {
@@ -108,11 +98,11 @@ private extension RegularUserProfileEditPage {
   ) {
     switch state {
     case .loading:
-      print("loading")
       loading = true
     case let .finished(avatarUrl):
       loading = false
       guard let avatarUrl else { return }
+      ImageCache.default.removeImage(forKey: avatarUrl)
       cacheVM.setAvatarUrl(avatarUrl)
     default:
       loading = false

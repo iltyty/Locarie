@@ -28,8 +28,8 @@ struct BusinessBottomBar: View {
         directionButton
         Spacer()
       }
-      .padding(.top, Constants.topPadding)
-      .padding(.horizontal, Constants.hPadding)
+      .padding(.top, BusinessBottomBarConstants.topPadding)
+      .padding(.horizontal, BusinessBottomBarConstants.hPadding)
     }
     .onChange(of: business) { newBusiness in
       favoriteBusinessVM.checkFavoredBy(
@@ -49,7 +49,7 @@ struct BusinessBottomBar: View {
       default: break
       }
     })
-    .frame(height: Constants.height)
+    .frame(height: BusinessBottomBarConstants.height)
     .ignoresSafeArea(edges: .bottom)
   }
 }
@@ -59,7 +59,7 @@ private extension BusinessBottomBar {
     Image(favoriteButtonName)
       .resizable()
       .scaledToFit()
-      .frame(height: Constants.iconSize)
+      .frame(height: BusinessBottomBarConstants.iconSize)
       .foregroundStyle(
         alreadyFollowed ? Color.locariePrimary : .primary
       )
@@ -94,7 +94,7 @@ private extension BusinessBottomBar {
   var background: some View {
     Rectangle()
       .fill(.background)
-      .shadow(radius: Constants.shadowRadius)
+      .shadow(radius: BusinessBottomBarConstants.shadowRadius)
   }
 
   func favoriteButtonTapped() {
@@ -110,7 +110,7 @@ private extension BusinessBottomBar {
   }
 }
 
-private enum Constants {
+enum BusinessBottomBarConstants {
   static let height: CGFloat = 85
   static let topPadding: CGFloat = 15
   static let hPadding: CGFloat = 40

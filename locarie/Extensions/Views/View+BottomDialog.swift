@@ -47,12 +47,8 @@ struct BottomDialogTestView: View {
   var body: some View {
     Text("hello").bottomDialog(isPresented: $presenting) {
       VStack(spacing: 5) {
-        bottomDialogButtonBuilder("OK") {
-          print("OK")
-        }
-        bottomDialogButtonBuilder("Cancel") {
-          print("Cancel")
-        }
+        bottomDialogButtonBuilder("OK") { print("OK") }
+        bottomDialogButtonBuilder("Cancel") { print("Cancel") }
       }
       .padding(.horizontal, 16)
     }

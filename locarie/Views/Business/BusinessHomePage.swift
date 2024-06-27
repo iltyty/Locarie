@@ -54,7 +54,7 @@ struct BusinessHomePage: View {
           VStack {
             Spacer()
             BackToMapButton()
-              .padding(.bottom, 102)
+              .padding(.bottom, BusinessBottomBarConstants.height + 24)
               .onTapGesture {
                 moveBottomSheet(to: Constants.bottomDetent)
               }
@@ -133,7 +133,7 @@ private extension BusinessHomePage {
       Map(viewport: $viewport) {
         ForEvery(userListVM.businesses) { u in
           MapViewAnnotation(coordinate: u.coordinate) {
-            BusinessMapAvatar(url: u.avatarUrl, amplified: u.id == user.id)
+            BusinessMapAvatar(url: u.avatarUrl, newUpdate: u.hasUpdateIn24Hours, amplified: u.id == user.id)
               .onTapGesture {
                 user = u
               }
@@ -156,11 +156,11 @@ private extension BusinessHomePage {
 
   var topContent: some View {
     HStack(spacing: 10) {
-      CircleButton(systemName: "chevron.backward").onTapGesture {
+      CircleButton("Chevron.Left").onTapGesture {
         dismiss()
       }
       Spacer()
-      CircleButton(name: "ShareIcon")
+      CircleButton("ShareIcon")
       CircleButton(systemName: "ellipsis")
     }
     .background {
@@ -179,34 +179,43 @@ private extension BusinessHomePage {
       detents: [Constants.bottomDetent, .large],
       currentDetent: $currentDetent
     ) {
-      Group {
-        if case .loading = profileVM.state {
-          BusinessUserProfilePage.skeleton
-        } else {
-          sheetContent
-        }
-      }
-      .padding(.horizontal, 16)
+      sheetContent.padding(.horizontal, 16)
     }
   }
 
   var sheetContent: some View {
     VStack(alignment: .leading, spacing: 8) {
-      BusinessProfileAvatarRow(
-        user: user,
-        presentingCover: $presentingProfileCover,
-        presentingDetail: $presentingProfileDetail
-      )
+      if case .loading = profileVM.state {
+        BusinessUserProfilePage.avatarRowSkeleton
+      } else {
+        BusinessProfileAvatarRow(
+          user: user,
+          presentingCover: $presentingProfileCover,
+          presentingDetail: $presentingProfileDetail
+        )
+      }
       ScrollViewReader { proxy in
         ScrollView {
           VStack(alignment: .leading, spacing: 16) {
-            ProfileCategories(user).id(0)
-            ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
+            if case .loading = profileVM.state {
+              BusinessUserProfilePage.categoriesSkeleton
+            } else {
+              ProfileCategories(user).id(0)
+            }
+            if case .loading = profileVM.state {
+              BusinessUserProfilePage.bioSkeleton
+            } else {
+              ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
+            }
             if presentingProfileDetail {
               ProfileDetail(user)
             }
-            ProfilePostsCount(listUserPostsVM.posts)
-            postList
+            if case .loading = listUserPostsVM.state {
+              BusinessUserProfilePage.postsSkeleton
+            } else {
+              ProfilePostsCount(listUserPostsVM.posts)
+              postList
+            }
           }
           .padding(.top, 8)
           .onChange(of: currentDetent) { _ in
@@ -304,12 +313,12 @@ private extension BusinessHomePage {
 }
 
 private enum Constants {
-  static let bottomY: CGFloat = 112
+  static let bottomY: CGFloat = 197
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(bottomY)
   static let vSpacing: CGFloat = 15
   static let mapZoom: CGFloat = 16
 }
 
 #Preview {
-  BusinessHomePage(uid: 2)
+  BusinessHomePage(uid: 2, fullscreen: false)
 }

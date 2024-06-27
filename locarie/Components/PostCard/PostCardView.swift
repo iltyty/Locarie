@@ -12,7 +12,7 @@ struct PostCardView: View {
   let post: PostDto
   let divider: Bool
   let deletable: Bool
-  let onAvatarTapped: () -> Void
+  let onTapped: () -> Void
   let onCoverTapped: () -> Void
   let onThumbnailTapped: () -> Void
   @Binding var presentingDeleteDialog: Bool
@@ -27,14 +27,14 @@ struct PostCardView: View {
   init(
     _ post: PostDto,
     divider: Bool = false,
-    onAvatarTapped: @escaping () -> Void = {},
+    onTapped: @escaping () -> Void = {},
     onCoverTapped: @escaping () -> Void = {},
     onThumbnailTapped: @escaping () -> Void = {}
   ) {
     self.post = post
     self.divider = divider
     deletable = false
-    self.onAvatarTapped = onAvatarTapped
+    self.onTapped = onTapped
     self.onCoverTapped = onCoverTapped
     self.onThumbnailTapped = onThumbnailTapped
     _presentingDeleteDialog = .constant(false)
@@ -45,7 +45,7 @@ struct PostCardView: View {
     _ post: PostDto,
     divider: Bool = false,
     deletable: Bool = false,
-    onAvatarTapped: @escaping () -> Void = {},
+    onTapped: @escaping () -> Void = {},
     onCoverTapped: @escaping () -> Void = {},
     onThumbnailTapped: @escaping () -> Void = {},
     presentingDeleteDialog: Binding<Bool>,
@@ -54,7 +54,7 @@ struct PostCardView: View {
     self.post = post
     self.divider = divider
     self.deletable = deletable
-    self.onAvatarTapped = onAvatarTapped
+    self.onTapped = onTapped
     self.onCoverTapped = onCoverTapped
     self.onThumbnailTapped = onThumbnailTapped
     _presentingDeleteDialog = presentingDeleteDialog
@@ -66,11 +66,12 @@ struct PostCardView: View {
       status.padding(.bottom, 10)
       cover.padding(.bottom, 12)
       content.padding(.bottom, 12)
-      categories.padding(.bottom, 16)
+      categories.padding(.bottom, divider ? 16 : BackToMapButton.height + 48)
       if divider {
         LocarieDivider().padding(.bottom, 16)
       }
     }
+    .onTapGesture { onTapped() }
   }
 
   private var background: some View {
@@ -92,9 +93,8 @@ private extension PostCardView {
             .clipShape(Circle())
         }
       }
-      .onTapGesture { onAvatarTapped() }
       VStack(alignment: .leading, spacing: 2) {
-        Text(post.businessName)
+        Text(post.businessName).fontWeight(.bold)
         HStack(spacing: 5) {
           Text(post.publishedTime)
             .foregroundStyle(post.publishedOneDayAgo ? LocarieColor.greyDark : LocarieColor.green)
@@ -134,6 +134,7 @@ private extension PostCardView {
           }
       }
     }
+    .contentShape(Rectangle())
   }
 
   var cover: some View {
@@ -173,13 +174,21 @@ private extension PostCardView {
   }
 
   var content: some View {
-    Text(post.content)
-      .lineLimit(Constants.contentLineLimit)
-      .listRowSeparator(.hidden)
+    HStack {
+      Text(post.content)
+        .lineLimit(Constants.contentLineLimit)
+        .listRowSeparator(.hidden)
+      Spacer()
+    }
+    .contentShape(Rectangle())
   }
 
   var categories: some View {
-    ProfileCategories(post.user)
+    HStack {
+      ProfileCategories(post.user)
+      Spacer()
+    }
+    .contentShape(Rectangle())
   }
 }
 

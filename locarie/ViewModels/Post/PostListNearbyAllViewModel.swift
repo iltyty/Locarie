@@ -50,5 +50,26 @@ final class PostListNearbyAllViewModel: BaseViewModel {
 extension PostListNearbyAllViewModel {
   enum State {
     case idle, loading, finished, failed(NetworkError)
+
+    func isIdle() -> Bool {
+      switch self {
+      case .idle: true
+      default: false
+      }
+    }
+
+    func isLoading() -> Bool {
+      switch self {
+      case .loading: true
+      default: false
+      }
+    }
+
+    func isFinished() -> Bool {
+      switch self {
+      case .finished: true
+      default: false
+      }
+    }
   }
 }

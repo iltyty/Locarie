@@ -11,7 +11,7 @@ struct ImageDeleteButton: View {
   var body: some View {
     ZStack {
       Circle()
-        .fill(.background)
+        .fill(.white)
         .frame(width: Constants.size, height: Constants.size)
         .shadow(radius: Constants.shadowRadius)
       Image(systemName: "xmark")
@@ -19,13 +19,11 @@ struct ImageDeleteButton: View {
         .foregroundStyle(.black)
         .frame(width: Constants.iconSize, height: Constants.iconSize)
     }
-    .offset(x: Constants.offset, y: -Constants.offset)
   }
 }
 
 private enum Constants {
   static let size: CGFloat = 24
   static let iconSize: CGFloat = 12
-  static let offset: CGFloat = 5
   static let shadowRadius: CGFloat = 2
 }

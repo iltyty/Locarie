@@ -18,6 +18,4 @@ enum LocarieColor {
   static let greyLight = Color(hex: 0xF9F9F9)
 
   static let lightGray = Color(hex: 0xD9D9D9)
-
-  static let mapAvatarBg = Color(hex: 0xFFAB80)
 }

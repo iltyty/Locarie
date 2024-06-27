@@ -14,7 +14,7 @@ struct SeeProfileButton: View {
       .padding(.horizontal, 24)
       .padding(.vertical, 10)
       .background {
-        Capsule().fill(LocarieColor.primary)
+        Capsule().fill(LocarieColor.primary).shadow(radius: 2)
       }
   }
 }

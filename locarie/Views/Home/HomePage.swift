@@ -41,7 +41,7 @@ struct HomePage: View {
         VStack {
           Spacer()
           BackToMapButton()
-            .padding(.bottom, 102)
+            .padding(.bottom, BottomTabConstants.height + 24)
             .onTapGesture {
               moveBottomSheet(to: Constants.bottomDetent)
             }
@@ -103,8 +103,8 @@ private extension HomePage {
         currentDetent: $currentDetent
       ) {
         Group {
-          if case .loading = postVM.state {
-            VStack {
+          if postVM.state.isIdle() || postVM.state.isLoading() {
+            VStack(spacing: 16) {
               PostCardView.skeleton
               PostCardView.skeleton
             }
@@ -115,7 +115,7 @@ private extension HomePage {
         .allowsHitTesting(currentDetent != Constants.bottomDetent)
         .padding(.horizontal, 16)
       } topContent: {
-        CircleButton(name: "Navigation")
+        CircleButton("Navigation")
           .padding(.trailing, 16)
           .onTapGesture {
             withViewportAnimation(.fly) {
@@ -149,7 +149,7 @@ private extension HomePage {
                 PostCardView(
                   postVM.posts[i],
                   divider: i != postVM.posts.count - 1,
-                  onAvatarTapped: {
+                  onTapped: {
                     router.navigate(to: Router.Int64Destination.businessHome(postVM.posts[i].user.id, true))
                   },
                   onCoverTapped: {
@@ -191,12 +191,12 @@ private extension HomePage {
   }
 
   var buttons: some View {
-    HStack {
+    HStack(spacing: 0) {
       locarieIcon
       Spacer()
-      searchIcon
+      searchIcon.padding(.horizontal, 16)
       NavigationLink(value: Router.Destination.favorite) {
-        CircleButton(name: "Bookmark.Fill")
+        CircleButton("Bookmark.Fill")
       }
       .buttonStyle(.plain)
     }
@@ -217,7 +217,7 @@ private extension HomePage {
   }
 
   var searchIcon: some View {
-    CircleButton(name: "MagnifyingGlass")
+    CircleButton("MagnifyingGlass")
       .onTapGesture {
         withAnimation {
           searching.toggle()
@@ -227,7 +227,7 @@ private extension HomePage {
 }
 
 private enum Constants {
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(205)
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(208)
 }
 
 #Preview {

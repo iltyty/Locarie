@@ -17,11 +17,17 @@ struct ProfileBusinessCategoryView: View {
   var body: some View {
     Text(category)
       .font(.custom(GlobalConstants.fontName, size: 14))
-      .foregroundStyle(LocarieColor.greyDark)
+      .foregroundStyle(Constants.color)
       .padding(.horizontal, 10)
       .padding(.vertical, 4)
-      .background(Capsule().fill(LocarieColor.greyMedium))
+      .background {
+        Capsule().stroke(Constants.color, style: .init(lineWidth: 1.5))
+      }
   }
+}
+
+private enum Constants {
+  static let color = Color(hex: 0x0E0E0E)
 }
 
 #Preview {

@@ -20,18 +20,18 @@ struct ForgotPasswordPage: View {
   var body: some View {
     VStack {
       NavigationBar("Reset Password", divider: true, padding: true)
-      VStack(spacing: Constants.spacing) {
+      VStack(spacing: 16) {
         hint
         emailInput
         nextButton
         Spacer()
       }
+      .keyboardDismissable(focus: $inputting)
     }
     .alert(alertTitle, isPresented: $presentingAlert, actions: {
       Button("OK") {}
     })
     .overlay(LoadingView($loading))
-    .keyboardDismissable(focus: $inputting)
     .onReceive(authVM.$state) { state in
       switch state {
       case .loading: loading = true
@@ -74,10 +74,6 @@ struct ForgotPasswordPage: View {
     .disabled(email.isEmpty)
     .opacity(email.isEmpty ? 0.5 : 1)
   }
-}
-
-private enum Constants {
-  static let spacing = 15.0
 }
 
 #Preview {

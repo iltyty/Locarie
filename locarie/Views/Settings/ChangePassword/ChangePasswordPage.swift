@@ -11,8 +11,8 @@ struct ChangePasswordPage: View {
   @State var password = ""
 
   var body: some View {
-    VStack(spacing: ChangePasswordConstants.vSpacing) {
-      navigationBar
+    VStack(spacing: 16) {
+      NavigationBar("Change password", divider: true, padding: true)
       passwordInput
       forgotPassword
       nextButton
@@ -22,10 +22,6 @@ struct ChangePasswordPage: View {
 }
 
 private extension ChangePasswordPage {
-  var navigationBar: some View {
-    NavigationBar("Change password", divider: true, padding: true)
-  }
-
   @ViewBuilder
   var passwordInput: some View {
     let title = "Type in your current password"

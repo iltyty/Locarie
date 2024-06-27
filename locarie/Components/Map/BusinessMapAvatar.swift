@@ -10,45 +10,56 @@ import SwiftUI
 
 struct BusinessMapAvatar: View {
   let url: String
+  let newUpdate: Bool
   var amplified = false
 
   var body: some View {
-    Circle()
-      .fill(.white)
-      .frame(width: size, height: size)
-      .overlay(avatar)
+    ZStack(alignment: .topTrailing) {
+      KFImage(URL(string: url))
+        .placeholder { SkeletonView(avatarSize, avatarSize, true) }
+        .resizable()
+        .frame(width: avatarSize, height: avatarSize)
+        .clipShape(Circle())
+        .frame(width: size, height: size)
+        .background { Circle().fill(LocarieColor.greyMedium) }
+      if newUpdate {
+        Circle()
+          .fill(LocarieColor.green)
+          .frame(width: 8, height: 8)
+          .frame(width: 12, height: 12)
+          .background { Circle().fill(LocarieColor.greyMedium) }
+          .offset(x: -offset, y: offset)
+      }
+    }
+  }
+
+  private var offset: CGFloat {
+    amplified ? 4 : 1
   }
 
   private var size: CGFloat {
     amplified ? Constants.amplifiedSize : Constants.regularSize
   }
 
-  private var avatar: some View {
-    KFImage(URL(string: url))
-      .placeholder {
-        Circle()
-          .fill(LocarieColor.mapAvatarBg)
-          .frame(width: avatarSize, height: avatarSize)
-      }
-      .resizable()
-      .frame(width: avatarSize, height: avatarSize)
-      .clipShape(Circle())
-  }
-
   private var avatarSize: CGFloat {
-    size - Constants.avatarDeltaSize
+    size - 2 * Constants.strokeWidth
   }
 }
 
 private enum Constants {
   static let regularSize: CGFloat = 40
   static let amplifiedSize: CGFloat = 60
-  static let avatarDeltaSize: CGFloat = 3
+  static let strokeWidth: CGFloat = 3
 }
 
 #Preview {
   ZStack {
     Color.pink
-    BusinessMapAvatar(url: "https://picsum.photos/100")
+    VStack {
+      BusinessMapAvatar(url: "https://picsum.photos/300", newUpdate: false)
+      BusinessMapAvatar(url: "https://picsum.photos/300", newUpdate: true)
+      BusinessMapAvatar(url: "https://picsum.photos/500", newUpdate: false, amplified: true)
+      BusinessMapAvatar(url: "https://picsum.photos/500", newUpdate: true, amplified: true)
+    }
   }
 }

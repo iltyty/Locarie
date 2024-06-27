@@ -9,18 +9,18 @@ import SwiftUI
 
 extension View {
   func keyboardDismissable(focus: FocusState<(some Hashable)?>.Binding) -> some View {
-    background(
+    background {
       Color.clear.contentShape(Rectangle()).onTapGesture {
         focus.wrappedValue = nil
       }
-    )
+    }
   }
 
   func keyboardDismissable(focus: FocusState<Bool>.Binding) -> some View {
-    background(
+    background {
       Color.clear.contentShape(Rectangle()).onTapGesture {
         focus.wrappedValue = false
       }
-    )
+    }
   }
 }

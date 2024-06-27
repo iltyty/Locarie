@@ -59,7 +59,7 @@ private extension NavigationBar {
 }
 
 private func defaultTitleLeft() -> AnyView {
-  AnyView(Image(systemName: "chevron.left")
+  AnyView(Image("Chevron.Left")
     .resizable()
     .scaledToFit()
     .frame(width: Constants.leftIconSize, height: Constants.leftIconSize))
@@ -71,6 +71,6 @@ private func defaultTitleRight() -> EmptyView {
 
 private enum Constants {
   static let leftIconSize: CGFloat = 18
-  static let topPadding: CGFloat = 8
+  static let topPadding: CGFloat = 18.5
   static let bottomPadding: CGFloat = 100
 }

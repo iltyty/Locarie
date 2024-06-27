@@ -5,6 +5,7 @@
 //  Created by qiuty on 2023/10/31.
 //
 
+import Kingfisher
 import SwiftUI
 
 struct RegularUserProfilePage: View {
@@ -13,6 +14,7 @@ struct RegularUserProfilePage: View {
   @Environment(\.dismiss) private var dismiss
 
   @State private var screenHeight: CGFloat = 0
+  @State private var topSafeAreaHeight: CGFloat = 0
 
   @State private var user = UserDto()
   @State private var post = PostDto()
@@ -21,69 +23,74 @@ struct RegularUserProfilePage: View {
 
   var body: some View {
     GeometryReader { proxy in
-      ZStack {
-        VStack {
-          LinearGradient(colors: [LocarieColor.primary, Color.white], startPoint: .top, endPoint: .bottom)
-            .frame(height: 320)
-          Spacer()
-        }
-        .ignoresSafeArea(edges: .top)
-        VStack(spacing: 0) {
-          ZStack(alignment: .top) {
-            ScrollView {
-              VStack(spacing: 72) {
-                HStack(spacing: 16) {
-                  Spacer()
-                  ProfileEditButton()
-                  settingsButton
-                }
-                .padding(.horizontal, 16)
-                avatarRow
+      VStack(spacing: 0) {
+        ZStack(alignment: .top) {
+          ScrollView {
+            VStack(spacing: 0) {
+              ZStack {
+                LinearGradient(
+                  colors: [LocarieColor.primary, Color.white],
+                  startPoint: .top,
+                  endPoint: .bottom
+                )
                 VStack(spacing: 0) {
-                  FollowAndLikeView(
-                    post: $post,
-                    user: $user,
-                    isPostCoverPresented: $isPostCoverPresented,
-                    isProfileCoverPresented: $isProfileCoverPresented
-                  )
+                  HStack(spacing: 16) {
+                    Spacer()
+                    ProfileEditButton()
+                    settingsButton
+                  }
+                  .padding(.horizontal, 16)
+                  avatarRow.padding(.vertical, 72)
                 }
+                .padding(.top, topSafeAreaHeight)
               }
-            }
-            .scrollIndicators(.hidden)
-            if cacheVM.isBusinessUser() {
-              HStack {
-                backButton
-                Spacer()
-              }
-              .padding(.horizontal, 16)
+              FollowAndLikeView(
+                post: $post,
+                user: $user,
+                isPostCoverPresented: $isPostCoverPresented,
+                isProfileCoverPresented: $isProfileCoverPresented
+              )
             }
           }
-          BottomTabView()
+          .scrollIndicators(.hidden)
+          if cacheVM.isBusinessUser() {
+            HStack {
+              backButton
+              Spacer()
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, topSafeAreaHeight)
+          }
         }
-        if isProfileCoverPresented {
-          BusinessProfileCover(
-            user: user,
-            onAvatarTapped: {
-              isProfileCoverPresented = false
-              Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id, true))
-            },
-            isPresenting: $isProfileCoverPresented
-          )
-        }
-        if isPostCoverPresented {
-          PostCover(
-            post: post,
-            tags: user.categories,
-            onAvatarTapped: {
-              isPostCoverPresented = false
-              Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id, true))
-            },
-            isPresenting: $isPostCoverPresented
-          )
-        }
+        BottomTabView()
       }
-      .onAppear {
+      .ignoresSafeArea(edges: .top)
+      .task(id: proxy.size.height) {
         screenHeight = proxy.size.height
+      }
+      .task(id: proxy.safeAreaInsets.top) {
+        topSafeAreaHeight = proxy.safeAreaInsets.top
+      }
+      if isProfileCoverPresented {
+        BusinessProfileCover(
+          user: user,
+          onAvatarTapped: {
+            isProfileCoverPresented = false
+            Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id, true))
+          },
+          isPresenting: $isProfileCoverPresented
+        )
+      }
+      if isPostCoverPresented {
+        PostCover(
+          post: post,
+          tags: user.categories,
+          onAvatarTapped: {
+            isPostCoverPresented = false
+            Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id, true))
+          },
+          isPresenting: $isPostCoverPresented
+        )
       }
     }
     .ignoresSafeArea(edges: .bottom)
@@ -92,7 +99,7 @@ struct RegularUserProfilePage: View {
 
 extension RegularUserProfilePage {
   var backButton: some View {
-    Image(systemName: "chevron.left")
+    Image("Chevron.Left")
       .resizable()
       .scaledToFit()
       .frame(width: 18, height: 18)
@@ -118,9 +125,20 @@ extension RegularUserProfilePage {
 
   var avatarRow: some View {
     HStack(spacing: 10) {
-      AvatarView(imageUrl: cacheVM.getAvatarUrl(), size: 92, isBusiness: false)
+      if cacheVM.getAvatarUrl().isEmpty {
+        defaultAvatar(size: 92, isBusiness: false)
+      } else {
+        KFImage(URL(string: cacheVM.getAvatarUrl()))
+          .placeholder {
+            SkeletonView(92, 92, true)
+          }
+          .resizable()
+          .scaledToFill()
+          .frame(width: 92, height: 92)
+      }
       Text(cacheVM.getUsername())
         .font(.custom(GlobalConstants.fontName, size: 20))
+        .fontWeight(.bold)
       Spacer()
     }
     .padding(.horizontal, 16)

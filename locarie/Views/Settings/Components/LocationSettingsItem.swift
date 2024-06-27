@@ -15,14 +15,17 @@ struct LocationSettingsItem<U: UserLocation>: View {
   @ObservedObject var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
-    VStack(spacing: 0) {
-      mapView
-      Rectangle().fill(LocarieColor.lightGray).frame(height: 1)
-      textView
+    NavigationLink {
+      BusinessAddressPage(dto: $location)
+    } label: {
+      VStack(spacing: 0) {
+        mapView
+        Rectangle().fill(LocarieColor.lightGray).frame(height: 1)
+        textView
+      }
+      .background(RoundedRectangle(cornerRadius: Constants.cornerRadius).stroke(LocarieColor.lightGray))
     }
-    .background(
-      RoundedRectangle(cornerRadius: Constants.cornerRadius).stroke(LocarieColor.lightGray)
-    )
+    .buttonStyle(.plain)
   }
 }
 
@@ -32,7 +35,7 @@ private extension LocationSettingsItem {
       Puck2D()
       if let coordinate {
         MapViewAnnotation(coordinate: coordinate) {
-          BusinessMapAvatar(url: cacheVM.getAvatarUrl())
+          BusinessMapAvatar(url: cacheVM.getAvatarUrl(), newUpdate: false)
         }
       }
     }
@@ -54,19 +57,17 @@ private extension LocationSettingsItem {
   }
 
   var textView: some View {
-    NavigationLink {
-      BusinessAddressPage(dto: $location)
-    } label: {
-      HStack {
-        Text("Location")
-        Spacer()
-        Text(location.address).foregroundStyle(LocarieColor.greyDark)
-        Image(systemName: "chevron.right").foregroundStyle(LocarieColor.greyDark)
-      }
-      .padding(16)
-      .lineLimit(1)
+    HStack {
+      Text("Location")
+      Spacer().contentShape(Rectangle())
+      Text(location.address).foregroundStyle(LocarieColor.greyDark)
+      Image("Chevron.Right.Grey")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 16, height: 16)
     }
-    .buttonStyle(.plain)
+    .padding(16)
+    .lineLimit(1)
   }
 }
 

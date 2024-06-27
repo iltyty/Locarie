@@ -22,13 +22,25 @@ struct LoginPage: View {
   var body: some View {
     GeometryReader { _ in
       VStack(spacing: 0) {
-        navigationBar
-        content.ignoresSafeArea(.keyboard)
+        NavigationBar()
+        VStack(spacing: 16) {
+          Spacer()
+          locarieIcon
+          Spacer()
+          emailInput
+          passwordInput
+          forgotPassword
+          loginButton
+          Spacer()
+          signUpText
+          Spacer()
+        }
+        .ignoresSafeArea(.keyboard)
+        .keyboardDismissable(focus: $focusField)
       }
       .ignoresSafeArea(.keyboard)
     }
     .disabled(isLoading)
-    .keyboardDismissable(focus: $focusField)
     .overlay(loadingOverlayView)
     .alert(alertTitle, isPresented: $isAlertShowing) {}
     .onReceive(loginViewModel.$state) { state in
@@ -69,25 +81,6 @@ struct LoginPage: View {
 }
 
 private extension LoginPage {
-  var content: some View {
-    VStack(spacing: Constants.formItemSpacing) {
-      Spacer()
-      locarieIcon
-      Spacer()
-      emailInput
-      passwordInput
-      forgotPassword
-      loginButton
-      Spacer()
-      signUpText
-      Spacer()
-    }
-  }
-
-  var navigationBar: some View {
-    NavigationBar()
-  }
-
   var loadingOverlayView: some View {
     isLoading ? loadingView : nil
   }
@@ -103,10 +96,7 @@ private extension LoginPage {
       Spacer()
       Image("LocarieIcon")
         .resizable()
-        .frame(
-          width: Constants.locarieIconSize,
-          height: Constants.locarieIconSize
-        )
+        .frame(width: Constants.locarieIconSize, height: Constants.locarieIconSize)
       Spacer()
     }
   }
@@ -115,7 +105,7 @@ private extension LoginPage {
     TextEditFormItemWithNoTitle(hint: "Email", text: $loginViewModel.dto.email)
       .focused($focusField, equals: .email)
       .textContentType(.emailAddress)
-      .padding(.horizontal)
+      .padding(.horizontal, 16)
   }
 
   var passwordInput: some View {
@@ -126,7 +116,7 @@ private extension LoginPage {
     )
     .focused($focusField, equals: .password)
     .textContentType(.password)
-    .padding(.horizontal)
+    .padding(.horizontal, 16)
   }
 
   var forgotPassword: some View {
@@ -135,7 +125,7 @@ private extension LoginPage {
         Spacer()
         Text("Forgotten password")
           .foregroundStyle(LocarieColor.blue)
-          .padding(.horizontal)
+          .padding(.horizontal, 16)
       }
     }
   }
@@ -148,10 +138,6 @@ private extension LoginPage {
     }
     .disabled(isLoginButtonDisabled)
     .opacity(loginButtonOpacity)
-  }
-
-  var orText: some View {
-    Text("or").foregroundStyle(.secondary)
   }
 
   var signUpText: some View {
@@ -182,7 +168,6 @@ private enum Field {
 private enum Constants {
   static let locarieIconSize = 64.0
   static let googleIconSize = 32.0
-  static let formItemSpacing = 15.0
   static let buttonDisabledOpacity = 0.5
 }
 

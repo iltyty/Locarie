@@ -120,11 +120,8 @@ private extension BusinessProfileEditPage {
           BusinessImagesEditPage()
         } label: {
           HStack {
-            if profileGetVM.dto.profileImageUrls.isEmpty {
-              defaultImages
-            } else {
-              profileImages
-            }
+            profileImages
+            defaultImages
           }
           .padding(.horizontal, 16)
         }
@@ -134,21 +131,35 @@ private extension BusinessProfileEditPage {
     }
   }
 
+  var profileImages: some View {
+    ForEach(profileImageUrls.indices, id: \.self) { i in
+      BusinessImageView(
+        url: URL(string: profileImageUrls[i]),
+        size: Constants.profileImageSize,
+        bordered: i == 0
+      )
+    }
+  }
+
+  var profileImageUrls: [String] {
+    profileGetVM.dto.profileImageUrls
+  }
+
   var defaultImages: some View {
-    ForEach(0 ..< Constants.defaultProfileImagesCount, id: \.self) { i in
+    ForEach(0 ..< 9 - profileImageUrls.count, id: \.self) { i in
       ZStack {
         if #available(iOS 17.0, *) {
           RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
             .fill(LocarieColor.greyMedium)
             .strokeBorder(
-              i == 0 ? LocarieColor.primary : LocarieColor.greyMedium,
+              i == 0 && profileImageUrls.isEmpty ? LocarieColor.primary : LocarieColor.greyMedium,
               style: .init(lineWidth: i == 0 ? Constants.firstProfileImageStrokeWidth : 0)
             )
             .frame(width: Constants.profileImageSize, height: Constants.profileImageSize)
         } else {
           RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
             .strokeBorder(
-              i == 0 ? LocarieColor.primary : LocarieColor.greyMedium,
+              i == 0 && profileImageUrls.isEmpty ? LocarieColor.primary : LocarieColor.greyMedium,
               style: .init(lineWidth: i == 0 ? Constants.firstProfileImageStrokeWidth : 0)
             )
             .background(
@@ -162,18 +173,6 @@ private extension BusinessProfileEditPage {
           .scaledToFit()
           .frame(width: Constants.defaultIconSize, height: Constants.defaultIconSize)
       }
-    }
-  }
-
-  @ViewBuilder
-  var profileImages: some View {
-    let urls = profileGetVM.dto.profileImageUrls
-    ForEach(urls.indices, id: \.self) { i in
-      BusinessImageView(
-        url: URL(string: urls[i]),
-        size: Constants.profileImageSize,
-        bordered: i == 0
-      )
     }
   }
 
@@ -232,7 +231,7 @@ private extension BusinessProfileEditPage {
   @ViewBuilder
   var locationInput: some View {
     LocationSettingsItem(location: $profileUpdateVM.dto, viewport: $viewport)
-      .id(cacheVM.getUserId())
+      .id(cacheVM.cache.avatarId)
   }
 
   var openingHoursInput: some View {
@@ -406,7 +405,6 @@ private extension BusinessProfileEditPage {
 private enum Constants {
   static let vSpacing: CGFloat = 16
   static let defaultIconSize: CGFloat = 28
-  static let defaultProfileImagesCount = 5
 
   static let imageCropSize: CGFloat = 250
 

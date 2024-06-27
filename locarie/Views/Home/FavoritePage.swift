@@ -31,7 +31,7 @@ struct FavoritePage: View {
 
         ForEvery(vm.posts) { post in
           MapViewAnnotation(coordinate: post.user.coordinate) {
-            BusinessMapAvatar(url: post.user.avatarUrl)
+            BusinessMapAvatar(url: post.user.avatarUrl, newUpdate: post.user.hasUpdateIn24Hours)
           }
         }
       }
@@ -42,7 +42,6 @@ struct FavoritePage: View {
       .ignoresSafeArea()
       VStack(spacing: 0) {
         topContent.padding(.vertical, 8)
-        Spacer()
         BottomSheet(
           topPosition: .right,
           detents: [Constants.bottomDetent, .large],
@@ -61,7 +60,7 @@ struct FavoritePage: View {
           .allowsHitTesting(currentDetent != Constants.bottomDetent)
           .padding(.horizontal, 16)
         } topContent: {
-          CircleButton(name: "Navigation")
+          CircleButton("Navigation")
             .padding(.trailing, 16)
             .onTapGesture {
               withViewportAnimation(.fly) {
@@ -75,7 +74,7 @@ struct FavoritePage: View {
         VStack {
           Spacer()
           BackToMapButton()
-            .padding(.bottom, 102)
+            .padding(.bottom, BottomTabConstants.height + 24)
             .onTapGesture {
               moveBottomSheet(to: Constants.bottomDetent)
             }
@@ -125,7 +124,7 @@ struct FavoritePage: View {
                 PostCardView(
                   vm.posts[i],
                   divider: i != vm.posts.count - 1,
-                  onAvatarTapped: {
+                  onTapped: {
                     router.navigate(to: Router.Int64Destination.businessHome(vm.posts[i].user.id, true))
                   },
                   onCoverTapped: {
@@ -176,7 +175,7 @@ struct FavoritePage: View {
 private extension FavoritePage {
   var topContent: some View {
     HStack {
-      CircleButton(systemName: "chevron.left").onTapGesture { dismiss() }
+      CircleButton("Chevron.Left").onTapGesture { dismiss() }
       Spacer()
     }
     .padding(.horizontal, 16)

@@ -20,6 +20,7 @@ final class ListUserPostsViewModel: BaseViewModel {
   }
 
   func getUserPosts(id: Int64) {
+    state = .loading
     networking.listUserPosts(id: id)
       .sink { [weak self] response in
         guard let self else { return }

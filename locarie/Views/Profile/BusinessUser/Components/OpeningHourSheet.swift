@@ -44,7 +44,7 @@ struct OpeningHourSheet: View {
 
 private extension OpeningHourSheet {
   var sheetTitle: some View {
-    Text(title).font(.headline)
+    Text(title).fontWeight(.bold)
   }
 
   var sheetCaption: some View {
@@ -66,21 +66,12 @@ private extension OpeningHourSheet {
   var statusContent: some View {
     Group {
       if closed {
-        closedView
+        Text("Closed").foregroundStyle(LocarieColor.greyDark)
       } else {
-        openView
+        timePicker
       }
     }
     .frame(height: Constants.statusContentHeight)
-  }
-
-  var openView: some View {
-    timePicker
-  }
-
-  var closedView: some View {
-    Text("Closed")
-      .foregroundStyle(.secondary)
   }
 }
 
@@ -135,7 +126,7 @@ private extension OpeningHourSheet {
     Button("Cancel") {
       isPresented = false
     }
-    .foregroundStyle(.secondary)
+    .foregroundStyle(LocarieColor.greyDark)
   }
 
   var doneButton: some View {

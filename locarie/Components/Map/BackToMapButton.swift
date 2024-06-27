@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct BackToMapButton: View {
+  static let width: CGFloat = 82
+  static let height: CGFloat = 40
+
   var body: some View {
     Image(systemName: "map")
       .resizable()
       .foregroundStyle(.white)
       .frame(width: 18, height: 18)
-      .frame(width: 82, height: 40)
+      .frame(width: BackToMapButton.width, height: BackToMapButton.height)
       .background { Capsule().fill(.black) }
   }
 }

@@ -12,7 +12,7 @@ struct CircleButton: View {
   let systemName: String
   let size: CGFloat
 
-  init(name: String, size: CGFloat = Constants.size) {
+  init(_ name: String, size: CGFloat = Constants.size) {
     self.name = name
     systemName = ""
     self.size = size
@@ -62,7 +62,7 @@ private enum Constants {
   ZStack {
     Color.red
     HStack {
-      CircleButton(name: "ShareIcon")
+      CircleButton("ShareIcon")
       CircleButton(systemName: "magnifyingglass")
     }
   }

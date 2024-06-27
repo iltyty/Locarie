@@ -57,25 +57,20 @@ struct LinkFormItemWithBlockTitle: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      titleView
-      contentView
+      Text(title)
+        .padding(.leading)
+        .fontWeight(.semibold)
+      HStack {
+        textView
+        Spacer()
+        iconView
+      }
+      .contentShape(Rectangle())
+      .background {
+        RoundedRectangle(cornerRadius: FormItemCommonConstants.cornerRadius)
+          .strokeBorder(FormItemCommonConstants.strokeColor, style: .init(lineWidth: 1.5))
+      }
     }
-  }
-
-  private var titleView: some View {
-    Text(title)
-      .padding(.leading)
-      .fontWeight(.semibold)
-  }
-
-  @ViewBuilder
-  private var contentView: some View {
-    HStack {
-      textView
-      Spacer()
-      iconView
-    }
-    .background(background)
   }
 
   private var textView: some View {
@@ -86,19 +81,13 @@ struct LinkFormItemWithBlockTitle: View {
   }
 
   private var iconView: some View {
-    Image(systemName: "chevron.right")
-      .font(.system(size: Constants.iconSize))
+    Image("Chevron.Right.Grey")
+      .resizable()
+      .scaledToFit()
+      .frame(width: 16, height: 16)
       .padding(.trailing)
+      .contentShape(Rectangle())
   }
-
-  private var background: some View {
-    RoundedRectangle(cornerRadius: FormItemCommonConstants.cornerRadius)
-      .strokeBorder(FormItemCommonConstants.strokeColor, style: .init(lineWidth: 1.5))
-  }
-}
-
-private enum Constants {
-  static let iconSize: CGFloat = 16
 }
 
 #Preview {

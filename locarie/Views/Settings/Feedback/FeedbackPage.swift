@@ -38,9 +38,9 @@ struct FeedbackPage: View {
         }
       }
       .padding(.horizontal, 16)
+      .keyboardDismissable(focus: $isEditing)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .keyboardDismissable(focus: $isEditing)
     .loadingIndicator(loading: $loading)
     .alert(alertText, isPresented: $presentingAlert) {
       Button("OK") {}
@@ -99,7 +99,6 @@ private extension FeedbackPage {
 
     Please share it and let us know.
     """)
-    .font(.callout)
   }
 
   var feedbackEditor: some View {

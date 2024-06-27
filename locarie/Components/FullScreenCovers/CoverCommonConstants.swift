@@ -8,5 +8,5 @@
 import SwiftUI
 
 enum CoverCommonConstants {
-  static let backgroundOpacity: CGFloat = 0.9
+  static let backgroundOpacity: CGFloat = 0.99
 }

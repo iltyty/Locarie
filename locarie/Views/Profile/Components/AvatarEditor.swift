@@ -66,15 +66,13 @@ private extension AvatarEditor {
     } else if !avatarUrl.isEmpty {
       avatar(avatarUrl)
     } else {
-      defaultAvatar(size: Constants.avatarSize)
+      defaultAvatar(size: Constants.avatarSize, isBusiness: cacheVM.isBusinessUser())
     }
   }
 
   func avatar(_ url: String) -> some View {
     KFImage(URL(string: url))
-      .placeholder {
-        defaultAvatar(size: Constants.avatarSize, isBusiness: cacheVM.isBusinessUser())
-      }
+      .placeholder { SkeletonView(Constants.avatarSize, Constants.avatarSize, true) }
       .resizable()
       .frame(width: Constants.avatarSize, height: Constants.avatarSize)
       .clipShape(Circle())

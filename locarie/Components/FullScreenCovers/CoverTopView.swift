@@ -10,11 +10,30 @@ import SwiftUI
 
 struct CoverTopView: View {
   let user: UserDto
+  let showMoreButton: Bool
   let sharePreviewText: String
-  var onAvatarTapped: () -> Void = {}
-  var onMoreButtonTapped: () -> Void = {}
+  var onAvatarTapped: () -> Void
+  var onMoreButtonTapped: () -> Void
 
   @Binding var isPresenting: Bool
+
+  init(
+    user: UserDto,
+    showMoreButton: Bool = true,
+    sharePreviewText: String,
+    onAvatarTapped: @escaping () -> Void = {},
+    onMoreButtonTapped: @escaping () -> Void = {},
+    isPresenting: Binding<Bool>
+  ) {
+    self.user = user
+    self.showMoreButton = showMoreButton
+    self.sharePreviewText = sharePreviewText
+    self.onAvatarTapped = onAvatarTapped
+    self.onMoreButtonTapped = onMoreButtonTapped
+    _isPresenting = isPresenting
+  }
+
+  private var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     HStack(spacing: 0) {
@@ -22,8 +41,10 @@ struct CoverTopView: View {
       avatar.padding(.trailing, 10)
       Text(user.businessName).fontWeight(.bold)
       Spacer()
-      shareButton.padding(.trailing, 24)
-      moreButton
+      shareButton
+      if cacheVM.getUserId() == user.id, showMoreButton {
+        moreButton.padding(.leading, 24)
+      }
     }
   }
 

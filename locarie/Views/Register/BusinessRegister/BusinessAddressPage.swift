@@ -128,7 +128,7 @@ private extension BusinessAddressPage {
 
   var topBar: some View {
     HStack {
-      CircleButton(systemName: "chevron.left").onTapGesture {
+      CircleButton("Chevron.Left").onTapGesture {
         dismiss()
       }
       Spacer()

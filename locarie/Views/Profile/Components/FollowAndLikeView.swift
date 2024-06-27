@@ -50,7 +50,7 @@ private extension FollowAndLikeView {
     .frame(maxWidth: .infinity)
     .background(
       Capsule()
-        .strokeBorder(isFollowedTabSelected ? .black : LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
+        .stroke(isFollowedTabSelected ? .black : LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
     )
     .onTapGesture {
       currentTab = .followed
@@ -73,7 +73,7 @@ private extension FollowAndLikeView {
     .frame(maxWidth: .infinity)
     .background(
       Capsule()
-        .strokeBorder(!isFollowedTabSelected ? .black : LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
+        .stroke(!isFollowedTabSelected ? .black : LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
     )
     .onTapGesture {
       currentTab = .saved
@@ -127,7 +127,7 @@ private extension FollowAndLikeView {
             PostCardView(
               posts[i],
               divider: i != posts.count - 1,
-              onAvatarTapped: {
+              onTapped: {
                 Router.shared.navigate(to: Router.Int64Destination.businessHome(posts[i].user.id, true))
               },
               onCoverTapped: {

@@ -19,8 +19,9 @@ struct LinkSettingsItem: View {
           .foregroundStyle(color)
           .padding(.vertical, 20)
         Spacer()
-        Image(systemName: "chevron.right")
-          .foregroundStyle(LocarieColor.greyDark)
+        Image("Chevron.Right.Grey")
+          .resizable()
+          .scaledToFit()
           .frame(width: 16, height: 16)
       }
       if divider {
