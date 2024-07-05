@@ -56,8 +56,6 @@
 		50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F812AF1512E0045AB12 /* PostCardView.swift */; };
 		5029426A2C2535D9000E5C64 /* LocarieDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502942692C2535D9000E5C64 /* LocarieDivider.swift */; };
 		5029426D2C255360000E5C64 /* View+KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5029426C2C255360000E5C64 /* View+KeyboardAdaptive.swift */; };
-		5029426F2C2553B7000E5C64 /* Publishers+KeyboardHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5029426E2C2553B7000E5C64 /* Publishers+KeyboardHeight.swift */; };
-		502942712C2553E2000E5C64 /* Notification+KeyboardHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502942702C2553E2000E5C64 /* Notification+KeyboardHeight.swift */; };
 		502A4FF02B32D34B00C0833A /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FEF2B32D34B00C0833A /* Color+Hex.swift */; };
 		502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+London.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */; };
 		502A4FF62B32D48400C0833A /* PostListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A4FF52B32D48400C0833A /* PostListService.swift */; };
@@ -308,8 +306,6 @@
 		50277F812AF1512E0045AB12 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
 		502942692C2535D9000E5C64 /* LocarieDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieDivider.swift; sourceTree = "<group>"; };
 		5029426C2C255360000E5C64 /* View+KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyboardAdaptive.swift"; sourceTree = "<group>"; };
-		5029426E2C2553B7000E5C64 /* Publishers+KeyboardHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publishers+KeyboardHeight.swift"; sourceTree = "<group>"; };
-		502942702C2553E2000E5C64 /* Notification+KeyboardHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+KeyboardHeight.swift"; sourceTree = "<group>"; };
 		502A4FEF2B32D34B00C0833A /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		502A4FF12B32D37E00C0833A /* CLLocationCoordinate2D+London.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+London.swift"; sourceTree = "<group>"; };
 		502A4FF52B32D48400C0833A /* PostListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListService.swift; sourceTree = "<group>"; };
@@ -760,8 +756,6 @@
 				50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */,
 				509AC0522B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift */,
 				505C25FE2C036FFE00862AC4 /* Date+TimeAgo.swift */,
-				5029426E2C2553B7000E5C64 /* Publishers+KeyboardHeight.swift */,
-				502942702C2553E2000E5C64 /* Notification+KeyboardHeight.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1668,7 +1662,6 @@
 				505C26012C05D47400862AC4 /* BusinessDescriptionPage.swift in Sources */,
 				5000C6C22AF7C7350057EF2D /* BottomTabView.swift in Sources */,
 				50C69A702BF33D6A00B51B0C /* ImageFullScreenView.swift in Sources */,
-				502942712C2553E2000E5C64 /* Notification+KeyboardHeight.swift in Sources */,
 				505568D12B84BCA000FD21E4 /* LinkFormItemWithInlineTitle.swift in Sources */,
 				50530B932B8775FD009C1F92 /* BusinessBottomBar.swift in Sources */,
 				50F549ED2B4428A100D06F20 /* ProfileUpdateViewModel.swift in Sources */,
@@ -1746,7 +1739,6 @@
 				509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */,
 				502A4FF62B32D48400C0833A /* PostListService.swift in Sources */,
 				5075FCCF2B86E8DB005E4A8B /* ProfilePhone.swift in Sources */,
-				5029426F2C2553B7000E5C64 /* Publishers+KeyboardHeight.swift in Sources */,
 				506590D22B8CB411009F8E5F /* UserEndpoints.swift in Sources */,
 				5075FCD72B870A05005E4A8B /* ProfileBio.swift in Sources */,
 				50369A6D2B300908005D6B43 /* PostCreateService.swift in Sources */,

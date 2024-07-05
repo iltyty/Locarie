@@ -18,34 +18,39 @@ struct FeedbackPage: View {
   @StateObject private var editVM = TextEditViewModel(limit: Constants.wordCountLimit)
 
   var body: some View {
-    VStack {
-      NavigationBar("Feedback", divider: true)
-      VStack(alignment: .leading) {
-        title
-          .padding(.top, 24)
-          .padding(.bottom, 16)
-          .onTapGesture {
-            isEditing = false
+    GeometryReader { proxy in
+      VStack {
+        NavigationBar("Feedback", divider: true)
+        ScrollView {
+          VStack(alignment: .leading) {
+            title
+              .padding(.top, 24)
+              .padding(.bottom, 16)
+              .onTapGesture {
+                isEditing = false
+              }
+            paragraph
+              .padding(.bottom, 24)
+              .onTapGesture {
+                isEditing = false
+              }
+            feedbackEditor.frame(height: 350)
+            Spacer()
+            shareButton.onTapGesture {
+              isEditing = false
+            }
           }
-        paragraph
-          .padding(.bottom, 24)
-          .onTapGesture {
-            isEditing = false
-          }
-        feedbackEditor
-        shareButton.onTapGesture {
-          isEditing = false
+          .padding(.horizontal, 16)
+          .keyboardDismissable(focus: $isEditing)
         }
+        .scrollDisabled(true)
       }
-      .padding(.horizontal, 16)
-      .keyboardDismissable(focus: $isEditing)
+      .frame(minHeight: proxy.size.height)
     }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
     .loadingIndicator(loading: $loading)
     .alert(alertText, isPresented: $presentingAlert) {
       Button("OK") {}
     }
-    .ignoresSafeArea(.keyboard)
     .onReceive(feedbackVM.$state) { state in
       handleFeedbackVMStateChange(state)
     }

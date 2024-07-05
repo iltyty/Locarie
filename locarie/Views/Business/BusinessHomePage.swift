@@ -20,6 +20,7 @@ struct BusinessHomePage: View {
 
   @State private var user = UserDto()
   @State private var post = PostDto()
+  @State private var favoredByCount = 0
   @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
 
   @State private var screenHeight: CGFloat = 0
@@ -36,6 +37,7 @@ struct BusinessHomePage: View {
   @StateObject private var profileVM = ProfileGetViewModel()
   @StateObject private var listUserPostsVM = ListUserPostsViewModel()
   @StateObject private var favoritePostVM = FavoritePostViewModel()
+  @StateObject private var favoriteBusinessVM = FavoriteBusinessViewModel()
 
   @Environment(\.dismiss) var dismiss
 
@@ -48,7 +50,20 @@ struct BusinessHomePage: View {
             .padding(.bottom, 8)
             .padding(.horizontal, 16)
           bottomContent
-          BusinessBottomBar(business: $user, location: user.location).background(.white)
+          BusinessBottomBar(
+            business: $user,
+            location: user.location,
+            favoriteBusinessVM: favoriteBusinessVM
+          )
+          .onReceive(favoriteBusinessVM.$state) { state in
+            switch state {
+            case .favoriteFinished:
+              favoredByCount += 1
+            case .unfavoriteFinished:
+              favoredByCount -= 1
+            default: break
+            }
+          }
         }
         if currentDetent == .large {
           VStack {
@@ -102,6 +117,7 @@ struct BusinessHomePage: View {
       updateMapCenter(user: dto)
     }
     .onChange(of: user) { newUser in
+      favoredByCount = newUser.favoredByCount
       listUserPostsVM.getUserPosts(id: newUser.id)
     }
   }
@@ -205,10 +221,10 @@ private extension BusinessHomePage {
             if case .loading = profileVM.state {
               BusinessUserProfilePage.bioSkeleton
             } else {
-              ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
+              ProfileBio(user, presentingDetail: $presentingProfileDetail)
             }
             if presentingProfileDetail {
-              ProfileDetail(user)
+              ProfileDetail(user, favoredByCount: favoredByCount, likedCount: likedCount)
             }
             if case .loading = listUserPostsVM.state {
               BusinessUserProfilePage.postsSkeleton
@@ -230,6 +246,10 @@ private extension BusinessHomePage {
       }
       .scrollIndicators(.hidden)
     }
+  }
+
+  var likedCount: Int {
+    listUserPostsVM.posts.map(\.favoredByCount).reduce(0, +)
   }
 
   @ViewBuilder

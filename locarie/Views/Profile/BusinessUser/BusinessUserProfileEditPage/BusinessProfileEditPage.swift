@@ -55,6 +55,7 @@ struct BusinessProfileEditPage: View {
           }
         }
         .scrollIndicators(.hidden)
+        .keyboardAdaptive()
       }
       if !cacheVM.cache.profileComplete {
         NotPublicButton()

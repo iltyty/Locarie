@@ -182,7 +182,6 @@ private extension BusinessUserProfilePage {
             }
         }
       }
-      .gestureOptions(disabledAllGesturesOptions())
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: Constants.bottomY))
       .ignoresSafeArea(edges: .all)
       .onAppear {
@@ -245,7 +244,7 @@ private extension BusinessUserProfilePage {
                 .foregroundStyle(LocarieColor.greyDark)
               }
               if presentingProfileDetail {
-                ProfileDetail(profileVM.dto)
+                ProfileDetail(profileVM.dto, favoredByCount: profileVM.dto.favoredByCount, likedCount: likedCount)
               }
             }
             if case .loading = postVM.state {
@@ -268,6 +267,10 @@ private extension BusinessUserProfilePage {
         .scrollIndicators(.hidden)
       }
     }
+  }
+
+  var likedCount: Int {
+    postVM.posts.map(\.favoredByCount).reduce(0, +)
   }
 
   @ViewBuilder

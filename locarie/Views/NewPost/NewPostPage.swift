@@ -16,6 +16,7 @@ struct NewPostPage: View {
   @State private var presentingNotPublicAlert = false
   @State private var alertMessage = ""
   @State private var screenWidth = 0.0
+  @State private var navigationBarHeight = 0.0
 
   @FocusState private var isEditing: Bool
 
@@ -24,6 +25,7 @@ struct NewPostPage: View {
 
   @StateObject private var profileVM = ProfileGetViewModel()
   @StateObject private var postVM = PostCreateViewModel()
+  @StateObject private var textEditVM = TextEditViewModel(limit: Constants.postContentMaxLength)
 
   @Environment(\.dismiss) private var dismiss
 
@@ -33,27 +35,38 @@ struct NewPostPage: View {
         NavigationBar("Post")
           .padding(.bottom, 8)
           .ignoresSafeArea(.keyboard)
-        VStack(alignment: .leading, spacing: 0) {
-          status.padding(.vertical, 8)
-          ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-              photosPicker.padding(.bottom, 24)
-              photoCount.padding(.bottom, 5)
-              paragraphInput.padding(.bottom, 24)
+          .background {
+            GeometryReader { p in
+              Color.clear.task(id: p.size) {
+                navigationBarHeight = p.size.height
+              }
             }
-            .padding(.top, 8)
           }
-          .scrollIndicators(.hidden)
-          .frame(maxHeight: 450)
-          LocarieDivider()
-          categories
+        ScrollView {
+          VStack(alignment: .leading, spacing: 0) {
+            status.padding(.vertical, 8)
+            ScrollView {
+              VStack(alignment: .leading, spacing: 0) {
+                photosPicker.padding(.bottom, 24)
+                photoCount.padding(.bottom, 5)
+                paragraphInput.padding(.bottom, 24)
+              }
+              .padding(.top, 8)
+            }
+            .scrollIndicators(.hidden)
+            .frame(maxHeight: 450)
+            LocarieDivider()
+            categories
+            Spacer().contentShape(Rectangle())
+            postButton.keyboardDismissable(focus: $isEditing)
+          }
+          .frame(minHeight: proxy.size.height - navigationBarHeight)
+          .padding(.horizontal, Constants.hSpacing)
+          .keyboardDismissable(focus: $isEditing)
         }
-        .padding(.horizontal, Constants.hSpacing)
-        .keyboardDismissable(focus: $isEditing)
-        Spacer().contentShape(Rectangle())
-        postButton.keyboardDismissable(focus: $isEditing)
+        .scrollIndicators(.hidden)
+        .scrollDisabled(true)
       }
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
       .onAppear {
         screenWidth = proxy.frame(in: .global).width
       }
@@ -228,7 +241,7 @@ private extension NewPostPage {
 
 private extension NewPostPage {
   var paragraphInput: some View {
-    TextEditorPlus(text: $postVM.post.content, hint: "Paragraph...")
+    TextEditorPlusWithLimit(viewModel: textEditVM, hint: "Paragraph...")
       .focused($isEditing)
       .frame(height: Constants.inputHeight, alignment: .top)
       .keyboardAdaptive()
@@ -251,6 +264,7 @@ private extension NewPostPage {
 extension NewPostPage {
   var postButton: some View {
     Button {
+      postVM.post.content = textEditVM.text
       postVM.create()
     } label: {
       BackgroundButtonFormItem(title: "Post").opacity(buttonOpacity)
@@ -276,7 +290,8 @@ private enum Constants {
   static let photoCornerRadius: CGFloat = 16
   static let photoTopPadding: CGFloat = 10
   static let photoTrailingPadding: CGFloat = 12
-  static let inputHeight: CGFloat = 150
+  static let inputHeight: CGFloat = 250
+  static let postContentMaxLength = 500
 }
 
 #Preview {

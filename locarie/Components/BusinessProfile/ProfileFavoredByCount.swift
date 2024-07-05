@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ProfileFavoredByCount: View {
-  let user: UserDto
+  let count: Int
 
-  init(_ user: UserDto) {
-    self.user = user
+  init(_ count: Int) {
+    self.count = count
   }
 
   var body: some View {
@@ -20,7 +20,7 @@ struct ProfileFavoredByCount: View {
         .resizable()
         .scaledToFit()
         .frame(width: 16, height: 16)
-      Text("\(user.favoredByCount)")
+      Text("\(count)")
     }
   }
 }

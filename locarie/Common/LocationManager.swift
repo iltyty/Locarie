@@ -25,7 +25,7 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
   private func setup() {
     switch manager.authorizationStatus {
     case .authorizedWhenInUse, .authorizedAlways:
-      manager.requestLocation()
+      manager.startUpdatingLocation()
       enableLocationFeatures()
     case .restricted, .denied:
       disableLocationFeatures()
@@ -44,7 +44,7 @@ extension LocationManager {
     else {
       return
     }
-    manager.requestLocation()
+    manager.startUpdatingLocation()
   }
 
   func enableLocationFeatures() {
@@ -66,6 +66,7 @@ extension LocationManager {
   ) {
     guard let location = locations.last else { return }
     self.location = location
+    manager.stopUpdatingLocation()
   }
 
   private func geocode() {

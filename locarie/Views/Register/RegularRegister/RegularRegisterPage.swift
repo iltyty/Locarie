@@ -39,12 +39,12 @@ struct RegularRegisterPage: View {
             Spacer()
           }
           .padding(.horizontal, 16)
+          .keyboardDismissable(focus: $focusField)
         }
+        .keyboardAdaptive()
       }
     }
-    .ignoresSafeArea(.keyboard)
     .disabled(isLoading)
-    .keyboardDismissable(focus: $focusField)
     .overlay { isLoading ? ProgressView() : nil }
     .alert(alertTitle, isPresented: $isAlertShowing) {}
     .onReceive(registerViewModel.$state) { state in

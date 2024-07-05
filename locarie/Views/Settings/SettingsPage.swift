@@ -30,9 +30,7 @@ struct SettingsPage: View {
           privacyPolicy
           termsOfService
           termsOfUse
-          logout
-            .padding(.top, 48)
-            .padding(.bottom, 100)
+          logout.padding(.top, 48).padding(.bottom, 100)
           Spacer()
         }
         .ignoresSafeArea(edges: .bottom)

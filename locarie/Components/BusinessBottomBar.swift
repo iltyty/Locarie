@@ -10,12 +10,11 @@ import SwiftUI
 struct BusinessBottomBar: View {
   @Binding var business: UserDto
   let location: BusinessLocation?
+  @ObservedObject var favoriteBusinessVM: FavoriteBusinessViewModel
 
   @State private var alreadyFollowed = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
-
-  @StateObject private var favoriteBusinessVM = FavoriteBusinessViewModel()
 
   var body: some View {
     ZStack(alignment: .top) {
@@ -40,7 +39,7 @@ struct BusinessBottomBar: View {
     .onReceive(favoriteBusinessVM.$alreadyFollowed) { followed in
       alreadyFollowed = followed
     }
-    .onReceive(favoriteBusinessVM.$state, perform: { state in
+    .onReceive(favoriteBusinessVM.$state) { state in
       switch state {
       case .favoriteFinished:
         alreadyFollowed = true
@@ -48,7 +47,7 @@ struct BusinessBottomBar: View {
         alreadyFollowed = false
       default: break
       }
-    })
+    }
     .frame(height: BusinessBottomBarConstants.height)
     .ignoresSafeArea(edges: .bottom)
   }
@@ -66,13 +65,7 @@ private extension BusinessBottomBar {
       .onTapGesture { favoriteButtonTapped() }
   }
 
-  var favoriteButtonName: String {
-    if alreadyFollowed {
-      "Bookmark.Fill"
-    } else {
-      "Bookmark"
-    }
-  }
+  var favoriteButtonName: String { alreadyFollowed ? "Bookmark.Fill" : "Bookmark" }
 
   var directionButton: some View {
     Link(destination: navigationUrl) {
@@ -93,7 +86,7 @@ private extension BusinessBottomBar {
 
   var background: some View {
     Rectangle()
-      .fill(.background)
+      .fill(.white)
       .shadow(radius: BusinessBottomBarConstants.shadowRadius)
   }
 

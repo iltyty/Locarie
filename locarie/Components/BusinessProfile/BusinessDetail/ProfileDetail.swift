@@ -9,14 +9,27 @@ import SwiftUI
 
 struct ProfileDetail: View {
   let user: UserDto
+  let favoredByCount: Int
+  let likedCount: Int
 
-  init(_ user: UserDto) {
+  init(_ user: UserDto, favoredByCount: Int, likedCount: Int) {
     self.user = user
+    self.favoredByCount = favoredByCount
+    self.likedCount = likedCount
   }
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
-      ProfileFavoredByCount(user)
+      HStack(spacing: 24) {
+        ProfileFavoredByCount(favoredByCount)
+        HStack(spacing: 10) {
+          Image("Heart")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 16, height: 16)
+          Text("\(likedCount)")
+        }
+      }
       ProfileAddress(user)
       if !user.businessHours.isEmpty {
         ProfileOpeningHours(user)

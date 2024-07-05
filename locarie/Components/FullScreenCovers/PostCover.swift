@@ -17,6 +17,7 @@ struct PostCover: View {
   private let cacheVM = LocalCacheViewModel.shared
   private let locationManager = LocationManager()
 
+  @State private var distance = "0 km away"
   @State private var alreadySaved = false
   @State private var deleteTapped = false
   @State private var presentingDeleteAlert = false
@@ -43,10 +44,24 @@ struct PostCover: View {
         .padding(.bottom, 4)
         .padding(.horizontal, 8)
         ScrollView {
-          VStack(alignment: .leading, spacing: 16) {
-            postStatus.padding(.top, 20)
+          VStack(alignment: .leading, spacing: 8) {
+            postStatus.padding(.top, 8)
             VStack(alignment: .leading, spacing: 0) {
-              Banner(urls: post.imageUrls, fullToggle: false).padding(.bottom, 16)
+              ZStack(alignment: .topTrailing) {
+                Banner(urls: post.imageUrls, fullToggle: false).padding(.bottom, 12)
+                Text(distance)
+                  .font(.custom(GlobalConstants.fontName, size: 12))
+                  .foregroundStyle(LocarieColor.greyDark)
+                  .padding(.horizontal, 10)
+                  .padding(.vertical, 5)
+                  .background(Capsule().fill(.white))
+                  .padding(5)
+                  .onReceive(locationManager.$location) { location in
+                    if let location {
+                      distance = "\(post.user.distance(to: location)) away"
+                    }
+                  }
+              }
               Text(post.content)
             }
             HStack(spacing: 5) {
@@ -54,6 +69,7 @@ struct PostCover: View {
                 ProfileBusinessCategoryView(tag)
               }
             }
+            .padding(.top, 4)
             .padding(.bottom, 150)
           }
         }
@@ -147,9 +163,6 @@ private extension PostCover {
     HStack(spacing: 5) {
       Text(post.publishedTime)
         .foregroundStyle(post.publishedOneDayAgo ? LocarieColor.greyDark : LocarieColor.green)
-      DotView()
-      Text(post.user.distance(to: locationManager.location))
-        .foregroundStyle(LocarieColor.greyDark)
       DotView()
       Text(post.user.neighborhood).foregroundStyle(LocarieColor.greyDark)
     }
