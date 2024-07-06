@@ -17,9 +17,10 @@ struct PostCover: View {
   private let cacheVM = LocalCacheViewModel.shared
   private let locationManager = LocationManager()
 
-  @State private var distance = "0 km away"
+  @State private var distance = "0 km"
   @State private var alreadySaved = false
   @State private var deleteTapped = false
+  @State private var presentingLoginSheet = false
   @State private var presentingDeleteAlert = false
   @State private var presentingDeleteSheet = false
 
@@ -58,7 +59,7 @@ struct PostCover: View {
                   .padding(5)
                   .onReceive(locationManager.$location) { location in
                     if let location {
-                      distance = "\(post.user.distance(to: location)) away"
+                      distance = "\(post.user.distance(to: location))"
                     }
                   }
               }
@@ -95,6 +96,7 @@ struct PostCover: View {
         postDeleteVM.delete(id: post.id)
       }
     }
+    .loginSheet(isPresented: $presentingLoginSheet)
     .bottomDialog(isPresented: $presentingDeleteSheet) {
       if deleteTapped {
         presentingDeleteAlert = true
@@ -166,13 +168,16 @@ private extension PostCover {
       DotView()
       Text(post.user.neighborhood).foregroundStyle(LocarieColor.greyDark)
     }
+    .font(.custom(GlobalConstants.fontName, size: 14))
   }
 
   var favoriteButton: some View {
     favoriteButtonBackground
       .overlay { favoriteIcon }
       .onTapGesture {
-        if alreadySaved {
+        if !cacheVM.isLoggedIn() {
+          presentingLoginSheet = true
+        } else if alreadySaved {
           favoritePostVM.unfavorite(userId: userId, postId: post.id)
         } else {
           favoritePostVM.favorite(userId: userId, postId: post.id)

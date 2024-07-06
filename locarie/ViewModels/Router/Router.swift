@@ -25,6 +25,11 @@ final class Router: ObservableObject {
   func navigateToRoot() {
     path.removeLast(path.count)
   }
+
+  func navigateToMinePage() {
+    path.removeLast(path.count)
+    BottomTabViewRouter.shared.currentPage = .profile
+  }
 }
 
 extension Router {
@@ -35,7 +40,7 @@ extension Router {
          businessRegister, forgotPassword, notifications
 
     case settings, myAccount, changePassword, newPassword,
-         feedback, privacyPolicy, termsOfUse, termsOfService
+         feedback, privacyPolicy, termsOfService, communityGuidelines
 
     case userProfile, regularUserProfile, businessUserProfile, businessImagesEdit,
          userProfileEdit
@@ -83,10 +88,10 @@ extension Router {
       FeedbackPage()
     case .privacyPolicy:
       PrivacyPolicyPage()
-    case .termsOfUse:
-      TermsOfUsePage()
     case .termsOfService:
       TermsOfServicePage()
+    case .communityGuidelines:
+      CommunityGuidelinesPage()
 
     case .userProfile:
       UserProfilePage()

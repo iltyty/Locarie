@@ -36,6 +36,4 @@ struct LocarieView: View {
   }
 }
 
-#Preview {
-  LocarieView()
-}
+#Preview { LocarieView() }

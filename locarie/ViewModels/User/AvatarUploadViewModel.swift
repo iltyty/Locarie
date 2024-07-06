@@ -65,7 +65,6 @@ import Foundation
   }
 
   private func handleResponse(_ response: AvatarUploadResponse) {
-    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
     } else {

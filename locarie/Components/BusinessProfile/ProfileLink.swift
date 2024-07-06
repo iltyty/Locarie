@@ -33,11 +33,27 @@ struct ProfileLink: View {
     if #available(iOS 17.0, *) {
       text.isEmpty
         ? Text(cacheVM.getUserId() == user.id ? "Edit" : "Link").foregroundStyle(LocarieColor.greyDark)
-        : Text(text)
+        : Text(.init("[\(text)](\(textWithHttpsPrefix(text)))"))
     } else {
       text.isEmpty
         ? Text(cacheVM.getUserId() == user.id ? "Edit" : "Link").foregroundColor(LocarieColor.greyDark)
-        : Text(text)
+        : Text(.init("[\(text)](\(textWithHttpsPrefix(text)))"))
+    }
+  }
+
+  func textWithoutHttpsPrefix(_ text: String) -> String {
+    if text.starts(with: "https://") {
+      String(text[text.index(text.startIndex, offsetBy: 8)...])
+    } else {
+      text
+    }
+  }
+
+  func textWithHttpsPrefix(_ text: String) -> String {
+    if text.starts(with: "https://") {
+      text
+    } else {
+      "https://" + text
     }
   }
 }

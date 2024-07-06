@@ -62,7 +62,6 @@ final class AuthViewModel: BaseViewModel {
   private func handleResponse(
     _ response: DataResponse<ResponseDto<some Decodable>, NetworkError>, finishedState: State
   ) {
-    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
       return
@@ -77,7 +76,6 @@ final class AuthViewModel: BaseViewModel {
   private func handleValidateResponse(
     _ response: DataResponse<ResponseDto<Bool>, NetworkError>, finishedState: State
   ) {
-    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
       return

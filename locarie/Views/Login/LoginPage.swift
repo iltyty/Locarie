@@ -64,7 +64,7 @@ struct LoginPage: View {
   private func handleLoginFinished(cache: UserCache?) {
     guard let cache else { return }
     cacheViewModel.setUserCache(cache)
-    router.navigateToRoot()
+    router.navigateToMinePage()
   }
 
   private func handleNetworkError(_ error: NetworkError) {

@@ -21,7 +21,11 @@ struct BusinessMapAvatar: View {
         .frame(width: avatarSize, height: avatarSize)
         .clipShape(Circle())
         .frame(width: size, height: size)
-        .background { Circle().fill(LocarieColor.greyMedium) }
+        .background {
+          Circle()
+            .fill(LocarieColor.greyMedium)
+            .shadow(color: Color.black.opacity(0.25), radius: 2, x: 0.25, y: 0.25)
+        }
       if newUpdate {
         Circle()
           .fill(LocarieColor.green)

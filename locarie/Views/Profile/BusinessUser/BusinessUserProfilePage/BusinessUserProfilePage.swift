@@ -115,22 +115,17 @@ struct BusinessUserProfilePage: View {
     }
     .onReceive(profileVM.$state) { state in
       if case .finished = state {
+        // for debug use, if all users have re-logged in, this line can be deleted
+        // because in previous version, the email is not cached, only new version
+        // users have their email cached after logged in. Thus, we should cache the
+        // email here for use of resetting password (see ChangePasswordPage)
+        cacheVM.setEmail(profileVM.dto.email)
         cacheVM.setProfileComplete(profileVM.dto.isProfileComplete)
         if cacheVM.isFirstLoggedIn(), !cacheVM.isProfileComplete() {
           presentingNotPublicSheet = true
         }
+        updateMapCenter(user: profileVM.dto)
       }
-    }
-    .onReceive(profileVM.$dto) { dto in
-      // for debug use, if all users have re-logged in, this line can be deleted
-      // because in previous version, the email is not cached, only new version
-      // users have their email cached after logged in. Thus, we should cache the
-      // email here for use of resetting password (see ChangePasswordPage)
-      cacheVM.setEmail(dto.email)
-      if cacheVM.isFirstLoggedIn(), !cacheVM.isProfileComplete() {
-        presentingNotPublicSheet = true
-      }
-      updateMapCenter(user: dto)
     }
     .onReceive(postDeleteVM.$state) { state in
       switch state {
@@ -280,7 +275,7 @@ private extension BusinessUserProfilePage {
         Spacer()
         VStack {
           Image("NoPost").padding(.top, 40)
-          Text("No post yet")
+          Text("Start Posting")
             .font(.custom(GlobalConstants.fontName, size: 14))
             .fontWeight(.bold)
         }

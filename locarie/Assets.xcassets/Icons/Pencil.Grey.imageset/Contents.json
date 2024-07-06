@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "EditIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Pencil.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

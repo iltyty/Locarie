@@ -61,11 +61,8 @@ struct BottomSheet<Content: View, TopContent: View>: View {
     )
     .background(GeometryReader { reader in
       Color.clear
-        .onAppear {
+        .task(id: reader.size.height) {
           contentHeight = reader.size.height
-        }
-        .onChange(of: reader.size.height) { height in
-          contentHeight = height
         }
     })
     .offset(y: offsetY)
@@ -116,6 +113,7 @@ private extension BottomSheet {
       topTrailingRadius: BottomSheetConstants.backgroundCornerRadius
     )
     .fill(.white)
+    .shadow(color: Color.black.opacity(0.25), radius: 2, x: 0.25, y: 0.25)
   }
 }
 
@@ -148,7 +146,7 @@ private struct BottomSheetTestView: View {
   @State var currentDetent: BottomSheetDetent = .medium
 
   var body: some View {
-    BottomSheet(topPosition: .right, detents: [.minimum, .medium, .large], currentDetent: $currentDetent) {
+    BottomSheet(detents: [.minimum, .fraction(0.3), .large], currentDetent: $currentDetent) {
       ScrollView {
         VStack {
           ForEach(1 ..< 100, id: \.self) { i in

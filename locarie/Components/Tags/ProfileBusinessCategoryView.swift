@@ -21,7 +21,9 @@ struct ProfileBusinessCategoryView: View {
       .padding(.horizontal, 10)
       .padding(.vertical, 4)
       .background {
-        Capsule().strokeBorder(Constants.color, style: .init(lineWidth: 1.5))
+        Capsule()
+          .stroke(Constants.color, style: .init(lineWidth: 1.5))
+          .padding(0.75)
       }
   }
 }

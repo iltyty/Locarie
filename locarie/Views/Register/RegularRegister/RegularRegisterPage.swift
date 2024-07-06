@@ -25,21 +25,25 @@ struct RegularRegisterPage: View {
 
   var body: some View {
     GeometryReader { _ in
-      VStack(spacing: 32) {
-        NavigationBar("Create an account")
+      VStack(spacing: 0) {
+        NavigationBar("Create an account").padding(.bottom, 16)
         ScrollView {
           VStack(spacing: 16) {
-            emailInput
-            firstNameInput
-            lastNameInput
-            usernameInput
-            passwordInput
+            VStack(spacing: 16) {
+              emailInput
+              firstNameInput
+              lastNameInput
+              usernameInput
+              passwordInput
+            }
+            .keyboardDismissable(focus: $focusField)
+
             bottomText
             createButton
             Spacer()
           }
+          .padding(.top, 16)
           .padding(.horizontal, 16)
-          .keyboardDismissable(focus: $focusField)
         }
         .keyboardAdaptive()
       }
@@ -139,7 +143,6 @@ private extension RegularRegisterPage {
       pickerLineImage(systemName: systemName, isFilled: $isServiceAgreed)
       Text("""
       I agree to the \(Text("Privacy Policy").foregroundColor(LocarieColor.primary)), \
-      \(Text("Terms of use").foregroundColor(LocarieColor.primary)), \
       \(Text("Community Guidelines").foregroundColor(LocarieColor.primary)), and \
       \(Text("Terms of Service").foregroundColor(LocarieColor.primary)).
       """)

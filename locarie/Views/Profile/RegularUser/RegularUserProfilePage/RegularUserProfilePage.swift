@@ -27,22 +27,23 @@ struct RegularUserProfilePage: View {
         ZStack(alignment: .top) {
           ScrollView {
             VStack(spacing: 0) {
-              ZStack {
+              VStack(spacing: 0) {
+                HStack(spacing: 16) {
+                  Spacer()
+                  ProfileEditButton()
+                  settingsButton
+                }
+                .padding(.horizontal, 16)
+                avatarRow.padding(.vertical, 72)
+              }
+              .padding(.top, topSafeAreaHeight)
+              .background {
                 LinearGradient(
                   colors: [LocarieColor.primary, Color.white],
                   startPoint: .top,
                   endPoint: .bottom
                 )
-                VStack(spacing: 0) {
-                  HStack(spacing: 16) {
-                    Spacer()
-                    ProfileEditButton()
-                    settingsButton
-                  }
-                  .padding(.horizontal, 16)
-                  avatarRow.padding(.vertical, 72)
-                }
-                .padding(.top, topSafeAreaHeight)
+                .ignoresSafeArea(edges: .top)
               }
               FollowAndLikeView(
                 post: $post,
@@ -53,6 +54,12 @@ struct RegularUserProfilePage: View {
             }
           }
           .scrollIndicators(.hidden)
+          .background {
+            VStack {
+              LocarieColor.primary.frame(height: 300)
+              Spacer()
+            }
+          }
           if cacheVM.isBusinessUser() {
             HStack {
               backButton

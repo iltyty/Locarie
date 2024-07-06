@@ -51,6 +51,7 @@ private extension FollowAndLikeView {
     .background(
       Capsule()
         .stroke(isFollowedTabSelected ? .black : LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
+        .padding(0.75)
     )
     .onTapGesture {
       currentTab = .followed
@@ -74,6 +75,7 @@ private extension FollowAndLikeView {
     .background(
       Capsule()
         .stroke(!isFollowedTabSelected ? .black : LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
+        .padding(0.75)
     )
     .onTapGesture {
       currentTab = .saved

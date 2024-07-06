@@ -19,7 +19,7 @@ struct BusinessMyAccountPage: View {
     VStack(spacing: 24) {
       NavigationBar("My account", divider: true).background(.white)
       VStack(alignment: .leading, spacing: 0) {
-        TextSettingsItem(title: "Account type", value: "Business")
+        TextSettingsItem(title: "Account type", value: "Business Account")
         TextSettingsItem(title: "Business name", value: profileVM.dto.businessName)
         TextSettingsItem(title: "Business category", value: profileVM.dto.categories.joined(separator: ", "))
         TextSettingsItem(title: "Email", value: profileVM.dto.email)

@@ -29,7 +29,6 @@ final class PostDeleteViewModel: BaseViewModel {
   }
 
   private func handleResponse(_ response: PostDeleteResponse) {
-    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
       return

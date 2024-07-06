@@ -24,8 +24,7 @@ struct HomePage: View {
   @State private var scrollId: Int64? = nil
   @State private var searching = false
   @State private var selectedPost = PostDto()
-  @State private var viewport: Viewport =
-    .followPuck(zoom: 11)
+  @State private var viewport: Viewport = .camera(center: .london, zoom: 11)
 
   @Namespace var namespace
 

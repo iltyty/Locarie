@@ -13,7 +13,7 @@ struct BioEditPage: View {
   @StateObject var bioEditViewModel =
     TextEditViewModel(limit: Constants.wordLimit)
 
-  @State private var hint = "Bio..."
+  @State private var hint = "Bio"
 
   @Environment(\.dismiss) var dismiss
 

@@ -1,21 +1,23 @@
 //
-//  TermsOfUsePage.swift
+//  CommunityGuidelinesPage.swift
 //  locarie
 //
-//  Created by qiuty on 04/01/2024.
+//  Created by qiuty on 06/07/2024.
 //
 
 import SwiftUI
 
-struct TermsOfUsePage: View {
+struct CommunityGuidelinesPage: View {
   var body: some View {
     VStack {
-      NavigationBar("Terms of use", divider: true)
+      NavigationBar("Community Guidelines", divider: true)
       VStack(alignment: .leading) {
-        termsOfUseTitle
+        Text("Community Guidelines")
+          .font(.custom(GlobalConstants.fontName, size: 18))
+          .foregroundStyle(Color.locariePrimary)
           .padding(.top, 24)
           .padding(.bottom, 16)
-        termsOfUseContent
+        content
       }
       .padding(.horizontal, 16)
       Spacer()
@@ -23,14 +25,8 @@ struct TermsOfUsePage: View {
   }
 }
 
-private extension TermsOfUsePage {
-  var termsOfUseTitle: some View {
-    Text("Terms of use")
-      .font(.custom(GlobalConstants.fontName, size: 18))
-      .foregroundStyle(Color.locariePrimary)
-  }
-
-  var termsOfUseContent: some View {
+private extension CommunityGuidelinesPage {
+  var content: some View {
     Text("""
     Here at Locarie, we aim to foster a sense of community and belonging, both online and offline.
 
@@ -46,5 +42,5 @@ private extension TermsOfUsePage {
 }
 
 #Preview {
-  TermsOfUsePage()
+  CommunityGuidelinesPage()
 }

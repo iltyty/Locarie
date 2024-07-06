@@ -29,6 +29,7 @@ struct DynamicPostsMapView: View {
               BusinessMapAvatar(url: post.user.avatarUrl, newUpdate: post.user.hasUpdateIn24Hours)
             }
           }
+          .allowOverlap(true)
         }
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 208))

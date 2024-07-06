@@ -154,7 +154,7 @@ extension RegisterViewModel {
 private extension RegisterViewModel {
   var isBusinessNameValidPublisher: AnyPublisher<Bool, Never> {
     $dto.map { dto in
-      !dto.businessName.isEmpty
+      !dto.businessName.isEmpty && dto.businessName.count < 30
     }
     .eraseToAnyPublisher()
   }

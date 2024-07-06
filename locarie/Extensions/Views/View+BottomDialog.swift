@@ -15,8 +15,7 @@ extension View {
   ) -> some View {
     sheet(isPresented: isPresented, onDismiss: onDismiss) {
       if #available(iOS 16.4, *) {
-        sheetContent(content: content())
-          .presentationCornerRadius(24)
+        sheetContent(content: content()).presentationCornerRadius(24)
       } else {
         sheetContent(content: content())
       }
@@ -41,7 +40,7 @@ private func sheetContent(content: some View) -> some View {
   .presentationDetents([.height(180)])
 }
 
-struct BottomDialogTestView: View {
+private struct BottomDialogTestView: View {
   @State private var presenting = true
 
   var body: some View {

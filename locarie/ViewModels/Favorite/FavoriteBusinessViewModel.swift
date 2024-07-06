@@ -148,7 +148,6 @@ extension FavoriteBusinessViewModel {
   }
 
   private func handleListPostsResponse(_ response: ListFavoriteBusinessPostsResponse) {
-    debugPrint(response)
     if let error = response.error {
       state = .listPostsFailed(error)
       return

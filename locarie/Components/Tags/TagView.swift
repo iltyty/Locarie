@@ -17,14 +17,14 @@ struct TagView: View {
       .padding(.vertical, 11.5)
       .padding(.horizontal, 14)
       .background {
-        if isSelected {
-          RoundedRectangle(cornerRadius: Constants.cornerRadius)
-            .fill(LocarieColor.lightGray)
-        } else {
-          RoundedRectangle(cornerRadius: Constants.cornerRadius)
-            .strokeBorder(LocarieColor.lightGray, style: .init(lineWidth: 1.5))
-        }
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+          .stroke(strokeColor, style: .init(lineWidth: 1.5))
+          .padding(0.75)
       }
+  }
+
+  private var strokeColor: Color {
+    isSelected ? Color(hex: 0x0E0E0E) : LocarieColor.lightGray
   }
 }
 
@@ -34,7 +34,7 @@ private enum Constants {
 
 #Preview {
   VStack {
-    TagView(tag: "test", isSelected: true)
-    TagView(tag: "test")
+    TagView(tag: "Restaurant", isSelected: true)
+    TagView(tag: "Bakery")
   }
 }

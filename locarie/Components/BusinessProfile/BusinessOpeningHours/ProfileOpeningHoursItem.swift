@@ -22,7 +22,10 @@ struct ProfileOpeningHoursItem: View {
       Spacer()
       Text(hours.formattedTime).foregroundStyle(.secondary)
       if editable {
-        Image(systemName: "square.and.pencil").foregroundStyle(.secondary)
+        Image("Pencil.Grey")
+          .resizable()
+          .scaledToFit()
+          .frame(width: 16, height: 16)
       }
     }
   }

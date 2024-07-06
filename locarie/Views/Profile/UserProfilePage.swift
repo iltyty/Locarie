@@ -12,28 +12,12 @@ struct UserProfilePage: View {
 
   var body: some View {
     if !cacheViewModel.isLoggedIn() {
-      loginOrRegister
-    } else if cacheViewModel.isBusinessUser() {
-      businessUserProfile
-    } else {
-      regularUserProfile
-    }
-  }
-}
-
-private extension UserProfilePage {
-  var loginOrRegister: some View {
-    VStack {
       LoginOrRegisterPage()
+    } else if cacheViewModel.isBusinessUser() {
+      BusinessUserProfilePage()
+    } else {
+      RegularUserProfilePage()
     }
-  }
-
-  var regularUserProfile: some View {
-    RegularUserProfilePage()
-  }
-
-  var businessUserProfile: some View {
-    BusinessUserProfilePage()
   }
 }
 

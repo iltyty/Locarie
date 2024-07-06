@@ -10,18 +10,39 @@ import SwiftUI
 
 struct PlaceSearcher: View {
   @ObservedObject var vm: PlaceSuggestionsViewModel
+  var hint = "Search places"
+
   @State private var loading = false
+  @FocusState private var inputting: Bool
 
   private let origin: CLLocationCoordinate2D? = nil
 
   var body: some View {
-    VStack {
-      searchBar
-      searchResult
+    VStack(spacing: 0) {
+      HStack {
+        searchIcon
+        textInput
+      }
+      .frame(height: Constants.height)
+      .background {
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+          .stroke(LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
+          .padding(0.75)
+      }
+      if case let .loaded(suggestions) = vm.state, inputting {
+        VStack(alignment: .leading) {
+          List {
+            ForEach(suggestions, id: \.self) { suggestion in
+              PlaceSuggestionItem(suggestion)
+                .onTapGesture { vm.choose(suggestion) }
+            }
+          }
+          .listStyle(.plain)
+        }
+        .loadingIndicator(loading: $loading)
+      }
     }
-    .onAppear {
-      vm.listenToSearch(withOrigin: origin)
-    }
+    .onAppear { vm.listenToSearch(withOrigin: origin) }
     .onReceive(vm.$state) { state in
       if case .loading = state {
         loading = true
@@ -31,37 +52,6 @@ struct PlaceSearcher: View {
     }
   }
 
-  private var searchBar: some View {
-    HStack {
-      searchIcon
-      textInput
-    }
-    .background(searchBarBackground)
-    .padding()
-  }
-
-  @ViewBuilder
-  private var searchResult: some View {
-    Group {
-      if case let .loaded(suggestions) = vm.state {
-        VStack(alignment: .leading) {
-          List {
-            ForEach(suggestions, id: \.self) { suggestion in
-              PlaceSuggestionItem(suggestion)
-                .onTapGesture {
-                  vm.choose(suggestion)
-                }
-            }
-          }
-          .listStyle(.plain)
-        }
-      } else {
-        EmptyView()
-      }
-    }
-    .loadingIndicator(loading: $loading)
-  }
-
   private var searchIcon: some View {
     Image(systemName: "magnifyingglass")
       .padding([.leading])
@@ -69,16 +59,11 @@ struct PlaceSearcher: View {
   }
 
   private var textInput: some View {
-    TextField("Search places", text: $vm.place)
+    TextField(hint, text: $vm.place)
+      .focused($inputting)
+      .tint(LocarieColor.greyDark)
       .autocorrectionDisabled()
       .textInputAutocapitalization(.never)
-  }
-
-  private var searchBarBackground: some View {
-    RoundedRectangle(cornerRadius: Constants.cornerRadius)
-      .fill(.background)
-      .frame(height: Constants.height)
-      .shadow(color: .gray, radius: 2)
   }
 }
 
@@ -90,8 +75,5 @@ private enum Constants {
 }
 
 #Preview {
-  ZStack {
-    Color.pink
-    PlaceSearcher(vm: PlaceSuggestionsViewModel())
-  }
+  PlaceSearcher(vm: PlaceSuggestionsViewModel())
 }

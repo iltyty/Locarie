@@ -245,6 +245,9 @@ private extension NewPostPage {
       .focused($isEditing)
       .frame(height: Constants.inputHeight, alignment: .top)
       .keyboardAdaptive()
+      .onChange(of: textEditVM.text) { text in
+        postVM.post.content = text
+      }
   }
 
   var categories: some View {

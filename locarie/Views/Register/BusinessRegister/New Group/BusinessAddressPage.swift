@@ -13,9 +13,12 @@ import SwiftUI
 struct BusinessAddressPage<U: UserLocation>: View {
   @Binding var dto: U
 
+  @State private var inputting = false
+  @State private var searching = false
   @State private var needUpdating = true
   @State private var viewport: Viewport = .followPuck(zoom: Constants.mapZoom)
-  @State private var presentingSheet = false
+  @State private var currentDetent = Constants.bottomDetent
+  @FocusState private var focusing: Bool
 
   @StateObject private var suggestVM = PlaceSuggestionsViewModel()
   @StateObject private var retrieveVM = PlaceRetrieveViewModel()
@@ -26,12 +29,25 @@ struct BusinessAddressPage<U: UserLocation>: View {
   var body: some View {
     ZStack {
       mapView.ignoresSafeArea()
-      contentView
       Image("Pin")
+      contentView
+      VStack {
+        Spacer()
+        confirmButton
+      }
     }
-    .sheet(isPresented: $presentingSheet, content: {
-      sheetContent.presentationDetents([.fraction(0.9)])
-    })
+    .onAppear {
+      suggestVM.place = dto.address
+      if let location = dto.location {
+        viewport = .camera(
+          center: .init(
+            latitude: location.latitude,
+            longitude: location.longitude
+          ),
+          zoom: Constants.mapZoom
+        )
+      }
+    }
     .onReceive(suggestVM.$state) { state in
       handleSuggestionChoice(state: state)
     }
@@ -86,92 +102,113 @@ private extension BusinessAddressPage {
 private extension BusinessAddressPage {
   var contentView: some View {
     VStack {
-      topBar
-      Spacer()
-      VStack(spacing: Constants.bottomVSpacing) {
-        searchTitle
-        searchBar
-        confirmButton
+      HStack {
+        CircleButton("Chevron.Left")
+          .onTapGesture {
+            if inputting {
+              inputting = false
+            } else if searching {
+              searching = false
+            } else {
+              dismiss()
+            }
+          }
+        Spacer()
       }
-      .padding(.bottom, Constants.bottomVPadding)
-      .background(
-        UnevenRoundedRectangle(topLeadingRadius: Constants.cornerRadius, topTrailingRadius: Constants.cornerRadius)
-          .fill(.background)
-      )
+      .padding(.horizontal, 16)
+      Spacer()
+      BottomSheet(
+        detents: [Constants.bottomDetent, .large],
+        currentDetent: $currentDetent
+      ) { bottomSheetContent.disabled(currentDetent == Constants.bottomDetent) }
     }
     .ignoresSafeArea(edges: [.bottom])
   }
 
-  var searchTitle: some View {
-    Text("Your business address").padding(.top)
+  var bottomSheetContent: some View {
+    Group {
+      if currentDetent == Constants.bottomDetent || !inputting {
+        addressSearchPage
+      } else {
+        AddressInputPage(address: $dto.address, neighborhood: $dto.neighborhood)
+      }
+    }
+    .padding(.horizontal, 16)
   }
 
-  var searchBar: some View {
-    HStack {
-      Image(systemName: "magnifyingglass")
-      TextField("Type in your address", text: $dto.address)
-        .disabled(true)
-    }
-    .padding(.horizontal)
-    .background(
-      Capsule()
-        .fill(.background)
-        .frame(height: 48)
-        .frame(maxWidth: .infinity)
-        .shadow(radius: 2)
-    )
-    .padding(.horizontal)
-    .onTapGesture {
-      presentingSheet = true
-    }
-  }
-
-  var topBar: some View {
-    HStack {
-      CircleButton("Chevron.Left").onTapGesture {
-        dismiss()
+  var addressSearchPage: some View {
+    VStack(spacing: 24) {
+      Text("Your Business Address").fontWeight(.bold)
+      PlaceSearcher(vm: suggestVM, hint: "Type in your address")
+        .focused($focusing)
+        .onChange(of: dto.address) { address in
+          suggestVM.place = address
+        }
+        .onChange(of: focusing) { focusing in
+          if focusing {
+            searching = true
+          }
+        }
+        .onChange(of: suggestVM.place) { _ in
+          switch suggestVM.state {
+          case .chosen: break
+          default:
+            if focusing {
+              searching = true
+            }
+          }
+        }
+        .disabled(currentDetent == Constants.bottomDetent)
+      if !searching {
+        HStack(spacing: 16) {
+          Image("Pencil.Grey")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 18, height: 18)
+            .frame(width: 40, height: 40)
+            .background(Circle().fill(LocarieColor.greyMedium))
+          Text("Enter Manually")
+            .foregroundStyle(LocarieColor.greyDark)
+            .onTapGesture { inputting = true }
+          Spacer()
+        }
       }
       Spacer()
     }
-    .padding(.horizontal, 16)
   }
 
   var confirmButton: some View {
     Button {
       dismiss()
     } label: {
-      StrokeButtonFormItem(title: "Next step")
+      if inputting {
+        StrokeButtonFormItem(title: "Done")
+          .disabled(isDoneButtonDisabled)
+          .opacity(isDoneButtonDisabled ? 0.5 : 1)
+          .onTapGesture { inputting = false }
+      } else {
+        StrokeButtonFormItem(title: "Next step")
+          .disabled(isNextButtonDisabled)
+          .opacity(isNextButtonDisabled ? 0.5 : 1)
+      }
     }
-    .disabled(isButtonDisabled)
-    .opacity(buttonOpacity)
-    .padding([.horizontal, .bottom])
+    .padding(.horizontal, 16)
   }
 
-  var isButtonDisabled: Bool {
+  var isNextButtonDisabled: Bool {
     dto.location == nil || dto.address.isEmpty
   }
 
-  var buttonOpacity: CGFloat {
-    isButtonDisabled ? Constants.buttonDisabledOpacity : 1
-  }
-}
-
-private extension BusinessAddressPage {
-  var sheetContent: some View {
-    VStack {
-      searchTitle
-      PlaceSearcher(vm: suggestVM)
-      Spacer()
-    }
+  var isDoneButtonDisabled: Bool {
+    dto.address.isEmpty || dto.neighborhood.isEmpty
   }
 }
 
 private extension BusinessAddressPage {
   private func handleSuggestionChoice(state: PlaceSuggestionsViewModel.State) {
     if case let .chosen(dto) = state {
-      debugPrint(dto)
+      searching = false
       retrieveVM.retrieve(mapboxId: dto.mapboxId)
-      presentingSheet = false
     }
   }
 
@@ -223,11 +260,12 @@ private extension BusinessAddressPage {
 
 private enum Constants {
   static let mapZoom = 15.0
-  static let buttonDisabledOpacity = 0.5
   static let animationDuration = 1.0
   static let cornerRadius: CGFloat = 24
-  static let bottomVSpacing: CGFloat = 36
   static let bottomVPadding: CGFloat = 40
+
+  static let bottomDetentOffset: CGFloat = 300
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(bottomDetentOffset)
 }
 
 #Preview {

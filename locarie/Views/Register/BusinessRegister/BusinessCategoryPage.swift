@@ -76,9 +76,7 @@ struct BusinessCategoryPage: View {
         .foregroundStyle(LocarieColor.greyDark)
         .padding(.vertical, 5)
         .padding(.horizontal, 16)
-        .background {
-          Capsule().fill(LocarieColor.greyMedium)
-        }
+        .background { Capsule().fill(LocarieColor.greyMedium) }
     }
   }
 

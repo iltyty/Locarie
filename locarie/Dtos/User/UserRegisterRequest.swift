@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol UserLocation: Codable {
+protocol UserLocation: Codable, Equatable {
   var address: String { get set }
   var neighborhood: String { get set }
   var location: BusinessLocation? { get set }

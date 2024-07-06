@@ -16,18 +16,9 @@ struct PlaceSuggestionItem: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      name
-      detail
+      Text(suggestion.name)
+      Text(suggestion.fullAddress ?? "").lineLimit(1)
     }
-  }
-
-  var name: some View {
-    Text(suggestion.name)
-  }
-
-  var detail: some View {
-    Text(suggestion.fullAddress ?? "")
-      .lineLimit(1)
   }
 }
 

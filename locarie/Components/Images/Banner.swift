@@ -29,7 +29,7 @@ struct Banner: View {
               screenSize = proxy.size
             }
           if indicator == .inner {
-            indicators.padding(.bottom, 5)
+            indicators.padding(.bottom, 10)
           }
         }
         if indicator == .bottom {
@@ -79,7 +79,7 @@ struct Banner: View {
           .resizable()
           .scaledToFit()
           .frame(width: 6, height: 6)
-          .foregroundStyle(index == i ? LocarieColor.primary : LocarieColor.greyMedium)
+          .foregroundStyle(index == i ? Color.white : LocarieColor.greyMedium)
       }
     }
   }

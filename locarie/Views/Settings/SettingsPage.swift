@@ -29,7 +29,7 @@ struct SettingsPage: View {
           legalSectionTitle.padding(.top, 24).padding(.bottom, 15)
           privacyPolicy
           termsOfService
-          termsOfUse
+          communityGuidelines
           logout.padding(.top, 48).padding(.bottom, 100)
           Spacer()
         }
@@ -49,14 +49,14 @@ private extension SettingsPage {
 
   var myAccount: some View {
     NavigationLink(value: Router.Destination.myAccount) {
-      LinkSettingsItem(text: "My account")
+      LinkSettingsItem(text: "My Account")
     }
     .buttonStyle(.plain)
   }
 
   var changePassword: some View {
     NavigationLink(value: Router.Destination.changePassword) {
-      LinkSettingsItem(text: "Change password")
+      LinkSettingsItem(text: "Change Password")
     }
     .buttonStyle(.plain)
   }
@@ -100,21 +100,21 @@ private extension SettingsPage {
 
   var privacyPolicy: some View {
     NavigationLink(value: Router.Destination.privacyPolicy) {
-      LinkSettingsItem(text: "Privacy policy")
+      LinkSettingsItem(text: "Privacy Policy")
     }
     .buttonStyle(.plain)
   }
 
   var termsOfService: some View {
     NavigationLink(value: Router.Destination.termsOfService) {
-      LinkSettingsItem(text: "Terms of services")
+      LinkSettingsItem(text: "Terms of Services")
     }
     .buttonStyle(.plain)
   }
 
-  var termsOfUse: some View {
-    NavigationLink(value: Router.Destination.termsOfUse) {
-      LinkSettingsItem(text: "Terms of use", divider: false)
+  var communityGuidelines: some View {
+    NavigationLink(value: Router.Destination.communityGuidelines) {
+      LinkSettingsItem(text: "Community Guidelines", divider: false)
     }
     .buttonStyle(.plain)
   }

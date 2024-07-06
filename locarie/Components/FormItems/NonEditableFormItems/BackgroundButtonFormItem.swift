@@ -32,7 +32,6 @@ struct BackgroundButtonFormItem: View {
     Text(title)
       .padding(.horizontal, Constants.textHPadding)
       .font(.custom(GlobalConstants.fontName, size: 18))
-      .fontWeight(.bold)
       .foregroundStyle(.white)
   }
 

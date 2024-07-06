@@ -12,7 +12,7 @@ struct BusinessProfileCover: View {
   var onAvatarTapped: () -> Void = {}
   @Binding var isPresenting: Bool
 
-  @ObservedObject var cacheVM = LocalCacheViewModel.shared
+  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
@@ -38,51 +38,11 @@ struct BusinessProfileCover: View {
 private extension BusinessProfileCover {
   var coverBottom: some View {
     VStack(alignment: .leading, spacing: 16) {
-      if cacheVM.getUserId() == user.id {
-        editButtonView.padding(.bottom, 14)
-      }
       ProfileAddress(user)
       ProfileOpenUntil(user)
       SeeProfileButton().onTapGesture { onAvatarTapped() }
     }
     .padding(.bottom, 48)
-  }
-
-  var editButtonView: some View {
-    HStack {
-      Spacer()
-      NavigationLink {
-        UserProfileEditPage()
-      } label: {
-        editButton
-      }
-      .buttonStyle(.plain)
-      Spacer()
-    }
-  }
-
-  var editButton: some View {
-    Label {
-      Text("Edit profile")
-    } icon: {
-      Image("EditIcon")
-        .resizable()
-        .scaledToFit()
-        .frame(
-          width: Constants.editButtonIconSize,
-          height: Constants.editButtonIconSize
-        )
-    }
-    .padding(.horizontal, Constants.editButtonInnerPadding)
-    .frame(height: Constants.editButtonHeight)
-    .background(editButtonBackground)
-    .padding(.top, Constants.editButtonTopPadding)
-  }
-
-  var editButtonBackground: some View {
-    Capsule()
-      .fill(.background)
-      .shadow(radius: Constants.editButtonShadowRadius)
   }
 }
 

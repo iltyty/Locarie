@@ -93,16 +93,18 @@ private extension FeedbackPage {
 
 private extension FeedbackPage {
   var title: some View {
-    Text("Share your feedback with us.")
+    Text("Share Your Feedback With Us.")
       .font(.custom(GlobalConstants.fontName, size: 20))
       .foregroundStyle(Color.locariePrimary)
   }
 
   var paragraph: some View {
     Text("""
-    We would love to hear about your experience with Locarie. Share your feedback about Locarie and report any problems or what we can improve to make your experience even better.
-
-    Please share it and let us know.
+    We value your thoughts and experiences on Locarie. \
+    Please share your feedback with us—whether it’s a suggestion, \
+    an issue you’ve encountered, or something you loved. \
+    Your insights help us improve and create a better experience for everyone. \
+    Thank you for being an integral part of Locarie.
     """)
   }
 
@@ -111,7 +113,7 @@ private extension FeedbackPage {
       VStack {
         TextEditorPlusWithLimit(
           viewModel: editVM,
-          hint: "Share your feedback...",
+          hint: "Share Your Feedback",
           border: true
         )
         .focused($isEditing)

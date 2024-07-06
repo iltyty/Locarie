@@ -15,8 +15,7 @@ public extension Publishers {
     let willHide = NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification)
       .map { _ in CGFloat(0) }
 
-    return MergeMany(willShow, willHide)
-      .eraseToAnyPublisher()
+    return Merge(willShow, willHide).eraseToAnyPublisher()
   }
 }
 

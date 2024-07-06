@@ -19,7 +19,7 @@ struct RegularMyAccountPage: View {
     VStack(spacing: 24) {
       NavigationBar("My account", divider: true).background(.white)
       VStack(alignment: .leading, spacing: 0) {
-        TextSettingsItem(title: "Account type", value: "Business")
+        TextSettingsItem(title: "Account type", value: "Personal Account")
         TextSettingsItem(title: "Email", value: profileVM.dto.email)
         TextSettingsItem(title: "Username", value: profileVM.dto.username)
         TextSettingsItem(title: "First name", value: profileVM.dto.firstName)

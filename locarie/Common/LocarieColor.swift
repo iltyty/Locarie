@@ -12,6 +12,7 @@ enum LocarieColor {
   static let blue = Color(hex: 0x0097FF)
   static let red = Color(hex: 0xFF3030)
   static let green = Color(hex: 0x228B22)
+  static let black = Color(hex: 0x0E0E0E)
 
   static let greyDark = Color(hex: 0x707070)
   static let greyMedium = Color(hex: 0xF0F0F0)

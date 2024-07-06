@@ -38,8 +38,11 @@ struct CoverTopView: View {
   var body: some View {
     HStack(spacing: 0) {
       dismissButton.padding(.trailing, 24)
-      avatar.padding(.trailing, 10)
-      Text(user.businessName).fontWeight(.bold)
+      Group {
+        avatar.padding(.trailing, 10)
+        Text(user.businessName).fontWeight(.bold)
+      }
+      .onTapGesture { onAvatarTapped() }
       Spacer()
       shareButton
       if cacheVM.getUserId() == user.id, showMoreButton {
@@ -68,17 +71,14 @@ struct CoverTopView: View {
           .clipShape(Circle())
       }
     }
-    .onTapGesture {
-      onAvatarTapped()
-    }
   }
 
   @ViewBuilder
   var shareButton: some View {
-    let link = URL(string: "https://www.hackingwithswift.com")!
+    let link = URL(string: "https://www.locarie.com")!
     ShareLink(
       item: link,
-      preview: SharePreview(sharePreviewText, image: Image("LocarieIcon"))
+      preview: SharePreview("Locarie", image: Image("LocarieIcon"))
     ) {
       buttonBuilder(Image("ShareIcon"))
     }

@@ -13,6 +13,7 @@ struct BusinessBottomBar: View {
   @ObservedObject var favoriteBusinessVM: FavoriteBusinessViewModel
 
   @State private var alreadyFollowed = false
+  @State private var presentingLoginSheet = false
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
 
@@ -30,6 +31,9 @@ struct BusinessBottomBar: View {
       .padding(.top, BusinessBottomBarConstants.topPadding)
       .padding(.horizontal, BusinessBottomBarConstants.hPadding)
     }
+    .frame(height: BusinessBottomBarConstants.height)
+    .loginSheet(isPresented: $presentingLoginSheet)
+    .ignoresSafeArea(edges: .bottom)
     .onChange(of: business) { newBusiness in
       favoriteBusinessVM.checkFavoredBy(
         userId: cacheVM.getUserId(),
@@ -48,8 +52,6 @@ struct BusinessBottomBar: View {
       default: break
       }
     }
-    .frame(height: BusinessBottomBarConstants.height)
-    .ignoresSafeArea(edges: .bottom)
   }
 }
 
@@ -91,7 +93,9 @@ private extension BusinessBottomBar {
   }
 
   func favoriteButtonTapped() {
-    if alreadyFollowed {
+    if !cacheVM.isLoggedIn() {
+      presentingLoginSheet = true
+    } else if alreadyFollowed {
       favoriteBusinessVM.unfavorite(
         userId: cacheVM.getUserId(), businessId: business.id
       )

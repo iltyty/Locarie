@@ -18,7 +18,7 @@ struct PostCardView: View {
   @Binding var presentingDeleteDialog: Bool
   @Binding var deleteTargetPost: PostDto
 
-  @State private var distance = "0 km away"
+  @State private var distance = "0 km"
   @State private var deleteTapped = false
   @State private var presentingSheet = false
   @State private var presentingCover = false
@@ -146,16 +146,20 @@ private extension PostCardView {
           .foregroundStyle(LocarieColor.greyDark)
           .padding(.horizontal, 10)
           .padding(.vertical, 5)
-          .background(Capsule().fill(.white))
+          .background {
+            Capsule()
+              .fill(.white)
+              .shadow(color: Color.black.opacity(0.25), radius: 2, x: 0.25, y: 0.25)
+          }
           .padding(5)
           .onReceive(locationManager.$location) { location in
             if let location {
-              distance = "\(post.user.distance(to: location)) away"
+              distance = "\(post.user.distance(to: location))"
             }
           }
         Spacer()
         if post.user.profileImageUrls.isEmpty {
-          DefaultBusinessImageView(size: 48)
+          DefaultBusinessImageView(size: 48).shadow(color: Color.black.opacity(0.25), radius: 2, x: 0.25, y: 0.25)
         } else {
           KFImage(URL(string: post.user.profileImageUrls[0]))
             .placeholder { SkeletonView(48, 48) }
@@ -164,7 +168,11 @@ private extension PostCardView {
             .frame(width: 48, height: 48)
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .padding(1.5)
-            .background { RoundedRectangle(cornerRadius: 16).fill(LocarieColor.greyMedium) }
+            .background {
+              RoundedRectangle(cornerRadius: 16)
+                .fill(LocarieColor.greyMedium)
+                .shadow(color: Color.black.opacity(0.25), radius: 2, x: 0.25, y: 0.25)
+            }
             .padding(5)
             .onTapGesture { onThumbnailTapped() }
         }
@@ -177,6 +185,7 @@ private extension PostCardView {
     HStack {
       Text(post.content)
         .lineLimit(Constants.contentLineLimit)
+        .lineSpacing(2)
         .listRowSeparator(.hidden)
       Spacer()
     }
@@ -196,7 +205,7 @@ extension PostCardView {
   static var skeleton: some View {
     VStack(alignment: .leading, spacing: 0) {
       HStack(spacing: 10) {
-        SkeletonView(40, 40, true)
+        SkeletonView(Constants.avatarSize, Constants.avatarSize, true)
         VStack(alignment: .leading, spacing: 10) {
           SkeletonView(60, 10)
           SkeletonView(146, 10)
@@ -223,7 +232,7 @@ extension PostCardView {
 }
 
 private enum Constants {
-  static let avatarSize: CGFloat = 40
+  static let avatarSize: CGFloat = 34
   static let coverAspectRatio: CGFloat = 4 / 3
   static let coverBorderRadius: CGFloat = 10.0
   static let contentLineLimit = 2
