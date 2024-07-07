@@ -14,7 +14,7 @@ struct PrivacyPolicyPage: View {
     VStack(spacing: 0) {
       NavigationBar("Privacy Policy")
       ZStack {
-        WebView(url: "https://www.locarie.com", loading: $loading)
+        WebView(url: "https://www.locarie.com/privacy", loading: $loading)
           .ignoresSafeArea(edges: .bottom)
         if loading {
           ProgressView()

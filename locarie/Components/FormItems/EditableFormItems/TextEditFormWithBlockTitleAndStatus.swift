@@ -10,6 +10,7 @@ import SwiftUI
 struct TextEditFormItemWithBlockTitleAndStatus: View {
   let title: String
   let hint: String
+  var note = ""
   let valid: Bool
   var isSecure = false
 
@@ -18,8 +19,10 @@ struct TextEditFormItemWithBlockTitleAndStatus: View {
   @State private var showingSecure = false
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 16) {
-      Text(title).padding(.horizontal, FormItemCommonConstants.hPadding)
+    VStack(alignment: .leading, spacing: 0) {
+      Text(title)
+        .padding(.bottom, 16)
+        .padding(.horizontal, FormItemCommonConstants.hPadding)
       HStack(spacing: 0) {
         Group {
           if !isSecure || showingSecure {
@@ -37,6 +40,7 @@ struct TextEditFormItemWithBlockTitleAndStatus: View {
             .resizable()
             .scaledToFit()
             .frame(size: 23)
+            .contentShape(Rectangle())
             .onTapGesture {
               showingSecure.toggle()
             }
@@ -51,6 +55,7 @@ struct TextEditFormItemWithBlockTitleAndStatus: View {
           .strokeBorder(FormItemCommonConstants.strokeColor, style: .init(lineWidth: 1.5))
           .padding(0.75)
       }
+      FormItemNoteView(note)
     }
   }
 }
@@ -71,6 +76,7 @@ private struct TestView: View {
       TextEditFormItemWithBlockTitleAndStatus(
         title: "Password",
         hint: "Password",
+        note: "Maximum 20 letters",
         valid: valid,
         isSecure: true,
         text: $password

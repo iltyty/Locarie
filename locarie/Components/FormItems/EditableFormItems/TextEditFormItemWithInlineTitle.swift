@@ -10,38 +10,29 @@ import SwiftUI
 struct TextEditFormItemWithInlineTitle: View {
   let title: String
   let hint: String
+  var note = ""
 
   @Binding var text: String
 
   var body: some View {
-    HStack {
-      titleView
-      textEditView
-      Spacer()
-      iconView
+    VStack(alignment: .leading, spacing: 0) {
+      HStack {
+        Text(title).frame(width: Constants.titleWidth, alignment: .leading)
+        TextField(hint, text: $text, prompt: Text(hint).foregroundColor(LocarieColor.greyDark))
+          .textInputAutocapitalization(.never)
+          .foregroundStyle(LocarieColor.greyDark)
+        Spacer()
+        Image("Pencil.Grey")
+          .resizable()
+          .scaledToFit()
+          .frame(size: Constants.iconSize)
+      }
+      .padding(.horizontal, FormItemCommonConstants.hPadding)
+      .frame(height: FormItemCommonConstants.height)
+      .frame(maxWidth: .infinity)
+      .background(background)
+      FormItemNoteView(note)
     }
-    .padding(.horizontal, FormItemCommonConstants.hPadding)
-    .frame(height: FormItemCommonConstants.height)
-    .frame(maxWidth: .infinity)
-    .background(background)
-  }
-
-  private var titleView: some View {
-    Text(title)
-      .frame(width: Constants.titleWidth, alignment: .leading)
-  }
-
-  private var textEditView: some View {
-    TextField(hint, text: $text, prompt: Text(hint).foregroundColor(LocarieColor.greyDark))
-      .textInputAutocapitalization(.never)
-      .foregroundStyle(LocarieColor.greyDark)
-  }
-
-  private var iconView: some View {
-    Image("Pencil.Grey")
-      .resizable()
-      .scaledToFit()
-      .frame(size: Constants.iconSize)
   }
 
   private var background: some View {
@@ -65,6 +56,7 @@ private enum Constants {
     TextEditFormItemWithInlineTitle(
       title: "Email",
       hint: "Email",
+      note: "Only letters, numbers, and full stops are allowed.",
       text: .constant("email@example.com")
     )
   }

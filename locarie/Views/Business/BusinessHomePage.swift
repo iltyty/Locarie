@@ -154,8 +154,9 @@ private extension BusinessHomePage {
                 user = u
               }
           }
+          .allowOverlap(true)
+          .allowOverlapWithPuck(true)
           .selected(u.id == user.id)
-          .variableAnchors([.init(anchor: .bottom)])
         }
       }
       .onMapTapGesture { _ in

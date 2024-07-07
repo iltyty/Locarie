@@ -72,6 +72,7 @@ private extension RegularUserProfileEditPage {
     TextEditFormItemWithInlineTitle(
       title: "@Username",
       hint: "Username",
+      note: "Only letters, numbers, and full stops are allowed.",
       text: $profileUpdateVM.dto.username
     )
   }

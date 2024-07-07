@@ -15,7 +15,7 @@ struct BusinessRegisterPage: View {
   var body: some View {
     GeometryReader { _ in
       VStack(spacing: 0) {
-        navigationBar
+        NavigationBar("Create a business account")
         content
           .keyboardDismissable(focus: $focused)
           .ignoresSafeArea(.keyboard)
@@ -36,15 +36,12 @@ struct BusinessRegisterPage: View {
     .padding(.horizontal)
   }
 
-  private var navigationBar: some View {
-    NavigationBar("Create a business account")
-  }
-
   @ViewBuilder private var businessNameInput: some View {
     let text = "Business name"
     TextEditFormItemWithBlockTitleAndStatus(
       title: text,
       hint: text,
+      note: "Maximum 25 letters.",
       valid: viewModel.isBusinessNameValid,
       text: $viewModel.dto.businessName
     )

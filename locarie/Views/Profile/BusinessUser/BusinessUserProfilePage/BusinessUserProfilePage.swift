@@ -353,10 +353,7 @@ private extension BusinessUserProfilePage {
               )
             }
             .resizable()
-            .frame(
-              width: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth,
-              height: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth
-            )
+            .frame(size: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth)
             .clipShape(Circle())
         }
       }

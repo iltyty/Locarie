@@ -14,7 +14,7 @@ struct CommunityGuidelinesPage: View {
     VStack(spacing: 0) {
       NavigationBar("Community Guidelines")
       ZStack {
-        WebView(url: "https://www.locarie.com", loading: $loading)
+        WebView(url: "https://www.locarie.com/community-guidelines", loading: $loading)
           .ignoresSafeArea(edges: .bottom)
         if loading {
           ProgressView()

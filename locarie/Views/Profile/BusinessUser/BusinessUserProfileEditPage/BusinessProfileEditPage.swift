@@ -191,6 +191,7 @@ private extension BusinessProfileEditPage {
     TextEditFormItemWithInlineTitle(
       title: text,
       hint: text,
+      note: "Maximum 25 letters.",
       text: $profileUpdateVM.dto.businessName
     )
   }
@@ -199,6 +200,7 @@ private extension BusinessProfileEditPage {
     TextEditFormItemWithInlineTitle(
       title: "@Username",
       hint: "Username",
+      note: "Only letters, numbers, and full stops are allowed.",
       text: $profileUpdateVM.dto.username
     )
   }

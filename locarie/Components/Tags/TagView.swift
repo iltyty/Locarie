@@ -13,7 +13,7 @@ struct TagView: View {
 
   var body: some View {
     Text(tag)
-      .foregroundStyle(LocarieColor.greyDark)
+      .foregroundStyle(isSelected ? LocarieColor.black : LocarieColor.greyDark)
       .padding(.vertical, 11.5)
       .padding(.horizontal, 14)
       .background {

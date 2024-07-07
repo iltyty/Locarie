@@ -10,24 +10,34 @@ import SwiftUI
 struct TextEditFormItemWithBlockTitle: View {
   let title: String
   let hint: String
+  var note = ""
   var isSecure = false
 
   @Binding var text: String
 
+  @State private var showingPassword = false
+
   var body: some View {
-    VStack(alignment: .leading, spacing: 16) {
-      Text(title).padding(.leading, FormItemCommonConstants.hPadding)
+    VStack(alignment: .leading, spacing: 0) {
+      Text(title)
+        .padding(.bottom, 16)
+        .padding(.leading, FormItemCommonConstants.hPadding)
       textEditView
+      FormItemNoteView(note)
     }
   }
 
   @ViewBuilder
   private var textEditView: some View {
-    Group {
-      if isSecure {
+    HStack(spacing: 0) {
+      if isSecure, !showingPassword {
         SecureField(hint, text: $text, prompt: Text(hint).foregroundColor(LocarieColor.greyDark))
       } else {
         TextField(hint, text: $text, prompt: Text(hint).foregroundColor(LocarieColor.greyDark))
+      }
+      Spacer()
+      if isSecure, !text.isEmpty {
+        FormItemPasswordSwitchView(showing: $showingPassword)
       }
     }
     .textInputAutocapitalization(.never)

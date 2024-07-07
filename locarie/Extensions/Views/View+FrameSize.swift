@@ -9,6 +9,6 @@ import SwiftUI
 
 extension View {
   func frame(size: CGFloat) -> some View {
-    frame(size: size)
+    frame(width: size, height: size)
   }
 }

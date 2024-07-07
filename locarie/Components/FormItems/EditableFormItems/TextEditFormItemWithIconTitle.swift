@@ -10,20 +10,24 @@ import SwiftUI
 struct TextEditFormItemWithIconTitle: View {
   let iconSystemName: String
   let hint: String
+  var note = ""
 
   @Binding var text: String
 
   var body: some View {
-    HStack {
-      iconView
-      textEditView
-      Spacer()
+    VStack(alignment: .leading, spacing: 0) {
+      HStack {
+        iconView
+        textEditView
+        Spacer()
+      }
+      .padding(.horizontal)
+      .padding(.horizontal, FormItemCommonConstants.hPadding)
+      .frame(maxWidth: .infinity)
+      .frame(height: FormItemCommonConstants.height)
+      .background(background)
+      FormItemNoteView(note)
     }
-    .padding(.horizontal)
-    .padding(.horizontal, FormItemCommonConstants.hPadding)
-    .frame(maxWidth: .infinity)
-    .frame(height: FormItemCommonConstants.height)
-    .background(background)
   }
 
   private var iconView: some View {

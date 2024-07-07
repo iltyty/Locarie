@@ -98,6 +98,7 @@ private extension RegularRegisterPage {
     TextEditFormItemWithBlockTitleAndStatus(
       title: "@Username",
       hint: "Username",
+      note: "Only letters, numbers, and full stops are allowed.",
       valid: registerViewModel.isUsernameValid,
       text: $registerViewModel.dto.username
     )
@@ -110,16 +111,13 @@ private extension RegularRegisterPage {
       TextEditFormItemWithBlockTitleAndStatus(
         title: "Password",
         hint: "Password",
+        note: "Minimum 8 characters or numbers.",
         valid: registerViewModel.isPasswordValid,
         isSecure: true,
         text: $registerViewModel.dto.password
       )
       .focused($focusField, equals: .password)
       .textContentType(.password)
-      Text("Minimum 8 characters or numbers.")
-        .font(.custom(GlobalConstants.fontName, size: 14))
-        .foregroundStyle(LocarieColor.greyDark)
-        .padding(.leading, 16)
     }
   }
 
@@ -146,12 +144,28 @@ private extension RegularRegisterPage {
     let systemName = isServiceAgreed ? "circle.fill" : "circle"
     return HStack(alignment: .top, spacing: 10) {
       pickerLineImage(systemName: systemName, isFilled: $isServiceAgreed)
-      Text("""
-      I agree to the \(Text("Privacy Policy").foregroundColor(LocarieColor.primary)), \
-      \(Text("Community Guidelines").foregroundColor(LocarieColor.primary)), and \
-      \(Text("Terms of Service").foregroundColor(LocarieColor.primary)).
-      """)
-      Spacer()
+      WrappingHStack(hSpacing: 0) {
+        Text("I agree to the ")
+        NavigationLink(value: Router.Destination.privacyPolicy) {
+          Text("Privacy Policy").foregroundStyle(LocarieColor.primary)
+        }
+        .buttonStyle(.plain)
+        Text(", ")
+        NavigationLink(value: Router.Destination.communityGuidelines) {
+          Text("Community ").foregroundColor(LocarieColor.primary)
+        }
+        .buttonStyle(.plain)
+        NavigationLink(value: Router.Destination.communityGuidelines) {
+          Text("Guide").foregroundColor(LocarieColor.primary)
+        }
+        .buttonStyle(.plain)
+        Text(" and, ")
+        NavigationLink(value: Router.Destination.termsOfService) {
+          Text("Terms of Service").foregroundColor(LocarieColor.primary)
+        }
+        .buttonStyle(.plain)
+        Text(".")
+      }
     }
   }
 

@@ -11,7 +11,7 @@ struct NotificationsPage: View {
   var body: some View {
     VStack(spacing: SettingsConstants.vSpacing) {
       NavigationBar("Notifications", divider: true).background(.white)
-      ToggleSettingsItem(title: "News and updates", divider: false)
+      ToggleSettingsItem(title: "News and Updates", divider: false)
       Spacer()
     }
     .background(LocarieColor.greyLight)

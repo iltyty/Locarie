@@ -18,12 +18,9 @@ public final class PlaceSuggestionsViewModel: ObservableObject {
   private let networking: MapboxSuggestionService
   private var subscriptions: Set<AnyCancellable> = []
 
-  private let debounceInterval: DispatchQueue.SchedulerTimeType
-    .Stride = .seconds(0.5)
+  private let debounceInterval: DispatchQueue.SchedulerTimeType.Stride = .seconds(0.5)
 
-  init(
-    networking: MapboxSuggestionService = MapboxSuggestionServiceImpl.shared
-  ) {
+  init(networking: MapboxSuggestionService = MapboxSuggestionServiceImpl.shared) {
     self.networking = networking
     debouncePlace()
   }
@@ -38,7 +35,7 @@ public final class PlaceSuggestionsViewModel: ObservableObject {
       .store(in: &subscriptions)
   }
 
-  func listenToSearch(withOrigin origin: CLLocationCoordinate2D?) {
+  func listenToSearch() {
     $debouncedPlace
       .sink { [weak self] query in
         guard let self else { return }
@@ -47,7 +44,7 @@ public final class PlaceSuggestionsViewModel: ObservableObject {
           state = .idle
         default:
           if !query.isEmpty {
-            getPlaceSuggestions(withOrigin: origin)
+            getPlaceSuggestions()
           } else {
             state = .idle
           }
@@ -56,8 +53,8 @@ public final class PlaceSuggestionsViewModel: ObservableObject {
       .store(in: &subscriptions)
   }
 
-  func getPlaceSuggestions(withOrigin origin: CLLocationCoordinate2D?) {
-    networking.getPlaceSuggestions(forPlace: place, withOrigin: origin)
+  func getPlaceSuggestions() {
+    networking.getPlaceSuggestions(forPlace: place, withOrigin: nil)
       .sink { [weak self] completion in
         guard let self else { return }
         handleSinkCompletion(completion)
@@ -68,9 +65,7 @@ public final class PlaceSuggestionsViewModel: ObservableObject {
       .store(in: &subscriptions)
   }
 
-  private func handleSinkCompletion(_ completion: Subscribers
-    .Completion<AFError>)
-  {
+  private func handleSinkCompletion(_ completion: Subscribers.Completion<AFError>) {
     switch completion {
     case let .failure(error):
       debugPrint(error)

@@ -9,15 +9,26 @@ import SwiftUI
 
 struct PlaceSuggestionItem: View {
   private let suggestion: PlaceSuggestionDto
+  private let divider: Bool
 
-  init(_ suggestion: PlaceSuggestionDto) {
+  init(_ suggestion: PlaceSuggestionDto, divider: Bool = true) {
     self.suggestion = suggestion
+    self.divider = divider
   }
 
   var body: some View {
-    VStack(alignment: .leading) {
-      Text(suggestion.name)
-      Text(suggestion.fullAddress ?? "").lineLimit(1)
+    VStack(alignment: .leading, spacing: 0) {
+      Text("\(suggestion.name)\(address)")
+        .lineLimit(1)
+      if divider { LocarieDivider().padding(.top, 22) }
+    }
+  }
+
+  private var address: String {
+    if let fullAddress = suggestion.fullAddress {
+      ", \(fullAddress)"
+    } else {
+      ""
     }
   }
 }

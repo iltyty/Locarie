@@ -27,19 +27,30 @@ enum Regexes {
 
   static let username = Regex {
     Repeat(1 ... 25) {
-      One(.word)
+      ChoiceOf {
+        One(.word)
+        "."
+      }
     }
   }
 
   static let password = Regex {
+    Anchor.startOfLine
     Repeat(8 ... 20) {
-      One(.word)
+      ChoiceOf {
+        One(.word)
+        CharacterClass.anyOf("!@#$%^&*()-_=+[]{}|;:',.<>?/`~\"\\")
+      }
     }
+    Anchor.endOfLine
   }
 
   static let businessName = Regex {
     Repeat(1 ... 25) {
-      One(.word)
+      ChoiceOf {
+        One(.word)
+        " "
+      }
     }
   }
 }

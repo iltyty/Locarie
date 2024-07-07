@@ -14,7 +14,7 @@ struct TermsOfServicePage: View {
     VStack(spacing: 0) {
       NavigationBar("Terms of Service")
       ZStack {
-        WebView(url: "https://www.locarie.com", loading: $loading)
+        WebView(url: "https://www.locarie.com/terms", loading: $loading)
           .ignoresSafeArea(edges: .bottom)
         if loading {
           ProgressView()

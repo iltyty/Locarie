@@ -27,9 +27,9 @@ struct LoginPage: View {
           Spacer()
           locarieIcon
           Spacer()
-          emailInput.padding(.bottom, 10)
-          passwordInput.padding(.bottom, 9)
-          forgotPassword.padding(.bottom, 9)
+          emailInput.padding(.bottom, 16)
+          passwordInput.padding(.bottom, 14)
+          forgotPassword.padding(.bottom, 14)
           loginButton
           Spacer()
           signUpText

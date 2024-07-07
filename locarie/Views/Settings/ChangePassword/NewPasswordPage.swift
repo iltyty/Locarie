@@ -22,12 +22,11 @@ struct NewPasswordPage: View {
       NavigationBar("Change password", divider: true, padding: true)
       VStack(alignment: .leading, spacing: 16) {
         newPasswordInput
-        passwordNote
         newPasswordConfirmInput
-        Spacer()
+        nextButton
       }
       .padding(.horizontal, 16)
-      nextButton
+      Spacer()
     }
     .loadingIndicator(loading: $loading)
     .alert(alertTitle, isPresented: $isAlertPresented) { Button("OK") {} }
@@ -55,26 +54,24 @@ private extension NewPasswordPage {
   @ViewBuilder
   var newPasswordInput: some View {
     let title = "New password"
-    TextEditFormItemWithBlockTitle(
+    TextEditFormItemWithBlockTitleAndStatus(
       title: title,
       hint: "Password",
+      note: "Minimum 8 characters or numbers.",
+      valid: newPasswordVM.isPasswordValid,
+      isSecure: true,
       text: $newPasswordVM.password
     )
-  }
-
-  var passwordNote: some View {
-    Text("Minimum 8 characters or numbers.")
-      .font(.footnote)
-      .foregroundStyle(.secondary)
-      .padding(.leading)
   }
 
   @ViewBuilder
   var newPasswordConfirmInput: some View {
     let title = "Confirm new password"
-    TextEditFormItemWithBlockTitle(
+    TextEditFormItemWithBlockTitleAndStatus(
       title: title,
       hint: "Password",
+      valid: newPasswordVM.isConfirmPasswordValid,
+      isSecure: true,
       text: $newPasswordVM.confirmPassword
     )
   }

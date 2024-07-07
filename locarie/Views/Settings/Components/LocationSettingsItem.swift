@@ -20,7 +20,7 @@ struct LocationSettingsItem<U: UserLocation>: View {
     } label: {
       VStack(spacing: 0) {
         mapView
-        Rectangle().fill(LocarieColor.lightGray).frame(height: 1)
+        LocarieDivider()
         textView
       }
       .background(RoundedRectangle(cornerRadius: Constants.cornerRadius).stroke(LocarieColor.lightGray))

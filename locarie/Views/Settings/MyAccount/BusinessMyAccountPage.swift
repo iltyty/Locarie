@@ -19,19 +19,19 @@ struct BusinessMyAccountPage: View {
     VStack(spacing: 24) {
       NavigationBar("My account", divider: true).background(.white)
       VStack(alignment: .leading, spacing: 0) {
-        TextSettingsItem(title: "Account type", value: "Business Account")
-        TextSettingsItem(title: "Business name", value: profileVM.dto.businessName)
-        TextSettingsItem(title: "Business category", value: profileVM.dto.categories.joined(separator: ", "))
+        TextSettingsItem(title: "Account Type", value: "Business Account")
+        TextSettingsItem(title: "Business Name", value: profileVM.dto.businessName)
+        TextSettingsItem(title: "Business Category", value: profileVM.dto.categories.joined(separator: ", "))
         TextSettingsItem(title: "Email", value: profileVM.dto.email)
         TextSettingsItem(title: "Username", value: profileVM.dto.username)
-        TextSettingsItem(title: "First name", value: profileVM.dto.firstName)
-        TextSettingsItem(title: "Last name", value: profileVM.dto.lastName)
+        TextSettingsItem(title: "First Name", value: profileVM.dto.firstName)
+        TextSettingsItem(title: "Last Name", value: profileVM.dto.lastName)
         TextSettingsItem(title: "Version", value: "V0.0.1", divider: false)
-        NavigationLink("Edit profile") { UserProfileEditPage() }
+        NavigationLink("Edit Profile") { UserProfileEditPage() }
           .padding(.horizontal)
           .padding(.top, 48)
           .foregroundStyle(LocarieColor.blue)
-        Button("Delete account") { presentingAlert = true }
+        Button("Delete Account") { presentingAlert = true }
           .padding(.horizontal)
           .padding(.top, 48)
           .foregroundStyle(LocarieColor.red)
