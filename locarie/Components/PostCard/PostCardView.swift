@@ -89,7 +89,7 @@ private extension PostCardView {
           KFImage(URL(string: post.businessAvatarUrl))
             .placeholder { SkeletonView(Constants.avatarSize, Constants.avatarSize, true) }
             .resizable()
-            .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+            .frame(size: Constants.avatarSize)
             .clipShape(Circle())
         }
       }
@@ -108,7 +108,7 @@ private extension PostCardView {
         Image(systemName: "ellipsis")
           .resizable()
           .scaledToFit()
-          .frame(width: 16, height: 16)
+          .frame(size: 16)
           .bottomDialog(isPresented: $presentingSheet) {
             if deleteTapped {
               deleteTargetPost = post
@@ -165,7 +165,7 @@ private extension PostCardView {
             .placeholder { SkeletonView(48, 48) }
             .resizable()
             .scaledToFill()
-            .frame(width: 48, height: 48)
+            .frame(size: 48)
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .padding(1.5)
             .background {

@@ -15,7 +15,7 @@ struct BackToMapButton: View {
     Image(systemName: "map")
       .resizable()
       .foregroundStyle(.white)
-      .frame(width: 18, height: 18)
+      .frame(size: 18)
       .frame(width: BackToMapButton.width, height: BackToMapButton.height)
       .background { Capsule().fill(.black) }
   }

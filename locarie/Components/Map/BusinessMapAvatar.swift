@@ -18,9 +18,9 @@ struct BusinessMapAvatar: View {
       KFImage(URL(string: url))
         .placeholder { SkeletonView(avatarSize, avatarSize, true) }
         .resizable()
-        .frame(width: avatarSize, height: avatarSize)
+        .frame(size: avatarSize)
         .clipShape(Circle())
-        .frame(width: size, height: size)
+        .frame(size: size)
         .background {
           Circle()
             .fill(LocarieColor.greyMedium)
@@ -29,8 +29,8 @@ struct BusinessMapAvatar: View {
       if newUpdate {
         Circle()
           .fill(LocarieColor.green)
-          .frame(width: 8, height: 8)
-          .frame(width: 12, height: 12)
+          .frame(size: 8)
+          .frame(size: 12)
           .background { Circle().fill(LocarieColor.greyMedium) }
           .offset(x: -offset, y: offset)
       }

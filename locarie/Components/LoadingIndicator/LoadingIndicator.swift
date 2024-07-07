@@ -15,7 +15,7 @@ struct LoadingIndicator: View {
     Circle()
       .trim(from: Constants.startFraction, to: Constants.endFraction)
       .stroke(Constants.lineColor, lineWidth: Constants.lineWidth)
-      .frame(width: Constants.size, height: Constants.size)
+      .frame(size: Constants.size)
       .rotationEffect(Angle(degrees: angle))
       .onAppear {
         withAnimation(.linear(

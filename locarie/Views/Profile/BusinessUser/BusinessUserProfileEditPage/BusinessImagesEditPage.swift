@@ -168,11 +168,11 @@ private extension BusinessImagesEditPage {
     ZStack {
       RoundedRectangle(cornerRadius: Constants.imageCornerRadius)
         .fill(LocarieColor.greyMedium)
-        .frame(width: Constants.imageSize, height: Constants.imageSize)
+        .frame(size: Constants.imageSize)
       Image("DefaultImage")
         .resizable()
         .scaledToFit()
-        .frame(width: Constants.defaultImageIconSize, height: Constants.defaultImageIconSize)
+        .frame(size: Constants.defaultImageIconSize)
     }
   }
 }

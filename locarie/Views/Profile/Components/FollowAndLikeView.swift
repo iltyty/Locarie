@@ -43,7 +43,7 @@ private extension FollowAndLikeView {
       Image("Bookmark")
         .resizable()
         .scaledToFit()
-        .frame(width: 16, height: 16)
+        .frame(size: 16)
       Text("Following")
     }
     .frame(height: Constants.tabHeight)
@@ -67,7 +67,7 @@ private extension FollowAndLikeView {
       Image("Heart")
         .resizable()
         .scaledToFit()
-        .frame(width: 16, height: 16)
+        .frame(size: 16)
       Text("Likes")
     }
     .frame(height: Constants.tabHeight)
@@ -155,7 +155,7 @@ private extension FollowAndLikeView {
       Image("Bookmark.Grey")
         .resizable()
         .scaledToFit()
-        .frame(width: 40, height: 40)
+        .frame(size: 40)
       Text("No followed yet").font(.custom(GlobalConstants.fontName, size: 14))
       Spacer()
     }
@@ -167,7 +167,7 @@ private extension FollowAndLikeView {
       Image("Heart.Grey")
         .resizable()
         .scaledToFit()
-        .frame(width: 40, height: 40)
+        .frame(size: 40)
       Text("No likes yet").font(.custom(GlobalConstants.fontName, size: 14))
       Spacer()
     }

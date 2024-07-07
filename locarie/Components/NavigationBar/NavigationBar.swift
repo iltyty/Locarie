@@ -62,7 +62,7 @@ private func defaultTitleLeft() -> AnyView {
   AnyView(Image("Chevron.Left")
     .resizable()
     .scaledToFit()
-    .frame(width: Constants.leftIconSize, height: Constants.leftIconSize))
+    .frame(size: Constants.leftIconSize))
 }
 
 private func defaultTitleRight() -> EmptyView {

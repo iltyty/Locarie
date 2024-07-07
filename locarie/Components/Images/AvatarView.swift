@@ -42,17 +42,17 @@ struct AvatarView: View {
       image
         .resizable()
         .scaledToFill()
-        .frame(width: size, height: size)
+        .frame(size: size)
         .clipShape(Circle())
     }
-    .frame(width: size, height: size)
+    .frame(size: size)
   }
 
   var customImage: some View {
     Image(name)
       .resizable()
       .scaledToFill()
-      .frame(width: size, height: size)
+      .frame(size: size)
       .clipShape(Circle())
   }
 }

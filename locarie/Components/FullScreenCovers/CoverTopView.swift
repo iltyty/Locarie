@@ -67,7 +67,7 @@ struct CoverTopView: View {
         KFImage(URL(string: user.avatarUrl))
           .placeholder { SkeletonView(Constants.avatarSize, Constants.avatarSize, true) }
           .resizable()
-          .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+          .frame(size: Constants.avatarSize)
           .clipShape(Circle())
       }
     }
@@ -94,7 +94,7 @@ struct CoverTopView: View {
     image
       .resizable()
       .scaledToFit()
-      .frame(width: Constants.buttonSize, height: Constants.buttonSize)
+      .frame(size: Constants.buttonSize)
       .contentShape(Rectangle())
   }
 }

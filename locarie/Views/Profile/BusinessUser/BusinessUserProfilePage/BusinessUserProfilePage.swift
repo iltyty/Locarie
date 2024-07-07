@@ -319,7 +319,7 @@ private extension BusinessUserProfilePage {
         if !cacheVM.cache.profileComplete {
           Circle()
             .fill(LocarieColor.primary)
-            .frame(width: 10, height: 10)
+            .frame(size: 10)
         }
       }
       settingsButton
@@ -339,7 +339,7 @@ private extension BusinessUserProfilePage {
       ZStack {
         Circle()
           .fill(Color(hex: 0xF0F0F0))
-          .frame(width: Constants.topButtonSize, height: Constants.topButtonSize)
+          .frame(size: Constants.topButtonSize)
           .shadow(radius: 2)
         if cacheVM.getAvatarUrl().isEmpty {
           defaultAvatar(size: Constants.topButtonSize - 2 * Constants.topButtonStrokeWidth)
@@ -367,7 +367,7 @@ private extension BusinessUserProfilePage {
   var settingsButton: some View {
     NavigationLink(value: Router.Destination.settings) {
       Image("GearShape")
-        .frame(width: Constants.topButtonSize, height: Constants.topButtonSize)
+        .frame(size: Constants.topButtonSize)
         .background(Circle().fill(.background).shadow(radius: 2))
     }
     .buttonStyle(.plain)

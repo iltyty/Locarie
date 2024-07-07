@@ -14,8 +14,8 @@ struct DefaultBusinessImageView: View {
     Image("DefaultImage")
       .resizable()
       .scaledToFit()
-      .frame(width: Constants.iconSize, height: Constants.iconSize)
-      .frame(width: size, height: size)
+      .frame(size: Constants.iconSize)
+      .frame(size: size)
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(LocarieColor.greyMedium)

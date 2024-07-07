@@ -26,7 +26,7 @@ struct ProfileDetail: View {
           Image("Heart")
             .resizable()
             .scaledToFit()
-            .frame(width: 16, height: 16)
+            .frame(size: 16)
           Text("\(likedCount)")
         }
       }

@@ -158,7 +158,7 @@ private struct BottomSheetTestView: View {
       Image("NavigationIcon")
         .resizable()
         .scaledToFill()
-        .frame(width: 50, height: 50)
+        .frame(size: 50)
     }
     .background(.green)
   }

@@ -14,7 +14,7 @@ struct RoundedAvatarSkeletonView: View {
   var body: some View {
     RoundedRectangle(cornerRadius: radius)
       .fill(LocarieColor.greyMedium)
-      .frame(width: size, height: size)
+      .frame(size: size)
   }
 }
 

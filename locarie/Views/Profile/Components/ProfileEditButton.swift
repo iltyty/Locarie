@@ -16,7 +16,7 @@ struct ProfileEditButton: View {
         Image("Pencil.Black")
           .resizable()
           .scaledToFit()
-          .frame(width: Constants.iconSize, height: Constants.iconSize)
+          .frame(size: Constants.iconSize)
         Text("Edit profile")
       }
       .padding(.horizontal)

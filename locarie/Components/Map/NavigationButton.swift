@@ -13,7 +13,7 @@ struct NavigationButton: View {
       .resizable()
       .scaledToFill()
       .shadow(radius: Constants.shadowRadius)
-      .frame(width: Constants.size, height: Constants.size)
+      .frame(size: Constants.size)
   }
 }
 

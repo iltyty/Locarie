@@ -23,7 +23,7 @@ struct BottomTabViewItem: View {
 
   var body: some View {
     Image(viewRouter.currentPage == page ? selectedIconName : iconName)
-      .frame(width: Constants.size, height: Constants.size)
+      .frame(size: Constants.size)
   }
 }
 

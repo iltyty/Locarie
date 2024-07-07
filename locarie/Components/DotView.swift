@@ -9,6 +9,6 @@ import SwiftUI
 
 struct DotView: View {
   var body: some View {
-    Circle().fill(LocarieColor.greyDark).frame(width: 3, height: 3)
+    Circle().fill(LocarieColor.greyDark).frame(size: 3)
   }
 }

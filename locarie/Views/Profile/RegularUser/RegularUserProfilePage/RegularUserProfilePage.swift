@@ -110,8 +110,8 @@ extension RegularUserProfilePage {
     Image("Chevron.Left")
       .resizable()
       .scaledToFit()
-      .frame(width: 18, height: 18)
-      .frame(width: 40, height: 40)
+      .frame(size: 18)
+      .frame(size: 40)
       .background(Circle().fill(.white).shadow(radius: 2))
       .buttonStyle(.plain)
       .onTapGesture {
@@ -124,8 +124,8 @@ extension RegularUserProfilePage {
       Image(systemName: "gearshape")
         .resizable()
         .scaledToFit()
-        .frame(width: 18, height: 18)
-        .frame(width: 40, height: 40)
+        .frame(size: 18)
+        .frame(size: 40)
         .background(Circle().fill(.white).shadow(radius: 2))
     }
     .buttonStyle(.plain)
@@ -142,7 +142,7 @@ extension RegularUserProfilePage {
           }
           .resizable()
           .scaledToFill()
-          .frame(width: 92, height: 92)
+          .frame(size: 92)
       }
       Text(cacheVM.getUsername())
         .font(.custom(GlobalConstants.fontName, size: 20))

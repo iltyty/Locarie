@@ -12,8 +12,8 @@ struct NotPublicButton: View {
     Image("Exclamationmark")
       .resizable()
       .scaledToFit()
-      .frame(width: 18, height: 18)
-      .frame(width: 40, height: 40)
+      .frame(size: 18)
+      .frame(size: 40)
       .background {
         Circle().fill(LocarieColor.primary)
       }

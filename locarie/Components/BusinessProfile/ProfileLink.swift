@@ -23,7 +23,7 @@ struct ProfileLink: View {
       Image("Link")
         .resizable()
         .scaledToFit()
-        .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
+        .frame(size: ProfileConstants.iconSize)
     }
   }
 

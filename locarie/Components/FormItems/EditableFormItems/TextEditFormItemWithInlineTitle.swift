@@ -41,7 +41,7 @@ struct TextEditFormItemWithInlineTitle: View {
     Image("Pencil.Grey")
       .resizable()
       .scaledToFit()
-      .frame(width: Constants.iconSize, height: Constants.iconSize)
+      .frame(size: Constants.iconSize)
   }
 
   private var background: some View {

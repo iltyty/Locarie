@@ -19,7 +19,7 @@ struct BusinessDescriptionPage: View {
       HStack(alignment: .top, spacing: 0) {
         Circle()
           .fill(LocarieColor.primary)
-          .frame(width: Constants.dotSize, height: Constants.dotSize)
+          .frame(size: Constants.dotSize)
           .padding(.top, 8)
           .padding(.trailing, 7)
         Text("Share What's On and connect with those who would love your business.")

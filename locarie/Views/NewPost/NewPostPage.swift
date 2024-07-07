@@ -132,7 +132,7 @@ private extension NewPostPage {
           .placeholder { SkeletonView(40, 40, true) }
           .resizable()
           .scaledToFill()
-          .frame(width: 40, height: 40)
+          .frame(size: 40)
           .clipShape(Circle())
         VStack(alignment: .leading, spacing: 0) {
           Text(profileVM.dto.businessName)
@@ -162,8 +162,8 @@ private extension NewPostPage {
           Image(systemName: "plus")
             .resizable()
             .foregroundStyle(LocarieColor.greyDark)
-            .frame(width: Constants.photoIconSize, height: Constants.photoIconSize)
-            .frame(width: minPhotoWidth, height: minPhotoWidth)
+            .frame(size: Constants.photoIconSize)
+            .frame(size: minPhotoWidth)
             .background(
               RoundedRectangle(cornerRadius: Constants.photoCornerRadius)
                 .fill(LocarieColor.greyMedium)

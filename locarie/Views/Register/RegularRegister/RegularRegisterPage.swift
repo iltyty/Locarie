@@ -195,7 +195,7 @@ private extension RegularRegisterPage {
     isFilled: Binding<Bool>
   ) -> some View {
     Image(systemName: systemName)
-      .frame(width: 18, height: 18)
+      .frame(size: 18)
       .foregroundStyle(Color.locariePrimary)
       .contentShape(Rectangle())
       .onTapGesture {

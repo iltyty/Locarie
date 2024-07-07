@@ -57,7 +57,7 @@ struct Banner: View {
           .resizable()
           .scaledToFit()
           .foregroundStyle(.white)
-          .frame(width: Constants.fullIconSize, height: Constants.fullIconSize)
+          .frame(size: Constants.fullIconSize)
           .padding()
           .overlay {
             Color.clear
@@ -78,7 +78,7 @@ struct Banner: View {
         Image(systemName: "circle.fill")
           .resizable()
           .scaledToFit()
-          .frame(width: 6, height: 6)
+          .frame(size: 6)
           .foregroundStyle(index == i ? Color.white : LocarieColor.greyMedium)
       }
     }

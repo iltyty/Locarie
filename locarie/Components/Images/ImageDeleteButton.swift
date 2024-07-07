@@ -12,12 +12,12 @@ struct ImageDeleteButton: View {
     ZStack {
       Circle()
         .fill(.white)
-        .frame(width: Constants.size, height: Constants.size)
+        .frame(size: Constants.size)
         .shadow(radius: Constants.shadowRadius)
       Image(systemName: "xmark")
         .font(.system(size: Constants.iconSize))
         .foregroundStyle(.black)
-        .frame(width: Constants.iconSize, height: Constants.iconSize)
+        .frame(size: Constants.iconSize)
     }
   }
 }

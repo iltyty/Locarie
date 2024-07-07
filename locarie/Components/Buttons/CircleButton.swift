@@ -41,13 +41,13 @@ struct CircleButton: View {
           .scaledToFit()
       }
     }
-    .frame(width: Constants.iconSize, height: Constants.iconSize)
+    .frame(size: Constants.iconSize)
   }
 
   private var iconBackground: some View {
     Circle()
       .fill(.background)
-      .frame(width: size, height: size)
+      .frame(size: size)
       .shadow(radius: Constants.shadow)
   }
 }

@@ -19,7 +19,7 @@ struct BusinessImageView: View {
         .placeholder { DefaultBusinessImageView(size: size) }
         .resizable()
         .scaledToFill()
-        .frame(width: size, height: size)
+        .frame(size: size)
         .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
     }
     .overlay {

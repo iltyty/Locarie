@@ -185,7 +185,7 @@ private struct ImageCropTestView: View {
         Image(uiImage: image)
           .resizable()
           .scaledToFill()
-          .frame(width: 250, height: 250)
+          .frame(size: 250)
       } else {
         Text("No image selected, click to select")
           .onTapGesture {

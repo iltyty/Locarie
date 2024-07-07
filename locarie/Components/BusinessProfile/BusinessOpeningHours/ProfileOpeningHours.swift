@@ -40,7 +40,7 @@ private extension ProfileOpeningHours {
       Image("Clock")
         .resizable()
         .scaledToFit()
-        .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
+        .frame(size: ProfileConstants.iconSize)
     }
   }
 
@@ -63,7 +63,7 @@ private extension ProfileOpeningHours {
     Image("Chevron.Right")
       .resizable()
       .scaledToFit()
-      .frame(width: 16, height: 16)
+      .frame(size: 16)
       .onTapGesture { isPresented = true }
   }
 
@@ -96,7 +96,7 @@ private extension ProfileOpeningHours {
         .fontWeight(.semibold)
       HStack {
         Image(systemName: "xmark")
-          .frame(width: Constants.xmarkSize, height: Constants.xmarkSize)
+          .frame(size: Constants.xmarkSize)
           .onTapGesture {
             isPresented = false
           }

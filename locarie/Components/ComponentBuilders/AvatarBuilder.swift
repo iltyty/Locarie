@@ -12,6 +12,6 @@ func defaultAvatar(size: CGFloat, isBusiness: Bool = true) -> some View {
   Image(isBusiness ? "DefaultBusinessAvatar" : "DefaultRegularAvatar")
     .resizable()
     .scaledToFit()
-    .frame(width: size, height: size)
+    .frame(size: size)
     .clipShape(Circle())
 }

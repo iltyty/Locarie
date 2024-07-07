@@ -45,7 +45,7 @@ private extension BusinessSearchView {
       Image("Chevron.Left")
         .resizable()
         .scaledToFit()
-        .frame(width: 18, height: 18)
+        .frame(size: 18)
         .contentShape(Rectangle())
         .onTapGesture {
           searching = false
@@ -56,7 +56,7 @@ private extension BusinessSearchView {
       Image("Xmark.Grey")
         .resizable()
         .scaledToFit()
-        .frame(width: 18, height: 18)
+        .frame(size: 18)
         .foregroundStyle(LocarieColor.greyDark)
         .onTapGesture {
           if businessName.isEmpty {
@@ -109,7 +109,7 @@ private extension BusinessSearchView {
           Image("Map")
             .resizable()
             .scaledToFill()
-            .frame(width: 18, height: 18)
+            .frame(size: 18)
           Text(area.rawValue)
         }
         .padding(.horizontal, 12)

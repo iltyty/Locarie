@@ -22,7 +22,7 @@ struct ProfilePhone: View {
     } icon: {
       Image("Phone")
         .font(.system(size: ProfileConstants.iconSize))
-        .frame(width: ProfileConstants.iconSize, height: ProfileConstants.iconSize)
+        .frame(size: ProfileConstants.iconSize)
     }
   }
 

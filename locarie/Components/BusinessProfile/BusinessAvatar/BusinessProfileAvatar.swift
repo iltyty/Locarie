@@ -17,7 +17,7 @@ struct BusinessProfileAvatar: View {
       AsyncImage(url: URL(string: url)) { image in
         image.resizable()
           .scaledToFill()
-          .frame(width: Constants.size, height: Constants.size)
+          .frame(size: Constants.size)
           .clipShape(Circle())
       } placeholder: {
         SkeletonView(Constants.size, Constants.size, true)

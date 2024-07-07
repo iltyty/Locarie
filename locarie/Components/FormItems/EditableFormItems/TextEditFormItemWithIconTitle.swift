@@ -30,7 +30,7 @@ struct TextEditFormItemWithIconTitle: View {
     Image(systemName: iconSystemName)
       .resizable()
       .scaledToFit()
-      .frame(width: Constants.iconSize, height: Constants.iconSize)
+      .frame(size: Constants.iconSize)
   }
 
   private var textEditView: some View {

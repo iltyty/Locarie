@@ -61,7 +61,7 @@ private extension AvatarEditor {
       Image(uiImage: croppedImage)
         .resizable()
         .scaledToFill()
-        .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+        .frame(size: Constants.avatarSize)
         .clipShape(Circle())
     } else if !avatarUrl.isEmpty {
       avatar(avatarUrl)
@@ -74,7 +74,7 @@ private extension AvatarEditor {
     KFImage(URL(string: url))
       .placeholder { SkeletonView(Constants.avatarSize, Constants.avatarSize, true) }
       .resizable()
-      .frame(width: Constants.avatarSize, height: Constants.avatarSize)
+      .frame(size: Constants.avatarSize)
       .clipShape(Circle())
   }
 

@@ -24,7 +24,7 @@ struct BusinessFollowedAvatarRow: View {
             .placeholder { RoundedAvatarSkeletonView(size: Constants.size) }
             .resizable()
             .scaledToFill()
-            .frame(width: Constants.size, height: Constants.size)
+            .frame(size: Constants.size)
             .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
         }
         HStack(alignment: .top) {

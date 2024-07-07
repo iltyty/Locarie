@@ -207,7 +207,7 @@ private extension HomePage {
     Image("LocarieIcon")
       .resizable()
       .scaledToFit()
-      .frame(width: 40, height: 40)
+      .frame(size: 40)
       .clipShape(RoundedRectangle(cornerRadius: 4))
       .shadow(radius: 2)
       .onTapGesture {

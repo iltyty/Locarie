@@ -64,7 +64,7 @@ private extension LocationSettingsItem {
       Image("Chevron.Right.Grey")
         .resizable()
         .scaledToFit()
-        .frame(width: 16, height: 16)
+        .frame(size: 16)
     }
     .padding(16)
     .lineLimit(1)

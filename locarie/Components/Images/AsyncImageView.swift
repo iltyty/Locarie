@@ -119,7 +119,7 @@ struct AsyncImageTestView: View {
           .resizable()
           .scaledToFit()
           .clipShape(Circle())
-          .frame(width: 300, height: 300)
+          .frame(size: 300)
       }
       .id(id)
       Button("modify") {

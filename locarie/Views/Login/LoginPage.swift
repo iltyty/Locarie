@@ -96,7 +96,7 @@ private extension LoginPage {
       Spacer()
       Image("LocarieIcon")
         .resizable()
-        .frame(width: Constants.locarieIconSize, height: Constants.locarieIconSize)
+        .frame(size: Constants.locarieIconSize)
       Spacer()
     }
   }

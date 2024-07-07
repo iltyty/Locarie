@@ -70,7 +70,7 @@ struct NotPublicSheetView: View {
           Circle().strokeBorder(LocarieColor.primary, style: .init(lineWidth: 1.8))
         }
       }
-      .frame(width: 18, height: 18)
+      .frame(size: 18)
       Text(text)
     }
   }

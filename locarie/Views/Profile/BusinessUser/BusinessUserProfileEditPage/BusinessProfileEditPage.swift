@@ -156,7 +156,7 @@ private extension BusinessProfileEditPage {
               i == 0 && profileImageUrls.isEmpty ? LocarieColor.primary : LocarieColor.greyMedium,
               style: .init(lineWidth: i == 0 ? Constants.firstProfileImageStrokeWidth : 0)
             )
-            .frame(width: Constants.profileImageSize, height: Constants.profileImageSize)
+            .frame(size: Constants.profileImageSize)
         } else {
           RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
             .strokeBorder(
@@ -167,12 +167,12 @@ private extension BusinessProfileEditPage {
               RoundedRectangle(cornerRadius: Constants.profileImageCornerRadius)
                 .fill(LocarieColor.greyMedium)
             )
-            .frame(width: Constants.profileImageSize, height: Constants.profileImageSize)
+            .frame(size: Constants.profileImageSize)
         }
         Image("DefaultImage")
           .resizable()
           .scaledToFit()
-          .frame(width: Constants.defaultIconSize, height: Constants.defaultIconSize)
+          .frame(size: Constants.defaultIconSize)
       }
     }
   }

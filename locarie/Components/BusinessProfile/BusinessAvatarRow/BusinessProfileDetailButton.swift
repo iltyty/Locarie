@@ -20,7 +20,7 @@ struct BusinessProfileDetailButton: View {
         .resizable()
         .scaledToFit()
         .rotationEffect(presenting ? .degrees(-180) : .zero)
-        .frame(width: 18, height: 18)
+        .frame(size: 18)
     }
     .buttonStyle(.plain)
   }
