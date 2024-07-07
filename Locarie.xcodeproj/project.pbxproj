@@ -169,7 +169,7 @@
 		509D5BCC2B459CC900833021 /* OpeningHourSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */; };
 		50A06DE72BC7B05900C1E158 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A06DE62BC7B05900C1E158 /* LoadingIndicator.swift */; };
 		50A06DE92BC7D01F00C1E158 /* View+LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A06DE82BC7D01E00C1E158 /* View+LoadingIndicator.swift */; };
-		50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */; };
+		50AAB17D2AEFA2E9003FEDF1 /* LocarieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17C2AEFA2E9003FEDF1 /* LocarieApp.swift */; };
 		50AAB17F2AEFA2E9003FEDF1 /* LocarieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */; };
 		50AAB1812AEFA2EC003FEDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */; };
 		50AAB1842AEFA2EC003FEDF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50AAB1832AEFA2EC003FEDF1 /* Preview Assets.xcassets */; };
@@ -426,14 +426,14 @@
 		509D5BCB2B459CC900833021 /* OpeningHourSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHourSheet.swift; sourceTree = "<group>"; };
 		50A06DE62BC7B05900C1E158 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		50A06DE82BC7D01E00C1E158 /* View+LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+LoadingIndicator.swift"; sourceTree = "<group>"; };
-		50AAB1792AEFA2E9003FEDF1 /* locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieApp.swift; sourceTree = "<group>"; };
+		50AAB1792AEFA2E9003FEDF1 /* Locarie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Locarie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50AAB17C2AEFA2E9003FEDF1 /* LocarieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieApp.swift; sourceTree = "<group>"; };
 		50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieView.swift; sourceTree = "<group>"; };
 		50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50AAB1832AEFA2EC003FEDF1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		50AAB1892AEFA2ED003FEDF1 /* locarieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locarieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50AAB1892AEFA2ED003FEDF1 /* LocarieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocarieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AAB18D2AEFA2ED003FEDF1 /* locarieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieTests.swift; sourceTree = "<group>"; };
-		50AAB1932AEFA2ED003FEDF1 /* locarieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locarieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50AAB1932AEFA2ED003FEDF1 /* LocarieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocarieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AAB1972AEFA2ED003FEDF1 /* locarieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieUITests.swift; sourceTree = "<group>"; };
 		50AAB1992AEFA2ED003FEDF1 /* locarieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locarieUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		50B11ACE2AF9DE77002A7B91 /* NewPostPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostPage.swift; sourceTree = "<group>"; };
@@ -1189,9 +1189,9 @@
 		50AAB17A2AEFA2E9003FEDF1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50AAB1792AEFA2E9003FEDF1 /* locarie.app */,
-				50AAB1892AEFA2ED003FEDF1 /* locarieTests.xctest */,
-				50AAB1932AEFA2ED003FEDF1 /* locarieUITests.xctest */,
+				50AAB1792AEFA2E9003FEDF1 /* Locarie.app */,
+				50AAB1892AEFA2ED003FEDF1 /* LocarieTests.xctest */,
+				50AAB1932AEFA2ED003FEDF1 /* LocarieUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1210,7 +1210,7 @@
 				50B11AE92AFB878A002A7B91 /* ViewModels */,
 				50B11ACC2AF9DDD9002A7B91 /* Views */,
 				50E60DED2B01F4F900CA088F /* Info.plist */,
-				50AAB17C2AEFA2E9003FEDF1 /* locarieApp.swift */,
+				50AAB17C2AEFA2E9003FEDF1 /* LocarieApp.swift */,
 				50AAB17E2AEFA2E9003FEDF1 /* LocarieView.swift */,
 				50AAB1802AEFA2EC003FEDF1 /* Assets.xcassets */,
 				50AAB1822AEFA2EC003FEDF1 /* Preview Content */,
@@ -1556,9 +1556,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		50AAB1782AEFA2E9003FEDF1 /* locarie */ = {
+		50AAB1782AEFA2E9003FEDF1 /* Locarie */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50AAB19D2AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarie" */;
+			buildConfigurationList = 50AAB19D2AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "Locarie" */;
 			buildPhases = (
 				50AAB1752AEFA2E9003FEDF1 /* Sources */,
 				50AAB1762AEFA2E9003FEDF1 /* Frameworks */,
@@ -1568,19 +1568,19 @@
 			);
 			dependencies = (
 			);
-			name = locarie;
+			name = Locarie;
 			packageProductDependencies = (
 				503905772B340A4E005B574F /* Alamofire */,
 				50B5DEBE2B3ADE1800C0A641 /* MapboxMaps */,
 				506E172C2C27CC7000282A8E /* Kingfisher */,
 			);
 			productName = locarie;
-			productReference = 50AAB1792AEFA2E9003FEDF1 /* locarie.app */;
+			productReference = 50AAB1792AEFA2E9003FEDF1 /* Locarie.app */;
 			productType = "com.apple.product-type.application";
 		};
-		50AAB1882AEFA2ED003FEDF1 /* locarieTests */ = {
+		50AAB1882AEFA2ED003FEDF1 /* LocarieTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50AAB1A02AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarieTests" */;
+			buildConfigurationList = 50AAB1A02AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "LocarieTests" */;
 			buildPhases = (
 				50AAB1852AEFA2ED003FEDF1 /* Sources */,
 				50AAB1862AEFA2ED003FEDF1 /* Frameworks */,
@@ -1591,14 +1591,14 @@
 			dependencies = (
 				50AAB18B2AEFA2ED003FEDF1 /* PBXTargetDependency */,
 			);
-			name = locarieTests;
+			name = LocarieTests;
 			productName = locarieTests;
-			productReference = 50AAB1892AEFA2ED003FEDF1 /* locarieTests.xctest */;
+			productReference = 50AAB1892AEFA2ED003FEDF1 /* LocarieTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		50AAB1922AEFA2ED003FEDF1 /* locarieUITests */ = {
+		50AAB1922AEFA2ED003FEDF1 /* LocarieUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50AAB1A32AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarieUITests" */;
+			buildConfigurationList = 50AAB1A32AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "LocarieUITests" */;
 			buildPhases = (
 				50AAB18F2AEFA2ED003FEDF1 /* Sources */,
 				50AAB1902AEFA2ED003FEDF1 /* Frameworks */,
@@ -1609,9 +1609,9 @@
 			dependencies = (
 				50AAB1952AEFA2ED003FEDF1 /* PBXTargetDependency */,
 			);
-			name = locarieUITests;
+			name = LocarieUITests;
 			productName = locarieUITests;
-			productReference = 50AAB1932AEFA2ED003FEDF1 /* locarieUITests.xctest */;
+			productReference = 50AAB1932AEFA2ED003FEDF1 /* LocarieUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -1655,9 +1655,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				50AAB1782AEFA2E9003FEDF1 /* locarie */,
-				50AAB1882AEFA2ED003FEDF1 /* locarieTests */,
-				50AAB1922AEFA2ED003FEDF1 /* locarieUITests */,
+				50AAB1782AEFA2E9003FEDF1 /* Locarie */,
+				50AAB1882AEFA2ED003FEDF1 /* LocarieTests */,
+				50AAB1922AEFA2ED003FEDF1 /* LocarieUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1914,7 +1914,7 @@
 				505BCE732C20141200498E65 /* BottomSheetY.swift in Sources */,
 				50FDD88E2B4B9090003015F9 /* ProfileGetViewModel.swift in Sources */,
 				509A10342BCE19CF00FB55C7 /* BusinessImageView.swift in Sources */,
-				50AAB17D2AEFA2E9003FEDF1 /* locarieApp.swift in Sources */,
+				50AAB17D2AEFA2E9003FEDF1 /* LocarieApp.swift in Sources */,
 				500FB2452B8889FD00E14DEE /* MapboxNeighborhoodLookupService.swift in Sources */,
 				5075FCD12B86E932005E4A8B /* ProfileDetail.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
@@ -1949,12 +1949,12 @@
 /* Begin PBXTargetDependency section */
 		50AAB18B2AEFA2ED003FEDF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 50AAB1782AEFA2E9003FEDF1 /* locarie */;
+			target = 50AAB1782AEFA2E9003FEDF1 /* Locarie */;
 			targetProxy = 50AAB18A2AEFA2ED003FEDF1 /* PBXContainerItemProxy */;
 		};
 		50AAB1952AEFA2ED003FEDF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 50AAB1782AEFA2E9003FEDF1 /* locarie */;
+			target = 50AAB1782AEFA2E9003FEDF1 /* Locarie */;
 			targetProxy = 50AAB1942AEFA2ED003FEDF1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2244,7 +2244,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50AAB19D2AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarie" */ = {
+		50AAB19D2AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "Locarie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50AAB19E2AEFA2ED003FEDF1 /* Debug */,
@@ -2253,7 +2253,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50AAB1A02AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarieTests" */ = {
+		50AAB1A02AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "LocarieTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50AAB1A12AEFA2ED003FEDF1 /* Debug */,
@@ -2262,7 +2262,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50AAB1A32AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "locarieUITests" */ = {
+		50AAB1A32AEFA2ED003FEDF1 /* Build configuration list for PBXNativeTarget "LocarieUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50AAB1A42AEFA2ED003FEDF1 /* Debug */,

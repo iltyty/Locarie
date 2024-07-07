@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "50AAB1782AEFA2E9003FEDF1"
-               BuildableName = "locarie.app"
-               BlueprintName = "locarie"
+               BuildableName = "Locarie.app"
+               BlueprintName = "Locarie"
                ReferencedContainer = "container:locarie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -35,8 +35,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "50AAB1882AEFA2ED003FEDF1"
-               BuildableName = "locarieTests.xctest"
-               BlueprintName = "locarieTests"
+               BuildableName = "LocarieTests.xctest"
+               BlueprintName = "LocarieTests"
                ReferencedContainer = "container:locarie.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -46,8 +46,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "50AAB1922AEFA2ED003FEDF1"
-               BuildableName = "locarieUITests.xctest"
-               BlueprintName = "locarieUITests"
+               BuildableName = "LocarieUITests.xctest"
+               BlueprintName = "LocarieUITests"
                ReferencedContainer = "container:locarie.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -68,8 +68,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50AAB1782AEFA2E9003FEDF1"
-            BuildableName = "locarie.app"
-            BlueprintName = "locarie"
+            BuildableName = "Locarie.app"
+            BlueprintName = "Locarie"
             ReferencedContainer = "container:locarie.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -89,8 +89,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50AAB1782AEFA2E9003FEDF1"
-            BuildableName = "locarie.app"
-            BlueprintName = "locarie"
+            BuildableName = "Locarie.app"
+            BlueprintName = "Locarie"
             ReferencedContainer = "container:locarie.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
