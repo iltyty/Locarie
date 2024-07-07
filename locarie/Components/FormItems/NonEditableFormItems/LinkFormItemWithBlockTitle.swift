@@ -76,7 +76,7 @@ struct LinkFormItemWithBlockTitle: View {
   private var textView: some View {
     Text(textContent)
       .foregroundStyle(isShowingHint ? .secondary : .primary)
-      .padding(.vertical, FormItemCommonConstants.vPadding)
+      .frame(height: FormItemCommonConstants.height)
       .padding(.horizontal, FormItemCommonConstants.hPadding)
   }
 

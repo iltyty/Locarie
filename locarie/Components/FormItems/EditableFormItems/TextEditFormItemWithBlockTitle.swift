@@ -16,7 +16,7 @@ struct TextEditFormItemWithBlockTitle: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
-      Text(title).padding(.leading, 16)
+      Text(title).padding(.leading, FormItemCommonConstants.hPadding)
       textEditView
     }
   }
@@ -31,14 +31,15 @@ struct TextEditFormItemWithBlockTitle: View {
       }
     }
     .textInputAutocapitalization(.never)
-    .padding(.vertical, FormItemCommonConstants.vPadding)
     .padding(.horizontal, FormItemCommonConstants.hPadding)
+    .frame(height: FormItemCommonConstants.height)
     .background(background)
   }
 
   private var background: some View {
     RoundedRectangle(cornerRadius: FormItemCommonConstants.cornerRadius)
       .strokeBorder(FormItemCommonConstants.strokeColor, style: .init(lineWidth: 1.5))
+      .padding(0.75)
   }
 }
 

@@ -46,7 +46,7 @@ struct LinkFormItemWithInlineTitle: View {
       Spacer()
       iconView
     }
-    .padding(.vertical, FormItemCommonConstants.vPadding)
+    .frame(height: FormItemCommonConstants.height)
     .padding(.horizontal, FormItemCommonConstants.hPadding)
     .frame(maxWidth: .infinity)
     .background(background)

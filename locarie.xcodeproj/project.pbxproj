@@ -211,6 +211,8 @@
 		50E6A7442C39428200932FAD /* View+LoginSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A7432C39428200932FAD /* View+LoginSheet.swift */; };
 		50E6A7472C39652500932FAD /* AddressInputPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A7462C39652500932FAD /* AddressInputPage.swift */; };
 		50E6A74A2C3965DD00932FAD /* Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A7492C3965DD00932FAD /* Handler.swift */; };
+		50E6A74C2C3A22EC00932FAD /* TextEditFormWithBlockTitleAndStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A74B2C3A22EC00932FAD /* TextEditFormWithBlockTitleAndStatus.swift */; };
+		50E6A74E2C3A24FB00932FAD /* View+FrameSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A74D2C3A24FB00932FAD /* View+FrameSize.swift */; };
 		50F220D22B8D872F00B547AB /* ProfileOpeningHoursItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F220D12B8D872F00B547AB /* ProfileOpeningHoursItem.swift */; };
 		50F220D52B8DB18D00B547AB /* LocationSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F220D42B8DB18D00B547AB /* LocationSettingsItem.swift */; };
 		50F220D72B8DFA2E00B547AB /* PostListWithinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F220D62B8DFA2E00B547AB /* PostListWithinViewModel.swift */; };
@@ -464,6 +466,8 @@
 		50E6A7432C39428200932FAD /* View+LoginSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+LoginSheet.swift"; sourceTree = "<group>"; };
 		50E6A7462C39652500932FAD /* AddressInputPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInputPage.swift; sourceTree = "<group>"; };
 		50E6A7492C3965DD00932FAD /* Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handler.swift; sourceTree = "<group>"; };
+		50E6A74B2C3A22EC00932FAD /* TextEditFormWithBlockTitleAndStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditFormWithBlockTitleAndStatus.swift; sourceTree = "<group>"; };
+		50E6A74D2C3A24FB00932FAD /* View+FrameSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+FrameSize.swift"; sourceTree = "<group>"; };
 		50F220D12B8D872F00B547AB /* ProfileOpeningHoursItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOpeningHoursItem.swift; sourceTree = "<group>"; };
 		50F220D42B8DB18D00B547AB /* LocationSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSettingsItem.swift; sourceTree = "<group>"; };
 		50F220D62B8DFA2E00B547AB /* PostListWithinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListWithinViewModel.swift; sourceTree = "<group>"; };
@@ -750,6 +754,7 @@
 				5029426C2C255360000E5C64 /* View+KeyboardAdaptive.swift */,
 				50A06DE82BC7D01E00C1E158 /* View+LoadingIndicator.swift */,
 				50E6A7432C39428200932FAD /* View+LoginSheet.swift */,
+				50E6A74D2C3A24FB00932FAD /* View+FrameSize.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -883,6 +888,7 @@
 				505568C02B8499CB00FD21E4 /* TextEditFormItemWithInlineTitle.swift */,
 				505568C72B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift */,
 				505568CB2B84A86700FD21E4 /* TextEditFormItemWithIconTitle.swift */,
+				50E6A74B2C3A22EC00932FAD /* TextEditFormWithBlockTitleAndStatus.swift */,
 			);
 			path = EditableFormItems;
 			sourceTree = "<group>";
@@ -1749,6 +1755,7 @@
 				50FDD89B2B53D633003015F9 /* BusinessImagesService.swift in Sources */,
 				500FB2422B885C7400E14DEE /* BusinessMapAvatar.swift in Sources */,
 				506590E02B8CC098009F8E5F /* AuthEndpoints.swift in Sources */,
+				50E6A74E2C3A24FB00932FAD /* View+FrameSize.swift in Sources */,
 				509AC04D2B56844400A79CDB /* BottomSheet+BottomSheetDetent.swift in Sources */,
 				502A4FF62B32D48400C0833A /* PostListService.swift in Sources */,
 				5075FCCF2B86E8DB005E4A8B /* ProfilePhone.swift in Sources */,
@@ -1794,6 +1801,7 @@
 				501BAF312B46345500D9D84F /* PrivacyPolicyPage.swift in Sources */,
 				50998AF22B35D195002196B5 /* ForgotPasswordPage.swift in Sources */,
 				50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */,
+				50E6A74C2C3A22EC00932FAD /* TextEditFormWithBlockTitleAndStatus.swift in Sources */,
 				5075FCD92B870A40005E4A8B /* ProfilePostsCount.swift in Sources */,
 				506590DB2B8CB4DB009F8E5F /* FeedbackService.swift in Sources */,
 				50A06DE92BC7D01F00C1E158 /* View+LoadingIndicator.swift in Sources */,

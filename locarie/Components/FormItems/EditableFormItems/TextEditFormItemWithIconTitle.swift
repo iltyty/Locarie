@@ -20,9 +20,9 @@ struct TextEditFormItemWithIconTitle: View {
       Spacer()
     }
     .padding(.horizontal)
-    .frame(maxWidth: .infinity)
-    .padding(.vertical, FormItemCommonConstants.vPadding)
     .padding(.horizontal, FormItemCommonConstants.hPadding)
+    .frame(maxWidth: .infinity)
+    .frame(height: FormItemCommonConstants.height)
     .background(background)
   }
 

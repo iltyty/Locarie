@@ -25,9 +25,21 @@ enum Regexes {
     }
   }
 
+  static let username = Regex {
+    Repeat(1 ... 25) {
+      One(.word)
+    }
+  }
+
   static let password = Regex {
     Repeat(8 ... 20) {
-      word
+      One(.word)
+    }
+  }
+
+  static let businessName = Regex {
+    Repeat(1 ... 25) {
+      One(.word)
     }
   }
 }

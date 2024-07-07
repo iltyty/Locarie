@@ -170,7 +170,7 @@ private extension BusinessUserProfilePage {
     MapReader { proxy in
       Map(viewport: $viewport) {
         MapViewAnnotation(coordinate: profileVM.dto.coordinate) {
-          BusinessMapAvatar(url: profileVM.dto.avatarUrl, newUpdate: profileVM.dto.hasUpdateIn24Hours)
+          BusinessMapAvatar(url: profileVM.dto.avatarUrl, newUpdate: profileVM.dto.hasUpdateIn24Hours, amplified: true)
             .id(avatarId)
             .onTapGesture {
               updateMapCenter(user: profileVM.dto)

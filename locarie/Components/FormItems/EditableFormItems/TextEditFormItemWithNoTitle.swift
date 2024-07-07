@@ -22,7 +22,7 @@ struct TextEditFormItemWithNoTitle: View {
       }
     }
     .textInputAutocapitalization(.never)
-    .padding(.vertical, FormItemCommonConstants.vPadding)
+    .frame(height: FormItemCommonConstants.height)
     .padding(.horizontal, FormItemCommonConstants.hPadding)
     .frame(maxWidth: .infinity)
     .background(background)

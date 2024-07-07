@@ -62,9 +62,10 @@ struct RegularRegisterPage: View {
 
 private extension RegularRegisterPage {
   var emailInput: some View {
-    TextEditFormItemWithBlockTitle(
+    TextEditFormItemWithBlockTitleAndStatus(
       title: "Email",
       hint: "Email",
+      valid: registerViewModel.isEmailValid,
       text: $registerViewModel.dto.email
     )
     .focused($focusField, equals: .email)
@@ -72,9 +73,10 @@ private extension RegularRegisterPage {
   }
 
   var firstNameInput: some View {
-    TextEditFormItemWithBlockTitle(
+    TextEditFormItemWithBlockTitleAndStatus(
       title: "First name",
       hint: "First name",
+      valid: registerViewModel.isFirstNameValid,
       text: $registerViewModel.dto.firstName
     )
     .focused($focusField, equals: .firstName)
@@ -82,9 +84,10 @@ private extension RegularRegisterPage {
   }
 
   var lastNameInput: some View {
-    TextEditFormItemWithBlockTitle(
+    TextEditFormItemWithBlockTitleAndStatus(
       title: "Last name",
       hint: "Last name",
+      valid: registerViewModel.isLastNameValid,
       text: $registerViewModel.dto.lastName
     )
     .focused($focusField, equals: .lastName)
@@ -92,9 +95,10 @@ private extension RegularRegisterPage {
   }
 
   var usernameInput: some View {
-    TextEditFormItemWithBlockTitle(
+    TextEditFormItemWithBlockTitleAndStatus(
       title: "@Username",
       hint: "Username",
+      valid: registerViewModel.isUsernameValid,
       text: $registerViewModel.dto.username
     )
     .focused($focusField, equals: .username)
@@ -103,9 +107,10 @@ private extension RegularRegisterPage {
 
   var passwordInput: some View {
     VStack(alignment: .leading, spacing: 10) {
-      TextEditFormItemWithBlockTitle(
+      TextEditFormItemWithBlockTitleAndStatus(
         title: "Password",
         hint: "Password",
+        valid: registerViewModel.isPasswordValid,
         isSecure: true,
         text: $registerViewModel.dto.password
       )

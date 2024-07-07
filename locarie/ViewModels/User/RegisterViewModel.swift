@@ -12,6 +12,12 @@ import Foundation
 final class RegisterViewModel: BaseViewModel {
   @Published var dto: RegisterRequestDto
   @Published var state: State = .idle
+  @Published var isEmailValid = false
+  @Published var isFirstNameValid = false
+  @Published var isLastNameValid = false
+  @Published var isUsernameValid = false
+  @Published var isPasswordValid = false
+  @Published var isBusinessNameValid = false
   @Published var isFormValid = false
   @Published var isBusinessFormValid = false
 
@@ -26,8 +32,7 @@ final class RegisterViewModel: BaseViewModel {
     dto = RegisterRequestDto()
     super.init()
     dto.type = type
-    storeIsFormValidPublisher()
-    storeIsBusinessFormValidPublisher()
+    storePublishers()
   }
 
   var isFormValidPublisher: AnyPublisher<Bool, Never> {
@@ -62,15 +67,70 @@ final class RegisterViewModel: BaseViewModel {
     .map { $0 && $1 && $2 }
     .eraseToAnyPublisher()
   }
+}
 
-  private func storeIsFormValidPublisher() {
+private extension RegisterViewModel {
+  func storePublishers() {
+    storeIsEmailValidPublisher()
+    storeIsFirstNameValidPublisher()
+    storeIsLastNameValidPublisher()
+    storeIsUsernameValidPublisher()
+    storeIsPasswordValidPublisher()
+    storeIsBusinessNameValidPublisher()
+    storeIsFormValidPublisher()
+    storeIsBusinessFormValidPublisher()
+  }
+
+  func storeIsEmailValidPublisher() {
+    isEmailValidPublisher
+      .receive(on: RunLoop.main)
+      .assign(to: \.isEmailValid, on: self)
+      .store(in: &subscriptions)
+  }
+
+  func storeIsFirstNameValidPublisher() {
+    isFirstNameValidPublisher
+      .receive(on: RunLoop.main)
+      .assign(to: \.isFirstNameValid, on: self)
+      .store(in: &subscriptions)
+  }
+
+  func storeIsLastNameValidPublisher() {
+    isLastNameValidPublisher
+      .receive(on: RunLoop.main)
+      .assign(to: \.isLastNameValid, on: self)
+      .store(in: &subscriptions)
+  }
+
+  func storeIsUsernameValidPublisher() {
+    isUsernameValidPublisher
+      .receive(on: RunLoop.main)
+      .assign(to: \.isUsernameValid, on: self)
+      .store(in: &subscriptions)
+  }
+
+  func storeIsPasswordValidPublisher() {
+    isPasswordValidPublisher
+      .receive(on: RunLoop.main)
+      .assign(to: \.isPasswordValid, on: self)
+      .store(in: &subscriptions)
+  }
+
+  func storeIsBusinessNameValidPublisher() {
+    isBusinessNameValidPublisher
+      .receive(on: RunLoop.main)
+      .assign(to: \.isBusinessNameValid, on: self)
+      .store(in: &subscriptions)
+  }
+
+  func storeIsFormValidPublisher() {
     isFormValidPublisher
       .receive(on: RunLoop.main)
       .assign(to: \.isFormValid, on: self)
       .store(in: &subscriptions)
   }
 
-  private func storeIsBusinessFormValidPublisher() {
+  func storeIsBusinessFormValidPublisher() {
     isBusinessFormValidPublisher
       .receive(on: RunLoop.main)
       .assign(to: \.isBusinessFormValid, on: self)
@@ -108,7 +168,7 @@ extension RegisterViewModel {
 extension RegisterViewModel {
   var isEmailValidPublisher: AnyPublisher<Bool, Never> {
     $dto.map { dto in
-      dto.email.firstMatch(of: Regexes.email) != nil
+      dto.email.wholeMatch(of: Regexes.email) != nil
     }
     .eraseToAnyPublisher()
   }
@@ -129,14 +189,14 @@ extension RegisterViewModel {
 
   var isUsernameValidPublisher: AnyPublisher<Bool, Never> {
     $dto.map { dto in
-      !dto.username.isEmpty
+      dto.username.wholeMatch(of: Regexes.username) != nil
     }
     .eraseToAnyPublisher()
   }
 
   var isPasswordValidPublisher: AnyPublisher<Bool, Never> {
     $dto.map { dto in
-      dto.password.firstMatch(of: Regexes.password) != nil
+      dto.password.wholeMatch(of: Regexes.password) != nil
     }
     .eraseToAnyPublisher()
   }
@@ -154,7 +214,7 @@ extension RegisterViewModel {
 private extension RegisterViewModel {
   var isBusinessNameValidPublisher: AnyPublisher<Bool, Never> {
     $dto.map { dto in
-      !dto.businessName.isEmpty && dto.businessName.count < 30
+      dto.businessName.wholeMatch(of: Regexes.businessName) != nil
     }
     .eraseToAnyPublisher()
   }

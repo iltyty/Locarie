@@ -16,11 +16,12 @@ struct BusinessRegisterPage: View {
     GeometryReader { _ in
       VStack(spacing: 0) {
         navigationBar
-        content.ignoresSafeArea(.keyboard)
+        content
+          .keyboardDismissable(focus: $focused)
+          .ignoresSafeArea(.keyboard)
       }
       .ignoresSafeArea(.keyboard)
     }
-    .keyboardDismissable(focus: $focused)
   }
 
   private var content: some View {
@@ -41,9 +42,10 @@ struct BusinessRegisterPage: View {
 
   @ViewBuilder private var businessNameInput: some View {
     let text = "Business name"
-    TextEditFormItemWithBlockTitle(
+    TextEditFormItemWithBlockTitleAndStatus(
       title: text,
       hint: text,
+      valid: viewModel.isBusinessNameValid,
       text: $viewModel.dto.businessName
     )
     .focused($focused)

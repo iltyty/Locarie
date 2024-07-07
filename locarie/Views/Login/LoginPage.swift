@@ -23,13 +23,13 @@ struct LoginPage: View {
     GeometryReader { _ in
       VStack(spacing: 0) {
         NavigationBar()
-        VStack(spacing: 16) {
+        VStack(spacing: 0) {
           Spacer()
           locarieIcon
           Spacer()
-          emailInput
-          passwordInput
-          forgotPassword
+          emailInput.padding(.bottom, 10)
+          passwordInput.padding(.bottom, 9)
+          forgotPassword.padding(.bottom, 9)
           loginButton
           Spacer()
           signUpText

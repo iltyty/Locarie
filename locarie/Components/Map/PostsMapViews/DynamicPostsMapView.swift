@@ -30,6 +30,7 @@ struct DynamicPostsMapView: View {
             }
           }
           .allowOverlap(true)
+          .allowOverlapWithPuck(true)
         }
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 208))

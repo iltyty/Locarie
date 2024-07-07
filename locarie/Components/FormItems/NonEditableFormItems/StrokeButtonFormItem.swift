@@ -23,8 +23,8 @@ struct StrokeButtonFormItem: View {
         content
       }
     }
-    .padding(.vertical, FormItemCommonConstants.vPadding)
     .padding(.horizontal, FormItemCommonConstants.hPadding)
+    .frame(height: FormItemCommonConstants.height)
     .background(background)
   }
 
