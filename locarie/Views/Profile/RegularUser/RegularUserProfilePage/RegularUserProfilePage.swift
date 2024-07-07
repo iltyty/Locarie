@@ -51,6 +51,7 @@ struct RegularUserProfilePage: View {
                 isPostCoverPresented: $isPostCoverPresented,
                 isProfileCoverPresented: $isProfileCoverPresented
               )
+              .background(.white)
             }
           }
           .scrollIndicators(.hidden)
