@@ -31,7 +31,6 @@ struct StrokeButtonFormItem: View {
   private var content: some View {
     Text(title)
       .padding(.horizontal, textHPadding)
-      .fontWeight(.semibold)
       .foregroundStyle(color)
       .tint(color)
   }

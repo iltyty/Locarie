@@ -17,7 +17,7 @@
                BlueprintIdentifier = "50AAB1782AEFA2E9003FEDF1"
                BuildableName = "Locarie.app"
                BlueprintName = "Locarie"
-               ReferencedContainer = "container:locarie.xcodeproj">
+               ReferencedContainer = "container:Locarie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -37,7 +37,7 @@
                BlueprintIdentifier = "50AAB1882AEFA2ED003FEDF1"
                BuildableName = "LocarieTests.xctest"
                BlueprintName = "LocarieTests"
-               ReferencedContainer = "container:locarie.xcodeproj">
+               ReferencedContainer = "container:Locarie.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -48,7 +48,7 @@
                BlueprintIdentifier = "50AAB1922AEFA2ED003FEDF1"
                BuildableName = "LocarieUITests.xctest"
                BlueprintName = "LocarieUITests"
-               ReferencedContainer = "container:locarie.xcodeproj">
+               ReferencedContainer = "container:Locarie.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -70,7 +70,7 @@
             BlueprintIdentifier = "50AAB1782AEFA2E9003FEDF1"
             BuildableName = "Locarie.app"
             BlueprintName = "Locarie"
-            ReferencedContainer = "container:locarie.xcodeproj">
+            ReferencedContainer = "container:Locarie.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <LocationScenarioReference
@@ -91,7 +91,7 @@
             BlueprintIdentifier = "50AAB1782AEFA2E9003FEDF1"
             BuildableName = "Locarie.app"
             BlueprintName = "Locarie"
-            ReferencedContainer = "container:locarie.xcodeproj">
+            ReferencedContainer = "container:Locarie.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
