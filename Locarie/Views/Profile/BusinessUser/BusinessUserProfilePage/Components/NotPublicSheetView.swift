@@ -37,6 +37,9 @@ struct NotPublicSheetView: View {
     }
     .padding(.top, 8)
     .padding(.horizontal, 32)
+    .onDisappear {
+      cacheVM.setFirstLoggedIn(false)
+    }
   }
 
   private var completeCnt: Int {
