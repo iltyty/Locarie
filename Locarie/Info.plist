@@ -2,17 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your access to your precise location so that you can fully benefit from our map features. You will be able to see posts from nearby businesses.</string>
+	<key>MBXAccessToken</key>
+	<string>sk.eyJ1IjoidG9tbXl5ZW50eSIsImEiOiJjbHF1dzN4Zmc1Yjk3MmtycXhsaHI5NjFxIn0.CyS0WkbzbZKrrIEzDzskDw</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Fonts/HelveticaNeue.ttf</string>
 		<string>Fonts/HelveticaNeueItalic.ttf</string>
 	</array>
-	<key>CFBundleIdentifier</key>
-	<string></string>
-	<key>MBXAccessToken</key>
-	<string>sk.eyJ1IjoidG9tbXl5ZW50eSIsImEiOiJjbHF1dzN4Zmc1Yjk3MmtycXhsaHI5NjFxIn0.CyS0WkbzbZKrrIEzDzskDw</string>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIImageName</key>

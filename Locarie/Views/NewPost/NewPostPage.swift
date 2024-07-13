@@ -137,8 +137,8 @@ private extension NewPostPage {
         VStack(alignment: .leading, spacing: 0) {
           Text(profileVM.dto.businessName)
           HStack(spacing: 5) {
-            Text(profileVM.dto.lastUpdateTime)
-              .foregroundStyle(profileVM.dto.hasUpdateIn24Hours ? LocarieColor.greyDark : LocarieColor.green)
+            Text("now")
+              .foregroundStyle(LocarieColor.green)
             DotView()
             Text(profileVM.dto.neighborhood)
               .foregroundStyle(LocarieColor.greyDark)

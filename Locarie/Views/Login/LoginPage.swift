@@ -29,7 +29,7 @@ struct LoginPage: View {
           Spacer()
           emailInput.padding(.bottom, 16)
           passwordInput.padding(.bottom, 7.5)
-          forgotPassword.padding(.bottom, 7.5)
+          forgotPassword.padding(.bottom, 21.5)
           loginButton
           Spacer()
           signUpText

@@ -26,6 +26,7 @@ struct StrokeButtonFormItem: View {
     .padding(.horizontal, FormItemCommonConstants.hPadding)
     .frame(height: FormItemCommonConstants.height)
     .background(background)
+    .contentShape(Rectangle())
   }
 
   private var content: some View {
