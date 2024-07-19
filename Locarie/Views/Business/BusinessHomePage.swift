@@ -47,12 +47,11 @@ struct BusinessHomePage: View {
         mapView
         VStack(spacing: 0) {
           topContent
-            .padding(.bottom, 8)
+            .padding(.vertical, 8)
             .padding(.horizontal, 16)
           bottomContent
           BusinessBottomBar(
             business: $user,
-            location: user.location,
             favoriteBusinessVM: favoriteBusinessVM
           )
           .onReceive(favoriteBusinessVM.$state) { state in
@@ -177,8 +176,9 @@ private extension BusinessHomePage {
         dismiss()
       }
       Spacer()
-      CircleButton("ShareIcon")
-      CircleButton(systemName: "ellipsis")
+      ShareLink(item: URL(string: "https://apps.apple.com/us/app/locarie/id6499185074")!, message: Text("Locarie")) {
+        CircleButton("ShareIcon")
+      }
     }
     .background {
       GeometryReader { proxy in

@@ -33,6 +33,8 @@ struct FavoritePage: View {
           MapViewAnnotation(coordinate: post.user.coordinate) {
             BusinessMapAvatar(url: post.user.avatarUrl, newUpdate: post.user.hasUpdateIn24Hours)
           }
+          .allowOverlap(true)
+          .allowOverlapWithPuck(true)
         }
       }
       .onMapTapGesture { _ in

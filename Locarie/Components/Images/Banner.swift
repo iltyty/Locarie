@@ -28,7 +28,7 @@ struct Banner: View {
             .onAppear {
               screenSize = proxy.size
             }
-          if indicator == .inner {
+          if indicator == .inner, urls.count > 1 {
             indicators.padding(.bottom, 10)
           }
         }
@@ -127,7 +127,6 @@ private enum Constants {
 #Preview {
   Banner(
     urls: [
-      "https://picsum.photos/300/200",
       "https://picsum.photos/300/200",
     ],
     isPortrait: false

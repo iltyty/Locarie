@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BusinessBottomBar: View {
   @Binding var business: UserDto
-  let location: BusinessLocation?
   @ObservedObject var favoriteBusinessVM: FavoriteBusinessViewModel
 
   @State private var alreadyFollowed = false
@@ -76,13 +75,13 @@ private extension BusinessBottomBar {
     .fontWeight(.bold)
     .tint(.primary)
     .buttonStyle(.plain)
-    .disabled(location == nil)
+    .disabled(business.address.isEmpty)
   }
 
   var navigationUrl: URL {
-    URL(
-      string: "https://www.google.com/maps?saddr=&daddr=\(location?.latitude ?? 0)," +
-        "\(location?.longitude ?? 0)&directionsmode=walking"
+    let destination = business.address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+    return URL(
+      string: "https://www.google.com/maps/dir/?api=1&destination=\(destination)"
     )!
   }
 
