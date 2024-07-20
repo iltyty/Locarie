@@ -12,10 +12,12 @@ struct DynamicPostsMapView: View {
   @Binding var viewport: Viewport
   @Binding var mapTouched: Bool
 
+  @ObservedObject var postVM: PostListNearbyAllViewModel
+
   @State private var map: MapboxMap!
   @State private var needUpdating = true
 
-  @ObservedObject var postVM: PostListNearbyAllViewModel
+  @ObservedObject private var network = Network.shared
   @StateObject private var locationManager = LocationManager()
 
   var body: some View {
@@ -43,6 +45,12 @@ struct DynamicPostsMapView: View {
     }
     .onReceive(locationManager.$location) { location in
       updatePosts(location)
+    }
+    .onChange(of: network.connected) { connected in
+      print(connected)
+      if connected, let location = locationManager.location {
+        updatePosts(location)
+      }
     }
     .ignoresSafeArea()
     .simultaneousGesture(dragGesture)

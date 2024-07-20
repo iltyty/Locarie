@@ -71,5 +71,14 @@ extension PostListNearbyAllViewModel {
       default: false
       }
     }
+
+    func isLoaded() -> Bool {
+      switch self {
+      case .idle: false
+      case .loading: false
+      case .finished: true
+      case .failed: true
+      }
+    }
   }
 }

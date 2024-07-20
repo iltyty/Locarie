@@ -11,6 +11,7 @@ import SwiftUI
 struct HomePage: View {
   private let router = Router.shared
 
+  @ObservedObject private var network = Network.shared
   @StateObject private var postVM = PostListNearbyAllViewModel()
 
   @State private var user = UserDto()
@@ -99,7 +100,16 @@ private extension HomePage {
         currentDetent: $currentDetent
       ) {
         Group {
-          if postVM.state.isIdle() || postVM.state.isLoading() {
+          if !network.connected && postVM.posts.isEmpty {
+            VStack(spacing: 45) {
+              Text("Explore")
+                .font(.custom(GlobalConstants.fontName, size: 18))
+                .fontWeight(.bold)
+              Text("No network connection")
+                .fontWeight(.bold)
+                .foregroundStyle(LocarieColor.greyDark)
+            }
+          } else if postVM.state.isIdle() || postVM.state.isLoading() {
             VStack(spacing: 16) {
               PostCardView.skeleton
               PostCardView.skeleton
