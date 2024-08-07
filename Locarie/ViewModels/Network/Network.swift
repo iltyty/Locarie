@@ -22,7 +22,9 @@ final class Network: ObservableObject {
 
   func checkConnection() {
     monitor.pathUpdateHandler = { path in
-      self.connected = (path.status == .satisfied)
+      DispatchQueue.main.async {
+        self.connected = (path.status == .satisfied)
+      }
     }
     monitor.start(queue: queue)
   }

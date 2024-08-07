@@ -40,7 +40,7 @@ final class UserListViewModel: BaseViewModel {
       return
     }
     if let result = dto.data {
-      businesses = result
+      businesses = result.filter(\.isProfileComplete)
     }
     state = .finished
   }

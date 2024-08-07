@@ -10,17 +10,18 @@ import SwiftUI
 
 struct PlaceSearcher: View {
   @ObservedObject var vm: PlaceSuggestionsViewModel
-  var hint = "Search places"
+  var placeholder = "Search places"
+  var hint = ""
 
   @State private var loading = false
 
   var body: some View {
-    VStack(spacing: 0) {
+    VStack(alignment: .leading, spacing: 0) {
       HStack(spacing: 0) {
         Image(systemName: "magnifyingglass")
           .padding(.leading, 16)
           .padding(.trailing, 14)
-        TextField(hint, text: $vm.place)
+        TextField(placeholder, text: $vm.place)
           .tint(LocarieColor.greyDark)
           .autocorrectionDisabled()
           .textInputAutocapitalization(.never)
@@ -31,14 +32,25 @@ struct PlaceSearcher: View {
           .stroke(LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
           .padding(0.75)
       }
+      if !hint.isEmpty {
+        Text(hint)
+          .font(.custom(GlobalConstants.fontName, size: 14))
+          .foregroundStyle(LocarieColor.greyDark)
+          .padding(.leading, 16)
+          .padding(.top, 7.5)
+      }
       if case let .loaded(suggestions) = vm.state {
-        VStack(alignment: .leading, spacing: 22) {
-          ForEach(suggestions.indices, id: \.self) { i in
-            PlaceSuggestionItem(suggestions[i], divider: i != suggestions.count - 1)
-              .onTapGesture { vm.choose(suggestions[i]) }
+        ScrollView {
+          VStack(alignment: .leading, spacing: 22) {
+            ForEach(suggestions.indices, id: \.self) { i in
+              PlaceSuggestionItem(suggestions[i], divider: i != suggestions.count - 1)
+                .onTapGesture { vm.choose(suggestions[i]) }
+            }
           }
+          .padding(.top, 14)
         }
-        .padding(.top, 22)
+        .scrollIndicators(.hidden)
+        .padding(.top, 8)
       }
     }
     .loadingIndicator(loading: $loading)

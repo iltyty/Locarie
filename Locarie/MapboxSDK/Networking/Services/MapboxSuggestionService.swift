@@ -51,7 +51,10 @@ public extension MapboxSuggestionServiceImpl {
   }
 
   private func prepareQueryParameters(forQuery query: String) -> Parameters {
-    ["q": query]
+    [
+      "q": query,
+      "limit": 10,
+    ]
   }
 
   private func prepareOriginParameter(

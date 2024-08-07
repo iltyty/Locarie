@@ -53,18 +53,16 @@ private extension BusinessSearchView {
       TextField("Search businesses", text: $businessName)
         .autocorrectionDisabled()
         .textInputAutocapitalization(.never)
-      Image("Xmark.Grey")
-        .resizable()
-        .scaledToFit()
-        .frame(size: 18)
-        .foregroundStyle(LocarieColor.greyDark)
-        .onTapGesture {
-          if businessName.isEmpty {
-            searching = false
-          } else {
+      if !businessName.isEmpty {
+        Image("Xmark.Grey")
+          .resizable()
+          .scaledToFit()
+          .frame(size: 18)
+          .foregroundStyle(LocarieColor.greyDark)
+          .onTapGesture {
             businessName = ""
           }
-        }
+      }
     }
     .padding(.horizontal, 16)
     .frame(height: 48)

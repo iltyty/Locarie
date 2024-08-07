@@ -208,18 +208,13 @@ private extension BusinessAddressPage {
       Text("Your Business Address").fontWeight(.bold)
       switch pageState {
       case .initial, .editing:
-        VStack(spacing: 10) {
-          PlaceSearcher(vm: suggestVM, hint: "Type in your address")
+        VStack(alignment: .leading, spacing: 10) {
+          PlaceSearcher(vm: suggestVM, placeholder: "Type in your address", hint: "Postcode will not work.")
             .focused($inputtingPlace)
             .onChange(of: dto.address) { address in
               suggestVM.place = address
             }
             .disabled(currentDetent == Constants.bottomDetent)
-          if currentDetent == Constants.bottomDetent {
-            Text("Please enter your business address, not your postcode.")
-              .font(.custom(GlobalConstants.fontName, size: 14))
-              .foregroundStyle(LocarieColor.greyDark)
-          }
         }
       case .done:
         HStack(spacing: 10) {
