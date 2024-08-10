@@ -31,17 +31,7 @@ struct BusinessAddressPage<U: UserLocation>: View {
     GeometryReader { proxy in
       ZStack {
         VStack(spacing: 0) {
-          ZStack {
-            mapView.frame(height: max(0, mapHeight(proxy: proxy)))
-            if !setupDone {
-              Image("Pin.Grey")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 32, height: 61)
-                .offset(y: -24)
-            }
-          }
-          .ignoresSafeArea(edges: .top)
+          mapView.frame(height: max(0, mapHeight(proxy: proxy)))
           Spacer()
         }
         contentView

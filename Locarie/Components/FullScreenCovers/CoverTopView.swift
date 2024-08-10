@@ -75,11 +75,7 @@ struct CoverTopView: View {
 
   @ViewBuilder
   var shareButton: some View {
-    let link = URL(string: "https://www.locarie.com")!
-    ShareLink(
-      item: link,
-      preview: SharePreview("Locarie", image: Image("LocarieIcon"))
-    ) {
+    ShareLink(item: URL(string: "https://apps.apple.com/us/app/locarie/id6499185074")!, message: Text("Locarie")) {
       buttonBuilder(Image("ShareIcon"))
     }
   }
