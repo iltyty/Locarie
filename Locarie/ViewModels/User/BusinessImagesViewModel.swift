@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import Kingfisher
 
 @MainActor final class BusinessImagesViewModel: BaseViewModel {
   @Published var state: State = .idle
@@ -15,11 +16,57 @@ import Foundation
   @Published var existedImageData = [Data]()
   @Published var photoVM = PhotoViewModel()
 
+  public let loader = ExistingImageLoader()
+
   private let networking: BusinessImagesService
   private var subscriptions: Set<AnyCancellable> = []
 
   init(_ networking: BusinessImagesService = BusinessImagesServiceImpl.shared) {
     self.networking = networking
+  }
+
+  public actor ExistingImageLoader {
+    public func loadExistedImageData(on mainActor: BusinessImagesViewModel) async {
+      for urlString in await mainActor.existedImageUrls {
+        Task {
+          if !ImageCache.default.isCached(forKey: urlString) {
+            if let url = URL(string: urlString), let data = try? Data(contentsOf: url) {
+              DispatchQueue.main.async {
+                mainActor.existedImageData.append(data)
+              }
+            }
+          } else {
+            ImageCache.default.retrieveImage(forKey: urlString) { result in
+              var loaded = false
+              switch result {
+              case let .success(value):
+                if let image = value.image {
+                  if let data = image.pngData() {
+                    loaded = true
+                    DispatchQueue.main.async {
+                      mainActor.existedImageData.append(data)
+                    }
+                  } else if let data = image.jpegData(compressionQuality: 1) {
+                    loaded = true
+                    DispatchQueue.main.async {
+                      mainActor.existedImageData.append(data)
+                    }
+                  }
+                }
+              default: break
+              }
+              if !loaded {
+                if let url = URL(string: urlString), let data = try? Data(contentsOf: url) {
+                  DispatchQueue.main.async {
+                    mainActor.existedImageData.append(data)
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   func get(userId id: Int64) {
@@ -58,7 +105,6 @@ import Foundation
     guard !existedImageUrls.isEmpty || !photoVM.attachments.isEmpty else { return }
 
     state = .loading
-    loadExistedImageData()
     let data = existedImageData + photoVM.attachments.map(\.data)
 
     let filenames = getExistedImageFilenames() + getPhotoFilenames()
@@ -69,14 +115,6 @@ import Foundation
         handleUploadResponse(response)
       }
       .store(in: &subscriptions)
-  }
-
-  private func loadExistedImageData() {
-    for urlString in existedImageUrls {
-      if let url = URL(string: urlString), let data = try? Data(contentsOf: url) {
-        existedImageData.append(data)
-      }
-    }
   }
 
   private func getExistedImageFilenames() -> [String] {

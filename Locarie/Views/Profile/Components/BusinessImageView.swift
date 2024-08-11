@@ -9,22 +9,35 @@ import Kingfisher
 import SwiftUI
 
 struct BusinessImageView: View {
-  let url: URL?
+  let url: String
+  var data: Data? = nil
+  var loadFromData = false
   var size: CGFloat = Constants.size
   var bordered: Bool = false
 
   var body: some View {
-    Group {
-      KFImage(url)
+    if loadFromData {
+      KFImage.data(data, cacheKey: url)
         .placeholder { DefaultBusinessImageView(size: size) }
         .resizable()
         .scaledToFill()
         .frame(size: size)
         .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
-    }
-    .overlay {
-      RoundedRectangle(cornerRadius: Constants.cornerRadius)
-        .strokeBorder(LocarieColor.primary, style: .init(lineWidth: bordered ? Constants.strokeWidth : 0))
+        .overlay {
+          RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            .strokeBorder(LocarieColor.primary, style: .init(lineWidth: bordered ? Constants.strokeWidth : 0))
+        }
+    } else {
+      KFImage(URL(string: url))
+        .placeholder { DefaultBusinessImageView(size: size) }
+        .resizable()
+        .scaledToFill()
+        .frame(size: size)
+        .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+        .overlay {
+          RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            .strokeBorder(LocarieColor.primary, style: .init(lineWidth: bordered ? Constants.strokeWidth : 0))
+        }
     }
   }
 }

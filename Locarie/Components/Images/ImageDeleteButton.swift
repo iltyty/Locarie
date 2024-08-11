@@ -14,10 +14,12 @@ struct ImageDeleteButton: View {
         .fill(.white)
         .frame(size: Constants.size)
         .shadow(radius: Constants.shadowRadius)
+        .contentShape(Rectangle())
       Image(systemName: "xmark")
         .font(.system(size: Constants.iconSize))
         .foregroundStyle(.black)
         .frame(size: Constants.iconSize)
+        .contentShape(Rectangle())
     }
   }
 }

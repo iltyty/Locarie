@@ -134,7 +134,7 @@ private extension BusinessProfileEditPage {
   var profileImages: some View {
     ForEach(profileImageUrls.indices, id: \.self) { i in
       BusinessImageView(
-        url: URL(string: profileImageUrls[i]),
+        url: profileImageUrls[i],
         size: Constants.profileImageSize,
         bordered: i == 0
       )

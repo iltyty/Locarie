@@ -35,8 +35,17 @@ struct BusinessImagesEditPage: View {
     .onAppear {
       imageVM.get(userId: cacheVM.getUserId())
     }
+    .onChange(of: imageVM.existedImageData) { data in
+      if data.count == imageVM.existedImageUrls.count {
+        loading = false
+      }
+    }
     .onReceive(imageVM.$state) { state in
       switch state {
+      case .getFinished:
+        Task {
+          await imageVM.loader.loadExistedImageData(on: imageVM)
+        }
       case .uploadFinished:
         loading = false
         presentingAlert = true
@@ -70,7 +79,7 @@ struct BusinessImagesEditPage: View {
   private var businessImages: some View {
     PhotosPicker(
       selection: $imageVM.photoVM.selection,
-      maxSelectionCount: defaultImagesCount,
+      maxSelectionCount: Constants.maxImageCount - imageVM.existedImageUrls.count,
       matching: .images,
       photoLibrary: .shared()
     ) {
@@ -104,16 +113,24 @@ struct BusinessImagesEditPage: View {
 private extension BusinessImagesEditPage {
   @ViewBuilder
   var existedImages: some View {
-    ForEach(imageVM.existedImageUrls, id: \.self) { url in
+    let urls = imageVM.existedImageUrls
+    let data = imageVM.existedImageData
+    ForEach(Array(urls.enumerated()), id: \.element) { url in
       ZStack(alignment: .topTrailing) {
         BusinessImageView(
-          url: URL(string: url),
+          url: url.element,
+          data: data.count > url.offset ? data[url.offset] : nil,
+          loadFromData: true,
           size: Constants.imageSize,
-          bordered: url == imageVM.existedImageUrls[0]
+          bordered: url.offset == 0
         )
-        ImageDeleteButton().onTapGesture {
-          imageVM.existedImageUrls.removeAll { $0 == url }
-        }
+        ImageDeleteButton()
+          .onTapGesture {
+            imageVM.existedImageUrls.remove(at: url.offset)
+            if imageVM.existedImageData.count > url.offset {
+              imageVM.existedImageData.remove(at: url.offset)
+            }
+          }
       }
     }
   }
@@ -135,11 +152,12 @@ private extension BusinessImagesEditPage {
             EmptyView()
           }
         }
-        ImageDeleteButton().onTapGesture {
-          let index = attachments.firstIndex { $0.id == attachment.id }!
-          imageVM.photoVM.selection.remove(at: index)
-          imageVM.objectWillChange.send()
-        }
+        ImageDeleteButton()
+          .onTapGesture {
+            let index = attachments.firstIndex { $0.id == attachment.id }!
+            imageVM.photoVM.selection.remove(at: index)
+            imageVM.objectWillChange.send()
+          }
       }
     }
   }
