@@ -43,8 +43,12 @@ struct BusinessImagesEditPage: View {
     .onReceive(imageVM.$state) { state in
       switch state {
       case .getFinished:
-        Task {
-          await imageVM.loader.loadExistedImageData(on: imageVM)
+        if imageVM.existedImageUrls.isEmpty {
+          loading = false
+        } else {
+          Task {
+            await imageVM.loader.loadExistedImageData(on: imageVM)
+          }
         }
       case .uploadFinished:
         loading = false
