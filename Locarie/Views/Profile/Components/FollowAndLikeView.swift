@@ -90,13 +90,13 @@ private extension FollowAndLikeView {
       case .saved: savedPosts
       }
     }
-    .padding([.bottom, .horizontal], 16)
+    .padding(.bottom, 16)
   }
 
   @ViewBuilder
   var followedBusinesses: some View {
     if case .loading = favoriteBusinessVM.state {
-      followingSkeleton.frame(maxHeight: .infinity, alignment: .top)
+      followingSkeleton.frame(maxHeight: .infinity, alignment: .top).padding(.horizontal, 16)
     } else if favoriteBusinessVM.users.isEmpty {
       emptyFollowedBusinesses
     } else {
@@ -208,4 +208,27 @@ private enum Constants {
   static let tabWidth: CGFloat = 170
   static let tabHeight: CGFloat = 40
   static let emptyTabContentTopPadding: CGFloat = 50
+}
+
+private struct FollowTestView: View {
+  var body: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      HStack(spacing: 10) {
+        RoundedAvatarSkeletonView(size: 72)
+        VStack(alignment: .leading, spacing: 10) {
+          SkeletonView(84, 14)
+          SkeletonView(146, 10)
+        }
+        Spacer()
+      }
+      HStack(spacing: 5) {
+        SkeletonView(68, 10)
+        SkeletonView(68, 10)
+      }
+    }
+  }
+}
+
+#Preview {
+  FollowTestView()
 }

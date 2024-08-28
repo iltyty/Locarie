@@ -11,7 +11,6 @@ struct BusinessProfileAvatarRow: View {
   let user: UserDto
 
   @Binding var presentingCover: Bool
-  @Binding var presentingDetail: Bool
 
   var body: some View {
     HStack(spacing: 0) {
@@ -22,9 +21,6 @@ struct BusinessProfileAvatarRow: View {
         .padding(.trailing, 10)
       BusinessStatus(user)
       Spacer()
-      BusinessProfileDetailButton(presenting: $presentingDetail)
-        .padding(.leading, 10)
-        .padding(.trailing, 16)
     }
   }
 }

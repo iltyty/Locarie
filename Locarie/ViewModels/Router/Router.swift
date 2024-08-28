@@ -37,7 +37,7 @@ extension Router {
     case favorite
 
     case loginOrRegister, login, regularRegister, businessDescription,
-         businessRegister, forgotPassword, notifications
+         businessRegister, forgotPassword, notifications, distanceUnits
 
     case settings, myAccount, changePassword, newPassword,
          feedback, privacyPolicy, termsOfService, communityGuidelines
@@ -75,6 +75,8 @@ extension Router {
       ForgotPasswordPage()
     case .notifications:
       NotificationsPage()
+    case .distanceUnits:
+      DistanceUnitsPage()
 
     case .settings:
       SettingsPage()

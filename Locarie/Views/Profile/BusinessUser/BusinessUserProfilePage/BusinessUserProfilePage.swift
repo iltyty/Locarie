@@ -22,9 +22,9 @@ struct BusinessUserProfilePage: View {
   @State private var mapUpperBoundY: CGFloat = 0
   @State private var mapBottomBoundY: CGFloat = 0
 
+  @State private var profileCoverCurIndex = 0
   @State private var presentingDeletePostDialog = false
   @State private var presentingNotPublicSheet = false
-  @State private var presentingProfileDetail = true
   @State private var presentingProfileCover = false
   @State private var presentingPostCover = false
 
@@ -67,6 +67,7 @@ struct BusinessUserProfilePage: View {
         if presentingProfileCover {
           BusinessProfileCover(
             user: profileVM.dto,
+            curIndex: profileCoverCurIndex,
             onAvatarTapped: {
               presentingProfileCover = false
             },
@@ -201,62 +202,77 @@ private extension BusinessUserProfilePage {
         detents: [Constants.bottomDetent, .large],
         currentDetent: $currentDetent
       ) {
-        sheetContent.padding(.horizontal, 16)
+        sheetContent
       }
     }
   }
 
   var sheetContent: some View {
     VStack(alignment: .leading, spacing: 8) {
-      if case .loading = profileVM.state {
-        BusinessUserProfilePage.avatarRowSkeleton
-      } else {
-        BusinessProfileAvatarRow(
-          user: profileVM.dto,
-          presentingCover: $presentingProfileCover,
-          presentingDetail: $presentingProfileDetail
-        )
+      Group {
+        if case .loading = profileVM.state {
+          BusinessUserProfilePage.avatarRowSkeleton
+        } else {
+          BusinessProfileAvatarRow(
+            user: profileVM.dto,
+            presentingCover: $presentingProfileCover
+          )
+        }
       }
+      .padding(.horizontal, 16)
       ScrollViewReader { proxy in
         ScrollView {
           VStack(alignment: .leading, spacing: 16) {
-            if case .loading = profileVM.state {
-              BusinessUserProfilePage.categoriesSkeleton
-            } else {
-              ProfileCategories(profileVM.dto).id(0)
-            }
-            if case .loading = profileVM.state {
-              BusinessUserProfilePage.bioSkeleton
-            } else {
-              if cacheVM.cache.profileComplete {
-                ProfileBio(profileVM.dto, presentingDetail: $presentingProfileDetail)
+            Group {
+              if case .loading = profileVM.state {
+                BusinessUserProfilePage.categoriesSkeleton
               } else {
-                Text("""
-                Not Public Yet…
-                Your profile is only a few steps away from going public. \
-                Complete your profile to start connecting with customers!
-                """)
-                .foregroundStyle(LocarieColor.greyDark)
-              }
-              if presentingProfileDetail {
-                ProfileDetail(profileVM.dto, favoredByCount: profileVM.dto.favoredByCount, likedCount: likedCount)
+                ProfileCategories(profileVM.dto).id(0)
               }
             }
-            if case .loading = postVM.state {
-              BusinessUserProfilePage.postsSkeleton
+            .padding(.horizontal, 16)
+            if case .loading = profileVM.state {
+              BusinessUserProfilePage.bioSkeleton.padding(.horizontal, 16)
             } else {
-              ProfilePostsCount(postVM.posts)
-              postList
+              Group {
+                if cacheVM.cache.profileComplete {
+                  ProfileBio(profileVM.dto)
+                } else {
+                  Text("""
+                  Not Public Yet…
+                  Your profile is only a few steps away from going public. \
+                  Complete your profile to start connecting with customers!
+                  """)
+                  .foregroundStyle(LocarieColor.greyDark)
+                }
+              }
+              .padding(.horizontal, 16)
+              ProfileDetail(profileVM.dto, favoredByCount: profileVM.dto.favoredByCount, likedCount: likedCount)
+                .padding(.horizontal, 16)
+              LocarieDivider().padding(.horizontal, 16)
+              if case .finished = profileVM.state {
+                ProfileImages(
+                  amplified: !postVM.posts.isEmpty,
+                  urls: profileVM.dto.profileImageUrls,
+                  profileCoverCurIndex: $profileCoverCurIndex,
+                  presentingProfileCover: $presentingProfileCover
+                )
+                LocarieDivider().padding(.horizontal, 16)
+              }
             }
+            Group {
+              if case .loading = postVM.state {
+                BusinessUserProfilePage.postsSkeleton
+              } else {
+                ProfilePostsCount(postVM.posts)
+                postList
+              }
+            }
+            .padding(.horizontal, 16)
           }
           .padding(.top, 8)
           .onChange(of: currentDetent) { _ in
             proxy.scrollTo(0)
-          }
-          .onChange(of: presentingProfileDetail) { presenting in
-            if presenting {
-              proxy.scrollTo(0)
-            }
           }
         }
         .scrollIndicators(.hidden)

@@ -85,12 +85,20 @@ extension UserDto {
 
 extension UserDto {
   func distance(to location: CLLocation?) -> String {
-    guard let location else { return "0 m" }
-    let dist = location.distance(from: clLocation)
-    return switch dist {
-    case 0 ..< 1000: String(format: "%.f m", dist)
-    default: String(format: "%.f km", dist / 1000)
+    let cacheVM = LocalCacheViewModel.shared
+    guard let location else {
+      if cacheVM.isCurrentMilesDistanceUnits() {
+        return "0 mi"
+      }
+      return "0 km"
     }
+    let dist = location.distance(from: clLocation)
+    if cacheVM.isCurrentMilesDistanceUnits() {
+      let feet = dist * 3.28084
+      let miles = dist / 1609.34
+      return feet < 1000 ? String(format: "%.f ft", feet) : String(format: "%.f mi", miles)
+    }
+    return dist < 1000 ? String(format: "%.f m", dist) : String(format: "%.f km", dist / 1000)
   }
 
   var clLocation: CLLocation {

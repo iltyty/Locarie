@@ -18,7 +18,7 @@ struct PostCardView: View {
   @Binding var presentingDeleteDialog: Bool
   @Binding var deleteTargetPost: PostDto
 
-  @State private var distance = "0 km"
+  @State private var distance = "0"
   @State private var deleteTapped = false
   @State private var presentingSheet = false
   @State private var presentingCover = false

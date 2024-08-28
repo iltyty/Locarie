@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BusinessProfileCover: View {
   let user: UserDto
+  var curIndex = 0
   var onAvatarTapped: () -> Void = {}
   @Binding var isPresenting: Bool
 
@@ -26,7 +27,7 @@ struct BusinessProfileCover: View {
       .padding(.bottom, 24)
       .padding(.horizontal, 8)
       Spacer()
-      Banner(urls: user.profileImageUrls, isPortrait: false)
+      Banner(urls: user.profileImageUrls, isPortrait: false, curIndex: curIndex)
       Spacer()
       coverBottom
     }

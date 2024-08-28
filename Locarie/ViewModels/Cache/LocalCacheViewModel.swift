@@ -80,4 +80,16 @@ class LocalCacheViewModel: ObservableObject {
   func setProfileComplete(_ complete: Bool) {
     cache.setProfileComplete(complete)
   }
+
+  func isCurrentMilesDistanceUnits() -> Bool {
+    cache.distanceUnits == DistanceUnits.miles.rawValue
+  }
+
+  func getDistanceUnits() -> String {
+    cache.distanceUnits
+  }
+
+  func setDistanceUnits(_ units: DistanceUnits) {
+    cache.setDistanceUnits(units)
+  }
 }

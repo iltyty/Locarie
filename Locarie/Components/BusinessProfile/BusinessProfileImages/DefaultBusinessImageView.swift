@@ -8,14 +8,34 @@
 import SwiftUI
 
 struct DefaultBusinessImageView: View {
-  var size: CGFloat = Constants.size
+  var size: CGFloat
+  var width: CGFloat
+  var height: CGFloat
+
+  init() {
+    size = Constants.size
+    width = size
+    height = size
+  }
+
+  init(size: CGFloat) {
+    self.size = size
+    width = self.size
+    height = self.size
+  }
+
+  init(width: CGFloat, height: CGFloat) {
+    size = 0
+    self.width = width
+    self.height = height
+  }
 
   var body: some View {
     Image("DefaultImage")
       .resizable()
       .scaledToFit()
       .frame(size: Constants.iconSize)
-      .frame(size: size)
+      .frame(width: width, height: height)
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(LocarieColor.greyMedium)

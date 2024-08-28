@@ -59,32 +59,3 @@ struct TextEditFormItemWithBlockTitleAndStatus: View {
     }
   }
 }
-
-private struct TestView: View {
-  @State private var firstName = ""
-  @State private var password = ""
-  @State private var valid = false
-
-  var body: some View {
-    VStack {
-      TextEditFormItemWithBlockTitleAndStatus(
-        title: "First Name",
-        hint: "First Name",
-        valid: valid,
-        text: $firstName
-      )
-      TextEditFormItemWithBlockTitleAndStatus(
-        title: "Password",
-        hint: "Password",
-        note: "Maximum 20 letters",
-        valid: valid,
-        isSecure: true,
-        text: $password
-      )
-    }
-  }
-}
-
-#Preview {
-  TestView()
-}

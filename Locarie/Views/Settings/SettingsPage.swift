@@ -22,6 +22,7 @@ struct SettingsPage: View {
           myAccount
           changePassword
           notifications
+          distanceUnits
           locarieForBusinessSectionTitle.padding(.top, 24).padding(.bottom, 15)
           signUpForBusiness
           supportSectionTitle.padding(.top, 24).padding(.bottom, 15)
@@ -63,7 +64,14 @@ private extension SettingsPage {
 
   var notifications: some View {
     NavigationLink(value: Router.Destination.notifications) {
-      LinkSettingsItem(text: "Notifications", divider: false)
+      LinkSettingsItem(text: "Notifications")
+    }
+    .buttonStyle(.plain)
+  }
+
+  var distanceUnits: some View {
+    NavigationLink(value: Router.Destination.distanceUnits) {
+      LinkSettingsItem(text: "Distance Units", divider: false)
     }
     .buttonStyle(.plain)
   }

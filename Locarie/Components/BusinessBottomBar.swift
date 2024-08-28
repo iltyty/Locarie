@@ -107,7 +107,7 @@ private extension BusinessBottomBar {
 }
 
 enum BusinessBottomBarConstants {
-  static let height: CGFloat = 85
+  static let height: CGFloat = 78
   static let topPadding: CGFloat = 15
   static let hPadding: CGFloat = 40
   static let iconSize: CGFloat = 28

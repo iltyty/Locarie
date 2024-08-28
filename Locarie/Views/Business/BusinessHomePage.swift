@@ -28,7 +28,7 @@ struct BusinessHomePage: View {
   @State private var mapUpperBoundY: CGFloat = 0
   @State private var mapBottomBoundY: CGFloat = 0
 
-  @State private var presentingProfileDetail = false
+  @State private var profileCoverCurIndex = 0
   @State private var presentingPostCover = false
   @State private var presentingProfileCover = false
 
@@ -90,6 +90,7 @@ struct BusinessHomePage: View {
         if presentingProfileCover {
           BusinessProfileCover(
             user: user,
+            curIndex: profileCoverCurIndex,
             onAvatarTapped: {
               presentingProfileCover = false
             },
@@ -196,56 +197,67 @@ private extension BusinessHomePage {
       detents: [Constants.bottomDetent, .large],
       currentDetent: $currentDetent
     ) {
-      sheetContent.padding(.horizontal, 16)
-    }
-  }
-
-  var sheetContent: some View {
-    VStack(alignment: .leading, spacing: 8) {
-      if case .loading = profileVM.state {
-        BusinessUserProfilePage.avatarRowSkeleton
-      } else {
-        BusinessProfileAvatarRow(
-          user: user,
-          presentingCover: $presentingProfileCover,
-          presentingDetail: $presentingProfileDetail
-        )
-      }
-      ScrollViewReader { proxy in
-        ScrollView {
-          VStack(alignment: .leading, spacing: 16) {
-            if case .loading = profileVM.state {
-              BusinessUserProfilePage.categoriesSkeleton
-            } else {
-              ProfileCategories(user).id(0)
-            }
-            if case .loading = profileVM.state {
-              BusinessUserProfilePage.bioSkeleton
-            } else {
-              ProfileBio(user, presentingDetail: $presentingProfileDetail)
-            }
-            if presentingProfileDetail {
+      VStack(alignment: .leading, spacing: 8) {
+        Group {
+          if case .loading = profileVM.state {
+            BusinessUserProfilePage.avatarRowSkeleton
+          } else {
+            BusinessProfileAvatarRow(
+              user: user,
+              presentingCover: $presentingProfileCover
+            )
+          }
+        }
+        .padding(.horizontal, 16)
+        ScrollViewReader { proxy in
+          ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+              Group {
+                if case .loading = profileVM.state {
+                  BusinessUserProfilePage.categoriesSkeleton
+                } else {
+                  ProfileCategories(user).id(0)
+                }
+              }
+              .padding(.horizontal, 16)
+              Group {
+                if case .loading = profileVM.state {
+                  BusinessUserProfilePage.bioSkeleton
+                } else {
+                  ProfileBio(user)
+                }
+              }
+              .padding(.horizontal, 16)
               ProfileDetail(user, favoredByCount: favoredByCount, likedCount: likedCount)
+                .padding(.horizontal, 16)
+              LocarieDivider().padding(.horizontal, 16)
+              if case .finished = profileVM.state {
+                ProfileImages(
+                  amplified: !listUserPostsVM.posts.isEmpty,
+                  urls: user.profileImageUrls,
+                  profileCoverCurIndex: $profileCoverCurIndex,
+                  presentingProfileCover: $presentingProfileCover
+                )
+              }
+              LocarieDivider().padding(.horizontal, 16)
+              Group {
+                if case .loading = listUserPostsVM.state {
+                  BusinessUserProfilePage.postsSkeleton
+                } else {
+                  ProfilePostsCount(listUserPostsVM.posts)
+                  postList
+                }
+              }
+              .padding(.horizontal, 16)
             }
-            if case .loading = listUserPostsVM.state {
-              BusinessUserProfilePage.postsSkeleton
-            } else {
-              ProfilePostsCount(listUserPostsVM.posts)
-              postList
-            }
-          }
-          .padding(.top, 8)
-          .onChange(of: currentDetent) { _ in
-            proxy.scrollTo(0)
-          }
-          .onChange(of: presentingProfileDetail) { presenting in
-            if presenting {
+            .padding(.top, 8)
+            .onChange(of: currentDetent) { _ in
               proxy.scrollTo(0)
             }
           }
         }
+        .scrollIndicators(.hidden)
       }
-      .scrollIndicators(.hidden)
     }
   }
 
@@ -341,5 +353,5 @@ private enum Constants {
 }
 
 #Preview {
-  BusinessHomePage(uid: 2, fullscreen: false)
+  BusinessHomePage(uid: 14, fullscreen: false)
 }

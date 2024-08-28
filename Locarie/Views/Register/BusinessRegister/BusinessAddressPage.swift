@@ -31,7 +31,9 @@ struct BusinessAddressPage<U: UserLocation>: View {
     GeometryReader { proxy in
       ZStack {
         VStack(spacing: 0) {
-          mapView.frame(height: max(0, mapHeight(proxy: proxy)))
+          mapView
+            .frame(height: max(0, mapHeight(proxy: proxy)))
+            .ignoresSafeArea(edges: .top)
           Spacer()
         }
         contentView
@@ -281,7 +283,17 @@ private extension BusinessAddressPage {
   }
 
   func setNeighborhood(_ result: PlaceRetrieveDto) {
-    dto.neighborhood = result.properties.context.neighborhood?.name ?? ""
+    let context = result.properties.context
+    dto.neighborhood = context.neighborhood?.name ?? ""
+    if dto.neighborhood.isEmpty {
+      dto.neighborhood = context.locality?.name ?? ""
+    }
+    if dto.neighborhood.isEmpty {
+      dto.neighborhood = context.place?.name ?? ""
+    }
+    if dto.neighborhood.isEmpty {
+      dto.neighborhood = context.street?.name ?? ""
+    }
   }
 
   func setViewport() {
@@ -313,22 +325,14 @@ private enum Constants {
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(bottomDetentOffset)
 }
 
-private struct TestView: View {
+private struct BusinessAddressTestView: View {
   @StateObject var vm = RegisterViewModel(type: .business)
 
   var body: some View {
     BusinessAddressPage(dto: $vm.dto)
-      .onAppear {
-        vm.dto.location = .init(
-          latitude: CLLocation.london.coordinate.latitude,
-          longitude: CLLocation.london.coordinate.longitude
-        )
-        vm.dto.neighborhood = "Marylebone"
-        vm.dto.address = "6 Chiltern Street"
-      }
   }
 }
 
 #Preview {
-  TestView()
+  BusinessAddressTestView()
 }

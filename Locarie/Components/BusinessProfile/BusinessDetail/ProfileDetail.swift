@@ -30,7 +30,10 @@ struct ProfileDetail: View {
           Text("\(likedCount)")
         }
       }
-      ProfileAddress(user)
+      Link(destination: navigationUrl) {
+        ProfileAddress(user)
+      }
+      .buttonStyle(.plain)
       if !user.businessHours.isEmpty {
         ProfileOpeningHours(user)
       }
@@ -40,7 +43,13 @@ struct ProfileDetail: View {
       if !user.phone.isEmpty {
         ProfilePhone(user)
       }
-      LocarieDivider()
     }
+  }
+
+  var navigationUrl: URL {
+    let destination = user.address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+    return URL(
+      string: "https://www.google.com/maps/dir/?api=1&destination=\(destination)"
+    )!
   }
 }

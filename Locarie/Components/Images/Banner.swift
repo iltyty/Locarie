@@ -14,6 +14,7 @@ struct Banner: View {
   var indicator: IndicatorPosition = .inner
   var rounded = true
   var isPortrait = true
+  var curIndex = 0
 
   @State private var index = 0
   @State private var presentingFullScreen = false
@@ -40,6 +41,9 @@ struct Banner: View {
     .frame(height: height + (indicator == .bottom ? 16 : 0))
     .fullScreenCover(isPresented: $presentingFullScreen) {
       ImageFullScreenView(urls[index])
+    }
+    .onAppear {
+      index = curIndex
     }
   }
 
@@ -127,6 +131,7 @@ private enum Constants {
 #Preview {
   Banner(
     urls: [
+      "https://picsum.photos/300/200",
       "https://picsum.photos/300/200",
     ],
     isPortrait: false

@@ -34,6 +34,9 @@ struct LocalCache {
   @AppStorage(LocalCacheKeys.profileComplete.rawValue)
   private(set) var profileComplete = false
 
+  @AppStorage(LocalCacheKeys.distanceUnits.rawValue)
+  private(set) var distanceUnits = DistanceUnits.miles.rawValue
+
   mutating func setUserInfo(_ info: UserInfo) {
     userId = Double(info.id)
     email = info.email
@@ -69,6 +72,10 @@ struct LocalCache {
     profileComplete = complete
   }
 
+  mutating func setDistanceUnits(_ units: DistanceUnits) {
+    distanceUnits = units.rawValue
+  }
+
   mutating func reset() {
     userId = 0
     email = ""
@@ -79,6 +86,7 @@ struct LocalCache {
     firstLoggedIn = true
     avatarId = ""
     profileComplete = false
+    distanceUnits = DistanceUnits.miles.rawValue
   }
 }
 
@@ -91,8 +99,7 @@ enum LocalCacheKeys: String, CaseIterable {
   case jwtTokenKey = "jwtToken"
 
   case firstLoggedInKey = "firstLoggedIn"
-
   case avatarId
-
   case profileComplete
+  case distanceUnits
 }
