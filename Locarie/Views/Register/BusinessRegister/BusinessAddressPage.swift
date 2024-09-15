@@ -284,16 +284,14 @@ private extension BusinessAddressPage {
 
   func setNeighborhood(_ result: PlaceRetrieveDto) {
     let context = result.properties.context
-    dto.neighborhood = context.neighborhood?.name ?? ""
-    if dto.neighborhood.isEmpty {
-      dto.neighborhood = context.locality?.name ?? ""
-    }
-    if dto.neighborhood.isEmpty {
-      dto.neighborhood = context.place?.name ?? ""
-    }
-    if dto.neighborhood.isEmpty {
-      dto.neighborhood = context.street?.name ?? ""
-    }
+    dto.neighborhood = context.neighborhood?.name
+    ?? context.locality?.name
+    ?? context.street?.name
+    ?? context.address?.name
+    ?? context.place?.name
+    ?? context.postcode?.name
+    ?? context.country?.name
+    ?? ""
   }
 
   func setViewport() {

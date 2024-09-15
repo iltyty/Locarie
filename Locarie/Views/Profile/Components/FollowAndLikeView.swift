@@ -103,7 +103,7 @@ private extension FollowAndLikeView {
       VStack(alignment: .leading, spacing: 24) {
         ForEach(favoriteBusinessVM.users) { user in
           NavigationLink(value: Router.Int64Destination.businessHome(user.id, true)) {
-            BusinessFollowedAvatarRow(
+            BusinessAvatarRow(
               user: user,
               isPresentingCover: $isPresentingCover
             )

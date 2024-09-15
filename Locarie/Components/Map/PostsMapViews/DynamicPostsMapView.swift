@@ -11,8 +11,10 @@ import SwiftUI
 struct DynamicPostsMapView: View {
   @Binding var viewport: Viewport
   @Binding var mapTouched: Bool
-
+  @Binding var homePage: HomePage.Page
+  
   @ObservedObject var postVM: PostListNearbyAllViewModel
+  @ObservedObject var userListVM = UserListViewModel()
 
   @State private var map: MapboxMap!
   @State private var needUpdating = true
@@ -25,14 +27,26 @@ struct DynamicPostsMapView: View {
       Map(viewport: $viewport) {
         Puck2D()
 
-        ForEvery(postVM.posts) { post in
-          MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
-            NavigationLink(value: Router.Int64Destination.businessHome(post.user.id, false)) {
-              BusinessMapAvatar(url: post.user.avatarUrl, newUpdate: post.user.hasUpdateIn24Hours)
+        if homePage == .latest {
+          ForEvery(postVM.posts) { post in
+            MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
+              NavigationLink(value: Router.Int64Destination.businessHome(post.user.id, false)) {
+                BusinessMapAvatar(url: post.user.avatarUrl, newUpdate: post.user.hasUpdateIn24Hours)
+              }
             }
+            .allowOverlap(true)
+            .allowOverlapWithPuck(true)
           }
-          .allowOverlap(true)
-          .allowOverlapWithPuck(true)
+//        } else {
+//          ForEvery(userListVM.businesses) { user in
+//            MapViewAnnotation(coordinate: user.coordinate) {
+//              NavigationLink(value: Router.Int64Destination.businessHome(user.id, false)) {
+//                BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
+//              }
+//            }
+//            .allowOverlap(true)
+//            .allowOverlapWithPuck(true)
+//          }
         }
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 208))
@@ -44,12 +58,26 @@ struct DynamicPostsMapView: View {
       }
     }
     .onReceive(locationManager.$location) { location in
+      guard let location else { return }
       updatePosts(location)
+      updateBusinesses(location)
     }
+//    .onChange(of: homePage) { page in
+//      switch page {
+//      case .latest:
+//        if let location = locationManager.location {
+//          updatePosts(location)
+//        }
+//      case .places:
+//        if let location = locationManager.location {
+//          updateBusinesses(location)
+//        }
+//      }
+//    }
     .onChange(of: network.connected) { connected in
-      print(connected)
       if connected, let location = locationManager.location {
         updatePosts(location)
+        updateBusinesses(location)
       }
     }
     .ignoresSafeArea()
@@ -59,8 +87,7 @@ struct DynamicPostsMapView: View {
 }
 
 private extension DynamicPostsMapView {
-  func updatePosts(_ location: CLLocation?) {
-    guard let location else { return }
+  func updatePosts(_ location: CLLocation) {
     updatePosts(
       with: CLLocationCoordinate2D(
         latitude: location.coordinate.latitude,
@@ -72,6 +99,10 @@ private extension DynamicPostsMapView {
   func updatePosts(with coordinate: CLLocationCoordinate2D) {
     needUpdating = false
     postVM.getNearbyAllPosts(with: coordinate)
+  }
+  
+  func updateBusinesses(_ location: CLLocation) {
+    userListVM.listBusinesses()
   }
 }
 

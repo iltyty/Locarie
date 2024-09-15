@@ -19,12 +19,11 @@ struct BusinessSearchView: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
-      searchBar
-        .padding(.vertical, 8)
-        .padding(.horizontal, 16)
+      searchBar.padding(.vertical, 8)
       businessesView
       Spacer()
     }
+    .padding(.horizontal, 16)
     .background(.white)
     .loadingIndicator(loading: $loading)
     .onReceive(userListVM.$state) { state in
@@ -87,22 +86,13 @@ private extension BusinessSearchView {
   var businessesView: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: Constants.vSpacing) {
-        areas.padding(.top, 16).padding(.horizontal, 16)
-        Text("Businesses")
-          .fontWeight(.bold)
-          .foregroundStyle(LocarieColor.greyDark)
-          .padding(.horizontal, 16)
-        ForEach(businesses.indices, id: \.self) { i in
-          VStack(alignment: .leading, spacing: 16) {
-            let user = businesses[i]
-            NavigationLink(value: Router.Int64Destination.businessHome(user.id, true)) {
-              BusinessFollowedAvatarRow(user: user, isPresentingCover: .constant(false))
-            }
-            .buttonStyle(.plain)
-            if i != businesses.count - 1 {
-              LocarieDivider().padding(.horizontal, 16)
-            }
+        areas.padding(.top, 16)
+        Text("Businesses").foregroundStyle(LocarieColor.greyDark)
+        ForEach(businesses) { user in
+          NavigationLink(value: Router.Int64Destination.businessHome(user.id, true)) {
+            BusinessSearchAvatarRow(user: user, isPresentingCover: .constant(false))
           }
+          .buttonStyle(.plain)
         }
       }
       .padding(.bottom, 48)

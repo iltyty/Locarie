@@ -52,5 +52,19 @@ extension UserListViewModel {
     case loading
     case finished
     case failed(NetworkError)
+    
+    func isIdle() -> Bool {
+      return switch self {
+      case .idle: true
+      default: false
+      }
+    }
+    
+    func isLoading() -> Bool {
+      return switch self {
+      case .loading: true
+      default: false
+      }
+    }
   }
 }

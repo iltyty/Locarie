@@ -5,7 +5,7 @@
 //  Created by qiuty on 2023/10/30.
 //
 
-@testable import locarie
+@testable import Locarie
 import XCTest
 
 final class locarieTests: XCTestCase {

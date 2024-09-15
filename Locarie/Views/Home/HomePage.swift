@@ -13,7 +13,9 @@ struct HomePage: View {
 
   @ObservedObject private var network = Network.shared
   @StateObject private var postVM = PostListNearbyAllViewModel()
+  @StateObject private var userListVM = UserListViewModel()
 
+  @State private var page: Page = .latest
   @State private var user = UserDto()
   @State private var post = PostDto()
   @State private var presentingProfileCover = false
@@ -22,7 +24,6 @@ struct HomePage: View {
   @State private var bottomTabMinY: CGFloat = 0
   @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
   @State private var mapTouched = false
-  @State private var scrollId: Int64? = nil
   @State private var searching = false
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport = .camera(center: .london, zoom: 11)
@@ -34,7 +35,9 @@ struct HomePage: View {
       DynamicPostsMapView(
         viewport: $viewport,
         mapTouched: $mapTouched,
-        postVM: postVM
+        homePage: $page,
+        postVM: postVM,
+        userListVM: userListVM
       )
       contentView
       if currentDetent == .large {
@@ -100,26 +103,22 @@ private extension HomePage {
         currentDetent: $currentDetent
       ) {
         Group {
-          if !network.connected && postVM.posts.isEmpty {
-            VStack(spacing: 45) {
-              Text("Explore")
-                .font(.custom(GlobalConstants.fontName, size: 18))
-                .fontWeight(.bold)
-              Text("No network connection")
-                .fontWeight(.bold)
-                .foregroundStyle(LocarieColor.greyDark)
+          VStack(spacing: 16) {
+            HStack(spacing: 0) {
+              Spacer()
+              latestTab
+              Spacer()
+              placesTab
+              Spacer()
             }
-          } else if postVM.state.isIdle() || postVM.state.isLoading() {
-            VStack(spacing: 16) {
-              PostCardView.skeleton
-              PostCardView.skeleton
+            if page == .latest {
+              latestTabContent
+            } else {
+              placesTabContent
             }
-          } else {
-            postList
           }
         }
         .allowsHitTesting(currentDetent != Constants.bottomDetent)
-        .padding(.horizontal, 16)
       } topContent: {
         CircleButton("Navigation")
           .padding(.trailing, 16)
@@ -138,15 +137,65 @@ private extension HomePage {
       }
     }
   }
-
-  var postList: some View {
-    ScrollViewReader { proxy in
-      ScrollView {
-        VStack(spacing: 20) {
-          Text("Explore")
-            .id(-1)
-            .font(.custom(GlobalConstants.fontName, size: 18))
-            .fontWeight(.bold)
+  
+  var latestTab: some View {
+    VStack(spacing: 4) {
+      Text("Latest")
+        .font(.custom(GlobalConstants.fontName, size: 18))
+        .fontWeight(.bold)
+        .foregroundStyle(page == .latest ? Color.black : LocarieColor.greyDark)
+      Group {
+        if page == .latest {
+          Rectangle()
+            .fill(LocarieColor.primary)
+        } else {
+          Color.clear
+        }
+      }
+      .frame(width: 32, height: 2.5)
+    }
+    .onTapGesture {
+      page = .latest
+    }
+  }
+  
+  var placesTab: some View {
+    VStack(spacing: 4) {
+      Text("Places")
+        .font(.custom(GlobalConstants.fontName, size: 18))
+        .fontWeight(.bold)
+        .foregroundStyle(page == .places ? Color.black : LocarieColor.greyDark)
+      Group {
+        if page == .places {
+          Rectangle()
+            .fill(LocarieColor.primary)
+        } else {
+          Color.clear
+        }
+      }
+      .frame(width: 32, height: 2.5)
+    }
+    .onTapGesture {
+      page = .places
+    }
+  }
+  
+  @ViewBuilder
+  var latestTabContent: some View {
+    if !network.connected && postVM.posts.isEmpty {
+        Text("No network connection")
+          .fontWeight(.bold)
+          .foregroundStyle(LocarieColor.greyDark)
+          .padding(.horizontal, 16)
+    } else if postVM.state.isIdle() || postVM.state.isLoading() {
+      VStack(spacing: 16) {
+        PostCardView.skeleton
+        PostCardView.skeleton
+      }
+      .padding(.horizontal, 16)
+    } else {
+      VStack(spacing: 0) {
+        ScrollView {
           if postVM.posts.isEmpty {
             emptyList
           } else {
@@ -169,20 +218,62 @@ private extension HomePage {
                     presentingProfileCover = true
                   }
                 )
-                .id(i)
+                .padding(.top, i == 0 ? 8 : 0)
                 .tint(.primary)
                 .buttonStyle(.plain)
               }
             }
           }
         }
-        .onChange(of: scrollId) { _ in
-          proxy.scrollTo(0)
-          scrollId = 1
-        }
+        .scrollIndicators(.hidden)
+        .padding(.horizontal, 16)
       }
     }
-    .scrollIndicators(.hidden)
+  }
+  
+  @ViewBuilder
+  var placesTabContent: some View {
+    if !network.connected && userListVM.businesses.isEmpty {
+        Text("No network connection")
+          .fontWeight(.bold)
+          .foregroundStyle(LocarieColor.greyDark)
+          .padding(.horizontal, 16)
+    } else if userListVM.state.isIdle() || userListVM.state.isLoading() {
+      VStack(spacing: 16) {
+        BusinessAvatarRow.skeleton
+        BusinessAvatarRow.skeleton
+      }
+      .padding(.leading, 16)
+    } else {
+      ScrollView {
+        VStack(spacing: 20) {
+          if userListVM.businesses.isEmpty {
+            emptyList
+          } else {
+            VStack(spacing: 0) {
+              ForEach(userListVM.businesses.indices, id: \.self) { i in
+                let user = userListVM.businesses[i]
+                VStack(spacing: 0) {
+                  NavigationLink(value: Router.Int64Destination.businessHome(user.id, true)) {
+                    BusinessAvatarRow(
+                      user: user,
+                      isPresentingCover: $presentingProfileCover
+                    )
+                  }
+                  .buttonStyle(.plain)
+                  .tint(.primary)
+                  .padding(.bottom, i != userListVM.businesses.count - 1 ? 16 : BackToMapButton.height + 48)
+                  if i != userListVM.businesses.count - 1 {
+                    LocarieDivider().padding([.bottom, .horizontal], 16)
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .scrollIndicators(.hidden)
+    }
   }
 
   var emptyList: some View {
@@ -195,7 +286,7 @@ private extension HomePage {
     }
     .padding(.top, 45)
   }
-
+  
   var buttons: some View {
     HStack(spacing: 0) {
       locarieIcon
@@ -229,6 +320,12 @@ private extension HomePage {
           searching.toggle()
         }
       }
+  }
+}
+
+extension HomePage {
+  enum Page {
+    case latest, places
   }
 }
 

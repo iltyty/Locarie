@@ -237,3 +237,7 @@ private enum Constants {
   static let coverBorderRadius: CGFloat = 10.0
   static let contentLineLimit = 2
 }
+
+#Preview {
+  PostCardView.skeleton
+}

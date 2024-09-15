@@ -22,11 +22,13 @@ struct PlaceCoordinate: Codable {
 
 struct PlaceContext: Codable {
   let address: PlaceContextItem?
-  let street: PlaceContextItem?
-  let neighborhood: PlaceContextItem?
-  let locality: PlaceContextItem?
-  let place: PlaceContextItem?
+  let country: PlaceContextItem?
   let district: PlaceContextItem?
+  let locality: PlaceContextItem?
+  let neighborhood: PlaceContextItem?
+  let place: PlaceContextItem?
+  let postcode: PlaceContextItem?
+  let street: PlaceContextItem?
 }
 
 struct PlaceContextItem: Codable {
