@@ -17,6 +17,8 @@ struct SquareProfileImages: View {
         HStack(spacing: 8) {
           ForEach(urls.indices, id: \.self) { i in
             KFImage(URL(string: urls[i]))
+              .downsampling(size: .init(size: 2 * Constants.size))
+              .cacheOriginalImage()
               .placeholder {
                 DefaultBusinessImageView(size: Constants.size)
               }

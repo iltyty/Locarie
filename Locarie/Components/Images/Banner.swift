@@ -103,6 +103,8 @@ struct Banner: View {
   private var images: some View {
     ForEach(urls.indices, id: \.self) { i in
       KFImage(URL(string: urls[i]))
+        .downsampling(size: .init(width: 3 * screenSize.width, height: 3 * screenSize.width / aspectRatio))
+        .cacheOriginalImage()
         .placeholder { defaultImage }
         .resizable()
         .scaledToFill()

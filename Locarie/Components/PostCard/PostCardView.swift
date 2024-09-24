@@ -87,6 +87,8 @@ private extension PostCardView {
           defaultAvatar(size: Constants.avatarSize, isBusiness: true)
         } else {
           KFImage(URL(string: post.businessAvatarUrl))
+            .downsampling(size: .init(size: 4 * Constants.avatarSize))
+            .cacheOriginalImage()
             .placeholder { SkeletonView(Constants.avatarSize, Constants.avatarSize, true) }
             .resizable()
             .frame(size: Constants.avatarSize)
@@ -162,6 +164,8 @@ private extension PostCardView {
           DefaultBusinessImageView(size: 48).shadow(color: Color.black.opacity(0.25), radius: 2, x: 0.25, y: 0.25)
         } else {
           KFImage(URL(string: post.user.profileImageUrls[0]))
+            .downsampling(size: .init(size: 48 * 8))
+            .cacheOriginalImage()
             .placeholder { SkeletonView(48, 48) }
             .resizable()
             .scaledToFill()

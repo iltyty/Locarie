@@ -233,7 +233,7 @@ private extension BusinessHomePage {
               LocarieDivider().padding(.horizontal, 16)
               if case .finished = profileVM.state {
                 ProfileImages(
-                  amplified: !listUserPostsVM.posts.isEmpty,
+                  amplified: listUserPostsVM.posts.isEmpty,
                   urls: user.profileImageUrls,
                   profileCoverCurIndex: $profileCoverCurIndex,
                   presentingProfileCover: $presentingProfileCover

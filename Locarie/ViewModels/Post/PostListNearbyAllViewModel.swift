@@ -31,6 +31,7 @@ final class PostListNearbyAllViewModel: BaseViewModel {
   }
 
   func handleResponse(_ response: PostListResponse) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
       return

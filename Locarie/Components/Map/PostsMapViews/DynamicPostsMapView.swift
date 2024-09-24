@@ -37,16 +37,16 @@ struct DynamicPostsMapView: View {
             .allowOverlap(true)
             .allowOverlapWithPuck(true)
           }
-//        } else {
-//          ForEvery(userListVM.businesses) { user in
-//            MapViewAnnotation(coordinate: user.coordinate) {
-//              NavigationLink(value: Router.Int64Destination.businessHome(user.id, false)) {
-//                BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
-//              }
-//            }
-//            .allowOverlap(true)
-//            .allowOverlapWithPuck(true)
-//          }
+        } else {
+          ForEvery(userListVM.businesses) { user in
+            MapViewAnnotation(coordinate: user.coordinate) {
+              NavigationLink(value: Router.Int64Destination.businessHome(user.id, false)) {
+                BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
+              }
+            }
+            .allowOverlap(true)
+            .allowOverlapWithPuck(true)
+          }
         }
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 208))

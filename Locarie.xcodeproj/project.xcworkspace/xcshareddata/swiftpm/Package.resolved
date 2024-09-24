@@ -1,12 +1,13 @@
 {
+  "originHash" : "b1c287303bdb2c746c300e5b4c2cf7d241b7de271ca30ad39cc730e62c8613e9",
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire",
       "state" : {
-        "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
-        "version" : "5.8.1"
+        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
+        "version" : "5.9.1"
       }
     },
     {
@@ -23,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mapbox/mapbox-common-ios.git",
       "state" : {
-        "revision" : "15aed0b292a0fe0672113c1b69be04bd350c8bb3",
-        "version" : "24.3.1"
+        "revision" : "3cbd3eba5a316e4213b4860db398d5777f9de957",
+        "version" : "24.6.1"
       }
     },
     {
@@ -32,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mapbox/mapbox-core-maps-ios.git",
       "state" : {
-        "revision" : "3638d2841f8a2ef6a995c659457d6133a6f0d1be",
-        "version" : "11.3.0"
+        "revision" : "80f08d877ff8a6ba1ad46d357e7863bb0a98f414",
+        "version" : "11.6.1"
       }
     },
     {
@@ -41,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mapbox/mapbox-maps-ios",
       "state" : {
-        "revision" : "935c658a4d4d454de0e81e0b49ed291bd2c756a9",
-        "version" : "11.3.0"
+        "revision" : "c502416eaadd90891cb2a1d2d62f57a52dcfbfa5",
+        "version" : "11.6.1"
       }
     },
     {
@@ -55,5 +56,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
