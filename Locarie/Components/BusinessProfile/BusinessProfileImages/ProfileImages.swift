@@ -34,11 +34,6 @@ struct ProfileImages: View {
               }
           }
         }
-        HStack(spacing: 8) {
-          ForEach(0 ..< Constants.maxImageCount - urls.count, id: \.self) { _ in
-            DefaultBusinessImageView(width: width, height: height)
-          }
-        }
       }
       .padding(.horizontal, 16)
     }

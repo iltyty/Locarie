@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OpeningHourSheet: View {
   let title: String
+  let openingTimeIndex: Int
 
   @Binding var isPresented: Bool
   @Binding var businessHours: BusinessHoursDto
@@ -33,10 +34,10 @@ struct OpeningHourSheet: View {
   func setupStates() {
     closed = businessHours.closed
     let calendar = Calendar.current
-    if let date = calendar.date(from: businessHours.openingTime) {
+    if openingTimeIndex < businessHours.openingHoursCount, let date = calendar.date(from: businessHours.openingTime[openingTimeIndex]) {
       openingTime = date
     }
-    if let date = calendar.date(from: businessHours.closingTime) {
+    if openingTimeIndex < businessHours.openingHoursCount, let date = calendar.date(from: businessHours.closingTime[openingTimeIndex]) {
       closingTime = date
     }
   }
@@ -131,20 +132,26 @@ private extension OpeningHourSheet {
 
   var doneButton: some View {
     Button("Done") {
-      setDailHours()
+      setDailyHours()
       isPresented = false
     }
     .foregroundStyle(Color.locariePrimary)
   }
 
-  func setDailHours() {
+  func setDailyHours() {
     let calendar = Calendar.current
     businessHours.closed = closed
-    businessHours.openingTime = calendar.dateComponents(
+    if openingTimeIndex >= businessHours.openingHoursCount {
+      for _ in businessHours.openingHoursCount...openingTimeIndex {
+        businessHours.openingTime.append(calendar.dateComponents([.hour, .minute], from: openingTime))
+        businessHours.closingTime.append(calendar.dateComponents([.hour, .minute], from: closingTime))
+      }
+    }
+    businessHours.openingTime[openingTimeIndex] = calendar.dateComponents(
       [.hour, .minute],
       from: openingTime
     )
-    businessHours.closingTime = calendar.dateComponents(
+    businessHours.closingTime[openingTimeIndex] = calendar.dateComponents(
       [.hour, .minute],
       from: closingTime
     )

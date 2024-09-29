@@ -24,7 +24,7 @@ struct RegularMyAccountPage: View {
         TextSettingsItem(title: "Username", value: profileVM.dto.username)
         TextSettingsItem(title: "First Name", value: profileVM.dto.firstName)
         TextSettingsItem(title: "Last Name", value: profileVM.dto.lastName)
-        TextSettingsItem(title: "Version", value: "V1.0.3", divider: false)
+        TextSettingsItem(title: "Version", value: "V1.0.6", divider: false)
         NavigationLink("Edit Profile") { UserProfileEditPage() }
           .padding(.horizontal)
           .padding(.top, 48)

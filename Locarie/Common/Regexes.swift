@@ -63,7 +63,7 @@ enum Regexes {
     Repeat(1 ... 25) {
       ChoiceOf {
         One(.word)
-        CharacterClass.anyOf(" .-!")
+        CharacterClass.anyOf(" .-!:&")
       }
     }
   }

@@ -124,11 +124,7 @@ extension UserDto {
   var lastUpdateTime: String { lastUpdate.timeAgoString() }
 
   var hasUpdateIn24Hours: Bool {
-    let components = Calendar.current.dateComponents([.hour], from: lastUpdate, to: Date())
-    if let hours = components.hour {
-      return abs(hours) < 24
-    }
-    return false
+    Date.now.timeIntervalSince(lastUpdate) < 86400
   }
 
   var openUtil: String {
@@ -153,14 +149,24 @@ extension UserDto {
     guard let todayBusinessHours else { return true }
     if todayBusinessHours.closed { return true }
     let now = Date()
-    let closingTime = todayBusinessHours.closingTime
-    let closingDate = Calendar.current.date(
-      bySettingHour: closingTime.hour ?? 0,
-      minute: closingTime.minute ?? 0,
-      second: 0,
-      of: now
-    )!
-    return now > closingDate
+    for i in 0..<todayBusinessHours.openingHoursCount {
+      let openingTime = Calendar.current.date(
+        bySettingHour: todayBusinessHours.openingTime[i].hour ?? 0,
+        minute: todayBusinessHours.openingTime[i].minute ?? 0,
+        second: 0,
+        of: now
+      )!
+      let closingTime = Calendar.current.date(
+        bySettingHour: todayBusinessHours.closingTime[i].hour ?? 0,
+        minute: todayBusinessHours.closingTime[i].minute ?? 0,
+        second: 0,
+        of: now
+      )!
+      if now >= openingTime && now <= closingTime {
+        return true
+      }
+    }
+    return false
   }
 }
 

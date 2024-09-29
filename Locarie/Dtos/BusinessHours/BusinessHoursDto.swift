@@ -11,37 +11,40 @@ struct BusinessHoursDto: Codable, Identifiable {
   var id = 0
   var dayOfWeek: DayOfWeek
   var closed: Bool
-  var openingTime: DateComponents
-  var closingTime: DateComponents
+  var openingTime: [DateComponents]
+  var closingTime: [DateComponents]
 
   init(dayOfWeek: DayOfWeek) {
     self.dayOfWeek = dayOfWeek
     closed = true
-    openingTime = DateComponents()
-    openingTime.hour = 8
-    openingTime.minute = 0
-    closingTime = DateComponents()
-    closingTime.hour = 21
-    closingTime.minute = 0
+    openingTime = []
+    closingTime = []
   }
 }
 
 extension BusinessHoursDto {
   var formattedStatus: String {
-    let dayOfWeekString = dayOfWeek.rawValue.capitalized
-    return "\(dayOfWeekString): \(formattedTime)"
+    var res = "\(dayOfWeek.rawValue.capitalized): "
+    let cnt = min(openingTime.count, closingTime.count)
+    for i in 0..<cnt {
+      res += "\(formattedTime(i)), "
+    }
+    return res
   }
 
-  var formattedTime: String {
-    closed ? "Closed" : "\(formattedOpeningTime)-\(formattedClosingTime)"
+  func formattedTime(_ i: Int) -> String {
+    if i >= openingTime.count || i >= closingTime.count {
+      return i == 0 ? "Closed" : "optional"
+    }
+    return closed ? "Closed" : "\(formattedOpeningTime(i))-\(formattedClosingTime(i))"
   }
 
-  var formattedOpeningTime: String {
-    dateComponentsFormatter.string(from: openingTime) ?? ""
+  func formattedOpeningTime(_ i: Int) -> String {
+    i >= openingTime.count ? "" : dateComponentsFormatter.string(from: openingTime[i]) ?? ""
   }
 
-  var formattedClosingTime: String {
-    dateComponentsFormatter.string(from: closingTime) ?? ""
+  func formattedClosingTime(_ i: Int) -> String {
+    i >= closingTime.count ? "" : dateComponentsFormatter.string(from: closingTime[i]) ?? ""
   }
 
   var dateComponentsFormatter: DateComponentsFormatter {
@@ -49,6 +52,10 @@ extension BusinessHoursDto {
     formatter.allowedUnits = [.hour, .minute]
     formatter.zeroFormattingBehavior = .pad
     return formatter
+  }
+  
+  var openingHoursCount: Int {
+    min(openingTime.count, closingTime.count)
   }
 }
 

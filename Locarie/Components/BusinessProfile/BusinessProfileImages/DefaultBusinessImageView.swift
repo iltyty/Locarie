@@ -31,15 +31,9 @@ struct DefaultBusinessImageView: View {
   }
 
   var body: some View {
-    Image("DefaultImage")
-      .resizable()
-      .scaledToFit()
-      .frame(size: Constants.iconSize)
+    RoundedRectangle(cornerRadius: Constants.cornerRadius)
+      .fill(LocarieColor.greyMedium)
       .frame(width: width, height: height)
-      .background(
-        RoundedRectangle(cornerRadius: Constants.cornerRadius)
-          .fill(LocarieColor.greyMedium)
-      )
   }
 }
 

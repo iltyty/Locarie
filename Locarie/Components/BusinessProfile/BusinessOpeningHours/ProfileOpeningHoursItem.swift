@@ -10,23 +10,67 @@ import SwiftUI
 struct ProfileOpeningHoursItem: View {
   let editable: Bool
   let hours: BusinessHoursDto
-
-  init(_ hours: BusinessHoursDto, editable: Bool = false) {
+  var onFirstOpeningTimeTapped: () -> Void
+  var onSecondOpeningTimeTapped: () -> Void
+  
+  init(
+    _ hours: BusinessHoursDto,
+    editable: Bool = false,
+    onFirstOpeningTimeTapped: @escaping () -> Void = {},
+    onSecondOpeningTimeTapped: @escaping () -> Void = {}
+  ) {
     self.hours = hours
     self.editable = editable
+    self.onFirstOpeningTimeTapped = onFirstOpeningTimeTapped
+    self.onSecondOpeningTimeTapped = onSecondOpeningTimeTapped
   }
-
+  
   var body: some View {
-    HStack {
+    HStack(alignment: .top) {
       Text(hours.dayOfWeek.rawValue)
       Spacer()
-      Text(hours.formattedTime).foregroundStyle(.secondary)
-      if editable {
-        Image("Pencil.Grey")
-          .resizable()
-          .scaledToFit()
-          .frame(size: 16)
+      VStack(alignment: .trailing, spacing: 12) {
+        HStack(spacing: 24) {
+          Text(hours.formattedTime(0)).foregroundStyle(LocarieColor.greyDark)
+          if editable {
+            editIcon
+          }
+        }
+        .onTapGesture {
+          onFirstOpeningTimeTapped()
+        }
+        HStack(spacing: 24) {
+          if editable {
+            Group {
+              if hours.openingHoursCount == 1 {
+                Text("optional").foregroundStyle(LocarieColor.greyDark)
+              } else {
+                Text(hours.formattedTime(1)).foregroundStyle(LocarieColor.greyDark)
+              }
+              editIcon
+            }
+            .onTapGesture {
+              onSecondOpeningTimeTapped()
+            }
+          } else {
+            if hours.openingHoursCount == 1 {
+              Color.clear.frame(height: 16)
+            }
+          }
+        }
       }
     }
   }
+  
+  private var editIcon: some View {
+    Image("Pencil.Grey")
+      .resizable()
+      .scaledToFit()
+      .frame(size: 16)
+  }
+}
+
+#Preview {
+  ProfileOpeningHoursItem(BusinessHoursDto(dayOfWeek: .Friday), editable: true)
+    .padding()
 }

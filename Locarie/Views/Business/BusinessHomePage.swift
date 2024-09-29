@@ -353,5 +353,5 @@ private enum Constants {
 }
 
 #Preview {
-  BusinessHomePage(uid: 14, fullscreen: false)
+  BusinessHomePage(uid: 53, fullscreen: false)
 }

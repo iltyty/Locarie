@@ -17,7 +17,7 @@ struct SquareProfileImages: View {
         HStack(spacing: 8) {
           ForEach(urls.indices, id: \.self) { i in
             KFImage(URL(string: urls[i]))
-              .downsampling(size: .init(size: 2 * Constants.size))
+              .downsampling(size: .init(size: 4 * Constants.size))
               .cacheOriginalImage()
               .placeholder {
                 DefaultBusinessImageView(size: Constants.size)
@@ -28,11 +28,11 @@ struct SquareProfileImages: View {
               .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
           }
         }
-        HStack(spacing: 8) {
-          ForEach(0 ..< Constants.maxImageCount - urls.count, id: \.self) { _ in
-            DefaultBusinessImageView(size: Constants.size)
-          }
-        }
+//        HStack(spacing: 8) {
+//          ForEach(0 ..< Constants.maxImageCount - urls.count, id: \.self) { _ in
+//            DefaultBusinessImageView(size: Constants.size)
+//          }
+//        }
       }
       .padding(.horizontal, 16)
     }

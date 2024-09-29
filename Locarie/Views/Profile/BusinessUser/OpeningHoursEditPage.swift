@@ -11,6 +11,7 @@ struct OpeningHoursEditPage: View {
   @Binding var businessHoursDtos: [BusinessHoursDto]
 
   @State var currentDayIndex = 0
+  @State var openingTimeIndex = 0
   @State var isSheetPresented = false
   @State var allBusinessHours = BusinessHoursDto.all
 
@@ -19,7 +20,25 @@ struct OpeningHoursEditPage: View {
   var body: some View {
     VStack {
       navigationBar
-      days
+      VStack(spacing: Constants.vSpacing) {
+        ForEach(allBusinessHours.indices, id: \.self) { index in
+          ProfileOpeningHoursItem(
+            allBusinessHours[index],
+            editable: true,
+            onFirstOpeningTimeTapped: {
+              currentDayIndex = index
+              openingTimeIndex = 0
+              isSheetPresented = true
+            },
+            onSecondOpeningTimeTapped: {
+              currentDayIndex = index
+              openingTimeIndex = 1
+              isSheetPresented = true
+            }
+          )
+        }
+      }
+      .padding(.horizontal)
       Spacer()
     }
     .onAppear {
@@ -52,19 +71,6 @@ private extension OpeningHoursEditPage {
     .foregroundStyle(Color.locariePrimary)
   }
 
-  var days: some View {
-    VStack(spacing: Constants.vSpacing) {
-      ForEach(allBusinessHours.indices, id: \.self) { index in
-        ProfileOpeningHoursItem(allBusinessHours[index], editable: true)
-          .onTapGesture {
-            currentDayIndex = index
-            isSheetPresented = true
-          }
-      }
-    }
-    .padding(.horizontal)
-  }
-
   var sortedDays: [BusinessHoursDto.DayOfWeek] {
     BusinessHoursDto.DayOfWeek.allCases.sorted()
   }
@@ -73,6 +79,7 @@ private extension OpeningHoursEditPage {
     let title = allBusinessHours[index].dayOfWeek.rawValue.capitalized
     return OpeningHourSheet(
       title: title,
+      openingTimeIndex: openingTimeIndex,
       isPresented: $isSheetPresented,
       businessHours: binding(for: index)
     )
@@ -102,6 +109,14 @@ private enum Constants {
   static let sheetHeightFraction = 0.4
 }
 
+private struct OpneingHoursEditPageTestView: View {
+  @State var hours: [BusinessHoursDto] = []
+  
+  var body: some View {
+    OpeningHoursEditPage(businessHoursDtos: $hours)
+  }
+}
+
 #Preview {
-  OpeningHoursEditPage(businessHoursDtos: .constant([]))
+  OpneingHoursEditPageTestView()
 }
