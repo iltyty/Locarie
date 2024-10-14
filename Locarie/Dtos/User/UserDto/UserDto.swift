@@ -33,7 +33,7 @@ struct UserDto: Codable, Equatable, Identifiable, UserInfo, UserLocation {
   var neighborhood: String = ""
   var location: BusinessLocation?
 
-  var lastUpdate: Date = .init()
+  var lastUpdate: Date?
 
   var businessHours = [BusinessHoursDto]()
 
@@ -121,10 +121,13 @@ extension UserDto {
 }
 
 extension UserDto {
-  var lastUpdateTime: String { lastUpdate.timeAgoString() }
+  var lastUpdateTime: String { lastUpdate?.timeAgoString() ?? "" }
 
   var hasUpdateIn24Hours: Bool {
-    Date.now.timeIntervalSince(lastUpdate) < 86400
+    if let lastUpdate, Date.now.timeIntervalSince(lastUpdate) < 86400 {
+      return true
+    }
+    return false
   }
 
   var openUtil: String {
@@ -149,7 +152,7 @@ extension UserDto {
     guard let todayBusinessHours else { return true }
     if todayBusinessHours.closed { return true }
     let now = Date()
-    for i in 0..<todayBusinessHours.openingHoursCount {
+    for i in 0 ..< todayBusinessHours.openingHoursCount {
       let openingTime = Calendar.current.date(
         bySettingHour: todayBusinessHours.openingTime[i].hour ?? 0,
         minute: todayBusinessHours.openingTime[i].minute ?? 0,
@@ -162,7 +165,7 @@ extension UserDto {
         second: 0,
         of: now
       )!
-      if now >= openingTime && now <= closingTime {
+      if now >= openingTime, now <= closingTime {
         return true
       }
     }
@@ -232,7 +235,7 @@ extension UserDto {
       )
     }
     if try container.decodeNil(forKey: .lastUpdate) {
-      lastUpdate = Date()
+      lastUpdate = nil
     } else {
       let lastUpdateTimestamp = try container.decode(Int64.self, forKey: .lastUpdate)
       lastUpdate = .init(timeIntervalSince1970: Double(lastUpdateTimestamp) / 1000)

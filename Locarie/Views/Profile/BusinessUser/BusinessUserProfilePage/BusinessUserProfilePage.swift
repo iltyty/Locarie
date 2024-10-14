@@ -252,8 +252,8 @@ private extension BusinessUserProfilePage {
               LocarieDivider().padding(.horizontal, 16)
               if case .finished = profileVM.state {
                 ProfileImages(
+                  user: profileVM.dto,
                   amplified: postVM.posts.isEmpty,
-                  urls: profileVM.dto.profileImageUrls,
                   profileCoverCurIndex: $profileCoverCurIndex,
                   presentingProfileCover: $presentingProfileCover
                 )

@@ -123,7 +123,7 @@ private extension BottomSheet {
       .fill(LocarieColor.greyMedium)
       .frame(width: BottomSheetConstants.handlerWidth, height: BottomSheetConstants.handlerHeight)
       .padding(.top, 8)
-      .padding(.bottom, 18)
+      .padding(.bottom, 16)
   }
 }
 

@@ -18,7 +18,7 @@ struct ProfileLink: View {
 
   var body: some View {
     Label {
-      linkText
+      linkText.buttonStyle(.plain).tint(.black)
     } icon: {
       Image("Link")
         .resizable()

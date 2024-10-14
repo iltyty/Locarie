@@ -50,6 +50,7 @@
 		501BAF482B46527000D9D84F /* ChangePasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF472B46527000D9D84F /* ChangePasswordPage.swift */; };
 		501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF492B46538300D9D84F /* NewPasswordPage.swift */; };
 		501BAF4E2B4655EF00D9D84F /* UserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501BAF4D2B4655EF00D9D84F /* UserProfilePage.swift */; };
+		501C3BD72CBAAA7700D7E89E /* DistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501C3BD62CBAAA7700D7E89E /* DistanceView.swift */; };
 		50277F742AF117700045AB12 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F732AF117700045AB12 /* HomePage.swift */; };
 		50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */; };
 		50277F822AF1512E0045AB12 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50277F812AF1512E0045AB12 /* PostCardView.swift */; };
@@ -315,6 +316,7 @@
 		501BAF472B46527000D9D84F /* ChangePasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPage.swift; sourceTree = "<group>"; };
 		501BAF492B46538300D9D84F /* NewPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordPage.swift; sourceTree = "<group>"; };
 		501BAF4D2B4655EF00D9D84F /* UserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePage.swift; sourceTree = "<group>"; };
+		501C3BD62CBAAA7700D7E89E /* DistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceView.swift; sourceTree = "<group>"; };
 		50277F732AF117700045AB12 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularUserProfilePage.swift; sourceTree = "<group>"; };
 		50277F812AF1512E0045AB12 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
@@ -767,6 +769,7 @@
 				509A10402BCE747A00FB55C7 /* DotView.swift */,
 				502942692C2535D9000E5C64 /* LocarieDivider.swift */,
 				50E6A7412C393F1600932FAD /* LoginSheet.swift */,
+				501C3BD62CBAAA7700D7E89E /* DistanceView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1814,6 +1817,7 @@
 				5075FCB52B84CE4E005E4A8B /* LinkFormItemWithBlockTitle.swift in Sources */,
 				50F181EA2C7779750035EC79 /* ProfileImages.swift in Sources */,
 				509D5BC32B45610F00833021 /* BioEditPage.swift in Sources */,
+				501C3BD72CBAAA7700D7E89E /* DistanceView.swift in Sources */,
 				501BAF422B46503600D9D84F /* LabelSettingsItem.swift in Sources */,
 				505BCE772C22B2E900498E65 /* PostDeleteService.swift in Sources */,
 				500FB2392B8835AC00E14DEE /* BusinessStatus.swift in Sources */,

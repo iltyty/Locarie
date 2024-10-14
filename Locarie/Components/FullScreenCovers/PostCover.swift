@@ -87,6 +87,7 @@ struct PostCover: View {
           }
         }
       }
+      .padding(.trailing, 16)
       .padding(.bottom, 36)
     }
     .padding(.horizontal, 16)
@@ -225,6 +226,6 @@ private extension PostCover {
 
 private enum Constants {
   static let favoriteButtonShadowRadius: CGFloat = 2
-  static let favoriteButtonIconSize: CGFloat = 28
-  static let favoriteButtonBackgroundSize: CGFloat = 60
+  static let favoriteButtonIconSize: CGFloat = 18
+  static let favoriteButtonBackgroundSize: CGFloat = 40
 }

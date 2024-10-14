@@ -26,7 +26,7 @@ struct HomePage: View {
   @State private var mapTouched = false
   @State private var searching = false
   @State private var selectedPost = PostDto()
-  @State private var viewport: Viewport = .camera(center: .london, zoom: 11)
+  @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
 
   @Namespace var namespace
 
@@ -103,7 +103,7 @@ private extension HomePage {
         currentDetent: $currentDetent
       ) {
         Group {
-          VStack(spacing: 16) {
+          VStack(spacing: 0) {
             HStack(spacing: 0) {
               Spacer()
               latestTab
@@ -118,7 +118,6 @@ private extension HomePage {
             }
           }
         }
-        .allowsHitTesting(currentDetent != Constants.bottomDetent)
       } topContent: {
         CircleButton("Navigation")
           .padding(.trailing, 16)
@@ -137,28 +136,27 @@ private extension HomePage {
       }
     }
   }
-  
+
   var latestTab: some View {
-    VStack(spacing: 4) {
+    VStack(spacing: 12) {
       Text("Latest")
         .font(.custom(GlobalConstants.fontName, size: 18))
         .fontWeight(.bold)
         .foregroundStyle(page == .latest ? Color.black : LocarieColor.greyDark)
       Group {
         if page == .latest {
-          Rectangle()
-            .fill(LocarieColor.primary)
+          Rectangle().fill(.black)
         } else {
           Color.clear
         }
       }
-      .frame(width: 32, height: 2.5)
+      .frame(width: 36, height: 2)
     }
     .onTapGesture {
       page = .latest
     }
   }
-  
+
   var placesTab: some View {
     VStack(spacing: 4) {
       Text("Places")
@@ -167,32 +165,31 @@ private extension HomePage {
         .foregroundStyle(page == .places ? Color.black : LocarieColor.greyDark)
       Group {
         if page == .places {
-          Rectangle()
-            .fill(LocarieColor.primary)
+          Rectangle().fill(.black)
         } else {
           Color.clear
         }
       }
-      .frame(width: 32, height: 2.5)
+      .frame(width: 36, height: 2)
     }
     .onTapGesture {
       page = .places
     }
   }
-  
+
   @ViewBuilder
   var latestTabContent: some View {
     if !network.connected && postVM.posts.isEmpty {
-        Text("No network connection")
-          .fontWeight(.bold)
-          .foregroundStyle(LocarieColor.greyDark)
-          .padding(.horizontal, 16)
+      Text("No network connection")
+        .fontWeight(.bold)
+        .foregroundStyle(LocarieColor.greyDark)
+        .padding([.top, .horizontal], 16)
     } else if postVM.state.isIdle() || postVM.state.isLoading() {
       VStack(spacing: 16) {
         PostCardView.skeleton
         PostCardView.skeleton
       }
-      .padding(.horizontal, 16)
+      .padding([.top, .horizontal], 16)
     } else {
       VStack(spacing: 0) {
         ScrollView {
@@ -223,6 +220,7 @@ private extension HomePage {
                 .buttonStyle(.plain)
               }
             }
+            .padding(.top, 16)
           }
         }
         .scrollIndicators(.hidden)
@@ -230,20 +228,20 @@ private extension HomePage {
       }
     }
   }
-  
+
   @ViewBuilder
   var placesTabContent: some View {
     if !network.connected && userListVM.businesses.isEmpty {
-        Text("No network connection")
-          .fontWeight(.bold)
-          .foregroundStyle(LocarieColor.greyDark)
-          .padding(.horizontal, 16)
+      Text("No network connection")
+        .fontWeight(.bold)
+        .foregroundStyle(LocarieColor.greyDark)
+        .padding([.top, .horizontal], 16)
     } else if userListVM.state.isIdle() || userListVM.state.isLoading() {
       VStack(spacing: 16) {
         BusinessAvatarRow.skeleton
         BusinessAvatarRow.skeleton
       }
-      .padding(.leading, 16)
+      .padding([.top, .leading], 16)
     } else {
       ScrollView {
         VStack(spacing: 20) {
@@ -271,6 +269,7 @@ private extension HomePage {
             }
           }
         }
+        .padding(.top, 16)
       }
       .scrollIndicators(.hidden)
     }
@@ -286,7 +285,7 @@ private extension HomePage {
     }
     .padding(.top, 45)
   }
-  
+
   var buttons: some View {
     HStack(spacing: 0) {
       locarieIcon
