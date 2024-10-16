@@ -27,7 +27,7 @@ struct BusinessStatus: View {
         Text(user.neighborhood).foregroundStyle(LocarieColor.greyDark)
         DotView()
         Group {
-          if user.isNowClosed {
+          if user.currentOpeningPeriod == 0 {
             Text("Closed").foregroundStyle(LocarieColor.greyDark)
           } else {
             Text("Open").foregroundStyle(LocarieColor.green)

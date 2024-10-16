@@ -49,7 +49,7 @@ private extension ProfileOpeningHours {
     if user.businessHours.isEmpty {
       Text(cacheVM.getUserId() == user.id ? "Edit" : "Opening hours")
         .foregroundStyle(LocarieColor.greyDark)
-    } else if user.isNowClosed {
+    } else if user.currentOpeningPeriod == 0 {
       Text("Closed").foregroundStyle(.secondary)
     } else {
       HStack(spacing: 0) {

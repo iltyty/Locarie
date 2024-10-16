@@ -11,8 +11,7 @@ import SwiftUI
 struct DynamicPostsMapView: View {
   @Binding var viewport: Viewport
   @Binding var mapTouched: Bool
-  @Binding var homePage: HomePage.Page
-  
+
   @ObservedObject var postVM: PostListNearbyAllViewModel
   @ObservedObject var userListVM = UserListViewModel()
 
@@ -26,27 +25,14 @@ struct DynamicPostsMapView: View {
     MapReader { proxy in
       Map(viewport: $viewport) {
         Puck2D()
-
-        if homePage == .latest {
-          ForEvery(postVM.posts) { post in
-            MapViewAnnotation(coordinate: post.businessLocationCoordinate) {
-              NavigationLink(value: Router.Int64Destination.businessHome(post.user.id, false)) {
-                BusinessMapAvatar(url: post.user.avatarUrl, newUpdate: post.user.hasUpdateIn24Hours)
-              }
+        ForEvery(userListVM.businesses) { user in
+          MapViewAnnotation(coordinate: user.coordinate) {
+            NavigationLink(value: Router.Int64Destination.businessHome(user.id, false)) {
+              BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
             }
-            .allowOverlap(true)
-            .allowOverlapWithPuck(true)
           }
-        } else {
-          ForEvery(userListVM.businesses) { user in
-            MapViewAnnotation(coordinate: user.coordinate) {
-              NavigationLink(value: Router.Int64Destination.businessHome(user.id, false)) {
-                BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
-              }
-            }
-            .allowOverlap(true)
-            .allowOverlapWithPuck(true)
-          }
+          .allowOverlap(true)
+          .allowOverlapWithPuck(true)
         }
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 208))
@@ -100,8 +86,8 @@ private extension DynamicPostsMapView {
     needUpdating = false
     postVM.getNearbyAllPosts(with: coordinate)
   }
-  
-  func updateBusinesses(_ location: CLLocation) {
+
+  func updateBusinesses(_: CLLocation) {
     userListVM.listBusinesses()
   }
 }

@@ -15,7 +15,6 @@ struct HomePage: View {
   @StateObject private var postVM = PostListNearbyAllViewModel()
   @StateObject private var userListVM = UserListViewModel()
 
-  @State private var page: Page = .latest
   @State private var user = UserDto()
   @State private var post = PostDto()
   @State private var presentingProfileCover = false
@@ -35,7 +34,6 @@ struct HomePage: View {
       DynamicPostsMapView(
         viewport: $viewport,
         mapTouched: $mapTouched,
-        homePage: $page,
         postVM: postVM,
         userListVM: userListVM
       )
@@ -102,21 +100,9 @@ private extension HomePage {
         detents: [Constants.bottomDetent, .large],
         currentDetent: $currentDetent
       ) {
-        Group {
-          VStack(spacing: 0) {
-            HStack(spacing: 0) {
-              Spacer()
-              latestTab
-              Spacer()
-              placesTab
-              Spacer()
-            }
-            if page == .latest {
-              latestTabContent
-            } else {
-              placesTabContent
-            }
-          }
+        LocarieTabView(["Latest", "Places"]) {
+          latestTabContent.tag(0)
+          placesTabContent.tag(1)
         }
       } topContent: {
         CircleButton("Navigation")
@@ -134,46 +120,6 @@ private extension HomePage {
           }
         }
       }
-    }
-  }
-
-  var latestTab: some View {
-    VStack(spacing: 12) {
-      Text("Latest")
-        .font(.custom(GlobalConstants.fontName, size: 18))
-        .fontWeight(.bold)
-        .foregroundStyle(page == .latest ? Color.black : LocarieColor.greyDark)
-      Group {
-        if page == .latest {
-          Rectangle().fill(.black)
-        } else {
-          Color.clear
-        }
-      }
-      .frame(width: 36, height: 2)
-    }
-    .onTapGesture {
-      page = .latest
-    }
-  }
-
-  var placesTab: some View {
-    VStack(spacing: 4) {
-      Text("Places")
-        .font(.custom(GlobalConstants.fontName, size: 18))
-        .fontWeight(.bold)
-        .foregroundStyle(page == .places ? Color.black : LocarieColor.greyDark)
-      Group {
-        if page == .places {
-          Rectangle().fill(.black)
-        } else {
-          Color.clear
-        }
-      }
-      .frame(width: 36, height: 2)
-    }
-    .onTapGesture {
-      page = .places
     }
   }
 
@@ -319,12 +265,6 @@ private extension HomePage {
           searching.toggle()
         }
       }
-  }
-}
-
-extension HomePage {
-  enum Page {
-    case latest, places
   }
 }
 

@@ -133,10 +133,11 @@ extension UserDto {
   var openUtil: String {
     guard businessHours.count == 7 else { return "Closed" }
     guard let todayBusinessHours else { return "Closed" }
-    if isNowClosed {
+    let current = currentOpeningPeriod
+    if current == 0 {
       return "Closed"
     }
-    return "until \(todayBusinessHours.formattedClosingTime)"
+    return "until \(todayBusinessHours.formattedClosingTime(current - 1))"
   }
 
   private var todayBusinessHours: BusinessHoursDto? {
@@ -148,9 +149,10 @@ extension UserDto {
     return BusinessHoursDto.DayOfWeek.allCases[index]
   }
 
-  var isNowClosed: Bool {
-    guard let todayBusinessHours else { return true }
-    if todayBusinessHours.closed { return true }
+  // 0 for closed, 1/2 for the first/second opening time period
+  var currentOpeningPeriod: Int {
+    guard let todayBusinessHours else { return 0 }
+    if todayBusinessHours.closed { return 0 }
     let now = Date()
     for i in 0 ..< todayBusinessHours.openingHoursCount {
       let openingTime = Calendar.current.date(
@@ -166,10 +168,10 @@ extension UserDto {
         of: now
       )!
       if now >= openingTime, now <= closingTime {
-        return true
+        return i + 1
       }
     }
-    return false
+    return 0
   }
 }
 

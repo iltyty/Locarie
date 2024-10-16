@@ -245,6 +245,14 @@ private extension NewPostPage {
       .focused($isEditing)
       .frame(height: Constants.inputHeight, alignment: .top)
       .keyboardAdaptive()
+//      .toolbar {
+//        ToolbarItemGroup(placement: .keyboard) {
+//          Spacer()
+//          Button("Done") {
+//            isEditing = false
+//          }
+//        }
+//      }
       .onChange(of: textEditVM.text) { text in
         postVM.post.content = text
       }

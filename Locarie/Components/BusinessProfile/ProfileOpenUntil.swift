@@ -31,7 +31,7 @@ struct ProfileOpenUntil: View {
     if user.businessHours.isEmpty {
       Text(cacheVM.getUserId() == user.id ? "Go edit" : "Opening hours")
         .foregroundStyle(.secondary)
-    } else if user.isNowClosed {
+    } else if user.currentOpeningPeriod == 0 {
       Text("Closed").foregroundStyle(.secondary)
     } else {
       HStack(spacing: 0) {

@@ -238,6 +238,7 @@
 		50F54A202B45503900D06F20 /* AvatarEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F54A1F2B45503800D06F20 /* AvatarEditor.swift */; };
 		50F85B3D2B23F09B00D04787 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */; };
 		50F85B452B242EE200D04787 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F85B442B242EE200D04787 /* APIServices.swift */; };
+		50F8AC6A2CBEBD9000D3E41E /* LocarieTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F8AC692CBEBD9000D3E41E /* LocarieTabView.swift */; };
 		50FDD8852B4AB93E003015F9 /* BusinessUserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */; };
 		50FDD8882B4AFC17003015F9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8872B4AFC17003015F9 /* Router.swift */; };
 		50FDD88A2B4B8B0D003015F9 /* ProfileGetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8892B4B8B0D003015F9 /* ProfileGetService.swift */; };
@@ -505,6 +506,7 @@
 		50F54A1F2B45503800D06F20 /* AvatarEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEditor.swift; sourceTree = "<group>"; };
 		50F85B3C2B23F09B00D04787 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		50F85B442B242EE200D04787 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
+		50F8AC692CBEBD9000D3E41E /* LocarieTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocarieTabView.swift; sourceTree = "<group>"; };
 		50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessUserProfilePage.swift; sourceTree = "<group>"; };
 		50FDD8872B4AFC17003015F9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		50FDD8892B4B8B0D003015F9 /* ProfileGetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGetService.swift; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 				506801542B88CC2000AFF000 /* Components */,
 				50277F732AF117700045AB12 /* HomePage.swift */,
 				506801522B88CBFF00AFF000 /* FavoritePage.swift */,
+				50F8AC692CBEBD9000D3E41E /* LocarieTabView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1950,6 +1953,7 @@
 				50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */,
 				50B5DEC62B3B092F00C0A641 /* MapboxSuggestionService.swift in Sources */,
 				50530B912B875185009C1F92 /* UserProfileEditPage.swift in Sources */,
+				50F8AC6A2CBEBD9000D3E41E /* LocarieTabView.swift in Sources */,
 				50B11ADA2AFB3661002A7B91 /* BusinessHomePage.swift in Sources */,
 				50E6A75F2C3AADBE00932FAD /* CLLocation.swift in Sources */,
 				50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */,
@@ -2144,7 +2148,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"locarie/Preview Content\"";
 				DEVELOPMENT_TEAM = USKV668THP;
 				ENABLE_PREVIEWS = YES;
@@ -2181,7 +2185,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"locarie/Preview Content\"";
 				DEVELOPMENT_TEAM = USKV668THP;
 				ENABLE_PREVIEWS = YES;
