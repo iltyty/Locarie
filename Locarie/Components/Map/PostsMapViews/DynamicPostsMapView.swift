@@ -15,6 +15,7 @@ struct DynamicPostsMapView: View {
   @ObservedObject var postVM: PostListNearbyAllViewModel
   @ObservedObject var userListVM = UserListViewModel()
 
+  @State private var displayAvatar = false
   @State private var map: MapboxMap!
   @State private var needUpdating = true
 
@@ -28,11 +29,21 @@ struct DynamicPostsMapView: View {
         ForEvery(userListVM.businesses) { user in
           MapViewAnnotation(coordinate: user.coordinate) {
             NavigationLink(value: Router.Int64Destination.businessHome(user.id, false)) {
-              BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
+              if displayAvatar {
+                BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
+              } else {
+                Circle().fill(LocarieColor.primary).frame(size: 6)
+              }
             }
           }
           .allowOverlap(true)
           .allowOverlapWithPuck(true)
+        }
+      }
+      .onCameraChanged { camera in
+        let zoom = camera.cameraState.zoom
+        if (zoom >= 14) != displayAvatar {
+          displayAvatar.toggle()
         }
       }
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 208))

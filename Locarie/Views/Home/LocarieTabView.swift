@@ -31,16 +31,19 @@ struct LocarieTabView<Content: View>: View {
           Spacer()
         }
       }
-      TabView(
-        selection: Binding<Int>(
-          get: { index },
-          set: { i in
-            withAnimation(.spring(duration: 0.5)) { index = i }
-          }
-        ),
-        content: content
-      )
-      .tabViewStyle(.page(indexDisplayMode: .never))
+      // Using TabView with page style together with ScrollView
+      // will cause weird trembling bug:
+      // https://developer.apple.com/forums/thread/730151
+//      TabView(
+//        selection: Binding<Int>(
+//          get: { index },
+//          set: { i in
+//            withAnimation(.spring(duration: 0.5)) { index = i }
+//          }
+//        ),
+//        content: content
+//      )
+//      .tabViewStyle(.page(indexDisplayMode: .never))
     }
   }
 

@@ -15,6 +15,7 @@ struct HomePage: View {
   @StateObject private var postVM = PostListNearbyAllViewModel()
   @StateObject private var userListVM = UserListViewModel()
 
+  @State private var index = 0
   @State private var user = UserDto()
   @State private var post = PostDto()
   @State private var presentingProfileCover = false
@@ -27,7 +28,8 @@ struct HomePage: View {
   @State private var selectedPost = PostDto()
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
 
-  @Namespace var namespace
+  @Namespace private var tabBarID
+  @Namespace private var tabBarNS
 
   var body: some View {
     ZStack {
@@ -100,9 +102,19 @@ private extension HomePage {
         detents: [Constants.bottomDetent, .large],
         currentDetent: $currentDetent
       ) {
-        LocarieTabView(["Latest", "Places"]) {
-          latestTabContent.tag(0)
-          placesTabContent.tag(1)
+        VStack(spacing: 0) {
+          HStack(spacing: 0) {
+            Spacer()
+            tabBuilder(text: "Latest", i: 0)
+            Spacer()
+            tabBuilder(text: "Places", i: 1)
+            Spacer()
+          }
+          if index == 0 {
+            latestTabContent
+          } else {
+            placesTabContent
+          }
         }
       } topContent: {
         CircleButton("Navigation")
@@ -123,6 +135,24 @@ private extension HomePage {
     }
   }
 
+  func tabBuilder(text: String, i: Int) -> some View {
+    VStack(spacing: 14) {
+      Text(text)
+        .fontWeight(index == i ? .bold : .medium)
+        .onTapGesture {
+          index = i
+        }
+      Group {
+        if index == i {
+          Rectangle().fill(.black).matchedGeometryEffect(id: tabBarID, in: tabBarNS)
+        } else {
+          Color.clear
+        }
+      }
+      .frame(width: 32, height: 2)
+    }
+  }
+
   @ViewBuilder
   var latestTabContent: some View {
     if !network.connected && postVM.posts.isEmpty {
@@ -131,11 +161,14 @@ private extension HomePage {
         .foregroundStyle(LocarieColor.greyDark)
         .padding([.top, .horizontal], 16)
     } else if postVM.state.isIdle() || postVM.state.isLoading() {
-      VStack(spacing: 16) {
-        PostCardView.skeleton
-        PostCardView.skeleton
+      ScrollView {
+        VStack(spacing: 16) {
+          PostCardView.skeleton
+          PostCardView.skeleton
+        }
+        .padding([.top, .horizontal], 16)
       }
-      .padding([.top, .horizontal], 16)
+      .scrollIndicators(.hidden)
     } else {
       VStack(spacing: 0) {
         ScrollView {
@@ -183,11 +216,14 @@ private extension HomePage {
         .foregroundStyle(LocarieColor.greyDark)
         .padding([.top, .horizontal], 16)
     } else if userListVM.state.isIdle() || userListVM.state.isLoading() {
-      VStack(spacing: 16) {
-        BusinessAvatarRow.skeleton
-        BusinessAvatarRow.skeleton
+      ScrollView {
+        VStack(spacing: 16) {
+          BusinessAvatarRow.skeleton
+          BusinessAvatarRow.skeleton
+        }
+        .padding([.top, .leading], 16)
       }
-      .padding([.top, .leading], 16)
+      .scrollIndicators(.hidden)
     } else {
       ScrollView {
         VStack(spacing: 20) {
@@ -269,7 +305,7 @@ private extension HomePage {
 }
 
 private enum Constants {
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(208)
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(222)
 }
 
 #Preview {
