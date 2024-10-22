@@ -50,8 +50,8 @@ struct LocarieTabView<Content: View>: View {
   private func tabBuilder(text: String, i: Int) -> some View {
     VStack(spacing: 14) {
       Text(text)
-        .fontWeight(index == i ? .bold : .regular)
-        .animation(nil)
+        .fontWeight(.bold)
+        .foregroundStyle(index == i ? .black : LocarieColor.greyDark)
         .onTapGesture {
           withAnimation(.spring(duration: 0.5)) {
             index = i

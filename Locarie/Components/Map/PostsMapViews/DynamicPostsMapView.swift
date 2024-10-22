@@ -29,11 +29,8 @@ struct DynamicPostsMapView: View {
         ForEvery(userListVM.businesses) { user in
           MapViewAnnotation(coordinate: user.coordinate) {
             NavigationLink(value: Router.Int64Destination.businessHome(user.id, false)) {
-              if displayAvatar {
-                BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
-              } else {
-                Circle().fill(LocarieColor.primary).frame(size: 6)
-              }
+              BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
+              //                Circle().fill(LocarieColor.primary).frame(size: 12)
             }
           }
           .allowOverlap(true)
@@ -46,7 +43,7 @@ struct DynamicPostsMapView: View {
           displayAvatar.toggle()
         }
       }
-      .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 208))
+      .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 222))
       .onMapTapGesture { _ in
         mapTouched.toggle()
       }

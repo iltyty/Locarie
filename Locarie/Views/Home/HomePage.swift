@@ -138,7 +138,8 @@ private extension HomePage {
   func tabBuilder(text: String, i: Int) -> some View {
     VStack(spacing: 14) {
       Text(text)
-        .fontWeight(index == i ? .bold : .medium)
+        .fontWeight(.bold)
+        .foregroundStyle(index == i ? .black : LocarieColor.greyDark)
         .onTapGesture {
           index = i
         }
@@ -194,7 +195,6 @@ private extension HomePage {
                     presentingProfileCover = true
                   }
                 )
-                .padding(.top, i == 0 ? 8 : 0)
                 .tint(.primary)
                 .buttonStyle(.plain)
               }
@@ -225,8 +225,8 @@ private extension HomePage {
       }
       .scrollIndicators(.hidden)
     } else {
-      ScrollView {
-        VStack(spacing: 20) {
+      VStack(spacing: 0) {
+        ScrollView {
           if userListVM.businesses.isEmpty {
             emptyList
           } else {
@@ -249,11 +249,11 @@ private extension HomePage {
                 }
               }
             }
+            .padding(.top, 16)
           }
         }
-        .padding(.top, 16)
+        .scrollIndicators(.hidden)
       }
-      .scrollIndicators(.hidden)
     }
   }
 
@@ -305,7 +305,7 @@ private extension HomePage {
 }
 
 private enum Constants {
-  static let bottomDetent: BottomSheetDetent = .absoluteBottom(222)
+  static let bottomDetent: BottomSheetDetent = .absoluteBottom(214)
 }
 
 #Preview {
