@@ -6,14 +6,23 @@
 //
 
 enum BusinessCategory: String, CaseIterable, Codable {
-  case coffee = "Coffee"
-  case restaurant = "Restaurant"
-  case drinks = "Drinks"
-
-  case shop = "Shop"
   case art = "Art"
-  case lifestyle = "Lifestyle"
-  case fashion = "Bakery"
+  case appointment = "By Appointment"
+  case bakery = "Bakery"
+  case cocktail = "Cocktail"
+  case coffee = "Coffee"
+  case concept = "Concept Store"
+  case drinks = "Drinks"
+  case eats = "Eats"
+  case experience = "Experience"
+  case florist = "Florist"
   case fresh = "Fresh Produce"
+  case lifestyle = "Lifestyle"
+  case music = "Music"
+  case plants = "Plants"
+  case restaurant = "Restaurant"
+  case shop = "Shop"
+  case studio = "Studio"
   case venue = "Venue"
+  case wineBar = "Wine Bar"
 }
