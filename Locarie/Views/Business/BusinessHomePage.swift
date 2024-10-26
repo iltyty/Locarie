@@ -347,7 +347,7 @@ private extension BusinessHomePage {
 }
 
 private enum Constants {
-  static let bottomY: CGFloat = 190
+  static let bottomY: CGFloat = 175
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(bottomY)
   static let vSpacing: CGFloat = 15
   static let mapZoom: CGFloat = 16
