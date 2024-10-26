@@ -178,6 +178,7 @@ private extension BusinessUserProfilePage {
             }
         }
       }
+      .mapStyle(MapStyle(uri: StyleURI(rawValue: GlobalConstants.mapStyleURI)!))
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: Constants.bottomY))
       .ignoresSafeArea(edges: .all)
       .onAppear {

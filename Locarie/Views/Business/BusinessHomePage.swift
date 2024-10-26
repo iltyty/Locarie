@@ -159,6 +159,7 @@ private extension BusinessHomePage {
           .selected(u.id == user.id)
         }
       }
+      .mapStyle(MapStyle(uri: StyleURI(rawValue: GlobalConstants.mapStyleURI)!))
       .onMapTapGesture { _ in
         moveBottomSheet(to: Constants.bottomDetent)
       }

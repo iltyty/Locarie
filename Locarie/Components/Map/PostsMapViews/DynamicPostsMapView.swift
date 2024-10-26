@@ -37,6 +37,7 @@ struct DynamicPostsMapView: View {
           .allowOverlapWithPuck(true)
         }
       }
+      .mapStyle(MapStyle(uri: StyleURI(rawValue: GlobalConstants.mapStyleURI)!))
       .onCameraChanged { camera in
         let zoom = camera.cameraState.zoom
         if (zoom >= 14) != displayAvatar {

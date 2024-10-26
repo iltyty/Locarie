@@ -97,6 +97,7 @@ private extension BusinessAddressPage {
           }
         }
       }
+      .mapStyle(MapStyle(uri: StyleURI(rawValue: GlobalConstants.mapStyleURI)!))
       .ornamentOptions(noScaleBarAndCompassOrnamentOptions(bottom: 40))
       .onCameraChanged { onCameraChanged($0) }
       .gesture(dragGesture)

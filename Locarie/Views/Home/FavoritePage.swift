@@ -37,6 +37,7 @@ struct FavoritePage: View {
           .allowOverlapWithPuck(true)
         }
       }
+      .mapStyle(MapStyle(uri: StyleURI(rawValue: GlobalConstants.mapStyleURI)!))
       .onMapTapGesture { _ in
         moveBottomSheet(to: Constants.bottomDetent)
       }
