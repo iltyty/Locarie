@@ -6,6 +6,7 @@
 //
 
 import Combine
+import CoreLocation
 import Foundation
 
 final class UserListViewModel: BaseViewModel {
@@ -13,16 +14,24 @@ final class UserListViewModel: BaseViewModel {
   @Published var businesses: [UserDto] = []
   @Published var allBusinesses: [UserLocationDto] = []
 
+  private var page = 0
+  private var pageSize = 10
+  private var allFetched = false
   private let networking: UserListService
   private var subscriptions: Set<AnyCancellable> = []
 
-  init(_ networking: UserListService = UserListServiceImpl.shared) {
+  init(_ networking: UserListService = UserListServiceImpl.shared, size: Int = 10) {
+    self.pageSize = size
     self.networking = networking
   }
 
-  func listBusinesses() {
-    state = .loading
-    networking.listBusinesses()
+  func listBusinesses(with location: CLLocationCoordinate2D) {
+    print("page =", page)
+    if allFetched { return }
+    if businesses.isEmpty {
+      state = .loading
+    }
+    networking.listBusinesses(latitude: location.latitude, longitude: location.longitude, page: page, size: pageSize)
       .sink { [weak self] response in
         guard let self else { return }
         handleListBusinessesResponse(response)
@@ -50,9 +59,9 @@ final class UserListViewModel: BaseViewModel {
       state = .failed(newNetworkError(response: dto))
       return
     }
-    if let result = dto.data {
-      businesses = result.filter(\.isProfileComplete)
-    }
+    page += 1
+    allFetched = dto.data.last
+    businesses.append(contentsOf: dto.data.content.filter(\.isProfileComplete))
     state = .finished
   }
   
@@ -98,6 +107,13 @@ extension UserListViewModel {
     func isLoadingAllBusinesses() -> Bool {
       return switch self {
       case .loadingAllBusinesses: true
+      default: false
+      }
+    }
+    
+    func isFinished() -> Bool {
+      return switch self {
+      case .finished: true
       default: false
       }
     }

@@ -34,7 +34,6 @@ struct BusinessSearchView: View {
     }
     .onAppear {
       favoriteVM.list(userId: cacheVM.getUserId())
-      userListVM.listBusinesses()
     }
   }
 }

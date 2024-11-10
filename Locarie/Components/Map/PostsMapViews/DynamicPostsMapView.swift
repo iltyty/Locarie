@@ -16,11 +16,13 @@ struct DynamicPostsMapView: View {
   @ObservedObject var userListVM = UserListViewModel()
   
   var shouldFetchPost: Bool
-  @State private var i = 0
+  var shouldFetchUser: Bool
 
   @State private var displayAvatar = false
   @State private var map: MapboxMap!
   @State private var initialPostListFetched = false
+  @State private var initialUserListFetched = false
+  @State private var allBusinessesOnMapFetched = false
 
   @ObservedObject private var network = Network.shared
   @ObservedObject private var locationManager = LocationManager()
@@ -57,27 +59,39 @@ struct DynamicPostsMapView: View {
     .onReceive(postVM.$state) { state in
       if state.isFinished() { initialPostListFetched = true }
     }
-    .onReceive(locationManager.$location) { location in
-      guard !initialPostListFetched else { return }
-      guard !postVM.state.isLoading() else { return }
-      guard let location else { return }
-      updatePosts(location)
-      updateBusinesses(location)
+    .onReceive(userListVM.$state) { state in
+      if state.isFinished() { initialUserListFetched = true }
     }
-    .onChange(of: network.connected) { connected in
-      guard !initialPostListFetched else { return }
-      guard !postVM.state.isLoading() else { return }
-      if connected, let location = locationManager.location {
+    .onReceive(locationManager.$location) { location in
+      guard let location else { return }
+      if !initialPostListFetched {
         updatePosts(location)
+      }
+      if !initialUserListFetched {
         updateBusinesses(location)
       }
     }
-    .onChange(of: shouldFetchPost) { fetch in
-      i += 1
+    .onChange(of: network.connected) { connected in
+      if connected, let location = locationManager.location {
+        if !initialPostListFetched {
+          updatePosts(location)
+        }
+        if !initialUserListFetched {
+          updateBusinesses(location)
+        }
+      }
+    }
+    .onChange(of: shouldFetchPost) { _ in
       guard let location = locationManager.location else {
         return
       }
       updatePosts(location)
+    }
+    .onChange(of: shouldFetchUser) { _ in
+      guard let location = locationManager.location else {
+        return
+      }
+      updateBusinesses(location)
     }
     .ignoresSafeArea()
     .simultaneousGesture(dragGesture)
@@ -87,17 +101,16 @@ struct DynamicPostsMapView: View {
 
 private extension DynamicPostsMapView {
   func updatePosts(_ location: CLLocation) {
-    postVM.getNearbyAllPosts(
-      with: CLLocationCoordinate2D(
-        latitude: location.coordinate.latitude,
-        longitude: location.coordinate.longitude
-      )
-    )
+    guard !postVM.state.isLoading() else { return }
+    postVM.getNearbyAllPosts(with: location.coordinate)
   }
 
-  func updateBusinesses(_: CLLocation) {
-    userListVM.listAllBusinesses()
-    userListVM.listBusinesses()
+  func updateBusinesses(_ location: CLLocation) {
+    guard !userListVM.state.isLoading() else { return }
+    if userListVM.allBusinesses.isEmpty {
+      userListVM.listAllBusinesses()
+    }
+    userListVM.listBusinesses(with: location.coordinate)
   }
 }
 

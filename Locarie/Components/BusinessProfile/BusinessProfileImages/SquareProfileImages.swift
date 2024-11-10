@@ -35,7 +35,6 @@ struct SquareProfileImages: View {
       GeometryReader { proxy in
         Color.clear.task(id: proxy.size) {
           screenWidth = proxy.size.width
-          print("screen width = ", screenWidth)
         }
       }
     }

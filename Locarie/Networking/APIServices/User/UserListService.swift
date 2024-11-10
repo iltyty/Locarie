@@ -10,7 +10,7 @@ import Combine
 import Foundation
 
 protocol UserListService {
-  func listBusinesses() -> AnyPublisher<ListBusinessesResponse, Never>
+  func listBusinesses(latitude: Double, longitude: Double, page: Int, size: Int) -> AnyPublisher<ListBusinessesResponse, Never>
   func listAllBusinesses() -> AnyPublisher<ListAllBusinessesResponse, Never>
 }
 
@@ -18,10 +18,16 @@ final class UserListServiceImpl: BaseAPIService, UserListService {
   static let shared = UserListServiceImpl()
   override private init() {}
 
-  func listBusinesses() -> AnyPublisher<ListBusinessesResponse, Never> {
-    AF.request(APIEndpoints.listBusinessesUrl, method: .get)
+  func listBusinesses(latitude: Double, longitude: Double, page: Int, size: Int) -> AnyPublisher<ListBusinessesResponse, Never> {
+    let params = [
+      "latitude": latitude,
+      "longitude": longitude,
+      "page": page,
+      "size": size
+    ] as [String : Any]
+    return AF.request(APIEndpoints.listBusinessesUrl, method: .get, parameters: params)
       .validate()
-      .publishDecodable(type: ResponseDto<[UserDto]>.self)
+      .publishDecodable(type: PaginatedResponseDto<UserDto>.self)
       .map { self.mapResponse($0) }
       .receive(on: RunLoop.main)
       .eraseToAnyPublisher()
@@ -37,5 +43,5 @@ final class UserListServiceImpl: BaseAPIService, UserListService {
   }
 }
 
-typealias ListBusinessesResponse = DataResponse<ResponseDto<[UserDto]>, NetworkError>
+typealias ListBusinessesResponse = DataResponse<PaginatedResponseDto<UserDto>, NetworkError>
 typealias ListAllBusinessesResponse = DataResponse<ResponseDto<[UserLocationDto]>, NetworkError>

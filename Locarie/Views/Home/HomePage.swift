@@ -13,12 +13,14 @@ struct HomePage: View {
 
   @ObservedObject private var network = Network.shared
   @StateObject private var postVM = PostListNearbyAllViewModel(size: Constants.postPageSize)
-  @StateObject private var userListVM = UserListViewModel()
+  @StateObject private var userListVM = UserListViewModel(size: Constants.userPageSize)
 
   @State private var tabIndex = 0
   
   @State private var prePostIndex = 0
+  @State private var preUserIndex = 0
   @State private var shouldFetchPost = false
+  @State private var shouldFetchUser = false
 
   @State private var user = UserDto()
   @State private var post = PostDto()
@@ -35,6 +37,7 @@ struct HomePage: View {
   @Namespace private var tabBarNS
   
   private let postScrollViewCoordinateSpace = "postScrollView"
+  private let userScrollViewCoordinateSpace = "userScrollView"
 
   var body: some View {
     ZStack {
@@ -43,7 +46,8 @@ struct HomePage: View {
         mapTouched: $mapTouched,
         postVM: postVM,
         userListVM: userListVM,
-        shouldFetchPost: shouldFetchPost
+        shouldFetchPost: shouldFetchPost,
+        shouldFetchUser: shouldFetchUser
       )
       contentView
       if currentDetent == .large {
@@ -218,7 +222,8 @@ private extension HomePage {
                 return
               }
               prePostIndex = i
-              if i == postVM.posts.count - Constants.postFetchThreshold || i == postVM.posts.count {
+              let delta = postVM.posts.count - Constants.postFetchThreshold
+              if delta <= 0 || i == delta || i == postVM.posts.count {
                 shouldFetchPost.toggle()
               }
             }
@@ -254,7 +259,7 @@ private extension HomePage {
           if userListVM.businesses.isEmpty {
             emptyList
           } else {
-            LazyVStack(spacing: 0) {
+            VStack(spacing: 0) {
               ForEach(userListVM.businesses.indices, id: \.self) { i in
                 let user = userListVM.businesses[i]
                 VStack(spacing: 0) {
@@ -273,9 +278,27 @@ private extension HomePage {
                 }
               }
             }
+            .background {
+              GeometryReader { proxy in
+                Color.clear.preference(key: UserViewOffsetKey.self, value: -(proxy.frame(in: .named(userScrollViewCoordinateSpace)).origin.y - 16))
+              }
+            }
+            .onPreferenceChange(UserViewOffsetKey.self) { offset in
+              let i = Int(offset) / Constants.userHeight
+              if i <= preUserIndex {
+                preUserIndex = i
+                return
+              }
+              preUserIndex = i
+              let delta = userListVM.businesses.count - Constants.userFetchThreshold
+              if delta <= 0 || i == delta || i == userListVM.businesses.count {
+                shouldFetchUser.toggle()
+              }
+            }
             .padding(.top, 16)
           }
         }
+        .coordinateSpace(name: userScrollViewCoordinateSpace)
         .scrollIndicators(.hidden)
       }
     }
@@ -328,18 +351,33 @@ private extension HomePage {
   }
 }
 
-private struct PostViewOffsetKey: PreferenceKey {
-  typealias Value = CGFloat
-  static var defaultValue = CGFloat.zero
-  static func reduce(value: inout Value, nextValue: () -> Value) {
-      value += nextValue()
+private extension HomePage {
+  struct PostViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
+    }
+  }
+
+  struct UserViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
+    }
   }
 }
 
 private enum Constants {
   static let postHeight = 430
   static let postPageSize = 10
-  static let postFetchThreshold = 2
+  static let postFetchThreshold = 5
+
+  static let userHeight = 346
+  static let userPageSize = 10
+  static let userFetchThreshold = 5
+  
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(214)
 }
 

@@ -572,11 +572,11 @@
 			isa = PBXGroup;
 			children = (
 				AFD25ADB2CE0E18400FFE3DB /* Utils.swift */,
-				AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */,
 				50FDD8932B4D707B003015F9 /* BusinessHours */,
 				50369A692B2DBD55005D6B43 /* Post */,
 				50369A662B2DBCBC005D6B43 /* User */,
 				500F66202B257D4D0074FE3C /* Dtos.swift */,
+				AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */,
 			);
 			path = Dtos;
 			sourceTree = "<group>";

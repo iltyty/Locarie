@@ -110,7 +110,7 @@ struct BusinessHomePage: View {
       }
       profileVM.getProfile(userId: uid)
       listUserPostsVM.getUserPosts(id: uid)
-      userListVM.listBusinesses()
+      userListVM.listAllBusinesses()
     }
     .onReceive(profileVM.$dto) { dto in
       user = dto
@@ -148,11 +148,11 @@ private extension BusinessHomePage {
     MapReader { proxy in
       Map(viewport: $viewport) {
         Puck2D()
-        ForEvery(userListVM.businesses) { u in
-          MapViewAnnotation(coordinate: u.coordinate) {
+        ForEvery(userListVM.allBusinesses) { u in
+          MapViewAnnotation(coordinate: .init(latitude: u.location.latitude, longitude: u.location.longitude)) {
             BusinessMapAvatar(url: u.avatarUrl, newUpdate: u.hasUpdateIn24Hours, amplified: u.id == user.id)
               .onTapGesture {
-                user = u
+                profileVM.getProfile(userId: u.id)
               }
           }
           .allowOverlap(true)
