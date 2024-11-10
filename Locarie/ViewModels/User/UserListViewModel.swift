@@ -26,7 +26,6 @@ final class UserListViewModel: BaseViewModel {
   }
 
   func listBusinesses(with location: CLLocationCoordinate2D) {
-    print("page =", page)
     if allFetched { return }
     if businesses.isEmpty {
       state = .loading

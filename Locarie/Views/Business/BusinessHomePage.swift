@@ -113,6 +113,7 @@ struct BusinessHomePage: View {
       userListVM.listAllBusinesses()
     }
     .onReceive(profileVM.$dto) { dto in
+      print(dto.businessName)
       user = dto
       updateMapCenter(user: dto)
     }
@@ -152,6 +153,7 @@ private extension BusinessHomePage {
           MapViewAnnotation(coordinate: .init(latitude: u.location.latitude, longitude: u.location.longitude)) {
             BusinessMapAvatar(url: u.avatarUrl, newUpdate: u.hasUpdateIn24Hours, amplified: u.id == user.id)
               .onTapGesture {
+                profileVM.state = .idle
                 profileVM.getProfile(userId: u.id)
               }
           }
