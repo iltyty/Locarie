@@ -29,8 +29,8 @@ struct DynamicPostsMapView: View {
     MapReader { proxy in
       Map(viewport: $viewport) {
         Puck2D()
-        ForEvery(userListVM.businesses) { user in
-          MapViewAnnotation(coordinate: user.coordinate) {
+        ForEvery(userListVM.allBusinesses) { user in
+          MapViewAnnotation(coordinate: .init(latitude: user.location.latitude, longitude: user.location.longitude)) {
             NavigationLink(value: Router.Int64Destination.businessHome(user.id, false)) {
               BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
             }
@@ -96,6 +96,7 @@ private extension DynamicPostsMapView {
   }
 
   func updateBusinesses(_: CLLocation) {
+    userListVM.listAllBusinesses()
     userListVM.listBusinesses()
   }
 }

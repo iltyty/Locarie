@@ -11,6 +11,7 @@ import Foundation
 
 protocol UserListService {
   func listBusinesses() -> AnyPublisher<ListBusinessesResponse, Never>
+  func listAllBusinesses() -> AnyPublisher<ListAllBusinessesResponse, Never>
 }
 
 final class UserListServiceImpl: BaseAPIService, UserListService {
@@ -25,9 +26,16 @@ final class UserListServiceImpl: BaseAPIService, UserListService {
       .receive(on: RunLoop.main)
       .eraseToAnyPublisher()
   }
+  
+  func listAllBusinesses() -> AnyPublisher<ListAllBusinessesResponse, Never> {
+    AF.request(APIEndpoints.listAllBusinessesUrl, method: .get)
+      .validate()
+      .publishDecodable(type: ResponseDto<[UserLocationDto]>.self)
+      .map { self.mapResponse($0) }
+      .receive(on: RunLoop.main)
+      .eraseToAnyPublisher()
+  }
 }
 
-typealias ListBusinessesResponse = DataResponse<
-  ResponseDto<[UserDto]>,
-  NetworkError
->
+typealias ListBusinessesResponse = DataResponse<ResponseDto<[UserDto]>, NetworkError>
+typealias ListAllBusinessesResponse = DataResponse<ResponseDto<[UserLocationDto]>, NetworkError>

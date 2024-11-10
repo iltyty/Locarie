@@ -213,7 +213,6 @@ private extension HomePage {
             }
             .onPreferenceChange(PostViewOffsetKey.self) { offset in
               let i = Int(offset) / Constants.postHeight
-              print(i)
               if i <= prePostIndex {
                 prePostIndex = i
                 return

@@ -9,9 +9,11 @@ import Foundation
 
 extension APIEndpoints {
   static let usersUrl = baseUrl + "/users"
+  static let businessesUrl = usersUrl + "/businesses"
   static let userLoginUrl = URL(string: usersUrl + "/login")!
   static let userRegisterUrl = URL(string: usersUrl + "/register")!
-  static let listBusinessesUrl = URL(string: usersUrl + "/businesses")!
+  static let listBusinessesUrl = URL(string: businessesUrl)!
+  static let listAllBusinessesUrl = URL(string: businessesUrl + "/all")!
 
   static func userUrl(id: Int64) -> URL {
     URL(string: usersUrl + "/\(id)")!
