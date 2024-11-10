@@ -36,10 +36,11 @@ struct BusinessAvatarRow: View {
         Spacer()
       }
       .padding(.bottom, 10)
+      .padding(.horizontal, 16)
       SquareProfileImages(urls: user.profileImageUrls).padding(.bottom, 16)
       ProfileCategories(user).font(.custom(GlobalConstants.fontName, size: 14))
+        .padding(.horizontal, 16)
     }
-    .padding(.horizontal, 16)
   }
 
   static var skeleton: some View {

@@ -17,4 +17,12 @@ class BaseViewModel: ObservableObject {
     let backendError = BackendError(message: dto.message, code: code)
     return NetworkError(initialError: nil, backendError: backendError)
   }
+  
+  func newNetworkError(
+    response dto: PaginatedResponseDto<some Decodable>
+  ) -> NetworkError {
+    let code = ResultCode(rawValue: dto.status) ?? .unknown
+    let backendError = BackendError(message: dto.message, code: code)
+    return NetworkError(initialError: nil, backendError: backendError)
+  }
 }

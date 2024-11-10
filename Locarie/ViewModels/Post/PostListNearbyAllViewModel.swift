@@ -13,16 +13,23 @@ final class PostListNearbyAllViewModel: BaseViewModel {
   @Published var state: State = .idle
   @Published var posts: [PostDto] = []
 
+  private var page = 0
+  private var pageSize = 10
+  private var allFetched = false
   private var networking: PostListService
   private var subscriptions: Set<AnyCancellable> = []
 
-  init(_ networking: PostListService = PostListServiceImpl.shared) {
+  init(_ networking: PostListService = PostListServiceImpl.shared, size: Int = 10) {
+    self.pageSize = size
     self.networking = networking
   }
 
   func getNearbyAllPosts(with location: CLLocationCoordinate2D) {
-    state = .loading
-    networking.listPostsNearbyAll(latitude: location.latitude, longitude: location.longitude)
+    if allFetched { return }
+    if posts.isEmpty {
+      state = .loading
+    }
+    networking.listPostsNearbyAll(latitude: location.latitude, longitude: location.longitude, page: page, size: pageSize)
       .sink { [weak self] response in
         guard let self else { return }
         handleResponse(response)
@@ -30,8 +37,7 @@ final class PostListNearbyAllViewModel: BaseViewModel {
       .store(in: &subscriptions)
   }
 
-  func handleResponse(_ response: PostListResponse) {
-    debugPrint(response)
+  func handleResponse(_ response: PaginatedPostListResponse) {
     if let error = response.error {
       state = .failed(error)
       return
@@ -41,9 +47,9 @@ final class PostListNearbyAllViewModel: BaseViewModel {
       state = .failed(newNetworkError(response: dto))
       return
     }
-    if let data = dto.data {
-      posts = data
-    }
+    page += 1
+    allFetched = dto.data.last
+    posts.append(contentsOf: dto.data.content)
     state = .finished
   }
 }

@@ -147,6 +147,7 @@ private extension BusinessHomePage {
   var mapView: some View {
     MapReader { proxy in
       Map(viewport: $viewport) {
+        Puck2D()
         ForEvery(userListVM.businesses) { u in
           MapViewAnnotation(coordinate: u.coordinate) {
             BusinessMapAvatar(url: u.avatarUrl, newUpdate: u.hasUpdateIn24Hours, amplified: u.id == user.id)
@@ -235,7 +236,7 @@ private extension BusinessHomePage {
               if case .finished = profileVM.state {
                 ProfileImages(
                   user: user,
-                  amplified: !listUserPostsVM.posts.isEmpty,
+                  amplified: listUserPostsVM.posts.isEmpty,
                   profileCoverCurIndex: $profileCoverCurIndex,
                   presentingProfileCover: $presentingProfileCover
                 )

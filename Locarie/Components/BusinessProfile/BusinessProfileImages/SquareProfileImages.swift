@@ -16,7 +16,7 @@ struct SquareProfileImages: View {
   var body: some View {
     HStack(spacing: 8) {
       KFImage(URL(string: urls[0]))
-        .downsampling(size: .init(size: 3 * imageSize + 8))
+        .downsampling(size: .init(size: 4 * imageSize + 8))
         .cacheOriginalImage()
         .placeholder {
           DefaultBusinessImageView(size: 2 * imageSize + 8)
@@ -30,10 +30,12 @@ struct SquareProfileImages: View {
         imageViewBuilder(2)
       }
     }
+    .frame(maxWidth: .infinity)
     .background {
       GeometryReader { proxy in
         Color.clear.task(id: proxy.size) {
           screenWidth = proxy.size.width
+          print("screen width = ", screenWidth)
         }
       }
     }
@@ -42,8 +44,7 @@ struct SquareProfileImages: View {
   private var imageSize: CGFloat {
     // 16 for horizontal padding
     // 8 for padding between images
-//    (screenWidth - 16 * 2 - 8) / 3
-    114
+    screenWidth > 0 ? (screenWidth - 16 * 2 - 8) / 3 : 114
   }
 
   @ViewBuilder

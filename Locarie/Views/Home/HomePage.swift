@@ -12,10 +12,14 @@ struct HomePage: View {
   private let router = Router.shared
 
   @ObservedObject private var network = Network.shared
-  @StateObject private var postVM = PostListNearbyAllViewModel()
+  @StateObject private var postVM = PostListNearbyAllViewModel(size: Constants.postPageSize)
   @StateObject private var userListVM = UserListViewModel()
 
-  @State private var index = 0
+  @State private var tabIndex = 0
+  
+  @State private var prePostIndex = 0
+  @State private var shouldFetchPost = false
+
   @State private var user = UserDto()
   @State private var post = PostDto()
   @State private var presentingProfileCover = false
@@ -25,11 +29,12 @@ struct HomePage: View {
   @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
   @State private var mapTouched = false
   @State private var searching = false
-  @State private var selectedPost = PostDto()
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
 
   @Namespace private var tabBarID
   @Namespace private var tabBarNS
+  
+  private let postScrollViewCoordinateSpace = "postScrollView"
 
   var body: some View {
     ZStack {
@@ -37,7 +42,8 @@ struct HomePage: View {
         viewport: $viewport,
         mapTouched: $mapTouched,
         postVM: postVM,
-        userListVM: userListVM
+        userListVM: userListVM,
+        shouldFetchPost: shouldFetchPost
       )
       contentView
       if currentDetent == .large {
@@ -78,9 +84,6 @@ struct HomePage: View {
       }
     }
     .ignoresSafeArea(edges: .bottom)
-    .onReceive(postVM.$posts) { posts in
-      selectedPost = posts.first ?? PostDto()
-    }
     .onChange(of: mapTouched) { _ in
       moveBottomSheet(to: Constants.bottomDetent)
     }
@@ -110,7 +113,7 @@ private extension HomePage {
             tabBuilder(text: "Places", i: 1)
             Spacer()
           }
-          if index == 0 {
+          if tabIndex == 0 {
             latestTabContent
           } else {
             placesTabContent
@@ -139,12 +142,12 @@ private extension HomePage {
     VStack(spacing: 14) {
       Text(text)
         .fontWeight(.bold)
-        .foregroundStyle(index == i ? .black : LocarieColor.greyDark)
+        .foregroundStyle(tabIndex == i ? .black : LocarieColor.greyDark)
         .onTapGesture {
-          index = i
+          tabIndex = i
         }
       Group {
-        if index == i {
+        if tabIndex == i {
           Rectangle().fill(.black).matchedGeometryEffect(id: tabBarID, in: tabBarNS)
         } else {
           Color.clear
@@ -176,6 +179,9 @@ private extension HomePage {
           if postVM.posts.isEmpty {
             emptyList
           } else {
+            // Bug: cannot use LazyVStack here due to a SwiftUI bug:
+            // https://forums.developer.apple.com/forums/thread/746396
+            // SwiftUI really sucks!
             VStack(spacing: 0) {
               ForEach(postVM.posts.indices, id: \.self) { i in
                 PostCardView(
@@ -195,13 +201,32 @@ private extension HomePage {
                     presentingProfileCover = true
                   }
                 )
+                .id(i)
                 .tint(.primary)
                 .buttonStyle(.plain)
+              }
+            }
+            .background {
+              GeometryReader { proxy in
+                Color.clear.preference(key: PostViewOffsetKey.self, value: -(proxy.frame(in: .named(postScrollViewCoordinateSpace)).origin.y - 16))
+              }
+            }
+            .onPreferenceChange(PostViewOffsetKey.self) { offset in
+              let i = Int(offset) / Constants.postHeight
+              print(i)
+              if i <= prePostIndex {
+                prePostIndex = i
+                return
+              }
+              prePostIndex = i
+              if i == postVM.posts.count - Constants.postFetchThreshold || i == postVM.posts.count {
+                shouldFetchPost.toggle()
               }
             }
             .padding(.top, 16)
           }
         }
+        .coordinateSpace(name: postScrollViewCoordinateSpace)
         .scrollIndicators(.hidden)
         .padding(.horizontal, 16)
       }
@@ -230,7 +255,7 @@ private extension HomePage {
           if userListVM.businesses.isEmpty {
             emptyList
           } else {
-            VStack(spacing: 0) {
+            LazyVStack(spacing: 0) {
               ForEach(userListVM.businesses.indices, id: \.self) { i in
                 let user = userListVM.businesses[i]
                 VStack(spacing: 0) {
@@ -304,7 +329,18 @@ private extension HomePage {
   }
 }
 
+private struct PostViewOffsetKey: PreferenceKey {
+  typealias Value = CGFloat
+  static var defaultValue = CGFloat.zero
+  static func reduce(value: inout Value, nextValue: () -> Value) {
+      value += nextValue()
+  }
+}
+
 private enum Constants {
+  static let postHeight = 430
+  static let postPageSize = 10
+  static let postFetchThreshold = 2
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(214)
 }
 

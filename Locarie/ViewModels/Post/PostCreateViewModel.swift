@@ -27,7 +27,7 @@ import Foundation
   }
 
   private func storeIsFormValidPublisher() {
-    isFormValidPublisher
+    isImagesValidPublisher
       .receive(on: RunLoop.main)
       .assign(to: \.isFormValid, on: self)
       .store(in: &subscriptions)
@@ -90,20 +90,6 @@ import Foundation
 }
 
 private extension PostCreateViewModel {
-  var isFormValidPublisher: AnyPublisher<Bool, Never> {
-    Publishers.CombineLatest(
-      isContentValidPublisher, isImagesValidPublisher
-    )
-    .map { $0 && $1 }
-    .eraseToAnyPublisher()
-  }
-
-  var isContentValidPublisher: AnyPublisher<Bool, Never> {
-    $post
-      .map { !$0.content.isEmpty }
-      .eraseToAnyPublisher()
-  }
-
   var isImagesValidPublisher: AnyPublisher<Bool, Never> {
     $photoVM
       .map { !$0.attachments.isEmpty }

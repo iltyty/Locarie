@@ -143,6 +143,7 @@ private extension FollowAndLikeView {
                 isProfileCoverPresented = true
               }
             )
+            .padding(.horizontal, 16)
           }
         }
       }

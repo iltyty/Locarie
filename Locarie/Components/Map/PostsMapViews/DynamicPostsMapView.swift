@@ -14,13 +14,16 @@ struct DynamicPostsMapView: View {
 
   @ObservedObject var postVM: PostListNearbyAllViewModel
   @ObservedObject var userListVM = UserListViewModel()
+  
+  var shouldFetchPost: Bool
+  @State private var i = 0
 
   @State private var displayAvatar = false
   @State private var map: MapboxMap!
-  @State private var needUpdating = true
+  @State private var initialPostListFetched = false
 
   @ObservedObject private var network = Network.shared
-  @StateObject private var locationManager = LocationManager()
+  @ObservedObject private var locationManager = LocationManager()
 
   var body: some View {
     MapReader { proxy in
@@ -30,7 +33,6 @@ struct DynamicPostsMapView: View {
           MapViewAnnotation(coordinate: user.coordinate) {
             NavigationLink(value: Router.Int64Destination.businessHome(user.id, false)) {
               BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
-              //                Circle().fill(LocarieColor.primary).frame(size: 12)
             }
           }
           .allowOverlap(true)
@@ -52,28 +54,30 @@ struct DynamicPostsMapView: View {
         map = proxy.map!
       }
     }
+    .onReceive(postVM.$state) { state in
+      if state.isFinished() { initialPostListFetched = true }
+    }
     .onReceive(locationManager.$location) { location in
+      guard !initialPostListFetched else { return }
+      guard !postVM.state.isLoading() else { return }
       guard let location else { return }
       updatePosts(location)
       updateBusinesses(location)
     }
-//    .onChange(of: homePage) { page in
-//      switch page {
-//      case .latest:
-//        if let location = locationManager.location {
-//          updatePosts(location)
-//        }
-//      case .places:
-//        if let location = locationManager.location {
-//          updateBusinesses(location)
-//        }
-//      }
-//    }
     .onChange(of: network.connected) { connected in
+      guard !initialPostListFetched else { return }
+      guard !postVM.state.isLoading() else { return }
       if connected, let location = locationManager.location {
         updatePosts(location)
         updateBusinesses(location)
       }
+    }
+    .onChange(of: shouldFetchPost) { fetch in
+      i += 1
+      guard let location = locationManager.location else {
+        return
+      }
+      updatePosts(location)
     }
     .ignoresSafeArea()
     .simultaneousGesture(dragGesture)
@@ -83,17 +87,12 @@ struct DynamicPostsMapView: View {
 
 private extension DynamicPostsMapView {
   func updatePosts(_ location: CLLocation) {
-    updatePosts(
+    postVM.getNearbyAllPosts(
       with: CLLocationCoordinate2D(
         latitude: location.coordinate.latitude,
         longitude: location.coordinate.longitude
       )
     )
-  }
-
-  func updatePosts(with coordinate: CLLocationCoordinate2D) {
-    needUpdating = false
-    postVM.getNearbyAllPosts(with: coordinate)
   }
 
   func updateBusinesses(_: CLLocation) {
@@ -105,12 +104,10 @@ private extension DynamicPostsMapView {
   var dragGesture: some Gesture {
     DragGesture()
       .onChanged { _ in mapTouched.toggle() }
-      .onEnded { _ in needUpdating = true }
   }
 
   var magnifyGesture: some Gesture {
     MagnificationGesture(minimumScaleDelta: 0.1)
       .onChanged { _ in mapTouched.toggle() }
-      .onEnded { _ in needUpdating = true }
   }
 }
