@@ -289,6 +289,7 @@ private extension BusinessUserProfilePage {
             .font(.custom(GlobalConstants.fontName, size: 14))
             .fontWeight(.bold)
         }
+        .padding(.bottom, 80)
         Spacer()
       }
     } else {

@@ -187,21 +187,30 @@ private extension BusinessProfileEditPage {
   @ViewBuilder
   var businessNameInput: some View {
     let text = "Business name"
-    TextEditFormItemWithInlineTitle(
-      title: text,
-      hint: text,
-      note: "Maximum 25 letters.",
-      text: $profileUpdateVM.dto.businessName
-    )
+    NavigationLink {
+      BusinessNameEditPage(profileUpdateVM: profileUpdateVM)
+    } label: {
+      LinkFormItemWithInlineTitle(
+        title: text,
+        hint: text,
+        note: "Maximum 25 letters",
+        text: $profileUpdateVM.dto.businessName
+      )
+    }
+    .buttonStyle(.plain)
   }
 
   var usernameInput: some View {
-    TextEditFormItemWithInlineTitle(
-      title: "@Username",
-      hint: "Username",
-      note: "Only letters, numbers, and full stops are allowed.",
-      text: $profileUpdateVM.dto.username
-    )
+    NavigationLink {
+      UsernameEditPage(profileUpdateVM: profileUpdateVM)
+    } label: {
+      LinkFormItemWithInlineTitle(
+        title: "@Username",
+        hint: "Username",
+        note: "Only letters, numbers, and full stops are allowed.",
+        text: $profileUpdateVM.dto.username)
+    }
+    .buttonStyle(.plain)
   }
 
   var categoryInput: some View {
@@ -256,19 +265,27 @@ private extension BusinessProfileEditPage {
   }
 
   var linkInput: some View {
-    TextEditFormItemWithInlineTitle(
-      title: "Add link",
-      hint: "Add link (optional)",
-      text: $profileUpdateVM.dto.homepageUrl
-    )
+    NavigationLink {
+      LinkEditPage(profileUpdateVM: profileUpdateVM)
+    } label: {
+      LinkFormItemWithInlineTitle(
+        title: "Add link",
+        hint: "Add link (optional)",
+        text: $profileUpdateVM.dto.homepageUrl)
+    }
+    .buttonStyle(.plain)
   }
 
   var phoneInput: some View {
-    TextEditFormItemWithInlineTitle(
-      title: "Phone",
-      hint: "Phone (optional)",
-      text: $profileUpdateVM.dto.phone
-    )
+    NavigationLink {
+      PhoneEditPage(profileUpdateVM: profileUpdateVM)
+    } label: {
+      LinkFormItemWithInlineTitle(
+        title: "Phone",
+        hint: "Phone (optional)",
+        text: $profileUpdateVM.dto.phone)
+    }
+    .buttonStyle(.plain)
   }
 
   var personalDetailTitle: some View {
@@ -278,23 +295,30 @@ private extension BusinessProfileEditPage {
   @ViewBuilder
   var firstNameInput: some View {
     let text = "First Name"
-    TextEditFormItemWithInlineTitle(
-      title: text,
-      hint: text,
-      note: "Maximum 25 letters.",
-      text: $profileUpdateVM.dto.firstName
-    )
+    NavigationLink {
+      FirstNameEditPage(profileUpdateVM: profileUpdateVM)
+    } label: {
+      LinkFormItemWithInlineTitle(
+        title: text,
+        hint: text,
+        text: $profileUpdateVM.dto.firstName)
+    }
+    .buttonStyle(.plain)
   }
 
   @ViewBuilder
   var lastNameInput: some View {
     let text = "Last Name"
-    TextEditFormItemWithInlineTitle(
-      title: text,
-      hint: text,
-      note: "Maximum 25 letters.",
-      text: $profileUpdateVM.dto.lastName
-    )
+    NavigationLink {
+      LastNameEditPage(profileUpdateVM: profileUpdateVM)
+    } label: {
+      LinkFormItemWithInlineTitle(
+        title: text,
+        hint: text,
+        note: "Maximum 25 letters.",
+        text: $profileUpdateVM.dto.lastName)
+    }
+    .buttonStyle(.plain)
   }
 
   @ViewBuilder

@@ -258,6 +258,12 @@
 		AFD25ADA2CE0DE1100FFE3DB /* UserLocationDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD25AD92CE0DE0E00FFE3DB /* UserLocationDto.swift */; };
 		AFD25ADC2CE0E18500FFE3DB /* DtoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD25ADB2CE0E18400FFE3DB /* DtoUtils.swift */; };
 		AFD25ADE2CE0FB9600FFE3DB /* ExpandableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD25ADD2CE0FB9300FFE3DB /* ExpandableText.swift */; };
+		AFD2F03C2CE2561800F5FDC1 /* BusinessNameEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD2F03B2CE2561400F5FDC1 /* BusinessNameEditPage.swift */; };
+		AFD2F03E2CE25A2100F5FDC1 /* UsernameEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD2F03D2CE25A2100F5FDC1 /* UsernameEditPage.swift */; };
+		AFD2F0402CE25AF500F5FDC1 /* FirstNameEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD2F03F2CE25AF500F5FDC1 /* FirstNameEditPage.swift */; };
+		AFD2F0422CE25B2800F5FDC1 /* LastNameEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD2F0412CE25B2800F5FDC1 /* LastNameEditPage.swift */; };
+		AFD2F0442CE25B4500F5FDC1 /* LinkEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD2F0432CE25B4500F5FDC1 /* LinkEditPage.swift */; };
+		AFD2F0462CE25B6000F5FDC1 /* PhoneEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD2F0452CE25B6000F5FDC1 /* PhoneEditPage.swift */; };
 		AFFE1B6D2CDFA344002401DD /* PaginatedDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */; };
 /* End PBXBuildFile section */
 
@@ -531,6 +537,12 @@
 		AFD25AD92CE0DE0E00FFE3DB /* UserLocationDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationDto.swift; sourceTree = "<group>"; };
 		AFD25ADB2CE0E18400FFE3DB /* DtoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoUtils.swift; sourceTree = "<group>"; };
 		AFD25ADD2CE0FB9300FFE3DB /* ExpandableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableText.swift; sourceTree = "<group>"; };
+		AFD2F03B2CE2561400F5FDC1 /* BusinessNameEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessNameEditPage.swift; sourceTree = "<group>"; };
+		AFD2F03D2CE25A2100F5FDC1 /* UsernameEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameEditPage.swift; sourceTree = "<group>"; };
+		AFD2F03F2CE25AF500F5FDC1 /* FirstNameEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstNameEditPage.swift; sourceTree = "<group>"; };
+		AFD2F0412CE25B2800F5FDC1 /* LastNameEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastNameEditPage.swift; sourceTree = "<group>"; };
+		AFD2F0432CE25B4500F5FDC1 /* LinkEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkEditPage.swift; sourceTree = "<group>"; };
+		AFD2F0452CE25B6000F5FDC1 /* PhoneEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneEditPage.swift; sourceTree = "<group>"; };
 		AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -762,7 +774,6 @@
 		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				AFD25ADD2CE0FB9300FFE3DB /* ExpandableText.swift */,
 				50E6A7592C3A3EBB00932FAD /* WebView */,
 				50E6A7482C3965CB00932FAD /* Handlers */,
 				509A103A2BCE55E300FB55C7 /* TextEdit */,
@@ -781,11 +792,12 @@
 				50F54A012B45283000D06F20 /* NavigationBar */,
 				5075FCB82B860547005E4A8B /* FullScreenCovers */,
 				50530B922B8775FD009C1F92 /* BusinessBottomBar.swift */,
-				506590EB2B8CE65D009F8E5F /* LoadingView.swift */,
+				501C3BD62CBAAA7700D7E89E /* DistanceView.swift */,
 				509A10402BCE747A00FB55C7 /* DotView.swift */,
+				AFD25ADD2CE0FB9300FFE3DB /* ExpandableText.swift */,
+				506590EB2B8CE65D009F8E5F /* LoadingView.swift */,
 				502942692C2535D9000E5C64 /* LocarieDivider.swift */,
 				50E6A7412C393F1600932FAD /* LoginSheet.swift */,
-				501C3BD62CBAAA7700D7E89E /* DistanceView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1130,6 +1142,12 @@
 		509A102E2BCD1CC200FB55C7 /* BusinessUserProfileEditPage */ = {
 			isa = PBXGroup;
 			children = (
+				AFD2F03B2CE2561400F5FDC1 /* BusinessNameEditPage.swift */,
+				AFD2F03D2CE25A2100F5FDC1 /* UsernameEditPage.swift */,
+				AFD2F03F2CE25AF500F5FDC1 /* FirstNameEditPage.swift */,
+				AFD2F0432CE25B4500F5FDC1 /* LinkEditPage.swift */,
+				AFD2F0452CE25B6000F5FDC1 /* PhoneEditPage.swift */,
+				AFD2F0412CE25B2800F5FDC1 /* LastNameEditPage.swift */,
 				50F54A1C2B454E0800D06F20 /* BusinessProfileEditPage.swift */,
 				509A102F2BCD206400FB55C7 /* BusinessImagesEditPage.swift */,
 			);
@@ -1763,6 +1781,7 @@
 				5075FCC52B86E6F8005E4A8B /* ProfileFavoredByCount.swift in Sources */,
 				506590EE2B8CEBFF009F8E5F /* NewPasswordViewModel.swift in Sources */,
 				506F6AE02C4B4E3700B0ED36 /* Network.swift in Sources */,
+				AFD2F03E2CE25A2100F5FDC1 /* UsernameEditPage.swift in Sources */,
 				5075FCBC2B86190B005E4A8B /* PostCover.swift in Sources */,
 				504794A72B70D2A20038D31F /* ListUserPostsViewModel.swift in Sources */,
 				505C26012C05D47400862AC4 /* BusinessDescriptionPage.swift in Sources */,
@@ -1892,6 +1911,7 @@
 				5039057A2B341418005B574F /* PostListNearbyViewModel.swift in Sources */,
 				5075FCC72B86E757005E4A8B /* ProfileAddress.swift in Sources */,
 				5075FCC02B861C66005E4A8B /* BusinessProfileCover.swift in Sources */,
+				AFD2F0402CE25AF500F5FDC1 /* FirstNameEditPage.swift in Sources */,
 				501815A12C29A91900DED766 /* NotPublicButton.swift in Sources */,
 				506590E62B8CC466009F8E5F /* AuthViewModel.swift in Sources */,
 				50C69A692BE9CF4B00B51B0C /* ImageCropView.swift in Sources */,
@@ -1902,6 +1922,7 @@
 				50998AF22B35D195002196B5 /* ForgotPasswordPage.swift in Sources */,
 				50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */,
 				50E6A74C2C3A22EC00932FAD /* TextEditFormWithBlockTitleAndStatus.swift in Sources */,
+				AFD2F0462CE25B6000F5FDC1 /* PhoneEditPage.swift in Sources */,
 				5075FCD92B870A40005E4A8B /* ProfilePostsCount.swift in Sources */,
 				506590DB2B8CB4DB009F8E5F /* FeedbackService.swift in Sources */,
 				50A06DE92BC7D01F00C1E158 /* View+LoadingIndicator.swift in Sources */,
@@ -1938,6 +1959,7 @@
 				505C26072C0891FB00862AC4 /* RegularMyAccountPage.swift in Sources */,
 				506590DE2B8CB5B6009F8E5F /* FeedbackViewModel.swift in Sources */,
 				5075FCBA2B8605BD005E4A8B /* CoverTopView.swift in Sources */,
+				AFD2F0442CE25B4500F5FDC1 /* LinkEditPage.swift in Sources */,
 				50530B9D2B878E18009C1F92 /* FavoriteBusinessViewModel.swift in Sources */,
 				5075FCD52B870968005E4A8B /* ProfileCategories.swift in Sources */,
 				50FDD88A2B4B8B0D003015F9 /* ProfileGetService.swift in Sources */,
@@ -1979,6 +2001,7 @@
 				50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */,
 				505568C82B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift in Sources */,
 				50B5DEDA2B3B2DCC00C0A641 /* PlaceSuggestionItem.swift in Sources */,
+				AFD2F03C2CE2561800F5FDC1 /* BusinessNameEditPage.swift in Sources */,
 				500FB2332B8833A500E14DEE /* BusinessAvatarConstants.swift in Sources */,
 				50B5DED12B3B162500C0A641 /* PlaceSuggestionsViewModel.swift in Sources */,
 				50D0CE812B8AE16B0070B90F /* LondonAreas.swift in Sources */,
@@ -1995,6 +2018,7 @@
 				5075FCD12B86E932005E4A8B /* ProfileDetail.swift in Sources */,
 				500F66212B257D4D0074FE3C /* Dtos.swift in Sources */,
 				50FDD8952B4D708B003015F9 /* BusinessHoursDto.swift in Sources */,
+				AFD2F0422CE25B2800F5FDC1 /* LastNameEditPage.swift in Sources */,
 				50CBC9882B6FCDBA0025A0D9 /* SwitchableBanner.swift in Sources */,
 				50F549F52B44F64A00D06F20 /* AvatarBuilder.swift in Sources */,
 				50998B0A2B370ED5002196B5 /* TagView.swift in Sources */,

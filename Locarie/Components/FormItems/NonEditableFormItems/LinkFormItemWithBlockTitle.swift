@@ -10,6 +10,7 @@ import SwiftUI
 struct LinkFormItemWithBlockTitle: View {
   let title: String
   let hint: String
+  var note = ""
   let isBindingText: Bool
 
   @Binding var text: String
@@ -70,6 +71,7 @@ struct LinkFormItemWithBlockTitle: View {
         RoundedRectangle(cornerRadius: FormItemCommonConstants.cornerRadius)
           .strokeBorder(FormItemCommonConstants.strokeColor, style: .init(lineWidth: 1.5))
       }
+      FormItemNoteView(note)
     }
   }
 

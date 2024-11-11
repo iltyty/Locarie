@@ -106,7 +106,6 @@ struct BusinessHomePage: View {
       userListVM.listAllBusinesses()
     }
     .onReceive(profileVM.$dto) { dto in
-      print(dto.businessName)
       user = dto
       updateMapCenter(user: dto)
     }
@@ -273,6 +272,7 @@ private extension BusinessHomePage {
             .font(.custom(GlobalConstants.fontName, size: 14))
             .fontWeight(.bold)
         }
+        .padding(.bottom, 80)
         Spacer()
       }
     } else {

@@ -10,6 +10,7 @@ import SwiftUI
 struct LinkFormItemWithInlineTitle: View {
   let title: String
   let hint: String
+  var note: String
   let isBindingText: Bool
 
   @Binding var text: String
@@ -18,10 +19,12 @@ struct LinkFormItemWithInlineTitle: View {
   init(
     title: String,
     hint: String,
+    note: String = "",
     text: Binding<String>
   ) {
     self.title = title
     self.hint = hint
+    self.note = note
     isBindingText = true
     _text = text
     _textArray = .constant([])
@@ -30,26 +33,31 @@ struct LinkFormItemWithInlineTitle: View {
   init(
     title: String,
     hint: String,
+    note: String = "",
     textArray: Binding<[String]>
   ) {
     self.title = title
     self.hint = hint
+    self.note = note
     isBindingText = false
     _text = .constant("")
     _textArray = textArray
   }
 
   var body: some View {
-    HStack {
-      titleView
-      textView
-      Spacer()
-      iconView
+    VStack(alignment: .leading, spacing: 0) {
+      HStack {
+        titleView
+        textView
+        Spacer()
+        iconView
+      }
+      .frame(height: FormItemCommonConstants.height)
+      .padding(.horizontal, FormItemCommonConstants.hPadding)
+      .frame(maxWidth: .infinity)
+      .background(background)
+      FormItemNoteView(note)
     }
-    .frame(height: FormItemCommonConstants.height)
-    .padding(.horizontal, FormItemCommonConstants.hPadding)
-    .frame(maxWidth: .infinity)
-    .background(background)
   }
 
   private var isShowingHint: Bool {
