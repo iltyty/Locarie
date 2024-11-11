@@ -29,7 +29,7 @@ extension Date {
     } else if let seconds = components.second, seconds > 0 {
       "\(seconds) second\(seconds == 1 ? "" : "s") ago"
     } else {
-      "just now"
+      "Just now"
     }
   }
 }

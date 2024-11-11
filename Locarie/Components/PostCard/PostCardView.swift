@@ -63,7 +63,9 @@ struct PostCardView: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
-      status.padding(.bottom, 10)
+      status
+        .padding(.bottom, 10)
+        .onTapGesture { onTapped() }
       cover.padding(.bottom, 12)
       content.padding(.bottom, 12)
       categories.padding(.bottom, divider ? 16 : BackToMapButton.height + 48)
@@ -71,7 +73,6 @@ struct PostCardView: View {
         LocarieDivider().padding(.bottom, 16)
       }
     }
-    .onTapGesture { onTapped() }
   }
 
   private var background: some View {
@@ -98,10 +99,10 @@ private extension PostCardView {
       VStack(alignment: .leading, spacing: 2) {
         Text(post.businessName).fontWeight(.bold)
         HStack(spacing: 5) {
+          Text(post.user.neighborhood).foregroundStyle(LocarieColor.greyDark)
+          DotView()
           Text(post.publishedTime)
             .foregroundStyle(post.publishedOneDayAgo ? LocarieColor.greyDark : LocarieColor.green)
-          DotView()
-          Text(post.user.neighborhood).foregroundStyle(LocarieColor.greyDark)
         }
         .font(.custom(GlobalConstants.fontName, size: 14))
       }
@@ -171,14 +172,7 @@ private extension PostCardView {
   }
 
   var content: some View {
-    HStack {
-      Text(post.content)
-        .lineLimit(Constants.contentLineLimit)
-        .lineSpacing(2)
-        .listRowSeparator(.hidden)
-      Spacer()
-    }
-    .contentShape(Rectangle())
+    ExpandableText(post.content, lineLimit: Constants.postContentMaxLint)
   }
 
   var categories: some View {
@@ -225,6 +219,7 @@ private enum Constants {
   static let coverAspectRatio: CGFloat = 4 / 3
   static let coverBorderRadius: CGFloat = 10.0
   static let contentLineLimit = 2
+  static let postContentMaxLint = 2
 }
 
 #Preview {

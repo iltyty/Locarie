@@ -48,21 +48,15 @@ struct BusinessAvatarRow: View {
       HStack(spacing: 10) {
         SkeletonView(30, 30, true)
         VStack(alignment: .leading, spacing: 10) {
-          SkeletonView(62, 10)
-          SkeletonView(121, 10)
+          SkeletonView(60, 10)
+          SkeletonView(146, 10)
         }
         Spacer()
       }
       .padding(.bottom, 10)
-      HStack(spacing: 10) {
-        SkeletonView(236, 236)
-        VStack(spacing: 10) {
-          SkeletonView(114, 114)
-          SkeletonView(114, 114)
-        }
-      }
+      SkeletonView(.infinity, 267)
       .padding(.bottom, 16)
-      SkeletonView(121, 16)
+      SkeletonView(141, 10)
     }
   }
 }

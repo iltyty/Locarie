@@ -250,7 +250,7 @@ private extension HomePage {
           BusinessAvatarRow.skeleton
           BusinessAvatarRow.skeleton
         }
-        .padding([.top, .leading], 16)
+        .padding([.top, .horizontal], 16)
       }
       .scrollIndicators(.hidden)
     } else {
