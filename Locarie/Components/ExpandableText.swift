@@ -39,7 +39,6 @@ struct ExpandableText: View {
           .background(GeometryReader { visibleTextGeometry in
             Color.clear.onAppear {
               let size = CGSize(width: visibleTextGeometry.size.width, height: .greatestFiniteMagnitude)
-              print(size)
               let attributes:[NSAttributedString.Key:Any] = [NSAttributedString.Key.font: font]
               
               ///Binary search until mid == low && mid == high

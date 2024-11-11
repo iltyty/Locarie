@@ -67,12 +67,7 @@ struct HomePage: View {
       }
       if presentingPostCover {
         PostCover(
-          post: post,
-          tags: user.categories,
-          onAvatarTapped: {
-            presentingPostCover = false
-            router.navigate(to: Router.Int64Destination.businessHome(user.id, true))
-          },
+          imageUrls: post.imageUrls,
           isPresenting: $presentingPostCover
         )
       }

@@ -254,8 +254,9 @@
 		50FDD8A12B54D9D0003015F9 /* UserDefaults+Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */; };
 		AF4759DA2CA2CED8007A9164 /* CGSize+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4759D92CA2CED1007A9164 /* CGSize+Init.swift */; };
 		AF57C9A62C85A5D100868065 /* BusinessSearchAvatarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF57C9A52C85A5D100868065 /* BusinessSearchAvatarRow.swift */; };
+		AF9B56962CE244D5004397E6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9B56952CE244D4004397E6 /* Utils.swift */; };
 		AFD25ADA2CE0DE1100FFE3DB /* UserLocationDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD25AD92CE0DE0E00FFE3DB /* UserLocationDto.swift */; };
-		AFD25ADC2CE0E18500FFE3DB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD25ADB2CE0E18400FFE3DB /* Utils.swift */; };
+		AFD25ADC2CE0E18500FFE3DB /* DtoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD25ADB2CE0E18400FFE3DB /* DtoUtils.swift */; };
 		AFD25ADE2CE0FB9600FFE3DB /* ExpandableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD25ADD2CE0FB9300FFE3DB /* ExpandableText.swift */; };
 		AFFE1B6D2CDFA344002401DD /* PaginatedDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */; };
 /* End PBXBuildFile section */
@@ -526,8 +527,9 @@
 		50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Reset.swift"; sourceTree = "<group>"; };
 		AF4759D92CA2CED1007A9164 /* CGSize+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Init.swift"; sourceTree = "<group>"; };
 		AF57C9A52C85A5D100868065 /* BusinessSearchAvatarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSearchAvatarRow.swift; sourceTree = "<group>"; };
+		AF9B56952CE244D4004397E6 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		AFD25AD92CE0DE0E00FFE3DB /* UserLocationDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationDto.swift; sourceTree = "<group>"; };
-		AFD25ADB2CE0E18400FFE3DB /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		AFD25ADB2CE0E18400FFE3DB /* DtoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoUtils.swift; sourceTree = "<group>"; };
 		AFD25ADD2CE0FB9300FFE3DB /* ExpandableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableText.swift; sourceTree = "<group>"; };
 		AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -573,7 +575,7 @@
 		500F661F2B257C4C0074FE3C /* Dtos */ = {
 			isa = PBXGroup;
 			children = (
-				AFD25ADB2CE0E18400FFE3DB /* Utils.swift */,
+				AFD25ADB2CE0E18400FFE3DB /* DtoUtils.swift */,
 				50FDD8932B4D707B003015F9 /* BusinessHours */,
 				50369A692B2DBD55005D6B43 /* Post */,
 				50369A662B2DBCBC005D6B43 /* User */,
@@ -1407,6 +1409,7 @@
 		50E60DE62AFF885200CA088F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				AF9B56952CE244D4004397E6 /* Utils.swift */,
 				509AC0502B57832400A79CDB /* LocationManager.swift */,
 				500F66232B25CE320074FE3C /* GlobalConstants.swift */,
 				50998B0F2B39161D002196B5 /* Regexes.swift */,
@@ -1808,6 +1811,7 @@
 				503794AC2AF1F44A00DA64F4 /* BottomSheet.swift in Sources */,
 				50998B102B39161D002196B5 /* Regexes.swift in Sources */,
 				50530B982B878087009C1F92 /* FavoritePostService.swift in Sources */,
+				AF9B56962CE244D5004397E6 /* Utils.swift in Sources */,
 				509A10392BCE4F7800FB55C7 /* ImageDeleteButton.swift in Sources */,
 				502A4FF22B32D37F00C0833A /* CLLocationCoordinate2D+London.swift in Sources */,
 				502A4FF02B32D34B00C0833A /* Color+Hex.swift in Sources */,
@@ -1893,7 +1897,7 @@
 				50C69A692BE9CF4B00B51B0C /* ImageCropView.swift in Sources */,
 				506590D62B8CB477009F8E5F /* FavoriteEndpoints.swift in Sources */,
 				50E6A7612C3AC36200932FAD /* FormItemNoteView.swift in Sources */,
-				AFD25ADC2CE0E18500FFE3DB /* Utils.swift in Sources */,
+				AFD25ADC2CE0E18500FFE3DB /* DtoUtils.swift in Sources */,
 				501BAF312B46345500D9D84F /* PrivacyPolicyPage.swift in Sources */,
 				50998AF22B35D195002196B5 /* ForgotPasswordPage.swift in Sources */,
 				50B5DEDE2B3BE89900C0A641 /* PlaceRetrieve.swift in Sources */,

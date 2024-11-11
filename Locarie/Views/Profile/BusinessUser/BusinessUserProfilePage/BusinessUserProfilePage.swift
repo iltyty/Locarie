@@ -76,14 +76,7 @@ struct BusinessUserProfilePage: View {
         }
         if presentingPostCover {
           PostCover(
-            post: post,
-            tags: profileVM.dto.categories,
-            onAvatarTapped: {
-              presentingPostCover = false
-            },
-            onPostDeleted: { id in
-              postVM.posts.removeAll { $0.id == id }
-            },
+            imageUrls: post.imageUrls,
             isPresenting: $presentingPostCover
           )
         }

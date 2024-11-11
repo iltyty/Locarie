@@ -91,12 +91,7 @@ struct RegularUserProfilePage: View {
       }
       if isPostCoverPresented {
         PostCover(
-          post: post,
-          tags: user.categories,
-          onAvatarTapped: {
-            isPostCoverPresented = false
-            Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id, true))
-          },
+          imageUrls: post.imageUrls,
           isPresenting: $isPostCoverPresented
         )
       }

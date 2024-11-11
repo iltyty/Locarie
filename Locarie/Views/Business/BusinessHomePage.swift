@@ -76,14 +76,7 @@ struct BusinessHomePage: View {
         }
         if presentingPostCover {
           PostCover(
-            post: post,
-            tags: user.categories,
-            onAvatarTapped: {
-              presentingPostCover = false
-            },
-            onPostDeleted: { id in
-              listUserPostsVM.posts.removeAll { $0.id == id }
-            },
+            imageUrls: post.imageUrls,
             isPresenting: $presentingPostCover
           )
         }

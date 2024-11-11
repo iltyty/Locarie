@@ -18,10 +18,13 @@ struct PostCardView: View {
   @Binding var presentingDeleteDialog: Bool
   @Binding var deleteTargetPost: PostDto
 
+  @State private var liked = false
+  @State private var likedCount = 0
   @State private var distance = "0"
   @State private var deleteTapped = false
   @State private var presentingSheet = false
   @State private var presentingCover = false
+  @StateObject private var favoriteVM = FavoritePostViewModel()
   @ObservedObject private var locationManager = LocationManager()
 
   init(
@@ -68,11 +71,42 @@ struct PostCardView: View {
         .onTapGesture { onTapped() }
       cover.padding(.bottom, 12)
       content.padding(.bottom, 12)
-      categories.padding(.bottom, divider ? 16 : BackToMapButton.height + 48)
+      HStack {
+        favoriteCount
+        HStack {
+          Spacer()
+          seeProfile
+        }
+        .contentShape(Rectangle())
+        .onTapGesture { onTapped() }
+      }
+      .padding(.bottom, divider ? 16 : BackToMapButton.height + 48)
       if divider {
         LocarieDivider().padding(.bottom, 16)
       }
     }
+    .onAppear {
+      likedCount = post.favoredByCount
+      favoriteVM.checkFavoredBy(userId: userId, postId: post.id)
+    }
+    .onReceive(favoriteVM.$alreadySaved) { saved in
+      liked = saved
+    }
+    .onReceive(favoriteVM.$state) { state in
+      switch state {
+      case .favoriteFinished:
+        likedCount += 1
+        liked = true
+      case .unfavoriteFinished:
+        likedCount -= 1
+        liked = false
+      default: break
+      }
+    }
+  }
+  
+  private var userId: Int64 {
+    LocalCacheViewModel.shared.getUserId()
   }
 
   private var background: some View {
@@ -139,7 +173,7 @@ private extension PostCardView {
     }
     .contentShape(Rectangle())
   }
-
+  
   var cover: some View {
     ZStack(alignment: .trailing) {
       Banner(urls: post.imageUrls, indicator: .inner, isPortrait: false)
@@ -170,19 +204,39 @@ private extension PostCardView {
     }
     .onTapGesture { onCoverTapped() }
   }
-
+  
   var content: some View {
     ExpandableText(post.content, lineLimit: Constants.postContentMaxLint)
   }
-
-  var categories: some View {
-    HStack {
-      ProfileCategories(post.user)
-      Spacer()
+  
+  var favoriteCount: some View {
+    HStack(spacing: 5) {
+      Image(liked ? "Heart.Fill" : "Heart")
+        .resizable()
+        .scaledToFit()
+        .frame(size: 18)
+        .contentShape(Rectangle())
+        .onTapGesture {
+          if !liked {
+            favoriteVM.favorite(userId: userId, postId: post.id)
+          } else {
+            favoriteVM.unfavorite(userId: userId, postId: post.id)
+          }
+        }
+      Text("\(formatLargeNumber(likedCount))")
     }
-    .contentShape(Rectangle())
+  }
+  
+  var seeProfile: some View {
+    Text("See profile")
+      .padding(.vertical, 5)
+      .padding(.horizontal, 10)
+      .background {
+        Capsule().stroke(LocarieColor.greyMedium, style: .init(lineWidth: 1.5))
+      }
   }
 }
+
 
 extension PostCardView {
   static var skeleton: some View {
