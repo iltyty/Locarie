@@ -25,12 +25,12 @@ final class UserListViewModel: BaseViewModel {
     self.networking = networking
   }
 
-  func listBusinesses(with location: CLLocationCoordinate2D) {
+  func listBusinesses(with location: CLLocationCoordinate2D, name: String = "") {
     if allFetched { return }
     if businesses.isEmpty {
       state = .loading
     }
-    networking.listBusinesses(latitude: location.latitude, longitude: location.longitude, page: page, size: pageSize)
+    networking.listBusinesses(latitude: location.latitude, longitude: location.longitude, name: name, page: page, size: pageSize)
       .sink { [weak self] response in
         guard let self else { return }
         handleListBusinessesResponse(response)
@@ -46,6 +46,13 @@ final class UserListViewModel: BaseViewModel {
         handleListAllBusinessesResponse(response)
       }
       .store(in: &subscriptions)
+  }
+  
+  func clear() {
+    page = 0
+    allFetched = false
+    businesses = []
+    allBusinesses = []
   }
 
   private func handleListBusinessesResponse(_ response: ListBusinessesResponse) {

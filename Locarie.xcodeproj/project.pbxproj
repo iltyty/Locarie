@@ -256,6 +256,7 @@
 		AF57C9A62C85A5D100868065 /* BusinessSearchAvatarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF57C9A52C85A5D100868065 /* BusinessSearchAvatarRow.swift */; };
 		AFD25ADA2CE0DE1100FFE3DB /* UserLocationDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD25AD92CE0DE0E00FFE3DB /* UserLocationDto.swift */; };
 		AFD25ADC2CE0E18500FFE3DB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD25ADB2CE0E18400FFE3DB /* Utils.swift */; };
+		AFD25ADE2CE0FB9600FFE3DB /* ExpandableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD25ADD2CE0FB9300FFE3DB /* ExpandableText.swift */; };
 		AFFE1B6D2CDFA344002401DD /* PaginatedDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */; };
 /* End PBXBuildFile section */
 
@@ -527,6 +528,7 @@
 		AF57C9A52C85A5D100868065 /* BusinessSearchAvatarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSearchAvatarRow.swift; sourceTree = "<group>"; };
 		AFD25AD92CE0DE0E00FFE3DB /* UserLocationDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationDto.swift; sourceTree = "<group>"; };
 		AFD25ADB2CE0E18400FFE3DB /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		AFD25ADD2CE0FB9300FFE3DB /* ExpandableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableText.swift; sourceTree = "<group>"; };
 		AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -758,6 +760,7 @@
 		50277F7E2AF12A640045AB12 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				AFD25ADD2CE0FB9300FFE3DB /* ExpandableText.swift */,
 				50E6A7592C3A3EBB00932FAD /* WebView */,
 				50E6A7482C3965CB00932FAD /* Handlers */,
 				509A103A2BCE55E300FB55C7 /* TextEdit */,
@@ -1773,6 +1776,7 @@
 				50530B962B877D7B009C1F92 /* FavoriteBusinessService.swift in Sources */,
 				505568C42B8499CC00FD21E4 /* TextEditFormItemWithInlineTitle.swift in Sources */,
 				50FDD8A12B54D9D0003015F9 /* UserDefaults+Reset.swift in Sources */,
+				AFD25ADE2CE0FB9600FFE3DB /* ExpandableText.swift in Sources */,
 				AF4759DA2CA2CED8007A9164 /* CGSize+Init.swift in Sources */,
 				5018159D2C299B5300DED766 /* NotPublicSheetView.swift in Sources */,
 				502A4FFC2B32D71500C0833A /* UserDto.swift in Sources */,

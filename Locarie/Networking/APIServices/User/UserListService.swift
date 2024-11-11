@@ -10,7 +10,7 @@ import Combine
 import Foundation
 
 protocol UserListService {
-  func listBusinesses(latitude: Double, longitude: Double, page: Int, size: Int) -> AnyPublisher<ListBusinessesResponse, Never>
+  func listBusinesses(latitude: Double, longitude: Double, name: String, page: Int, size: Int) -> AnyPublisher<ListBusinessesResponse, Never>
   func listAllBusinesses() -> AnyPublisher<ListAllBusinessesResponse, Never>
 }
 
@@ -18,12 +18,13 @@ final class UserListServiceImpl: BaseAPIService, UserListService {
   static let shared = UserListServiceImpl()
   override private init() {}
 
-  func listBusinesses(latitude: Double, longitude: Double, page: Int, size: Int) -> AnyPublisher<ListBusinessesResponse, Never> {
+  func listBusinesses(latitude: Double, longitude: Double, name: String, page: Int, size: Int) -> AnyPublisher<ListBusinessesResponse, Never> {
     let params = [
       "latitude": latitude,
       "longitude": longitude,
       "page": page,
-      "size": size
+      "size": size,
+      "name": name
     ] as [String : Any]
     return AF.request(APIEndpoints.listBusinessesUrl, method: .get, parameters: params)
       .validate()

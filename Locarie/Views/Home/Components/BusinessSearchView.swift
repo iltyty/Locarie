@@ -5,17 +5,18 @@
 //  Created by qiuty on 25/02/2024.
 //
 
+import Combine
 import SwiftUI
 
 struct BusinessSearchView: View {
   @Binding var searching: Bool
 
-  @State var businessName = ""
   @State private var loading = false
+  @StateObject private var vm = TextFieldObserver()
 
   @StateObject private var userListVM = UserListViewModel()
-  @StateObject private var favoriteVM = FavoriteBusinessViewModel()
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+  @StateObject private var locationManager = LocationManager()
 
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
@@ -32,8 +33,12 @@ struct BusinessSearchView: View {
       default: loading = false
       }
     }
-    .onAppear {
-      favoriteVM.list(userId: cacheVM.getUserId())
+    .onReceive(vm.$debouncedName) { name in
+      guard !name.isEmpty else { return }
+      guard let location = locationManager.location else { return }
+      // clear UserListViewModel for the next query
+      userListVM.clear()
+      userListVM.listBusinesses(with: location.coordinate, name: name)
     }
   }
 }
@@ -49,17 +54,17 @@ private extension BusinessSearchView {
         .onTapGesture {
           searching = false
         }
-      TextField("Search businesses", text: $businessName)
+      TextField("Search businesses", text: $vm.name)
         .autocorrectionDisabled()
         .textInputAutocapitalization(.never)
-      if !businessName.isEmpty {
+      if !vm.name.isEmpty {
         Image("Xmark.Grey")
           .resizable()
           .scaledToFit()
           .frame(size: 18)
           .foregroundStyle(LocarieColor.greyDark)
           .onTapGesture {
-            businessName = ""
+            vm.name = ""
           }
       }
     }
@@ -71,23 +76,23 @@ private extension BusinessSearchView {
     }
   }
 
-  var businesses: [UserDto] {
-    userListVM.businesses
-      .filter {
-        businessName.isEmpty || $0.businessName.range(
-          of: businessName,
-          options: .caseInsensitive
-        ) != nil
-      }
-      .filter(\.isProfileComplete)
-  }
+//  var businesses: [UserDto] {
+//    userListVM.businesses
+//      .filter {
+//        businessName.isEmpty || $0.businessName.range(
+//          of: businessName,
+//          options: .caseInsensitive
+//        ) != nil
+//      }
+//      .filter(\.isProfileComplete)
+//  }
 
   var businessesView: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: Constants.vSpacing) {
         areas.padding(.top, 16)
         Text("Businesses").foregroundStyle(LocarieColor.greyDark)
-        ForEach(businesses) { user in
+        ForEach(userListVM.businesses) { user in
           NavigationLink(value: Router.Int64Destination.businessHome(user.id, true)) {
             BusinessSearchAvatarRow(user: user, isPresentingCover: .constant(false))
           }
@@ -119,9 +124,23 @@ private extension BusinessSearchView {
       Spacer()
     }
   }
+}
 
-  func isFollowed(_ id: Int64) -> Bool {
-    favoriteVM.users.contains { $0.id == id }
+private extension BusinessSearchView {
+  class TextFieldObserver: ObservableObject {
+    @Published var name = ""
+    @Published var debouncedName = ""
+    
+    private var subscriptions: Set<AnyCancellable> = []
+    
+    init() {
+      $name.debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+        .sink { [weak self] value in
+          guard let self else { return }
+          self.debouncedName = value
+        }
+        .store(in: &subscriptions)
+    }
   }
 }
 
