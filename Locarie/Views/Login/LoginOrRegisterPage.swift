@@ -55,9 +55,9 @@ struct LoginOrRegisterPage: View {
   }
 
   var signupBusinessButton: some View {
-    NavigationLink(value: Router.Destination.businessDescription) {
+    NavigationLink(value: Router.Destination.addBusiness) {
       StrokeButtonFormItem(
-        title: "Create a business account",
+        title: "Add your business",
         isFixedWidth: true,
         color: LocarieColor.blue
       )

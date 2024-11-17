@@ -15,7 +15,7 @@ struct BusinessHomeAvatar: View {
     if url.isEmpty {
       Image("DefaultBusinessProfileImage")
         .resizable()
-        .scaledToFill()
+        .scaledToFit()
         .frame(size: Constants.size)
         .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
         .clipped()

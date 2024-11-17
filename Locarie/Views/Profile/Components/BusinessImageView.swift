@@ -18,7 +18,7 @@ struct BusinessImageView: View {
   var body: some View {
     if loadFromData {
       KFImage.data(data, cacheKey: url)
-        .downsampling(size: .init(size: size))
+        .downsampling(size: .init(size: 4 * size))
         .cacheOriginalImage()
         .placeholder { DefaultBusinessImageView(size: size) }
         .resizable()

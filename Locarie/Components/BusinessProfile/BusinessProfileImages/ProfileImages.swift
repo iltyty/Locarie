@@ -25,6 +25,7 @@ struct ProfileImages: View {
                 .placeholder {
                   DefaultBusinessImageView(width: width, height: height)
                 }
+                .downsampling(size: .init(width: 3 * width, height: 3 * height))
                 .resizable()
                 .scaledToFill()
                 .frame(width: width, height: height)

@@ -172,7 +172,7 @@ private extension HomePage {
             // Bug: cannot use LazyVStack here due to a SwiftUI bug:
             // https://forums.developer.apple.com/forums/thread/746396
             // SwiftUI really sucks!
-            VStack(spacing: 0) {
+            LazyVStack(spacing: 0) {
               ForEach(postVM.posts.indices, id: \.self) { i in
                 PostCardView(
                   postVM.posts[i],

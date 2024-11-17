@@ -27,7 +27,7 @@ struct BusinessDescriptionPage: View {
       }
       Spacer()
       NavigationLink {
-        BusinessRegisterPage()
+        AddBusinessPage()
       } label: {
         StrokeButtonFormItem(title: "Next step").padding([.horizontal, .bottom])
       }

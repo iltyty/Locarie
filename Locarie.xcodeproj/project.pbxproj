@@ -265,6 +265,8 @@
 		AFDF113B2CE8C23800E941E1 /* BusinessCategoryEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDF113A2CE8C23800E941E1 /* BusinessCategoryEditPage.swift */; };
 		AFDF113D2CE8E54B00E941E1 /* BusinessAddressEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDF113C2CE8E54B00E941E1 /* BusinessAddressEditPage.swift */; };
 		AFDF113F2CE8F30200E941E1 /* BusinessBirthdayEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDF113E2CE8F30200E941E1 /* BusinessBirthdayEditPage.swift */; };
+		AFDF11412CE98BD000E941E1 /* AddBusinessPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDF11402CE98BD000E941E1 /* AddBusinessPage.swift */; };
+		AFDF11432CE98E8F00E941E1 /* InvitationCodePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDF11422CE98E8F00E941E1 /* InvitationCodePage.swift */; };
 		AFFE1B6D2CDFA344002401DD /* PaginatedDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */; };
 /* End PBXBuildFile section */
 
@@ -545,6 +547,8 @@
 		AFDF113A2CE8C23800E941E1 /* BusinessCategoryEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCategoryEditPage.swift; sourceTree = "<group>"; };
 		AFDF113C2CE8E54B00E941E1 /* BusinessAddressEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAddressEditPage.swift; sourceTree = "<group>"; };
 		AFDF113E2CE8F30200E941E1 /* BusinessBirthdayEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessBirthdayEditPage.swift; sourceTree = "<group>"; };
+		AFDF11402CE98BD000E941E1 /* AddBusinessPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBusinessPage.swift; sourceTree = "<group>"; };
+		AFDF11422CE98E8F00E941E1 /* InvitationCodePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodePage.swift; sourceTree = "<group>"; };
 		AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1128,17 +1132,17 @@
 			path = BusinessDetail;
 			sourceTree = "<group>";
 		};
-		509A10272BCCBDF400FB55C7 /* BusinessUserProfilePage */ = {
+		509A10272BCCBDF400FB55C7 /* BusinessUserProfile */ = {
 			isa = PBXGroup;
 			children = (
 				5018159B2C299B3D00DED766 /* Components */,
 				50FDD8842B4AB93E003015F9 /* BusinessUserProfilePage.swift */,
 				509A10282BCCBE0D00FB55C7 /* BusinessUserProfilePage+SkeletonPage.swift */,
 			);
-			path = BusinessUserProfilePage;
+			path = BusinessUserProfile;
 			sourceTree = "<group>";
 		};
-		509A102E2BCD1CC200FB55C7 /* BusinessUserProfileEditPage */ = {
+		509A102E2BCD1CC200FB55C7 /* BusinessUserProfileEdit */ = {
 			isa = PBXGroup;
 			children = (
 				AFDF113C2CE8E54B00E941E1 /* BusinessAddressEditPage.swift */,
@@ -1152,7 +1156,7 @@
 				509D5BC22B45610F00833021 /* BioEditPage.swift */,
 				509D5BC42B45611E00833021 /* OpeningHoursEditPage.swift */,
 			);
-			path = BusinessUserProfileEditPage;
+			path = BusinessUserProfileEdit;
 			sourceTree = "<group>";
 		};
 		509A10352BCE474D00FB55C7 /* PostCard */ = {
@@ -1523,6 +1527,8 @@
 				50998B072B370B34002196B5 /* BusinessCategoryPage.swift */,
 				50998B012B36842A002196B5 /* BusinessRegisterPage.swift */,
 				505C26002C05D47400862AC4 /* BusinessDescriptionPage.swift */,
+				AFDF11402CE98BD000E941E1 /* AddBusinessPage.swift */,
+				AFDF11422CE98E8F00E941E1 /* InvitationCodePage.swift */,
 			);
 			path = BusinessRegister;
 			sourceTree = "<group>";
@@ -1539,8 +1545,8 @@
 		50F549EB2B44273900D06F20 /* BusinessUser */ = {
 			isa = PBXGroup;
 			children = (
-				509A102E2BCD1CC200FB55C7 /* BusinessUserProfileEditPage */,
-				509A10272BCCBDF400FB55C7 /* BusinessUserProfilePage */,
+				509A102E2BCD1CC200FB55C7 /* BusinessUserProfileEdit */,
+				509A10272BCCBDF400FB55C7 /* BusinessUserProfile */,
 				5075FCDC2B8717A5005E4A8B /* Components */,
 				AFDF11362CE8459300E941E1 /* ProfileImageEditPage.swift */,
 				AFD2F0412CE25B2800F5FDC1 /* LastNameEditPage.swift */,
@@ -1827,6 +1833,7 @@
 				502A4FF82B32D4CD00C0833A /* PostListDto.swift in Sources */,
 				5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */,
 				501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */,
+				AFDF11412CE98BD000E941E1 /* AddBusinessPage.swift in Sources */,
 				5075FCD32B86F225005E4A8B /* BusinessProfileAvatarRow.swift in Sources */,
 				505568C22B8499CC00FD21E4 /* BackgroundButtonFormItem.swift in Sources */,
 				5029426A2C2535D9000E5C64 /* LocarieDivider.swift in Sources */,
@@ -1943,6 +1950,7 @@
 				509AC0512B57832400A79CDB /* LocationManager.swift in Sources */,
 				509A10292BCCBE0D00FB55C7 /* BusinessUserProfilePage+SkeletonPage.swift in Sources */,
 				50F181ED2C778C130035EC79 /* SquareProfileImages.swift in Sources */,
+				AFDF11432CE98E8F00E941E1 /* InvitationCodePage.swift in Sources */,
 				505568CF2B84BB7500FD21E4 /* StrokeButtonFormItem.swift in Sources */,
 				5054CDEC2B28807800645F5C /* LocalCacheViewModel.swift in Sources */,
 				50369A6B2B2DBD67005D6B43 /* PostCreateDto.swift in Sources */,
