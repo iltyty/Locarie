@@ -10,13 +10,10 @@ import SwiftUI
 
 struct BusinessHomePage: View {
   let uid: Int64
+  let latitude: CGFloat
+  let longitude: CGFloat
   var fullscreen = true
   let locationManager = LocationManager()
-
-  @State private var viewport: Viewport = .camera(
-    center: .london,
-    zoom: Constants.mapZoom
-  )
 
   @State private var user = UserDto()
   @State private var post = PostDto()
@@ -75,20 +72,10 @@ struct BusinessHomePage: View {
           }
         }
         if presentingPostCover {
-          PostCover(
-            imageUrls: post.imageUrls,
-            isPresenting: $presentingPostCover
-          )
+          ImagesFullScreenCover(imageUrls: post.imageUrls, isPresenting: $presentingPostCover)
         }
         if presentingProfileCover {
-          BusinessProfileCover(
-            user: user,
-            curIndex: profileCoverCurIndex,
-            onAvatarTapped: {
-              presentingProfileCover = false
-            },
-            isPresenting: $presentingProfileCover
-          )
+          ImagesFullScreenCover(imageUrls: user.profileImageUrls, isPresenting: $presentingProfileCover)
         }
       }
       .onAppear {
@@ -107,7 +94,6 @@ struct BusinessHomePage: View {
     }
     .onReceive(profileVM.$dto) { dto in
       user = dto
-      updateMapCenter(user: dto)
     }
     .onChange(of: user) { newUser in
       favoredByCount = newUser.favoredByCount
@@ -120,26 +106,12 @@ struct BusinessHomePage: View {
       currentDetent = detent
     }
   }
-
-  private func updateMapCenter(user: UserDto) {
-    guard user.coordinate.latitude.isNormal, user.coordinate.longitude.isNormal else { return }
-    let latitude = user.coordinate.latitude - deltaLatitudeDegrees *
-      (screenHeight - mapUpperBoundY - mapBottomBoundY) /
-      (2 * screenHeight)
-
-    withViewportAnimation(.easeInOut(duration: 0.5)) {
-      viewport = .camera(
-        center: .init(latitude: latitude, longitude: user.coordinate.longitude),
-        zoom: Constants.mapZoom
-      )
-    }
-  }
 }
 
 private extension BusinessHomePage {
   var mapView: some View {
     MapReader { proxy in
-      Map(viewport: $viewport) {
+      Map(initialViewport: .camera(center: .init(latitude: latitude, longitude: longitude), zoom: Constants.mapZoom)) {
         Puck2D()
         ForEvery(userListVM.allBusinesses) { u in
           MapViewAnnotation(coordinate: .init(latitude: u.location.latitude, longitude: u.location.longitude)) {
@@ -347,8 +319,4 @@ private enum Constants {
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(bottomY)
   static let vSpacing: CGFloat = 15
   static let mapZoom: CGFloat = 16
-}
-
-#Preview {
-  BusinessHomePage(uid: 53, fullscreen: false)
 }

@@ -23,6 +23,7 @@ enum BusinessCategory: String, CaseIterable, Codable {
   case restaurant = "Restaurant"
   case shop = "Shop"
   case studio = "Studio"
+  case teaRoom = "Tea Room"
   case venue = "Venue"
   case wineBar = "Wine Bar"
 }

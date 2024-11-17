@@ -50,7 +50,7 @@ private extension ProfileOpeningHours {
       Text(cacheVM.getUserId() == user.id ? "Edit" : "Opening hours")
         .foregroundStyle(LocarieColor.greyDark)
     } else if user.currentOpeningPeriod == 0 {
-      Text("Closed").foregroundStyle(.secondary)
+      Text("Closed").foregroundStyle(LocarieColor.greyDark)
     } else {
       HStack(spacing: 0) {
         Text("Open ").foregroundStyle(LocarieColor.green)
@@ -70,13 +70,13 @@ private extension ProfileOpeningHours {
   @ViewBuilder
   var sheet: some View {
     if #available(iOS 16.4, *) {
-      sheetForOlderIoS.presentationCornerRadius(Constants.cornerRadius)
+      sheetView.presentationCornerRadius(Constants.cornerRadius)
     } else {
-      sheetForOlderIoS
+      sheetView
     }
   }
 
-  var sheetForOlderIoS: some View {
+  var sheetView: some View {
     VStack(spacing: Constants.vSpacing) {
       sheetTitle
       ForEach(user.businessHours) { hours in

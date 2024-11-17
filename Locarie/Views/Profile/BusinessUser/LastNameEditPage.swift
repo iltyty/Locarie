@@ -16,8 +16,14 @@ struct LastNameEditPage: View {
     VStack(spacing: 0) {
       NavigationBar("Last Name", right: saveButton, divider: true)
       Spacer()
-      TextEditFormItemWithBlockTitle(title: "Last Name", hint: "Last Name", text: $profileUpdateVM.dto.lastName)
-        .padding(.horizontal, 16)
+      TextEditFormItemWithBlockTitleAndStatus(
+        title: "Last Name",
+        hint:"Last Name",
+        note: "Maximum 25 letters",
+        valid: profileUpdateVM.isLastNameValid,
+        text: $profileUpdateVM.dto.lastName
+      )
+      .padding(.horizontal, 16)
       Spacer()
       Spacer()
     }
@@ -46,5 +52,6 @@ private extension LastNameEditPage {
   func updateProfile() {
     let userId = cacheVM.getUserId()
     profileUpdateVM.updateProfile(userId: userId)
+    dismiss()
   }
 }

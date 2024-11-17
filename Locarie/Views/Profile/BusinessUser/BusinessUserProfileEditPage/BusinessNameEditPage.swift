@@ -9,15 +9,22 @@ import SwiftUI
 
 struct BusinessNameEditPage: View {
   @ObservedObject var profileUpdateVM: ProfileUpdateViewModel
-  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
-  @Environment(\.dismiss) var dismiss
+  @Environment(\.dismiss) private var dismiss
 
+  private let cacheVM = LocalCacheViewModel.shared
+  
   var body: some View {
     VStack(spacing: 0) {
       NavigationBar("Business name", right: saveButton, divider: true)
       Spacer()
-      TextEditFormItemWithBlockTitle(title: "Business name", hint: "Business name", text: $profileUpdateVM.dto.businessName)
-        .padding(.horizontal, 16)
+      TextEditFormItemWithBlockTitleAndStatus(
+        title: "Business name",
+        hint: "Business name",
+        note: "Maximum 25 letters.",
+        valid: profileUpdateVM.isBusinessNameValid,
+        text: $profileUpdateVM.dto.businessName
+      )
+      .padding(.horizontal, 16)
       Spacer()
       Spacer()
     }
@@ -46,5 +53,6 @@ private extension BusinessNameEditPage {
   func updateProfile() {
     let userId = cacheVM.getUserId()
     profileUpdateVM.updateProfile(userId: userId)
+    dismiss()
   }
 }

@@ -31,7 +31,12 @@ struct ProfileOpeningHoursItem: View {
       Spacer()
       VStack(alignment: .trailing, spacing: 12) {
         HStack(spacing: 24) {
-          Text(hours.formattedTime(0)).foregroundStyle(LocarieColor.greyDark)
+          VStack(spacing: 8) {
+            Text(hours.formattedTime(0)).foregroundStyle(LocarieColor.greyDark)
+            if !editable && hours.openingHoursCount > 1 {
+              Text(hours.formattedTime(1)).foregroundStyle(LocarieColor.greyDark)
+            }
+          }
           if editable {
             editIcon
           }
@@ -52,10 +57,6 @@ struct ProfileOpeningHoursItem: View {
             .onTapGesture {
               onSecondOpeningTimeTapped()
             }
-          } else {
-            if hours.openingHoursCount == 1 {
-              Color.clear.frame(height: 16)
-            }
           }
         }
       }
@@ -71,6 +72,5 @@ struct ProfileOpeningHoursItem: View {
 }
 
 #Preview {
-  ProfileOpeningHoursItem(BusinessHoursDto(dayOfWeek: .Friday), editable: true)
-    .padding()
+  ProfileOpeningHoursItem(BusinessHoursDto(dayOfWeek: .Friday))
 }

@@ -11,11 +11,13 @@ import SwiftUI
 
 struct AvatarEditor: View {
   @ObservedObject var photoVM: PhotoViewModel
-  @ObservedObject private var cacheVM = LocalCacheViewModel.shared
+  @Binding var modified: Bool
 
   @State private var uiImage: UIImage?
   @State private var croppedImage: UIImage?
   @State private var isCropping = false
+  
+  private let cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     VStack(spacing: 10) {
@@ -32,6 +34,7 @@ struct AvatarEditor: View {
         croppedImage = image
         if photoVM.attachments.count == 1 {
           photoVM.attachments.first!.data = image?.pngData() ?? image?.jpegData(compressionQuality: 1) ?? Data()
+          modified = true
         }
       }
     }
@@ -88,8 +91,4 @@ private extension AvatarEditor {
 private enum Constants {
   static let avatarSize: CGFloat = 64
   static let imageCropSize: CGFloat = 350
-}
-
-#Preview {
-  AvatarEditor(photoVM: PhotoViewModel())
 }

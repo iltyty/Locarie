@@ -8,15 +8,15 @@
 @_spi(Experimental) import MapboxMaps
 import SwiftUI
 
-struct LocationSettingsItem<U: UserLocation>: View {
-  @Binding var location: U
+struct LocationSettingsItem: View {
+  @ObservedObject var profileUpdateVM: ProfileUpdateViewModel
   @Binding var viewport: Viewport
 
-  @ObservedObject var cacheVM = LocalCacheViewModel.shared
+  private let cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     NavigationLink {
-      BusinessAddressPage(dto: $location)
+      BusinessAddressEditPage(profileUpdateVM: profileUpdateVM)
     } label: {
       VStack(spacing: 0) {
         mapView
@@ -52,7 +52,7 @@ private extension LocationSettingsItem {
   }
 
   var coordinate: CLLocationCoordinate2D? {
-    guard let location = location.location else { return nil }
+    guard let location = profileUpdateVM.dto.location else { return nil }
     return CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
   }
 
@@ -60,7 +60,7 @@ private extension LocationSettingsItem {
     HStack {
       Text("Location")
       Spacer().contentShape(Rectangle())
-      Text(location.address).foregroundStyle(LocarieColor.greyDark)
+      Text(profileUpdateVM.dto.address).foregroundStyle(LocarieColor.greyDark)
       Image("Chevron.Right.Grey")
         .resizable()
         .scaledToFit()

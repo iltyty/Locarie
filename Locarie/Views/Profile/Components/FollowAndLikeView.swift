@@ -5,6 +5,7 @@
 //  Created by qiuty on 15/04/2024.
 //
 
+import CoreLocation
 import SwiftUI
 
 struct FollowAndLikeView: View {
@@ -12,6 +13,8 @@ struct FollowAndLikeView: View {
   @Binding var user: UserDto
   @Binding var isPostCoverPresented: Bool
   @Binding var isProfileCoverPresented: Bool
+  
+  private let router = Router.shared
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var favoritePostsVM = FavoritePostViewModel()
@@ -100,16 +103,29 @@ private extension FollowAndLikeView {
     } else if favoriteBusinessVM.users.isEmpty {
       emptyFollowedBusinesses
     } else {
-      VStack(alignment: .leading, spacing: 24) {
-        ForEach(favoriteBusinessVM.users) { user in
-          NavigationLink(value: Router.Int64Destination.businessHome(user.id, true)) {
+      VStack(alignment: .leading, spacing: 0) {
+        // reversed: newest to oldest
+        ForEach(favoriteBusinessVM.users.indices.reversed(), id: \.self) { i in
+          let users = favoriteBusinessVM.users
+          let user = users[i]
+          NavigationLink(value: Router.BusinessHomeDestination.businessHome(
+            user.id,
+            user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+            user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+            true
+          )) {
             BusinessAvatarRow(
               user: user,
               isPresentingCover: $isPresentingCover
             )
           }
+          .padding(.bottom, i != users.count - 1 ? 16 : 48)
           .buttonStyle(.plain)
           .tint(.primary)
+
+          if i != users.count - 1 {
+            LocarieDivider().padding([.bottom, .horizontal], 16)
+          }
         }
       }
     }
@@ -125,12 +141,18 @@ private extension FollowAndLikeView {
       let posts = favoritePostsVM.posts
       ScrollView {
         VStack(spacing: 0) {
-          ForEach(posts.indices, id: \.self) { i in
+          // reversed: newest to oldest
+          ForEach(posts.indices.reversed(), id: \.self) { i in
             PostCardView(
               posts[i],
-              divider: i != posts.count - 1,
+              bottomPadding: false,
               onTapped: {
-                Router.shared.navigate(to: Router.Int64Destination.businessHome(posts[i].user.id, true))
+                router.navigate(to: Router.BusinessHomeDestination.businessHome(
+                  posts[i].user.id,
+                  user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+                  user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+                  true
+                ))
               },
               onCoverTapped: {
                 post = posts[i]
@@ -144,6 +166,11 @@ private extension FollowAndLikeView {
               }
             )
             .padding(.horizontal, 16)
+            .padding(.bottom, i != posts.count - 1 ? 16 : 48)
+            
+            if i != posts.count - 1 {
+              LocarieDivider().padding([.bottom, .horizontal], 16)
+            }
           }
         }
       }

@@ -13,12 +13,10 @@ import PhotosUI
 import SwiftUI
 
 struct BusinessProfileEditPage: View {
-  @State private var birthday = Date()
-  @State private var birthdayFormatted = ""
   @State private var viewport: Viewport = .followPuck(zoom: GlobalConstants.mapZoom)
 
+  @State private var birthdayFormatted = ""
   @State private var presentingAlert = false
-  @State private var presentingSheet = false
   @State private var presentingNotPublicSheet = false
 
   @StateObject private var avatarVM = AvatarUploadViewModel()
@@ -29,14 +27,13 @@ struct BusinessProfileEditPage: View {
   var body: some View {
     ZStack(alignment: .bottomTrailing) {
       VStack(spacing: 0) {
-        NavigationBar("Edit profile", right: saveButton, divider: true)
+        NavigationBar("Edit profile", divider: true)
         ScrollView {
           VStack(alignment: .leading, spacing: 24) {
             profileImagesEditor.padding(.top, 24)
             avatarEditor.padding(.horizontal, 16)
             VStack(alignment: .leading, spacing: 16) {
               businessNameInput
-              usernameInput
               categoryInput
               bioInput
               locationInput
@@ -69,7 +66,6 @@ struct BusinessProfileEditPage: View {
     .alert("Profile saved", isPresented: $presentingAlert) {
       Button("OK") {}
     }
-    .sheet(isPresented: $presentingSheet) { birthdaySheet }
     .sheet(isPresented: $presentingNotPublicSheet) {
       Group {
         if #available(iOS 16.4, *) {
@@ -103,13 +99,6 @@ struct BusinessProfileEditPage: View {
 }
 
 private extension BusinessProfileEditPage {
-  var saveButton: some View {
-    Button("Save") { updateProfile() }
-      .disabled(!profileUpdateVM.isFormValid)
-      .fontWeight(.bold)
-      .foregroundStyle(profileUpdateVM.isFormValid ? LocarieColor.primary : LocarieColor.greyDark)
-  }
-
   var profileImagesEditor: some View {
     VStack(alignment: .leading, spacing: 16) {
       Text("Edit business images")
@@ -176,14 +165,33 @@ private extension BusinessProfileEditPage {
     }
   }
 
+  @ViewBuilder
   var avatarEditor: some View {
-    HStack {
-      Spacer()
-      AvatarEditor(photoVM: avatarVM.photoViewModel)
-      Spacer()
+    let url = cacheVM.getAvatarUrl()
+    NavigationLink {
+      ProfileImageEditPage(avatarVM: avatarVM)
+    } label: {
+      VStack(spacing: 10) {
+        HStack {
+          Spacer()
+          if !url.isEmpty {
+            KFImage(URL(string: url))
+              .placeholder { SkeletonView(64, 64, true) }
+              .resizable()
+              .frame(size: 64)
+              .clipShape(Circle())
+          } else {
+            defaultAvatar(size: 64, isBusiness: cacheVM.isBusinessUser())
+          }
+          Spacer()
+        }
+        Text("Edit profile image")
+          .font(.custom(GlobalConstants.fontName, size: 14))
+          .foregroundStyle(LocarieColor.blue)
+      }
     }
   }
-
+  
   @ViewBuilder
   var businessNameInput: some View {
     let text = "Business name"
@@ -200,22 +208,9 @@ private extension BusinessProfileEditPage {
     .buttonStyle(.plain)
   }
 
-  var usernameInput: some View {
-    NavigationLink {
-      UsernameEditPage(profileUpdateVM: profileUpdateVM)
-    } label: {
-      LinkFormItemWithInlineTitle(
-        title: "@Username",
-        hint: "Username",
-        note: "Only letters, numbers, and full stops are allowed.",
-        text: $profileUpdateVM.dto.username)
-    }
-    .buttonStyle(.plain)
-  }
-
   var categoryInput: some View {
     NavigationLink {
-      BusinessCategoryPage(categories: $profileUpdateVM.dto.categories)
+      BusinessCategoryEditPage(profileUpdateVM: profileUpdateVM)
     } label: {
       LinkFormItemWithInlineTitle(
         title: "Categories",
@@ -228,7 +223,7 @@ private extension BusinessProfileEditPage {
 
   var bioInput: some View {
     NavigationLink {
-      BioEditPage(bio: $profileUpdateVM.dto.introduction)
+      BioEditPage(profileUpdateVM: profileUpdateVM)
     } label: {
       LinkFormItemWithInlineTitle(
         title: "Bio",
@@ -241,7 +236,7 @@ private extension BusinessProfileEditPage {
 
   @ViewBuilder
   var locationInput: some View {
-    LocationSettingsItem(location: $profileUpdateVM.dto, viewport: $viewport)
+    LocationSettingsItem(profileUpdateVM: profileUpdateVM, viewport: $viewport)
       .onChange(of: profileUpdateVM.dto) { newDto in
         if let location = newDto.location {
           viewport = .camera(center: .init(latitude: location.latitude, longitude: location.longitude))
@@ -252,8 +247,7 @@ private extension BusinessProfileEditPage {
 
   var openingHoursInput: some View {
     NavigationLink {
-      OpeningHoursEditPage(businessHoursDtos: $profileUpdateVM.dto
-        .businessHours)
+      OpeningHoursEditPage(profileUpdateVM: profileUpdateVM)
     } label: {
       LinkFormItemWithInlineTitle(
         title: "Opening hours",
@@ -301,6 +295,7 @@ private extension BusinessProfileEditPage {
       LinkFormItemWithInlineTitle(
         title: text,
         hint: text,
+        note: "Maximum 25 letters",
         text: $profileUpdateVM.dto.firstName)
     }
     .buttonStyle(.plain)
@@ -315,7 +310,7 @@ private extension BusinessProfileEditPage {
       LinkFormItemWithInlineTitle(
         title: text,
         hint: text,
-        note: "Maximum 25 letters.",
+        note: "Maximum 25 letters",
         text: $profileUpdateVM.dto.lastName)
     }
     .buttonStyle(.plain)
@@ -323,78 +318,30 @@ private extension BusinessProfileEditPage {
 
   @ViewBuilder
   var birthdayInput: some View {
-    LinkFormItemWithInlineTitle(
-      title: "Birthday", hint: "Birthday", text: $birthdayFormatted
-    )
-    .onTapGesture {
-      presentingSheet = true
+    let text = "Birthday"
+    NavigationLink {
+      BusinessBirthdayEditPage(
+        profileUpdateVM: profileUpdateVM,
+        birthdayFormatted: $birthdayFormatted
+      )
+    } label: {
+      LinkFormItemWithInlineTitle(
+        title: text,
+        hint: text,
+        text: $birthdayFormatted
+      )
     }
+    .buttonStyle(.plain)
   }
 }
 
 private extension BusinessProfileEditPage {
-  var birthdaySheet: some View {
-    VStack {
-      birthdaySheetButtons
-      birthdayPicker
-    }
-    .presentationDetents([.fraction(Constants.birthdaySheetHeightFraction)])
-  }
-
-  var birthdaySheetButtons: some View {
-    HStack {
-      birthdaySheetCancelButton
-      Spacer()
-      birthdaySheetDoneButton
-    }
-    .padding(.horizontal, 16)
-  }
-
-  var birthdaySheetCancelButton: some View {
-    Button("Cancel") {
-      presentingSheet = false
-    }
-    .foregroundStyle(.secondary)
-  }
-
-  var birthdaySheetDoneButton: some View {
-    Button("Done") {
-      profileUpdateVM.dto.birthday = birthday
-      birthdayFormatted = profileUpdateVM.dto.formattedBirthday
-      presentingSheet = false
-    }
-    .foregroundStyle(Color.locariePrimary)
-  }
-
-  var birthdayPicker: some View {
-    DatePicker(
-      "Birthday",
-      selection: $birthday,
-      in: ...Date(),
-      displayedComponents: [.date]
-    )
-    .labelsHidden()
-    .datePickerStyle(.wheel)
-    .padding(.horizontal, 16)
-  }
-}
-
-private extension BusinessProfileEditPage {
-  func updateProfile() {
-    let userId = cacheVM.getUserId()
-    avatarVM.upload(userId: userId)
-    profileUpdateVM.updateProfile(userId: userId)
-  }
-
   func handleProfileGetViewModelStateChange(
     _ state: ProfileGetViewModel.State
   ) {
     if case .finished = state {
       let dto = profileGetVM.dto
       presentingNotPublicSheet = !dto.isProfileComplete
-      if let birthday = dto.birthday {
-        self.birthday = birthday
-      }
       birthdayFormatted = dto.formattedBirthday
       profileUpdateVM.dto = dto
     }
@@ -444,7 +391,6 @@ private enum Constants {
   static let firstProfileImageStrokeWidth: CGFloat = 3
   static let profileImageSize: CGFloat = 114
   static let profileImageCornerRadius: CGFloat = 16
-  static let birthdaySheetHeightFraction: CGFloat = 0.4
 }
 
 #Preview {

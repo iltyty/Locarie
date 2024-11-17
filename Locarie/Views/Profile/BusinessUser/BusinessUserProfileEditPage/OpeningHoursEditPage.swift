@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct OpeningHoursEditPage: View {
-  @Binding var businessHoursDtos: [BusinessHoursDto]
+  @ObservedObject var profileUpdateVM: ProfileUpdateViewModel
 
-  @State var currentDayIndex = 0
-  @State var openingTimeIndex = 0
-  @State var isSheetPresented = false
-  @State var allBusinessHours = BusinessHoursDto.all
+  @State private var currentDayIndex = 0
+  @State private var openingTimeIndex = 0
+  @State private var isSheetPresented = false
+  @State private var allBusinessHours = BusinessHoursDto.all
 
-  @Environment(\.dismiss) var dismiss
+  @Environment(\.dismiss) private var dismiss
+  
+  private let cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     VStack {
-      navigationBar
+      NavigationBar("Edit opening hours", right: doneButton, divider: true)
+        .padding(.bottom)
       VStack(spacing: Constants.vSpacing) {
         ForEach(allBusinessHours.indices, id: \.self) { index in
           ProfileOpeningHoursItem(
@@ -50,21 +53,17 @@ struct OpeningHoursEditPage: View {
   }
 
   private func setBusinessHours() {
-    if !businessHoursDtos.isEmpty {
-      allBusinessHours = businessHoursDtos
+    if !profileUpdateVM.dto.businessHours.isEmpty {
+      allBusinessHours = profileUpdateVM.dto.businessHours
     }
   }
 }
 
 private extension OpeningHoursEditPage {
-  var navigationBar: some View {
-    NavigationBar("Edit opening hours", right: doneButton, divider: true)
-      .padding(.bottom)
-  }
-
   var doneButton: some View {
-    Button("Done") {
+    Button("Save") {
       setBusinessHoursDtos()
+      profileUpdateVM.updateProfile(userId: cacheVM.getUserId())
       dismiss()
     }
     .fontWeight(.bold)
@@ -97,9 +96,9 @@ private extension OpeningHoursEditPage {
   }
 
   func setBusinessHoursDtos() {
-    businessHoursDtos.removeAll()
+    profileUpdateVM.dto.businessHours.removeAll()
     for hours in allBusinessHours {
-      businessHoursDtos.append(hours)
+      profileUpdateVM.dto.businessHours.append(hours)
     }
   }
 }
@@ -107,16 +106,4 @@ private extension OpeningHoursEditPage {
 private enum Constants {
   static let vSpacing = 40.0
   static let sheetHeightFraction = 0.4
-}
-
-private struct OpneingHoursEditPageTestView: View {
-  @State var hours: [BusinessHoursDto] = []
-  
-  var body: some View {
-    OpeningHoursEditPage(businessHoursDtos: $hours)
-  }
-}
-
-#Preview {
-  OpneingHoursEditPageTestView()
 }

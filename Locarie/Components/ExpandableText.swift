@@ -17,7 +17,11 @@ struct ExpandableText: View {
   let font: UIFont
   let lineLimit: Int
   
-  init(_ text: String, lineLimit: Int, font: UIFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)) {
+  init(
+    _ text: String,
+    lineLimit: Int,
+    font: UIFont = .init(name: GlobalConstants.fontName, size: 16) ?? UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+  ) {
     self.text = text
     _shrinkText =  State(wrappedValue: text)
     self.lineLimit = lineLimit

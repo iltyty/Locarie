@@ -61,10 +61,7 @@ enum Regexes {
 
   static let businessName = Regex {
     Repeat(1 ... 25) {
-      ChoiceOf {
-        One(.word)
-        CharacterClass.anyOf(" .-!:&é")
-      }
+      .anyNonNewline
     }
   }
 }

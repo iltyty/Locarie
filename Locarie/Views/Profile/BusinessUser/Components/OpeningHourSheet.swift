@@ -140,12 +140,20 @@ private extension OpeningHourSheet {
 
   func setDailyHours() {
     let calendar = Calendar.current
-    businessHours.closed = closed
-    if openingTimeIndex >= businessHours.openingHoursCount {
-      for _ in businessHours.openingHoursCount...openingTimeIndex {
-        businessHours.openingTime.append(calendar.dateComponents([.hour, .minute], from: openingTime))
-        businessHours.closingTime.append(calendar.dateComponents([.hour, .minute], from: closingTime))
+    
+    if closed {
+      if openingTimeIndex == 0 {
+        businessHours.closed = closed
+      } else {
+        businessHours.openingTime.remove(at: 1)
+        businessHours.closingTime.remove(at: 1)
       }
+      return
+    }
+    
+    if openingTimeIndex == 1 {
+      businessHours.openingTime[0] = calendar.dateComponents([.hour, .minute], from: openingTime)
+      businessHours.closingTime[0] = calendar.dateComponents([.hour, .minute], from: closingTime)
     }
     businessHours.openingTime[openingTimeIndex] = calendar.dateComponents(
       [.hour, .minute],

@@ -1,5 +1,5 @@
 //
-//  UsernameEditPage.swift
+//  FirstNameEditPage.swift
 //  Locarie
 //
 //  Created by qiu on 2024/11/11.
@@ -7,17 +7,23 @@
 
 import SwiftUI
 
-struct UsernameEditPage: View {
+struct FirstNameEditPage: View {
   @ObservedObject var profileUpdateVM: ProfileUpdateViewModel
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @Environment(\.dismiss) var dismiss
-  
+
   var body: some View {
     VStack(spacing: 0) {
-      NavigationBar("Username", right: saveButton, divider: true)
+      NavigationBar("First Name", right: saveButton, divider: true)
       Spacer()
-      TextEditFormItemWithBlockTitle(title: "Username", hint: "Username", text: $profileUpdateVM.dto.username)
-        .padding(.horizontal, 16)
+      TextEditFormItemWithBlockTitleAndStatus(
+        title: "First Name",
+        hint: "First Name",
+        note: "Maximum 25 letters",
+        valid: profileUpdateVM.isFirstNameValid,
+        text: $profileUpdateVM.dto.firstName
+      )
+      .padding(.horizontal, 16)
       Spacer()
       Spacer()
     }
@@ -42,9 +48,10 @@ struct UsernameEditPage: View {
   }
 }
 
-private extension UsernameEditPage {
+private extension FirstNameEditPage {
   func updateProfile() {
     let userId = cacheVM.getUserId()
     profileUpdateVM.updateProfile(userId: userId)
+    dismiss()
   }
 }

@@ -14,7 +14,7 @@ struct PhoneEditPage: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      NavigationBar("First Name", right: saveButton, divider: true)
+      NavigationBar("Phone", right: saveButton, divider: true)
       Spacer()
       TextEditFormItemWithBlockTitle(title: "Phone", hint: "Phone", text: $profileUpdateVM.dto.homepageUrl)
         .padding(.horizontal, 16)
@@ -46,5 +46,6 @@ private extension PhoneEditPage {
   func updateProfile() {
     let userId = cacheVM.getUserId()
     profileUpdateVM.updateProfile(userId: userId)
+    dismiss()
   }
 }

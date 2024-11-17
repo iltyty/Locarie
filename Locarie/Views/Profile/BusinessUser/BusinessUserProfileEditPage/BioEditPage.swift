@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct BioEditPage: View {
-  @Binding var bio: String
-
-  @StateObject var bioEditViewModel =
-    TextEditViewModel(limit: Constants.wordLimit)
+  @ObservedObject var profileUpdateVM: ProfileUpdateViewModel
 
   @State private var hint = "Bio"
-
-  @Environment(\.dismiss) var dismiss
+  @Environment(\.dismiss) private var dismiss
+  @StateObject private  var bioEditViewModel = TextEditViewModel(limit: Constants.wordLimit)
+  
+  private let cacheVM = LocalCacheViewModel.shared
 
   var body: some View {
     VStack(spacing: Constants.vSpacing) {
@@ -23,19 +22,20 @@ struct BioEditPage: View {
       bioEditor
     }
     .onAppear {
-      bioEditViewModel.text = bio
+      bioEditViewModel.text = profileUpdateVM.dto.introduction
     }
   }
 }
 
 private extension BioEditPage {
   var navigationTitle: some View {
-    NavigationBar("Edit Bio", right: doneButton, divider: true)
+    NavigationBar("Bio", right: doneButton, divider: true)
   }
 
   var doneButton: some View {
     Button("Done") {
-      bio = bioEditViewModel.text
+      profileUpdateVM.dto.introduction = bioEditViewModel.text
+      profileUpdateVM.updateProfile(userId: cacheVM.getUserId())
       dismiss()
     }
     .fontWeight(.bold)
@@ -50,8 +50,4 @@ private extension BioEditPage {
 private enum Constants {
   static let vSpacing = 24.0
   static let wordLimit = 150
-}
-
-#Preview {
-  BioEditPage(bio: .constant(""))
 }

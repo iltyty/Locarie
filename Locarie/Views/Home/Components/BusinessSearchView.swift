@@ -6,6 +6,7 @@
 //
 
 import Combine
+import CoreLocation
 import SwiftUI
 
 struct BusinessSearchView: View {
@@ -93,7 +94,12 @@ private extension BusinessSearchView {
         areas.padding(.top, 16)
         Text("Businesses").foregroundStyle(LocarieColor.greyDark)
         ForEach(userListVM.businesses) { user in
-          NavigationLink(value: Router.Int64Destination.businessHome(user.id, true)) {
+          NavigationLink(value: Router.BusinessHomeDestination.businessHome(
+            user.id,
+            user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+            user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+            true
+          )) {
             BusinessSearchAvatarRow(user: user, isPresentingCover: .constant(false))
           }
           .buttonStyle(.plain)

@@ -16,7 +16,7 @@ struct SquareProfileImages: View {
   var body: some View {
     HStack(spacing: 8) {
       KFImage(URL(string: urls[0]))
-        .downsampling(size: .init(size: 4 * imageSize + 8))
+        .downsampling(size: .init(size: 5 * imageSize))
         .cacheOriginalImage()
         .placeholder {
           DefaultBusinessImageView(size: 2 * imageSize + 8)
@@ -42,8 +42,9 @@ struct SquareProfileImages: View {
 
   private var imageSize: CGFloat {
     // 16 for horizontal padding
-    // 8 for padding between images
-    screenWidth > 0 ? (screenWidth - 16 * 2 - 8) / 3 : 114
+    // 8 for horizontal padding between images
+    // the second 8 for vertical padding between images
+    screenWidth > 0 ? (screenWidth - 16 * 2 - 8 - 8) / 3 : 114
   }
 
   @ViewBuilder

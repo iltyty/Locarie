@@ -6,6 +6,7 @@
 //
 
 @_spi(Experimental) import MapboxMaps
+import CoreLocation
 import SwiftUI
 
 struct HomePage: View {
@@ -66,20 +67,10 @@ struct HomePage: View {
         }
       }
       if presentingPostCover {
-        PostCover(
-          imageUrls: post.imageUrls,
-          isPresenting: $presentingPostCover
-        )
+        ImagesFullScreenCover(imageUrls: post.imageUrls, isPresenting: $presentingPostCover)
       }
       if presentingProfileCover {
-        BusinessProfileCover(
-          user: user,
-          onAvatarTapped: {
-            presentingProfileCover = false
-            router.navigate(to: Router.Int64Destination.businessHome(user.id, true))
-          },
-          isPresenting: $presentingProfileCover
-        )
+        ImagesFullScreenCover(imageUrls: user.profileImageUrls, isPresenting: $presentingProfileCover)
       }
     }
     .ignoresSafeArea(edges: .bottom)
@@ -186,8 +177,14 @@ private extension HomePage {
                 PostCardView(
                   postVM.posts[i],
                   divider: i != postVM.posts.count - 1,
+                  seeProfile: true,
                   onTapped: {
-                    router.navigate(to: Router.Int64Destination.businessHome(postVM.posts[i].user.id, true))
+                    router.navigate(to: Router.BusinessHomeDestination.businessHome(
+                      postVM.posts[i].user.id,
+                      user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+                      user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+                      true)
+                    )
                   },
                   onCoverTapped: {
                     post = postVM.posts[i]
@@ -258,7 +255,12 @@ private extension HomePage {
               ForEach(userListVM.businesses.indices, id: \.self) { i in
                 let user = userListVM.businesses[i]
                 VStack(spacing: 0) {
-                  NavigationLink(value: Router.Int64Destination.businessHome(user.id, true)) {
+                  NavigationLink(value: Router.BusinessHomeDestination.businessHome(
+                    user.id,
+                    user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+                    user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+                    true
+                  )) {
                     BusinessAvatarRow(
                       user: user,
                       isPresentingCover: $presentingProfileCover

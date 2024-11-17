@@ -31,7 +31,19 @@ struct BusinessAvatarRow: View {
         }
         VStack(alignment: .leading, spacing: 2) {
           Text(user.businessName).fontWeight(.bold)
-          Text(user.neighborhood).foregroundStyle(LocarieColor.greyDark)
+          HStack(spacing: 5) {
+            Text(user.neighborhood).foregroundStyle(LocarieColor.greyDark)
+              .font(.custom(GlobalConstants.fontName, size: 14))
+            DotView()
+            Group {
+              if user.currentOpeningPeriod == 0 {
+                Text("Closed").foregroundStyle(LocarieColor.greyDark)
+              } else {
+                Text("Open ").foregroundStyle(LocarieColor.green)
+              }
+            }
+            .font(.custom(GlobalConstants.fontName, size: 14))
+          }
         }
         Spacer()
       }

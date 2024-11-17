@@ -79,21 +79,11 @@ struct RegularUserProfilePage: View {
       .task(id: proxy.safeAreaInsets.top) {
         topSafeAreaHeight = proxy.safeAreaInsets.top
       }
-      if isProfileCoverPresented {
-        BusinessProfileCover(
-          user: user,
-          onAvatarTapped: {
-            isProfileCoverPresented = false
-            Router.shared.navigate(to: Router.Int64Destination.businessHome(user.id, true))
-          },
-          isPresenting: $isProfileCoverPresented
-        )
-      }
       if isPostCoverPresented {
-        PostCover(
-          imageUrls: post.imageUrls,
-          isPresenting: $isPostCoverPresented
-        )
+        ImagesFullScreenCover(imageUrls: post.imageUrls, isPresenting: $isPostCoverPresented)
+      }
+      if isProfileCoverPresented {
+        ImagesFullScreenCover(imageUrls: user.profileImageUrls, isPresenting: $isProfileCoverPresented)
       }
     }
     .ignoresSafeArea(edges: .bottom)

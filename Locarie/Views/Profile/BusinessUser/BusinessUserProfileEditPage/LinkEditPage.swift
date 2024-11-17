@@ -14,7 +14,7 @@ struct LinkEditPage: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      NavigationBar("First Name", right: saveButton, divider: true)
+      NavigationBar("Link", right: saveButton, divider: true)
       Spacer()
       TextEditFormItemWithBlockTitle(title: "Link", hint: "Link", text: $profileUpdateVM.dto.homepageUrl)
         .padding(.horizontal, 16)
@@ -46,5 +46,6 @@ private extension LinkEditPage {
   func updateProfile() {
     let userId = cacheVM.getUserId()
     profileUpdateVM.updateProfile(userId: userId)
+    dismiss()
   }
 }

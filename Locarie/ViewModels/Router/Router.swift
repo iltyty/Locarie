@@ -50,8 +50,8 @@ extension Router {
     case codeValidation(String), resetPassword(String)
   }
 
-  enum Int64Destination: Hashable {
-    case businessHome(Int64, Bool)
+  enum BusinessHomeDestination: Hashable {
+    case businessHome(Int64, CGFloat, CGFloat, Bool)
   }
 }
 
@@ -119,10 +119,10 @@ extension Router {
   }
 
   @ViewBuilder
-  func getInt64DestinationPage(with destination: Int64Destination) -> some View {
+  func getBusinessHomePage(with destination: BusinessHomeDestination) -> some View {
     switch destination {
-    case let .businessHome(uid, fullscreen):
-      BusinessHomePage(uid: uid, fullscreen: fullscreen)
+    case let .businessHome(uid, latitude, longitude,fullscreen):
+      BusinessHomePage(uid: uid, latitude: latitude, longitude: longitude, fullscreen: fullscreen)
     }
   }
 }

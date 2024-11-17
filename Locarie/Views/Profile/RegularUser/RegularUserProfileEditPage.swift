@@ -9,7 +9,8 @@ import Kingfisher
 import SwiftUI
 
 struct RegularUserProfileEditPage: View {
-  @State private var loading = false
+  @State private var avatarModified = false
+  @State private var presentingAlert = false
 
   @FocusState private var focusField: Field?
 
@@ -21,10 +22,10 @@ struct RegularUserProfileEditPage: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      NavigationBar("Edit profile", right: saveButton, divider: true)
+      NavigationBar("Edit profile", divider: true)
       VStack {
         ScrollView {
-          AvatarEditor(photoVM: avatarVM.photoViewModel).padding(.vertical, Constants.avatarVPadding)
+          profileImageEditor.padding(.vertical, Constants.avatarVPadding)
           VStack(spacing: Constants.vSpacing) {
             firstNameInput
             lastNameInput
@@ -38,7 +39,9 @@ struct RegularUserProfileEditPage: View {
 
       Spacer()
     }
-    .loadingIndicator(loading: $loading)
+    .alert("Profile saved", isPresented: $presentingAlert) {
+      Button("OK") {}
+    }
     .onAppear {
       profileGetVM.getProfile(userId: cacheVM.getUserId())
     }
@@ -55,41 +58,79 @@ struct RegularUserProfileEditPage: View {
 }
 
 private extension RegularUserProfileEditPage {
-  var saveButton: some View {
-    Button("Save") { updateProfile() }
-      .disabled(!profileUpdateVM.isFormValid)
-      .fontWeight(.bold)
-      .foregroundStyle(profileUpdateVM.isFormValid ? LocarieColor.primary : LocarieColor.greyDark)
+  @ViewBuilder
+  var profileImageEditor: some View {
+    let url = cacheVM.getAvatarUrl()
+    NavigationLink {
+      ProfileImageEditPage(avatarVM: avatarVM)
+    } label: {
+      VStack(spacing: 10) {
+        HStack {
+          Spacer()
+          if !url.isEmpty {
+            KFImage(URL(string: url))
+              .placeholder { SkeletonView(64, 64, true) }
+              .resizable()
+              .frame(size: 64)
+              .clipShape(Circle())
+          } else {
+            defaultAvatar(size: 64, isBusiness: cacheVM.isBusinessUser())
+          }
+          Spacer()
+        }
+        Text("Edit profile image")
+          .font(.custom(GlobalConstants.fontName, size: 14))
+          .foregroundStyle(LocarieColor.blue)
+      }
+    }
   }
-
+  
+  @ViewBuilder
   var firstNameInput: some View {
-    TextEditFormItemWithInlineTitle(
-      title: "First name",
-      hint: "First name",
-      note: "Maximum 25 letters.",
-      text: $profileUpdateVM.dto.firstName
-    )
-    .focused($focusField, equals: .firstName)
+    let text = "First Name"
+    NavigationLink {
+      FirstNameEditPage(profileUpdateVM: profileUpdateVM)
+    } label: {
+      LinkFormItemWithInlineTitle(
+        title: text,
+        hint: text,
+        note: "Maximum 25 letters",
+        text: $profileUpdateVM.dto.firstName)
+      .focused($focusField, equals: .firstName)
+    }
+    .buttonStyle(.plain)
   }
 
+  @ViewBuilder
   var lastNameInput: some View {
-    TextEditFormItemWithInlineTitle(
-      title: "Last name",
-      hint: "Last name",
-      note: "Maximum 25 letters.",
-      text: $profileUpdateVM.dto.lastName
-    )
-    .focused($focusField, equals: .lastName)
+    let text = "Last Name"
+    NavigationLink {
+      LastNameEditPage(profileUpdateVM: profileUpdateVM)
+    } label: {
+      LinkFormItemWithInlineTitle(
+        title: text,
+        hint: text,
+        note: "Maximum 25 letters",
+        text: $profileUpdateVM.dto.lastName)
+      .focused($focusField, equals: .lastName)
+    }
+    .buttonStyle(.plain)
   }
-
+  
+  @ViewBuilder
   var usernameInput: some View {
-    TextEditFormItemWithInlineTitle(
-      title: "@Username",
-      hint: "Username",
-      note: "Only letters, numbers, and full stops are allowed.",
-      text: $profileUpdateVM.dto.username
-    )
-    .focused($focusField, equals: .username)
+    let text = "Username"
+    NavigationLink {
+      UsernameEditPage(profileUpdateVM: profileUpdateVM)
+    } label: {
+      LinkFormItemWithInlineTitle(
+        title: text,
+        hint: text,
+        note: "Only letters, numbers, and full stops are allowed.",
+        text: $profileUpdateVM.dto.username)
+      .focused($focusField, equals: .username)
+    }
+    .buttonStyle(.plain)
   }
 }
 
@@ -113,15 +154,11 @@ private extension RegularUserProfileEditPage {
     _ state: AvatarUploadViewModel.State
   ) {
     switch state {
-    case .loading:
-      loading = true
     case let .finished(avatarUrl):
-      loading = false
       guard let avatarUrl else { return }
       ImageCache.default.removeImage(forKey: avatarUrl)
       cacheVM.setAvatarUrl(avatarUrl)
-    default:
-      loading = false
+    default: return
     }
   }
 
@@ -129,26 +166,22 @@ private extension RegularUserProfileEditPage {
     _ state: ProfileUpdateViewModel.State
   ) {
     switch state {
-    case .loading:
-      loading = true
     case let .finished(dto):
       handleProfileUpdateFinished(dto)
     case let .failed(error):
       handleProfileUpdateError(error)
-    default:
-      loading = false
+    default: return
     }
   }
 
   func handleProfileUpdateFinished(_ dto: UserDto?) {
-    loading = false
     if let dto {
       cacheVM.setUserInfo(dto)
+      presentingAlert = true
     }
   }
 
   func handleProfileUpdateError(_ error: NetworkError) {
-    loading = false
     print(error)
   }
 }

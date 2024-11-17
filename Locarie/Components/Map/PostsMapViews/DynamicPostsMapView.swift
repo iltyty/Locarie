@@ -33,7 +33,9 @@ struct DynamicPostsMapView: View {
         Puck2D()
         ForEvery(userListVM.allBusinesses) { user in
           MapViewAnnotation(coordinate: .init(latitude: user.location.latitude, longitude: user.location.longitude)) {
-            NavigationLink(value: Router.Int64Destination.businessHome(user.id, false)) {
+            NavigationLink(
+              value: Router.BusinessHomeDestination.businessHome(user.id, user.location.latitude, user.location.longitude, false)
+            ) {
               BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
             }
           }

@@ -64,21 +64,11 @@ struct BusinessUserProfilePage: View {
           }
           .padding(.bottom, BottomTabConstants.height + 24)
         }
-        if presentingProfileCover {
-          BusinessProfileCover(
-            user: profileVM.dto,
-            curIndex: profileCoverCurIndex,
-            onAvatarTapped: {
-              presentingProfileCover = false
-            },
-            isPresenting: $presentingProfileCover
-          )
-        }
         if presentingPostCover {
-          PostCover(
-            imageUrls: post.imageUrls,
-            isPresenting: $presentingPostCover
-          )
+          ImagesFullScreenCover(imageUrls: post.imageUrls, isPresenting: $presentingPostCover)
+        }
+        if presentingProfileCover {
+          ImagesFullScreenCover(imageUrls: profileVM.dto.profileImageUrls, isPresenting: $presentingProfileCover)
         }
       }
       .sheet(isPresented: $presentingNotPublicSheet) {
@@ -251,7 +241,9 @@ private extension BusinessUserProfilePage {
                   profileCoverCurIndex: $profileCoverCurIndex,
                   presentingProfileCover: $presentingProfileCover
                 )
-                LocarieDivider().padding(.horizontal, 16)
+                if !profileVM.dto.profileImageUrls.isEmpty {
+                  LocarieDivider().padding(.horizontal, 16)
+                }
               }
             }
             Group {

@@ -21,20 +21,18 @@ struct ImageCropView: View {
   @GestureState private var interacting: Bool = false
 
   var body: some View {
-    ZStack {
-      Color.black.ignoresSafeArea()
-      VStack {
-        navigationBar.foregroundStyle(.white)
-        imageView()
-          .background(Color.white.clipShape(clipShape()))
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .contentShape(Rectangle())
-      }
+    VStack {
+      NavigationBar("Crop image", left: dismissButton, right: confirmButton)
+        .foregroundStyle(.white)
+      imageView()
+        .background(Color.white.clipShape(clipShape()))
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .contentShape(Rectangle())
     }
-  }
-
-  private var navigationBar: some View {
-    NavigationBar("Crop image", left: dismissButton, right: confirmButton)
+    .background(.black)
+    .safeAreaInset(edge: .top) {
+      Color.black.frame(height: 50)
+    }
   }
 
   private var dismissButton: some View {

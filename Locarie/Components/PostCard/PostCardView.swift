@@ -12,31 +12,39 @@ struct PostCardView: View {
   let post: PostDto
   let divider: Bool
   let deletable: Bool
+  let displaySeeProfile: Bool
+  let bottomPadding: Bool
   let onTapped: () -> Void
   let onCoverTapped: () -> Void
   let onThumbnailTapped: () -> Void
   @Binding var presentingDeleteDialog: Bool
   @Binding var deleteTargetPost: PostDto
 
+  private let cacheVM = LocalCacheViewModel.shared
   @State private var liked = false
   @State private var likedCount = 0
   @State private var distance = "0"
   @State private var deleteTapped = false
   @State private var presentingSheet = false
   @State private var presentingCover = false
+  @State private var presentingLoginSheet = false
   @StateObject private var favoriteVM = FavoritePostViewModel()
   @ObservedObject private var locationManager = LocationManager()
 
   init(
     _ post: PostDto,
     divider: Bool = false,
+    seeProfile: Bool = false,
+    bottomPadding: Bool = true,
     onTapped: @escaping () -> Void = {},
     onCoverTapped: @escaping () -> Void = {},
     onThumbnailTapped: @escaping () -> Void = {}
   ) {
     self.post = post
     self.divider = divider
-    deletable = false
+    self.deletable = false
+    self.displaySeeProfile = seeProfile
+    self.bottomPadding = bottomPadding
     self.onTapped = onTapped
     self.onCoverTapped = onCoverTapped
     self.onThumbnailTapped = onThumbnailTapped
@@ -48,6 +56,8 @@ struct PostCardView: View {
     _ post: PostDto,
     divider: Bool = false,
     deletable: Bool = false,
+    seeProfile: Bool = false,
+    bottomPadding: Bool = true,
     onTapped: @escaping () -> Void = {},
     onCoverTapped: @escaping () -> Void = {},
     onThumbnailTapped: @escaping () -> Void = {},
@@ -57,6 +67,8 @@ struct PostCardView: View {
     self.post = post
     self.divider = divider
     self.deletable = deletable
+    self.displaySeeProfile = seeProfile
+    self.bottomPadding = bottomPadding
     self.onTapped = onTapped
     self.onCoverTapped = onCoverTapped
     self.onThumbnailTapped = onThumbnailTapped
@@ -73,18 +85,21 @@ struct PostCardView: View {
       content.padding(.bottom, 12)
       HStack {
         favoriteCount
-        HStack {
-          Spacer()
-          seeProfile
+        if displaySeeProfile {
+          HStack {
+            Spacer()
+            seeProfile
+          }
+          .contentShape(Rectangle())
+          .onTapGesture { onTapped() }
         }
-        .contentShape(Rectangle())
-        .onTapGesture { onTapped() }
       }
-      .padding(.bottom, divider ? 16 : BackToMapButton.height + 48)
+      .padding(.bottom, bottomPadding ? (divider ? 16 : BackToMapButton.height + 48) : 0)
       if divider {
         LocarieDivider().padding(.bottom, 16)
       }
     }
+    .loginSheet(isPresented: $presentingLoginSheet)
     .onAppear {
       likedCount = post.favoredByCount
       favoriteVM.checkFavoredBy(userId: userId, postId: post.id)
@@ -206,7 +221,10 @@ private extension PostCardView {
   }
   
   var content: some View {
-    ExpandableText(post.content, lineLimit: Constants.postContentMaxLint)
+    ExpandableText(
+      post.content,
+      lineLimit: Constants.postContentMaxLint
+    )
   }
   
   var favoriteCount: some View {
@@ -216,13 +234,7 @@ private extension PostCardView {
         .scaledToFit()
         .frame(size: 18)
         .contentShape(Rectangle())
-        .onTapGesture {
-          if !liked {
-            favoriteVM.favorite(userId: userId, postId: post.id)
-          } else {
-            favoriteVM.unfavorite(userId: userId, postId: post.id)
-          }
-        }
+        .onTapGesture { favoriteButtonTapped() }
       Text("\(formatLargeNumber(likedCount))")
     }
   }
@@ -237,6 +249,17 @@ private extension PostCardView {
   }
 }
 
+private extension PostCardView {
+  func favoriteButtonTapped() {
+    if !cacheVM.isLoggedIn() {
+      presentingLoginSheet = true
+    } else if !liked {
+      favoriteVM.favorite(userId: userId, postId: post.id)
+    } else {
+      favoriteVM.unfavorite(userId: userId, postId: post.id)
+    }
+  }
+}
 
 extension PostCardView {
   static var skeleton: some View {

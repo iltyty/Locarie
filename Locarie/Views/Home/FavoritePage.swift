@@ -84,20 +84,10 @@ struct FavoritePage: View {
         }
       }
       if presentingPostCover {
-        PostCover(
-          imageUrls: post.imageUrls,
-          isPresenting: $presentingPostCover
-        )
+        ImagesFullScreenCover(imageUrls: post.imageUrls, isPresenting: $presentingPostCover)
       }
       if presentingProfileCover {
-        BusinessProfileCover(
-          user: user,
-          onAvatarTapped: {
-            presentingProfileCover = false
-            router.navigate(to: Router.Int64Destination.businessHome(user.id, true))
-          },
-          isPresenting: $presentingProfileCover
-        )
+        ImagesFullScreenCover(imageUrls: user.profileImageUrls, isPresenting: $presentingProfileCover)
       }
     }
     .ignoresSafeArea(edges: .bottom)
@@ -123,7 +113,12 @@ struct FavoritePage: View {
                   vm.posts[i],
                   divider: i != vm.posts.count - 1,
                   onTapped: {
-                    router.navigate(to: Router.Int64Destination.businessHome(vm.posts[i].user.id, true))
+                    router.navigate(to: Router.BusinessHomeDestination.businessHome(
+                      vm.posts[i].user.id,
+                      user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+                      user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+                      true)
+                    )
                   },
                   onCoverTapped: {
                     post = vm.posts[i]

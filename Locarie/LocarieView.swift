@@ -29,8 +29,8 @@ struct LocarieView: View {
       .navigationDestination(for: Router.StringDestination.self) { dest in
         router.getStringDestinationPage(with: dest)
       }
-      .navigationDestination(for: Router.Int64Destination.self) { dest in
-        router.getInt64DestinationPage(with: dest)
+      .navigationDestination(for: Router.BusinessHomeDestination.self) { dest in
+        router.getBusinessHomePage(with: dest)
       }
     }
   }
