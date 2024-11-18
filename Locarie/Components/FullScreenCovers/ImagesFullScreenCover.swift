@@ -22,7 +22,7 @@ struct ImagesFullScreenCover: View {
         .scaledToFit()
         .frame(size: 18)
         .contentShape(Rectangle())
-        .padding(.top, 8)
+        .padding(.top, 19)
         .padding(.horizontal, 24)
         .onTapGesture { isPresenting = false }
       

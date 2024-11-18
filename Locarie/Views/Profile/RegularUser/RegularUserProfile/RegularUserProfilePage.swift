@@ -27,24 +27,17 @@ struct RegularUserProfilePage: View {
         ZStack(alignment: .top) {
           ScrollView {
             VStack(spacing: 0) {
-              VStack(spacing: 0) {
-                HStack(spacing: 16) {
-                  Spacer()
-                  ProfileEditButton()
-                  settingsButton
+              avatarRow
+                .padding(.top, topSafeAreaHeight + 72 + 40)
+                .padding(.bottom, 72)
+                .background {
+                  LinearGradient(
+                    colors: [LocarieColor.primary, Color.white],
+                    startPoint: .top,
+                    endPoint: .bottom
+                  )
+                  .ignoresSafeArea(edges: .top)
                 }
-                .padding(.horizontal, 16)
-                avatarRow.padding(.vertical, 72)
-              }
-              .padding(.top, topSafeAreaHeight)
-              .background {
-                LinearGradient(
-                  colors: [LocarieColor.primary, Color.white],
-                  startPoint: .top,
-                  endPoint: .bottom
-                )
-                .ignoresSafeArea(edges: .top)
-              }
               FollowAndLikeView(
                 post: $post,
                 user: $user,
@@ -65,6 +58,8 @@ struct RegularUserProfilePage: View {
             HStack {
               backButton
               Spacer()
+              ProfileEditButton()
+              settingsButton
             }
             .padding(.horizontal, 16)
             .padding(.top, topSafeAreaHeight)

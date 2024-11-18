@@ -102,7 +102,7 @@ import Kingfisher
     if case .loading = state {
       return
     }
-    guard !existedImageUrls.isEmpty || !photoVM.attachments.isEmpty else { return }
+//    guard !existedImageUrls.isEmpty || !photoVM.attachments.isEmpty else { return }
 
     state = .loading
     let data = existedImageData + photoVM.attachments.map(\.data)
@@ -145,6 +145,7 @@ import Kingfisher
   }
 
   private func handleUploadResponse(_ response: BusinessImagesUploadResponse) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
       return

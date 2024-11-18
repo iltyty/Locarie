@@ -1106,13 +1106,13 @@
 			path = Skeleton;
 			sourceTree = "<group>";
 		};
-		509A101E2BC90AC000FB55C7 /* RegularUserProfilePage */ = {
+		509A101E2BC90AC000FB55C7 /* RegularUserProfile */ = {
 			isa = PBXGroup;
 			children = (
 				50277F7C2AF117CE0045AB12 /* RegularUserProfilePage.swift */,
 				509A101F2BC90ADA00FB55C7 /* RegularUserProfilePage+SkeletonPage.swift */,
 			);
-			path = RegularUserProfilePage;
+			path = RegularUserProfile;
 			sourceTree = "<group>";
 		};
 		509A10212BCBC50000FB55C7 /* Tags */ = {
@@ -1536,7 +1536,7 @@
 		50F549EA2B44273100D06F20 /* RegularUser */ = {
 			isa = PBXGroup;
 			children = (
-				509A101E2BC90AC000FB55C7 /* RegularUserProfilePage */,
+				509A101E2BC90AC000FB55C7 /* RegularUserProfile */,
 				50530B8E2B87514C009C1F92 /* RegularUserProfileEditPage.swift */,
 			);
 			path = RegularUser;

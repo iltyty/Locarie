@@ -62,11 +62,7 @@ extension BaseAPIService {
     mimeTypes: [String]
   ) -> MultipartFormData {
     let result = MultipartFormData()
-    guard images.count > 0, images.count == filenames.count,
-          images.count == mimeTypes.count
-    else {
-      return result
-    }
+    guard images.count == filenames.count, images.count == mimeTypes.count else { return result }
     for i in images.indices {
       result.append(
         images[i],
