@@ -13,7 +13,7 @@ struct PostCardView: View {
   let divider: Bool
   let deletable: Bool
   let displaySeeProfile: Bool
-  let bottomPadding: Bool
+  let bottomPadding: BottomPadding
   let onTapped: () -> Void
   let onCoverTapped: () -> Void
   let onThumbnailTapped: () -> Void
@@ -35,7 +35,7 @@ struct PostCardView: View {
     _ post: PostDto,
     divider: Bool = false,
     seeProfile: Bool = false,
-    bottomPadding: Bool = true,
+    bottomPadding: BottomPadding = .large,
     onTapped: @escaping () -> Void = {},
     onCoverTapped: @escaping () -> Void = {},
     onThumbnailTapped: @escaping () -> Void = {}
@@ -57,7 +57,7 @@ struct PostCardView: View {
     divider: Bool = false,
     deletable: Bool = false,
     seeProfile: Bool = false,
-    bottomPadding: Bool = true,
+    bottomPadding: BottomPadding = .large,
     onTapped: @escaping () -> Void = {},
     onCoverTapped: @escaping () -> Void = {},
     onThumbnailTapped: @escaping () -> Void = {},
@@ -94,11 +94,11 @@ struct PostCardView: View {
           .onTapGesture { onTapped() }
         }
       }
-      .padding(.bottom, bottomPadding ? (divider ? 16 : BackToMapButton.height + 48) : 0)
       if divider {
-        LocarieDivider().padding(.bottom, 16)
+        LocarieDivider().padding(.top, 16)
       }
     }
+    .padding(.bottom, bottomPaddingValue)
     .loginSheet(isPresented: $presentingLoginSheet)
     .onAppear {
       likedCount = post.favoredByCount
@@ -117,6 +117,14 @@ struct PostCardView: View {
         liked = false
       default: break
       }
+    }
+  }
+  
+  private var bottomPaddingValue: CGFloat {
+    switch bottomPadding {
+    case .zero: 0
+    case .small: 16
+    case .large: BackToMapButton.height + 48
     }
   }
   
@@ -288,6 +296,12 @@ extension PostCardView {
       .fill(LocarieColor.greyMedium)
       .frame(height: 267)
       .frame(maxWidth: .infinity)
+  }
+}
+
+extension PostCardView {
+  enum BottomPadding {
+    case zero, small, large
   }
 }
 

@@ -111,7 +111,8 @@ struct FavoritePage: View {
               ForEach(vm.posts.indices, id: \.self) { i in
                 PostCardView(
                   vm.posts[i],
-                  divider: i != vm.posts.count - 1,
+                  divider: true,
+                  bottomPadding: i == vm.posts.count - 1 ? .large : .small,
                   onTapped: {
                     router.navigate(to: Router.BusinessHomeDestination.businessHome(
                       vm.posts[i].user.id,

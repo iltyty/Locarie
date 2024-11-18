@@ -145,7 +145,7 @@ private extension FollowAndLikeView {
           ForEach(posts.indices.reversed(), id: \.self) { i in
             PostCardView(
               posts[i],
-              bottomPadding: false,
+              bottomPadding: i == posts.count - 1 ? .small : .zero,
               onTapped: {
                 router.navigate(to: Router.BusinessHomeDestination.businessHome(
                   posts[i].user.id,

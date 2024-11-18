@@ -254,7 +254,8 @@ private extension BusinessHomePage {
           let p = posts[i]
           PostCardView(
             p,
-            divider: i != posts.count - 1,
+            divider: true,
+            bottomPadding: i == posts.count - 1 ? .large : .small,
             onCoverTapped: {
               post = p
               presentingPostCover = true

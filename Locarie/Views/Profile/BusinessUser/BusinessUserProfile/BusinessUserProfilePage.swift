@@ -290,8 +290,9 @@ private extension BusinessUserProfilePage {
           let p = postVM.posts[i]
           PostCardView(
             p,
-            divider: i != postVM.posts.count - 1,
+            divider: true,
             deletable: true,
+            bottomPadding: i == postVM.posts.count - 1 ? .large : .small,
             onCoverTapped: {
               post = p
               presentingPostCover = true
