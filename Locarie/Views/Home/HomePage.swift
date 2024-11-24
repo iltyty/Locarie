@@ -67,10 +67,18 @@ struct HomePage: View {
         }
       }
       if presentingPostCover {
-        ImagesFullScreenCover(imageUrls: post.imageUrls, isPresenting: $presentingPostCover)
+        ImagesFullScreenCover(
+          index: 0,
+          imageUrls: post.imageUrls,
+          isPresenting: $presentingPostCover
+        )
       }
       if presentingProfileCover {
-        ImagesFullScreenCover(imageUrls: user.profileImageUrls, isPresenting: $presentingProfileCover)
+        ImagesFullScreenCover(
+          index: 0,
+          imageUrls: user.profileImageUrls,
+          isPresenting: $presentingProfileCover
+        )
       }
     }
     .ignoresSafeArea(edges: .bottom)
@@ -167,7 +175,7 @@ private extension HomePage {
       VStack(spacing: 0) {
         ScrollView {
           if postVM.posts.isEmpty {
-            emptyList
+            emptyPostList
           } else {
             // Bug: cannot use LazyVStack here due to a SwiftUI bug:
             // https://forums.developer.apple.com/forums/thread/746396
@@ -249,51 +257,20 @@ private extension HomePage {
     } else {
       VStack(spacing: 0) {
         ScrollView {
-          if userListVM.businesses.isEmpty {
-            emptyList
-          } else {
-            VStack(spacing: 0) {
-              ForEach(userListVM.businesses.indices, id: \.self) { i in
-                let user = userListVM.businesses[i]
-                VStack(spacing: 0) {
-                  NavigationLink(value: Router.BusinessHomeDestination.businessHome(
-                    user.id,
-                    user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
-                    user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
-                    true
-                  )) {
-                    BusinessAvatarRow(
-                      user: user,
-                      isPresentingCover: $presentingProfileCover
-                    )
-                  }
-                  .buttonStyle(.plain)
-                  .tint(.primary)
-                  .padding(.bottom, i != userListVM.businesses.count - 1 ? 16 : BackToMapButton.height + 48)
-                  if i != userListVM.businesses.count - 1 {
-                    LocarieDivider().padding([.bottom, .horizontal], 16)
-                  }
-                }
+          VStack(spacing: 0) {
+            Group {
+              if userListVM.businesses.isEmpty {
+                emptyBusinessList
+              } else {
+                placeList
               }
             }
-            .background {
-              GeometryReader { proxy in
-                Color.clear.preference(key: UserViewOffsetKey.self, value: -(proxy.frame(in: .named(userScrollViewCoordinateSpace)).origin.y - 16))
-              }
+            SuggestPlace().padding([.bottom, .horizontal], 16)
+            if !userListVM.businesses.isEmpty {
+              LocarieDivider()
+                .padding(.horizontal, 16)
+                .padding(.bottom, BackToMapButton.height + 16)
             }
-            .onPreferenceChange(UserViewOffsetKey.self) { offset in
-              let i = Int(offset) / Constants.userHeight
-              if i <= preUserIndex {
-                preUserIndex = i
-                return
-              }
-              preUserIndex = i
-              let delta = userListVM.businesses.count - Constants.userFetchThreshold
-              if delta <= 0 || i == delta || i == userListVM.businesses.count {
-                shouldFetchUser.toggle()
-              }
-            }
-            .padding(.top, 16)
           }
         }
         .coordinateSpace(name: userScrollViewCoordinateSpace)
@@ -301,16 +278,77 @@ private extension HomePage {
       }
     }
   }
+  
+  var placeList: some View {
+    VStack(spacing: 0) {
+      ForEach(userListVM.businesses.indices, id: \.self) { i in
+        let user = userListVM.businesses[i]
+        VStack(spacing: 0) {
+          NavigationLink(value: Router.BusinessHomeDestination.businessHome(
+            user.id,
+            user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+            user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+            true
+          )) {
+            BusinessAvatarRow(
+              user: user,
+              isPresentingCover: $presentingProfileCover
+            )
+          }
+          .buttonStyle(.plain)
+          .tint(.primary)
+          .padding(.bottom, i != userListVM.businesses.count - 1 ? 16 : BackToMapButton.height + 48)
+          
+          LocarieDivider().padding([.bottom, .horizontal], 16)
+        }
+      }
+    }
+    .background {
+      GeometryReader { proxy in
+        Color.clear.preference(key: UserViewOffsetKey.self, value: -(proxy.frame(in: .named(userScrollViewCoordinateSpace)).origin.y - 16))
+      }
+    }
+    .onPreferenceChange(UserViewOffsetKey.self) { offset in
+      let i = Int(offset) / Constants.userHeight
+      if i <= preUserIndex {
+        preUserIndex = i
+        return
+      }
+      preUserIndex = i
+      let delta = userListVM.businesses.count - Constants.userFetchThreshold
+      if delta <= 0 || i == delta || i == userListVM.businesses.count {
+        shouldFetchUser.toggle()
+      }
+    }
+    .padding(.top, 16)
+  }
 
-  var emptyList: some View {
+  var emptyPostList: some View {
     VStack {
-      Image("NoBusiness")
+      Image("NoPost")
+        .resizable()
+        .scaledToFit()
+        .frame(size: 72)
+      Text("No post yet")
+        .font(.custom(GlobalConstants.fontName, size: 14))
+        .fontWeight(.bold)
+    }
+    .padding(.top, 45)
+    .padding(.bottom, 16)
+  }
+  
+  var emptyBusinessList: some View {
+    VStack {
+      Image("Business")
+        .resizable()
+        .scaledToFit()
+        .frame(size: 72)
       Text("No business yet")
         .font(.custom(GlobalConstants.fontName, size: 14))
         .fontWeight(.bold)
-        .foregroundStyle(LocarieColor.greyDark)
     }
     .padding(.top, 45)
+    .padding(.bottom, 16)
   }
 
   var buttons: some View {

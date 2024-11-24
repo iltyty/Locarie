@@ -20,11 +20,12 @@ struct BusinessSearchView: View {
   @StateObject private var locationManager = LocationManager()
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 0) {
-      searchBar.padding(.vertical, 8)
+    VStack(alignment: .leading, spacing: 24) {
+      searchBar
       businessesView
       Spacer()
     }
+    .padding(.top, 8)
     .padding(.horizontal, 16)
     .background(.white)
     .loadingIndicator(loading: $loading)
@@ -77,22 +78,15 @@ private extension BusinessSearchView {
     }
   }
 
-//  var businesses: [UserDto] {
-//    userListVM.businesses
-//      .filter {
-//        businessName.isEmpty || $0.businessName.range(
-//          of: businessName,
-//          options: .caseInsensitive
-//        ) != nil
-//      }
-//      .filter(\.isProfileComplete)
-//  }
-
   var businessesView: some View {
     ScrollView {
-      VStack(alignment: .leading, spacing: Constants.vSpacing) {
-        areas.padding(.top, 16)
-        Text("Businesses").foregroundStyle(LocarieColor.greyDark)
+      VStack(alignment: .leading, spacing: 0) {
+        areas
+        Text("Businesses")
+          .fontWeight(.bold)
+          .foregroundStyle(LocarieColor.greyDark)
+          .padding(.vertical, 21)
+        SuggestPlace()
         ForEach(userListVM.businesses) { user in
           NavigationLink(value: Router.BusinessHomeDestination.businessHome(
             user.id,
@@ -151,7 +145,6 @@ private extension BusinessSearchView {
 }
 
 private enum Constants {
-  static let vSpacing: CGFloat = 24
   static let searchBarHeight: CGFloat = 40
   static let searchBarCornerRadius: CGFloat = 25
   static let avatarSize: CGFloat = 40

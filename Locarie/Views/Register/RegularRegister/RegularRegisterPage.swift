@@ -100,7 +100,7 @@ private extension RegularRegisterPage {
     TextEditFormItemWithBlockTitleAndStatus(
       title: "@Username",
       hint: "Username",
-      note: "Only letters, numbers, and full stops are allowed.",
+      note: "Only letters, numbers, and certain symbols are allowed.",
       valid: registerViewModel.isUsernameValid,
       text: $registerViewModel.dto.username
     )

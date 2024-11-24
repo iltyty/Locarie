@@ -72,10 +72,18 @@ struct BusinessHomePage: View {
           }
         }
         if presentingPostCover {
-          ImagesFullScreenCover(imageUrls: post.imageUrls, isPresenting: $presentingPostCover)
+          ImagesFullScreenCover(
+            index: profileCoverCurIndex,
+            imageUrls: post.imageUrls,
+            isPresenting: $presentingPostCover
+          )
         }
         if presentingProfileCover {
-          ImagesFullScreenCover(imageUrls: user.profileImageUrls, isPresenting: $presentingProfileCover)
+          ImagesFullScreenCover(
+            index: profileCoverCurIndex,
+            imageUrls: user.profileImageUrls,
+            isPresenting: $presentingProfileCover
+          )
         }
       }
       .onAppear {

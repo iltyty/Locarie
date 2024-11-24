@@ -10,29 +10,6 @@ import SwiftUI
 struct LocarieView: View {
   @ObservedObject private var router = Router.shared
   @ObservedObject private var viewRouter = BottomTabViewRouter.shared
-  
-//  private let cacheVM = LocalCacheViewModel.shared
-//  var body: some View {
-//    let url = cacheVM.getAvatarUrl()
-//    VStack(spacing: 10) {
-//      HStack {
-//        Spacer()
-//        if !url.isEmpty {
-//          KFImage(URL(string: url))
-//            .placeholder { SkeletonView(64, 64, true) }
-//            .resizable()
-//            .frame(size: 64)
-//            .clipShape(Circle())
-//        } else {
-//          defaultAvatar(size: 64, isBusiness: cacheVM.isBusinessUser())
-//        }
-//        Spacer()
-//      }
-//    }
-//    .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification, object: nil)) { notification in
-//      print(notification)
-//    }
-//  }
 
   var body: some View {
     NavigationStack(path: $router.path) {
@@ -46,6 +23,7 @@ struct LocarieView: View {
           EmptyView()
         }
       }
+      .navigationBarBackButtonHidden()
       .ignoresSafeArea(edges: .bottom)
       .navigationDestination(for: Router.Destination.self) { dest in
         router.getDestinationPage(with: dest)

@@ -81,8 +81,13 @@ struct PostCardView: View {
       status
         .padding(.bottom, 10)
         .onTapGesture { onTapped() }
-      cover.padding(.bottom, 12)
-      content.padding(.bottom, 12)
+      // ATTENTION: here, no matter whether post.content is empty or not,
+      // content always occupies certain height of space
+      // 16 + 1.5: 1.5 for the line width of the see profile button
+      cover.padding(.bottom, post.content.isEmpty ? 16 + 1.5 : 12)
+      if !post.content.isEmpty {
+        content.padding(.bottom, 12)
+      }
       HStack {
         favoriteCount
         if displaySeeProfile {
@@ -231,7 +236,7 @@ private extension PostCardView {
   var content: some View {
     ExpandableText(
       post.content,
-      lineLimit: Constants.postContentMaxLint
+      lineLimit: Constants.postContentMaxLine
     )
   }
   
@@ -309,8 +314,7 @@ private enum Constants {
   static let avatarSize: CGFloat = 34
   static let coverAspectRatio: CGFloat = 4 / 3
   static let coverBorderRadius: CGFloat = 10.0
-  static let contentLineLimit = 2
-  static let postContentMaxLint = 2
+  static let postContentMaxLine = 2
 }
 
 #Preview {

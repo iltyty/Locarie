@@ -50,8 +50,7 @@ private extension OpeningHourSheet {
 
   var sheetCaption: some View {
     HStack {
-      Text("Status of your business on this day")
-        .foregroundStyle(.secondary)
+      Text("Status of your business on this day").foregroundStyle(LocarieColor.greyDark)
       Spacer()
     }
   }
@@ -140,29 +139,41 @@ private extension OpeningHourSheet {
 
   func setDailyHours() {
     let calendar = Calendar.current
+    let openingTimeComponents = calendar.dateComponents([.hour, .minute], from: openingTime)
+    let closingTimeComponents = calendar.dateComponents([.hour, .minute], from: closingTime)
+
+    if businessHours.openingHoursCount == 0 {
+      if closed {
+        return
+      }
+      businessHours.closed = false
+      businessHours.openingTime.append(openingTimeComponents)
+      businessHours.closingTime.append(closingTimeComponents)
+      return
+    }
     
     if closed {
       if openingTimeIndex == 0 {
         businessHours.closed = closed
+        businessHours.openingTime.removeAll()
+        businessHours.closingTime.removeAll()
       } else {
         businessHours.openingTime.remove(at: 1)
         businessHours.closingTime.remove(at: 1)
       }
       return
     }
-    
-    if openingTimeIndex == 1 {
-      businessHours.openingTime[0] = calendar.dateComponents([.hour, .minute], from: openingTime)
-      businessHours.closingTime[0] = calendar.dateComponents([.hour, .minute], from: closingTime)
+    businessHours.closed = false
+    if openingTimeIndex >= businessHours.openingTime.count {
+      businessHours.openingTime.append(openingTimeComponents)
+    } else {
+      businessHours.openingTime[openingTimeIndex] = openingTimeComponents
     }
-    businessHours.openingTime[openingTimeIndex] = calendar.dateComponents(
-      [.hour, .minute],
-      from: openingTime
-    )
-    businessHours.closingTime[openingTimeIndex] = calendar.dateComponents(
-      [.hour, .minute],
-      from: closingTime
-    )
+    if openingTimeIndex >= businessHours.closingTime.count {
+      businessHours.closingTime.append(closingTimeComponents)
+    } else {
+      businessHours.closingTime[openingTimeIndex] = closingTimeComponents
+    }
   }
 }
 

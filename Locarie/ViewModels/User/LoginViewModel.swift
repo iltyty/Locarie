@@ -23,7 +23,9 @@ final class LoginViewModel: BaseViewModel {
     super.init()
     isFormValidPublisher
       .receive(on: RunLoop.main)
-      .assign(to: \.isFormValid, on: self)
+      .sink { [weak self] value in
+        self?.isFormValid = value
+      }
       .store(in: &subscriptions)
   }
 
@@ -41,13 +43,13 @@ extension LoginViewModel {
     state = .loading
     networking.login(dto: dto)
       .sink { [weak self] response in
-        guard let self else { return }
-        handleLoginResponse(response)
+        self?.handleLoginResponse(response)
       }
       .store(in: &subscriptions)
   }
 
   private func handleLoginResponse(_ response: LoginResponse) {
+    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
     } else {

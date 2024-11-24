@@ -103,35 +103,45 @@ private extension ProfileUpdateViewModel {
   func storeIsFirstNameValidPublisher() {
     isFirstNameValidPublisher
       .receive(on: RunLoop.main)
-      .assign(to: \.isFirstNameValid, on: self)
+      .sink { [weak self] value in
+        self?.isFirstNameValid = value
+      }
       .store(in: &subscriptions)
   }
 
   func storeIsLastNameValidPublisher() {
     isLastNameValidPublisher
       .receive(on: RunLoop.main)
-      .assign(to: \.isLastNameValid, on: self)
+      .sink { [weak self] value in
+        self?.isLastNameValid = value
+      }
       .store(in: &subscriptions)
   }
 
   func storeIsUsernameValidPublisher() {
     isUsernameValidPublisher
       .receive(on: RunLoop.main)
-      .assign(to: \.isUsernameValid, on: self)
+      .sink { [weak self] value in
+        self?.isUsernameValid = value
+      }
       .store(in: &subscriptions)
   }
 
   func storeIsBusinessNameValidPublisher() {
     isBusinessNameValidPublisher
       .receive(on: RunLoop.main)
-      .assign(to: \.isBusinessNameValid, on: self)
+      .sink { [weak self] value in
+        self?.isBusinessNameValid = value
+      }
       .store(in: &subscriptions)
   }
 
   func storeIsFormValidPublisher() {
     isFormValidPublisher
       .receive(on: RunLoop.main)
-      .assign(to: \.isFormValid, on: self)
+      .sink { [weak self] value in
+        self?.isFormValid = value
+      }
       .store(in: &subscriptions)
   }
 }

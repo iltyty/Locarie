@@ -17,15 +17,24 @@ enum Regexes {
 
   static let email = Regex {
     ZeroOrMore {
-      word
+      emailSegment
       "."
     }
-    word
+    emailSegment
     "@"
-    word
+    emailSegment
     OneOrMore {
       "."
-      word
+      emailSegment
+    }
+  }
+  
+  private static let emailSegment = Regex {
+    OneOrMore {
+      ChoiceOf {
+        One(.word)
+        CharacterClass.anyOf("+-_~")
+      }
     }
   }
 

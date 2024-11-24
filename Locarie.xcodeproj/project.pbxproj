@@ -267,6 +267,8 @@
 		AFDF113F2CE8F30200E941E1 /* BusinessBirthdayEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDF113E2CE8F30200E941E1 /* BusinessBirthdayEditPage.swift */; };
 		AFDF11412CE98BD000E941E1 /* AddBusinessPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDF11402CE98BD000E941E1 /* AddBusinessPage.swift */; };
 		AFDF11432CE98E8F00E941E1 /* InvitationCodePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDF11422CE98E8F00E941E1 /* InvitationCodePage.swift */; };
+		AFF0F0902CEC0DB7003CA074 /* SuggestPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF0F08F2CEC0DB7003CA074 /* SuggestPlace.swift */; };
+		AFF0F0922CEC1612003CA074 /* SuggestPlaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF0F0912CEC1612003CA074 /* SuggestPlaceItem.swift */; };
 		AFFE1B6D2CDFA344002401DD /* PaginatedDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */; };
 /* End PBXBuildFile section */
 
@@ -549,6 +551,8 @@
 		AFDF113E2CE8F30200E941E1 /* BusinessBirthdayEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessBirthdayEditPage.swift; sourceTree = "<group>"; };
 		AFDF11402CE98BD000E941E1 /* AddBusinessPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBusinessPage.swift; sourceTree = "<group>"; };
 		AFDF11422CE98E8F00E941E1 /* InvitationCodePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodePage.swift; sourceTree = "<group>"; };
+		AFF0F08F2CEC0DB7003CA074 /* SuggestPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestPlace.swift; sourceTree = "<group>"; };
+		AFF0F0912CEC1612003CA074 /* SuggestPlaceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestPlaceItem.swift; sourceTree = "<group>"; };
 		AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -697,6 +701,7 @@
 				501BAF3F2B464F0600D9D84F /* ToggleSettingsItem.swift */,
 				501BAF412B46503600D9D84F /* LabelSettingsItem.swift */,
 				50F220D42B8DB18D00B547AB /* LocationSettingsItem.swift */,
+				AFF0F0912CEC1612003CA074 /* SuggestPlaceItem.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -798,6 +803,7 @@
 				50F54A012B45283000D06F20 /* NavigationBar */,
 				5075FCB82B860547005E4A8B /* FullScreenCovers */,
 				50530B922B8775FD009C1F92 /* BusinessBottomBar.swift */,
+				AFF0F08F2CEC0DB7003CA074 /* SuggestPlace.swift */,
 				501C3BD62CBAAA7700D7E89E /* DistanceView.swift */,
 				509A10402BCE747A00FB55C7 /* DotView.swift */,
 				AFD25ADD2CE0FB9300FFE3DB /* ExpandableText.swift */,
@@ -1712,7 +1718,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					50AAB1782AEFA2E9003FEDF1 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -1819,6 +1825,7 @@
 				509A10372BCE476300FB55C7 /* BusinessUserStatusRow.swift in Sources */,
 				500FB2582B88BCF500E14DEE /* PostsMapViewConstants.swift in Sources */,
 				501BAF4A2B46538300D9D84F /* NewPasswordPage.swift in Sources */,
+				AFF0F0902CEC0DB7003CA074 /* SuggestPlace.swift in Sources */,
 				509A101D2BC8DF9200FB55C7 /* SkeletonView.swift in Sources */,
 				50B5DEE02B3C107000C0A641 /* MapboxBaseService.swift in Sources */,
 				500FB23F2B88379500E14DEE /* BusinessAvatarRow.swift in Sources */,
@@ -2002,6 +2009,7 @@
 				50369A682B2DBCD9005D6B43 /* UserLoginDto.swift in Sources */,
 				AFFE1B6D2CDFA344002401DD /* PaginatedDto.swift in Sources */,
 				50F549E02B3D0F9000D06F20 /* NetworkError.swift in Sources */,
+				AFF0F0922CEC1612003CA074 /* SuggestPlaceItem.swift in Sources */,
 				509A10302BCD206400FB55C7 /* BusinessImagesEditPage.swift in Sources */,
 				50277F7D2AF117CE0045AB12 /* RegularUserProfilePage.swift in Sources */,
 				50B5DEC62B3B092F00C0A641 /* MapboxSuggestionService.swift in Sources */,
@@ -2273,7 +2281,6 @@
 		50AAB1A12AEFA2ED003FEDF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2293,7 +2300,6 @@
 		50AAB1A22AEFA2ED003FEDF1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2313,7 +2319,6 @@
 		50AAB1A42AEFA2ED003FEDF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2330,7 +2335,6 @@
 		50AAB1A52AEFA2ED003FEDF1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

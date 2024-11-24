@@ -17,6 +17,7 @@ enum BusinessCategory: String, CaseIterable, Codable {
   case experience = "Experience"
   case florist = "Florist"
   case fresh = "Fresh Produce"
+  case homeware = "Homeware"
   case lifestyle = "Lifestyle"
   case music = "Music"
   case plants = "Plants"

@@ -75,10 +75,18 @@ struct RegularUserProfilePage: View {
         topSafeAreaHeight = proxy.safeAreaInsets.top
       }
       if isPostCoverPresented {
-        ImagesFullScreenCover(imageUrls: post.imageUrls, isPresenting: $isPostCoverPresented)
+        ImagesFullScreenCover(
+          index: 0,
+          imageUrls: post.imageUrls,
+          isPresenting: $isPostCoverPresented
+        )
       }
       if isProfileCoverPresented {
-        ImagesFullScreenCover(imageUrls: user.profileImageUrls, isPresenting: $isProfileCoverPresented)
+        ImagesFullScreenCover(
+          index: 0,
+          imageUrls: user.profileImageUrls,
+          isPresenting: $isProfileCoverPresented
+        )
       }
     }
     .ignoresSafeArea(edges: .bottom)

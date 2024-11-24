@@ -65,10 +65,18 @@ struct BusinessUserProfilePage: View {
           .padding(.bottom, BottomTabConstants.height + 24)
         }
         if presentingPostCover {
-          ImagesFullScreenCover(imageUrls: post.imageUrls, isPresenting: $presentingPostCover)
+          ImagesFullScreenCover(
+            index: profileCoverCurIndex,
+            imageUrls: post.imageUrls,
+            isPresenting: $presentingPostCover
+          )
         }
         if presentingProfileCover {
-          ImagesFullScreenCover(imageUrls: profileVM.dto.profileImageUrls, isPresenting: $presentingProfileCover)
+          ImagesFullScreenCover(
+            index: profileCoverCurIndex,
+            imageUrls: profileVM.dto.profileImageUrls,
+            isPresenting: $presentingProfileCover
+          )
         }
       }
       .sheet(isPresented: $presentingNotPublicSheet) {

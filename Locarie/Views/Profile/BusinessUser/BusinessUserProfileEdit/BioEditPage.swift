@@ -49,5 +49,5 @@ private extension BioEditPage {
 
 private enum Constants {
   static let vSpacing = 24.0
-  static let wordLimit = 150
+  static let wordLimit = 500
 }

@@ -9,6 +9,7 @@ import Kingfisher
 import SwiftUI
 
 struct ImagesFullScreenCover: View {
+  let index: Int
   let imageUrls: [String]
   @Binding var isPresenting: Bool
 
@@ -59,5 +60,8 @@ struct ImagesFullScreenCover: View {
       .padding(.bottom, 60)
     }
     .background(.ultraThinMaterial.opacity(CoverCommonConstants.backgroundOpacity))
+    .onAppear {
+      curIndex = index
+    }
   }
 }

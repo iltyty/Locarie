@@ -26,6 +26,7 @@ struct SettingsPage: View {
           locarieForBusinessSectionTitle.padding(.top, 24).padding(.bottom, 15)
           signUpForBusiness
           supportSectionTitle.padding(.top, 24).padding(.bottom, 15)
+          SuggestPlaceItem()
           feedback
           legalSectionTitle.padding(.top, 24).padding(.bottom, 15)
           privacyPolicy

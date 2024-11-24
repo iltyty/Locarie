@@ -29,7 +29,9 @@ import Foundation
   private func storeIsFormValidPublisher() {
     isImagesValidPublisher
       .receive(on: RunLoop.main)
-      .assign(to: \.isFormValid, on: self)
+      .sink { [weak self] value in
+        self?.isFormValid = value
+      }
       .store(in: &subscriptions)
   }
 

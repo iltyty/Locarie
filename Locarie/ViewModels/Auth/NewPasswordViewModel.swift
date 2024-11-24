@@ -20,15 +20,21 @@ final class NewPasswordViewModel: ObservableObject {
   init() {
     isPasswordValidPublisher
       .receive(on: RunLoop.main)
-      .assign(to: \.isPasswordValid, on: self)
+      .sink { [weak self] value in
+        self?.isPasswordValid = value
+      }
       .store(in: &subscriptions)
     isConfirmPasswordValidPublisher
       .receive(on: RunLoop.main)
-      .assign(to: \.isConfirmPasswordValid, on: self)
+      .sink { [weak self] value in
+        self?.isConfirmPasswordValid = value
+      }
       .store(in: &subscriptions)
     isFormValidPublisher
       .receive(on: RunLoop.main)
-      .assign(to: \.isFormValid, on: self)
+      .sink { [weak self] value in
+        self?.isFormValid = value
+      }
       .store(in: &subscriptions)
   }
 }
