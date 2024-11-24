@@ -265,12 +265,9 @@ private extension HomePage {
                 placeList
               }
             }
-            SuggestPlace().padding([.bottom, .horizontal], 16)
-            if !userListVM.businesses.isEmpty {
-              LocarieDivider()
-                .padding(.horizontal, 16)
-                .padding(.bottom, BackToMapButton.height + 16)
-            }
+            SuggestPlace()
+              .padding(.horizontal, 16)
+              .padding(.bottom, BackToMapButton.height + 40)
           }
         }
         .coordinateSpace(name: userScrollViewCoordinateSpace)
@@ -297,7 +294,7 @@ private extension HomePage {
           }
           .buttonStyle(.plain)
           .tint(.primary)
-          .padding(.bottom, i != userListVM.businesses.count - 1 ? 16 : BackToMapButton.height + 48)
+          .padding(.bottom, 16)
           
           LocarieDivider().padding([.bottom, .horizontal], 16)
         }

@@ -102,7 +102,6 @@ import Kingfisher
     if case .loading = state {
       return
     }
-//    guard !existedImageUrls.isEmpty || !photoVM.attachments.isEmpty else { return }
 
     state = .loading
     let data = existedImageData + photoVM.attachments.map(\.data)

@@ -269,6 +269,7 @@
 		AFDF11432CE98E8F00E941E1 /* InvitationCodePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDF11422CE98E8F00E941E1 /* InvitationCodePage.swift */; };
 		AFF0F0902CEC0DB7003CA074 /* SuggestPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF0F08F2CEC0DB7003CA074 /* SuggestPlace.swift */; };
 		AFF0F0922CEC1612003CA074 /* SuggestPlaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF0F0912CEC1612003CA074 /* SuggestPlaceItem.swift */; };
+		AFFBB1AF2CF2F3800035FC75 /* UIImage+downsampling.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFBB1AE2CF2F37B0035FC75 /* UIImage+downsampling.swift */; };
 		AFFE1B6D2CDFA344002401DD /* PaginatedDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */; };
 /* End PBXBuildFile section */
 
@@ -553,6 +554,7 @@
 		AFDF11422CE98E8F00E941E1 /* InvitationCodePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodePage.swift; sourceTree = "<group>"; };
 		AFF0F08F2CEC0DB7003CA074 /* SuggestPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestPlace.swift; sourceTree = "<group>"; };
 		AFF0F0912CEC1612003CA074 /* SuggestPlaceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestPlaceItem.swift; sourceTree = "<group>"; };
+		AFFBB1AE2CF2F37B0035FC75 /* UIImage+downsampling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+downsampling.swift"; sourceTree = "<group>"; };
 		AFFE1B6C2CDFA33C002401DD /* PaginatedDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -831,6 +833,7 @@
 		502A4FEE2B32D32D00C0833A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AFFBB1AE2CF2F37B0035FC75 /* UIImage+downsampling.swift */,
 				AF4759D92CA2CED1007A9164 /* CGSize+Init.swift */,
 				5029426B2C255346000E5C64 /* Views */,
 				502A4FEF2B32D34B00C0833A /* Color+Hex.swift */,
@@ -1841,6 +1844,7 @@
 				5075FCBE2B861A06005E4A8B /* CoverCommonConstants.swift in Sources */,
 				501BAF252B462DA500D9D84F /* SettingsSectionTitle.swift in Sources */,
 				AFDF11412CE98BD000E941E1 /* AddBusinessPage.swift in Sources */,
+				AFFBB1AF2CF2F3800035FC75 /* UIImage+downsampling.swift in Sources */,
 				5075FCD32B86F225005E4A8B /* BusinessProfileAvatarRow.swift in Sources */,
 				505568C22B8499CC00FD21E4 /* BackgroundButtonFormItem.swift in Sources */,
 				5029426A2C2535D9000E5C64 /* LocarieDivider.swift in Sources */,

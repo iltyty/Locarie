@@ -31,6 +31,7 @@ struct BusinessImageView: View {
         }
     } else {
       KFImage(URL(string: url))
+        .downsampling(size: .init(size: 4 * size))
         .placeholder { DefaultBusinessImageView(size: size) }
         .resizable()
         .scaledToFill()

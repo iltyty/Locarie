@@ -83,7 +83,7 @@ struct BusinessImagesEditPage: View {
   private var businessImages: some View {
     PhotosPicker(
       selection: $imageVM.photoVM.selection,
-      maxSelectionCount: Constants.maxImageCount - imageVM.existedImageUrls.count,
+      maxSelectionCount: defaultImagesCount,
       matching: .images,
       photoLibrary: .shared()
     ) {
@@ -128,6 +128,7 @@ private extension BusinessImagesEditPage {
           size: Constants.imageSize,
           bordered: url.offset == 0
         )
+        .allowsHitTesting(defaultImagesCount != 0)
         ImageDeleteButton()
           .onTapGesture {
             imageVM.existedImageUrls.remove(at: url.offset)
@@ -156,6 +157,7 @@ private extension BusinessImagesEditPage {
             EmptyView()
           }
         }
+        .allowsHitTesting(defaultImagesCount != 0)
         ImageDeleteButton()
           .onTapGesture {
             let index = attachments.firstIndex { $0.id == attachment.id }!
@@ -183,7 +185,7 @@ private extension BusinessImagesEditPage {
   }
 
   var defaultImagesCount: Int {
-    Constants.maxImageCount - imageVM.existedImageUrls.count - imageVM.photoVM.attachments.count
+    max(0, Constants.maxImageCount - imageVM.existedImageUrls.count - imageVM.photoVM.attachments.count)
   }
 
   var defaultImage: some View {

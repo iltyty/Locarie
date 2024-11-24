@@ -52,7 +52,7 @@ struct ImageAttachmentView: View {
     Group {
       switch imageAttachment.status {
       case let .finished(uiImage):
-        finishedImage(Image(uiImage: uiImage))
+        finishedImage(uiImage)
       case .failed:
         failedImage
       default:
@@ -64,8 +64,8 @@ struct ImageAttachmentView: View {
   }
 
   @ViewBuilder
-  private func finishedImage(_ image: Image) -> some View {
-    let clippedImage = image.resizable()
+  private func finishedImage(_ uiImage: UIImage) -> some View {
+    let clippedImage = Image(uiImage: uiImage.downsampling(scale: 0.5)).resizable()
       .scaledToFill()
       .frame(width: width, height: height)
       .clipped()
