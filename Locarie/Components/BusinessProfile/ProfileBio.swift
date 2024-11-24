@@ -15,6 +15,6 @@ struct ProfileBio: View {
   }
 
   var body: some View {
-    Text(user.introduction.isEmpty ? "Go set up the profile!" : user.introduction)
+    ExpandableText(user.introduction.isEmpty ? "Go set up the profile!" : user.introduction, lineLimit: 3)
   }
 }

@@ -214,8 +214,10 @@ private extension BusinessHomePage {
                   profileCoverCurIndex: $profileCoverCurIndex,
                   presentingProfileCover: $presentingProfileCover
                 )
+                if !profileVM.dto.profileImageUrls.isEmpty {
+                  LocarieDivider().padding(.horizontal, 16)
+                }
               }
-              LocarieDivider().padding(.horizontal, 16)
               Group {
                 if case .loading = listUserPostsVM.state {
                   BusinessUserProfilePage.postsSkeleton
