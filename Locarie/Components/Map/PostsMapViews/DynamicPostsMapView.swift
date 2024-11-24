@@ -41,6 +41,7 @@ struct DynamicPostsMapView: View {
           }
           .allowOverlap(true)
           .allowOverlapWithPuck(true)
+          .selected(user.hasUpdateIn24Hours)
         }
       }
       .mapStyle(MapStyle(uri: StyleURI(rawValue: GlobalConstants.mapStyleURI)!))

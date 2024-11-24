@@ -82,7 +82,8 @@ final class UserListViewModel: BaseViewModel {
       return
     }
     if let result = dto.data {
-      allBusinesses = result
+      // shuffled for random icon z-index on map
+      allBusinesses = result.shuffled()
     }
     state = .finished
   }
