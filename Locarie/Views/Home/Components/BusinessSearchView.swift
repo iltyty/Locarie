@@ -86,7 +86,7 @@ private extension BusinessSearchView {
           .fontWeight(.bold)
           .foregroundStyle(LocarieColor.greyDark)
           .padding(.vertical, 21)
-        SuggestPlace()
+        SuggestPlace().padding(.bottom, 16)
         ForEach(userListVM.businesses) { user in
           NavigationLink(value: Router.BusinessHomeDestination.businessHome(
             user.id,
@@ -95,6 +95,7 @@ private extension BusinessSearchView {
             true
           )) {
             BusinessSearchAvatarRow(user: user, isPresentingCover: .constant(false))
+              .padding(.bottom, 16)
           }
           .buttonStyle(.plain)
         }
