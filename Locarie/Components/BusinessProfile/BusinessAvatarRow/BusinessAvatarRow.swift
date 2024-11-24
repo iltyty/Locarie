@@ -49,7 +49,7 @@ struct BusinessAvatarRow: View {
       }
       .padding(.bottom, 10)
       .padding(.horizontal, 16)
-      SquareProfileImages(urls: user.profileImageUrls).padding(.bottom, 16)
+      SquareProfileImages(user: user).padding(.bottom, 16)
       Text(user.introduction)
         .lineLimit(2)
         .padding([.bottom, .horizontal], 16)

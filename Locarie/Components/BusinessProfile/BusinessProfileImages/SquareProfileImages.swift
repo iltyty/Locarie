@@ -9,22 +9,25 @@ import Kingfisher
 import SwiftUI
 
 struct SquareProfileImages: View {
-  let urls: [String]
+  let user: UserDto
 
   @State private var screenWidth: CGFloat = 0
 
   var body: some View {
     HStack(spacing: 8) {
-      KFImage(URL(string: urls[0]))
-        .downsampling(size: .init(size: 5 * imageSize))
-        .cacheOriginalImage()
-        .placeholder {
-          DefaultBusinessImageView(size: 2 * imageSize + 8)
-        }
-        .resizable()
-        .scaledToFill()
-        .frame(size: 2 * imageSize + 8)
-        .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+      ZStack(alignment: .topTrailing) {
+        KFImage(URL(string: user.profileImageUrls[0]))
+          .downsampling(size: .init(size: 5 * imageSize))
+          .cacheOriginalImage()
+          .placeholder {
+            DefaultBusinessImageView(size: 2 * imageSize + 8)
+          }
+          .resizable()
+          .scaledToFill()
+          .frame(size: 2 * imageSize + 8)
+          .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+        DistanceView(user: user).padding(5)
+      }
       VStack(spacing: 8) {
         imageViewBuilder(1)
         imageViewBuilder(2)
@@ -49,10 +52,10 @@ struct SquareProfileImages: View {
 
   @ViewBuilder
   private func imageViewBuilder(_ i: Int) -> some View {
-    if i >= urls.count {
+    if i >= user.profileImageUrls.count {
       DefaultBusinessImageView(size: imageSize)
     } else {
-      KFImage(URL(string: urls[i]))
+      KFImage(URL(string: user.profileImageUrls[i]))
         .downsampling(size: .init(size: 3 * imageSize))
         .cacheOriginalImage()
         .placeholder {
