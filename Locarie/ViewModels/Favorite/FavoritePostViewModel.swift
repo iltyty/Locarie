@@ -13,12 +13,22 @@ final class FavoritePostViewModel: BaseViewModel {
   @Published var posts: [PostDto] = []
   @Published var state: State = .idle
 
-  let networking: FavoritePostService
 
-  var subscriptions: Set<AnyCancellable> = []
+  private var page = 0
+  private var pageSize = 10
+  private var allFetched = false
+  private let networking: FavoritePostService
+  private var subscriptions: Set<AnyCancellable> = []
 
-  init(_ networking: FavoritePostService = FavoritePostServiceImpl.shared) {
+  init(_ networking: FavoritePostService = FavoritePostServiceImpl.shared, size: Int = 10) {
+    self.pageSize = size
     self.networking = networking
+  }
+  
+  func reset() {
+    page = 0
+    allFetched = false
+    posts = []
   }
 }
 
@@ -78,8 +88,11 @@ extension FavoritePostViewModel {
 
 extension FavoritePostViewModel {
   func list(userId: Int64) {
-    state = .loading
-    networking.list(userId: userId)
+    if allFetched { return }
+    if posts.isEmpty {
+      state = .loading
+    }
+    networking.list(userId: userId, page: page, size: pageSize)
       .sink { [weak self] response in
         guard let self else { return }
         handleListResponse(response)
@@ -92,17 +105,21 @@ extension FavoritePostViewModel {
   ) {
     if let error = response.error {
       state = .listFailed(error)
-    } else {
-      let dto = response.value!
-      if dto.status == 0 {
-        if let data = dto.data {
-          posts = data
-        }
-        state = .listFinished
-      } else {
-        state = .listFailed(newNetworkError(response: dto))
-      }
+      return
     }
+    
+    let dto = response.value!
+    if dto.status != 0 {
+      state = .listFailed(newNetworkError(response: dto))
+      return
+    }
+    
+    allFetched = dto.data.last
+    if !allFetched {
+      page += 1
+    }
+    posts.append(contentsOf: dto.data.content)
+    state = .listFinished
   }
 }
 

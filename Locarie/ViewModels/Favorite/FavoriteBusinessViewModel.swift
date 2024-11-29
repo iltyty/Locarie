@@ -13,14 +13,26 @@ final class FavoriteBusinessViewModel: BaseViewModel {
   @Published var state: State = .idle
   @Published var posts: [PostDto] = []
 
-  let networking: FavoriteBusinessService
+  private var pageSize = 10
+  private var userPage = 0
+  private var postPage = 0
+  private var userAllFetched = false
+  private var postAllFetched = false
+  private let networking: FavoriteBusinessService
+  private var subscriptions: Set<AnyCancellable> = []
 
-  var subscriptions: Set<AnyCancellable> = []
-
-  init(
-    _ networking: FavoriteBusinessService = FavoriteBusinessServiceImpl.shared
-  ) {
+  init( _ networking: FavoriteBusinessService = FavoriteBusinessServiceImpl.shared, size: Int = 10) {
+    self.pageSize = size
     self.networking = networking
+  }
+  
+  func reset() {
+    users = []
+    posts = []
+    userPage = 0
+    postPage = 0
+    userAllFetched = false
+    postAllFetched = false
   }
 }
 
@@ -35,9 +47,7 @@ extension FavoriteBusinessViewModel {
       .store(in: &subscriptions)
   }
 
-  private func handleFavoriteResponse(
-    _ response: FavoriteBusinessResponse
-  ) {
+  private func handleFavoriteResponse( _ response: FavoriteBusinessResponse ) {
     if let error = response.error {
       state = .favoriteFailed(error)
     } else {
@@ -62,9 +72,7 @@ extension FavoriteBusinessViewModel {
       .store(in: &subscriptions)
   }
 
-  private func handleUnfavoriteResponse(
-    _ response: UnfavoriteBusinessResponse
-  ) {
+  private func handleUnfavoriteResponse( _ response: UnfavoriteBusinessResponse ) {
     if let error = response.error {
       state = .unfavoriteFailed(error)
     } else {
@@ -80,31 +88,39 @@ extension FavoriteBusinessViewModel {
 
 extension FavoriteBusinessViewModel {
   func list(userId: Int64) {
-    state = .loading
-    networking.list(userId: userId)
+    if userAllFetched { return }
+    if users.isEmpty {
+      state = .loading
+    }
+    networking.list(userId: userId, page: userPage, size: pageSize)
       .sink { [weak self] response in
         guard let self else { return }
         handleListResponse(response)
       }
       .store(in: &subscriptions)
   }
-
+  
   private func handleListResponse(
     _ response: ListFavoriteBusinessesResponse
   ) {
+    debugPrint(response)
     if let error = response.error {
       state = .listFailed(error)
-    } else {
-      let dto = response.value!
-      if dto.status == 0 {
-        if let data = dto.data {
-          users = data
-        }
-        state = .listFinished
-      } else {
-        state = .listFailed(newNetworkError(response: dto))
-      }
+      return
     }
+    
+    let dto = response.value!
+    if dto.status != 0 {
+      state = .listFailed(newNetworkError(response: dto))
+      return
+    }
+    
+    userAllFetched = dto.data.last
+    if !userAllFetched {
+      userPage += 1
+    }
+    users.append(contentsOf: dto.data.content)
+    state = .listFinished
   }
 }
 
@@ -138,8 +154,11 @@ extension FavoriteBusinessViewModel {
 
 extension FavoriteBusinessViewModel {
   func listFavoriteBusinessPosts(userId: Int64) {
-    state = .loading
-    networking.listFavoriteBusinessPosts(userId: userId)
+    if postAllFetched { return }
+    if posts.isEmpty {
+      state = .loading
+    }
+    networking.listFavoriteBusinessPosts(userId: userId, page: postPage, size: pageSize)
       .sink { [weak self] response in
         guard let self else { return }
         handleListPostsResponse(response)
@@ -148,19 +167,24 @@ extension FavoriteBusinessViewModel {
   }
 
   private func handleListPostsResponse(_ response: ListFavoriteBusinessPostsResponse) {
+    debugPrint(response)
     if let error = response.error {
       state = .listPostsFailed(error)
       return
     }
+    
     let dto = response.value!
-    if dto.status == 0 {
-      if let data = dto.data {
-        posts = data
-      }
-      state = .listPostsFinished
-    } else {
+    if dto.status != 0 {
       state = .listPostsFailed(newNetworkError(response: dto))
+      return
     }
+    
+    postAllFetched = dto.data.last
+    if !postAllFetched {
+      postPage += 1
+    }
+    posts.append(contentsOf: dto.data.content)
+    state = .listPostsFinished
   }
 }
 

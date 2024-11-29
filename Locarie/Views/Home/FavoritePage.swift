@@ -12,9 +12,11 @@ struct FavoritePage: View {
   private let router = Router.shared
   private let cacheVM = LocalCacheViewModel.shared
 
-  @State private var scrollId: Int64? = nil
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
   @State private var currentDetent: BottomSheetDetent = Constants.bottomDetent
+  
+  @State private var prePostIndex = 0
+  @State private var shouldFetchPost = false
 
   @State private var post = PostDto()
   @State private var user = UserDto()
@@ -24,6 +26,8 @@ struct FavoritePage: View {
   @StateObject private var vm = FavoriteBusinessViewModel()
 
   @Environment(\.dismiss) var dismiss
+  
+  private let scrollViewCoordinateSpace = "scrollView"
 
   var body: some View {
     ZStack {
@@ -32,7 +36,16 @@ struct FavoritePage: View {
 
         ForEvery(vm.posts) { post in
           MapViewAnnotation(coordinate: post.user.coordinate) {
-            BusinessMapAvatar(url: post.user.avatarUrl, newUpdate: post.user.hasUpdateIn24Hours)
+            NavigationLink(
+              value: Router.BusinessHomeDestination.businessHome(
+                post.user.id,
+                post.user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+                post.user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+                false
+              )
+            ) {
+              BusinessMapAvatar(url: post.user.avatarUrl, newUpdate: post.user.hasUpdateIn24Hours)
+            }
           }
           .allowOverlap(true)
           .allowOverlapWithPuck(true)
@@ -101,57 +114,70 @@ struct FavoritePage: View {
     }
     .ignoresSafeArea(edges: .bottom)
     .onAppear {
-//      vm.list(userId: cacheVM.getUserId())
+      vm.listFavoriteBusinessPosts(userId: cacheVM.getUserId())
+    }
+    .onChange(of: shouldFetchPost) { _ in
       vm.listFavoriteBusinessPosts(userId: cacheVM.getUserId())
     }
   }
 
   private var postList: some View {
-    ScrollViewReader { proxy in
-      ScrollView {
-        VStack(spacing: 20) {
-          Text("Following")
-            .id(-1)
-            .font(.custom(GlobalConstants.fontName, size: 18))
-            .fontWeight(.bold)
-          if vm.posts.isEmpty {
-            emptyList
-          } else {
-            VStack(spacing: 0) {
-              ForEach(vm.posts.indices, id: \.self) { i in
-                PostCardView(
-                  vm.posts[i],
-                  divider: true,
-                  bottomPadding: i == vm.posts.count - 1 ? .large : .small,
-                  onTapped: {
-                    router.navigate(to: Router.BusinessHomeDestination.businessHome(
-                      vm.posts[i].user.id,
-                      user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
-                      user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
-                      true)
-                    )
-                  },
-                  onCoverTapped: {
-                    post = vm.posts[i]
-                    user = post.user
-                    presentingPostCover = true
-                  },
-                  onThumbnailTapped: {
-                    post = vm.posts[i]
-                    user = post.user
-                    presentingProfileCover = true
-                  }
-                )
-                .id(i)
-                .tint(.primary)
-                .buttonStyle(.plain)
+    ScrollView {
+      VStack(spacing: 20) {
+        Text("Following")
+          .id(-1)
+          .font(.custom(GlobalConstants.fontName, size: 18))
+          .fontWeight(.bold)
+        if vm.posts.isEmpty {
+          emptyList
+        } else {
+          VStack(spacing: 0) {
+            ForEach(vm.posts.indices, id: \.self) { i in
+              PostCardView(
+                vm.posts[i],
+                divider: true,
+                bottomPadding: i == vm.posts.count - 1 ? .large : .small,
+                onTapped: {
+                  router.navigate(to: Router.BusinessHomeDestination.businessHome(
+                    vm.posts[i].user.id,
+                    user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+                    user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+                    true)
+                  )
+                },
+                onCoverTapped: {
+                  post = vm.posts[i]
+                  user = post.user
+                  presentingPostCover = true
+                },
+                onThumbnailTapped: {
+                  post = vm.posts[i]
+                  user = post.user
+                  presentingProfileCover = true
+                }
+              )
+              .id(i)
+              .tint(.primary)
+              .buttonStyle(.plain)
+            }
+            .background {
+              GeometryReader { proxy in
+                Color.clear.preference(key: PostViewOffsetKey.self, value: -(proxy.frame(in: .named(scrollViewCoordinateSpace)).origin.y - 16))
+              }
+            }
+            .onPreferenceChange(PostViewOffsetKey.self) { offset in
+              let i = Int(offset) / GlobalConstants.postCardHeight
+              if i <= prePostIndex {
+                prePostIndex = i
+                return
+              }
+              prePostIndex = i
+              let delta = vm.posts.count - 5
+              if delta <= 0 || i == delta || i == vm.posts.count {
+                shouldFetchPost.toggle()
               }
             }
           }
-        }
-        .onChange(of: scrollId) { _ in
-          proxy.scrollTo(0)
-          scrollId = 1
         }
       }
     }
@@ -186,6 +212,16 @@ private extension FavoritePage {
       Spacer()
     }
     .padding(.horizontal, 16)
+  }
+}
+
+private extension FavoritePage {
+  struct PostViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+      value += nextValue()
+    }
   }
 }
 

@@ -13,15 +13,21 @@ struct FollowAndLikeView: View {
   @Binding var user: UserDto
   @Binding var isPostCoverPresented: Bool
   @Binding var isProfileCoverPresented: Bool
-  
-  private let router = Router.shared
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var favoritePostsVM = FavoritePostViewModel()
   @StateObject private var favoriteBusinessVM = FavoriteBusinessViewModel()
 
+  @State private var prePostIndex = 0
+  @State private var preUserIndex = 0
+  @State private var shouldFetchPost = false
+  @State private var shouldFetchUser = false
   @State private var isPresentingCover = false
   @State private var currentTab: Tab = .followed
+  
+  private let router = Router.shared
+  private let postScrollViewCoordinateSpace = "postScrollView"
+  private let userScrollViewCoordinateSpace = "userScrollView"
 
   var body: some View {
     VStack(spacing: 24) {
@@ -36,6 +42,12 @@ struct FollowAndLikeView: View {
       let userId = cacheVM.getUserId()
       favoritePostsVM.list(userId: userId)
       favoriteBusinessVM.list(userId: userId)
+    }
+    .onChange(of: shouldFetchPost) { _ in
+      favoritePostsVM.list(userId: cacheVM.getUserId())
+    }
+    .onChange(of: shouldFetchUser) { _ in
+      favoriteBusinessVM.list(userId: cacheVM.getUserId())
     }
   }
 }
@@ -90,7 +102,7 @@ private extension FollowAndLikeView {
     Group {
       switch currentTab {
       case .followed: followedBusinesses
-      case .saved: savedPosts
+      case .saved: likedPosts
       }
     }
     .padding(.bottom, 16)
@@ -114,10 +126,7 @@ private extension FollowAndLikeView {
             user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
             true
           )) {
-            BusinessAvatarRow(
-              user: user,
-              isPresentingCover: $isPresentingCover
-            )
+            BusinessAvatarRow(user: user, isPresentingCover: $isPresentingCover)
           }
           .padding(.bottom, i != users.count - 1 ? 16 : 48)
           .buttonStyle(.plain)
@@ -127,12 +136,29 @@ private extension FollowAndLikeView {
             LocarieDivider().padding([.bottom, .horizontal], 16)
           }
         }
+        .background {
+          GeometryReader { proxy in
+            Color.clear.preference(key: UserViewOffsetKey.self, value: -(proxy.frame(in: .named(userScrollViewCoordinateSpace)).origin.y - 16))
+          }
+        }
+        .onPreferenceChange(UserViewOffsetKey.self) { offset in
+          let i = Int(offset) / GlobalConstants.userCardHeight
+          if i <= preUserIndex {
+            preUserIndex = i
+            return
+          }
+          preUserIndex = i
+          let delta = favoriteBusinessVM.users.count - 5
+          if delta <= 0 || i == delta || i == favoriteBusinessVM.users.count {
+            shouldFetchUser.toggle()
+          }
+        }
       }
     }
   }
 
   @ViewBuilder
-  var savedPosts: some View {
+  var likedPosts: some View {
     if case .loading = favoritePostsVM.state {
       PostCardView.skeleton.frame(maxHeight: .infinity, alignment: .top)
     } else if favoritePostsVM.posts.isEmpty {
@@ -145,7 +171,7 @@ private extension FollowAndLikeView {
           ForEach(posts.indices.reversed(), id: \.self) { i in
             PostCardView(
               posts[i],
-              bottomPadding: i == posts.count - 1 ? .small : .zero,
+              bottomPadding: i == 0 ? .small : .zero,
               onTapped: {
                 router.navigate(to: Router.BusinessHomeDestination.businessHome(
                   posts[i].user.id,
@@ -170,6 +196,23 @@ private extension FollowAndLikeView {
             
             if i != posts.count - 1 {
               LocarieDivider().padding([.bottom, .horizontal], 16)
+            }
+          }
+          .background {
+            GeometryReader { proxy in
+              Color.clear.preference(key: PostViewOffsetKey.self, value: -(proxy.frame(in: .named(postScrollViewCoordinateSpace)).origin.y - 16))
+            }
+          }
+          .onPreferenceChange(PostViewOffsetKey.self) { offset in
+            let i = Int(offset) / GlobalConstants.postCardHeight
+            if i <= prePostIndex {
+              prePostIndex = i
+              return
+            }
+            prePostIndex = i
+            let delta = favoritePostsVM.posts.count - 5
+            if delta <= 0 || i == delta || i == favoritePostsVM.posts.count {
+              shouldFetchPost.toggle()
             }
           }
         }
@@ -229,6 +272,24 @@ private extension FollowAndLikeView {
 private extension FollowAndLikeView {
   enum Tab {
     case followed, saved
+  }
+}
+
+private extension FollowAndLikeView {
+  struct PostViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
+    }
+  }
+
+  struct UserViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
+    }
   }
 }
 

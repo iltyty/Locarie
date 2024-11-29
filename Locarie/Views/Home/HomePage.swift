@@ -299,7 +299,7 @@ private extension HomePage {
       }
     }
     .onPreferenceChange(UserViewOffsetKey.self) { offset in
-      let i = Int(offset) / Constants.userHeight
+      let i = Int(offset) / GlobalConstants.userCardHeight
       if i <= preUserIndex {
         preUserIndex = i
         return
@@ -399,7 +399,6 @@ private enum Constants {
   static let postPageSize = 10
   static let postFetchThreshold = 5
 
-  static let userHeight = 346
   static let userPageSize = 10
   static let userFetchThreshold = 5
   

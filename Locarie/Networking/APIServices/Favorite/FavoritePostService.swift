@@ -10,28 +10,19 @@ import Combine
 import Foundation
 
 protocol FavoritePostService {
-  func favorite(userId: Int64, postId: Int64)
-    -> AnyPublisher<FavoritePostResponse, Never>
-  func unfavorite(userId: Int64, postId: Int64)
-    -> AnyPublisher<UnfavoritePostResponse, Never>
-  func list(userId: Int64)
-    -> AnyPublisher<ListFavoritePostsResponse, Never>
-  func isFavoredBy(userId: Int64, postId: Int64)
-    -> AnyPublisher<BusinessIsFavoredByResponse, Never>
+  func favorite(userId: Int64, postId: Int64) -> AnyPublisher<FavoritePostResponse, Never>
+  func unfavorite(userId: Int64, postId: Int64) -> AnyPublisher<UnfavoritePostResponse, Never>
+  func list(userId: Int64, page: Int, size: Int) -> AnyPublisher<ListFavoritePostsResponse, Never>
+  func isFavoredBy(userId: Int64, postId: Int64) -> AnyPublisher<BusinessIsFavoredByResponse, Never>
 }
 
-final class FavoritePostServiceImpl:
-  BaseAPIService, FavoritePostService
-{
+final class FavoritePostServiceImpl: BaseAPIService, FavoritePostService {
   static let shared = FavoritePostServiceImpl()
   override private init() {}
 
-  func favorite(userId: Int64, postId: Int64)
-    -> AnyPublisher<FavoriteBusinessResponse, Never>
-  {
+  func favorite(userId: Int64, postId: Int64) -> AnyPublisher<FavoriteBusinessResponse, Never> {
     let endpoint = APIEndpoints.favoritePostUrl
     let params = prepareIdsParams(userId: userId, postId: postId)
-    print(userId, postId)
     return AF.request(endpoint, method: .post, parameters: params)
       .validate()
       .publishDecodable(type: ResponseDto<Bool>.self)
@@ -44,9 +35,7 @@ final class FavoritePostServiceImpl:
     ["userId": "\(userId)", "postId": "\(postId)"]
   }
 
-  func unfavorite(userId: Int64, postId: Int64)
-    -> AnyPublisher<UnfavoritePostResponse, Never>
-  {
+  func unfavorite(userId: Int64, postId: Int64) -> AnyPublisher<UnfavoritePostResponse, Never> {
     let endpoint = APIEndpoints.unfavoritePostUrl
     let params = prepareIdsParams(userId: userId, postId: postId)
     return AF.request(endpoint, method: .post, parameters: params)
@@ -57,24 +46,18 @@ final class FavoritePostServiceImpl:
       .eraseToAnyPublisher()
   }
 
-  func list(userId: Int64) -> AnyPublisher<ListFavoritePostsResponse, Never> {
+  func list(userId: Int64, page: Int, size: Int) -> AnyPublisher<ListFavoritePostsResponse, Never> {
     let endpoint = APIEndpoints.favoritePostUrl
-    let params = prepareUserIdParam(userId: userId)
+    let params = ["userId": "\(userId)", "page": page, "size": size] as [String: Any]
     return AF.request(endpoint, method: .get, parameters: params)
       .validate()
-      .publishDecodable(type: ResponseDto<[PostDto]>.self)
+      .publishDecodable(type: PaginatedResponseDto<PostDto>.self)
       .map { self.mapResponse($0) }
       .receive(on: RunLoop.main)
       .eraseToAnyPublisher()
   }
 
-  private func prepareUserIdParam(userId: Int64) -> Parameters {
-    ["userId": "\(userId)"]
-  }
-
-  func isFavoredBy(userId: Int64, postId: Int64)
-    -> AnyPublisher<BusinessIsFavoredByResponse, Never>
-  {
+  func isFavoredBy(userId: Int64, postId: Int64) -> AnyPublisher<BusinessIsFavoredByResponse, Never> {
     let endpoint = APIEndpoints.postIsFavoredByUrl
     let params = prepareIdsParams(userId: userId, postId: postId)
     return AF.request(endpoint, method: .get, parameters: params)
@@ -86,15 +69,7 @@ final class FavoritePostServiceImpl:
   }
 }
 
-typealias FavoritePostResponse = DataResponse<
-  ResponseDto<Bool>, NetworkError
->
-typealias UnfavoritePostResponse = DataResponse<
-  ResponseDto<Bool>, NetworkError
->
-typealias ListFavoritePostsResponse = DataResponse<
-  ResponseDto<[PostDto]>, NetworkError
->
-typealias PostIsFavoredByResponse = DataResponse<
-  ResponseDto<Bool>, NetworkError
->
+typealias FavoritePostResponse = DataResponse<ResponseDto<Bool>, NetworkError>
+typealias UnfavoritePostResponse = DataResponse<ResponseDto<Bool>, NetworkError>
+typealias ListFavoritePostsResponse = DataResponse<PaginatedResponseDto<PostDto>, NetworkError>
+typealias PostIsFavoredByResponse = DataResponse<ResponseDto<Bool>, NetworkError>
