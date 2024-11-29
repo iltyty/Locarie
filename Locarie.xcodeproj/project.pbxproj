@@ -213,7 +213,7 @@
 		50E6A7582C3A365C00932FAD /* FileReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A7572C3A365C00932FAD /* FileReadViewModel.swift */; };
 		50E6A75B2C3A3ECC00932FAD /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A75A2C3A3ECC00932FAD /* WebView.swift */; };
 		50E6A75D2C3A608600932FAD /* View+UniversalShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A75C2C3A608600932FAD /* View+UniversalShadow.swift */; };
-		50E6A75F2C3AADBE00932FAD /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A75E2C3AADBE00932FAD /* CLLocation.swift */; };
+		50E6A75F2C3AADBE00932FAD /* CLLocation+London.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A75E2C3AADBE00932FAD /* CLLocation+London.swift */; };
 		50E6A7612C3AC36200932FAD /* FormItemNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A7602C3AC36100932FAD /* FormItemNoteView.swift */; };
 		50E6A7632C3ACE3E00932FAD /* FormItemPasswordSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E6A7622C3ACE3E00932FAD /* FormItemPasswordSwitchView.swift */; };
 		50F181EA2C7779750035EC79 /* ProfileImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F181E92C7779750035EC79 /* ProfileImages.swift */; };
@@ -498,7 +498,7 @@
 		50E6A7572C3A365C00932FAD /* FileReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileReadViewModel.swift; sourceTree = "<group>"; };
 		50E6A75A2C3A3ECC00932FAD /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		50E6A75C2C3A608600932FAD /* View+UniversalShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+UniversalShadow.swift"; sourceTree = "<group>"; };
-		50E6A75E2C3AADBE00932FAD /* CLLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocation.swift; sourceTree = "<group>"; };
+		50E6A75E2C3AADBE00932FAD /* CLLocation+London.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+London.swift"; sourceTree = "<group>"; };
 		50E6A7602C3AC36100932FAD /* FormItemNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemNoteView.swift; sourceTree = "<group>"; };
 		50E6A7622C3ACE3E00932FAD /* FormItemPasswordSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemPasswordSwitchView.swift; sourceTree = "<group>"; };
 		50F181E92C7779750035EC79 /* ProfileImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImages.swift; sourceTree = "<group>"; };
@@ -841,7 +841,7 @@
 				50FDD8A02B54D9D0003015F9 /* UserDefaults+Reset.swift */,
 				509AC0522B57891E00A79CDB /* UINavigationController+NavigationBarHidden.swift */,
 				505C25FE2C036FFE00862AC4 /* Date+TimeAgo.swift */,
-				50E6A75E2C3AADBE00932FAD /* CLLocation.swift */,
+				50E6A75E2C3AADBE00932FAD /* CLLocation+London.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2021,7 +2021,7 @@
 				50F8AC6A2CBEBD9000D3E41E /* LocarieTabView.swift in Sources */,
 				AFDF113B2CE8C23800E941E1 /* BusinessCategoryEditPage.swift in Sources */,
 				50B11ADA2AFB3661002A7B91 /* BusinessHomePage.swift in Sources */,
-				50E6A75F2C3AADBE00932FAD /* CLLocation.swift in Sources */,
+				50E6A75F2C3AADBE00932FAD /* CLLocation+London.swift in Sources */,
 				50F549DD2B3D079300D06F20 /* LoginViewModel.swift in Sources */,
 				505568C82B84A3E400FD21E4 /* TextEditFormItemWithNoTitle.swift in Sources */,
 				50B5DEDA2B3B2DCC00C0A641 /* PlaceSuggestionItem.swift in Sources */,

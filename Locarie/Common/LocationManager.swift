@@ -11,7 +11,7 @@ import Foundation
 final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
   private let geocoder = CLGeocoder()
   let manager: CLLocationManager
-  var locationFeaturesEnabled = false
+  @Published var locationFeaturesEnabled = false
   @Published var location: CLLocation?
   @Published var placemark: CLPlacemark?
 

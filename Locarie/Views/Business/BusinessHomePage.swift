@@ -13,7 +13,7 @@ struct BusinessHomePage: View {
   let latitude: CGFloat
   let longitude: CGFloat
   var fullscreen = true
-  let locationManager = LocationManager()
+  private let locationManager = LocationManager()
 
   @State private var user = UserDto()
   @State private var post = PostDto()

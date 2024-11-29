@@ -190,8 +190,8 @@ private extension HomePage {
                   onTapped: {
                     router.navigate(to: Router.BusinessHomeDestination.businessHome(
                       postVM.posts[i].user.id,
-                      user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
-                      user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+                      postVM.posts[i].user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+                      postVM.posts[i].user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
                       true)
                     )
                   },
@@ -255,24 +255,22 @@ private extension HomePage {
       }
       .scrollIndicators(.hidden)
     } else {
-      VStack(spacing: 0) {
-        ScrollView {
-          VStack(spacing: 0) {
-            Group {
-              if userListVM.businesses.isEmpty {
-                emptyBusinessList
-              } else {
-                placeList
-              }
+      ScrollView {
+        VStack(spacing: 0) {
+          Group {
+            if userListVM.businesses.isEmpty {
+              emptyBusinessList
+            } else {
+              placeList
             }
-            SuggestPlace()
-              .padding(.horizontal, 16)
-              .padding(.bottom, BackToMapButton.height + 40)
           }
+          SuggestPlace()
+            .padding(.horizontal, 16)
+            .padding(.bottom, BackToMapButton.height + 40)
         }
-        .coordinateSpace(name: userScrollViewCoordinateSpace)
-        .scrollIndicators(.hidden)
       }
+      .coordinateSpace(name: userScrollViewCoordinateSpace)
+      .scrollIndicators(.hidden)
     }
   }
   
@@ -286,15 +284,10 @@ private extension HomePage {
             user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
             user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
             true
-          )) {
-            BusinessAvatarRow(
-              user: user,
-              isPresentingCover: $presentingProfileCover
-            )
-          }
-          .buttonStyle(.plain)
-          .tint(.primary)
-          .padding(.bottom, 16)
+          )) { BusinessAvatarRow(user: user, isPresentingCover: $presentingProfileCover) }
+            .buttonStyle(.plain)
+            .tint(.primary)
+            .padding(.bottom, 16)
           
           LocarieDivider().padding([.bottom, .horizontal], 16)
         }
@@ -415,5 +408,10 @@ private enum Constants {
 }
 
 #Preview {
-  HomePage()
+//  HomePage()
+  ScrollView {
+    VStack {
+      Text("test").lineLimit(2, reservesSpace: true).background(.red)
+    }
+  }
 }

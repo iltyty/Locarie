@@ -51,8 +51,9 @@ struct BusinessAvatarRow: View {
       .padding(.horizontal, 16)
       SquareProfileImages(user: user).padding(.bottom, 16)
       Text(user.introduction)
-        .lineLimit(2)
-        .padding([.bottom, .horizontal], 16)
+        .lineLimit(1, reservesSpace: false)
+        .padding(.horizontal, 16)
+        .padding(.bottom, 14)
       ProfileCategories(user).font(.custom(GlobalConstants.fontName, size: 14))
         .padding(.horizontal, 16)
     }
@@ -69,8 +70,7 @@ struct BusinessAvatarRow: View {
         Spacer()
       }
       .padding(.bottom, 10)
-      SkeletonView(.infinity, 267)
-      .padding(.bottom, 16)
+      SkeletonView(.infinity, 267).padding(.bottom, 16)
       SkeletonView(141, 10)
     }
   }

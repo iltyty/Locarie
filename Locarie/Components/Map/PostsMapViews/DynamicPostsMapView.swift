@@ -65,23 +65,18 @@ struct DynamicPostsMapView: View {
     .onReceive(userListVM.$state) { state in
       if state.isFinished() { initialUserListFetched = true }
     }
+    .onReceive(locationManager.$locationFeaturesEnabled) { enabled in
+      if !enabled {
+        updatePostsAndBusinessesIfNeeded(.london)
+      }
+    }
     .onReceive(locationManager.$location) { location in
       guard let location else { return }
-      if !initialPostListFetched {
-        updatePosts(location)
-      }
-      if !initialUserListFetched {
-        updateBusinesses(location)
-      }
+      updatePostsAndBusinessesIfNeeded(location)
     }
     .onChange(of: network.connected) { connected in
       if connected, let location = locationManager.location {
-        if !initialPostListFetched {
-          updatePosts(location)
-        }
-        if !initialUserListFetched {
-          updateBusinesses(location)
-        }
+        updatePosts(location)
       }
     }
     .onChange(of: shouldFetchPost) { _ in
@@ -99,6 +94,15 @@ struct DynamicPostsMapView: View {
     .ignoresSafeArea()
     .simultaneousGesture(dragGesture)
     .simultaneousGesture(magnifyGesture)
+  }
+  
+  private func updatePostsAndBusinessesIfNeeded(_ location: CLLocation) {
+    if !initialPostListFetched {
+      updatePosts(location)
+    }
+    if !initialUserListFetched {
+      updateBusinesses(location)
+    }
   }
 }
 

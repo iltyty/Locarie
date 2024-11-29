@@ -54,16 +54,16 @@ struct RegularUserProfilePage: View {
               Spacer()
             }
           }
-          if cacheVM.isBusinessUser() {
-            HStack {
+          HStack {
+            if cacheVM.isBusinessUser() {
               backButton
-              Spacer()
-              ProfileEditButton()
-              settingsButton
             }
-            .padding(.horizontal, 16)
-            .padding(.top, topSafeAreaHeight)
+            Spacer()
+            ProfileEditButton()
+            settingsButton
           }
+          .padding(.horizontal, 16)
+          .padding(.top, topSafeAreaHeight)
         }
         BottomTabView()
       }

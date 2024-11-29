@@ -10,6 +10,7 @@ import SwiftUI
 
 struct FavoritePage: View {
   private let router = Router.shared
+  private let cacheVM = LocalCacheViewModel.shared
 
   @State private var scrollId: Int64? = nil
   @State private var viewport: Viewport = .camera(center: .london, zoom: 12)
@@ -100,7 +101,8 @@ struct FavoritePage: View {
     }
     .ignoresSafeArea(edges: .bottom)
     .onAppear {
-      vm.listFavoriteBusinessPosts(userId: LocalCacheViewModel.shared.getUserId())
+//      vm.list(userId: cacheVM.getUserId())
+      vm.listFavoriteBusinessPosts(userId: cacheVM.getUserId())
     }
   }
 
@@ -158,13 +160,16 @@ struct FavoritePage: View {
 
   private var emptyList: some View {
     VStack {
-      Image("NoBusiness")
-      Text("No business yet")
+      Image("NoPost")
+        .resizable()
+        .scaledToFit()
+        .frame(size: 72)
+      Text("No post yet")
         .font(.custom(GlobalConstants.fontName, size: 14))
         .fontWeight(.bold)
-        .foregroundStyle(LocarieColor.greyDark)
     }
     .padding(.top, 45)
+    .padding(.bottom, 16)
   }
 
   private func moveBottomSheet(to detent: BottomSheetDetent) {
