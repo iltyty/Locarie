@@ -13,6 +13,9 @@ struct BusinessUserProfilePage: View {
   @State var screenSize: CGSize = .zero
 
   @State private var avatarId = ""
+  
+  @State private var prePostIndex = 0
+  @State private var shouldFetchPost = false
 
   @State private var viewport: Viewport = .camera(center: .london, zoom: Constants.mapZoom)
   @State private var post = PostDto()
@@ -32,6 +35,8 @@ struct BusinessUserProfilePage: View {
   @StateObject private var profileVM = ProfileGetViewModel()
   @StateObject private var postVM = ListUserPostsViewModel()
   @StateObject private var postDeleteVM = PostDeleteViewModel()
+  
+  private let scrollViewCoordinateSpace = "scrollView"
 
   var body: some View {
     GeometryReader { proxy in
@@ -94,6 +99,8 @@ struct BusinessUserProfilePage: View {
         mapBottomBoundY = screenSize.height - Constants.bottomY
 
         profileVM.getProfile(userId: userId)
+        
+        postVM.reset()
         postVM.getUserPosts(id: userId)
       }
       .onDisappear {
@@ -104,6 +111,9 @@ struct BusinessUserProfilePage: View {
       Button("Delete", role: .destructive) {
         postDeleteVM.delete(id: post.id)
       }
+    }
+    .onChange(of: shouldFetchPost) { _ in
+      postVM.getUserPosts(id: userId)
     }
     .onReceive(profileVM.$state) { state in
       if case .finished = state {
@@ -318,6 +328,23 @@ private extension BusinessUserProfilePage {
             presentingPostCover = true
           }
         }
+        .background {
+          GeometryReader { proxy in
+            Color.clear.preference(key: PostViewOffsetKey.self, value: -(proxy.frame(in: .named(scrollViewCoordinateSpace)).origin.y - 16))
+          }
+        }
+        .onPreferenceChange(PostViewOffsetKey.self) { offset in
+          let i = Int(offset) / GlobalConstants.postCardHeight
+          if i <= prePostIndex {
+            prePostIndex = i
+            return
+          }
+          prePostIndex = i
+          let delta = postVM.posts.count - Constants.postFetchThreshold
+          if delta <= 0 || i == delta || i == postVM.posts.count {
+            shouldFetchPost.toggle()
+          }
+        }
       }
     }
   }
@@ -383,6 +410,16 @@ private extension BusinessUserProfilePage {
   }
 }
 
+private extension BusinessUserProfilePage {
+  struct PostViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
+    }
+  }
+}
+
 private enum Constants {
   static let bottomY: CGFloat = 212
   static let bottomDetent: BottomSheetDetent = .absoluteBottom(bottomY)
@@ -396,6 +433,8 @@ private enum Constants {
   static let topButtonSize: CGFloat = 40
   static let topButtonStrokeWidth: CGFloat = 3
   static let topButtonIconSize: CGFloat = 18
+  
+  static let postFetchThreshold = 5
 }
 
 #Preview {

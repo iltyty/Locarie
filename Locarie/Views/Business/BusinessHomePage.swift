@@ -14,6 +14,9 @@ struct BusinessHomePage: View {
   let longitude: CGFloat
   var fullscreen = true
   private let locationManager = LocationManager()
+  
+  @State private var prePostIndex = 0
+  @State private var shouldFetchPost = false
 
   @State private var user = UserDto()
   @State private var post = PostDto()
@@ -32,11 +35,13 @@ struct BusinessHomePage: View {
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var userListVM = UserListViewModel()
   @StateObject private var profileVM = ProfileGetViewModel()
-  @StateObject private var listUserPostsVM = ListUserPostsViewModel()
+  @StateObject private var postVM = ListUserPostsViewModel()
   @StateObject private var favoritePostVM = FavoritePostViewModel()
   @StateObject private var favoriteBusinessVM = FavoriteBusinessViewModel()
 
   @Environment(\.dismiss) var dismiss
+  
+  private let scrollViewCoordinateSpace = "scrollView"
 
   var body: some View {
     GeometryReader { proxy in
@@ -97,15 +102,18 @@ struct BusinessHomePage: View {
         currentDetent = .large
       }
       profileVM.getProfile(userId: uid)
-      listUserPostsVM.getUserPosts(id: uid)
       userListVM.listAllBusinesses()
     }
     .onReceive(profileVM.$dto) { dto in
       user = dto
     }
+    .onChange(of: shouldFetchPost) { _ in
+      postVM.getUserPosts(id: uid)
+    }
     .onChange(of: user) { newUser in
       favoredByCount = newUser.favoredByCount
-      listUserPostsVM.getUserPosts(id: newUser.id)
+      postVM.reset()
+      postVM.getUserPosts(id: newUser.id)
     }
   }
 
@@ -210,7 +218,7 @@ private extension BusinessHomePage {
               if case .finished = profileVM.state {
                 ProfileImages(
                   user: user,
-                  amplified: listUserPostsVM.posts.isEmpty,
+                  amplified: postVM.posts.isEmpty,
                   profileCoverCurIndex: $profileCoverCurIndex,
                   presentingProfileCover: $presentingProfileCover
                 )
@@ -219,10 +227,10 @@ private extension BusinessHomePage {
                 }
               }
               Group {
-                if case .loading = listUserPostsVM.state {
+                if case .loading = postVM.state {
                   BusinessUserProfilePage.postsSkeleton
                 } else {
-                  ProfilePostsCount(listUserPostsVM.posts)
+                  ProfilePostsCount(postVM.posts)
                   postList
                 }
               }
@@ -240,12 +248,12 @@ private extension BusinessHomePage {
   }
 
   var likedCount: Int {
-    listUserPostsVM.posts.map(\.favoredByCount).reduce(0, +)
+    postVM.posts.map(\.favoredByCount).reduce(0, +)
   }
 
   @ViewBuilder
   var postList: some View {
-    if listUserPostsVM.posts.isEmpty {
+    if postVM.posts.isEmpty {
       HStack {
         Spacer()
         VStack {
@@ -259,7 +267,7 @@ private extension BusinessHomePage {
       }
     } else {
       VStack(spacing: 0) {
-        let posts = listUserPostsVM.posts
+        let posts = postVM.posts
         ForEach(posts.indices, id: \.self) { i in
           let p = posts[i]
           PostCardView(
@@ -280,13 +288,30 @@ private extension BusinessHomePage {
             presentingPostCover = true
           }
         }
+        .background {
+          GeometryReader { proxy in
+            Color.clear.preference(key: PostViewOffsetKey.self, value: -(proxy.frame(in: .named(scrollViewCoordinateSpace)).origin.y - 16))
+          }
+        }
+        .onPreferenceChange(PostViewOffsetKey.self) { offset in
+          let i = Int(offset) / GlobalConstants.postCardHeight
+          if i <= prePostIndex {
+            prePostIndex = i
+            return
+          }
+          prePostIndex = i
+          let delta = postVM.posts.count - 5
+          if delta <= 0 || i == delta || i == postVM.posts.count {
+            shouldFetchPost.toggle()
+          }
+        }
       }
     }
   }
 
   var updatedIn24Hours: Bool {
-    !listUserPostsVM.posts.isEmpty &&
-      Date().timeIntervalSince(listUserPostsVM.posts[0].time) < 86400
+    !postVM.posts.isEmpty &&
+      Date().timeIntervalSince(postVM.posts[0].time) < 86400
   }
 }
 
@@ -321,6 +346,16 @@ private extension BusinessHomePage {
         Spacer()
       }
       SkeletonView(48, 10)
+    }
+  }
+}
+
+private extension BusinessHomePage {
+  struct PostViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
     }
   }
 }

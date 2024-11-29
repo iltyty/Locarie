@@ -15,7 +15,7 @@ protocol PostListService {
 
   func listPostsNearbyAll(latitude: Double, longitude: Double, page: Int, size: Int) -> AnyPublisher<PaginatedPostListResponse, Never>
 
-  func listUserPosts(id: Int64) -> AnyPublisher<PostListResponse, Never>
+  func listUserPosts(id: Int64, page: Int, size: Int) -> AnyPublisher<PaginatedPostListResponse, Never>
 
   func listPostsWithin(_ request: PostListWithinRequestDto) -> AnyPublisher<PostListResponse, Never>
 }
@@ -56,11 +56,12 @@ final class PostListServiceImpl: BaseAPIService, PostListService {
       .eraseToAnyPublisher()
   }
 
-  func listUserPosts(id: Int64) -> AnyPublisher<PostListResponse, Never> {
+  func listUserPosts(id: Int64, page: Int, size: Int) -> AnyPublisher<PaginatedPostListResponse, Never> {
+    let params = [ "page": page, "size": size ]
     let endpoint = APIEndpoints.listUserPosts(id: id)
-    return AF.request(endpoint)
+    return AF.request(endpoint, parameters: params)
       .validate()
-      .publishDecodable(type: ResponseDto<[PostDto]>.self)
+      .publishDecodable(type: PaginatedResponseDto<PostDto>.self)
       .map { self.mapResponse($0) }
       .receive(on: RunLoop.main)
       .eraseToAnyPublisher()

@@ -97,9 +97,9 @@ struct NewPostPage: View {
         loading = true
       case .finished:
         loading = false
+        postVM.reset()
         viewRouter.currentPage = .profile
         dismiss()
-        postVM.reset()
       case let .failed(error):
         loading = false
         // - TODO: alert message

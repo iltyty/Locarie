@@ -217,7 +217,7 @@ private extension HomePage {
               }
             }
             .onPreferenceChange(PostViewOffsetKey.self) { offset in
-              let i = Int(offset) / Constants.postHeight
+              let i = Int(offset) / GlobalConstants.postCardHeight
               if i <= prePostIndex {
                 prePostIndex = i
                 return
@@ -396,7 +396,6 @@ private extension HomePage {
 }
 
 private enum Constants {
-  static let postHeight = 430
   static let postPageSize = 10
   static let postFetchThreshold = 5
 

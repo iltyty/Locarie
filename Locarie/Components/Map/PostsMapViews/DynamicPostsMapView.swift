@@ -57,6 +57,9 @@ struct DynamicPostsMapView: View {
       }
       .onAppear {
         map = proxy.map!
+        if !locationManager.locationFeaturesEnabled {
+          updatePostsAndBusinessesIfNeeded(.london)
+        }
       }
     }
     .onReceive(postVM.$state) { state in
@@ -64,11 +67,6 @@ struct DynamicPostsMapView: View {
     }
     .onReceive(userListVM.$state) { state in
       if state.isFinished() { initialUserListFetched = true }
-    }
-    .onReceive(locationManager.$locationFeaturesEnabled) { enabled in
-      if !enabled {
-        updatePostsAndBusinessesIfNeeded(.london)
-      }
     }
     .onReceive(locationManager.$location) { location in
       guard let location else { return }

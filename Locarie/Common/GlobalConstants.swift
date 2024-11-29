@@ -16,4 +16,6 @@ enum GlobalConstants {
   static let navigationBarBottomPadding = 100.0
   static let fontName = "HelveticaNeue-Medium"
   static let mapStyleURI = "mapbox://styles/tommyyenty/cm2brt0s000rs01pi34x87tol"
+  
+  static let postCardHeight = 430
 }

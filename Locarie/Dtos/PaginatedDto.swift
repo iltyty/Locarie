@@ -15,12 +15,16 @@ struct PaginatedResponseDto<T: Decodable>: Decodable {
 
 struct PaginatedData<T: Decodable>: Decodable {
   let content: [T]
-  let totalPages: Int
-  let totalElements: Int
-  let last: Bool
-  let pageable: Pageable
+  let page: Pageable
+  
+  var last: Bool {
+    page.number + 1 == page.totalPages
+  }
 }
 
 struct Pageable: Decodable {
-  let pageNumber: Int
+  let size: Int
+  let number: Int
+  let totalPages: Int
+  let totalElements: Int
 }

@@ -47,8 +47,10 @@ final class PostListNearbyAllViewModel: BaseViewModel {
       state = .failed(newNetworkError(response: dto))
       return
     }
-    page += 1
     allFetched = dto.data.last
+    if !allFetched {
+      page += 1
+    }
     posts.append(contentsOf: dto.data.content)
     state = .finished
   }
