@@ -12,10 +12,10 @@ import SwiftUI
 struct BusinessSearchView: View {
   @Binding var searching: Bool
 
-  @State private var loading = false
   @StateObject private var vm = TextFieldObserver()
 
-  @StateObject private var userListVM = UserListViewModel()
+  //TODO: pagination not implemented yet
+  @StateObject private var userListVM = UserListViewModel(size: 100)
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
   @StateObject private var locationManager = LocationManager()
 
@@ -28,19 +28,14 @@ struct BusinessSearchView: View {
     .padding(.top, 8)
     .padding(.horizontal, 16)
     .background(.white)
-    .loadingIndicator(loading: $loading)
-    .onReceive(userListVM.$state) { state in
-      switch state {
-      case .loading: loading = true
-      default: loading = false
-      }
-    }
     .onReceive(vm.$debouncedName) { name in
       guard !name.isEmpty else { return }
-      guard let location = locationManager.location else { return }
       // clear UserListViewModel for the next query
       userListVM.clear()
-      userListVM.listBusinesses(with: location.coordinate, name: name)
+      userListVM.listBusinesses(
+        with: locationManager.location?.coordinate ?? .london,
+        name: name
+      )
     }
   }
 }
@@ -86,7 +81,6 @@ private extension BusinessSearchView {
           .fontWeight(.bold)
           .foregroundStyle(LocarieColor.greyDark)
           .padding(.vertical, 21)
-        SuggestPlace().padding(.bottom, 16)
         ForEach(userListVM.businesses) { user in
           NavigationLink(value: Router.BusinessHomeDestination.businessHome(
             user.id,
@@ -135,7 +129,7 @@ private extension BusinessSearchView {
     private var subscriptions: Set<AnyCancellable> = []
     
     init() {
-      $name.debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+      $name.debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
         .sink { [weak self] value in
           guard let self else { return }
           self.debouncedName = value

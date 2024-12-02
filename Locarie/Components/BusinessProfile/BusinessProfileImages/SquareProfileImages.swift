@@ -12,6 +12,7 @@ struct SquareProfileImages: View {
   let user: UserDto
 
   @State private var screenWidth: CGFloat = 0
+  @ObservedObject private var locationManager = LocationManager()
 
   var body: some View {
     HStack(spacing: 8) {
@@ -26,7 +27,9 @@ struct SquareProfileImages: View {
           .scaledToFill()
           .frame(size: 2 * imageSize + 8)
           .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
-        DistanceView(user: user).padding(5)
+        if locationManager.locationFeaturesEnabled {
+          DistanceView(user: user).padding(5)
+        }
       }
       VStack(spacing: 8) {
         imageViewBuilder(1)

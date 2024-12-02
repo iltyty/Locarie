@@ -11,10 +11,10 @@ import Foundation
 final class ListUserPostsViewModel: BaseViewModel {
   @Published var posts: [PostDto] = []
   @Published var state: State = .idle
-  
+  @Published var allFetched = false
+
   private var page = 0
   private var pageSize = 10
-  private var allFetched = false
   private let networking: PostListService
   private var subscriptions: Set<AnyCancellable> = []
   

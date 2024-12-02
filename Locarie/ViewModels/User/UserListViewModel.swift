@@ -67,6 +67,8 @@ final class UserListViewModel: BaseViewModel {
     }
     page += 1
     allFetched = dto.data.last
+    debugPrint(dto.data.content)
+    debugPrint(dto.data.content.filter(\.isProfileComplete))
     businesses.append(contentsOf: dto.data.content.filter(\.isProfileComplete))
     state = .finished
   }

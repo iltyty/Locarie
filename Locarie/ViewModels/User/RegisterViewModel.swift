@@ -205,7 +205,7 @@ extension RegisterViewModel {
 
   var isUsernameValidPublisher: AnyPublisher<Bool, Never> {
     $dto.map { dto in
-      dto.username.wholeMatch(of: Regexes.username) != nil
+      dto.type == .business || dto.username.wholeMatch(of: Regexes.username) != nil
     }
     .eraseToAnyPublisher()
   }

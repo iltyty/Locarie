@@ -334,6 +334,7 @@ private extension BusinessUserProfilePage {
           }
         }
         .onPreferenceChange(PostViewOffsetKey.self) { offset in
+          if postVM.allFetched { return }
           let i = Int(offset) / GlobalConstants.postCardHeight
           if i <= prePostIndex {
             prePostIndex = i

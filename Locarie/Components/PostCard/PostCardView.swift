@@ -206,7 +206,9 @@ private extension PostCardView {
     ZStack(alignment: .trailing) {
       Banner(urls: post.imageUrls, indicator: .inner, isPortrait: false)
       VStack(alignment: .trailing, spacing: 0) {
-        DistanceView(user: post.user)
+        if locationManager.locationFeaturesEnabled {
+          DistanceView(user: post.user)
+        }
         Spacer()
         if post.user.profileImageUrls.isEmpty {
           DefaultBusinessImageView(size: 48).shadow(color: Color.black.opacity(0.25), radius: 2, x: 0.25, y: 0.25)

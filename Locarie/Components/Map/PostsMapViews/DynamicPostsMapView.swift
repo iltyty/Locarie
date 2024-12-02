@@ -78,16 +78,10 @@ struct DynamicPostsMapView: View {
       }
     }
     .onChange(of: shouldFetchPost) { _ in
-      guard let location = locationManager.location else {
-        return
-      }
-      updatePosts(location)
+      updatePosts(locationManager.location ?? .london)
     }
     .onChange(of: shouldFetchUser) { _ in
-      guard let location = locationManager.location else {
-        return
-      }
-      updateBusinesses(location)
+      updateBusinesses(locationManager.location ?? .london)
     }
     .ignoresSafeArea()
     .simultaneousGesture(dragGesture)

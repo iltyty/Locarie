@@ -78,7 +78,7 @@ struct BusinessRegisterPage: View {
 
   var nextButton: some View {
     NavigationLink {
-      RegularRegisterPage(registerViewModel: vm)
+      RegularRegisterPage(isBusinessUser: true, registerViewModel: vm)
     } label: {
       StrokeButtonFormItem(
         title: "Next step",

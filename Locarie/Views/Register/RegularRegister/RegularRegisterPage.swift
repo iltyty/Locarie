@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct RegularRegisterPage: View {
-  @ObservedObject var router = Router.shared
+  var isBusinessUser = false
 
   @StateObject var cacheViewModel = LocalCacheViewModel.shared
   @StateObject var registerViewModel = RegisterViewModel()
   @StateObject var loginViewModel = LoginViewModel()
+  
+  @ObservedObject private var router = Router.shared
 
   @State private var isNotificationReceived = false
   @State private var isServiceAgreed = false
@@ -33,7 +35,9 @@ struct RegularRegisterPage: View {
               emailInput
               firstNameInput
               lastNameInput
-              usernameInput
+              if !isBusinessUser {
+                usernameInput
+              }
               passwordInput
             }
             .keyboardDismissable(focus: $focusField)

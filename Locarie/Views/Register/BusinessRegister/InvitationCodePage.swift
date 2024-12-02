@@ -30,7 +30,7 @@ struct InvitationCodePage: View {
 }
 
 private struct Constants {
-  static let code = "227515"
+  static let code = "826889"
 }
 
 #Preview {

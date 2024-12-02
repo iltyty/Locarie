@@ -256,7 +256,11 @@ private extension HomePage {
       .scrollIndicators(.hidden)
     } else {
       ScrollView {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
+          Text("Nearest-Furthest")
+            .fontWeight(.bold)
+            .foregroundStyle(LocarieColor.greyDark)
+            .padding([.leading, .top], 16)
           Group {
             if userListVM.businesses.isEmpty {
               emptyBusinessList
