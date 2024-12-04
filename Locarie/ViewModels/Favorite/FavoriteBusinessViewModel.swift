@@ -13,16 +13,18 @@ final class FavoriteBusinessViewModel: BaseViewModel {
   @Published var state: State = .idle
   @Published var posts: [PostDto] = []
 
-  private var pageSize = 10
-  private var userPage = 0
+  private var postSize = 10
   private var postPage = 0
+  private var userSize = 10
+  private var userPage = 0
   private var userAllFetched = false
   private var postAllFetched = false
   private let networking: FavoriteBusinessService
   private var subscriptions: Set<AnyCancellable> = []
 
-  init( _ networking: FavoriteBusinessService = FavoriteBusinessServiceImpl.shared, size: Int = 10) {
-    self.pageSize = size
+  init( _ networking: FavoriteBusinessService = FavoriteBusinessServiceImpl.shared, postSize: Int = 10, userSize: Int = 10) {
+    self.postSize = postSize
+    self.userSize = userSize
     self.networking = networking
   }
   
@@ -92,7 +94,7 @@ extension FavoriteBusinessViewModel {
     if users.isEmpty {
       state = .loading
     }
-    networking.list(userId: userId, page: userPage, size: pageSize)
+    networking.list(userId: userId, page: userPage, size: userSize)
       .sink { [weak self] response in
         guard let self else { return }
         handleListResponse(response)
@@ -158,7 +160,7 @@ extension FavoriteBusinessViewModel {
     if posts.isEmpty {
       state = .loading
     }
-    networking.listFavoriteBusinessPosts(userId: userId, page: postPage, size: pageSize)
+    networking.listFavoriteBusinessPosts(userId: userId, page: postPage, size: postSize)
       .sink { [weak self] response in
         guard let self else { return }
         handleListPostsResponse(response)

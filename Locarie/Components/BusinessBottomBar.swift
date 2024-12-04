@@ -33,6 +33,12 @@ struct BusinessBottomBar: View {
     .frame(height: BusinessBottomBarConstants.height)
     .loginSheet(isPresented: $presentingLoginSheet)
     .ignoresSafeArea(edges: .bottom)
+    .onAppear {
+      favoriteBusinessVM.checkFavoredBy(
+        userId: cacheVM.getUserId(),
+        businessId: business.id
+      )
+    }
     .onChange(of: business) { newBusiness in
       favoriteBusinessVM.checkFavoredBy(
         userId: cacheVM.getUserId(),

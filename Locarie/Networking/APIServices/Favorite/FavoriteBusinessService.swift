@@ -60,7 +60,7 @@ final class FavoriteBusinessServiceImpl: BaseAPIService, FavoriteBusinessService
 
   func isFavoredBy(userId: Int64, businessId: Int64) -> AnyPublisher<BusinessIsFavoredByResponse, Never> {
     let endpoint = APIEndpoints.businessIsFavoredByUrl
-    let params = ["userId": "\(userId)"]
+    let params = ["userId": "\(userId)", "businessId": "\(businessId)"]
     return AF.request(endpoint, method: .get, parameters: params)
       .validate()
       .publishDecodable(type: ResponseDto<Bool>.self)

@@ -56,15 +56,6 @@ struct BusinessHomePage: View {
             business: $user,
             favoriteBusinessVM: favoriteBusinessVM
           )
-          .onReceive(favoriteBusinessVM.$state) { state in
-            switch state {
-            case .favoriteFinished:
-              favoredByCount += 1
-            case .unfavoriteFinished:
-              favoredByCount -= 1
-            default: break
-            }
-          }
         }
         if currentDetent == .large {
           VStack {
@@ -106,6 +97,15 @@ struct BusinessHomePage: View {
     }
     .onReceive(profileVM.$dto) { dto in
       user = dto
+    }
+    .onReceive(favoriteBusinessVM.$state) { state in
+      switch state {
+      case .favoriteFinished:
+        favoredByCount += 1
+      case .unfavoriteFinished:
+        favoredByCount -= 1
+      default: break
+      }
     }
     .onChange(of: shouldFetchPost) { _ in
       postVM.getUserPosts(id: uid)

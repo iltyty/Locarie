@@ -23,7 +23,8 @@ struct FavoritePage: View {
   @State private var presentingPostCover = false
   @State private var presentingProfileCover = false
 
-  @StateObject private var vm = FavoriteBusinessViewModel()
+  // TODO: pagination
+  @StateObject private var vm = FavoriteBusinessViewModel(userSize: 1000)
 
   @Environment(\.dismiss) var dismiss
   
@@ -34,17 +35,17 @@ struct FavoritePage: View {
       Map(viewport: $viewport) {
         Puck2D()
 
-        ForEvery(vm.posts) { post in
-          MapViewAnnotation(coordinate: post.user.coordinate) {
+        ForEvery(vm.users) { user in
+          MapViewAnnotation(coordinate: user.coordinate) {
             NavigationLink(
               value: Router.BusinessHomeDestination.businessHome(
-                post.user.id,
-                post.user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
-                post.user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
+                user.id,
+                user.location?.latitude ?? CLLocationCoordinate2D.london.latitude,
+                user.location?.longitude ?? CLLocationCoordinate2D.london.longitude,
                 false
               )
             ) {
-              BusinessMapAvatar(url: post.user.avatarUrl, newUpdate: post.user.hasUpdateIn24Hours)
+              BusinessMapAvatar(url: user.avatarUrl, newUpdate: user.hasUpdateIn24Hours)
             }
           }
           .allowOverlap(true)
@@ -114,6 +115,7 @@ struct FavoritePage: View {
     }
     .ignoresSafeArea(edges: .bottom)
     .onAppear {
+      vm.list(userId: cacheVM.getUserId())
       vm.listFavoriteBusinessPosts(userId: cacheVM.getUserId())
     }
     .onChange(of: shouldFetchPost) { _ in

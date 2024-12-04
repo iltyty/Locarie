@@ -15,8 +15,9 @@ struct FollowAndLikeView: View {
   @Binding var isProfileCoverPresented: Bool
 
   @ObservedObject private var cacheVM = LocalCacheViewModel.shared
-  @StateObject private var favoritePostsVM = FavoritePostViewModel()
-  @StateObject private var favoriteBusinessVM = FavoriteBusinessViewModel()
+  // TODO: fix pagination bug
+  @StateObject private var favoritePostsVM = FavoritePostViewModel(size: 1000)
+  @StateObject private var favoriteBusinessVM = FavoriteBusinessViewModel(userSize: 1000)
 
   @State private var prePostIndex = 0
   @State private var preUserIndex = 0
