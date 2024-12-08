@@ -9,7 +9,7 @@ import CoreLocation
 import Foundation
 
 enum GlobalConstants {
-  static let version = "V1.0.6"
+  static let version = "V1.0.8"
   
   static let mapZoom = 12.0
   static let mapCenter = CLLocationCoordinate2D.london

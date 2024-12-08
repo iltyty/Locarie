@@ -11,7 +11,6 @@ extension UserDto {
       profileImageUrls.isEmpty ||
         avatarUrl.isEmpty ||
         businessName.isEmpty ||
-        username.isEmpty ||
         categories.isEmpty ||
         introduction.isEmpty ||
         location == nil ||
