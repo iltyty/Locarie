@@ -39,7 +39,7 @@ private extension BioEditPage {
       dismiss()
     }
     .fontWeight(.bold)
-    .foregroundStyle(Color.locariePrimary)
+    .foregroundStyle(LocarieColor.primary)
   }
 
   var bioEditor: some View {

@@ -45,7 +45,6 @@ struct OpeningHoursEditPage: View {
       Spacer()
     }
     .onAppear {
-      debugPrint(profileUpdateVM.dto)
       setBusinessHours()
     }
     .sheet(isPresented: $isSheetPresented) { [currentDayIndex] in

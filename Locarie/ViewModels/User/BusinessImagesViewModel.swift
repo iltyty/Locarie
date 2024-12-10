@@ -144,7 +144,6 @@ import Kingfisher
   }
 
   private func handleUploadResponse(_ response: BusinessImagesUploadResponse) {
-    debugPrint(response)
     if let error = response.error {
       state = .failed(error)
       return

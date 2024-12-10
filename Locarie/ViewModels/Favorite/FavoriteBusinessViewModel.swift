@@ -105,7 +105,6 @@ extension FavoriteBusinessViewModel {
   private func handleListResponse(
     _ response: ListFavoriteBusinessesResponse
   ) {
-    debugPrint(response)
     if let error = response.error {
       state = .listFailed(error)
       return
@@ -169,7 +168,6 @@ extension FavoriteBusinessViewModel {
   }
 
   private func handleListPostsResponse(_ response: ListFavoriteBusinessPostsResponse) {
-    debugPrint(response)
     if let error = response.error {
       state = .listPostsFailed(error)
       return

@@ -52,9 +52,8 @@ struct BusinessBirthdayEditPage: View {
   
   private var saveButton: some View {
     Button("Save") { updateProfile() }
-      .disabled(!profileUpdateVM.isFormValid)
       .fontWeight(.bold)
-      .foregroundStyle(profileUpdateVM.isFormValid ? LocarieColor.primary : LocarieColor.greyDark)
+      .foregroundStyle(LocarieColor.primary)
   }
 }
 
