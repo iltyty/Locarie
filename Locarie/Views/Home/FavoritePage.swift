@@ -192,7 +192,7 @@ struct FavoritePage: View {
         .resizable()
         .scaledToFit()
         .frame(size: 72)
-      Text("No post yet")
+      Text("No moments yet")
         .font(.custom(GlobalConstants.fontName, size: 14))
         .fontWeight(.bold)
     }

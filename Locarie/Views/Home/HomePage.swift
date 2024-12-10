@@ -106,13 +106,13 @@ private extension HomePage {
         VStack(spacing: 0) {
           HStack(spacing: 0) {
             Spacer()
-            tabBuilder(text: "Latest", i: 0)
+            tabBuilder(text: "Moments", i: 0)
             Spacer()
             tabBuilder(text: "Places", i: 1)
             Spacer()
           }
           if tabIndex == 0 {
-            latestTabContent
+            momentsTabContent
           } else {
             placesTabContent
           }
@@ -156,7 +156,7 @@ private extension HomePage {
   }
 
   @ViewBuilder
-  var latestTabContent: some View {
+  var momentsTabContent: some View {
     if !network.connected && postVM.posts.isEmpty {
       Text("No network connection")
         .fontWeight(.bold)
@@ -323,7 +323,7 @@ private extension HomePage {
         .resizable()
         .scaledToFit()
         .frame(size: 72)
-      Text("No post yet")
+      Text("No moments yet")
         .font(.custom(GlobalConstants.fontName, size: 14))
         .fontWeight(.bold)
     }
@@ -410,10 +410,5 @@ private enum Constants {
 }
 
 #Preview {
-//  HomePage()
-  ScrollView {
-    VStack {
-      Text("test").lineLimit(2, reservesSpace: true).background(.red)
-    }
-  }
+  HomePage()
 }

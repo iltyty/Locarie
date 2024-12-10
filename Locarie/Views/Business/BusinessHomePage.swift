@@ -258,7 +258,7 @@ private extension BusinessHomePage {
         Spacer()
         VStack {
           Image("NoPost").padding(.top, 40)
-          Text("No post yet")
+          Text("No moments yet")
             .font(.custom(GlobalConstants.fontName, size: 14))
             .fontWeight(.bold)
         }
